@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { TOOLS } from '@/lib/tools';
+import { biodataPosts } from '@/lib/biodata-content';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://toolioz.com';
@@ -14,11 +15,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: trendingIds.has(tool.id) ? 0.9 : 0.8,
   }));
 
+  const biodataBlogRoutes = biodataPosts.map((post) => ({
+    url: `${baseUrl}/biodata/blog/${post.slug}`,
+    lastModified,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
   const staticRoutes = [
     { route: '', priority: 1.0, freq: 'daily' as const },
     { route: '/finance', priority: 0.9, freq: 'weekly' as const },
     { route: '/devtools', priority: 0.9, freq: 'weekly' as const },
     { route: '/pdftools', priority: 0.9, freq: 'weekly' as const },
+    { route: '/biodata', priority: 0.9, freq: 'weekly' as const },
     { route: '/about', priority: 0.5, freq: 'monthly' as const },
     { route: '/contact', priority: 0.5, freq: 'monthly' as const },
     { route: '/privacy-policy', priority: 0.3, freq: 'yearly' as const },
@@ -30,5 +39,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority,
   }));
 
-  return [...staticRoutes, ...toolRoutes];
+  return [...staticRoutes, ...toolRoutes, ...biodataBlogRoutes];
 }

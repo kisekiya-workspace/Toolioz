@@ -14,6 +14,7 @@ import {
   Code,
   FileText,
   ExternalLink,
+  UserRound,
 } from 'lucide-react';
 import { CATEGORIES as TOOL_CATEGORIES, TOOLS } from '@/lib/tools';
 
@@ -21,6 +22,7 @@ const MAIN_NAV = [
   { name: 'Finance', href: '/finance', id: 'finance', icon: Landmark, color: '#3b82f6' },
   { name: 'DevTools', href: '/devtools', id: 'devtools', icon: Code, color: '#f59e0b' },
   { name: 'PDFTools', href: '/pdftools', id: 'pdftools', icon: FileText, color: '#ef4444' },
+  { name: 'Biodata', href: '/biodata', id: 'biodata', icon: UserRound, color: '#db2777' },
 ];
 
 export const Navbar = () => {

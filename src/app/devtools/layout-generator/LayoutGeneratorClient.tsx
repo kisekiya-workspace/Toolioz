@@ -80,6 +80,25 @@ export default function LayoutGeneratorClient({
   
   // Dragging state
   const [activeDrag, setActiveDrag] = useState<{ id: string, newColEnd: number, newRowEnd: number } | null>(null);
+
+  // Clamp areas when columns or rows decrease to prevent ghost columns extending the grid
+  useEffect(() => {
+    setAreas(prev => prev.map(a => {
+      let changed = false;
+      let newColEnd = a.colEnd;
+      let newRowEnd = a.rowEnd;
+      let newColStart = a.colStart;
+      let newRowStart = a.rowStart;
+      
+      if (newColEnd > columns + 1) { newColEnd = columns + 1; changed = true; }
+      if (newColStart > columns) { newColStart = columns; changed = true; }
+      
+      if (newRowEnd > rows + 1) { newRowEnd = rows + 1; changed = true; }
+      if (newRowStart > rows) { newRowStart = rows; changed = true; }
+      
+      return changed ? { ...a, colStart: newColStart, colEnd: newColEnd, rowStart: newRowStart, rowEnd: newRowEnd } : a;
+    }).filter(a => a.colStart < a.colEnd && a.rowStart < a.rowEnd));
+  }, [columns, rows]);
   
   const handleCreateArea = (col: number, row: number) => {
     // Prevent creating if an area completely covers this single cell (optional, but good UX)
@@ -126,27 +145,23 @@ export default function LayoutGeneratorClient({
     const area = areas.find(a => a.id === id);
     if (!area) return;
     
-    const initialColEnd = area.colEnd;
-    const initialRowEnd = area.rowEnd;
+    let currentNewColEnd = area.colEnd;
+    let currentNewRowEnd = area.rowEnd;
 
-    setActiveDrag({ id, newColEnd: area.colEnd, newRowEnd: area.rowEnd });
+    setActiveDrag({ id, newColEnd: currentNewColEnd, newRowEnd: currentNewRowEnd });
 
     const onMove = (moveEvent: PointerEvent) => {
-      const deltaX = moveEvent.clientX - startX;
-      const deltaY = moveEvent.clientY - startY;
+      const elements = document.elementsFromPoint(moveEvent.clientX, moveEvent.clientY);
+      const trackElement = elements.find(el => (el as HTMLElement).dataset?.col) as HTMLElement | undefined;
 
-      // Cell width is 100px, height is 60px
-      const colGrowth = Math.round(deltaX / (100 + gap));
-      const rowGrowth = Math.round(deltaY / (60 + gap));
-
-      let newColEnd = initialColEnd + colGrowth;
-      let newRowEnd = initialRowEnd + rowGrowth;
-
-      // Bound within grid
-      newColEnd = Math.max(area.colStart + 1, Math.min(newColEnd, columns + 1));
-      newRowEnd = Math.max(area.rowStart + 1, Math.min(newRowEnd, rows + 1));
-
-      setActiveDrag({ id, newColEnd, newRowEnd });
+      if (trackElement && trackElement.dataset.col && trackElement.dataset.row) {
+        const c = parseInt(trackElement.dataset.col);
+        const r = parseInt(trackElement.dataset.row);
+        currentNewColEnd = Math.max(area.colStart + 1, c + 1);
+        currentNewRowEnd = Math.max(area.rowStart + 1, r + 1);
+        
+        setActiveDrag({ id, newColEnd: currentNewColEnd, newRowEnd: currentNewRowEnd });
+      }
     };
 
     const onUp = (upEvent: PointerEvent) => {
@@ -154,14 +169,10 @@ export default function LayoutGeneratorClient({
       window.removeEventListener('pointermove', onMove);
       window.removeEventListener('pointerup', onUp);
       
-      setActiveDrag(current => {
-        if (current) {
-          setAreas(prev => prev.map(a => 
-            a.id === id ? { ...a, colEnd: current.newColEnd, rowEnd: current.newRowEnd } : a
-          ));
-        }
-        return null;
-      });
+      setAreas(prev => prev.map(a => 
+        a.id === id ? { ...a, colEnd: currentNewColEnd, rowEnd: currentNewRowEnd } : a
+      ));
+      setActiveDrag(null);
     };
 
     window.addEventListener('pointermove', onMove);
@@ -238,6 +249,14 @@ export default function LayoutGeneratorClient({
     css += `    display: flex;\n`;
     css += `    flex-direction: column;\n`;
     css += `  }\n`;
+    areas.forEach((a) => {
+      const safeName = a.name.toLowerCase() || `item-${a.id}`;
+      css += `  .${safeName}-area {\n`;
+      css += `    /* Reset grid placements for mobile */\n`;
+      css += `    grid-column: auto;\n`;
+      css += `    grid-row: auto;\n`;
+      css += `  }\n`;
+    });
     css += `}\n`;
     
     return css;
@@ -319,6 +338,8 @@ export default function LayoutGeneratorClient({
               {tracks.map((cell, idx) => (
                 <div 
                   key={`track-${idx}`}
+                  data-col={cell.c}
+                  data-row={cell.r}
                   className="flex cursor-pointer items-center justify-center rounded-[var(--radius-sm)] border border-dashed border-[var(--border)] bg-transparent text-[1.2rem] font-light text-[var(--text-secondary)] transition-all hover:border-[var(--primary)] hover:bg-[rgba(37,99,235,0.05)] hover:text-[var(--primary)]"
                   style={{ gridColumn: `${cell.c} / ${cell.c + 1}`, gridRow: `${cell.r} / ${cell.r + 1}` }}
                   onClick={() => handleCreateArea(cell.c, cell.r)}
@@ -330,7 +351,7 @@ export default function LayoutGeneratorClient({
               {areas.map(area => (
                 <div 
                   key={`area-${area.id}`}
-                  className="group relative z-10 flex items-center justify-center overflow-hidden rounded-[var(--radius-sm)] border-2 border-[var(--primary)] bg-[var(--glass)] text-[1.25rem] font-semibold text-[var(--text-primary)] shadow-[0_4px_20px_-2px_rgba(0,0,0,0.2)] backdrop-blur-[12px]"
+                  className={`group relative z-10 flex items-center justify-center overflow-hidden rounded-[var(--radius-sm)] border-2 border-[var(--primary)] bg-[var(--glass)] text-[1.25rem] font-semibold text-[var(--text-primary)] shadow-[0_4px_20px_-2px_rgba(0,0,0,0.2)] backdrop-blur-[12px] ${activeDrag ? 'pointer-events-none' : ''}`}
                   id={`visual-area-${area.id}`}
                   style={{ 
                     gridColumn: `${area.colStart} / ${area.colEnd}`, 
@@ -339,7 +360,7 @@ export default function LayoutGeneratorClient({
                 >
                   <input 
                     type="text"
-                    className="pointer-events-auto w-[90%] min-w-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap border-none border-b border-dashed border-b-transparent bg-transparent text-center text-[clamp(0.8rem,1.2vw,1.1rem)] font-semibold text-[var(--text-primary)] transition-colors focus:border-b-[var(--primary)] focus:outline-none placeholder:font-normal placeholder:text-[var(--text-secondary)] placeholder:opacity-50"
+                    className={`w-[90%] min-w-0 max-w-full overflow-hidden text-ellipsis whitespace-nowrap border-none border-b border-dashed border-b-transparent bg-transparent text-center text-[clamp(0.8rem,1.2vw,1.1rem)] font-semibold text-[var(--text-primary)] transition-colors focus:border-b-[var(--primary)] focus:outline-none placeholder:font-normal placeholder:text-[var(--text-secondary)] placeholder:opacity-50 ${activeDrag ? 'pointer-events-none' : 'pointer-events-auto'}`}
                     value={area.name}
                     onChange={(e) => handleRenameArea(area.id, e.target.value)}
                     onClick={(e) => e.stopPropagation()}

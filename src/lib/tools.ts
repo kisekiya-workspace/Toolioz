@@ -11,7 +11,6 @@ import {
   Wallet,
   FileText,
   Binary,
-  Settings,
   Code,
   FileSearch,
   Hash,
@@ -24,10 +23,11 @@ import {
   LayoutDashboard,
   Palette,
   Terminal,
+  UserRound,
   type LucideIcon
 } from 'lucide-react';
 
-export type Category = 'finance' | 'devtools' | 'pdftools';
+export type Category = 'finance' | 'devtools' | 'pdftools' | 'biodata';
 
 export interface Tool {
   id: string;
@@ -262,6 +262,16 @@ export const TOOLS: Tool[] = [
     category: 'devtools',
     isTrending: true
   },
+  {
+    id: 'biodata-generator',
+    title: 'Biodata Generator',
+    desc: 'Create marriage biodata PDFs with religion-based and modern templates.',
+    icon: UserRound,
+    href: '/biodata/biodata-generator',
+    color: '#db2777',
+    category: 'biodata',
+    isTrending: true
+  },
 
   // PDF Tools (Mocks)
   {
@@ -317,5 +327,12 @@ export const CATEGORIES = [
     desc: 'Simple tools to merge, split, and compress PDF files.',
     color: '#ef4444',
     icon: FileText
+  },
+  {
+    id: 'biodata',
+    title: 'Biodata Tools',
+    desc: 'Marriage biodata builders with cultural, traditional, and modern layouts.',
+    color: '#db2777',
+    icon: UserRound
   }
 ];

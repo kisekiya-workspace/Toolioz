@@ -1,31 +1,243 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Footer } from '@/components/layout/Footer';
 import { Card } from '@/components/ui/Card';
 import { SEOSection } from '@/components/ui/SEOSection';
-import { CalendarClock, Copy, Check, Info } from 'lucide-react';
+import { CalendarClock, Copy, Check, Info, Settings2, Clock, CalendarDays, Calendar as CalendarIcon, Hash } from 'lucide-react';
 import { CronExpressionParser } from 'cron-parser';
 import cronstrue from 'cronstrue';
+
+type CronMode = 'every' | 'step' | 'specific' | 'range';
+
+interface SegmentState {
+    mode: CronMode;
+    stepValue: number;
+    specificValues: number[];
+    rangeStart: number;
+    rangeEnd: number;
+}
+
+const defaultSegment = (min: number, max: number): SegmentState => ({
+    mode: 'every',
+    stepValue: 1,
+    specificValues: [min],
+    rangeStart: min,
+    rangeEnd: max,
+});
+
+const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const weekNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+const parseNumber = (val: string, isMonth: boolean, isWeek: boolean): number => {
+    const v = val.toLowerCase();
+    if (isWeek) {
+        const idx = weekNames.findIndex(n => n.toLowerCase().startsWith(v.slice(0, 3)));
+        if (idx !== -1) return idx;
+    }
+    if (isMonth) {
+        const idx = monthNames.findIndex(n => n.toLowerCase() === v.slice(0, 3));
+        if (idx !== -1) return idx + 1;
+    }
+    return parseInt(val);
+};
+
+const parseSegment = (val: string, min: number, max: number, isMonth = false, isWeek = false): SegmentState => {
+    const def = defaultSegment(min, max);
+    if (!val || val === '*') return def;
+
+    if (val.startsWith('*/')) {
+        return { ...def, mode: 'step', stepValue: parseInt(val.substring(2)) || 1 };
+    }
+    if (val.includes('-')) {
+        const [s, e] = val.split('-');
+        return { ...def, mode: 'range', rangeStart: parseNumber(s, isMonth, isWeek) || min, rangeEnd: parseNumber(e, isMonth, isWeek) || max };
+    }
+    if (val.includes(',') || !isNaN(parseNumber(val, isMonth, isWeek))) {
+        const nums = val.split(',').map(n => parseNumber(n, isMonth, isWeek)).filter(n => !isNaN(n));
+        return { ...def, mode: 'specific', specificValues: nums.length > 0 ? nums : [min] };
+    }
+    return def;
+};
+
+const generateSegment = (state: SegmentState): string => {
+    switch (state.mode) {
+        case 'every': return '*';
+        case 'step': return `*/${state.stepValue}`;
+        case 'range': return `${state.rangeStart}-${state.rangeEnd}`;
+        case 'specific': return state.specificValues.length > 0 ? [...state.specificValues].sort((a, b) => a - b).join(',') : '*';
+        default: return '*';
+    }
+};
+
+const SegmentBuilder = ({
+    title, state, onChange, min, max, labels
+}: {
+    title: string; state: SegmentState; onChange: (s: SegmentState) => void; min: number; max: number; labels?: string[]
+}) => {
+    const setMode = (mode: CronMode) => onChange({ ...state, mode });
+    
+    const toggleSpecific = (val: number) => {
+        const newVals = state.specificValues.includes(val)
+            ? state.specificValues.filter(v => v !== val)
+            : [...state.specificValues, val];
+        onChange({ ...state, specificValues: newVals });
+    };
+
+    const getLabel = (val: number) => {
+        if (labels) {
+            // week is 0-indexed mapped to 0-6 or 1-7. If labels are 7 items, val-min maps correctly?
+            return labels[val - min] || val.toString();
+        }
+        return val.toString().padStart(2, '0');
+    };
+
+    const gridItems = [];
+    for (let i = min; i <= max; i++) gridItems.push(i);
+
+    return (
+        <div className="flex flex-col gap-6 animate-in fade-in slide-in-from-bottom-2 duration-300">
+            <div className="flex flex-wrap gap-3">
+                {(['every', 'step', 'specific', 'range'] as CronMode[]).map(m => (
+                    <button
+                        key={m}
+                        onClick={() => setMode(m)}
+                        className={`rounded-full px-5 py-2.5 text-[0.9rem] font-bold capitalize transition-all duration-200 ${
+                            state.mode === m 
+                                ? 'bg-[#8b5cf6] text-white shadow-[0_4px_12px_rgba(139,92,246,0.3)]' 
+                                : 'bg-[var(--bg-primary)] text-[var(--text-secondary)] hover:bg-[rgba(139,92,246,0.1)] hover:text-[#8b5cf6] border border-[var(--border)]'
+                        }`}
+                    >
+                        {m === 'specific' ? 'Specific (Select)' : m === 'step' ? 'Interval' : m}
+                    </button>
+                ))}
+            </div>
+
+            <div className="min-h-[200px] rounded-xl border border-[var(--border)] bg-[var(--bg-primary)] p-6 shadow-sm">
+                {state.mode === 'every' && (
+                    <div className="flex h-full items-center justify-center text-center text-[var(--text-secondary)] font-medium">
+                        Executes on every valid {title.toLowerCase()}.
+                    </div>
+                )}
+
+                {state.mode === 'step' && (
+                    <div className="flex h-full flex-col items-center justify-center gap-4">
+                        <label className="font-bold text-[var(--text-primary)]">Execute every N {title.toLowerCase()}s:</label>
+                        <div className="flex items-center gap-3">
+                            <input 
+                                type="number" 
+                                min={1} max={max} 
+                                value={state.stepValue}
+                                onChange={e => onChange({ ...state, stepValue: parseInt(e.target.value) || 1 })}
+                                className="w-24 rounded-lg border-2 border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-2 text-center text-xl font-bold text-[#8b5cf6] outline-none focus:border-[#8b5cf6]"
+                            />
+                            <span className="font-semibold text-[var(--text-secondary)]">{title.toLowerCase()}s</span>
+                        </div>
+                    </div>
+                )}
+
+                {state.mode === 'range' && (
+                    <div className="flex h-full flex-col items-center justify-center gap-4">
+                        <label className="font-bold text-[var(--text-primary)]">Execute between:</label>
+                        <div className="flex items-center gap-4">
+                            <select 
+                                value={state.rangeStart}
+                                onChange={e => onChange({ ...state, rangeStart: parseInt(e.target.value) })}
+                                className="rounded-lg border-2 border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-2 text-lg font-bold text-[#8b5cf6] outline-none focus:border-[#8b5cf6]"
+                            >
+                                {gridItems.map(i => <option key={i} value={i}>{getLabel(i)}</option>)}
+                            </select>
+                            <span className="font-bold text-[var(--text-secondary)]">and</span>
+                            <select 
+                                value={state.rangeEnd}
+                                onChange={e => onChange({ ...state, rangeEnd: parseInt(e.target.value) })}
+                                className="rounded-lg border-2 border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-2 text-lg font-bold text-[#8b5cf6] outline-none focus:border-[#8b5cf6]"
+                            >
+                                {gridItems.map(i => <option key={i} value={i}>{getLabel(i)}</option>)}
+                            </select>
+                        </div>
+                    </div>
+                )}
+
+                {state.mode === 'specific' && (
+                    <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-10 gap-2 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
+                        {gridItems.map(i => {
+                            const selected = state.specificValues.includes(i);
+                            return (
+                                <button
+                                    key={i}
+                                    onClick={() => toggleSpecific(i)}
+                                    className={`flex h-12 w-full items-center justify-center rounded-lg text-sm font-bold transition-all duration-150 ${
+                                        selected 
+                                            ? 'bg-[#8b5cf6] text-white shadow-md scale-105' 
+                                            : 'bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:bg-[rgba(139,92,246,0.1)] hover:text-[#8b5cf6] border border-[var(--border)]'
+                                    }`}
+                                >
+                                    {getLabel(i)}
+                                </button>
+                            );
+                        })}
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+};
+
 export default function CronGeneratorClient() {
+    const [activeTab, setActiveTab] = useState<'minute' | 'hour' | 'day' | 'month' | 'week'>('minute');
     const [cronString, setCronString] = useState('*/15 * * * *');
     const [copied, setCopied] = useState(false);
 
-    // Parsed State
+    const [builderState, setBuilderState] = useState<{
+        minute: SegmentState; hour: SegmentState; day: SegmentState; month: SegmentState; week: SegmentState;
+    }>({
+        minute: parseSegment('*/15', 0, 59),
+        hour: parseSegment('*', 0, 23),
+        day: parseSegment('*', 1, 31),
+        month: parseSegment('*', 1, 12, true),
+        week: parseSegment('*', 0, 6, false, true),
+    });
+
     const [translation, setTranslation] = useState('');
     const [nextDates, setNextDates] = useState<{ date: string, time: string }[]>([]);
     const [error, setError] = useState<string | null>(null);
+    const [syncingFromText, setSyncingFromText] = useState(false);
 
+    // Sync Text -> Builder
+    const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const val = e.target.value;
+        setCronString(val);
+        setSyncingFromText(true);
+        const parts = val.trim().split(/\s+/);
+        if (parts.length === 5) {
+            setBuilderState({
+                minute: parseSegment(parts[0], 0, 59),
+                hour: parseSegment(parts[1], 0, 23),
+                day: parseSegment(parts[2], 1, 31),
+                month: parseSegment(parts[3], 1, 12, true),
+                week: parseSegment(parts[4], 0, 6, false, true),
+            });
+        }
+    };
+
+    // Sync Builder -> Text
+    const updateBuilderSegment = (segment: keyof typeof builderState, state: SegmentState) => {
+        const newState = { ...builderState, [segment]: state };
+        setBuilderState(newState);
+        setSyncingFromText(false);
+        const newCron = `${generateSegment(newState.minute)} ${generateSegment(newState.hour)} ${generateSegment(newState.day)} ${generateSegment(newState.month)} ${generateSegment(newState.week)}`;
+        setCronString(newCron);
+    };
+
+    // Calculate details
     useEffect(() => {
         try {
-            if (!cronString.trim()) {
-                throw new Error('Cron string cannot be empty');
+            if (!cronString.trim() || cronString.trim().split(/\s+/).length < 5) {
+                throw new Error('Incomplete cron expression');
             }
 
-            // Generate Human Readable translation
             const humanText = cronstrue.toString(cronString, { verbose: true });
-
-            // Generate Upcoming Executions (cron-parser v5 API)
             const interval = CronExpressionParser.parse(cronString);
             const dates = [];
             for (let i = 0; i < 5; i++) {
@@ -56,124 +268,157 @@ export default function CronGeneratorClient() {
 
     const setPreset = (val: string) => {
         setCronString(val);
+        const e = { target: { value: val } } as React.ChangeEvent<HTMLInputElement>;
+        handleTextChange(e);
     };
+
+    const tabs = [
+        { id: 'minute', icon: <Clock size={16} />, label: 'Minute' },
+        { id: 'hour', icon: <Clock size={16} />, label: 'Hour' },
+        { id: 'day', icon: <CalendarIcon size={16} />, label: 'Day' },
+        { id: 'month', icon: <CalendarDays size={16} />, label: 'Month' },
+        { id: 'week', icon: <CalendarClock size={16} />, label: 'Week' },
+    ] as const;
 
     return (
         <>
             <div className="min-h-screen bg-[var(--bg-primary)]">
-                <header className="bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,0.05)_0%,transparent_50%)] py-12 text-center md:py-24">
+                <header className="bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,0.05)_0%,transparent_50%)] py-12 text-center md:py-24 border-b border-[var(--border)]">
                     <div className="container">
-                        <h1 className="mb-4 text-[clamp(2.5rem,5vw,4rem)] font-black text-[var(--text-primary)]">Advanced Cron <span className="text-[#8b5cf6]">Engine</span></h1>
-                        <p className="text-xl text-[var(--text-secondary)]">Build valid cron syntax, see plain English translations, and preview execution timelines safely.</p>
+                        <h1 className="mb-4 text-[clamp(2.5rem,5vw,4rem)] font-black text-[var(--text-primary)] tracking-tight">Advanced Cron <span className="text-[#8b5cf6]">Builder</span></h1>
+                        <p className="text-xl text-[var(--text-secondary)] max-w-2xl mx-auto">Visually construct valid cron schedules, parse existing expressions into plain English, and preview execution timelines safely in your browser.</p>
                     </div>
                 </header>
 
                 <section className="container section">
-                    <div className="mx-auto max-w-[1000px]">
-                        <Card className="!p-6 md:!p-10">
-                            <div className="mb-6 flex flex-col items-start justify-between gap-6 rounded-[var(--radius-lg)] bg-[#1e293b] p-6 lg:flex-row lg:p-8">
-                                <div className="flex w-full flex-col gap-4">
+                    <div className="mx-auto max-w-[1200px]">
+                        
+                        {/* Massive Display & Input */}
+                        <Card className="!p-6 md:!p-10 mb-8 border-2 border-[#8b5cf6]/20 bg-[var(--bg-secondary)] shadow-xl shadow-[#8b5cf6]/5">
+                            <div className="flex flex-col xl:flex-row gap-8 items-center justify-between">
+                                <div className="flex-1 w-full">
+                                    <label className="text-[0.8rem] font-black uppercase tracking-widest text-[#8b5cf6] mb-3 block">Raw Cron Expression</label>
                                     <input
                                         type="text"
                                         value={cronString}
-                                        onChange={(e) => setCronString(e.target.value)}
-                                        className="w-full border-none bg-transparent font-mono text-[clamp(2rem,4vw,3rem)] font-extrabold tracking-[0.1em] text-[#8b5cf6] outline-none"
+                                        onChange={handleTextChange}
+                                        className="w-full bg-white dark:bg-[#1e293b] rounded-xl border border-[var(--border)] px-6 py-4 font-mono text-[clamp(1.5rem,3vw,2.5rem)] font-extrabold tracking-widest text-[var(--text-primary)] outline-none focus:border-[#8b5cf6] focus:ring-4 focus:ring-[#8b5cf6]/20 transition-all"
                                         spellCheck="false"
                                     />
                                     {error ? (
-                                        <div className="mt-2 text-sm font-semibold text-[#ef4444]">
-                                            Error: {error}
+                                        <div className="mt-4 text-[0.95rem] font-bold text-[#ef4444] bg-[#ef4444]/10 p-4 rounded-lg inline-flex items-center gap-2">
+                                            <Info size={18} /> {error}
                                         </div>
                                     ) : (
-                                        <div className="inline-block max-w-fit rounded-[var(--radius-sm)] bg-[rgba(139,92,246,0.1)] px-4 py-3 text-lg font-semibold text-[#c4b5fd]">
+                                        <div className="mt-4 inline-flex items-center gap-3 max-w-fit rounded-lg bg-[#8b5cf6]/10 px-5 py-3 text-[1.1rem] font-bold text-[#8b5cf6]">
+                                            <Settings2 size={20} />
                                             &quot;{translation}&quot;
                                         </div>
                                     )}
                                 </div>
-                                <button className="mt-0 flex shrink-0 cursor-pointer items-center gap-3 rounded-[var(--radius-md)] border-none bg-[rgba(255,255,255,0.1)] px-5 py-3 font-bold text-white transition-all duration-200 hover:bg-[rgba(255,255,255,0.2)] lg:mt-2" onClick={copyToClipboard} disabled={!!error}>
-                                    {copied ? <Check size={20} color="#10b981" /> : <Copy size={20} />}
-                                    <span>{copied ? 'Copied' : 'Copy'}</span>
+                                <button className="w-full xl:w-auto shrink-0 cursor-pointer flex justify-center items-center gap-3 rounded-xl border-none bg-[#8b5cf6] px-8 py-5 text-[1.1rem] font-extrabold text-white transition-all duration-200 hover:bg-[#7c3aed] hover:shadow-lg hover:-translate-y-1 active:translate-y-0" onClick={copyToClipboard} disabled={!!error}>
+                                    {copied ? <Check size={24} /> : <Copy size={24} />}
+                                    <span>{copied ? 'Copied to Clipboard' : 'Copy Expression'}</span>
                                 </button>
                             </div>
+                        </Card>
 
-                            <div className="grid grid-cols-1 gap-8 lg:grid-cols-[2fr_1fr]">
-                                <div className="rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
-                                    <h3 className="mb-4 flex items-center gap-2 text-base font-extrabold text-[var(--text-primary)]">
-                                        <CalendarClock size={20} color="#8b5cf6" />
+                        {/* Bento Grid Layout */}
+                        <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8">
+                            
+                            {/* Visual Builder */}
+                            <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] overflow-hidden shadow-sm">
+                                <div className="flex overflow-x-auto border-b border-[var(--border)] bg-[var(--bg-primary)] p-2 gap-2 custom-scrollbar">
+                                    {tabs.map(tab => (
+                                        <button
+                                            key={tab.id}
+                                            onClick={() => setActiveTab(tab.id as any)}
+                                            className={`flex items-center gap-2 whitespace-nowrap rounded-lg px-6 py-3 font-bold transition-all duration-200 ${
+                                                activeTab === tab.id
+                                                    ? 'bg-[#8b5cf6] text-white shadow-md'
+                                                    : 'text-[var(--text-secondary)] hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)]'
+                                            }`}
+                                        >
+                                            {tab.icon} {tab.label}
+                                        </button>
+                                    ))}
+                                </div>
+                                <div className="p-6 md:p-8">
+                                    {activeTab === 'minute' && <SegmentBuilder title="Minute" min={0} max={59} state={builderState.minute} onChange={s => updateBuilderSegment('minute', s)} />}
+                                    {activeTab === 'hour' && <SegmentBuilder title="Hour" min={0} max={23} state={builderState.hour} onChange={s => updateBuilderSegment('hour', s)} />}
+                                    {activeTab === 'day' && <SegmentBuilder title="Day of Month" min={1} max={31} state={builderState.day} onChange={s => updateBuilderSegment('day', s)} />}
+                                    {activeTab === 'month' && <SegmentBuilder title="Month" min={1} max={12} labels={monthNames} state={builderState.month} onChange={s => updateBuilderSegment('month', s)} />}
+                                    {activeTab === 'week' && <SegmentBuilder title="Day of Week" min={0} max={6} labels={weekNames} state={builderState.week} onChange={s => updateBuilderSegment('week', s)} />}
+                                </div>
+                            </div>
+
+                            {/* Sidebar Info */}
+                            <div className="flex flex-col gap-8">
+                                <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-6 shadow-sm">
+                                    <h3 className="mb-6 flex items-center gap-3 text-[1.1rem] font-extrabold text-[var(--text-primary)]">
+                                        <CalendarClock size={22} className="text-[#8b5cf6]" />
                                         Next 5 Executions
                                     </h3>
                                     {error ? (
-                                        <div style={{ color: '#ef4444', fontSize: '0.875rem', marginTop: '1rem' }}>
-                                            Fix the cron syntax error to preview upcoming executions.
+                                        <div className="text-[#ef4444] text-[0.95rem] font-medium bg-[#ef4444]/5 p-4 rounded-lg">
+                                            Fix the cron syntax to preview upcoming executions.
                                         </div>
                                     ) : (
-                                        <div className="ml-2 flex flex-col gap-0 border-l-2 border-[rgba(139,92,246,0.2)] pl-4">
+                                        <div className="ml-2 flex flex-col gap-2 border-l-[3px] border-[#8b5cf6]/30 pl-5 relative before:absolute before:top-0 before:-left-[3px] before:bottom-0 before:w-[3px] before:bg-gradient-to-b before:from-[#8b5cf6] before:to-transparent">
                                             {nextDates.map((nd, idx) => (
-                                                <div key={idx} className="relative py-3 before:absolute before:-left-[1.4rem] before:top-1/2 before:h-[12px] before:w-[12px] before:-translate-y-1/2 before:rounded-full before:border-2 before:border-[#8b5cf6] before:bg-[var(--bg-secondary)] before:content-[''] first:before:bg-[#8b5cf6] first:before:shadow-[0_0_10px_rgba(139,92,246,0.4)]">
-                                                    <div className="text-[0.9375rem] font-bold text-[var(--text-primary)]">{nd.date}</div>
-                                                    <div className="mt-1 font-mono text-[0.8125rem] font-bold text-[#8b5cf6]">{nd.time}</div>
+                                                <div key={idx} className="relative py-3 before:absolute before:-left-[1.6rem] before:top-1/2 before:h-[14px] before:w-[14px] before:-translate-y-1/2 before:rounded-full before:border-[3px] before:border-[#8b5cf6] before:bg-[var(--bg-secondary)] first:before:bg-[#8b5cf6] first:before:shadow-[0_0_12px_rgba(139,92,246,0.5)] transition-all hover:translate-x-1">
+                                                    <div className="text-[1rem] font-extrabold text-[var(--text-primary)]">{nd.date}</div>
+                                                    <div className="mt-1 flex items-center gap-2 font-mono text-[0.85rem] font-bold text-[#8b5cf6] bg-[#8b5cf6]/10 w-fit px-2 py-0.5 rounded-md"><Clock size={12}/> {nd.time}</div>
                                                 </div>
                                             ))}
                                         </div>
                                     )}
                                 </div>
 
-                                <div>
-                                    <div className="mt-0 lg:mt-0">
-                                        <h4 className="mb-4 text-base font-extrabold text-[var(--text-primary)]">Common Presets</h4>
-                                        <div className="flex flex-wrap gap-4">
-                                            <button onClick={() => setPreset('0 0 * * *')} className="cursor-pointer rounded-full border border-[var(--border)] bg-transparent px-4 py-2 text-sm font-semibold text-[var(--text-secondary)] transition-all duration-200 hover:border-[#8b5cf6] hover:bg-[rgba(139,92,246,0.05)] hover:text-[#8b5cf6]">Daily at Midnight</button>
-                                            <button onClick={() => setPreset('0 12 * * *')} className="cursor-pointer rounded-full border border-[var(--border)] bg-transparent px-4 py-2 text-sm font-semibold text-[var(--text-secondary)] transition-all duration-200 hover:border-[#8b5cf6] hover:bg-[rgba(139,92,246,0.05)] hover:text-[#8b5cf6]">Daily at Noon</button>
-                                            <button onClick={() => setPreset('0 * * * *')} className="cursor-pointer rounded-full border border-[var(--border)] bg-transparent px-4 py-2 text-sm font-semibold text-[var(--text-secondary)] transition-all duration-200 hover:border-[#8b5cf6] hover:bg-[rgba(139,92,246,0.05)] hover:text-[#8b5cf6]">Top of every Hour</button>
-                                            <button onClick={() => setPreset('0 0 * * 1')} className="cursor-pointer rounded-full border border-[var(--border)] bg-transparent px-4 py-2 text-sm font-semibold text-[var(--text-secondary)] transition-all duration-200 hover:border-[#8b5cf6] hover:bg-[rgba(139,92,246,0.05)] hover:text-[#8b5cf6]">Every Monday Midnight</button>
-                                            <button onClick={() => setPreset('0 0 1 * *')} className="cursor-pointer rounded-full border border-[var(--border)] bg-transparent px-4 py-2 text-sm font-semibold text-[var(--text-secondary)] transition-all duration-200 hover:border-[#8b5cf6] hover:bg-[rgba(139,92,246,0.05)] hover:text-[#8b5cf6]">1st of the Month</button>
-                                            <button onClick={() => setPreset('*/5 * * * *')} className="cursor-pointer rounded-full border border-[var(--border)] bg-transparent px-4 py-2 text-sm font-semibold text-[var(--text-secondary)] transition-all duration-200 hover:border-[#8b5cf6] hover:bg-[rgba(139,92,246,0.05)] hover:text-[#8b5cf6]">Every 5 Minutes</button>
-                                            <button onClick={() => setPreset('0 0 * * 1-5')} className="cursor-pointer rounded-full border border-[var(--border)] bg-transparent px-4 py-2 text-sm font-semibold text-[var(--text-secondary)] transition-all duration-200 hover:border-[#8b5cf6] hover:bg-[rgba(139,92,246,0.05)] hover:text-[#8b5cf6]">Weekdays (Mon-Fri)</button>
-                                        </div>
-                                    </div>
-
-                                    <div style={{ marginTop: '2rem', padding: '1.25rem', background: 'rgba(139, 92, 246, 0.05)', borderRadius: 'var(--radius-md)', border: '1px solid rgba(139, 92, 246, 0.2)' }}>
-                                        <h4 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#8b5cf6', fontWeight: 800, fontSize: '0.9rem', marginBottom: '0.5rem' }}>
-                                            <Info size={16} /> Syntax Reminder
-                                        </h4>
-                                        <ul style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', paddingLeft: '1.5rem', lineHeight: 1.6 }}>
-                                            <li><strong>*</strong> any value</li>
-                                            <li><strong>,</strong> value list separator</li>
-                                            <li><strong>-</strong> range of values</li>
-                                            <li><strong>/</strong> step values</li>
-                                        </ul>
+                                <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-6 shadow-sm">
+                                    <h4 className="mb-5 text-[1.1rem] font-extrabold text-[var(--text-primary)] flex items-center gap-2"><Hash size={20} className="text-[#8b5cf6]"/> Quick Presets</h4>
+                                    <div className="flex flex-wrap gap-2.5">
+                                        {[
+                                            { label: 'Midnight Daily', val: '0 0 * * *' },
+                                            { label: 'Every 5 Minutes', val: '*/5 * * * *' },
+                                            { label: 'Top of Hour', val: '0 * * * *' },
+                                            { label: 'Mon-Fri 9AM', val: '0 9 * * 1-5' },
+                                            { label: '1st of Month', val: '0 0 1 * *' },
+                                            { label: 'Every Sunday', val: '0 0 * * 0' },
+                                        ].map(preset => (
+                                            <button 
+                                                key={preset.label}
+                                                onClick={() => setPreset(preset.val)} 
+                                                className="cursor-pointer rounded-lg border border-[var(--border)] bg-[var(--bg-primary)] px-4 py-2 text-[0.85rem] font-bold text-[var(--text-secondary)] transition-all hover:border-[#8b5cf6] hover:bg-[#8b5cf6]/5 hover:text-[#8b5cf6] active:scale-95"
+                                            >
+                                                {preset.label}
+                                            </button>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
-                        </Card>
+
+                        </div>
                     </div>
                 </section>
 
                 <SEOSection
                     title="Online Cron Schedule Predictor & Advanced Parser"
-                    description="Automatically decipher complex cron expressions into human readable English. Generate a 5-iteration execution schedule natively in your browser to debug automated background jobs confidently without trial and error."
+                    description="Visually build cron schedules, decipher complex cron expressions into human readable English, and generate a 5-iteration execution schedule natively in your browser to debug automated background jobs confidently."
                     howToUse={[
-                        "Type or paste your raw cron expression directly into the purple input header (e.g. '0 22 * * 1-5').",
+                        "Use the Visual Builder tabs to select the exact minute, hour, day, month, and weekday your job should run.",
+                        "Alternatively, paste your raw cron expression directly into the massive purple input header (e.g. '0 22 * * 1-5').",
                         "Instantly see the plain English translation of exactly what the expression will do (e.g. 'At 10:00 PM, Monday through Friday').",
-                        "Review the 'Next 5 Executions' timeline on the left to confirm timezones and daylight savings don't disrupt your expected triggers.",
-                        "Use the quick presets panel to bootstrap standard infrastructure triggers immediately."
+                        "Review the 'Next 5 Executions' timeline to confirm timezones and logic don't disrupt your triggers.",
+                        "Copy the generated expression to paste into your server, CI/CD pipeline, or Kubernetes cronjob."
                     ]}
                     benefits={[
+                        "Visual Builder: Stop guessing syntax. Click buttons and let the generator write the asterisks and slashes for you.",
                         "Timeline Validation: Avoid catastrophic duplicate executions by verifying the absolute runtime timeline ahead of deployment.",
                         "Human Readable Translation: Instantly converts arbitrary stars and slashes into detailed English logic.",
-                        "Native Execution: Uses advanced math libraries entirely in the browser, safeguarding privacy via zero-server communication.",
-                        "Syntax Explainer: Handy reference chart directly on screen."
+                        "Native Execution: Uses advanced math libraries entirely in the browser, safeguarding privacy via zero-server communication."
                     ]}
                 />
-
-                <section className="container section" style={{ padding: '2rem 0 6rem' }}>
-                    <Card style={{ padding: '3rem', background: 'var(--bg-secondary)', border: 'none' }}>
-                        <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1.5rem', color: 'var(--text-primary)' }}>Why check Upcoming Execution Dates?</h2>
-                        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1.5rem', fontSize: '1.05rem' }}>
-                            Advanced backend software processes, Lambda functions, and Kubernetes tasks depend entirely on the archaic <strong>Unix Cron Specification</strong>. Writing an expression that reads `*/15` instead of `15` means triggering a job 4 times an hour instead of once per hour. Our <strong>Advanced Cron Predictor Engine</strong> immediately calculates the absolute next 5 invocation timestamps, so administrators can confidently push schedule architectures to production environments knowing the interval math strictly aligns with their expectations.
-                        </p>
-                    </Card>
-                </section>
             </div>
             <Footer />
         </>
