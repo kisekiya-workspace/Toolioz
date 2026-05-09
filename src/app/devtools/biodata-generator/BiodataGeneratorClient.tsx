@@ -49,6 +49,67 @@ const initialForm: BiodataForm = {
   address: 'Bangalore, Karnataka, India',
 };
 
+const AccordionItem = ({ 
+  id, 
+  title, 
+  isOpen, 
+  onToggle, 
+  children 
+}: { 
+  id: string, 
+  title: string, 
+  isOpen: boolean, 
+  onToggle: () => void, 
+  children: React.ReactNode 
+}) => {
+  return (
+    <div className="border-b border-gray-200">
+      <button
+        className="w-full flex items-center justify-between py-4 text-left font-semibold text-gray-800 hover:text-purple-600 transition-colors focus:outline-none"
+        onClick={onToggle}
+      >
+        {title}
+        {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+      </button>
+      {isOpen && <div className="pb-5 space-y-4 animate-in slide-in-from-top-2">{children}</div>}
+    </div>
+  );
+};
+
+const Input = ({ 
+  label, 
+  value, 
+  onChange, 
+  placeholder, 
+  type = 'text' 
+}: { 
+  label: string, 
+  value: string, 
+  onChange: (val: string) => void, 
+  placeholder?: string, 
+  type?: string 
+}) => (
+  <div>
+    <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">{label}</label>
+    {type === 'textarea' ? (
+      <textarea
+        className="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 focus:border-purple-500 focus:bg-white focus:ring-1 focus:ring-purple-500 outline-none transition"
+        rows={3}
+        value={value}
+        placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    ) : (
+      <input
+        type={type}
+        className="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 focus:border-purple-500 focus:bg-white focus:ring-1 focus:ring-purple-500 outline-none transition"
+        value={value}
+        placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    )}
+  </div>
+);
 
 export default function BiodataGeneratorClient() {
   const [activeTab, setActiveTab] = useState<'templates' | 'edit' | 'preview'>('edit');
@@ -103,7 +164,6 @@ export default function BiodataGeneratorClient() {
   };
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -204,45 +264,6 @@ export default function BiodataGeneratorClient() {
       case 'artdeco': return <ArtDecoTemplate data={form} />;
     }
   };
-
-  const AccordionItem = ({ id, title, children }: { id: string, title: string, children: React.ReactNode }) => {
-    const isOpen = openAccordion === id;
-    return (
-      <div className="border-b border-gray-200">
-        <button
-          className="w-full flex items-center justify-between py-4 text-left font-semibold text-gray-800 hover:text-purple-600 transition-colors focus:outline-none"
-          onClick={() => setOpenAccordion(isOpen ? '' : id)}
-        >
-          {title}
-          {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-        </button>
-        {isOpen && <div className="pb-5 space-y-4 animate-in slide-in-from-top-2">{children}</div>}
-      </div>
-    );
-  };
-
-  const Input = ({ label, field, placeholder, type = 'text' }: { label: string, field: keyof BiodataForm, placeholder?: string, type?: string }) => (
-    <div>
-      <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">{label}</label>
-      {type === 'textarea' ? (
-        <textarea
-          className="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 focus:border-purple-500 focus:bg-white focus:ring-1 focus:ring-purple-500 outline-none transition"
-          rows={3}
-          value={form[field] || ''}
-          placeholder={placeholder}
-          onChange={(e) => updateField(field, e.target.value)}
-        />
-      ) : (
-        <input
-          type={type}
-          className="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 focus:border-purple-500 focus:bg-white focus:ring-1 focus:ring-purple-500 outline-none transition"
-          value={form[field] || ''}
-          placeholder={placeholder}
-          onChange={(e) => updateField(field, e.target.value)}
-        />
-      )}
-    </div>
-  );
 
   if (!isLoaded) return null; // Avoid hydration mismatch
 
@@ -530,7 +551,12 @@ export default function BiodataGeneratorClient() {
               </div>
             ) : (
               <div className="space-y-1 pb-20 lg:pb-0">
-                <AccordionItem id="personal" title="Personal Info">
+                <AccordionItem 
+                  id="personal" 
+                  title="Personal Info"
+                  isOpen={openAccordion === 'personal'}
+                  onToggle={() => setOpenAccordion(openAccordion === 'personal' ? '' : 'personal')}
+                >
                   <div className="mb-4">
                     <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Profile Photo</label>
                     <div className="flex items-center gap-4">
@@ -550,52 +576,77 @@ export default function BiodataGeneratorClient() {
                       </div>
                     </div>
                   </div>
-                  <Input label="Full Name" field="fullName" placeholder="E.g., Gaurav Mehta" />
+                  <Input label="Full Name" value={form.fullName} onChange={(v) => updateField('fullName', v)} placeholder="E.g., Gaurav Mehta" />
                   <div className="grid grid-cols-2 gap-3">
-                    <Input label="Date of Birth" field="dateOfBirth" placeholder="DD-MM-YYYY" />
-                    <Input label="Time of Birth" field="birthTime" placeholder="HH:MM AM/PM" />
+                    <Input label="Date of Birth" value={form.dateOfBirth} onChange={(v) => updateField('dateOfBirth', v)} placeholder="DD-MM-YYYY" />
+                    <Input label="Time of Birth" value={form.birthTime} onChange={(v) => updateField('birthTime', v)} placeholder="HH:MM AM/PM" />
                   </div>
-                  <Input label="Place of Birth" field="birthPlace" placeholder="City, State" />
+                  <Input label="Place of Birth" value={form.birthPlace} onChange={(v) => updateField('birthPlace', v)} placeholder="City, State" />
                 </AccordionItem>
 
-                <AccordionItem id="profile" title="Profile Details">
+                <AccordionItem 
+                  id="profile" 
+                  title="Profile Details"
+                  isOpen={openAccordion === 'profile'}
+                  onToggle={() => setOpenAccordion(openAccordion === 'profile' ? '' : 'profile')}
+                >
                   <div className="grid grid-cols-2 gap-3">
-                    <Input label="Height" field="height" placeholder="E.g., 5'9&quot;" />
-                    <Input label="Religion" field="religion" placeholder="E.g., Hindu" />
-                    <Input label="Caste" field="caste" placeholder="E.g., Brahmin" />
-                    <Input label="Manglik" field="manglik" placeholder="Yes / No / Don't Know" />
+                    <Input label="Height" value={form.height} onChange={(v) => updateField('height', v)} placeholder="E.g., 5'9&quot;" />
+                    <Input label="Religion" value={form.religion} onChange={(v) => updateField('religion', v)} placeholder="E.g., Hindu" />
+                    <Input label="Caste" value={form.caste} onChange={(v) => updateField('caste', v)} placeholder="E.g., Brahmin" />
+                    <Input label="Manglik" value={form.manglik} onChange={(v) => updateField('manglik', v)} placeholder="Yes / No / Don't Know" />
                   </div>
-                  <Input label="Languages Known" field="languages" placeholder="E.g., English, Hindi" />
+                  <Input label="Languages Known" value={form.languages} onChange={(v) => updateField('languages', v)} placeholder="E.g., English, Hindi" />
                 </AccordionItem>
 
-                <AccordionItem id="education" title="Education & Profession">
-                  <Input label="Education" field="education" placeholder="E.g., B.Tech in Computer Science" />
-                  <Input label="Profession / Occupation" field="occupation" placeholder="E.g., Software Engineer at Google" />
-                  <Input label="Annual Income" field="annualIncome" placeholder="E.g., 18 LPA" />
+                <AccordionItem 
+                  id="education" 
+                  title="Education & Profession"
+                  isOpen={openAccordion === 'education'}
+                  onToggle={() => setOpenAccordion(openAccordion === 'education' ? '' : 'education')}
+                >
+                  <Input label="Education" value={form.education} onChange={(v) => updateField('education', v)} placeholder="E.g., B.Tech in Computer Science" />
+                  <Input label="Profession / Occupation" value={form.occupation} onChange={(v) => updateField('occupation', v)} placeholder="E.g., Software Engineer at Google" />
+                  <Input label="Annual Income" value={form.annualIncome} onChange={(v) => updateField('annualIncome', v)} placeholder="E.g., 18 LPA" />
                 </AccordionItem>
 
-                <AccordionItem id="family" title="Family Details">
+                <AccordionItem 
+                  id="family" 
+                  title="Family Details"
+                  isOpen={openAccordion === 'family'}
+                  onToggle={() => setOpenAccordion(openAccordion === 'family' ? '' : 'family')}
+                >
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <Input label="Father's Name" field="fatherName" />
-                    <Input label="Father's Occupation" field="fatherOccupation" />
-                    <Input label="Mother's Name" field="motherName" />
-                    <Input label="Mother's Occupation" field="motherOccupation" />
+                    <Input label="Father's Name" value={form.fatherName} onChange={(v) => updateField('fatherName', v)} />
+                    <Input label="Father's Occupation" value={form.fatherOccupation} onChange={(v) => updateField('fatherOccupation', v)} />
+                    <Input label="Mother's Name" value={form.motherName} onChange={(v) => updateField('motherName', v)} />
+                    <Input label="Mother's Occupation" value={form.motherOccupation} onChange={(v) => updateField('motherOccupation', v)} />
                   </div>
-                  <Input label="Siblings (Names & Details)" field="siblings" type="textarea" placeholder="List brothers and sisters..." />
+                  <Input label="Siblings (Names & Details)" value={form.siblings} onChange={(v) => updateField('siblings', v)} type="textarea" placeholder="List brothers and sisters..." />
                 </AccordionItem>
 
-                <AccordionItem id="about" title="About & Expectations">
-                  <Input label="About Me" field="about" type="textarea" placeholder="Write a short paragraph about yourself..." />
-                  <Input label="Hobbies & Interests" field="hobbies" type="textarea" />
-                  <Input label="Partner Expectations" field="partnerPreferences" type="textarea" placeholder="What are you looking for in a partner?" />
+                <AccordionItem 
+                  id="about" 
+                  title="About & Expectations"
+                  isOpen={openAccordion === 'about'}
+                  onToggle={() => setOpenAccordion(openAccordion === 'about' ? '' : 'about')}
+                >
+                  <Input label="About Me" value={form.about} onChange={(v) => updateField('about', v)} type="textarea" placeholder="Write a short paragraph about yourself..." />
+                  <Input label="Hobbies & Interests" value={form.hobbies} onChange={(v) => updateField('hobbies', v)} type="textarea" />
+                  <Input label="Partner Expectations" value={form.partnerPreferences} onChange={(v) => updateField('partnerPreferences', v)} type="textarea" placeholder="What are you looking for in a partner?" />
                 </AccordionItem>
 
-                <AccordionItem id="contact" title="Contact Info">
+                <AccordionItem 
+                  id="contact" 
+                  title="Contact Info"
+                  isOpen={openAccordion === 'contact'}
+                  onToggle={() => setOpenAccordion(openAccordion === 'contact' ? '' : 'contact')}
+                >
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <Input label="Mobile Number" field="phone" />
-                    <Input label="Email Address" field="email" />
+                    <Input label="Mobile Number" value={form.phone} onChange={(v) => updateField('phone', v)} />
+                    <Input label="Email Address" value={form.email} onChange={(v) => updateField('email', v)} />
                   </div>
-                  <Input label="Current / Permanent Address" field="address" type="textarea" />
+                  <Input label="Current / Permanent Address" value={form.address} onChange={(v) => updateField('address', v)} type="textarea" />
                 </AccordionItem>
               </div>
             )}

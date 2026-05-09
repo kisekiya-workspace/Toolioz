@@ -58,10 +58,10 @@ export const RoyalGoldTemplate = ({ data }: { data: BiodataForm }) => (
             <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity"><User size={80} /></div>
             <h3 className="text-[#d4af37] font-black text-xl mb-10 border-b border-[#d4af37]/30 pb-4 uppercase tracking-[0.2em]">Personal Portfolio</h3>
             <div className="space-y-6 text-base">
-               <div className="flex justify-between border-b border-[#d4af37]/10 pb-3"><span className="font-bold uppercase text-[10px] tracking-widest text-white/70">Birth Date</span><span className="font-black text-white">{data.dateOfBirth}</span></div>
-               <div className="flex justify-between border-b border-[#d4af37]/10 pb-3"><span className="font-bold uppercase text-[10px] tracking-widest text-white/70">Birth Time</span><span className="font-black text-white">{data.birthTime}</span></div>
-               <div className="flex justify-between border-b border-[#d4af37]/10 pb-3"><span className="font-bold uppercase text-[10px] tracking-widest text-white/70">Birth Place</span><span className="font-black text-white text-sm">{data.birthPlace}</span></div>
-               <div className="flex justify-between border-b border-[#d4af37]/10 pb-3"><span className="font-bold uppercase text-[10px] tracking-widest text-white/70">Stature</span><span className="font-black text-white">{data.height}</span></div>
+               <div className="flex justify-between border-b border-[#d4af37]/10 pb-3"><span className="font-bold uppercase text-[10px] tracking-widest text-white/90">Birth Date</span><span className="font-black text-white">{data.dateOfBirth}</span></div>
+               <div className="flex justify-between border-b border-[#d4af37]/10 pb-3"><span className="font-bold uppercase text-[10px] tracking-widest text-white/90">Birth Time</span><span className="font-black text-white">{data.birthTime}</span></div>
+               <div className="flex justify-between border-b border-[#d4af37]/10 pb-3"><span className="font-bold uppercase text-[10px] tracking-widest text-white/90">Birth Place</span><span className="font-black text-white text-sm">{data.birthPlace}</span></div>
+               <div className="flex justify-between border-b border-[#d4af37]/10 pb-3"><span className="font-bold uppercase text-[10px] tracking-widest text-white/90">Stature</span><span className="font-black text-white">{data.height}</span></div>
             </div>
          </section>
 
@@ -70,7 +70,7 @@ export const RoyalGoldTemplate = ({ data }: { data: BiodataForm }) => (
                <div className="absolute top-0 right-0 p-6 opacity-[0.03]"><GraduationCap size={60} /></div>
                <h3 className="text-[#d4af37] font-black text-lg mb-6 border-b border-[#d4af37]/30 pb-3 uppercase tracking-[0.2em]">Academic Stand</h3>
                <p className="text-xl font-black text-white leading-tight mb-4">{data.education}</p>
-               <div className="flex items-center gap-3 text-sm font-bold bg-[#d4af37] text-[#1a1a1a] px-4 py-2 rounded-xl inline-block uppercase">
+               <div className="flex items-center gap-3 text-sm font-bold bg-[#d4af37] text-[#1a1a1a] px-4 py-2 rounded-xl inline-block uppercase shadow-[0_0_15px_rgba(212,175,55,0.3)]">
                   <Briefcase size={14} /> {data.occupation}
                </div>
             </section>
@@ -79,8 +79,8 @@ export const RoyalGoldTemplate = ({ data }: { data: BiodataForm }) => (
                <div className="absolute top-0 right-0 p-6 opacity-[0.03]"><Users size={60} /></div>
                <h3 className="text-[#d4af37] font-black text-lg mb-6 border-b border-[#d4af37]/30 pb-3 uppercase tracking-[0.2em]">Family Dynasty</h3>
                <div className="grid grid-cols-2 gap-8">
-                  <div><p className="text-[10px] font-bold text-white/70 uppercase mb-2">Father</p><p className="font-black text-white text-base leading-none">{data.fatherName}</p></div>
-                  <div><p className="text-[10px] font-bold text-white/70 uppercase mb-2">Mother</p><p className="font-black text-white text-base leading-none">{data.motherName}</p></div>
+                  <div><p className="text-[10px] font-bold text-white/90 uppercase mb-2">Father</p><p className="font-black text-white text-base leading-none">{data.fatherName}</p></div>
+                  <div><p className="text-[10px] font-bold text-white/90 uppercase mb-2">Mother</p><p className="font-black text-white text-base leading-none">{data.motherName}</p></div>
                </div>
             </section>
          </div>
@@ -89,10 +89,10 @@ export const RoyalGoldTemplate = ({ data }: { data: BiodataForm }) => (
       <footer className="mt-auto w-full flex flex-col items-center pt-16">
          <div className="w-full h-px bg-gradient-to-r from-transparent via-[#d4af37] to-transparent mb-12 opacity-40"></div>
          <div className="flex gap-16 text-sm font-black uppercase tracking-[0.3em] mb-8">
-            <div className="flex items-center gap-3"><Phone size={18} /> {data.phone}</div>
-            <div className="flex items-center gap-3"><Mail size={18} /> {data.email}</div>
+            <div className="flex items-center gap-3 text-white"><Phone size={18} className="text-[#d4af37]" /> {data.phone}</div>
+            <div className="flex items-center gap-3 text-white"><Mail size={18} className="text-[#d4af37]" /> {data.email}</div>
          </div>
-         <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.5em] text-white/70">
+         <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.5em] text-white/90">
             <MapPin size={16} className="text-[#d4af37]" /> {data.address}
          </div>
       </footer>
