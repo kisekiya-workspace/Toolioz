@@ -22,7 +22,6 @@ export const biodataKeywords = [
   'luxury marriage biodata format',
   'compact biodata design for marriage',
   'art deco matrimonial profile maker',
-  'mesh gradient biodata template',
   'premium marriage biodata generator',
   'a4 size marriage biodata pdf',
 ];
@@ -41,7 +40,7 @@ export const biodataFaqs = [
   {
     question: 'Which biodata templates are available?',
     answer:
-      'We offer 14+ premium templates including Vintage Parchment, Cosmic Gradient, Minimalist Luxury, Modern Compact, Art Deco Noir, Modern Split, Classic Centered, Minimalist, Hindu Traditional, Islamic Elegant, Sikh Heritage, Floral Harmony, Royal Gold, and Modern Professional styles.',
+      'We offer 13+ premium templates including Vintage Parchment, Minimalist Luxury, Modern Compact, Art Deco Noir, Modern Split, Classic Centered, Minimalist, Hindu Traditional, Islamic Elegant, Sikh Heritage, Floral Harmony, Royal Gold, and Modern Professional styles.',
   },
   {
     question: 'Is my data safe and private?',
@@ -266,7 +265,7 @@ export const biodataPosts: BiodataPost[] = [
     slug: 'choosing-best-marriage-biodata-template-premium',
     title: 'Choosing the Best Marriage Biodata Template: Vintage, Luxury, and Modern Styles',
     description:
-      'Explore 14+ premium marriage biodata templates. Find the perfect layout from Vintage, Art Deco, Luxury, and Modern styles to make your matrimonial profile stand out.',
+      'Explore 13+ premium marriage biodata templates. Find the perfect layout from Vintage, Art Deco, Luxury, and Modern styles to make your matrimonial profile stand out.',
     keywords: [
       'best marriage biodata template',
       'vintage marriage biodata',
@@ -287,7 +286,7 @@ export const biodataPosts: BiodataPost[] = [
         heading: 'Matching the template to your background',
         body: [
           'If you are from a traditional background, templates like "Hindu Traditional", "Islamic Elegant", or "Sikh Heritage" provide culturally appropriate motifs and structure.',
-          'For professionals in tech or creative fields, "Modern Compact" or "Cosmic Gradient" offers a fresh, contemporary look that aligns with a modern lifestyle.',
+          'For professionals in tech or creative fields, "Modern Compact" offers a fresh, contemporary look that aligns with a modern lifestyle.',
         ],
       },
       {
@@ -312,7 +311,7 @@ export const biodataPosts: BiodataPost[] = [
       {
         question: 'Can I change my template after filling in my details?',
         answer:
-          'Yes, you can switch between all 14+ templates at any time without losing your data. The preview will update instantly to show how your info looks in the new design.',
+          'Yes, you can switch between all 13+ templates at any time without losing your data. The preview will update instantly to show how your info looks in the new design.',
       },
     ],
   },

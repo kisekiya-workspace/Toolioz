@@ -17,7 +17,6 @@ import {
   RoyalGoldTemplate, 
   ProfessionalTemplate,
   VintageTemplate,
-  GradientTemplate,
   LuxuryTemplate,
   CompactTemplate,
   ArtDecoTemplate
