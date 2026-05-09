@@ -91,6 +91,58 @@ export default function BiodataGeneratorPage() {
       <JSONLD data={howToJsonLd} />
       <JSONLD data={faqJsonLd} />
       <BiodataGeneratorClient />
-    </>
++
++      <div className="bg-white py-16">
++        <div className="max-w-4xl mx-auto px-6">
++          <h2 className="text-3xl font-black text-gray-900 mb-8 tracking-tight">Create Your Professional Marriage Biodata in Minutes</h2>
++          <div className="prose prose-slate max-w-none space-y-6 text-gray-600 leading-relaxed">
++            <p>
++              Our <strong>Free Marriage Biodata Generator</strong> is designed to help you create a stunning, professional matrimonial profile without the need for complex design tools or expensive services. Whether you are looking for a <strong>Hindu biodata format</strong>, an <strong>Islamic elegant design</strong>, or a <strong>modern professional layout</strong>, we have over 14 premium templates to choose from.
++            </p>
++            
++            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12">
++              <div>
++                <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
++                  <span className="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center text-sm">1</span>
++                  Religion-Specific Templates
++                </h3>
++                <p>We understand that different communities have different requirements. Our tool includes specialized templates for Hindu, Muslim, and Sikh backgrounds, featuring appropriate symbols and sections for horoscope details, family heritage, and more.</p>
++              </div>
++              <div>
++                <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
++                  <span className="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center text-sm">2</span>
++                  Modern & Premium Designs
++                </h3>
++                <p>Stand out with our new premium collection, including <strong>Vintage Parchment</strong>, <strong>Art Deco Noir</strong>, and <strong>Cosmic Gradient</strong>. These designs are crafted to make a lasting first impression on prospective families and partners.</p>
++              </div>
++              <div>
++                <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
++                  <span className="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center text-sm">3</span>
++                  Mobile-Friendly Experience
++                </h3>
++                <p>Created with a mobile-first approach, you can fill in your details, preview your A4 layout, and download your <strong>biodata PDF</strong> directly on your smartphone. No login, no registration, and completely free.</p>
++              </div>
++              <div>
++                <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
++                  <span className="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center text-sm">4</span>
++                  Privacy Guaranteed
++                </h3>
++                <p>Your privacy is our priority. All your data is processed locally in your browser and never stored on our servers. You have complete control over your information and photos.</p>
++              </div>
++            </div>
++
++            <div className="mt-16 p-8 bg-purple-50 rounded-3xl border border-purple-100">
++              <h3 className="text-2xl font-bold text-purple-900 mb-4">Tips for a Great Marriage Biodata</h3>
++              <ul className="list-disc pl-6 space-y-3 text-purple-800">
++                <li><strong>Use a clear photo:</strong> A recent, high-quality portrait makes the profile feel more authentic.</li>
++                <li><strong>Be concise:</strong> Families often scan many profiles; use bullet points for family details and education.</li>
++                <li><strong>Honesty is key:</strong> Provide accurate information about your profession, income, and lifestyle.</li>
++                <li><strong>Partner preferences:</strong> Clearly but respectfully state what you are looking for to ensure compatibility.</li>
++              </ul>
++            </div>
++          </div>
++        </div>
++      </div>
+     </>
   );
 }

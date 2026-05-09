@@ -2,39 +2,26 @@
 
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, useRef, type ChangeEvent, useEffect } from 'react';
-import { Camera, Download, LayoutTemplate, Edit3, ZoomIn, ZoomOut, Maximize, ChevronDown, ChevronUp, Image as ImageIcon, Sparkles } from 'lucide-react';
+import { Download, LayoutTemplate, Edit3, ZoomIn, ZoomOut, Maximize, ChevronDown, ChevronUp, Image as ImageIcon, Sparkles } from 'lucide-react';
 import * as htmlToImage from 'html-to-image';
 import { jsPDF } from 'jspdf';
-
-// --- TYPES & CONSTANTS ---
-type TemplateId = 'modern' | 'classic' | 'minimalist' | 'hindu' | 'islamic' | 'sikh';
-
-type BiodataForm = {
-  photo: string | null;
-  fullName: string;
-  dateOfBirth: string;
-  birthTime: string;
-  birthPlace: string;
-  height: string;
-  religion: string;
-  caste: string;
-  manglik: string;
-  education: string;
-  occupation: string;
-  annualIncome: string;
-  about: string;
-  hobbies: string;
-  languages: string;
-  partnerPreferences: string;
-  fatherName: string;
-  fatherOccupation: string;
-  motherName: string;
-  motherOccupation: string;
-  siblings: string;
-  phone: string;
-  email: string;
-  address: string;
-};
+import { BiodataForm, TemplateId } from './types';
+import { 
+  ModernSplitTemplate, 
+  ClassicCenteredTemplate, 
+  MinimalistTemplate, 
+  HinduTemplate, 
+  IslamicTemplate, 
+  SikhTemplate, 
+  FloralTemplate, 
+  RoyalGoldTemplate, 
+  ProfessionalTemplate,
+  VintageTemplate,
+  GradientTemplate,
+  LuxuryTemplate,
+  CompactTemplate,
+  ArtDecoTemplate
+} from './templates';
 
 const initialForm: BiodataForm = {
   photo: null,
@@ -63,429 +50,6 @@ const initialForm: BiodataForm = {
   address: 'Bangalore, Karnataka, India',
 };
 
-// --- TEMPLATES ---
-const ModernSplitTemplate = ({ data }: { data: BiodataForm }) => (
-  <div className="w-[794px] min-h-[1123px] bg-white text-gray-800 flex shadow-sm relative overflow-hidden" id="biodata-document">
-    {/* Left Sidebar */}
-    <div className="w-[280px] bg-purple-900 text-white p-8 flex flex-col shrink-0">
-      <div className="flex flex-col items-center text-center mt-4">
-        {data.photo ? (
-          <img src={data.photo} className="w-40 h-40 rounded-full object-cover border-4 border-white/20 shadow-xl" alt="Profile" crossOrigin="anonymous" />
-        ) : (
-          <div className="w-40 h-40 rounded-full bg-white/10 border-4 border-white/20 flex items-center justify-center">
-            <Camera size={40} className="text-white/50" />
-          </div>
-        )}
-        <h1 className="text-2xl font-bold mt-6 tracking-wide uppercase">{data.fullName}</h1>
-        <p className="text-purple-200 mt-2">{data.dateOfBirth}</p>
-      </div>
-      
-      <div className="mt-12 space-y-6">
-        <div>
-          <h2 className="text-sm font-bold tracking-widest text-purple-300 uppercase border-b border-purple-700 pb-2 mb-4">Contact</h2>
-          <div className="space-y-3 text-sm text-purple-100">
-            {data.phone && <p>📞 {data.phone}</p>}
-            {data.email && <p>✉️ {data.email}</p>}
-            {data.address && <p>📍 {data.address}</p>}
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    {/* Right Content */}
-    <div className="flex-1 p-10 bg-white space-y-8 text-gray-700">
-      <section>
-        <h2 className="text-xl font-bold text-purple-900 border-b-2 border-purple-100 pb-2 mb-4 uppercase">About Me</h2>
-        <p className="text-sm leading-relaxed">{data.about}</p>
-      </section>
-      
-      <section>
-        <h2 className="text-xl font-bold text-purple-900 border-b-2 border-purple-100 pb-2 mb-4 uppercase">Personal Details</h2>
-        <div className="grid grid-cols-2 gap-y-3 text-sm">
-          {data.dateOfBirth && <><div className="font-semibold text-gray-500">DOB</div><div>{data.dateOfBirth}</div></>}
-          {data.birthTime && <><div className="font-semibold text-gray-500">Time</div><div>{data.birthTime}</div></>}
-          {data.birthPlace && <><div className="font-semibold text-gray-500">Birth Place</div><div>{data.birthPlace}</div></>}
-          {data.height && <><div className="font-semibold text-gray-500">Height</div><div>{data.height}</div></>}
-          {data.religion && <><div className="font-semibold text-gray-500">Religion</div><div>{data.religion}</div></>}
-          {data.caste && <><div className="font-semibold text-gray-500">Caste</div><div>{data.caste}</div></>}
-          {data.manglik && <><div className="font-semibold text-gray-500">Manglik</div><div>{data.manglik}</div></>}
-          {data.languages && <><div className="font-semibold text-gray-500">Languages</div><div>{data.languages}</div></>}
-        </div>
-      </section>
-
-      <section>
-        <h2 className="text-xl font-bold text-purple-900 border-b-2 border-purple-100 pb-2 mb-4 uppercase">Education & Profession</h2>
-        <div className="grid grid-cols-[140px_1fr] gap-y-3 text-sm">
-          {data.education && <><div className="font-semibold text-gray-500">Education</div><div>{data.education}</div></>}
-          {data.occupation && <><div className="font-semibold text-gray-500">Profession</div><div>{data.occupation}</div></>}
-          {data.annualIncome && <><div className="font-semibold text-gray-500">Income</div><div>{data.annualIncome}</div></>}
-        </div>
-      </section>
-
-      <section>
-        <h2 className="text-xl font-bold text-purple-900 border-b-2 border-purple-100 pb-2 mb-4 uppercase">Family Details</h2>
-        <div className="grid grid-cols-[140px_1fr] gap-y-3 text-sm">
-          <div className="font-semibold text-gray-500">Father</div>
-          <div>{data.fatherName}{data.fatherOccupation ? ` - ${data.fatherOccupation}` : ''}</div>
-          
-          <div className="font-semibold text-gray-500">Mother</div>
-          <div>{data.motherName}{data.motherOccupation ? ` - ${data.motherOccupation}` : ''}</div>
-          
-          {data.siblings && (
-            <>
-              <div className="font-semibold text-gray-500">Siblings</div>
-              <div className="whitespace-pre-line">{data.siblings}</div>
-            </>
-          )}
-        </div>
-      </section>
-
-      <section>
-        <h2 className="text-xl font-bold text-purple-900 border-b-2 border-purple-100 pb-2 mb-4 uppercase">Partner Expectations</h2>
-        <p className="text-sm leading-relaxed">{data.partnerPreferences}</p>
-      </section>
-    </div>
-  </div>
-);
-
-const ClassicCenteredTemplate = ({ data }: { data: BiodataForm }) => (
-  <div className="w-[794px] min-h-[1123px] bg-[#fbf9f6] text-[#3e3a35] p-12 relative overflow-hidden" id="biodata-document">
-    <div className="absolute inset-4 border-2 border-[#8b2332] opacity-20 pointer-events-none"></div>
-    <div className="absolute inset-5 border border-[#8b2332] opacity-10 pointer-events-none"></div>
-    
-    <div className="flex flex-col items-center text-center">
-      <h1 className="text-3xl font-serif font-bold text-[#8b2332] tracking-widest uppercase mb-6">Biodata</h1>
-      {data.photo ? (
-        <div className="mb-6 rounded-full p-1 border-2 border-[#8b2332]">
-          <img src={data.photo} className="w-36 h-36 rounded-full object-cover" alt="Profile" crossOrigin="anonymous" />
-        </div>
-      ) : (
-        <div className="mb-6 rounded-full p-1 border-2 border-[#8b2332]">
-          <div className="w-36 h-36 rounded-full bg-black/5 flex items-center justify-center">
-            <Camera size={36} className="text-[#8b2332]/50" />
-          </div>
-        </div>
-      )}
-      <h2 className="text-2xl font-serif font-bold text-[#2d2a26] mb-1">{data.fullName}</h2>
-    </div>
-
-    <div className="mt-8 space-y-6 max-w-[600px] mx-auto">
-      <div className="bg-white/50 p-6 rounded-lg border border-[#8b2332]/10">
-        <h3 className="text-[#8b2332] font-serif font-bold text-lg mb-4 text-center border-b border-[#8b2332]/20 pb-2">Personal Details</h3>
-        <table className="w-full text-sm">
-          <tbody>
-            {data.dateOfBirth && <tr><td className="py-1.5 font-semibold w-[160px]">Date of Birth</td><td>: {data.dateOfBirth}</td></tr>}
-            {data.birthTime && <tr><td className="py-1.5 font-semibold">Time of Birth</td><td>: {data.birthTime}</td></tr>}
-            {data.birthPlace && <tr><td className="py-1.5 font-semibold">Place of Birth</td><td>: {data.birthPlace}</td></tr>}
-            {data.height && <tr><td className="py-1.5 font-semibold">Height</td><td>: {data.height}</td></tr>}
-            {data.religion && <tr><td className="py-1.5 font-semibold">Religion / Caste</td><td>: {data.religion}{data.caste ? ` / ${data.caste}` : ''}</td></tr>}
-            {data.manglik && <tr><td className="py-1.5 font-semibold">Manglik</td><td>: {data.manglik}</td></tr>}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="bg-white/50 p-6 rounded-lg border border-[#8b2332]/10">
-        <h3 className="text-[#8b2332] font-serif font-bold text-lg mb-4 text-center border-b border-[#8b2332]/20 pb-2">Education & Profession</h3>
-        <table className="w-full text-sm">
-          <tbody>
-            {data.education && <tr><td className="py-1.5 font-semibold w-[160px]">Education</td><td>: {data.education}</td></tr>}
-            {data.occupation && <tr><td className="py-1.5 font-semibold">Profession</td><td>: {data.occupation}</td></tr>}
-            {data.annualIncome && <tr><td className="py-1.5 font-semibold">Income</td><td>: {data.annualIncome}</td></tr>}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="bg-white/50 p-6 rounded-lg border border-[#8b2332]/10">
-        <h3 className="text-[#8b2332] font-serif font-bold text-lg mb-4 text-center border-b border-[#8b2332]/20 pb-2">Family Details</h3>
-        <table className="w-full text-sm">
-          <tbody>
-            <tr><td className="py-1.5 font-semibold w-[160px]">Father&apos;s Name</td><td>: {data.fatherName} {data.fatherOccupation && `(${data.fatherOccupation})`}</td></tr>
-            <tr><td className="py-1.5 font-semibold">Mother&apos;s Name</td><td>: {data.motherName} {data.motherOccupation && `(${data.motherOccupation})`}</td></tr>
-            {data.siblings && <tr><td className="py-1.5 font-semibold align-top">Siblings</td><td className="whitespace-pre-line">: {data.siblings}</td></tr>}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="bg-white/50 p-6 rounded-lg border border-[#8b2332]/10 text-center">
-        <h3 className="text-[#8b2332] font-serif font-bold text-lg mb-4 border-b border-[#8b2332]/20 pb-2">Contact Info</h3>
-        <p className="text-sm">
-          {data.phone && <span className="mx-2">📞 {data.phone}</span>}
-          {data.email && <span className="mx-2">✉️ {data.email}</span>}
-        </p>
-        {data.address && <p className="text-sm mt-2">📍 {data.address}</p>}
-      </div>
-    </div>
-  </div>
-);
-
-const MinimalistTemplate = ({ data }: { data: BiodataForm }) => (
-  <div className="w-[794px] min-h-[1123px] bg-white text-gray-800 p-16 relative" id="biodata-document">
-    <div className="flex gap-8 items-start border-b border-gray-200 pb-8 mb-8">
-      {data.photo ? (
-        <img src={data.photo} className="w-32 h-32 rounded-lg object-cover bg-gray-100 shrink-0" alt="Profile" crossOrigin="anonymous" />
-      ) : (
-        <div className="w-32 h-32 rounded-lg bg-gray-100 shrink-0 flex items-center justify-center">
-          <Camera className="text-gray-400" />
-        </div>
-      )}
-      <div className="flex-1 mt-2">
-        <h1 className="text-4xl font-light tracking-tight text-gray-900 mb-2">{data.fullName}</h1>
-        <p className="text-lg text-gray-500 mb-4">{data.occupation}</p>
-        <div className="flex gap-4 text-sm text-gray-400">
-            {data.phone && <span>{data.phone}</span>}
-            {data.email && <span>{data.email}</span>}
-        </div>
-      </div>
-    </div>
-    
-    <div className="grid grid-cols-2 gap-12">
-      <div className="space-y-8">
-        <section>
-          <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">About</h2>
-          <p className="text-sm leading-relaxed text-gray-600">{data.about}</p>
-        </section>
-        
-        <section>
-          <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Personal Details</h2>
-          <div className="space-y-2 text-sm text-gray-600">
-              <div className="flex justify-between border-b border-gray-50 pb-1"><span>DOB</span> <span className="font-medium text-gray-900">{data.dateOfBirth}</span></div>
-              <div className="flex justify-between border-b border-gray-50 pb-1"><span>Time</span> <span className="font-medium text-gray-900">{data.birthTime}</span></div>
-              <div className="flex justify-between border-b border-gray-50 pb-1"><span>Height</span> <span className="font-medium text-gray-900">{data.height}</span></div>
-              <div className="flex justify-between border-b border-gray-50 pb-1"><span>Religion</span> <span className="font-medium text-gray-900">{data.religion}</span></div>
-              <div className="flex justify-between border-b border-gray-50 pb-1"><span>Caste</span> <span className="font-medium text-gray-900">{data.caste}</span></div>
-          </div>
-        </section>
-
-        <section>
-          <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Contact & Location</h2>
-          <p className="text-sm text-gray-600">{data.address}</p>
-        </section>
-      </div>
-
-      <div className="space-y-8">
-        <section>
-          <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Education</h2>
-          <p className="text-sm text-gray-600">{data.education}</p>
-        </section>
-
-        <section>
-          <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Family Background</h2>
-          <div className="space-y-4 text-sm text-gray-600">
-              <div>
-                <p className="font-medium text-gray-900">Father: {data.fatherName}</p>
-                <p className="text-gray-500">{data.fatherOccupation}</p>
-              </div>
-              <div>
-                <p className="font-medium text-gray-900">Mother: {data.motherName}</p>
-                <p className="text-gray-500">{data.motherOccupation}</p>
-              </div>
-              {data.siblings && (
-                <div>
-                  <p className="font-medium text-gray-900">Siblings:</p>
-                  <p className="whitespace-pre-line text-gray-500 mt-1">{data.siblings}</p>
-                </div>
-              )}
-          </div>
-        </section>
-      </div>
-    </div>
-  </div>
-);
-
-const HinduTemplate = ({ data }: { data: BiodataForm }) => (
-  <div className="w-[794px] min-h-[1123px] bg-[#fffaf0] text-[#5c0000] p-12 relative overflow-hidden font-serif" id="biodata-document">
-    <div className="absolute inset-3 border-[6px] border-double border-[#d4af37] pointer-events-none opacity-60"></div>
-    <div className="absolute inset-5 border border-[#d4af37] pointer-events-none opacity-40"></div>
-    <div className="absolute left-8 top-8 text-3xl text-[#f97316]/30">ॐ</div>
-    <div className="absolute right-8 top-8 text-3xl text-[#f97316]/30">ॐ</div>
-    <div className="absolute bottom-8 left-8 text-3xl text-[#f97316]/30">ॐ</div>
-    <div className="absolute bottom-8 right-8 text-3xl text-[#f97316]/30">ॐ</div>
-    <div className="absolute left-12 right-12 top-24 h-1 bg-gradient-to-r from-transparent via-[#f97316]/50 to-transparent"></div>
-    
-    <div className="flex flex-col items-center text-center">
-      <div className="text-5xl text-[#e63946] mb-2 leading-none">ॐ</div>
-      <div className="text-lg text-[#800000] font-bold tracking-widest uppercase mb-6">|| Shree Ganeshay Namah ||</div>
-      
-      {data.photo && (
-        <div className="mb-6 rounded-tl-3xl rounded-br-3xl p-1 border-2 border-[#d4af37]">
-          <img src={data.photo} className="w-36 h-36 rounded-tl-2xl rounded-br-2xl object-cover" alt="Profile" crossOrigin="anonymous" />
-        </div>
-      )}
-      <h2 className="text-3xl font-bold text-[#800000] mb-1">{data.fullName}</h2>
-    </div>
-
-    <div className="mt-8 space-y-6 max-w-[650px] mx-auto">
-      <div className="p-4 border-t-2 border-b-2 border-[#d4af37]/30">
-        <h3 className="text-[#e63946] font-bold text-xl mb-4 text-center">Personal Details</h3>
-        <table className="w-full text-base">
-          <tbody>
-            {data.dateOfBirth && <tr><td className="py-1.5 font-semibold w-[180px]">Date of Birth</td><td>: {data.dateOfBirth}</td></tr>}
-            {data.birthTime && <tr><td className="py-1.5 font-semibold">Time of Birth</td><td>: {data.birthTime}</td></tr>}
-            {data.birthPlace && <tr><td className="py-1.5 font-semibold">Place of Birth</td><td>: {data.birthPlace}</td></tr>}
-            {data.height && <tr><td className="py-1.5 font-semibold">Height</td><td>: {data.height}</td></tr>}
-            {data.religion && <tr><td className="py-1.5 font-semibold">Religion / Caste</td><td>: {data.religion}{data.caste ? ` / ${data.caste}` : ''}</td></tr>}
-            {data.manglik && <tr><td className="py-1.5 font-semibold">Manglik</td><td>: {data.manglik}</td></tr>}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="p-4 border-t-2 border-b-2 border-[#d4af37]/30">
-        <h3 className="text-[#e63946] font-bold text-xl mb-4 text-center">Education & Profession</h3>
-        <table className="w-full text-base">
-          <tbody>
-            {data.education && <tr><td className="py-1.5 font-semibold w-[180px]">Education</td><td>: {data.education}</td></tr>}
-            {data.occupation && <tr><td className="py-1.5 font-semibold">Profession</td><td>: {data.occupation}</td></tr>}
-            {data.annualIncome && <tr><td className="py-1.5 font-semibold">Income</td><td>: {data.annualIncome}</td></tr>}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="p-4 border-t-2 border-b-2 border-[#d4af37]/30">
-        <h3 className="text-[#e63946] font-bold text-xl mb-4 text-center">Family Details</h3>
-        <table className="w-full text-base">
-          <tbody>
-            <tr><td className="py-1.5 font-semibold w-[180px] align-top">Father&apos;s Name</td><td>: {data.fatherName} <br/><span className="text-sm opacity-80">{data.fatherOccupation}</span></td></tr>
-            <tr><td className="py-1.5 font-semibold align-top mt-2 block">Mother&apos;s Name</td><td>: {data.motherName} <br/><span className="text-sm opacity-80">{data.motherOccupation}</span></td></tr>
-            {data.siblings && <tr><td className="py-1.5 font-semibold align-top mt-2 block">Siblings</td><td className="whitespace-pre-line">: {data.siblings}</td></tr>}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="p-4 text-center">
-        <h3 className="text-[#e63946] font-bold text-xl mb-4">Contact Info</h3>
-        <p className="text-base font-medium">
-          {data.phone && <span className="mx-3">📞 {data.phone}</span>}
-          {data.email && <span className="mx-3">✉️ {data.email}</span>}
-        </p>
-        {data.address && <p className="text-base mt-2">📍 {data.address}</p>}
-      </div>
-    </div>
-  </div>
-);
-
-const IslamicTemplate = ({ data }: { data: BiodataForm }) => (
-  <div className="w-[794px] min-h-[1123px] bg-[#f0fdf4] text-[#064e3b] p-12 relative overflow-hidden font-serif" id="biodata-document">
-    <div className="absolute inset-4 border-[3px] border-[#10b981] opacity-30 rounded-t-[200px] pointer-events-none"></div>
-    <div className="absolute inset-[22px] border border-[#10b981] opacity-20 rounded-t-[190px] pointer-events-none"></div>
-    <div className="absolute left-10 top-10 h-12 w-12 rounded-full border-2 border-[#10b981]/30"></div>
-    <div className="absolute left-14 top-10 h-12 w-12 rounded-full bg-[#f0fdf4]"></div>
-    <div className="absolute right-10 top-10 h-12 w-12 rounded-full border-2 border-[#10b981]/30"></div>
-    <div className="absolute right-14 top-10 h-12 w-12 rounded-full bg-[#f0fdf4]"></div>
-    
-    <div className="flex flex-col items-center text-center mt-8">
-      <div className="text-5xl text-[#047857] mb-3 font-sans">﷽</div>
-      
-      {data.photo && (
-        <div className="mb-6 rounded-full p-1 border-2 border-[#10b981]/50 bg-white shadow-sm mt-4">
-          <img src={data.photo} className="w-36 h-36 rounded-full object-cover" alt="Profile" crossOrigin="anonymous" />
-        </div>
-      )}
-      <h2 className="text-3xl font-bold text-[#064e3b] mt-2 mb-1">{data.fullName}</h2>
-      <div className="w-32 h-0.5 bg-[#10b981]/40 my-3"></div>
-    </div>
-
-    <div className="mt-6 space-y-6 max-w-[650px] mx-auto">
-      <div className="bg-white/60 p-5 rounded-lg shadow-sm border border-[#10b981]/10">
-        <h3 className="text-[#047857] font-bold text-lg mb-3 border-b border-[#10b981]/20 pb-2">Personal Details</h3>
-        <table className="w-full text-base">
-          <tbody>
-            {data.dateOfBirth && <tr><td className="py-1 font-semibold w-[180px]">Date of Birth</td><td>: {data.dateOfBirth}</td></tr>}
-            {data.height && <tr><td className="py-1 font-semibold">Height</td><td>: {data.height}</td></tr>}
-            {data.religion && <tr><td className="py-1 font-semibold">Religion/Sect</td><td>: {data.religion}{data.caste ? ` / ${data.caste}` : ''}</td></tr>}
-            {data.education && <tr><td className="py-1 font-semibold">Education</td><td>: {data.education}</td></tr>}
-            {data.occupation && <tr><td className="py-1 font-semibold">Occupation</td><td>: {data.occupation}</td></tr>}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="bg-white/60 p-5 rounded-lg shadow-sm border border-[#10b981]/10">
-        <h3 className="text-[#047857] font-bold text-lg mb-3 border-b border-[#10b981]/20 pb-2">Family Details</h3>
-        <table className="w-full text-base">
-          <tbody>
-            <tr><td className="py-1 font-semibold w-[180px] align-top">Father</td><td>: {data.fatherName} {data.fatherOccupation && `(${data.fatherOccupation})`}</td></tr>
-            <tr><td className="py-1 font-semibold align-top mt-1 block">Mother</td><td>: {data.motherName} {data.motherOccupation && `(${data.motherOccupation})`}</td></tr>
-            {data.siblings && <tr><td className="py-1 font-semibold align-top mt-1 block">Siblings</td><td className="whitespace-pre-line">: {data.siblings}</td></tr>}
-          </tbody>
-        </table>
-      </div>
-      
-      {data.about && (
-        <div className="bg-white/60 p-5 rounded-lg shadow-sm border border-[#10b981]/10">
-          <h3 className="text-[#047857] font-bold text-lg mb-3 border-b border-[#10b981]/20 pb-2">About Me</h3>
-          <p className="text-sm leading-relaxed">{data.about}</p>
-        </div>
-      )}
-
-      <div className="bg-white/60 p-5 rounded-lg shadow-sm border border-[#10b981]/10 text-center">
-        <h3 className="text-[#047857] font-bold text-lg mb-3">Contact</h3>
-        <p className="text-base">
-          {data.phone && <span className="mx-3">📞 {data.phone}</span>}
-          {data.email && <span className="mx-3">✉️ {data.email}</span>}
-        </p>
-        {data.address && <p className="text-sm mt-2">📍 {data.address}</p>}
-      </div>
-    </div>
-  </div>
-);
-
-const SikhTemplate = ({ data }: { data: BiodataForm }) => (
-  <div className="w-[794px] min-h-[1123px] bg-[#f8fafc] text-[#0f172a] p-12 relative overflow-hidden font-sans" id="biodata-document">
-    <div className="absolute top-0 left-0 right-0 h-4 bg-[#1e3a8a]"></div>
-    <div className="absolute bottom-0 left-0 right-0 h-4 bg-[#f97316]"></div>
-    <div className="absolute left-0 top-0 bottom-0 w-4 bg-[#1e3a8a]"></div>
-    <div className="absolute right-0 top-0 bottom-0 w-4 bg-[#f97316]"></div>
-    <div className="absolute left-10 top-10 text-4xl text-[#f97316]/20">ੴ</div>
-    <div className="absolute right-10 top-10 text-4xl text-[#1e3a8a]/20">ੴ</div>
-    
-    <div className="flex flex-col items-center text-center mt-6">
-      <div className="text-5xl text-[#f97316] mb-4 drop-shadow-sm font-bold">ੴ</div>
-      <h1 className="text-xl font-bold text-[#1e3a8a] tracking-widest uppercase mb-8">Waheguru Ji Ka Khalsa, Waheguru Ji Ki Fateh</h1>
-      
-      {data.photo && (
-        <div className="mb-6 rounded bg-white p-2 shadow-md border border-gray-200">
-          <img src={data.photo} className="w-36 h-36 rounded object-cover" alt="Profile" crossOrigin="anonymous" />
-        </div>
-      )}
-      <h2 className="text-4xl font-bold text-[#1e3a8a] mb-2">{data.fullName}</h2>
-    </div>
-
-    <div className="mt-10 space-y-8 max-w-[650px] mx-auto">
-      <div className="relative border-l-4 border-[#f97316] pl-6 py-2">
-        <h3 className="text-[#1e3a8a] font-bold text-xl mb-4 uppercase tracking-wider">Personal & Professional</h3>
-        <table className="w-full text-base">
-          <tbody>
-            {data.dateOfBirth && <tr><td className="py-1 font-semibold w-[180px] text-gray-500">Date of Birth</td><td className="font-medium">{data.dateOfBirth}</td></tr>}
-            {data.height && <tr><td className="py-1 font-semibold text-gray-500">Height</td><td className="font-medium">{data.height}</td></tr>}
-            {data.religion && <tr><td className="py-1 font-semibold text-gray-500">Religion/Caste</td><td className="font-medium">{data.religion}{data.caste ? ` / ${data.caste}` : ''}</td></tr>}
-            {data.education && <tr><td className="py-1 font-semibold text-gray-500">Education</td><td className="font-medium">{data.education}</td></tr>}
-            {data.occupation && <tr><td className="py-1 font-semibold text-gray-500">Occupation</td><td className="font-medium">{data.occupation}</td></tr>}
-            {data.annualIncome && <tr><td className="py-1 font-semibold text-gray-500">Income</td><td className="font-medium">{data.annualIncome}</td></tr>}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="relative border-l-4 border-[#1e3a8a] pl-6 py-2">
-        <h3 className="text-[#f97316] font-bold text-xl mb-4 uppercase tracking-wider">Family Background</h3>
-        <table className="w-full text-base">
-          <tbody>
-            <tr><td className="py-1 font-semibold w-[180px] text-gray-500 align-top">Father</td><td className="font-medium">{data.fatherName} <br/><span className="text-sm font-normal text-gray-500">{data.fatherOccupation}</span></td></tr>
-            <tr><td className="py-1 font-semibold text-gray-500 align-top mt-2 block">Mother</td><td className="font-medium">{data.motherName} <br/><span className="text-sm font-normal text-gray-500">{data.motherOccupation}</span></td></tr>
-            {data.siblings && <tr><td className="py-1 font-semibold text-gray-500 align-top mt-2 block">Siblings</td><td className="whitespace-pre-line font-medium">{data.siblings}</td></tr>}
-          </tbody>
-        </table>
-      </div>
-
-      <div className="bg-gray-100 p-6 rounded text-center shadow-inner mt-8">
-        <h3 className="text-gray-800 font-bold text-lg mb-3">Contact Details</h3>
-        <p className="text-base font-semibold text-[#1e3a8a]">
-          {data.phone && <span className="mx-3">📞 {data.phone}</span>}
-          {data.email && <span className="mx-3">✉️ {data.email}</span>}
-        </p>
-        {data.address && <p className="text-sm mt-2 text-gray-600">📍 {data.address}</p>}
-      </div>
-    </div>
-  </div>
-);
 
 export default function BiodataGeneratorClient() {
   const [activeTab, setActiveTab] = useState<'templates' | 'edit' | 'preview'>('edit');
@@ -519,12 +83,12 @@ export default function BiodataGeneratorClient() {
     if (savedTemplate) {
       setTemplateId(savedTemplate as TemplateId);
     }
-    
+
     // Auto-adjust zoom for mobile on load
     if (typeof window !== 'undefined' && window.innerWidth < 768) {
       setZoom(0.4);
     }
-    
+
     setIsLoaded(true);
   }, []);
 
@@ -540,6 +104,7 @@ export default function BiodataGeneratorClient() {
   };
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -581,22 +146,20 @@ export default function BiodataGeneratorClient() {
     if (!element) return;
     try {
       setIsExportingPdf(true);
-      const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-      const imgData = await htmlToImage.toJpeg(element, {
+      const imgData = await htmlToImage.toPng(element, {
         cacheBust: true,
-        quality: 0.98,
-        pixelRatio: isMobile ? 1.75 : 2,
+        pixelRatio: 3,
         backgroundColor: '#ffffff',
       });
       const pdf = new jsPDF('p', 'pt', 'a4');
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
-      pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-      
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+
       const fileName = `${form.fullName.replace(/\s+/g, '_') || 'Biodata'}.pdf`;
       const blob = pdf.output('blob');
       downloadBlob(blob, fileName);
-      
+
     } catch (e) {
       console.error('Failed to export PDF', e);
       window.alert('PDF export failed. Please open Preview and try again.');
@@ -610,10 +173,9 @@ export default function BiodataGeneratorClient() {
     if (!element) return;
     try {
       setIsExportingPng(true);
-      const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
       const blob = await htmlToImage.toBlob(element, {
         cacheBust: true,
-        pixelRatio: isMobile ? 1.75 : 2,
+        pixelRatio: 3,
         backgroundColor: '#ffffff',
       });
       if (!blob) throw new Error('Unable to render biodata image.');
@@ -634,6 +196,13 @@ export default function BiodataGeneratorClient() {
       case 'hindu': return <HinduTemplate data={form} />;
       case 'islamic': return <IslamicTemplate data={form} />;
       case 'sikh': return <SikhTemplate data={form} />;
+      case 'floral': return <FloralTemplate data={form} />;
+      case 'royal': return <RoyalGoldTemplate data={form} />;
+      case 'professional': return <ProfessionalTemplate data={form} />;
+      case 'vintage': return <VintageTemplate data={form} />;
+      case 'luxury': return <LuxuryTemplate data={form} />;
+      case 'compact': return <CompactTemplate data={form} />;
+      case 'artdeco': return <ArtDecoTemplate data={form} />;
     }
   };
 
@@ -698,10 +267,10 @@ export default function BiodataGeneratorClient() {
           >
             Sample
           </button>
-          <button onClick={exportPng} disabled={isExportingPng} className="hidden lg:flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-full text-sm font-semibold transition disabled:opacity-50">
+          <button onClick={exportPng} disabled={isExportingPng} className={`${activeTab === 'preview' ? 'flex' : 'hidden lg:flex'} items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-full text-sm font-semibold transition disabled:opacity-50`}>
             {isExportingPng ? 'Exporting...' : 'Export PNG'}
           </button>
-          <button onClick={exportPdf} disabled={isExportingPdf} className="flex items-center gap-1 sm:gap-2 bg-purple-600 hover:bg-purple-700 text-white px-3 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold shadow-md shadow-purple-200 transition disabled:opacity-50">
+          <button onClick={exportPdf} disabled={isExportingPdf} className={`${activeTab === 'preview' ? 'flex' : 'hidden lg:flex'} items-center gap-1 sm:gap-2 bg-purple-600 hover:bg-purple-700 text-white px-3 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold shadow-md shadow-purple-200 transition disabled:opacity-50`}>
             <Download size={14} className="sm:w-4 sm:h-4" />
             {isExportingPdf ? 'Wait...' : 'Export PDF'}
           </button>
@@ -742,7 +311,7 @@ export default function BiodataGeneratorClient() {
             </div>
             {activeTab === 'templates' ? (
               <div className="space-y-4 pb-20 lg:pb-0">
-                <div 
+                <div
                   onClick={() => setTemplateId('modern')}
                   className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'modern' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
                 >
@@ -753,7 +322,7 @@ export default function BiodataGeneratorClient() {
                   </div>
                 </div>
 
-                <div 
+                <div
                   onClick={() => setTemplateId('classic')}
                   className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'classic' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
                 >
@@ -761,14 +330,14 @@ export default function BiodataGeneratorClient() {
                     <div className="font-bold text-gray-900 mb-1">Classic Centered</div>
                     <p className="text-xs text-gray-500 mb-3">Traditional centered layout with elegant typography and borders.</p>
                     <div className="h-32 w-full rounded border border-gray-200 bg-[#fbf9f6] flex flex-col items-center justify-center p-2">
-                       <div className="w-8 h-8 rounded-full border border-red-800/30 bg-red-800/10 mb-2"></div>
-                       <div className="w-24 h-2 bg-gray-300 rounded-full mb-2"></div>
-                       <div className="w-full h-10 border border-red-800/20 rounded"></div>
+                      <div className="w-8 h-8 rounded-full border border-red-800/30 bg-red-800/10 mb-2"></div>
+                      <div className="w-24 h-2 bg-gray-300 rounded-full mb-2"></div>
+                      <div className="w-full h-10 border border-red-800/20 rounded"></div>
                     </div>
                   </div>
                 </div>
 
-                <div 
+                <div
                   onClick={() => setTemplateId('minimalist')}
                   className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'minimalist' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
                 >
@@ -776,22 +345,22 @@ export default function BiodataGeneratorClient() {
                     <div className="font-bold text-gray-900 mb-1">Minimalist</div>
                     <p className="text-xs text-gray-500 mb-3">Clean and spacious design focusing purely on content readability.</p>
                     <div className="h-32 w-full rounded border border-gray-200 bg-white p-3">
-                       <div className="flex gap-2 mb-3 border-b pb-2">
-                         <div className="w-8 h-8 rounded bg-gray-200"></div>
-                         <div className="space-y-1">
-                           <div className="w-16 h-2 bg-gray-300 rounded-full"></div>
-                           <div className="w-10 h-1.5 bg-gray-200 rounded-full"></div>
-                         </div>
-                       </div>
-                       <div className="grid grid-cols-2 gap-2">
-                         <div className="space-y-1"><div className="w-full h-1.5 bg-gray-100 rounded-full"></div><div className="w-4/5 h-1.5 bg-gray-100 rounded-full"></div></div>
-                         <div className="space-y-1"><div className="w-full h-1.5 bg-gray-100 rounded-full"></div><div className="w-4/5 h-1.5 bg-gray-100 rounded-full"></div></div>
-                       </div>
+                      <div className="flex gap-2 mb-3 border-b pb-2">
+                        <div className="w-8 h-8 rounded bg-gray-200"></div>
+                        <div className="space-y-1">
+                          <div className="w-16 h-2 bg-gray-300 rounded-full"></div>
+                          <div className="w-10 h-1.5 bg-gray-200 rounded-full"></div>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="space-y-1"><div className="w-full h-1.5 bg-gray-100 rounded-full"></div><div className="w-4/5 h-1.5 bg-gray-100 rounded-full"></div></div>
+                        <div className="space-y-1"><div className="w-full h-1.5 bg-gray-100 rounded-full"></div><div className="w-4/5 h-1.5 bg-gray-100 rounded-full"></div></div>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                <div 
+                <div
                   onClick={() => setTemplateId('hindu')}
                   className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'hindu' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
                 >
@@ -799,15 +368,15 @@ export default function BiodataGeneratorClient() {
                     <div className="font-bold text-[#800000] mb-1">Hindu Traditional</div>
                     <p className="text-xs text-gray-500 mb-3">Ornate borders and saffron colors with a classic traditional layout.</p>
                     <div className="h-32 w-full rounded border border-[#d4af37] bg-[#fffaf0] p-2 text-center flex flex-col items-center">
-                       <div className="text-xl text-[#e63946] leading-none mb-1">ॐ</div>
-                       <div className="w-16 h-1 bg-[#800000] mb-2"></div>
-                       <div className="w-full h-6 border border-[#d4af37]/50 mb-1"></div>
-                       <div className="w-full h-6 border border-[#d4af37]/50"></div>
+                      <div className="text-xl text-[#e63946] leading-none mb-1">ॐ</div>
+                      <div className="w-16 h-1 bg-[#800000] mb-2"></div>
+                      <div className="w-full h-6 border border-[#d4af37]/50 mb-1"></div>
+                      <div className="w-full h-6 border border-[#d4af37]/50"></div>
                     </div>
                   </div>
                 </div>
 
-                <div 
+                <div
                   onClick={() => setTemplateId('islamic')}
                   className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'islamic' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
                 >
@@ -815,15 +384,15 @@ export default function BiodataGeneratorClient() {
                     <div className="font-bold text-[#064e3b] mb-1">Islamic Elegant</div>
                     <p className="text-xs text-gray-500 mb-3">Emerald green styling with arched headers and clean sections.</p>
                     <div className="h-32 w-full rounded border border-[#10b981]/50 bg-[#f0fdf4] p-2 flex flex-col items-center">
-                       <div className="w-full h-8 border-2 border-[#10b981]/40 rounded-t-full mb-2 flex items-center justify-center">
-                          <div className="w-3 h-3 rounded-full bg-[#10b981]/50"></div>
-                       </div>
-                       <div className="w-full flex-1 bg-white border border-[#10b981]/20 rounded"></div>
+                      <div className="w-full h-8 border-2 border-[#10b981]/40 rounded-t-full mb-2 flex items-center justify-center">
+                        <div className="w-3 h-3 rounded-full bg-[#10b981]/50"></div>
+                      </div>
+                      <div className="w-full flex-1 bg-white border border-[#10b981]/20 rounded"></div>
                     </div>
                   </div>
                 </div>
 
-                <div 
+                <div
                   onClick={() => setTemplateId('sikh')}
                   className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'sikh' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
                 >
@@ -831,14 +400,131 @@ export default function BiodataGeneratorClient() {
                     <div className="font-bold text-[#1e3a8a] mb-1">Sikh Heritage</div>
                     <p className="text-xs text-gray-500 mb-3">Navy blue and orange layout inspired by Punjabi traditions.</p>
                     <div className="h-32 w-full rounded border border-gray-200 bg-[#f8fafc] relative overflow-hidden flex flex-col p-2">
-                       <div className="absolute top-0 left-0 right-0 h-1 bg-[#1e3a8a]"></div>
-                       <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#f97316]"></div>
-                       <div className="text-[#f97316] text-lg font-bold text-center mt-1 mb-1">ੴ</div>
-                       <div className="w-16 h-0.5 bg-[#1e3a8a] mx-auto mb-2"></div>
-                       <div className="flex-1 flex gap-2">
-                          <div className="w-1 bg-[#f97316] h-full"></div>
-                          <div className="flex-1 bg-gray-100 h-full rounded"></div>
-                       </div>
+                      <div className="absolute top-0 left-0 right-0 h-1 bg-[#1e3a8a]"></div>
+                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#f97316]"></div>
+                      <div className="text-[#f97316] text-lg font-bold text-center mt-1 mb-1">ੴ</div>
+                      <div className="w-16 h-0.5 bg-[#1e3a8a] mx-auto mb-2"></div>
+                      <div className="flex-1 flex gap-2">
+                        <div className="w-1 bg-[#f97316] h-full"></div>
+                        <div className="flex-1 bg-gray-100 h-full rounded"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  onClick={() => setTemplateId('floral')}
+                  className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'floral' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
+                >
+                  <div className="p-4">
+                    <div className="font-bold text-[#8c6d5e] mb-1">Floral Harmony</div>
+                    <p className="text-xs text-gray-500 mb-3">Soft pastel colors with delicate floral accents and serif fonts.</p>
+                    <div className="h-32 w-full rounded border border-[#e5d5c5] bg-[#fffcf9] flex items-center justify-center p-3">
+                      <div className="w-full h-full border border-[#e5d5c5]/50 rounded flex flex-col items-center justify-center">
+                        <div className="w-10 h-10 rounded-full border border-pink-200 bg-white mb-2"></div>
+                        <div className="w-16 h-1 bg-pink-100 rounded-full"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  onClick={() => setTemplateId('royal')}
+                  className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'royal' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
+                >
+                  <div className="p-4">
+                    <div className="font-bold text-[#d4af37] mb-1">Royal Gold</div>
+                    <p className="text-xs text-gray-500 mb-3">Premium dark theme with gold accents for a majestic look.</p>
+                    <div className="h-32 w-full rounded border border-[#d4af37]/30 bg-[#0f172a] flex flex-col items-center justify-center p-2">
+                      <div className="text-[#d4af37] text-lg mb-1">⚜️</div>
+                      <div className="w-20 h-0.5 bg-[#d4af37] mb-2"></div>
+                      <div className="w-10 h-10 rounded bg-gray-800 border border-[#d4af37]/20"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  onClick={() => setTemplateId('professional')}
+                  className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'professional' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
+                >
+                  <div className="p-4">
+                    <div className="font-bold text-slate-900 mb-1">Modern Professional</div>
+                    <p className="text-xs text-gray-500 mb-3">Clean, executive-style layout suitable for modern expectations.</p>
+                    <div className="h-32 w-full rounded border border-slate-200 bg-white p-2">
+                      <div className="flex justify-between mb-4">
+                        <div className="w-1/2 h-4 bg-slate-900"></div>
+                        <div className="w-8 h-10 bg-slate-100"></div>
+                      </div>
+                      <div className="w-full h-px bg-slate-100 mb-3"></div>
+                      <div className="grid grid-cols-3 gap-2">
+                        <div className="h-1 bg-slate-200 rounded"></div>
+                        <div className="col-span-2 h-1 bg-slate-100 rounded"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  onClick={() => setTemplateId('vintage')}
+                  className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'vintage' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
+                >
+                  <div className="p-4">
+                    <div className="font-bold text-[#8b7355] mb-1">Vintage Parchment</div>
+                    <p className="text-xs text-gray-500 mb-3">Retro historical aesthetic with parchment texture and classic serif.</p>
+                    <div className="h-32 w-full rounded border border-[#8b7355]/30 bg-[#f4ead5] flex items-center justify-center p-2 relative overflow-hidden">
+                      <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/parchment.png')]"></div>
+                      <div className="w-24 h-24 border border-[#8b7355]/40 p-2 flex flex-col items-center">
+                         <div className="w-8 h-1 bg-[#8b7355]/20 mb-2"></div>
+                         <div className="w-12 h-12 bg-white/50 border border-[#8b7355]/10"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  onClick={() => setTemplateId('luxury')}
+                  className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'luxury' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
+                >
+                  <div className="p-4">
+                    <div className="font-bold text-[#c5a059] mb-1">Minimalist Luxury</div>
+                    <p className="text-xs text-gray-500 mb-3">High-end editorial style with extreme whitespace and gold accents.</p>
+                    <div className="h-32 w-full rounded border border-gray-100 bg-white flex flex-col items-center justify-center p-4">
+                      <div className="w-full h-full border border-[#c5a059]/20 flex flex-col items-center justify-center gap-2">
+                         <div className="w-12 h-12 rounded-full border border-[#c5a059]/30"></div>
+                         <div className="w-16 h-0.5 bg-[#c5a059]/40"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  onClick={() => setTemplateId('compact')}
+                  className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'compact' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
+                >
+                  <div className="p-4">
+                    <div className="font-bold text-[#ff4d00] mb-1">Modern Compact</div>
+                    <p className="text-xs text-gray-500 mb-3">Bold Swiss design with high information density and technical feel.</p>
+                    <div className="h-32 w-full rounded border border-black bg-white flex p-2 gap-2">
+                      <div className="w-1.5 h-full bg-[#ff4d00]"></div>
+                      <div className="flex-1 space-y-2">
+                         <div className="w-12 h-4 bg-black"></div>
+                         <div className="w-full h-12 border border-black/10 bg-gray-50"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  onClick={() => setTemplateId('artdeco')}
+                  className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'artdeco' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
+                >
+                  <div className="p-4">
+                    <div className="font-bold text-[#d4af37] mb-1">Art Deco Noir</div>
+                    <p className="text-xs text-gray-500 mb-3">1920s Great Gatsby inspired sophisticated geometric design.</p>
+                    <div className="h-32 w-full rounded border border-[#d4af37]/20 bg-[#121212] flex flex-col items-center justify-center p-4">
+                       <div className="text-[#d4af37] text-2xl mb-1">✦</div>
+                       <div className="w-20 h-px bg-[#d4af37]/30 mb-2"></div>
+                       <div className="w-12 h-16 border border-[#d4af37]/40 bg-white/5"></div>
                     </div>
                   </div>
                 </div>
@@ -861,7 +547,7 @@ export default function BiodataGeneratorClient() {
                         <button onClick={() => fileInputRef.current?.click()} className="text-sm font-semibold text-purple-600 bg-purple-50 px-3 py-1.5 rounded-lg hover:bg-purple-100 transition">
                           Upload Image
                         </button>
-                        {form.photo && <button onClick={() => setForm({...form, photo: null})} className="text-sm text-gray-500 ml-3 hover:text-red-500">Remove</button>}
+                        {form.photo && <button onClick={() => setForm({ ...form, photo: null })} className="text-sm text-gray-500 ml-3 hover:text-red-500">Remove</button>}
                       </div>
                     </div>
                   </div>
@@ -921,9 +607,9 @@ export default function BiodataGeneratorClient() {
         <main className={`flex-1 bg-[#f8f9fa] relative overflow-hidden flex-col ${activeTab === 'preview' ? 'flex' : 'hidden lg:flex'}`} style={{ backgroundImage: 'radial-gradient(#e2e8f0 1px, transparent 1px)', backgroundSize: '24px 24px' }}>
           {/* Mobile Back to Edit Button */}
           <div className="lg:hidden absolute top-4 left-4 z-20">
-             <button onClick={() => setActiveTab('edit')} className="bg-white border border-gray-200 shadow-sm rounded-full px-4 py-2 text-sm font-semibold text-gray-700 flex items-center gap-2 hover:bg-gray-50">
-               ← Back to Edit
-             </button>
+            <button onClick={() => setActiveTab('edit')} className="bg-white border border-gray-200 shadow-sm rounded-full px-4 py-2 text-sm font-semibold text-gray-700 flex items-center gap-2 hover:bg-gray-50">
+              ← Back to Edit
+            </button>
           </div>
           <div className="absolute right-4 top-4 z-20 hidden rounded-full border border-gray-200 bg-white/95 px-4 py-2 text-sm font-semibold text-gray-600 shadow-sm lg:block">
             A4 preview
@@ -944,7 +630,7 @@ export default function BiodataGeneratorClient() {
               </div>
             </div>
           </div>
-          
+
           {/* Zoom Controls Overlay */}
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-1 bg-white/90 backdrop-blur border border-gray-200 shadow-lg rounded-full p-1.5 z-10">
             <button onClick={() => setZoom(z => Math.max(0.2, z - 0.1))} className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-full transition">
@@ -964,7 +650,8 @@ export default function BiodataGeneratorClient() {
         </main>
       </div>
 
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .custom-scrollbar::-webkit-scrollbar {
           width: 6px;
           height: 6px;
