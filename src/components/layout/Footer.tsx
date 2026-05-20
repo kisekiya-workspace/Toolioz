@@ -15,9 +15,9 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto border-t border-[var(--border)] bg-[var(--bg-secondary)] py-16 pb-12">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="mb-20 grid gap-12 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.5fr]">
+    <footer className="mt-auto overflow-x-hidden border-t border-[var(--border)] bg-[var(--bg-secondary)] py-12 pb-10 sm:py-16 sm:pb-12">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="mb-12 grid gap-10 sm:mb-16 sm:gap-12 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.5fr]">
           <div className="flex flex-col gap-6">
             <Link
               href="/"
@@ -128,14 +128,14 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-6 border-t border-[var(--border)] pt-12 text-center sm:flex-row sm:text-left">
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-[var(--border)] pt-8 text-center sm:flex-row sm:gap-6 sm:pt-12 sm:text-left">
           <p className="text-sm text-[var(--text-tertiary)]">
             © {currentYear} Toolioz. All rights reserved.
           </p>
-          <div className="flex items-center gap-5 text-[0.8125rem] font-semibold text-[var(--text-tertiary)]">
+          <div className="flex flex-wrap items-center justify-center gap-3 text-[0.8125rem] font-semibold text-[var(--text-tertiary)] sm:gap-5">
             <span>Version 2.0.4</span>
-            <div className="h-1 w-1 rounded-full bg-[var(--border)]" />
-            <span>Serverless Architecture</span>
+            <div className="hidden h-1 w-1 rounded-full bg-[var(--border)] sm:block" />
+            <span className="hidden sm:inline">Serverless Architecture</span>
           </div>
         </div>
       </div>

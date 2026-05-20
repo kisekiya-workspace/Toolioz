@@ -68,18 +68,18 @@ export const Navbar = () => {
           : 'h-[72px]',
       ].join(' ')}
     >
-      <div className="mx-auto w-full max-w-6xl px-6">
-        <div className="flex items-center justify-between gap-16">
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+        <div className="flex items-center justify-between gap-4">
           <Link
             href="/"
-            className="flex items-center gap-3 py-2 text-[1.35rem] font-extrabold text-[var(--text-primary)] transition-opacity hover:opacity-80"
+            className="flex min-w-0 items-center gap-2 py-2 text-xl font-extrabold text-[var(--text-primary)] transition-opacity hover:opacity-80 sm:gap-3 sm:text-[1.35rem]"
           >
             <Image
               src="/tooliozLogo.svg"
               alt="Toolioz logo"
               width={48}
               height={48}
-              className="rounded-md object-contain"
+              className="h-9 w-9 shrink-0 rounded-md object-contain sm:h-12 sm:w-12"
               priority
             />
             <span>Toolioz</span>
@@ -212,7 +212,7 @@ export const Navbar = () => {
           isOpen ? 'translate-x-0' : 'translate-x-full',
         ].join(' ')}
       >
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="flex flex-col gap-10">
             {currentCategoryId && (
               <div>
