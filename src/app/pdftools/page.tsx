@@ -1,49 +1,27 @@
 import React from 'react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import PDFToolsClient from './PDFToolsClient';
-import type { Metadata } from 'next';
+import { buildCollectionPageJsonLd, buildPageMetadata } from '@/lib/seo';
+import { pdftoolsBlogKeywords } from '@/lib/pdftools-blog-content';
 
-export const metadata: Metadata = {
-  title: "Professional PDF Tools | Merge, Split & Compress PDF Online | Toolioz",
-  description: "Free, high-performance web-native PDF utilities. Merge PDF documents, compress file size with surgery-deep optimization, and convert formats securely.",
-  keywords: 'Professional PDF tools online, merge pdf fast, compress pdf without loss, secure pdf utilities, browser-native pdf editor',
-  alternates: {
-    canonical: 'https://toolioz.com/pdftools',
-  },
-  openGraph: {
-    title: 'Precision PDF Utility Suite | Toolioz',
-    description: 'Manage, compress, and merge PDF files with advanced browser-native algorithms.',
-    url: 'https://toolioz.com/pdftools',
-    type: 'website',
-    images: [
-      {
-        url: '/tooliozLogo.png',
-        width: 512,
-        height: 512,
-        alt: 'Toolioz PDF Tools',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'PDF Tools | Toolioz',
-    description: 'Merge, compress, and convert PDFs quickly and securely.',
-    images: ['/tooliozLogo.png'],
-  },
-};
+export const metadata = buildPageMetadata({
+  title: 'Free PDF Tools Online | Merge, Compress & Convert | Toolioz',
+  description:
+    'Merge PDF files, compress for email, and convert images to PDF in your browser. Private, fast, no watermark on core tools.',
+  path: '/pdftools',
+  keywords: pdftoolsBlogKeywords.slice(0, 12),
+});
 
 export default function PDFToolsLandingPage() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "PDF Productivity Tools",
-    "url": "https://toolioz.com/pdftools",
-    "description": "A collection of secure and high-speed PDF manipulation utilities.",
-  };
-
   return (
     <>
-      <JSONLD data={jsonLd} />
+      <JSONLD
+        data={buildCollectionPageJsonLd({
+          name: 'PDF tools',
+          description: 'Browser-native PDF merge, compress, and conversion utilities.',
+          path: '/pdftools',
+        })}
+      />
       <PDFToolsClient />
     </>
   );

@@ -25,19 +25,24 @@
     "json-to-ts": "^2.1.0",
     "jspdf": "^4.2.1",
     "lucide-react": "^0.577.0",
-    "next": "16.1.7",
+    "next": "16.2.6",
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^5.6.205",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "tailwindcss": "^4.2.4"
   },
+  "overrides": {
+    "postcss": "^8.5.15",
+    "ws": "^8.20.1"
+  },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.1.7",
+    "eslint-config-next": "16.2.6",
+    "svgson": "^5.3.1",
     "ts-morph": "^28.0.0",
     "typescript": "^5",
     "wrangler": "^4.82.2"

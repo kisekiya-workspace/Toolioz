@@ -38,16 +38,6 @@ export default function GSTCalculatorPage() {
 
       "priceCurrency": "USD"
 
-    },
-
-    "aggregateRating": {
-
-      "@type": "AggregateRating",
-
-      "ratingValue": "4.9",
-
-      "ratingCount": "14200"
-
     }
 
   };

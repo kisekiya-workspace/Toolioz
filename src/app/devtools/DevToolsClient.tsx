@@ -3,9 +3,10 @@
 import React, { useMemo, useState } from 'react';
 import { Card } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
-import { Search, ShieldCheck, Zap, Terminal } from 'lucide-react';
+import { ArrowRight, BookOpen, Search, ShieldCheck, Terminal, Zap } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import Link from 'next/link';
+import { devtoolsBlogPosts } from '@/lib/devtools-blog-content';
 import { TOOLS } from '@/lib/tools';
 
 export default function DevToolsClient() {
@@ -110,6 +111,70 @@ export default function DevToolsClient() {
               ))}
             </div>
           )}
+        </div>
+      </section>
+
+      <section className="border-t border-slate-200 bg-[linear-gradient(180deg,#fffaf0_0%,#f8fafc_100%)] px-6 py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <div className="mb-3 inline-flex items-center gap-2 text-sm font-bold text-amber-700">
+                <BookOpen size={16} />
+                DevTools Blog
+              </div>
+              <h2 className="text-3xl font-black tracking-[-0.02em] md:text-5xl">
+                Guides that turn debugging questions into shortcuts
+              </h2>
+            </div>
+            <Link
+              href="/devtools/blog"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-slate-800 transition hover:-translate-y-0.5 hover:border-amber-300 hover:text-amber-700"
+            >
+              Read all guides <ArrowRight size={16} />
+            </Link>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {devtoolsBlogPosts.slice(0, 4).map((post) => (
+              <Link
+                key={post.slug}
+                href={`/devtools/blog/${post.slug}`}
+                className="group flex h-full flex-col justify-between rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-amber-200 hover:shadow-xl"
+              >
+                <div>
+                  <div className="mb-4 flex items-center justify-between gap-3">
+                    <span className="rounded-full bg-amber-50 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-amber-700">
+                      {post.readTime}
+                    </span>
+                    <span className="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">
+                      {post.updated}
+                    </span>
+                  </div>
+                  <h3 className="text-2xl font-black tracking-[-0.02em] text-slate-950 transition-colors group-hover:text-amber-700">
+                    {post.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">{post.description}</p>
+                </div>
+
+                <div className="mt-6">
+                  <div className="mb-4 flex flex-wrap gap-2">
+                    {post.keywords.slice(0, 2).map((keyword) => (
+                      <span
+                        key={keyword}
+                        className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[0.7rem] font-semibold text-slate-600"
+                      >
+                        {keyword}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="inline-flex items-center gap-2 text-sm font-bold text-amber-700">
+                    {post.toolLabel}
+                    <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

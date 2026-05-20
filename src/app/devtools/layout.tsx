@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   description:
-    'Practical developer tools for JSON formatting, regex testing, cron parsing, hashing, encoding, and API workflow debugging.',
+    'Practical developer tools for JSON formatting, regex testing, cron parsing, hashing, encoding, timestamps, and API workflow debugging.',
   keywords: [
     'developer tools',
     'json formatter',
@@ -12,6 +12,8 @@ export const metadata: Metadata = {
     'jwt decoder',
     'curl converter',
     'json diff',
+    'timestamp converter',
+    'devtools blog',
   ],
   openGraph: {
     siteName: 'Toolioz',

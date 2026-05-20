@@ -159,6 +159,163 @@ export const calculateSavingsGoal = (
 };
 
 /**
+ * Calculates a lump sum investment projection.
+ * Uses monthly compounding for a smoother long-term estimate.
+ */
+export const calculateLumpsum = (
+  principal: number,
+  annualRate: number,
+  years: number
+): number => {
+  return calculateCompoundInterest(principal, annualRate, 12, years);
+};
+
+export interface RetirementCorpusResult {
+  futureMonthlyExpense: number;
+  annualExpenseAtRetirement: number;
+  corpusNeeded: number;
+  futureValueOfCurrentSavings: number;
+  shortfall: number;
+  monthlySavingsNeeded: number;
+}
+
+/**
+ * Estimates the retirement corpus required based on inflation and a withdrawal horizon.
+ */
+export const calculateRetirementCorpus = (
+  currentMonthlyExpense: number,
+  yearsToRetirement: number,
+  yearsInRetirement: number,
+  inflationRate: number,
+  preRetirementReturn: number,
+  postRetirementReturn: number,
+  currentSavings: number = 0
+): RetirementCorpusResult => {
+  const inflatedExpense = currentMonthlyExpense * Math.pow(1 + inflationRate, yearsToRetirement);
+  const annualExpense = inflatedExpense * 12;
+
+  const corpusNeeded =
+    postRetirementReturn === 0
+      ? annualExpense * yearsInRetirement
+      : annualExpense * ((1 - Math.pow(1 + postRetirementReturn, -yearsInRetirement)) / postRetirementReturn);
+
+  const futureValueOfCurrentSavings = calculateCompoundInterest(
+    currentSavings,
+    preRetirementReturn,
+    12,
+    yearsToRetirement
+  );
+
+  const shortfall = Math.max(corpusNeeded - futureValueOfCurrentSavings, 0);
+  const monthlySavingsNeeded =
+    yearsToRetirement <= 0 ? shortfall : calculateSavingsGoal(shortfall, preRetirementReturn, yearsToRetirement);
+
+  return {
+    futureMonthlyExpense: inflatedExpense,
+    annualExpenseAtRetirement: annualExpense,
+    corpusNeeded,
+    futureValueOfCurrentSavings,
+    shortfall,
+    monthlySavingsNeeded,
+  };
+};
+
+export interface LoanPrepaymentResult {
+  baseEmi: number;
+  totalInterestWithoutPrepayment: number;
+  totalInterestWithPrepayment: number;
+  interestSaved: number;
+  monthsToClose: number;
+  monthsSaved: number;
+  totalPaidWithPrepayment: number;
+}
+
+/**
+ * Simulates how extra payments reduce loan interest and the loan tenure.
+ */
+export const calculateLoanPrepayment = (
+  principal: number,
+  annualRate: number,
+  yearsRemaining: number,
+  extraMonthlyPayment: number = 0
+): LoanPrepaymentResult => {
+  if (principal <= 0 || yearsRemaining <= 0) {
+    return {
+      baseEmi: 0,
+      totalInterestWithoutPrepayment: 0,
+      totalInterestWithPrepayment: 0,
+      interestSaved: 0,
+      monthsToClose: 0,
+      monthsSaved: 0,
+      totalPaidWithPrepayment: 0,
+    };
+  }
+
+  const totalMonths = Math.max(Math.round(yearsRemaining * 12), 1);
+  const monthlyRate = annualRate / 12;
+  const safeExtraPayment = Math.max(extraMonthlyPayment, 0);
+  const baseEmi = calculateMonthlyPayment(principal, annualRate, yearsRemaining);
+  const totalInterestWithoutPrepayment = Math.max(baseEmi * totalMonths - principal, 0);
+  const monthlyPayment = baseEmi + safeExtraPayment;
+
+  if (principal <= 0) {
+    return {
+      baseEmi: 0,
+      totalInterestWithoutPrepayment: 0,
+      totalInterestWithPrepayment: 0,
+      interestSaved: 0,
+      monthsToClose: 0,
+      monthsSaved: 0,
+      totalPaidWithPrepayment: 0,
+    };
+  }
+
+  if (monthlyRate === 0) {
+    const monthsToClose = Math.ceil(principal / Math.max(monthlyPayment, 1));
+    return {
+      baseEmi,
+      totalInterestWithoutPrepayment,
+      totalInterestWithPrepayment: 0,
+      interestSaved: totalInterestWithoutPrepayment,
+      monthsToClose,
+      monthsSaved: Math.max(totalMonths - monthsToClose, 0),
+      totalPaidWithPrepayment: principal,
+    };
+  }
+
+  let balance = principal;
+  let monthsToClose = 0;
+  let totalInterestWithPrepayment = 0;
+  const safetyLimit = totalMonths * 3 + 120;
+
+  while (balance > 0.01 && monthsToClose < safetyLimit) {
+    const interestForMonth = balance * monthlyRate;
+    const actualPayment = Math.min(monthlyPayment, balance + interestForMonth);
+    const principalReduction = actualPayment - interestForMonth;
+
+    if (principalReduction <= 0) {
+      break;
+    }
+
+    balance = Math.max(0, balance + interestForMonth - actualPayment);
+    totalInterestWithPrepayment += interestForMonth;
+    monthsToClose += 1;
+  }
+
+  const interestSaved = Math.max(totalInterestWithoutPrepayment - totalInterestWithPrepayment, 0);
+
+  return {
+    baseEmi,
+    totalInterestWithoutPrepayment,
+    totalInterestWithPrepayment,
+    interestSaved,
+    monthsToClose,
+    monthsSaved: Math.max(totalMonths - monthsToClose, 0),
+    totalPaidWithPrepayment: principal + totalInterestWithPrepayment,
+  };
+};
+
+/**
  * Global Income Tax Calculation Logic
  */
 
@@ -190,7 +347,7 @@ export const calculateIncomeTax = (
   } else if (country === 'US') {
     return calculateUSATax(income - deductions, status, year);
   } else if (country === 'UK') {
-    return calculateUKTax(income - deductions, year);
+    return calculateUKTax(income - deductions);
   }
   return { taxableIncome: 0, taxAmount: 0, takeHome: 0, effectiveRate: 0 };
 };
@@ -219,7 +376,7 @@ const calculateIndiaTax = (taxableIncome: number, status: FilingStatus, regime: 
     }
   } else {
     // Old Regime - Age based exemption
-    let exemption = status === 'senior' ? 300000 : 250000;
+    const exemption = status === 'senior' ? 300000 : 250000;
     if (taxableIncome > exemption) tax += (Math.min(taxableIncome, 500000) - exemption) * 0.05;
     if (taxableIncome > 500000) tax += (Math.min(taxableIncome, 1000000) - 500000) * 0.20;
     if (taxableIncome > 1000000) tax += (taxableIncome - 1000000) * 0.30;
@@ -278,7 +435,7 @@ const calculateUSATax = (taxableIncome: number, status: FilingStatus, year: numb
   };
 };
 
-const calculateUKTax = (taxableIncome: number, year: number): TaxResult => {
+const calculateUKTax = (taxableIncome: number): TaxResult => {
   const personalAllowance = 12570;
   const incomeAboveAllowance = Math.max(0, taxableIncome - personalAllowance);
   

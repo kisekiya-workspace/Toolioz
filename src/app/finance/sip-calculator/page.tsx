@@ -38,16 +38,6 @@ export default function SIPCalculatorPage() {
 
       "priceCurrency": "USD"
 
-    },
-
-    "aggregateRating": {
-
-      "@type": "AggregateRating",
-
-      "ratingValue": "4.8",
-
-      "ratingCount": "12850"
-
     }
 
   };

@@ -32,11 +32,6 @@ export default function BcryptGeneratorPage() {
       "@type": "Offer",
       "price": "0.00",
       "priceCurrency": "USD"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "ratingCount": "5600"
     }
     };
 

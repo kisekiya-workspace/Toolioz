@@ -1,0 +1,32 @@
+# Toolioz
+
+> Free online finance calculators, developer tools, PDF utilities, and marriage biodata makers. Client-side, private, no login required.
+
+## Main hubs
+
+- https://toolioz.com/
+- https://toolioz.com/finance
+- https://toolioz.com/finance/blog
+- https://toolioz.com/devtools
+- https://toolioz.com/devtools/blog
+- https://toolioz.com/pdftools
+- https://toolioz.com/pdftools/blog
+- https://toolioz.com/biodata
+- https://toolioz.com/biodata/blog
+- https://toolioz.com/resume-builder
+
+## Popular tools
+
+- https://toolioz.com/finance/sip-calculator
+- https://toolioz.com/finance/income-tax
+- https://toolioz.com/finance/loan-prepayment
+- https://toolioz.com/finance/retirement-corpus
+- https://toolioz.com/finance/lumpsum-calculator
+- https://toolioz.com/biodata/biodata-generator
+- https://toolioz.com/pdftools/resume-generator
+- https://toolioz.com/devtools/json-formatter
+- https://toolioz.com/devtools/timestamp-converter
+
+## Sitemap
+
+- https://toolioz.com/sitemap.xml

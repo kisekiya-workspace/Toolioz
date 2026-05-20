@@ -38,16 +38,6 @@ export default function MortgageCalculatorPage() {
 
       "priceCurrency": "USD"
 
-    },
-
-    "aggregateRating": {
-
-      "@type": "AggregateRating",
-
-      "ratingValue": "4.8",
-
-      "ratingCount": "7620"
-
     }
 
   };

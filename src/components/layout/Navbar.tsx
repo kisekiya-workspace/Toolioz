@@ -15,6 +15,7 @@ import {
   FileText,
   ExternalLink,
   UserRound,
+  Briefcase,
 } from 'lucide-react';
 import { CATEGORIES as TOOL_CATEGORIES, TOOLS } from '@/lib/tools';
 
@@ -189,6 +190,14 @@ export const Navbar = () => {
                 </div>
               )}
             </div>
+            
+            <Link
+              href="/resume-builder"
+              className="hidden lg:flex items-center gap-2 rounded-full bg-[var(--primary)] px-5 py-2 text-sm font-semibold text-white transition-all hover:bg-blue-700"
+            >
+              <Briefcase size={16} />
+              <span>Resume Builder</span>
+            </Link>
           </div>
 
           <button className="z-[2100] block md:hidden" onClick={() => setIsOpen(!isOpen)}>
@@ -233,6 +242,18 @@ export const Navbar = () => {
             )}
 
             <div>
+              <Link
+                href="/resume-builder"
+                className="mb-8 flex items-center gap-4 rounded-xl bg-[var(--primary)] p-4 font-semibold text-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg"
+                onClick={() => setIsOpen(false)}
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-[10px] bg-white/20">
+                  <Briefcase size={20} />
+                </div>
+                <span className="flex-1">ATS Resume Builder</span>
+                <ChevronRight size={14} />
+              </Link>
+              
               <h4 className="mb-4 pl-2 text-xs font-bold uppercase text-[var(--text-secondary)]">
                 Categories
               </h4>

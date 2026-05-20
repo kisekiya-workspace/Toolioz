@@ -13,6 +13,7 @@ import {
   Binary,
   Code,
   FileSearch,
+  Coins,
   Hash,
   ImagePlus,
   Key,
@@ -22,7 +23,9 @@ import {
   Asterisk,
   LayoutDashboard,
   Palette,
+  Target,
   Terminal,
+  TrendingDown,
   UserRound,
   type LucideIcon
 } from 'lucide-react';
@@ -81,6 +84,16 @@ export const TOOLS: Tool[] = [
     isTrending: true
   },
   {
+    id: 'lumpsum-calculator',
+    title: 'Lumpsum Calculator',
+    desc: 'Project how a one-time investment can grow with compounding.',
+    icon: Coins,
+    href: '/finance/lumpsum-calculator',
+    color: '#0f766e',
+    category: 'finance',
+    isTrending: true
+  },
+  {
     id: 'gst-calculator',
     title: 'GST/Tax Calc',
     desc: 'Calculate tax amounts and total costs in seconds.',
@@ -108,6 +121,16 @@ export const TOOLS: Tool[] = [
     category: 'finance'
   },
   {
+    id: 'retirement-corpus',
+    title: 'Retirement Corpus',
+    desc: 'Estimate the corpus you need to retire comfortably after inflation.',
+    icon: Target,
+    href: '/finance/retirement-corpus',
+    color: '#d97706',
+    category: 'finance',
+    isTrending: true
+  },
+  {
     id: 'inflation-calculator',
     title: 'Inflation Calc',
     desc: 'See how inflation affects the purchasing power of your money.',
@@ -115,6 +138,16 @@ export const TOOLS: Tool[] = [
     href: '/finance/inflation-calculator',
     color: '#ef4444',
     category: 'finance'
+  },
+  {
+    id: 'loan-prepayment',
+    title: 'Loan Prepayment',
+    desc: 'See how extra EMI payments shorten your loan and save interest.',
+    icon: TrendingDown,
+    href: '/finance/loan-prepayment',
+    color: '#dc2626',
+    category: 'finance',
+    isTrending: true
   },
   {
     id: 'car-loan',
@@ -224,6 +257,16 @@ export const TOOLS: Tool[] = [
     isTrending: true
   },
   {
+    id: 'timestamp-converter',
+    title: 'Timestamp Converter',
+    desc: 'Convert Unix seconds, milliseconds, and date strings instantly.',
+    icon: Clock,
+    href: '/devtools/timestamp-converter',
+    color: '#d97706',
+    category: 'devtools',
+    isTrending: true
+  },
+  {
     id: 'json-diff',
     title: 'JSON Diff Checker',
     desc: 'Compare two JSON payloads and inspect exact field-level changes.',
@@ -301,6 +344,16 @@ export const TOOLS: Tool[] = [
     icon: ImagePlus,
     href: '/pdftools/image-compressor',
     color: '#3b82f6',
+    category: 'pdftools',
+    isTrending: true
+  },
+  {
+    id: 'resume-generator',
+    title: 'ATS Resume Generator',
+    desc: 'Create polished resumes with a live LaTeX editor and text-based PDF export.',
+    icon: Briefcase,
+    href: '/pdftools/resume-generator',
+    color: '#111827',
     category: 'pdftools',
     isTrending: true
   }

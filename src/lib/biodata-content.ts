@@ -26,6 +26,16 @@ export const biodataKeywords = [
   'a4 size marriage biodata pdf',
 ];
 
+export const biodataBlogKeywords = [
+  'how to write marriage biodata',
+  'marriage biodata tips',
+  'biodata for marriage with photo',
+  'hindu marriage biodata guide',
+  'muslim marriage biodata advice',
+  'sikh marriage biodata help',
+  'matrimonial profile best practices',
+];
+
 export const biodataFaqs = [
   {
     question: 'Can I make a marriage biodata PDF on mobile?',
@@ -40,7 +50,7 @@ export const biodataFaqs = [
   {
     question: 'Which biodata templates are available?',
     answer:
-      'We offer 13+ premium templates including Vintage Parchment, Minimalist Luxury, Modern Compact, Art Deco Noir, Modern Split, Classic Centered, Minimalist, Hindu Traditional, Islamic Elegant, Sikh Heritage, Floral Harmony, Royal Gold, and Modern Professional styles.',
+      'We offer six premium templates: Modern Split, Classic Centered, Minimalist, Hindu Traditional, Islamic Elegant, and Sikh Heritage — each with a polished PDF export that matches the on-screen preview.',
   },
   {
     question: 'Is my data safe and private?',
@@ -312,6 +322,90 @@ export const biodataPosts: BiodataPost[] = [
         question: 'Can I change my template after filling in my details?',
         answer:
           'Yes, you can switch between all 13+ templates at any time without losing your data. The preview will update instantly to show how your info looks in the new design.',
+      },
+    ],
+  },
+  {
+    slug: 'sikh-marriage-biodata-format-pdf-free',
+    title: 'Sikh Marriage Biodata Format PDF: Family Details and Photo Layout',
+    description:
+      'Create a Sikh marriage biodata PDF with Khanda-inspired styling, family lineage, and clear sections for education, occupation, and partner preferences.',
+    keywords: [
+      'sikh marriage biodata format pdf',
+      'punjabi biodata for marriage',
+      'sikh wedding biodata template',
+      'biodata format for sikh boy',
+      'matrimonial biodata sikh family',
+    ],
+    updated: 'May 2026',
+    readTime: '6 min read',
+    sections: [
+      {
+        heading: 'Respectful design without clutter',
+        body: [
+          'A Sikh marriage biodata should feel dignified: clear headings, readable fonts, and space for family values alongside education and career details.',
+          'Use a template that supports a photo, birth details if shared, and separate blocks for father, mother, and siblings.',
+        ],
+      },
+      {
+        heading: 'What families expect to see',
+        body: [
+          'Besides personal details, many profiles include gotra, village or city roots, and occupation of parents. Keep wording concise so the PDF stays one or two pages.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Can I download the biodata without login?',
+        answer:
+          'Yes. Toolioz lets you fill the form in the browser and export a PDF without creating an account.',
+      },
+      {
+        question: 'Is the Sikh template free?',
+        answer:
+          'Yes. The Sikh Heritage template and PDF export are free to use.',
+      },
+    ],
+  },
+  {
+    slug: 'marriage-biodata-photo-size-and-placement',
+    title: 'Marriage Biodata Photo Size and Placement: Quick Guide',
+    description:
+      'Choose the right photo crop, resolution, and position so your marriage biodata looks professional on mobile and in print.',
+    keywords: [
+      'biodata photo size for marriage',
+      'marriage biodata with photo format',
+      'biodata photo dimensions',
+      'matrimonial photo tips',
+      'biodata profile picture size',
+    ],
+    updated: 'May 2026',
+    readTime: '4 min read',
+    sections: [
+      {
+        heading: 'Use a recent, well-lit photo',
+        body: [
+          'A passport-style or professional headshot works best. Avoid group photos, heavy filters, or low-resolution selfies that pixelate in PDF export.',
+          'Square or portrait crops around 400×400 pixels or larger usually print clearly on A4.',
+        ],
+      },
+      {
+        heading: 'Placement depends on template',
+        body: [
+          'Centered templates often place the photo under the name; sidebar layouts put it at the top of the colored column. Preview before download to confirm crop.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What file type should I upload?',
+        answer:
+          'JPG and PNG work well. Keep file size reasonable so mobile upload stays fast.',
+      },
+      {
+        question: 'Can I remove the photo later?',
+        answer:
+          'Yes. You can delete the photo in the editor and re-export the biodata.',
       },
     ],
   },

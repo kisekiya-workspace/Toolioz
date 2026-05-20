@@ -32,11 +32,6 @@ export default function RegexTesterPage() {
       "@type": "Offer",
       "price": "0.00",
       "priceCurrency": "USD"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.7",
-      "ratingCount": "10400"
     }
     };
 

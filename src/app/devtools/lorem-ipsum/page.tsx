@@ -32,11 +32,6 @@ export default function LoremIpsumPage() {
       "@type": "Offer",
       "price": "0.00",
       "priceCurrency": "USD"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.4",
-      "ratingCount": "4200"
     }
   };
 

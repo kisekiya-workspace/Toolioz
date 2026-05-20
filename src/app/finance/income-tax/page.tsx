@@ -38,16 +38,6 @@ export default function IncomeTaxPage() {
 
       "priceCurrency": "USD"
 
-    },
-
-    "aggregateRating": {
-
-      "@type": "AggregateRating",
-
-      "ratingValue": "4.9",
-
-      "ratingCount": "18420"
-
     }
 
   };

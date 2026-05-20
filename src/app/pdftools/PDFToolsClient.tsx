@@ -3,10 +3,11 @@
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
-import { Search, ShieldCheck, Zap, Lock } from 'lucide-react';
+import { Search, ShieldCheck, Zap, Lock, ArrowRight } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import Link from 'next/link';
 import { TOOLS } from '@/lib/tools';
+import { pdftoolsBlogPosts } from '@/lib/pdftools-blog-content';
 
 export default function PDFToolsClient() {
   const [search, setSearch] = useState('');
@@ -84,6 +85,45 @@ export default function PDFToolsClient() {
                   )}
                 </Card>
               </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-slate-50 py-24 border-y border-slate-200">
+        <div className="container">
+          <div className="mb-12 flex items-end justify-between">
+            <div>
+              <h2 className="text-[2.5rem] font-extrabold tracking-[-0.01em]">Productivity Resources</h2>
+              <p className="mt-2 text-[var(--text-secondary)]">Technical insights into PDF optimization and security.</p>
+            </div>
+            <Link href="/pdftools/blog" className="hidden font-semibold text-[#ef4444] hover:text-[#dc2626] sm:block">
+              View all articles &rarr;
+            </Link>
+          </div>
+
+          <div className="grid gap-8" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))' }}>
+            {pdftoolsBlogPosts.map((post) => (
+              <article key={post.slug} className="flex flex-col overflow-hidden rounded-[var(--radius-xl)] border border-[var(--border)] bg-white transition-shadow hover:shadow-lg">
+                <div className="flex-1 p-8">
+                  <div className="mb-4 flex items-center gap-3 text-sm text-[var(--text-secondary)]">
+                    <span className="font-bold uppercase tracking-wider text-[#ef4444]">{post.readTime}</span>
+                    <span>•</span>
+                    <span className="font-medium">Updated {post.updated}</span>
+                  </div>
+                  <h3 className="mb-4 text-2xl font-bold leading-tight">
+                    {post.title}
+                  </h3>
+                  <p className="text-[var(--text-secondary)] leading-relaxed">
+                    {post.description}
+                  </p>
+                </div>
+                <div className="bg-slate-50 px-8 py-5 border-t border-[var(--border)]">
+                  <Link href={`/pdftools/blog/${post.slug}`} className="font-bold text-[#ef4444] hover:text-[#dc2626] inline-flex items-center gap-2">
+                    Read article <ArrowRight size={16} />
+                  </Link>
+                </div>
+              </article>
             ))}
           </div>
         </div>

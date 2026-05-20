@@ -32,11 +32,6 @@ export default function UnitConverterPage() {
       "@type": "Offer",
       "price": "0.00",
       "priceCurrency": "USD"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.6",
-      "ratingCount": "8100"
     }
   };
 

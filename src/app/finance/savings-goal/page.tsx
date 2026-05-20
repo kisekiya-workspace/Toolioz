@@ -38,16 +38,6 @@ export default function SavingsGoalPage() {
 
       "priceCurrency": "USD"
 
-    },
-
-    "aggregateRating": {
-
-      "@type": "AggregateRating",
-
-      "ratingValue": "4.5",
-
-      "ratingCount": "3210"
-
     }
 
   };

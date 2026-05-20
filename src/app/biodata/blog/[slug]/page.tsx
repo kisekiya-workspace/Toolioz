@@ -85,31 +85,43 @@ export default async function BiodataBlogPostPage({ params }: BlogPageProps) {
       <JSONLD data={articleJsonLd} />
       <JSONLD data={faqJsonLd} />
 
-      <article className="mx-auto max-w-4xl px-6 py-12 md:py-18">
-        <Link href="/biodata" className="mb-8 inline-flex items-center gap-2 text-sm font-bold text-pink-700">
-          <ArrowLeft size={15} />
-          Biodata tools
+      <article className="mx-auto max-w-4xl px-6 py-16 md:py-24">
+        <Link href="/biodata/blog" className="mb-10 inline-flex items-center gap-2 text-sm font-bold text-pink-700">
+          <ArrowLeft size={16} />
+          Back to Biodata Blog
         </Link>
 
-        <div className="mb-4 text-xs font-bold uppercase tracking-[0.16em] text-pink-600">
-          {post.updated} / {post.readTime}
-        </div>
-        <h1 className="text-4xl font-black leading-tight tracking-[-0.02em] md:text-6xl">{post.title}</h1>
-        <p className="mt-6 text-xl leading-9 text-[var(--text-secondary)]">{post.description}</p>
-
-        <div className="mt-8 flex flex-wrap gap-2">
-          {post.keywords.map((keyword) => (
-            <span key={keyword} className="rounded-full bg-pink-50 px-3 py-1 text-xs font-semibold text-pink-700">
-              {keyword}
+        <div className="rounded-[2.5rem] border border-slate-200 bg-white p-8 shadow-sm md:p-12">
+          <div className="mb-6 flex flex-wrap items-center gap-3">
+            <span className="rounded-full bg-pink-50 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-pink-700">
+              {post.readTime}
             </span>
-          ))}
+            <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-emerald-700">
+              Updated {post.updated}
+            </span>
+          </div>
+
+          <h1 className="max-w-3xl text-4xl font-black leading-tight tracking-[-0.03em] md:text-6xl">
+            {post.title}
+          </h1>
+          <p className="mt-8 max-w-3xl text-xl leading-9 text-[var(--text-secondary)]">
+            {post.description}
+          </p>
+
+          <div className="mt-10 flex flex-wrap gap-2">
+            {post.keywords.map((keyword) => (
+              <span key={keyword} className="rounded-full border border-pink-100 bg-pink-50 px-3 py-1 text-xs font-semibold text-pink-700">
+                {keyword}
+              </span>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-12 space-y-12">
+        <div className="mt-20 space-y-20">
           {post.sections.map((section) => (
-            <section key={section.heading}>
-              <h2 className="text-2xl font-extrabold tracking-[-0.01em] md:text-3xl">{section.heading}</h2>
-              <div className="mt-4 space-y-4">
+            <section key={section.heading} className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm md:p-10">
+              <h2 className="text-3xl font-black tracking-[-0.02em] md:text-4xl">{section.heading}</h2>
+              <div className="mt-6 space-y-6">
                 {section.body.map((paragraph) => (
                   <p key={paragraph} className="text-lg leading-8 text-[var(--text-secondary)]">
                     {paragraph}
@@ -120,26 +132,26 @@ export default async function BiodataBlogPostPage({ params }: BlogPageProps) {
           ))}
         </div>
 
-        <section className="mt-14 rounded-[28px] border border-pink-100 bg-pink-50 p-6 md:p-8">
-          <h2 className="text-2xl font-extrabold">Create your biodata PDF</h2>
-          <p className="mt-3 text-[var(--text-secondary)]">
-            Use the free editor to choose a template, add a photo, preview the A4 layout, and export the PDF.
+        <section className="mt-20 rounded-[2.5rem] border border-pink-100 bg-pink-50 p-8 md:p-12">
+          <h2 className="text-3xl font-black tracking-tight">Create your biodata PDF</h2>
+          <p className="mt-4 text-lg text-[var(--text-secondary)]">
+            Use the free editor to choose a template, add a photo, preview the A4 layout, and export the PDF. No login required.
           </p>
           <Link
             href="/biodata/biodata-generator"
-            className="mt-5 inline-flex items-center gap-2 rounded-full bg-pink-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-pink-700"
+            className="mt-8 inline-flex items-center gap-3 rounded-full bg-pink-600 px-8 py-4 text-base font-bold text-white transition hover:bg-pink-700 hover:shadow-lg"
           >
-            Open Biodata Generator <ArrowRight size={15} />
+            Open Biodata Generator <ArrowRight size={20} />
           </Link>
         </section>
 
-        <section className="mt-14">
-          <h2 className="text-2xl font-extrabold">FAQs</h2>
-          <div className="mt-5 space-y-4">
+        <section className="mt-20">
+          <h2 className="text-3xl font-black tracking-tight mb-8">Frequently Asked Questions</h2>
+          <div className="space-y-6">
             {post.faqs.map((faq) => (
-              <div key={faq.question} className="rounded-2xl border border-[var(--border)] p-5">
-                <h3 className="font-bold">{faq.question}</h3>
-                <p className="mt-2 leading-7 text-[var(--text-secondary)]">{faq.answer}</p>
+              <div key={faq.question} className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+                <h3 className="text-xl font-bold text-slate-900">{faq.question}</h3>
+                <p className="mt-4 text-lg leading-8 text-[var(--text-secondary)]">{faq.answer}</p>
               </div>
             ))}
           </div>

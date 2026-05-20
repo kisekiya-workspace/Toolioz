@@ -1,4 +1,4 @@
-export type TemplateId = 'modern' | 'classic' | 'minimalist' | 'hindu' | 'islamic' | 'sikh' | 'floral' | 'royal' | 'professional' | 'vintage' | 'luxury' | 'compact' | 'artdeco';
+export type TemplateId = 'modern' | 'classic' | 'minimalist' | 'hindu' | 'islamic' | 'sikh';
 
 export type BiodataForm = {
   photo: string | null;

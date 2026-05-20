@@ -38,16 +38,6 @@ export default function ROICalculatorPage() {
 
       "priceCurrency": "USD"
 
-    },
-
-    "aggregateRating": {
-
-      "@type": "AggregateRating",
-
-      "ratingValue": "4.6",
-
-      "ratingCount": "5180"
-
     }
 
   };

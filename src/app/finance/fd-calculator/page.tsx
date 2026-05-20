@@ -38,16 +38,6 @@ export default function FDCalculatorPage() {
 
       "priceCurrency": "USD"
 
-    },
-
-    "aggregateRating": {
-
-      "@type": "AggregateRating",
-
-      "ratingValue": "4.7",
-
-      "ratingCount": "8950"
-
     }
 
   };

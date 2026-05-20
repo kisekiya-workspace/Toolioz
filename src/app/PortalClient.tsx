@@ -1,132 +1,223 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-
-import { Card } from '@/components/ui/Card';
-import { Input } from '@/components/ui/Input';
-import { Search, TrendingUp, ArrowRight, LayoutGrid, Zap, ShieldCheck, PieChart, Info, Percent, Landmark, ChevronDown } from 'lucide-react';
-import { Footer } from '@/components/layout/Footer';
+import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
-import { TOOLS, CATEGORIES } from '@/lib/tools';
+import {
+  Search,
+  TrendingUp,
+  ArrowRight,
+  Zap,
+  ShieldCheck,
+  Lock,
+  ChevronDown,
+  Sparkles,
+  BookOpen,
+} from 'lucide-react';
+import { Footer } from '@/components/layout/Footer';
+import { TOOLS, CATEGORIES, type Tool } from '@/lib/tools';
+
+const HUB_HREF: Record<string, string> = {
+  finance: '/finance',
+  devtools: '/devtools',
+  pdftools: '/pdftools',
+  biodata: '/biodata',
+};
+
+const QUICK_LINKS = [
+  { label: 'SIP Calculator', href: '/finance/sip-calculator' },
+  { label: 'Income Tax', href: '/finance/income-tax' },
+  { label: 'JSON Formatter', href: '/devtools/json-formatter' },
+  { label: 'Merge PDF', href: '/pdftools/merge-pdf' },
+  { label: 'Biodata Maker', href: '/biodata/biodata-generator' },
+  { label: 'Resume Builder', href: '/resume-builder' },
+];
+
+const BLOG_HUBS = [
+  { title: 'Finance guides', href: '/finance/blog', desc: 'SIP, tax, loans & retirement' },
+  { title: 'Dev guides', href: '/devtools/blog', desc: 'JSON, JWT, regex & more' },
+  { title: 'PDF tips', href: '/pdftools/blog', desc: 'Merge, compress & workflows' },
+  { title: 'Biodata help', href: '/biodata/blog', desc: 'Formats, photos & templates' },
+];
+
+const FAQS = [
+  {
+    q: 'Are these tools really free?',
+    a: 'Yes. No trials, no signup, and no paywall on core calculators and utilities.',
+  },
+  {
+    q: 'Is my data secure?',
+    a: 'Calculations and file processing run in your browser. Sensitive inputs are not stored on our servers.',
+  },
+  {
+    q: 'Do the finance formulas match real-world use?',
+    a: 'We use standard EMI, SIP, tax, and compounding formulas used in planning—not generic placeholders.',
+  },
+  {
+    q: 'Can I suggest a new tool?',
+    a: 'Use the contact page—we add utilities based on what users search for most.',
+  },
+];
+
+function ToolCard({ tool }: { tool: Tool }) {
+  return (
+    <Link href={tool.href} className="group block max-md:min-w-[268px] max-md:snap-center">
+      <article className="flex h-full items-start gap-4 rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--surface)] p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--border-strong)] hover:shadow-[var(--shadow-md)]">
+        <div
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+          style={{ backgroundColor: `${tool.color}18`, color: tool.color }}
+        >
+          <tool.icon size={22} strokeWidth={2} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <h3 className="mb-1 text-lg font-bold text-[var(--text-primary)] transition-colors group-hover:text-[var(--primary)]">
+            {tool.title}
+          </h3>
+          <p className="line-clamp-2 text-sm leading-relaxed text-[var(--text-secondary)]">{tool.desc}</p>
+        </div>
+        <ArrowRight
+          size={18}
+          className="mt-1 shrink-0 text-[var(--text-tertiary)] opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
+          style={{ color: tool.color }}
+        />
+      </article>
+    </Link>
+  );
+}
 
 export default function PortalClient() {
   const [search, setSearch] = useState('');
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-
-  const filteredTools = TOOLS.filter(tool =>
-    tool.title.toLowerCase().includes(search.toLowerCase()) ||
-    tool.desc.toLowerCase().includes(search.toLowerCase())
-  );
-
-  const trendingTools = TOOLS.filter(t => t.isTrending);
-
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
-  if (!mounted) return null;
+  const filteredTools = useMemo(
+    () =>
+      TOOLS.filter(
+        (tool) =>
+          tool.title.toLowerCase().includes(search.toLowerCase()) ||
+          tool.desc.toLowerCase().includes(search.toLowerCase())
+      ),
+    [search]
+  );
 
-  const faqs = [
-    {
-      q: "Are these tools truly free?",
-      a: "Yes, 100%. No hidden trials, no registration, and no credit card required."
-    },
-    {
-      q: "Is my data secure?",
-      a: "Absolutely. We follow a \"zero-server\" approach. Calculations run locally in your browser."
-    },
-    {
-      q: "Who builds these tools?",
-      a: "Our team of finance experts and developers ensured every formula meets industry standards."
-    },
-    {
-      q: "Can I request a new tool?",
-      a: "We're always expanding! Use the contact page to drop us your suggestions."
-    }
-  ];
+  const trendingTools = useMemo(() => TOOLS.filter((t) => t.isTrending), []);
+  const toolCount = TOOLS.length;
 
   return (
     <div className="bg-[var(--bg-primary)]">
+      <section className="relative overflow-hidden border-b border-[var(--border)]">
+        <div className="landing-hero-grid pointer-events-none absolute inset-0 opacity-80" aria-hidden />
+        <div
+          className="pointer-events-none absolute -right-32 -top-32 h-[420px] w-[420px] rounded-full opacity-[0.07]"
+          style={{ background: 'radial-gradient(circle, var(--primary) 0%, transparent 70%)' }}
+          aria-hidden
+        />
 
-
-      {/* Clean & Professional Hero Section */}
-      <section className="relative overflow-hidden border-b border-[var(--border)] bg-[var(--bg-secondary)] px-6 py-16 text-center md:py-24">
-        {/* Hero Section Background (Gradients removed) */}
-
-        <div className="relative mx-auto max-w-6xl">
-          <div className="relative z-10 mx-auto max-w-[900px]">
-            <div className="mb-8 inline-flex animate-[fadeIn_1s_ease-out] rounded-full border border-[var(--border-strong)] bg-white/50 px-5 py-2 text-xs font-bold uppercase tracking-[0.1em] text-[var(--text-primary)] shadow-sm backdrop-blur-md dark:bg-black/30">All-in-One Utility Hub</div>
-            <h1 className="mb-8 text-[clamp(2.75rem,8vw,5rem)] font-black leading-none tracking-[-0.03em] text-[var(--text-primary)]">
-              Smart Tools for <br />
-              <span className="text-[var(--primary)]">Advanced Decision Making</span>
-            </h1>
-            <p className="mx-auto mb-12 max-w-[700px] text-lg leading-8 text-[var(--text-secondary)] md:text-xl">
-              From complex tax projections to developer utilities and PDF magic.
-              We've built professional-grade tools that run entirely in your browser.
-              Always accurate, always private.
+        <div className="relative mx-auto max-w-6xl px-6 py-14 md:py-20">
+          <div className="landing-stagger mx-auto max-w-3xl text-center lg:max-w-4xl">
+            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-[var(--surface)] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--text-secondary)] shadow-[var(--shadow-sm)]">
+              <Sparkles size={14} className="text-[var(--primary)]" />
+              {toolCount}+ free tools · Private by default
             </p>
 
-            <div className="mx-auto mb-12 max-w-[700px]">
-              <div className="rounded-[var(--radius-lg)] border-2 border-[var(--border-strong)] bg-white p-2 shadow-sm transition-all duration-200 focus-within:border-[var(--primary)] focus-within:shadow-[0_0_0_4px_rgba(37,99,235,0.1)]">
-                <div className="flex items-center gap-3 px-2">
-                  <Search size={24} className="text-[var(--text-tertiary)]" />
-                  <input
-                    type="text"
-                    placeholder="Find a tool (e.g. SIP, JSON, PDF...)"
-                    className="w-full flex-1 bg-transparent py-3 text-lg text-[var(--text-primary)] outline-none placeholder:text-(--text-tertiary) md:text-xl border-none"
+            <h1 className="mb-6 text-[clamp(2.25rem,6.5vw,4.25rem)] font-black leading-[1.05] tracking-[-0.035em] text-[var(--text-primary)]">
+              Finance, dev & PDF tools
+              <span className="mt-1 block text-[var(--primary)]">that run in your browser</span>
+            </h1>
 
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                  />
-                </div>
+            <p className="mx-auto mb-10 max-w-2xl text-base leading-7 text-[var(--text-secondary)] md:text-lg">
+              SIP and tax calculators, JSON and regex utilities, PDF merge, marriage biodata, and ATS resumes—accurate,
+              fast, and built for everyday decisions.
+            </p>
+
+            <label className="mx-auto mb-4 block max-w-xl text-left">
+              <span className="sr-only">Search tools</span>
+              <div className="flex items-center gap-3 rounded-[var(--radius-lg)] border-2 border-[var(--border-strong)] bg-[var(--surface)] px-4 py-1 shadow-[var(--shadow-sm)] transition-shadow focus-within:border-[var(--primary)] focus-within:shadow-[0_0_0_4px_color-mix(in_srgb,var(--primary)_18%,transparent)]">
+                <Search size={22} className="shrink-0 text-[var(--text-tertiary)]" aria-hidden />
+                <input
+                  type="search"
+                  placeholder="Search SIP, JSON, biodata, resume…"
+                  className="w-full border-none bg-transparent py-3.5 text-base text-[var(--text-primary)] outline-none placeholder:text-[var(--text-tertiary)] md:text-lg"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
               </div>
+            </label>
+
+            <div className="mb-8 flex flex-wrap justify-center gap-2">
+              {QUICK_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="rounded-full border border-[var(--border)] bg-[var(--bg-secondary)] px-3.5 py-1.5 text-xs font-semibold text-[var(--text-secondary)] transition-colors hover:border-[var(--primary)] hover:text-[var(--primary)]"
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
 
-            <div className="mt-8 flex items-center justify-center gap-6 md:gap-12">
-              <div className="flex flex-col gap-1">
-                <strong>20+</strong>
-                <span>Pro Tools</span>
-              </div>
-              <div className="h-10 w-px bg-[var(--border)]" />
-              <div className="flex flex-col gap-1">
-                <strong>100%</strong>
-                <span>Client Side</span>
-              </div>
-              <div className="h-10 w-px bg-[var(--border)]" />
-              <div className="flex flex-col gap-1">
-                <strong>FREE</strong>
-                <span>Forever</span>
-              </div>
+            <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Link
+                href="/finance"
+                className="inline-flex h-12 min-w-[200px] items-center justify-center gap-2 rounded-xl bg-[var(--primary)] px-7 text-base font-bold text-white shadow-[var(--shadow-md)] transition-all hover:bg-[var(--primary-hover)] hover:shadow-[var(--shadow-lg)]"
+              >
+                Browse finance tools
+                <ArrowRight size={18} />
+              </Link>
+              <Link
+                href="/resume-builder"
+                className="inline-flex h-12 min-w-[200px] items-center justify-center gap-2 rounded-xl border-2 border-[var(--border-strong)] bg-[var(--surface)] px-7 text-base font-bold text-[var(--text-primary)] transition-colors hover:bg-[var(--bg-secondary)]"
+              >
+                ATS resume builder
+              </Link>
             </div>
           </div>
+
+          <ul className="mx-auto mt-12 flex max-w-lg flex-wrap items-center justify-center gap-x-8 gap-y-4 text-center text-sm text-[var(--text-secondary)]">
+            <li className="flex flex-col">
+              <strong className="text-2xl font-black tabular-nums text-[var(--text-primary)]">{toolCount}+</strong>
+              <span>utilities</span>
+            </li>
+            <li className="hidden h-8 w-px bg-[var(--border)] sm:block" aria-hidden />
+            <li className="flex flex-col">
+              <strong className="text-2xl font-black text-[var(--text-primary)]">0</strong>
+              <span>server uploads for calcs</span>
+            </li>
+            <li className="hidden h-8 w-px bg-[var(--border)] sm:block" aria-hidden />
+            <li className="flex flex-col">
+              <strong className="text-2xl font-black text-[var(--success)]">Free</strong>
+              <span>no account</span>
+            </li>
+          </ul>
         </div>
       </section>
 
-      {/* Category Section (if no search) */}
-      {!search && (
-        <section className="px-6 py-16 md:py-24 border-b border-[var(--border)]">
+      {!search && trendingTools.length > 0 && (
+        <section className="border-b border-[var(--border)] bg-[var(--bg-secondary)] px-6 py-10 md:py-12">
           <div className="mx-auto max-w-6xl">
-            <div className="mb-12 text-center md:mb-20">
-              <h2 className="mb-6 text-[2.25rem] font-black tracking-[-0.02em] text-[var(--text-primary)] md:text-[3.5rem]">Explore Categories</h2>
-              <p className="mx-auto max-w-[700px] text-lg text-[var(--text-secondary)] md:text-xl">
-                Choose from our professional suite of utility tools.
-              </p>
+            <div className="mb-6">
+              <p className="mb-1 text-xs font-bold uppercase tracking-[0.12em] text-[var(--primary)]">Popular now</p>
+              <h2 className="text-2xl font-black tracking-tight text-[var(--text-primary)] md:text-3xl">
+                Trending tools
+              </h2>
             </div>
-
-            <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-3 max-md:flex max-md:overflow-x-auto max-md:gap-4 max-md:pr-10 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden">
-              {CATEGORIES.map(cat => (
-                <Link key={cat.id} href={`#cat-${cat.id}`} className="max-md:min-w-[280px] max-md:snap-center">
-                  <div className="group !flex h-full !flex-col !rounded-[var(--radius-lg)] !border !border-[var(--border)] !bg-white !px-10 !py-12 transition-all duration-200 hover:-translate-y-1 hover:!shadow-[var(--shadow-lg)] dark:!bg-[var(--bg-secondary)]" style={{ borderColor: 'var(--border)' }}>
-                    <div className="mb-10" style={{ color: cat.color }}>
-                      <cat.icon size={32} />
-                    </div>
-                    <h3 className="mb-4 text-[2rem] font-extrabold text-[var(--text-primary)]">{cat.title}</h3>
-                    <p className="flex-1 text-lg leading-8 text-[var(--text-secondary)]">{cat.desc}</p>
-                    <ArrowRight className="mt-10 transition-transform duration-300 group-hover:translate-x-2" size={24} style={{ color: cat.color }} />
-                  </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {trendingTools.slice(0, 8).map((tool) => (
+                <Link
+                  key={tool.id}
+                  href={tool.href}
+                  className="group flex items-center gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)]"
+                >
+                  <span
+                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
+                    style={{ backgroundColor: `${tool.color}18`, color: tool.color }}
+                  >
+                    <tool.icon size={20} />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block truncate font-bold text-[var(--text-primary)] group-hover:text-[var(--primary)]">
+                      {tool.title}
+                    </span>
+                    <span className="block truncate text-xs text-[var(--text-tertiary)]">{tool.desc}</span>
+                  </span>
                 </Link>
               ))}
             </div>
@@ -134,58 +225,121 @@ export default function PortalClient() {
         </section>
       )}
 
-      {/* Tools Section (or Search Results) */}
-      <section className="px-6 py-16 bg-[var(--bg-secondary)] md:py-24 border-b border-[var(--border)]">
-        <div className="mx-auto max-w-6xl">
-          {search ? (
-            <div className="mb-12 text-center md:mb-20">
-              <h2 className="mb-6 text-[2.25rem] font-black tracking-[-0.02em] text-[var(--text-primary)] md:text-[3.5rem]">Search Results</h2>
-              <p className="mx-auto max-w-[700px] text-lg text-[var(--text-secondary)] md:text-xl">
-                Found {filteredTools.length} tool{filteredTools.length !== 1 ? 's' : ''} matching "{search}"
+      {!search && (
+        <section className="border-b border-[var(--border)] px-6 py-14 md:py-20">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-10 md:mb-14">
+              <h2 className="mb-3 text-3xl font-black tracking-tight text-[var(--text-primary)] md:text-4xl">
+                Four suites, one place
+              </h2>
+              <p className="max-w-2xl text-lg text-[var(--text-secondary)]">
+                Jump into a category hub for guides, blogs, and every tool in that family.
               </p>
             </div>
-          ) : null}
+
+            <div className="grid gap-5 md:grid-cols-2">
+              {CATEGORIES.map((cat) => {
+                const count = TOOLS.filter((t) => t.category === cat.id).length;
+                return (
+                  <Link
+                    key={cat.id}
+                    href={HUB_HREF[cat.id]}
+                    className="group relative overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--surface)] p-8 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-lg)]"
+                  >
+                    <div
+                      className="absolute right-0 top-0 h-32 w-32 translate-x-8 -translate-y-8 rounded-full opacity-[0.08]"
+                      style={{ backgroundColor: cat.color }}
+                      aria-hidden
+                    />
+                    <cat.icon size={28} style={{ color: cat.color }} className="mb-5" />
+                    <h3 className="mb-2 text-2xl font-extrabold text-[var(--text-primary)]">{cat.title}</h3>
+                    <p className="mb-4 max-w-md text-[var(--text-secondary)]">{cat.desc}</p>
+                    <p className="text-sm font-semibold text-[var(--text-tertiary)]">
+                      {count} tools ·{' '}
+                      <span className="inline-flex items-center gap-1 text-[var(--primary)]">
+                        Open hub <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+                      </span>
+                    </p>
+                  </Link>
+                );
+              })}
+            </div>
+
+            <Link
+              href="/resume-builder"
+              className="mt-5 flex flex-col gap-2 rounded-[var(--radius-lg)] border border-dashed border-[var(--border-strong)] bg-[var(--bg-secondary)] p-6 transition-colors hover:border-[var(--primary)] sm:flex-row sm:items-center sm:justify-between"
+            >
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wider text-[var(--primary)]">Also featured</p>
+                <p className="text-lg font-bold text-[var(--text-primary)]">ATS resume builder — vector PDF export</p>
+              </div>
+              <span className="inline-flex items-center gap-2 font-semibold text-[var(--primary)]">
+                Build resume <ArrowRight size={16} />
+              </span>
+            </Link>
+          </div>
+        </section>
+      )}
+
+      <section className="border-b border-[var(--border)] bg-[var(--bg-secondary)] px-6 py-14 md:py-20">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 className="text-3xl font-black tracking-tight text-[var(--text-primary)] md:text-4xl">
+                {search ? 'Search results' : 'All tools'}
+              </h2>
+              <p className="mt-2 text-[var(--text-secondary)]">
+                {search
+                  ? `${filteredTools.length} match${filteredTools.length === 1 ? '' : 'es'} for “${search}”`
+                  : 'Scroll by category or use search above.'}
+              </p>
+            </div>
+            {!search && (
+              <div className="flex flex-wrap gap-2">
+                {CATEGORIES.map((cat) => (
+                  <a
+                    key={cat.id}
+                    href={`#cat-${cat.id}`}
+                    className="rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1 text-xs font-semibold text-[var(--text-secondary)] hover:border-[var(--border-strong)]"
+                  >
+                    {cat.title.replace(' Tools', '').replace(' Utilities', '')}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
 
           {search ? (
-            <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3 max-md:flex max-md:overflow-x-auto max-md:gap-4 max-md:pr-10 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden">
-              {filteredTools.map(tool => (
-                <Link key={tool.id} href={tool.href} className="block max-md:min-w-[260px] max-md:snap-center">
-                  <div className="group !flex items-center gap-5 !rounded-[var(--radius-md)] !border !border-[var(--border)] !bg-white !p-6 transition-all duration-200 hover:!shadow-[var(--shadow-md)] dark:!bg-[var(--bg-primary)]">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl" style={{ backgroundColor: `${tool.color}15`, color: tool.color }}>
-                      <tool.icon size={24} />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="mb-2 text-xl font-bold text-[var(--text-primary)]" style={{ transition: 'color 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.color = tool.color} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-primary)'}>{tool.title}</h3>
-                      <p className="text-[0.9375rem] leading-6 text-[var(--text-secondary)] line-clamp-2">{tool.desc}</p>
-                    </div>
-                  </div>
-                </Link>
-              ))}
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {filteredTools.length === 0 ? (
+                <p className="col-span-full py-12 text-center text-[var(--text-secondary)]">
+                  No tools found. Try &quot;SIP&quot;, &quot;JSON&quot;, or &quot;PDF&quot;.
+                </p>
+              ) : (
+                filteredTools.map((tool) => <ToolCard key={tool.id} tool={tool} />)
+              )}
             </div>
           ) : (
-            CATEGORIES.map(cat => {
-              const catTools = TOOLS.filter(t => t.category === cat.id);
+            CATEGORIES.map((cat) => {
+              const catTools = TOOLS.filter((t) => t.category === cat.id);
               if (catTools.length === 0) return null;
-
               return (
-                <div key={cat.id} id={`cat-${cat.id}`} className="mb-20 last:mb-0">
-                  <div className="mb-10 flex items-center gap-4 border-b border-[var(--border)] pb-4">
-                    <div style={{ color: cat.color }}><cat.icon size={24} /></div>
-                    <h2 className="text-3xl font-bold text-[var(--text-primary)]">{cat.title}</h2>
+                <div key={cat.id} id={`cat-${cat.id}`} className="mb-14 scroll-mt-24 last:mb-0">
+                  <div className="mb-6 flex items-center justify-between gap-4 border-b border-[var(--border)] pb-3">
+                    <div className="flex items-center gap-3">
+                      <cat.icon size={22} style={{ color: cat.color }} />
+                      <h3 className="text-xl font-bold text-[var(--text-primary)]">{cat.title}</h3>
+                    </div>
+                    <Link
+                      href={HUB_HREF[cat.id]}
+                      className="shrink-0 text-sm font-semibold text-[var(--primary)] hover:underline"
+                    >
+                      View all
+                    </Link>
                   </div>
-                  <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3 max-md:flex max-md:overflow-x-auto max-md:gap-4 max-md:pr-10 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden">
-                    {catTools.map(tool => (
-                      <Link key={tool.id} href={tool.href} className="block max-md:min-w-[260px] max-md:snap-center">
-                        <div className="group !flex items-center gap-5 !rounded-[var(--radius-md)] !border !border-[var(--border)] !bg-white !p-6 transition-all duration-200 hover:!shadow-[var(--shadow-md)] dark:!bg-[var(--bg-primary)]">
-                          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl" style={{ backgroundColor: `${tool.color}15`, color: tool.color }}>
-                            <tool.icon size={24} />
-                          </div>
-                          <div className="flex-1">
-                            <h3 className="mb-2 text-xl font-bold text-[var(--text-primary)]" style={{ transition: 'color 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.color = tool.color} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-primary)'}>{tool.title}</h3>
-                            <p className="text-[0.9375rem] leading-6 text-[var(--text-secondary)] line-clamp-2">{tool.desc}</p>
-                          </div>
-                        </div>
-                      </Link>
+                  <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3 max-md:flex max-md:snap-x max-md:gap-4 max-md:overflow-x-auto max-md:pb-2 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden">
+                    {catTools.map((tool) => (
+                      <ToolCard key={tool.id} tool={tool} />
                     ))}
                   </div>
                 </div>
@@ -195,123 +349,166 @@ export default function PortalClient() {
         </div>
       </section>
 
-      {/* Why Choose Us (Visual Card) */}
-      <section className="px-6 py-16 md:py-24 border-b border-[var(--border)]">
-        <div className="mx-auto max-w-6xl">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div>
-              <div className="mb-4 inline-block rounded-full bg-[var(--bg-tertiary)] px-4 py-1 text-sm font-semibold text-[var(--primary)]">Why Toolioz</div>
-              <h2 className="mb-6 text-4xl font-black text-[var(--text-primary)] md:text-5xl">The Most Accurate Tools on the Web</h2>
-              <p className="mb-8 text-lg text-[var(--text-secondary)]">We don't just build calculators; we build clarity. Our tools are updated daily to reflect the latest global market conditions and technical standards.</p>
+      <section className="border-b border-[var(--border)] px-6 py-14 md:py-20">
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2 lg:items-center">
+          <div>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.12em] text-[var(--primary)]">Why Toolioz</p>
+            <h2 className="mb-5 text-3xl font-black leading-tight text-[var(--text-primary)] md:text-4xl">
+              Built for accuracy, not ads
+            </h2>
+            <p className="mb-8 text-lg text-[var(--text-secondary)]">
+              Every calculator uses real formulas. Dev tools run locally. PDF and biodata flows keep drafts on your
+              device unless you choose to export.
+            </p>
+            <ul className="space-y-5">
+              {[
+                { icon: Zap, title: 'Instant results', text: 'No queue, no login—open a tool and go.' },
+                { icon: Lock, title: 'Privacy first', text: 'Inputs stay in your browser for core calculators.' },
+                { icon: ShieldCheck, title: 'Production quality', text: 'Clean UI, readable outputs, mobile-friendly.' },
+              ].map(({ icon: Icon, title, text }) => (
+                <li key={title} className="flex gap-4">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--primary)]/10 text-[var(--primary)]">
+                    <Icon size={20} />
+                  </span>
+                  <span>
+                    <span className="block font-bold text-[var(--text-primary)]">{title}</span>
+                    <span className="text-[var(--text-secondary)]">{text}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-              <div className="space-y-6">
-                <div className="flex gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--primary)]/10 text-[var(--primary)]"><Zap size={20} /></div>
-                  <div>
-                    <h5 className="font-bold text-[var(--text-primary)]">Instant & Private</h5>
-                    <p className="text-[var(--text-secondary)]">No account required. Calculations happen on your machine.</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--primary)]/10 text-[var(--primary)]"><ShieldCheck size={20} /></div>
-                  <div>
-                    <h5 className="font-bold text-[var(--text-primary)]">Professional Grade</h5>
-                    <p className="text-[var(--text-secondary)]">Reflecting the latest standards and precision math.</p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--primary)]/10 text-[var(--primary)]"><LayoutGrid size={20} /></div>
-                  <div>
-                    <h5 className="font-bold text-[var(--text-primary)]">Minimalist Design</h5>
-                    <p className="text-[var(--text-secondary)]">Clean, ad-free interface focused on your workflow.</p>
-                  </div>
+          <div className="relative rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-8 md:p-10">
+            <div className="overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-xl)]">
+              <div className="flex gap-2 border-b border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-3">
+                <span className="h-2.5 w-2.5 rounded-full bg-[#ef4444]/60" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#f59e0b]/60" />
+                <span className="h-2.5 w-2.5 rounded-full bg-[#10b981]/60" />
+              </div>
+              <div className="space-y-3 p-6">
+                <div className="h-2.5 w-[55%] rounded bg-[var(--bg-tertiary)]" />
+                <div className="h-2.5 w-[80%] rounded bg-[var(--bg-tertiary)]" />
+                <div className="h-2.5 w-[40%] rounded bg-[var(--bg-tertiary)]" />
+                <div className="mt-6 flex h-24 items-end gap-2">
+                  {[45, 72, 95, 58, 82].map((h, i) => (
+                    <div
+                      key={i}
+                      className="flex-1 rounded-t bg-[var(--primary)]"
+                      style={{ height: `${h}%`, opacity: 0.35 + i * 0.12 }}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
-            <div className="relative flex min-h-[300px] items-center justify-center rounded-2xl bg-[var(--bg-tertiary)] p-6 sm:p-12">
-              <div className="w-full max-w-[400px] overflow-hidden rounded-xl border border-[var(--border)] bg-white shadow-xl">
-                <div className="flex gap-2 border-b border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-3">
-                  <div className="h-3 w-3 rounded-full bg-[#ef4444] opacity-50" />
-                  <div className="h-3 w-3 rounded-full bg-[#f59e0b] opacity-50" />
-                  <div className="h-3 w-3 rounded-full bg-[#10b981] opacity-50" />
-                </div>
-                <div className="p-6">
-                  <div className="mb-3 h-3 rounded bg-[var(--bg-secondary)]" style={{ width: '60%' }} />
-                  <div className="mb-3 h-3 rounded bg-[var(--bg-secondary)]" style={{ width: '85%' }} />
-                  <div className="mb-3 h-3 rounded bg-[var(--bg-secondary)]" style={{ width: '45%' }} />
-                  <div className="mt-6 flex h-[100px] items-end gap-3">
-                    <div className="flex-1 rounded-t bg-[#3b82f6] opacity-80" style={{ height: '45%' }} />
-                    <div className="flex-1 rounded-t bg-[#3b82f6] opacity-80" style={{ height: '75%' }} />
-                    <div className="flex-1 rounded-t bg-[#3b82f6] opacity-80" style={{ height: '95%' }} />
-                    <div className="flex-1 rounded-t bg-[#3b82f6] opacity-80" style={{ height: '65%' }} />
-                  </div>
-                </div>
-                <div className="absolute -bottom-4 -right-4 flex items-center gap-2 rounded-xl bg-white px-4 py-2 shadow-lg sm:-bottom-6 sm:-right-6">
-                  <TrendingUp size={16} className="text-[#10b981]" />
-                  <span className="text-[0.8rem] font-bold text-[#1e293b]">Real-time Accuracy</span>
-                </div>
-              </div>
-            </div>
+            <p className="absolute -bottom-3 right-6 flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-xs font-bold shadow-[var(--shadow-md)]">
+              <TrendingUp size={14} className="text-[var(--success)]" />
+              Live in-browser math
+            </p>
           </div>
         </div>
       </section>
 
-      {/* How it Works */}
       {!search && (
-        <section className="px-6 py-16 md:py-24 border-b border-[var(--border)]">
+        <section className="border-b border-[var(--border)] bg-[var(--bg-secondary)] px-6 py-14 md:py-16">
           <div className="mx-auto max-w-6xl">
-            <div className="mb-12 text-center md:mb-20">
-              <h2 className="mb-6 text-[2.25rem] font-black tracking-[-0.02em] text-[var(--text-primary)] md:text-[3.5rem]">How It Works</h2>
-              <p className="mx-auto max-w-[700px] text-lg text-[var(--text-secondary)] md:text-xl">
-                Zero server processing. Everything runs securely in your browser.
-              </p>
+            <div className="mb-8 flex items-center gap-2">
+              <BookOpen size={20} className="text-[var(--primary)]" />
+              <h2 className="text-2xl font-black text-[var(--text-primary)] md:text-3xl">Guides & blogs</h2>
             </div>
-
-            <div className="grid gap-8 lg:grid-cols-3">
-              {[
-                { step: '01', title: 'Select Tool', desc: 'Choose from our categorized suite of professional utilities.' },
-                { step: '02', title: 'Input Data', desc: 'Your data stays on your device. We never send it to our servers.' },
-                { step: '03', title: 'Instant Result', desc: 'Get immediate calculations and processing right in the browser.' }
-              ].map((s, i) => (
-                <div key={i} className="text-center max-md:flex max-md:items-start max-md:gap-6 max-md:text-left">
-                  <div className="mb-[-2rem] text-[4rem] font-black leading-none opacity-10 max-md:mb-0 max-md:text-[2.5rem]">{s.step}</div>
-                  <div>
-                    <h3 className="mb-4 text-2xl font-bold text-[var(--text-primary)]">{s.title}</h3>
-                    <p className="text-lg leading-7 text-[var(--text-secondary)]">{s.desc}</p>
-                  </div>
-                </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {BLOG_HUBS.map((hub) => (
+                <Link
+                  key={hub.href}
+                  href={hub.href}
+                  className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5 transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)]"
+                >
+                  <h3 className="font-bold text-[var(--text-primary)]">{hub.title}</h3>
+                  <p className="mt-1 text-sm text-[var(--text-secondary)]">{hub.desc}</p>
+                </Link>
               ))}
             </div>
           </div>
         </section>
       )}
 
-      {/* FAQ Section */}
-      <section className="px-6 py-16 md:py-24 border-b border-[var(--border)]">
-        <div className="mx-auto max-w-3xl">
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl font-black text-[var(--text-primary)]">Common Questions</h2>
+      {!search && (
+        <section className="border-b border-[var(--border)] px-6 py-14 md:py-20">
+          <div className="mx-auto max-w-6xl text-center">
+            <h2 className="mb-3 text-3xl font-black text-[var(--text-primary)] md:text-4xl">How it works</h2>
+            <p className="mx-auto mb-12 max-w-xl text-[var(--text-secondary)]">
+              Pick a tool, enter your numbers or data, get an answer—without creating an account.
+            </p>
+            <ol className="grid gap-8 md:grid-cols-3 md:gap-6">
+              {[
+                { n: '1', title: 'Choose a tool', desc: 'Finance, dev, PDF, or biodata—from the hub or search.' },
+                { n: '2', title: 'Work locally', desc: 'Your inputs process on your device for most utilities.' },
+                { n: '3', title: 'Export or share', desc: 'Copy results, download PDFs, or save drafts in-browser.' },
+              ].map((step) => (
+                <li key={step.n} className="relative px-4">
+                  <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[var(--primary)] text-sm font-black text-white">
+                    {step.n}
+                  </span>
+                  <h3 className="mb-2 text-lg font-bold text-[var(--text-primary)]">{step.title}</h3>
+                  <p className="text-sm leading-relaxed text-[var(--text-secondary)]">{step.desc}</p>
+                </li>
+              ))}
+            </ol>
           </div>
-          <div className="space-y-4">
-            {faqs.map((faq, idx) => (
-              <div
-                key={idx}
-                className="overflow-hidden rounded-xl border border-[var(--border)] bg-white transition-all dark:bg-[var(--bg-secondary)]"
-              >
-                <button
-                  className="flex w-full items-center justify-between p-6 text-left font-bold"
-                  onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
-                >
-                  {faq.q}
-                  <ChevronDown size={18} className={`transition-transform ${activeFaq === idx ? 'rotate-180' : ''}`} />
-                </button>
-                {activeFaq === idx && (
-                  <div className="px-6 pb-6 text-[var(--text-secondary)]">
-                    <p>{faq.a}</p>
-                  </div>
-                )}
-              </div>
-            ))}
+        </section>
+      )}
+
+      <section className="border-b border-[var(--border)] px-6 py-14 md:py-20">
+        <div className="mx-auto max-w-2xl">
+          <h2 className="mb-8 text-center text-3xl font-black text-[var(--text-primary)]">Common questions</h2>
+          <div className="space-y-3">
+            {FAQS.map((faq, idx) => {
+              const open = activeFaq === idx;
+              return (
+                <div key={faq.q} className="overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--surface)]">
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-between gap-4 p-5 text-left font-bold text-[var(--text-primary)]"
+                    onClick={() => setActiveFaq(open ? null : idx)}
+                    aria-expanded={open}
+                  >
+                    {faq.q}
+                    <ChevronDown
+                      size={18}
+                      className={`shrink-0 text-[var(--text-tertiary)] transition-transform ${open ? 'rotate-180' : ''}`}
+                    />
+                  </button>
+                  {open && (
+                    <div className="border-t border-[var(--border)] px-5 pb-5">
+                      <p className="pt-4 leading-relaxed text-[var(--text-secondary)]">{faq.a}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-14 md:py-16">
+        <div className="mx-auto max-w-3xl rounded-2xl bg-[var(--text-primary)] px-8 py-10 text-center text-[var(--bg-primary)] md:px-12 md:py-14">
+          <h2 className="mb-3 text-2xl font-black md:text-3xl">Start with what you need today</h2>
+          <p className="mb-8 text-sm opacity-80 md:text-base">
+            Plan investments, debug JSON, merge a PDF, or ship a resume—all free on Toolioz.
+          </p>
+          <div className="flex flex-col justify-center gap-3 sm:flex-row">
+            <Link
+              href="/finance/sip-calculator"
+              className="inline-flex h-11 items-center justify-center rounded-lg bg-[var(--primary)] px-6 font-bold text-white hover:bg-[var(--primary-hover)]"
+            >
+              SIP calculator
+            </Link>
+            <Link
+              href="/biodata/biodata-generator"
+              className="inline-flex h-11 items-center justify-center rounded-lg border border-white/25 px-6 font-bold hover:bg-white/10"
+            >
+              Biodata maker
+            </Link>
           </div>
         </div>
       </section>

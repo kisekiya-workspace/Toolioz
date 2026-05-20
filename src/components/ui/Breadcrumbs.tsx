@@ -8,7 +8,7 @@ import { CATEGORIES, TOOLS } from '@/lib/tools';
 
 export const Breadcrumbs = () => {
   const pathname = usePathname();
-  if (pathname === '/') return null;
+  if (pathname === '/' || pathname === '/resume-builder') return null;
 
   const pathSegments = pathname.split('/').filter(Boolean);
   
