@@ -4,6 +4,26 @@ import { TOOLS } from '@/lib/tools';
 export const SITE_URL = 'https://toolioz.com';
 export const SITE_NAME = 'Toolioz';
 
+/** Default social preview — served by app/opengraph-image.tsx (1200×630). */
+export const DEFAULT_OG_IMAGE = {
+  url: '/opengraph-image',
+  width: 1200,
+  height: 630,
+  alt: 'Toolioz — Free finance calculators, developer tools, PDF utilities, and marriage biodata maker',
+} as const;
+
+export function ogImageMetadata() {
+  return {
+    openGraph: {
+      images: [DEFAULT_OG_IMAGE],
+    },
+    twitter: {
+      card: 'summary_large_image' as const,
+      images: [DEFAULT_OG_IMAGE.url],
+    },
+  };
+}
+
 export function absoluteUrl(path: string): string {
   if (path.startsWith('http')) return path;
   return `${SITE_URL}${path.startsWith('/') ? path : `/${path}`}`;
@@ -73,7 +93,7 @@ export function buildWebsiteJsonLd() {
       '@type': 'Organization',
       name: SITE_NAME,
       url: SITE_URL,
-      logo: `${SITE_URL}/tooliozLogo.png`,
+      logo: `${SITE_URL}/tooliozLogo.svg`,
     },
     inLanguage: 'en',
   };
@@ -147,13 +167,13 @@ export function buildPageMetadata(options: {
       siteName: SITE_NAME,
       type: options.type ?? 'website',
       locale: 'en_US',
-      images: [{ url: '/tooliozLogo.png', width: 512, height: 512, alt: SITE_NAME }],
+      images: [DEFAULT_OG_IMAGE],
     },
     twitter: {
       card: 'summary_large_image',
       title: options.title,
       description: options.description,
-      images: ['/tooliozLogo.png'],
+      images: [DEFAULT_OG_IMAGE.url],
     },
   };
 }

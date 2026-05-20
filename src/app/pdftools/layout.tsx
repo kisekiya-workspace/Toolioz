@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { DEFAULT_OG_IMAGE } from '@/lib/seo';
 
 export const metadata: Metadata = {
   description:
@@ -14,18 +15,11 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: 'Toolioz',
     type: 'website',
-    images: [
-      {
-        url: '/tooliozLogo.png',
-        width: 512,
-        height: 512,
-        alt: 'Toolioz PDF Tools',
-      },
-    ],
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['/tooliozLogo.png'],
+    images: [DEFAULT_OG_IMAGE.url],
   },
 };
 
