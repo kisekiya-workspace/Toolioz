@@ -4,9 +4,9 @@ import { TOOLS } from '@/lib/tools';
 export const SITE_URL = 'https://toolioz.com';
 export const SITE_NAME = 'Toolioz';
 
-/** Default social preview — served by app/opengraph-image.tsx (1200×630). */
+/** Default social preview — static asset (keeps Worker bundle under Cloudflare free-tier limits). */
 export const DEFAULT_OG_IMAGE = {
-  url: '/opengraph-image',
+  url: '/opengraph.png',
   width: 1200,
   height: 630,
   alt: 'Toolioz — Free finance calculators, developer tools, PDF utilities, and marriage biodata maker',
