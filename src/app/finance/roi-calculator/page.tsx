@@ -2,6 +2,7 @@ import React from 'react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import ROIClient from './ROIClient';
 import type { Metadata } from 'next';
+import { buildCalculatorJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: "ROI & CAGR Calculator 2026 | Annualized Return Calculator | Toolioz",
@@ -19,30 +20,14 @@ export const metadata: Metadata = {
 };
 
 export default function ROICalculatorPage() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FinancialCalculator",
-    "name": "ROI Calculator",
-    "description": "Calculate Return on Investment for any asset.",
-    "url": "https://toolioz.com/finance/roi-calculator",
-    "brand": {
-      "@type": "Brand",
-      "name": "Toolioz / FinanceCalc"
-    },
+  const jsonLd = buildCalculatorJsonLd({
+    name: "ROI & CAGR Calculator",
+    description: "Calculate Return on Investment (ROI) and Compound Annual Growth Rate (CAGR).",
+    path: "/finance/roi-calculator",
+    applicationCategory: "FinanceApplication",
+  });
 
-    "offers": {
-
-      "@type": "Offer",
-
-      "price": "0.00",
-
-      "priceCurrency": "USD"
-
-    }
-
-  };
-
-return (
+  return (
     <>
       <JSONLD data={jsonLd} />
       <ROIClient />

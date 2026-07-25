@@ -10,8 +10,24 @@ import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
 
-import { FAQSchema } from '@/components/ui/FAQSchema';
 import { RelatedTools } from '@/components/ui/RelatedTools';
+import { FAQSchema } from '@/components/ui/FAQSchema';
+
+const CAR_LOAN_FAQS = [
+  {
+    question: "What is the difference between Flat Rate and Reducing Balance Interest Rate?",
+    answer: "A flat rate interest rate calculates interest on the original loan amount throughout the entire tenure. A reducing balance rate calculates interest only on the outstanding loan balance, which reduces monthly as you pay principal."
+  },
+  {
+    question: "Is 3-year or 5-year tenure better for a car loan?",
+    answer: "A 3-year car loan reduces total interest cost and ensures you don't end up in negative equity (owing more than the depreciated car value). A 5-year loan offers lower monthly EMIs."
+  },
+  {
+    question: "What is the recommended down payment for a car loan?",
+    answer: "Financial experts recommend putting down at least 20% as a down payment to avoid negative equity and secure lower interest rates from banks."
+  }
+];
+
 export default function CarLoanClient() {
   const [principal, setPrincipal] = useState<number>(500000);
   const [rate, setRate] = useState<number>(8.5);
@@ -214,6 +230,7 @@ Our car loan calculator helps you find the perfect balance. By experimenting wit
           ]}
           formula="M = P [ i(1 + i)^n ] / [ (1 + i)^n – 1 ]"
         />
+        <FAQSchema faqs={CAR_LOAN_FAQS} />
         <RelatedTools currentToolId="car-loan" categoryId="finance" />
       <Footer />
     </div>

@@ -526,6 +526,129 @@ export const devtoolsBlogPosts: DevToolsBlogPost[] = [
       },
     ],
   },
+  {
+    slug: 'jwt-security-best-practices-signature-validation',
+    title: 'JWT Security Best Practices: Decoding, Algorithm Confusion & Safe Token Storage',
+    description:
+      'Understand JSON Web Token structure, prevent algorithm confusion attacks (RS256 vs HS256), validate signature claims, and safely store tokens.',
+    keywords: [
+      'jwt signature security algorithm confusion hs256 vs rs256',
+      'jwt decode online security best practices',
+      'jwt vulnerabilities algorithm none attack',
+      'jwt token storage localstorage vs httponly cookie',
+      'jwt expiration claims exp nbf',
+    ],
+    updated: 'July 2026',
+    updatedIso: '2026-07-25',
+    readTime: '6 min read',
+    toolLabel: 'Open JWT Decoder',
+    toolHref: '/devtools/jwt-decoder',
+    sections: [
+      {
+        heading: 'Anatomy of a JSON Web Token (RFC 7519)',
+        body: [
+          'A JSON Web Token consists of three base64url-encoded strings separated by dots: Header, Payload, and Signature (header.payload.signature).',
+          'The Header contains algorithm specs (e.g., {"alg": "HS256", "typ": "JWT"}), the Payload contains user claims and expiration timestamps, and the Signature verifies that the message was not tampered with.',
+        ],
+      },
+      {
+        heading: 'Common JWT Vulnerabilities & How to Avoid Them',
+        body: [
+          '1. Algorithm Confusion Attack (RS256 vs HS256): Attackers swap public key validation with symmetric HMAC verification. Always enforce explicit algorithm whitelist in backend parsers.',
+          '2. The "alg": "none" Exploit: Early JWT parsers accepted unsigned tokens if alg was set to none. Modern authentication libraries disable this by default.',
+          '3. Weak HMAC Secret Keys: HS256 relies on a shared secret. If the secret key is short or predictable, attackers can brute-force the key and forge valid admin tokens.',
+        ],
+      },
+      {
+        heading: 'Where to Store Tokens: HttpOnly Cookies vs. LocalStorage',
+        body: [
+          'Storing JWTs in browser localStorage or sessionStorage leaves them vulnerable to Cross-Site Scripting (XSS) attacks, as any injected script can read localStorage.',
+          'For production web apps, store authentication JWTs in SameSite, HttpOnly, Secure cookies to protect against XSS token exfiltration.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Can a JWT be decoded without knowing the secret key?',
+        answer:
+          'Yes. The Header and Payload are only Base64URL encoded, not encrypted. Anyone can read the payload data, but only valid keyholders can verify or produce a valid signature.',
+      },
+      {
+        question: 'What is the difference between HS256 and RS256?',
+        answer:
+          'HS256 uses a single shared secret key for signing and verifying tokens. RS256 uses an asymmetric key pair: a private key to sign and a public key to verify.',
+      },
+    ],
+    sources: [
+      {
+        label: 'RFC 7519: JSON Web Token (JWT)',
+        href: 'https://datatracker.ietf.org/doc/html/rfc7519',
+      },
+      {
+        label: 'OWASP: JSON Web Token Cheat Sheet',
+        href: 'https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html',
+      },
+    ],
+  },
+  {
+    slug: 'bcrypt-cost-factor-tuning-password-hashing-guide',
+    title: 'Bcrypt Cost Factor Guide: How to Select the Ideal Work Factor for Password Security',
+    description:
+      'Learn how the bcrypt cost factor (log2 iterations) works, how to benchmark hashing latency on server infrastructure, and password hashing security standards.',
+    keywords: [
+      'bcrypt work factor cost tuning guide benchmark',
+      'bcrypt cost factor recommended 2026',
+      'bcrypt hash generator online security',
+      'password hashing speed vs security cost factor',
+      'bcrypt log2 round calculation',
+    ],
+    updated: 'July 2026',
+    updatedIso: '2026-07-25',
+    readTime: '5 min read',
+    toolLabel: 'Open Bcrypt Generator',
+    toolHref: '/devtools/bcrypt-generator',
+    sections: [
+      {
+        heading: 'What is the Bcrypt Cost Factor?',
+        body: [
+          'Bcrypt uses an adaptive key derivation function based on the Blowfish cipher. The cost factor parameter defines the log2 number of key expansion rounds performed (2^cost).',
+          'For example, cost 10 performs 2^10 = 1,024 iterations, while cost 12 performs 2^12 = 4,096 iterations. Every increase of 1 in cost factor doubles the CPU computation time required to hash or verify a password.',
+        ],
+      },
+      {
+        heading: 'Recommended Cost Factor Benchmarks for Modern Servers',
+        body: [
+          'As hardware speed increases, legacy cost factors (like 4 or 8) become vulnerable to GPU-accelerated dictionary attacks. OWASP recommends a cost factor that takes between 250ms to 500ms on your authentication server.',
+          'For general web applications, a cost factor of 10 to 12 offers an ideal balance between brute-force protection and CPU load during spikes in login requests.',
+        ],
+      },
+      {
+        heading: 'Salt Generation and Re-Hashing Upgrades',
+        body: [
+          'Bcrypt automatically incorporates a cryptographically secure 128-bit random salt into the hash string (e.g., $2b$12$eImiTXuWVfxh0Vi...'). This prevents precomputed rainbow table attacks.',
+          'When upgrading cost factors on existing user accounts, re-hash the password upon successful login when verifying older hashes.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is cost factor 10 secure enough for password hashing?',
+        answer:
+          'Yes, cost factor 10 to 12 is currently the standard for web application user authentication, providing strong protection against brute-force attacks.',
+      },
+      {
+        question: 'Why not use SHA-256 for passwords?',
+        answer:
+          'SHA-256 is designed for extreme execution speed (gigabytes per second), which enables attackers to test billions of candidate passwords per second on GPUs. Bcrypt is deliberately slow and memory-hard.',
+      },
+    ],
+    sources: [
+      {
+        label: 'OWASP Password Storage Cheat Sheet',
+        href: 'https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html',
+      },
+    ],
+  },
 ];
 
 export const devtoolsBlogKeywords = Array.from(
@@ -535,3 +658,4 @@ export const devtoolsBlogKeywords = Array.from(
 export function getDevtoolsBlogPost(slug: string) {
   return devtoolsBlogPosts.find((post) => post.slug === slug);
 }
+

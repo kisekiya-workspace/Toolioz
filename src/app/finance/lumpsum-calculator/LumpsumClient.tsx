@@ -9,7 +9,23 @@ import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { RelatedTools } from '@/components/ui/RelatedTools';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
+import { FAQSchema } from '@/components/ui/FAQSchema';
 import { BookOpen, Coins, Info, Lightbulb, ShieldCheck, TrendingUp } from 'lucide-react';
+
+const LUMPSUM_FAQS = [
+  {
+    question: "What is a Lumpsum Investment?",
+    answer: "A lumpsum investment is a one-time deposit of capital into an asset class (like equity mutual funds, fixed deposits, or stocks) rather than spreading payments over time via SIP."
+  },
+  {
+    question: "How is Lumpsum Future Value calculated?",
+    answer: "Lumpsum future value is calculated using compound interest formula: FV = P * (1 + r/n)^(n*t), where P is principal amount, r is annual return rate, n is compounding frequency, and t is number of years."
+  },
+  {
+    question: "Is Lumpsum better than SIP?",
+    answer: "Lumpsum investing generally outperforms SIP in rising (bull) markets because the entire capital benefits from compounding immediately. In volatile or falling markets, SIP reduces risk via Rupee Cost Averaging."
+  }
+];
 
 export default function LumpsumClient() {
   const [principal, setPrincipal] = useState<number>(250000);
@@ -145,8 +161,9 @@ export default function LumpsumClient() {
               </div>
             </Card>
           </div>
+        </section>
 
-          <section className="mx-auto max-w-[900px] px-6 py-16">
+        <section className="mx-auto max-w-[900px] px-6 py-16">
             <div className="mb-10 text-center">
               <h2 className="text-[1.8rem] font-black text-[var(--text-primary)]">
                 <TrendingUp className="mr-2 inline-block text-emerald-600" size={22} />
@@ -255,11 +272,10 @@ export default function LumpsumClient() {
               'Makes long-term goal setting more realistic and measurable.',
               'Useful for retirement, education, and other distant goals.',
             ]}
-            formula="FV = P(1 + r/12)^(12t)"
+            formula="A = P(1 + r/n)^(nt)"
           />
-        </section>
-
-        <Footer />
+          <FAQSchema faqs={LUMPSUM_FAQS} />
+          <Footer />
       </div>
     </>
   );

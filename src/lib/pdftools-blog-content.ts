@@ -144,8 +144,60 @@ export const pdftoolsBlogPosts: PdfBlogPost[] = [
       },
     ],
   },
+  {
+    slug: 'compress-pdf-for-email-and-web-upload',
+    title: 'How to Compress PDFs for Email & Web Submissions (Under 2MB Without Quality Loss)',
+    description:
+      'Shrink heavy scanned PDF documents under strict 2MB email or government portal limits without losing text clarity or vector crispness.',
+    updated: 'July 2026',
+    readTime: '5 min read',
+    keywords: [
+      'compress pdf for email attachment under 2mb free',
+      'how to shrink pdf file size for online submission',
+      'compress pdf without losing text sharpness',
+      'pdf image downsampling dpi guide',
+      'secure client side pdf compressor',
+    ],
+    toolLabel: 'Open PDF Compressor',
+    sections: [
+      {
+        heading: 'Why PDF Files Get Too Large for Submissions',
+        body: [
+          'Unoptimized PDF files often swell in size because high-resolution scanned pages store uncompressed bitmap images (300+ DPI) or embedded high-def fonts on every page.',
+          'Most web portals, university admission forms, and corporate email servers cap attachment sizes between 2MB and 10MB, causing upload rejections.',
+        ],
+      },
+      {
+        heading: 'Image Downsampling vs. Lossless Vector Optimization',
+        body: [
+          'Text and line vector art in PDFs consume very little memory. The majority of file size comes from raster images.',
+          'Downsampling image DPI from 300 DPI to 150 DPI reduces file size by up to 70% while keeping text crisp and fully readable on screen and standard printouts.',
+        ],
+      },
+      {
+        heading: 'Privacy Concerns with Online PDF Tools',
+        body: [
+          'When compressing confidential documents such as bank statements, passports, or tax forms, avoid uploading your files to unknown third-party servers.',
+          'Our PDF Compressor runs locally inside your web browser web assembly runtime. Your document never leaves your device during compression.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Will compressing a PDF alter the original text or signatures?',
+        answer:
+          'No, standard PDF compression targets raster image streams and stream streams. Text layers and digital signatures remain un-modified.',
+      },
+      {
+        question: 'How do I compress a PDF under 2MB for online portals?',
+        answer:
+          'Select standard or balanced compression mode. It will re-encode high-resolution images while preserving clear text legibility.',
+      },
+    ],
+  },
 ];
 
 export function getPdfPost(slug: string) {
   return pdftoolsBlogPosts.find((p) => p.slug === slug);
 }
+

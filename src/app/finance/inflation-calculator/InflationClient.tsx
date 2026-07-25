@@ -10,8 +10,24 @@ import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
 
-import { FAQSchema } from '@/components/ui/FAQSchema';
 import { RelatedTools } from '@/components/ui/RelatedTools';
+import { FAQSchema } from '@/components/ui/FAQSchema';
+
+const INFLATION_FAQS = [
+  {
+    question: "What is the formula for calculating future inflation cost?",
+    answer: "Future Cost = Current Cost * (1 + Inflation Rate)^Years. For example, ₹1,00,000 at 6% inflation over 10 years becomes ₹1,79,084."
+  },
+  {
+    question: "What is Real Rate of Return?",
+    answer: "Real Rate of Return is your nominal investment return minus the inflation rate and tax drag. If your FD yields 7% but inflation is 6% and tax is 30%, your real return is negative."
+  },
+  {
+    question: "Which asset classes beat inflation in India long term?",
+    answer: "Historically, Equity Mutual Funds (12-14% CAGR) and Real Estate (8-10% CAGR) beat retail CPI inflation (5-6% average) over 10+ year horizons."
+  }
+];
+
 export default function InflationClient() {
   const [amount, setAmount] = useState<number>(100000);
   const [rate, setRate] = useState<number>(5);
@@ -227,6 +243,7 @@ The only way to effectively combat inflation is through "Real Returns"—returns
           ]}
           formula="Future Value = Current Value × (1 + inflationRate)^years"
         />
+        <FAQSchema faqs={INFLATION_FAQS} />
         <RelatedTools currentToolId="inflation-calculator" categoryId="finance" />
       <Footer />
     </div>

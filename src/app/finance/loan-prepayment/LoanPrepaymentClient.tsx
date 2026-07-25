@@ -9,7 +9,23 @@ import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { RelatedTools } from '@/components/ui/RelatedTools';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
+import { FAQSchema } from '@/components/ui/FAQSchema';
 import { BookOpen, Info, Lightbulb, ShieldCheck, TrendingDown } from 'lucide-react';
+
+const PREPAYMENT_FAQS = [
+  {
+    question: "Does loan prepayment reduce tenure or EMI?",
+    answer: "Most banks automatically apply loan prepayments toward reducing the remaining loan tenure, keeping the monthly EMI the same. However, you can request your bank to keep the tenure same and reduce your monthly EMI instead."
+  },
+  {
+    question: "Are there prepayment penalty charges on home loans in India?",
+    answer: "As per RBI guidelines, banks and housing finance companies (HFCs) cannot charge prepayment penalties on floating-rate home loans granted to individual borrowers."
+  },
+  {
+    question: "Is it better to prepay a home loan or invest in mutual funds?",
+    answer: "If your loan interest rate (e.g. 8.5%) is lower than expected long-term mutual fund returns (e.g. 12%), investing may yield higher net returns. However, prepayments guarantee a risk-free return equal to your loan interest rate."
+  }
+];
 
 export default function LoanPrepaymentClient() {
   const [principal, setPrincipal] = useState<number>(1500000);
@@ -155,8 +171,9 @@ export default function LoanPrepaymentClient() {
               </div>
             </Card>
           </div>
+        </section>
 
-          <section className="mx-auto max-w-[900px] px-6 py-16">
+        <section className="mx-auto max-w-[900px] px-6 py-16">
             <div className="mb-10 text-center">
               <h2 className="text-[1.8rem] font-black text-[var(--text-primary)]">
                 <TrendingDown className="mr-2 inline-block text-red-600" size={22} />
@@ -257,11 +274,10 @@ export default function LoanPrepaymentClient() {
               'Useful for car loans, home loans, and personal loans.',
               'Makes the effect of an extra EMI easy to see before you commit.',
             ]}
-            formula="M = P[i(1+i)^n] / [(1+i)^n - 1]"
+            formula="EMI = P * r * (1+r)^n / ((1+r)^n - 1)"
           />
-        </section>
-
-        <Footer />
+          <FAQSchema faqs={PREPAYMENT_FAQS} />
+          <Footer />
       </div>
     </>
   );

@@ -10,8 +10,24 @@ import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
 
-import { FAQSchema } from '@/components/ui/FAQSchema';
 import { RelatedTools } from '@/components/ui/RelatedTools';
+import { FAQSchema } from '@/components/ui/FAQSchema';
+
+const ROI_FAQS = [
+  {
+    question: "What is the difference between ROI and CAGR?",
+    answer: "ROI measures total gain or loss as a percentage of initial investment, regardless of time. CAGR (Compound Annual Growth Rate) calculates the annualized rate of return over multiple years assuming steady growth."
+  },
+  {
+    question: "How do you calculate CAGR in Excel or financial calculators?",
+    answer: "The CAGR formula is: (Final Value / Initial Value)^(1 / Years) - 1. In Excel, you can use the RRI function or formula =((FV/PV)^(1/n))-1."
+  },
+  {
+    question: "What is a good ROI for investments?",
+    answer: "A 'good' ROI depends on asset risk. Stock market index funds historically yield 10-12% CAGR, real estate yields 8-10%, while fixed deposits yield 6-7%."
+  }
+];
+
 export default function ROIClient() {
   const [initial, setInitial] = useState<number>(1000);
   const [final, setFinal] = useState<number>(1500);
@@ -223,6 +239,7 @@ export default function ROIClient() {
           ]}
           formula="ROI = ((FV - IV) / IV) × 100 | CAGR = (FV/IV)^(1/n) - 1"
         />
+        <FAQSchema faqs={ROI_FAQS} />
         <RelatedTools currentToolId="roi-calculator" categoryId="finance" />
       <Footer />
     </div>

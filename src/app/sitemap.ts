@@ -6,6 +6,7 @@ import { financeBlogPosts } from '@/lib/finance-blog-content';
 import { pdftoolsBlogPosts } from '@/lib/pdftools-blog-content';
 import { resumeBlogPosts } from '@/lib/resume-blog-content';
 import { top5Articles } from '@/lib/top5-content';
+import { howToPosts } from '@/lib/howto-content';
 import { SITE_URL } from '@/lib/seo';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -22,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const hubRoutes: MetadataRoute.Sitemap = [
     { route: '', priority: 1.0, freq: 'daily' as const },
+    { route: '/how-to', priority: 0.96, freq: 'weekly' as const },
     { route: '/finance', priority: 0.95, freq: 'weekly' as const },
     { route: '/finance/blog', priority: 0.88, freq: 'weekly' as const },
     { route: '/devtools', priority: 0.95, freq: 'weekly' as const },
@@ -58,9 +60,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority,
     }));
 
+  const directHowToRoutes = howToPosts.map((post) => ({
+    url: `${SITE_URL}${post.directUrl}`,
+    lastModified: post.updatedIso ? new Date(post.updatedIso) : lastModified,
+    changeFrequency: 'weekly' as const,
+    priority: 0.95,
+  }));
+
   return [
     ...hubRoutes,
     ...toolRoutes,
+    ...directHowToRoutes,
+    ...blogRoutes(howToPosts, '/how-to', 0.90),
     ...blogRoutes(biodataPosts, '/biodata/blog', 0.82),
     ...blogRoutes(financeBlogPosts, '/finance/blog', 0.84),
     ...blogRoutes(devtoolsBlogPosts, '/devtools/blog', 0.8),
@@ -69,3 +80,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...blogRoutes(top5Articles, '/top5', 0.88),
   ];
 }
+

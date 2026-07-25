@@ -10,8 +10,24 @@ import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
 
-import { FAQSchema } from '@/components/ui/FAQSchema';
 import { RelatedTools } from '@/components/ui/RelatedTools';
+import { FAQSchema } from '@/components/ui/FAQSchema';
+
+const FD_FAQS = [
+  {
+    question: "What is TDS on Fixed Deposit interest in India?",
+    answer: "Tax Deducted at Source (TDS) at 10% is deducted by banks if annual FD interest exceeds ₹40,000 (₹50,000 for senior citizens). Submitting Form 15G / 15H prevents TDS if your total taxable income is below the exemption limit."
+  },
+  {
+    question: "What is FD Laddering?",
+    answer: "FD Laddering is a strategy of breaking your total investment into multiple FDs maturing across different years (e.g. 1, 2, 3, 4, 5 years). This ensures liquidity every year and optimizes interest rate cycles."
+  },
+  {
+    question: "Are Fixed Deposits insured?",
+    answer: "In India, bank deposits up to ₹5 Lakh per depositor per bank (principal + interest) are insured by the DICGC (a wholly-owned subsidiary of RBI)."
+  }
+];
+
 export default function FDClient() {
   const [principal, setPrincipal] = useState<number>(100000);
   const [rate, setRate] = useState<number>(7.1);
@@ -240,6 +256,7 @@ For many, FDs serve as an emergency fund or a way to save for specific future mi
           ]}
           formula="A = P(1 + r/n)^(nt)"
         />
+        <FAQSchema faqs={FD_FAQS} />
         <RelatedTools currentToolId="fd-calculator" categoryId="finance" />
       <Footer />
     </div>

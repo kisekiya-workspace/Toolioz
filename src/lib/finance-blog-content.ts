@@ -590,6 +590,132 @@ export const financeBlogPosts: FinanceBlogPost[] = [
       },
     ],
   },
+  {
+    slug: 'home-loan-prepayment-vs-sip-investment-guide',
+    title: 'Home Loan Prepayment vs. SIP Investment: Which Strategy Yields Higher Net Wealth?',
+    description:
+      'Compare prepaying your home loan early versus investing extra monthly income into equity SIP mutual funds with tax-adjusted math and risk analysis.',
+    keywords: [
+      'home loan prepayment vs sip investment calculator comparison',
+      'should i prepay home loan or invest in mutual funds',
+      'loan prepayment vs mutual fund sip return',
+      'home loan tax benefits vs ltcg return',
+      'home loan interest savings calculator',
+    ],
+    updated: 'July 2026',
+    updatedIso: '2026-07-25',
+    readTime: '6 min read',
+    toolLabel: 'Open Loan Prepayment Calculator',
+    toolHref: '/finance/loan-prepayment',
+    sections: [
+      {
+        heading: 'The Core Dilemma: Guaranteed Interest Savings vs. Market Returns',
+        body: [
+          'When you have surplus income each month, a fundamental financial choice arises: should you pay down your mortgage faster or direct those funds into systematic investment plans (SIPs)?',
+          'Prepaying a home loan gives you a guaranteed, risk-free return equal to your effective mortgage interest rate. On the other hand, equity mutual funds offer potential capital growth that historically outperforms real estate interest rates over a 10- to 15-year horizon, though with market volatility.',
+        ],
+      },
+      {
+        heading: 'Factor in Tax Deductions and Capital Gains Tax',
+        body: [
+          'Under Indian tax laws (Section 24b and Section 80C) or US mortgage interest deductions, interest paid on home loans reduces your taxable income. This lowers your effective mortgage rate. For example, an 8.5% loan rate may effectively cost only 6.8% post-tax depending on your income bracket.',
+          'Similarly, equity investments attract Long-Term Capital Gains (LTCG) tax on profits exceeding annual exemption limits. When calculating net wealth over 15 years, always compare post-tax loan savings against post-tax investment returns.',
+        ],
+      },
+      {
+        heading: 'A Hybrid Strategy: Balancing Peace of Mind and Wealth Creation',
+        body: [
+          'Many financial planners advocate a hybrid model: allocate 50% of your extra cash flow toward annual partial home loan prepayments and 50% toward disciplined equity SIPs.',
+          'This dual approach reduces your debt burden and EMI tenure while building a liquid investment corpus that can safeguard against unforeseen liquidity emergencies.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Does prepaying a home loan attract prepayment penalty charges?',
+        answer:
+          'In India, RBI guidelines prohibit floating rate home loan prepayment penalties for individual borrowers. Fixed rate loans may incur a small fee.',
+      },
+      {
+        question: 'Should I reduce EMI amount or reduce loan tenure when prepaying?',
+        answer:
+          'Reducing loan tenure while keeping EMI constant yields significantly higher overall interest savings compared to reducing the monthly EMI amount.',
+      },
+    ],
+    sources: [
+      {
+        label: 'RBI: Directives on Home Loan Prepayment Penalties',
+        href: 'https://www.rbi.org.in/commonman/English/Scripts/FAQs.aspx',
+      },
+      {
+        label: 'Investor.gov: Compound Interest and Investment Basics',
+        href: 'https://www.investor.gov/introduction-investing/investing-basics/invest-your-goals',
+      },
+    ],
+  },
+  {
+    slug: 'real-rate-of-return-inflation-adjusted-investing',
+    title: 'Understanding Real Rate of Return: How Inflation Changes Your Net Investment Gains',
+    description:
+      'Learn how inflation erodes purchasing power, how to calculate real rate of return using the Fisher equation, and how to protect long-term financial goals.',
+    keywords: [
+      'real rate of return calculator formula inflation adjusted return',
+      'how inflation eats investment returns',
+      'nominal vs real rate of return formula',
+      'purchasing power loss calculator guide',
+      'inflation adjusted financial goals',
+    ],
+    updated: 'July 2026',
+    updatedIso: '2026-07-25',
+    readTime: '6 min read',
+    toolLabel: 'Open Inflation Calculator',
+    toolHref: '/finance/inflation-calculator',
+    sections: [
+      {
+        heading: 'Nominal vs. Real Rate of Return',
+        body: [
+          'Nominal return is the raw percentage increase in your money over time, while real rate of return adjusts that gain for inflation to show true growth in purchasing power.',
+          'If your fixed deposit or bond yields 7% per year but general inflation runs at 6%, your real return is only around 0.94% post-inflation. Ignoring inflation leads to severe underfunding of long-term goals like retirement.',
+        ],
+      },
+      {
+        heading: 'The Exact Mathematical Formula (Fisher Equation)',
+        body: [
+          'While subtracting inflation from nominal return (7% - 6% = 1%) is a popular shortcut, the mathematically exact real rate of return uses the Fisher Equation:',
+          'Real Return = [(1 + Nominal Rate) / (1 + Inflation Rate)] - 1. For a 7% return and 6% inflation, (1.07 / 1.06) - 1 equals 0.943%.',
+        ],
+      },
+      {
+        heading: 'Beating Inflation with Growth Assets',
+        body: [
+          'Traditional savings accounts and low-yield fixed deposits often fail to deliver a positive real return after accounting for both inflation and income tax slabs.',
+          'To preserve and compound purchasing power, portfolios require an allocation to inflation-beating asset classes such as diversified equities, equity mutual funds, or inflation-indexed instruments.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Why is my purchasing power lower even when my bank account grows?',
+        answer:
+          'Because the price of goods and services (inflation) increases faster than the interest rate paid on your bank account.',
+      },
+      {
+        question: 'What inflation rate should I assume for retirement planning?',
+        answer:
+          'Financial planners usually recommend assuming a 6% to 7% annual inflation rate for general expenses, and 8% to 10% for healthcare and education expenses.',
+      },
+    ],
+    sources: [
+      {
+        label: 'FINRA: Inflation and Your Investments',
+        href: 'https://www.finra.org/investors/insights/inflation-and-your-investments',
+      },
+      {
+        label: 'SEC Investor.gov: Inflation Calculator Guide',
+        href: 'https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator',
+      },
+    ],
+  },
 ];
 
 export const financeBlogKeywords = Array.from(

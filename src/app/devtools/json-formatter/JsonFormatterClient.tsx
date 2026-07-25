@@ -12,6 +12,21 @@ import JsonToTS from 'json-to-ts';
 
 import { FAQSchema } from '@/components/ui/FAQSchema';
 import { RelatedTools } from '@/components/ui/RelatedTools';
+const JSON_FAQS = [
+  {
+    question: "Is my JSON data safe when using this online formatter?",
+    answer: "Yes, 100%. Toolioz processes all JSON formatting, validation, and TypeScript conversion entirely client-side inside your browser. No data is ever uploaded to any external server."
+  },
+  {
+    question: "How do I convert JSON to TypeScript interface or YAML?",
+    answer: "Paste your JSON data into the input box and click the 'JSON to TS' or 'JSON to YAML' toggle buttons to automatically generate ready-to-use TypeScript interfaces and YAML config files."
+  },
+  {
+    question: "Why is my JSON invalid?",
+    answer: "Common JSON syntax errors include missing trailing commas, unquoted property keys, single quotes instead of double quotes, and unmatched brackets. Our tool highlights the exact line and error message."
+  }
+];
+
 export default function JsonFormatterClient() {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
@@ -172,7 +187,7 @@ export default function JsonFormatterClient() {
           "Error Tracing: Highlights exactly where the JSON payload failed execution constraints, improving developer QA speeds."
         ]}
       />
-
+      <FAQSchema faqs={JSON_FAQS} />
     </div>
   );
 }

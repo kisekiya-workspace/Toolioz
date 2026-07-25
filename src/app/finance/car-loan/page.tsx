@@ -2,6 +2,7 @@ import React from 'react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import CarLoanClient from './CarLoanClient';
 import type { Metadata } from 'next';
+import { buildCalculatorJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: "Car Loan EMI Calculator 2026 | Flat vs Reducing Rate | Total Cost | Toolioz",
@@ -19,30 +20,14 @@ export const metadata: Metadata = {
 };
 
 export default function CarLoanCalculatorPage() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FinancialCalculator",
-    "name": "Car Loan EMI Calculator",
-    "description": "Calculate monthly EMIs for car loans.",
-    "url": "https://toolioz.com/finance/car-loan",
-    "brand": {
-      "@type": "Brand",
-      "name": "Toolioz / FinanceCalc"
-    },
+  const jsonLd = buildCalculatorJsonLd({
+    name: "Car Loan EMI Calculator",
+    description: "Calculate car loan EMI, total interest payable, and payback breakdown.",
+    path: "/finance/car-loan",
+    applicationCategory: "FinanceApplication",
+  });
 
-    "offers": {
-
-      "@type": "Offer",
-
-      "price": "0.00",
-
-      "priceCurrency": "USD"
-
-    }
-
-  };
-
-return (
+  return (
     <>
       <JSONLD data={jsonLd} />
       <CarLoanClient />

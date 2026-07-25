@@ -10,8 +10,24 @@ import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
 
-import { FAQSchema } from '@/components/ui/FAQSchema';
 import { RelatedTools } from '@/components/ui/RelatedTools';
+import { FAQSchema } from '@/components/ui/FAQSchema';
+
+const SAVINGS_FAQS = [
+  {
+    question: "What is the 50/30/20 Budgeting Rule?",
+    answer: "The 50/30/20 rule recommends allocating 50% of net income to Needs (housing, utilities, food), 30% to Wants (entertainment, dining), and 20% to Savings and debt repayment."
+  },
+  {
+    question: "How much should be in an Emergency Fund?",
+    answer: "An ideal emergency fund should cover 3 to 6 months of basic essential living expenses, kept in a highly liquid savings account or liquid mutual fund."
+  },
+  {
+    question: "What is a Sinking Fund?",
+    answer: "A sinking fund is a dedicated savings bucket created by setting aside small monthly amounts for a specific upcoming purchase (like a car down payment, vacation, or annual insurance premium)."
+  }
+];
+
 export default function SavingsGoalClient() {
   const [target, setTarget] = useState<number>(1000000);
   const [rate, setRate] = useState<number>(10);
@@ -211,6 +227,7 @@ Beyond just the numbers, goal-oriented saving helps in prioritizing your spendin
             "Financial Peace: Reduce stress by having a pre-planned roadmap for your major life expenses."
           ]}
         />
+        <FAQSchema faqs={SAVINGS_FAQS} />
         <RelatedTools currentToolId="savings-goal" categoryId="finance" />
       <Footer />
     </div>

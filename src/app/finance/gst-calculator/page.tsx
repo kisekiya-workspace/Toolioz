@@ -2,6 +2,7 @@ import React from 'react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import GSTClient from './GSTClient';
 import type { Metadata } from 'next';
+import { buildCalculatorJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: "GST Calculator 2026 | CGST SGST IGST Split & ITC Guide | Toolioz",
@@ -19,30 +20,14 @@ export const metadata: Metadata = {
 };
 
 export default function GSTCalculatorPage() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FinancialCalculator",
-    "name": "Unified GST Calculator",
-    "description": "Calculate GST inclusive and exclusive amounts.",
-    "url": "https://toolioz.com/finance/gst-calculator",
-    "brand": {
-      "@type": "Brand",
-      "name": "Toolioz / FinanceCalc"
-    },
+  const jsonLd = buildCalculatorJsonLd({
+    name: "GST Calculator",
+    description: "Calculate GST inclusive and exclusive amounts with CGST, SGST, and IGST breakdown.",
+    path: "/finance/gst-calculator",
+    applicationCategory: "FinanceApplication",
+  });
 
-    "offers": {
-
-      "@type": "Offer",
-
-      "price": "0.00",
-
-      "priceCurrency": "USD"
-
-    }
-
-  };
-
-return (
+  return (
     <>
       <JSONLD data={jsonLd} />
       <GSTClient />

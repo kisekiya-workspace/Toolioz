@@ -9,7 +9,23 @@ import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { RelatedTools } from '@/components/ui/RelatedTools';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
+import { FAQSchema } from '@/components/ui/FAQSchema';
 import { BookOpen, Info, Lightbulb, ShieldCheck, Target, Wallet } from 'lucide-react';
+
+const RETIREMENT_FAQS = [
+  {
+    question: "What is the 4% Rule in Retirement Planning?",
+    answer: "The 4% rule states that you can withdraw 4% of your total retirement savings in the first year of retirement, and adjust that amount for inflation each subsequent year, with a high probability that your money will last 30 years."
+  },
+  {
+    question: "How does inflation affect retirement corpus calculations?",
+    answer: "Inflation reduces purchasing power over time. At a 6% annual inflation rate, monthly expenses of ₹50,000 today will grow to ₹1.6 Lakhs per month in 20 years, quadrupling the required retirement corpus."
+  },
+  {
+    question: "What is SWP (Systematic Withdrawal Plan)?",
+    answer: "A Systematic Withdrawal Plan (SWP) allows you to withdraw a fixed amount regularly from your mutual fund investments, generating regular monthly cash flow for retirement while keeping the remaining principal invested."
+  }
+];
 
 export default function RetirementCorpusClient() {
   const [monthlyExpense, setMonthlyExpense] = useState<number>(60000);
@@ -279,6 +295,7 @@ export default function RetirementCorpusClient() {
             ]}
             formula="Corpus = Annual Expense x [1 - (1 + r)^-n] / r"
           />
+          <FAQSchema faqs={RETIREMENT_FAQS} />
         </section>
 
         <Footer />

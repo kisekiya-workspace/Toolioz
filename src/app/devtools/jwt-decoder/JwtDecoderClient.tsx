@@ -48,6 +48,21 @@ async function verifyHS256(token: string, secret: string): Promise<boolean> {
     }
 }
 
+const JWT_FAQS = [
+  {
+    question: "What are the 3 parts of a JWT token?",
+    answer: "A JWT consists of 3 dot-separated base64url-encoded parts: Header (algorithm & token type), Payload (claims and user data), and Signature (verifies integrity)."
+  },
+  {
+    question: "Is it safe to decode JWT tokens online?",
+    answer: "Yes, on Toolioz decoding happens entirely in your browser using JavaScript. No tokens, secrets, or payloads are transmitted to any server."
+  },
+  {
+    question: "What is the difference between HS256 and RS256 in JWT?",
+    answer: "HS256 uses a single shared secret key for both signing and verification. RS256 uses an asymmetric key pair: a private key for signing and a public key for verification."
+  }
+];
+
 export default function JwtDecoderClient() {
     const [token, setToken] = useState<string>('');
     const [secret, setSecret] = useState<string>('');
@@ -274,6 +289,7 @@ export default function JwtDecoderClient() {
                         </p>
                     </Card>
                 </section>
+                <FAQSchema faqs={JWT_FAQS} />
             </div>
             <Footer />
         </>

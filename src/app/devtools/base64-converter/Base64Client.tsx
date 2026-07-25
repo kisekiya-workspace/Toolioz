@@ -8,6 +8,17 @@ import { Binary, Copy, Trash2, SwitchCamera, Check, FileUp, Download } from 'luc
 
 import { FAQSchema } from '@/components/ui/FAQSchema';
 import { RelatedTools } from '@/components/ui/RelatedTools';
+const BASE64_FAQS = [
+  {
+    question: "What is Base64 encoding?",
+    answer: "Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format using 64 printable characters (A-Z, a-z, 0-9, +, /)."
+  },
+  {
+    question: "Is Base64 encoding secure encryption?",
+    answer: "No, Base64 is NOT encryption. It is an encoding method for safe data transport. Anyone can decode a Base64 string back to its original plain text instantly."
+  }
+];
+
 export default function Base64Client() {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
@@ -128,6 +139,7 @@ export default function Base64Client() {
         </div>
       </main>
 
+      <FAQSchema faqs={BASE64_FAQS} />
       <Footer />
     </div>
   );

@@ -2,6 +2,7 @@ import React from 'react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import SIPClient from './SIPClient';
 import type { Metadata } from 'next';
+import { buildCalculatorJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: "SIP Calculator 2026 | Step-Up SIP | ₹5000 Monthly Returns | Toolioz",
@@ -19,30 +20,14 @@ export const metadata: Metadata = {
 };
 
 export default function SIPCalculatorPage() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FinancialCalculator",
-    "name": "SIP Calculator",
-    "description": "Calculate returns on systematic investment plans.",
-    "url": "https://toolioz.com/finance/sip-calculator",
-    "brand": {
-      "@type": "Brand",
-      "name": "Toolioz / FinanceCalc"
-    },
+  const jsonLd = buildCalculatorJsonLd({
+    name: "SIP Calculator",
+    description: "Calculate returns on systematic investment plans with step-up option.",
+    path: "/finance/sip-calculator",
+    applicationCategory: "FinanceApplication",
+  });
 
-    "offers": {
-
-      "@type": "Offer",
-
-      "price": "0.00",
-
-      "priceCurrency": "USD"
-
-    }
-
-  };
-
-return (
+  return (
     <>
       <JSONLD data={jsonLd} />
       <SIPClient />

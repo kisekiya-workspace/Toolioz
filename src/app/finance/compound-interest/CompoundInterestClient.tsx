@@ -12,6 +12,21 @@ import { calculatorPageStyles as styles } from './page.styles';
 
 import { FAQSchema } from '@/components/ui/FAQSchema';
 import { RelatedTools } from '@/components/ui/RelatedTools';
+const COMPOUND_FAQS = [
+  {
+    question: "What is the compound interest formula?",
+    answer: "The compound interest formula is A = P(1 + r/n)^(nt), where A is the future value, P is principal, r is annual rate, n is compounding frequency per year, and t is time in years."
+  },
+  {
+    question: "How does compounding frequency affect total returns?",
+    answer: "Higher compounding frequency (e.g. daily vs annual) leads to higher Effective Annual Rate (EAR) and greater overall returns, because interest is added back to principal more frequently."
+  },
+  {
+    question: "What is the Rule of 72?",
+    answer: "The Rule of 72 is a quick mental math rule to estimate how many years it takes for an investment to double. Simply divide 72 by the annual interest rate (e.g., 72 / 12% = 6 years)."
+  }
+];
+
 export default function CompoundInterestClient() {
   const [principal, setPrincipal] = useState<number>(10000);
   const [rate, setRate] = useState<number>(5);
@@ -221,6 +236,7 @@ export default function CompoundInterestClient() {
           ]}
           formula="A = P(1 + r/n)^(nt)"
         />
+        <FAQSchema faqs={COMPOUND_FAQS} />
       <Footer />
     </div>
     </>

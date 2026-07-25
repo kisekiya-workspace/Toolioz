@@ -12,6 +12,22 @@ import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/
 
 import { FAQSchema } from '@/components/ui/FAQSchema';
 import { RelatedTools } from '@/components/ui/RelatedTools';
+
+const MORTGAGE_FAQS = [
+  {
+    question: "What is the 28/36 rule for mortgage affordability?",
+    answer: "The 28/36 rule states that your housing expenses should not exceed 28% of your gross monthly income, and your total debt service (housing + credit cards + car loans) should not exceed 36%."
+  },
+  {
+    question: "What is Private Mortgage Insurance (PMI)?",
+    answer: "PMI is insurance required by conventional lenders when your down payment is less than 20% of the home purchase price. It protects the lender if you default."
+  },
+  {
+    question: "Is a 15-year or 30-year mortgage better?",
+    answer: "A 15-year mortgage has higher monthly payments but lower interest rates and saves huge amounts in overall interest. A 30-year mortgage has lower monthly payments, offering greater cash flow flexibility."
+  }
+];
+
 export default function MortgageClient() {
   const [principal, setPrincipal] = useState<number>(300000);
   const [rate, setRate] = useState<number>(6.8);
@@ -227,6 +243,7 @@ Furthermore, our tool helps you evaluate different loan terms. While a 15-year m
           ]}
           formula="M = P [ i(1 + i)^n ] / [ (1 + i)^n – 1 ]"
         />
+        <FAQSchema faqs={MORTGAGE_FAQS} />
         <RelatedTools currentToolId="mortgage-calculator" categoryId="finance" />
       <Footer />
     </div>

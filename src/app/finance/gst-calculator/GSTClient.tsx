@@ -9,9 +9,24 @@ import { CreditCard, Info, AlertTriangle, CheckCircle2, ShieldCheck, BookOpen, C
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 
-import { FAQSchema } from '@/components/ui/FAQSchema';
 import { RelatedTools } from '@/components/ui/RelatedTools';
+import { FAQSchema } from '@/components/ui/FAQSchema';
 const TAX_SLABS = [5, 12, 18, 28];
+
+const GST_FAQS = [
+  {
+    question: "How is GST calculated on Inclusive and Exclusive amounts?",
+    answer: "For Exclusive amount: GST = Base Amount * Rate / 100. For Inclusive amount: GST = Total Amount - (Total Amount * 100 / (100 + Rate))."
+  },
+  {
+    question: "What is the difference between CGST, SGST, and IGST?",
+    answer: "CGST (Central GST) and SGST (State GST) apply to intra-state sales within the same state and are split equally 50/50. IGST (Integrated GST) applies to inter-state sales across state borders."
+  },
+  {
+    question: "What is Input Tax Credit (ITC)?",
+    answer: "Input Tax Credit allows registered businesses to deduct the GST paid on purchases from the GST liability due on output sales, preventing double taxation."
+  }
+];
 
 export default function GSTClient() {
   const [amount, setAmount] = useState<number>(1000);
@@ -286,6 +301,7 @@ Beyond just basic calculation, our tool serves as an educational resource to und
             "Versatility: Suitable for freelancers, small business owners, and large corporations alike."
           ]}
         />
+        <FAQSchema faqs={GST_FAQS} />
       <Footer />
     </div>
     </>

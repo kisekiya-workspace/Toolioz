@@ -10,6 +10,25 @@ import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { RelatedTools } from '@/components/ui/RelatedTools';
 
+const INCOME_TAX_FAQS = [
+  {
+    question: "What is the difference between New Tax Regime and Old Tax Regime in FY 2026-27?",
+    answer: "The New Tax Regime features lower tax slab rates but removes most exemptions (80C, 80D, HRA). The Old Tax Regime allows all traditional tax-saving deductions under Section 80C up to ₹1.5 Lakh, 80D medical insurance, and HRA."
+  },
+  {
+    question: "What is the Standard Deduction for salaried employees in FY 2025-26 and 2026-27?",
+    answer: "The Standard Deduction under the New Tax Regime is ₹75,000 for salaried employees and pensioners. Under the Old Tax Regime, it remains ₹50,000."
+  },
+  {
+    question: "Is income up to ₹7 Lakh or ₹12 Lakh tax-free under Section 87A?",
+    answer: "Under Section 87A of the New Tax Regime, full tax rebate is available for taxable income up to ₹7 Lakhs (making effective tax zero up to ₹7.75 Lakhs including standard deduction). In proposed budget provisions for 2026-27, rebate limits for low/middle income brackets extend up to ₹12 Lakhs effective tax relief."
+  },
+  {
+    question: "Can I switch between New and Old Tax Regime every year?",
+    answer: "Salaried individuals without business/professional income can switch between New and Old tax regimes every financial year at the time of filing their ITR."
+  }
+];
+
 import { FAQSchema } from '@/components/ui/FAQSchema';
 const COUNTRIES: { id: Country; name: string; currency: string; locale: string }[] = [
   { id: 'IN', name: 'India (FY 2026-27)', currency: 'INR', locale: 'en-IN' },
@@ -367,6 +386,7 @@ In the United States, tax brackets are adjusted annually for inflation to preven
             "Interactive Planning: Use the monthly toggle to align your tax liability with your monthly household budget."
           ]}
         />
+        <FAQSchema faqs={INCOME_TAX_FAQS} />
       <Footer />
     </div>
     </>

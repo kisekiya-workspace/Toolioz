@@ -2,6 +2,7 @@ import React from 'react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import FDClient from './FDClient';
 import type { Metadata } from 'next';
+import { buildCalculatorJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: "FD Calculator 2026 | Maturity Value & TDS on Fixed Deposit | Toolioz",
@@ -19,30 +20,14 @@ export const metadata: Metadata = {
 };
 
 export default function FDCalculatorPage() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FinancialCalculator",
-    "name": "Fixed Deposit Calculator",
-    "description": "Calculate FD maturity amount and total interest.",
-    "url": "https://toolioz.com/finance/fd-calculator",
-    "brand": {
-      "@type": "Brand",
-      "name": "Toolioz / FinanceCalc"
-    },
+  const jsonLd = buildCalculatorJsonLd({
+    name: "Fixed Deposit (FD) Calculator",
+    description: "Calculate FD maturity amount, total interest, and quarterly compounding returns.",
+    path: "/finance/fd-calculator",
+    applicationCategory: "FinanceApplication",
+  });
 
-    "offers": {
-
-      "@type": "Offer",
-
-      "price": "0.00",
-
-      "priceCurrency": "USD"
-
-    }
-
-  };
-
-return (
+  return (
     <>
       <JSONLD data={jsonLd} />
       <FDClient />

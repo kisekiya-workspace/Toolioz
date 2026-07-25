@@ -6,7 +6,7 @@ export const SITE_NAME = 'Toolioz';
 
 /** Default social preview — static asset (keeps Worker bundle under Cloudflare free-tier limits). */
 export const DEFAULT_OG_IMAGE = {
-  url: '/opengraph.png',
+  url: 'https://toolioz.com/opengraph.png',
   width: 1200,
   height: 630,
   alt: 'Toolioz — Free finance calculators, developer tools, PDF utilities, and marriage biodata maker',
@@ -94,6 +94,14 @@ export function buildWebsiteJsonLd() {
       name: SITE_NAME,
       url: SITE_URL,
       logo: `${SITE_URL}/tooliozLogo.svg`,
+    },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://toolioz.com/?q={search_term_string}',
+      },
+      'query-input': 'required name=search_term_string',
     },
     inLanguage: 'en',
   };

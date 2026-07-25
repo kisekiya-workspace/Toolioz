@@ -12,6 +12,29 @@ import { RelatedTools } from '@/components/ui/RelatedTools';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
 
 import { FAQSchema } from '@/components/ui/FAQSchema';
+const SIP_FAQS = [
+  {
+    question: "What is a Systematic Investment Plan (SIP)?",
+    answer: "A Systematic Investment Plan (SIP) allows you to invest a fixed sum regularly (monthly or quarterly) in mutual funds. It promotes financial discipline and leverages Rupee Cost Averaging and compound growth over time."
+  },
+  {
+    question: "How much monthly SIP is required to build ₹1 Crore in 10 years?",
+    answer: "Assuming an average annual return of 12% in equity mutual funds, a monthly SIP of approximately ₹43,500 for 10 years is needed to accumulate ₹1 Crore. With a 10% annual Step-Up SIP, you can start with ~₹25,000/month."
+  },
+  {
+    question: "What is Step-Up SIP and how does it work?",
+    answer: "Step-Up SIP (or Top-Up SIP) allows you to automatically increase your monthly investment by a fixed percentage (e.g. 10%) every year in line with annual salary increments. This significantly accelerates reaching financial goals."
+  },
+  {
+    question: "What is the difference between Direct and Regular Mutual Fund SIPs?",
+    answer: "Direct plans have lower expense ratios because no distributor commissions are paid. Over 20 years, investing via Direct SIPs can increase your total returns by 10% to 15% compared to Regular plans."
+  },
+  {
+    question: "How are SIP returns taxed in India (FY 2025-26 / 2026-27)?",
+    answer: "For Equity Mutual Funds, Long-Term Capital Gains (LTCG) over ₹1.25 Lakh per financial year are taxed at 12.5%. Short-Term Capital Gains (units sold under 1 year) are taxed at 20%."
+  }
+];
+
 export default function SIPClient() {
   const [monthlyInvestment, setMonthlyInvestment] = useState<number>(5000);
   const [rate, setRate] = useState<number>(12);
@@ -320,6 +343,7 @@ Our professional SIP calculator is designed to help you visualize this journey. 
           ]}
           formula="M = P * [ ((1 + i)^n - 1) / i ] * (1 + i)"
         />
+        <FAQSchema faqs={SIP_FAQS} />
       <Footer />
     </div>
     </>

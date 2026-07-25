@@ -2,6 +2,7 @@ import React from 'react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import CompoundInterestClient from './CompoundInterestClient';
 import type { Metadata } from 'next';
+import { buildCalculatorJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: "Compound Interest Calculator 2026 | Rule of 72 & Wealth Planner | Toolioz",
@@ -19,30 +20,14 @@ export const metadata: Metadata = {
 };
 
 export default function CompoundInterestPage() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FinancialCalculator",
-    "name": "Compound Interest Calculator",
-    "description": "Calculate compound interest with various frequencies.",
-    "url": "https://toolioz.com/finance/compound-interest",
-    "brand": {
-      "@type": "Brand",
-      "name": "Toolioz / FinanceCalc"
-    },
+  const jsonLd = buildCalculatorJsonLd({
+    name: "Compound Interest Calculator",
+    description: "Calculate compound interest with daily, monthly, and annual compounding frequencies.",
+    path: "/finance/compound-interest",
+    applicationCategory: "FinanceApplication",
+  });
 
-    "offers": {
-
-      "@type": "Offer",
-
-      "price": "0.00",
-
-      "priceCurrency": "USD"
-
-    }
-
-  };
-
-return (
+  return (
     <>
       <JSONLD data={jsonLd} />
       <CompoundInterestClient />

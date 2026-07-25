@@ -55,6 +55,12 @@ export function Footer() {
               Tools Hub
             </h4>
             <Link
+              href="/how-to"
+              className="text-[0.9375rem] font-semibold text-[var(--primary)] transition-colors hover:underline"
+            >
+              How-To Guides
+            </Link>
+            <Link
               href="/finance"
               className="text-[0.9375rem] text-[var(--text-secondary)] transition-colors hover:text-[var(--primary)]"
             >

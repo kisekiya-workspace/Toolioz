@@ -2,6 +2,7 @@ import React from 'react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import MortgageClient from './MortgageClient';
 import type { Metadata } from 'next';
+import { buildCalculatorJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: "Mortgage Calculator 2026 | Monthly Payment & Hidden Costs Guide | Toolioz",
@@ -19,30 +20,14 @@ export const metadata: Metadata = {
 };
 
 export default function MortgageCalculatorPage() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FinancialCalculator",
-    "name": "Professional Mortgage Calculator",
-    "description": "Calculate monthly mortgage payments and total interest payback.",
-    "url": "https://toolioz.com/finance/mortgage-calculator",
-    "brand": {
-      "@type": "Brand",
-      "name": "Toolioz / FinanceCalc"
-    },
+  const jsonLd = buildCalculatorJsonLd({
+    name: "Mortgage Calculator",
+    description: "Calculate monthly mortgage payments, total interest, and amortization schedule.",
+    path: "/finance/mortgage-calculator",
+    applicationCategory: "FinanceApplication",
+  });
 
-    "offers": {
-
-      "@type": "Offer",
-
-      "price": "0.00",
-
-      "priceCurrency": "USD"
-
-    }
-
-  };
-
-return (
+  return (
     <>
       <JSONLD data={jsonLd} />
       <MortgageClient />

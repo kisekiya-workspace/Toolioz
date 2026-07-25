@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import { JSONLD } from '@/components/ui/JSONLD';
 import LoanPrepaymentClient from './LoanPrepaymentClient';
+import { buildCalculatorJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Loan Prepayment Calculator 2026 | Extra EMI Savings | Toolioz',
@@ -18,34 +19,16 @@ export const metadata: Metadata = {
       'Estimate how much interest you can save by making extra EMI or principal payments.',
     url: 'https://toolioz.com/finance/loan-prepayment',
     type: 'website',
-    images: [
-      {
-        url: '/tooliozLogo.png',
-        width: 512,
-        height: 512,
-        alt: 'Toolioz Loan Prepayment Calculator',
-      },
-    ],
   },
 };
 
 export default function LoanPrepaymentPage() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FinancialCalculator',
-    name: 'Loan Prepayment Calculator',
-    description: 'Estimate how extra payments reduce total loan interest.',
-    url: 'https://toolioz.com/finance/loan-prepayment',
-    brand: {
-      '@type': 'Brand',
-      name: 'Toolioz',
-    },
-    offers: {
-      '@type': 'Offer',
-      price: '0.00',
-      priceCurrency: 'USD',
-    },
-  };
+  const jsonLd = buildCalculatorJsonLd({
+    name: "Loan Prepayment Calculator",
+    description: "Estimate how extra EMI payments reduce total loan interest and tenure.",
+    path: "/finance/loan-prepayment",
+    applicationCategory: "FinanceApplication",
+  });
 
   return (
     <>

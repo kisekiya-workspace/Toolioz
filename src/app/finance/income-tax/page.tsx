@@ -2,6 +2,7 @@ import React from 'react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import IncomeTaxClient from './IncomeTaxClient';
 import type { Metadata } from 'next';
+import { buildCalculatorJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: "Income Tax Calculator 2026-27 | New vs Old Regime Comparison | Toolioz",
@@ -19,30 +20,14 @@ export const metadata: Metadata = {
 };
 
 export default function IncomeTaxPage() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FinancialCalculator",
-    "name": "Global Income Tax Calculator",
-    "description": "Calculate income tax for India, US, and UK.",
-    "url": "https://toolioz.com/finance/income-tax",
-    "brand": {
-      "@type": "Brand",
-      "name": "Toolioz / FinanceCalc"
-    },
+  const jsonLd = buildCalculatorJsonLd({
+    name: "Income Tax Calculator",
+    description: "Calculate income tax with New vs Old Regime comparison for FY 2026-27.",
+    path: "/finance/income-tax",
+    applicationCategory: "FinanceApplication",
+  });
 
-    "offers": {
-
-      "@type": "Offer",
-
-      "price": "0.00",
-
-      "priceCurrency": "USD"
-
-    }
-
-  };
-
-return (
+  return (
     <>
       <JSONLD data={jsonLd} />
       <IncomeTaxClient />

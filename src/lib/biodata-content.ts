@@ -409,8 +409,63 @@ export const biodataPosts: BiodataPost[] = [
       },
     ],
   },
+  {
+    slug: 'marriage-biodata-format-and-layout-tips',
+    title: 'Marriage Biodata Format Guide: Essential Sections, Tips & Free PDF Generation',
+    description:
+      'Learn how to write and format a stunning marriage biodata profile with personal background, educational background, family details, and partner expectations.',
+    keywords: [
+      'marriage biodata format pdf download tips for boys and girls',
+      'how to create attractive marriage biodata profile',
+      'marriage biodata layout tips',
+      'biodata for marriage pdf generator online',
+      'marriage profile formatting guide',
+    ],
+    updated: 'July 2026',
+    readTime: '6 min read',
+    sections: [
+      {
+        heading: 'Essential Sections Every Marriage Biodata Should Include',
+        body: [
+          'A marriage biodata acts as your first introduction to potential life partners and their families. To create a balanced, respectful profile, organize your information into five clear sections:',
+          '1. Personal Details: Full Name, Date of Birth, Time of Birth, Place of Birth, Height, Complexion, and Current Location.',
+          '2. Educational & Professional Details: Highest Qualification, College/University, Designation, Employer, and Location.',
+          '3. Family Details: Father’s Name & Occupation, Mother’s Name & Occupation, Brothers/Sisters (married/unmarried), and Native Place.',
+          '4. Horoscope / Astrological Details (Optional): Rashi, Nakshatra, Gotra, and Manglik status.',
+          '5. Contact Details: Phone Numbers, Email Address, and Family Residence Address.',
+        ],
+      },
+      {
+        heading: 'Formatting & Visual Presentation Tips',
+        body: [
+          'Use clear typography with readable font sizes (11pt to 14pt) and distinct section headers. Avoid overly complex fonts or cluttered borders that make scanning difficult.',
+          'Always opt for an A4 page format with structured margins so the PDF downloads and prints cleanly without awkward page cuts.',
+        ],
+      },
+      {
+        heading: 'Partner Expectations: Keeping it Positive and Balanced',
+        body: [
+          'When listing partner expectations, focus on values, lifestyle preferences, and educational background rather than overly rigid physical demands.',
+          'Phrasing your preferences positively sets a warm, welcoming tone for families reading your proposal.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'How long should a marriage biodata be?',
+        answer:
+          'A single A4 page biodata is ideal. If family background or horoscope details are detailed, keep it to a maximum of two clean pages.',
+      },
+      {
+        question: 'Can I generate a marriage biodata PDF for free without registering?',
+        answer:
+          'Yes! Toolioz provides a free online biodata generator with multiple templates, live preview, and instant PDF download without requiring any account sign-up.',
+      },
+    ],
+  },
 ];
 
 export function getBiodataPost(slug: string) {
   return biodataPosts.find((post) => post.slug === slug);
 }
+
