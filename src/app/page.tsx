@@ -6,11 +6,13 @@ import { buildItemListJsonLd, buildPageMetadata, buildWebsiteJsonLd, allToolItem
 export const metadata = buildPageMetadata({
   title: 'Toolioz | Free Finance Calculators, Dev Tools & PDF Utilities',
   description:
-    'Free SIP calculator, income tax, loan EMI, JSON formatter, PDF merge, marriage biodata maker, and ATS resume builder. Fast, private, client-side tools for India and global users.',
+    'Free SIP calculator, income tax, loan EMI, JSON formatter, X tap-to-reveal PNG maker, PDF merge, marriage biodata maker, and ATS resume builder. Fast, private, client-side tools for India and global users.',
   path: '/',
   keywords: [
     'sip calculator india',
     'income tax calculator',
+    'x tap to reveal png maker',
+    'twitter hidden image maker',
     'marriage biodata maker free',
     'json formatter online',
     'merge pdf online free',

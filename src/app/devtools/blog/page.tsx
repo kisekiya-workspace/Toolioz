@@ -8,7 +8,7 @@ import { devtoolsBlogKeywords, devtoolsBlogPosts } from '@/lib/devtools-blog-con
 export const metadata: Metadata = {
   title: 'Developer Tools Blog | JSON, JWT, cURL, Regex & Timestamp Guides',
   description:
-    'Research-led developer tool articles on JSON formatting, cURL conversion, JWT decoding, regex debugging, and timestamp conversion.',
+    'Research-led developer tool articles on JSON formatting, cURL conversion, JWT decoding, regex debugging, timestamp conversion, and the X tap-to-reveal hidden PNG trend.',
   keywords: devtoolsBlogKeywords,
   alternates: {
     canonical: 'https://toolioz.com/devtools/blog',
@@ -52,12 +52,12 @@ export default function DevToolsBlogIndexPage() {
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
               These articles are built around high-intent topics like JSON formatting, JWT
-              inspection, cURL conversion, regex debugging, and timestamp conversion. Each guide
-              links directly to the matching tool.
+              inspection, cURL conversion, regex debugging, timestamp conversion, and viral X
+              tap-to-reveal PNGs. Each guide links directly to the matching tool.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              {['JSON Parse', 'JWT Decode', 'cURL to Fetch', 'Regex Backtracking', 'Unix Time'].map((tag) => (
+              {['JSON Parse', 'JWT Decode', 'cURL to Fetch', 'X Tap-to-Reveal', 'Unix Time'].map((tag) => (
                 <span
                   key={tag}
                   className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] text-slate-600 shadow-sm"
@@ -96,7 +96,7 @@ export default function DevToolsBlogIndexPage() {
                   <div className="mt-2 text-2xl font-black">Search-friendly dev topics</div>
                 </div>
                 <div className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-white/80">
-                  5 Guides
+                  6 Guides
                 </div>
               </div>
 

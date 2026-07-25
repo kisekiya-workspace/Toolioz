@@ -5,11 +5,15 @@ import { buildCollectionPageJsonLd, buildPageMetadata } from '@/lib/seo';
 import { devtoolsBlogKeywords } from '@/lib/devtools-blog-content';
 
 export const metadata = buildPageMetadata({
-  title: 'Developer Tools Online | JSON, JWT, Regex, Base64, Hash | Toolioz',
+  title: 'Developer Tools Online | JSON, JWT, Regex, X Tap-to-Reveal PNG | Toolioz',
   description:
-    'Free JSON formatter, JWT decoder, regex tester, Base64 encoder, SHA-256 hash, and timestamp converter. Runs in your browser—private by default.',
+    'Free JSON formatter, JWT decoder, regex tester, Base64 encoder, X tap-to-reveal hidden PNG maker, and timestamp converter. Runs in your browser—private by default.',
   path: '/devtools',
-  keywords: devtoolsBlogKeywords.slice(0, 15),
+  keywords: [
+    'x tap to reveal png',
+    'twitter hidden image maker',
+    ...devtoolsBlogKeywords.slice(0, 15),
+  ],
 });
 
 export default function DevToolsLandingPage() {

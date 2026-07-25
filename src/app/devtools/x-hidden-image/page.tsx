@@ -4,29 +4,17 @@ import XHiddenImageClient from './XHiddenImageClient';
 import { JSONLD } from '@/components/ui/JSONLD';
 import { TOOLS } from '@/lib/tools';
 import { buildCalculatorJsonLd, buildPageMetadata } from '@/lib/seo';
+import {
+  xHiddenImageKeywords,
+  xRevealHowToSteps,
+} from '@/lib/x-hidden-image-content';
 
 export const metadata = buildPageMetadata({
-  title: 'X Tap-to-Reveal PNG Maker — Hidden Image & Tap-and-Hold Trend | Toolioz',
+  title: 'Free X Tap to Reveal PNG Maker | Twitter Hidden Image Trend 2026 | Toolioz',
   description:
-    'Free X (Twitter) hidden image maker for the tap-to-reveal trend: muted timeline preview, full color when opened or tap-and-hold. Paint feed masks, optional line art, PNG8 export — 100% in your browser.',
+    'Free online X (Twitter) tap-to-reveal & tap-and-hold hidden PNG maker — muted timeline preview, full color when opened. Brush masks, feed mockups, PNG8 export. No upload, 100% browser.',
   path: '/devtools/x-hidden-image',
-  keywords: [
-    'X tap and hold image',
-    'X tap to reveal PNG',
-    'Twitter hidden image maker',
-    'X timeline reveal trend',
-    'tap and hold Twitter image 2026',
-    'Twitter engagement image PNG',
-    'checkerboard PNG X post',
-    'dual view PNG Twitter',
-    'PNG8 X upload',
-    'hidden picture X feed',
-    'open image full color X',
-    'Twitter tap to open image',
-    'X viral image trick',
-    'client-side PNG encoder',
-    'Toolioz',
-  ],
+  keywords: xHiddenImageKeywords,
 });
 
 export default function XHiddenImagePage() {
@@ -36,14 +24,28 @@ export default function XHiddenImagePage() {
   const jsonLd = buildCalculatorJsonLd({
     name: 'X Tap-to-Reveal PNG Maker',
     description:
-      'Browser-based encoder for X (Twitter) tap-to-reveal and tap-and-hold hidden images: timeline-safe PNG8 with brush masks and feed vs opened previews.',
+      'Free browser encoder for X (Twitter) tap-to-reveal and tap-and-hold hidden images: timeline-safe PNG8, brush masks, feed vs opened previews, and viral hidden-image trend exports.',
     path: '/devtools/x-hidden-image',
     applicationCategory: 'MultimediaApplication',
   });
 
+  const howToJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to make a tap-to-reveal hidden PNG for X (Twitter)',
+    description:
+      'Create a single PNG that looks muted in the X timeline and full color when opened or tap-and-held.',
+    step: xRevealHowToSteps.map((step) => ({
+      '@type': 'HowToStep',
+      name: step.name,
+      text: step.text,
+    })),
+  };
+
   return (
     <>
       <JSONLD data={jsonLd} />
+      <JSONLD data={howToJsonLd} />
       <XHiddenImageClient title={tool.title} color={tool.color} />
     </>
   );

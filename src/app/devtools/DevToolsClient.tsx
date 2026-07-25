@@ -51,7 +51,7 @@ export default function DevToolsClient() {
             <div className="mx-auto mb-12 max-w-[650px]">
               <div className="rounded-[var(--radius-xl)] border border-[var(--border)] bg-white p-2 shadow-[0_15px_40px_-10px_rgba(0,0,0,0.08)] transition-all duration-300 focus-within:-translate-y-[2px] focus-within:border-[#f59e0b] focus-within:shadow-[0_15px_45px_-10px_rgba(245,158,11,0.15)]">
                 <Input
-                  placeholder="Search tools (e.g. cURL, JWT, JSON diff, regex)"
+                  placeholder="Search tools (e.g. X reveal PNG, cURL, JWT, JSON diff, regex)"
                   prefix={<Search size={22} />}
                   className="!border-none !text-[1.125rem]"
                   value={search}

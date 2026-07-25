@@ -16,7 +16,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${SITE_URL}${tool.href}`,
     lastModified,
     changeFrequency: 'weekly' as const,
-    priority: trendingIds.has(tool.id) ? 0.92 : 0.85,
+    priority:
+      tool.id === 'x-hidden-image' ? 0.96 : trendingIds.has(tool.id) ? 0.92 : 0.85,
   }));
 
   const hubRoutes: MetadataRoute.Sitemap = [

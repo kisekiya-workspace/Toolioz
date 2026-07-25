@@ -26,7 +26,8 @@
 - https://toolioz.com/pdftools/resume-generator
 - https://toolioz.com/devtools/json-formatter
 - https://toolioz.com/devtools/timestamp-converter
-- https://toolioz.com/devtools/x-hidden-image — X (Twitter) tap-to-reveal / tap-and-hold hidden PNG maker
+- https://toolioz.com/devtools/x-hidden-image — Free X (Twitter) tap-to-reveal / tap-and-hold hidden PNG maker (viral timeline reveal trend 2026)
+- https://toolioz.com/devtools/blog/x-tap-to-reveal-hidden-png-twitter-guide — How X hidden-image / tap-to-reveal PNGs work
 
 ## Sitemap
 

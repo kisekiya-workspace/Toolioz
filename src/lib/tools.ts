@@ -308,7 +308,7 @@ export const TOOLS: Tool[] = [
   {
     id: 'x-hidden-image',
     title: 'X Tap-to-Reveal PNG Maker',
-    desc: 'X tap-and-hold / hidden-image trend: muted in the feed, full color when opened. Masks, PNG8, in-browser.',
+    desc: 'Free tap-to-reveal / tap-and-hold hidden PNG for X & Twitter — timeline preview vs opened, brush masks, PNG8. Trending 2026.',
     icon: ImagePlus,
     href: '/devtools/x-hidden-image',
     color: '#0f172a',
