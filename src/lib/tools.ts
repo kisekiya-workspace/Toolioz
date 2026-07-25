@@ -306,6 +306,16 @@ export const TOOLS: Tool[] = [
     isTrending: true
   },
   {
+    id: 'x-hidden-image',
+    title: 'X Hidden Image Maker',
+    desc: 'Create tap-to-reveal PNGs for X — muted on the timeline, full color when opened.',
+    icon: ImagePlus,
+    href: '/devtools/x-hidden-image',
+    color: '#0f172a',
+    category: 'devtools',
+    isTrending: true
+  },
+  {
     id: 'biodata-generator',
     title: 'Biodata Generator',
     desc: 'Create marriage biodata PDFs with religion-based and modern templates.',

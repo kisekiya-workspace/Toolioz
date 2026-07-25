@@ -6,6 +6,9 @@ import { MinimalistTemplate } from './templates/MinimalistTemplate';
 import { HinduTemplate } from './templates/HinduTemplate';
 import { IslamicTemplate } from './templates/IslamicTemplate';
 import { SikhTemplate } from './templates/SikhTemplate';
+import { FloralEditorialTemplate } from './templates/FloralEditorialTemplate';
+import { SlateBannerTemplate } from './templates/SlateBannerTemplate';
+import { RoyalTealTemplate } from './templates/RoyalTealTemplate';
 
 export type BiodataTemplateMeta = {
   id: TemplateId;
@@ -18,16 +21,16 @@ export type BiodataTemplateMeta = {
 export const BIODATA_TEMPLATES: BiodataTemplateMeta[] = [
   {
     id: 'modern',
-    name: 'Modern Split',
-    description: 'Dual-column layout with a bold color sidebar — great for professionals.',
-    accentClass: 'bg-purple-100 text-purple-800',
+    name: 'Modern Executive',
+    description: 'Sharp two-column biodata with a polished contact rail and clear family sections.',
+    accentClass: 'bg-teal-100 text-teal-900',
     component: ModernSplitTemplate,
   },
   {
     id: 'classic',
-    name: 'Classic Centered',
-    description: 'Traditional centered layout with elegant borders and warm tones.',
-    accentClass: 'bg-rose-100 text-rose-900',
+    name: 'Modern Classic',
+    description: 'Balanced centered profile with warm paper tones, strong hierarchy, and formal spacing.',
+    accentClass: 'bg-amber-100 text-amber-900',
     component: ClassicCenteredTemplate,
   },
   {
@@ -57,6 +60,27 @@ export const BIODATA_TEMPLATES: BiodataTemplateMeta[] = [
     description: 'Navy and kesari layout inspired by Punjabi matrimonial traditions.',
     accentClass: 'bg-blue-100 text-blue-900',
     component: SikhTemplate,
+  },
+  {
+    id: 'floral',
+    name: 'Floral Editorial',
+    description: 'Soft botanical biodata with magazine-style columns and refined spacing.',
+    accentClass: 'bg-stone-100 text-stone-800',
+    component: FloralEditorialTemplate,
+  },
+  {
+    id: 'slate',
+    name: 'Slate Banner',
+    description: 'Modern profile header with a calm sidebar for lifestyle and contact details.',
+    accentClass: 'bg-zinc-100 text-zinc-800',
+    component: SlateBannerTemplate,
+  },
+  {
+    id: 'royal',
+    name: 'Royal Teal',
+    description: 'Decorative teal and gold profile for a more premium matrimonial presentation.',
+    accentClass: 'bg-teal-100 text-teal-900',
+    component: RoyalTealTemplate,
   },
 ];
 

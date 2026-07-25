@@ -17,7 +17,7 @@ export function Footer() {
   return (
     <footer className="mt-auto overflow-x-hidden border-t border-[var(--border)] bg-[var(--bg-secondary)] py-12 pb-10 sm:py-16 sm:pb-12">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="mb-12 grid gap-10 sm:mb-16 sm:gap-12 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.5fr]">
+        <div className="mb-12 grid gap-10 sm:mb-16 sm:gap-12 md:grid-cols-2 lg:grid-cols-[2fr_1.2fr_1.2fr_1fr_1.5fr]">
           <div className="flex flex-col gap-6">
             <Link
               href="/"
@@ -77,6 +77,36 @@ export function Footer() {
               className="text-[0.9375rem] text-[var(--text-secondary)] transition-colors hover:text-[var(--primary)]"
             >
               SIP Calculator
+            </Link>
+          </div>
+
+          <div className="flex flex-col gap-5">
+            <h4 className="mb-2 text-sm font-extrabold uppercase tracking-[0.1em] text-[var(--text-primary)]">
+              Top Lists
+            </h4>
+            <Link
+              href="/top5"
+              className="text-[0.9375rem] text-[var(--text-secondary)] transition-colors hover:text-[var(--primary)]"
+            >
+              All Comparisons
+            </Link>
+            <Link
+              href="/top5/best-finance-calculators-india"
+              className="text-[0.9375rem] text-[var(--text-secondary)] transition-colors hover:text-[var(--primary)]"
+            >
+              Finance Calculators
+            </Link>
+            <Link
+              href="/top5/essential-web-developer-tools"
+              className="text-[0.9375rem] text-[var(--text-secondary)] transition-colors hover:text-[var(--primary)]"
+            >
+              Developer Utilities
+            </Link>
+            <Link
+              href="/top5/best-pdf-document-creators"
+              className="text-[0.9375rem] text-[var(--text-secondary)] transition-colors hover:text-[var(--primary)]"
+            >
+              PDF & Document Tools
             </Link>
           </div>
 

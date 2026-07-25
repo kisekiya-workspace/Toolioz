@@ -5,6 +5,7 @@ import { devtoolsBlogPosts } from '@/lib/devtools-blog-content';
 import { financeBlogPosts } from '@/lib/finance-blog-content';
 import { pdftoolsBlogPosts } from '@/lib/pdftools-blog-content';
 import { resumeBlogPosts } from '@/lib/resume-blog-content';
+import { top5Articles } from '@/lib/top5-content';
 import { SITE_URL } from '@/lib/seo';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -32,6 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { route: '/biodata/biodata-generator', priority: 0.93, freq: 'weekly' as const },
     { route: '/resume-builder', priority: 0.92, freq: 'weekly' as const },
     { route: '/resume-builder/blog', priority: 0.85, freq: 'weekly' as const },
+    { route: '/top5', priority: 0.90, freq: 'weekly' as const },
     { route: '/about', priority: 0.5, freq: 'monthly' as const },
     { route: '/contact', priority: 0.5, freq: 'monthly' as const },
     { route: '/privacy-policy', priority: 0.3, freq: 'yearly' as const },
@@ -63,5 +65,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...blogRoutes(devtoolsBlogPosts, '/devtools/blog', 0.8),
     ...blogRoutes(pdftoolsBlogPosts, '/pdftools/blog', 0.78),
     ...blogRoutes(resumeBlogPosts, '/resume-builder/blog', 0.78),
+    ...blogRoutes(top5Articles, '/top5', 0.88),
   ];
 }

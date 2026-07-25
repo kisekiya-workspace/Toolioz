@@ -46,6 +46,86 @@ const initialForm: BiodataForm = {
   address: 'Bangalore, Karnataka, India',
 };
 
+type AccordionItemProps = {
+  id: string;
+  title: string;
+  openAccordion: string;
+  setOpenAccordion: React.Dispatch<React.SetStateAction<string>>;
+  children: React.ReactNode;
+};
+
+const AccordionItem = ({ id, title, openAccordion, setOpenAccordion, children }: AccordionItemProps) => {
+  const isOpen = openAccordion === id;
+  return (
+    <div className="border-b border-gray-200">
+      <button
+        type="button"
+        className="w-full flex items-center justify-between py-4 text-left font-semibold text-gray-800 hover:text-purple-600 transition-colors focus:outline-none"
+        onClick={() => setOpenAccordion(isOpen ? '' : id)}
+      >
+        {title}
+        {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+      </button>
+      {isOpen && <div className="pb-5 space-y-4 animate-in slide-in-from-top-2">{children}</div>}
+    </div>
+  );
+};
+
+type BiodataInputProps = {
+  label: string;
+  field: keyof BiodataForm;
+  form: BiodataForm;
+  onUpdate: (field: keyof BiodataForm, value: string) => void;
+  placeholder?: string;
+  type?: string;
+};
+
+const stopFieldEvent = (event: React.SyntheticEvent<HTMLElement>) => {
+  event.preventDefault();
+  event.stopPropagation();
+};
+
+const stopFieldBubble = (event: React.SyntheticEvent<HTMLElement>) => {
+  event.stopPropagation();
+};
+
+const Input = ({ label, field, form, onUpdate, placeholder, type = 'text' }: BiodataInputProps) => (
+  <div>
+    <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">{label}</label>
+    {type === 'textarea' ? (
+      <textarea
+        className="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 focus:border-purple-500 focus:bg-white focus:ring-1 focus:ring-purple-500 outline-none transition"
+        rows={3}
+        value={form[field] || ''}
+        placeholder={placeholder}
+        onChange={(e) => {
+          stopFieldEvent(e);
+          onUpdate(field, e.target.value);
+        }}
+        onInput={stopFieldBubble}
+        onKeyDown={stopFieldBubble}
+        onClick={stopFieldEvent}
+        onMouseDown={stopFieldBubble}
+      />
+    ) : (
+      <input
+        type={type}
+        className="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 focus:border-purple-500 focus:bg-white focus:ring-1 focus:ring-purple-500 outline-none transition"
+        value={form[field] || ''}
+        placeholder={placeholder}
+        onChange={(e) => {
+          stopFieldEvent(e);
+          onUpdate(field, e.target.value);
+        }}
+        onInput={stopFieldBubble}
+        onKeyDown={stopFieldBubble}
+        onClick={stopFieldEvent}
+        onMouseDown={stopFieldBubble}
+      />
+    )}
+  </div>
+);
+
 
 export default function BiodataGeneratorClient() {
   const [activeTab, setActiveTab] = useState<'templates' | 'edit' | 'preview'>('edit');
@@ -204,47 +284,6 @@ export default function BiodataGeneratorClient() {
 
   const currentTemplate = BIODATA_TEMPLATES.find((t) => t.id === templateId) ?? BIODATA_TEMPLATES[0];
 
-  const AccordionItem = ({ id, title, children }: { id: string, title: string, children: React.ReactNode }) => {
-    const isOpen = openAccordion === id;
-    return (
-      <div className="border-b border-gray-200">
-        <button
-          className="w-full flex items-center justify-between py-4 text-left font-semibold text-gray-800 hover:text-purple-600 transition-colors focus:outline-none"
-          onClick={() => setOpenAccordion(isOpen ? '' : id)}
-        >
-          {title}
-          {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-        </button>
-        {isOpen && <div className="pb-5 space-y-4 animate-in slide-in-from-top-2">{children}</div>}
-      </div>
-    );
-  };
-
-  const Input = ({ label, field, placeholder, type = 'text' }: { label: string, field: keyof BiodataForm, placeholder?: string, type?: string }) => (
-    <div>
-      <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">{label}</label>
-      {type === 'textarea' ? (
-        <textarea
-          className="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 focus:border-purple-500 focus:bg-white focus:ring-1 focus:ring-purple-500 outline-none transition"
-          rows={3}
-          value={form[field] || ''}
-          placeholder={placeholder}
-          onChange={(e) => updateField(field, e.target.value)}
-          onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
-        />
-      ) : (
-        <input
-          type={type}
-          className="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 focus:border-purple-500 focus:bg-white focus:ring-1 focus:ring-purple-500 outline-none transition"
-          value={form[field] || ''}
-          placeholder={placeholder}
-          onChange={(e) => updateField(field, e.target.value)}
-          onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
-        />
-      )}
-    </div>
-  );
-
   if (!isLoaded) return null;
 
   const isPreviewTab = activeTab === 'preview';
@@ -325,9 +364,23 @@ export default function BiodataGeneratorClient() {
                   className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'modern' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
                 >
                   <div className="p-4">
-                    <div className="font-bold text-gray-900 mb-1">Modern Split</div>
-                    <p className="text-xs text-gray-500 mb-3">Professional dual-column layout with a distinct color sidebar.</p>
-                    <div className="h-32 w-full rounded border border-gray-200 bg-[linear-gradient(90deg,#581c87_35%,#ffffff_35%)]"></div>
+                    <div className="font-bold text-gray-900 mb-1">Modern Executive</div>
+                    <p className="text-xs text-gray-500 mb-3">Two-column profile with contact rail, essentials, family, and expectations.</p>
+                    <div className="flex h-32 w-full overflow-hidden rounded border border-gray-200 bg-[#fbfaf7]">
+                      <div className="w-[36%] bg-[#12343b] p-3">
+                        <div className="mb-3 h-8 w-8 rounded-sm border border-[#d79a2b]/60 bg-[#fbfaf7]/10"></div>
+                        <div className="mb-2 h-1.5 w-16 rounded-full bg-[#fbfaf7]/80"></div>
+                        <div className="h-1 w-10 rounded-full bg-[#d79a2b]"></div>
+                      </div>
+                      <div className="flex-1 p-3">
+                        <div className="mb-3 h-2 w-24 rounded-full bg-[#12343b]/80"></div>
+                        <div className="space-y-1.5">
+                          <div className="h-1.5 w-full rounded-full bg-gray-200"></div>
+                          <div className="h-1.5 w-5/6 rounded-full bg-gray-200"></div>
+                          <div className="h-1.5 w-11/12 rounded-full bg-gray-200"></div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -336,12 +389,16 @@ export default function BiodataGeneratorClient() {
                   className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'classic' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
                 >
                   <div className="p-4">
-                    <div className="font-bold text-gray-900 mb-1">Classic Centered</div>
-                    <p className="text-xs text-gray-500 mb-3">Traditional centered layout with elegant typography and borders.</p>
-                    <div className="h-32 w-full rounded border border-gray-200 bg-[#fbf9f6] flex flex-col items-center justify-center p-2">
-                      <div className="w-8 h-8 rounded-full border border-red-800/30 bg-red-800/10 mb-2"></div>
-                      <div className="w-24 h-2 bg-gray-300 rounded-full mb-2"></div>
-                      <div className="w-full h-10 border border-red-800/20 rounded"></div>
+                    <div className="font-bold text-gray-900 mb-1">Modern Classic</div>
+                    <p className="text-xs text-gray-500 mb-3">Formal single-page layout with warm paper tone and strong hierarchy.</p>
+                    <div className="flex h-32 w-full flex-col items-center rounded border border-gray-200 bg-[#f8f5ef] p-3">
+                      <div className="mb-2 h-1 w-full bg-[#b8860b]"></div>
+                      <div className="mb-2 h-7 w-7 rounded-sm border border-[#17324d]/30 bg-white"></div>
+                      <div className="mb-2 h-2 w-28 rounded-full bg-[#17324d]/80"></div>
+                      <div className="grid w-full flex-1 grid-cols-2 gap-2">
+                        <div className="rounded border border-[#b8860b]/25 bg-white/60"></div>
+                        <div className="rounded border border-[#b8860b]/25 bg-white/60"></div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -421,10 +478,66 @@ export default function BiodataGeneratorClient() {
                   </div>
                 </div>
 
+                <div
+                  onClick={() => setTemplateId('floral')}
+                  className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'floral' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
+                >
+                  <div className="p-4">
+                    <div className="font-bold text-gray-900 mb-1">Floral Editorial</div>
+                    <p className="text-xs text-gray-500 mb-3">Botanical magazine-style biodata with lifestyle and expectations columns.</p>
+                    <div className="relative h-32 w-full overflow-hidden rounded border border-gray-200 bg-[#fbfaf7] p-3">
+                      <div className="mb-3 h-3 w-24 rounded-full bg-[#252525]/80"></div>
+                      <div className="flex gap-3">
+                        <div className="h-16 w-12 rounded bg-[#c8a7a0]/50"></div>
+                        <div className="flex-1 space-y-1.5">
+                          <div className="h-1.5 w-20 rounded-full bg-[#4f5a48]/50"></div>
+                          <div className="h-1.5 w-full rounded-full bg-gray-200"></div>
+                          <div className="h-1.5 w-5/6 rounded-full bg-gray-200"></div>
+                        </div>
+                      </div>
+                      <div className="absolute right-2 top-3 h-20 w-10 rounded-full border-r border-[#c8a7a0] opacity-70"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  onClick={() => setTemplateId('slate')}
+                  className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'slate' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
+                >
+                  <div className="p-4">
+                    <div className="font-bold text-gray-900 mb-1">Slate Banner</div>
+                    <p className="text-xs text-gray-500 mb-3">Modern horizontal name banner with a calm profile sidebar.</p>
+                    <div className="relative h-32 w-full overflow-hidden rounded border border-gray-200 bg-white">
+                      <div className="absolute left-0 top-0 h-full w-[38%] bg-[#f4f1ef]"></div>
+                      <div className="absolute left-[28%] top-4 h-12 w-[72%] bg-[#595550]"></div>
+                      <div className="absolute left-5 top-3 h-12 w-12 rounded-full border-4 border-white bg-[#d9d0cb]"></div>
+                      <div className="absolute left-[48%] top-8 h-2 w-24 rounded-full bg-white"></div>
+                      <div className="absolute bottom-4 left-[44%] h-1.5 w-32 rounded-full bg-gray-200"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  onClick={() => setTemplateId('royal')}
+                  className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'royal' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
+                >
+                  <div className="p-4">
+                    <div className="font-bold text-gray-900 mb-1">Royal Teal</div>
+                    <p className="text-xs text-gray-500 mb-3">Premium teal and gold ornamental layout for a richer first impression.</p>
+                    <div className="relative flex h-32 w-full flex-col items-center overflow-hidden rounded border border-gray-200 bg-[#00777c] p-3">
+                      <div className="absolute left-1 top-1 h-10 w-10 rounded-br-full border-b border-r border-[#f2c078]"></div>
+                      <div className="absolute bottom-1 right-1 h-10 w-10 rounded-tl-full border-l border-t border-[#f2c078]"></div>
+                      <div className="mb-2 h-8 w-8 rounded-full border-2 border-[#f2c078] bg-white/20"></div>
+                      <div className="mb-3 h-2 w-24 rounded-full bg-[#f2c078]"></div>
+                      <div className="h-5 w-28 rounded-full bg-[#f2c078]/80"></div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             ) : (
               <div className="space-y-1 pb-20 lg:pb-0">
-                <AccordionItem id="personal" title="Personal Info">
+                <AccordionItem openAccordion={openAccordion} setOpenAccordion={setOpenAccordion} id="personal" title="Personal Info">
                   <div className="mb-4">
                     <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Profile Photo</label>
                     <div className="flex items-center gap-4">
@@ -436,60 +549,60 @@ export default function BiodataGeneratorClient() {
                         </div>
                       )}
                       <div>
-                        <input type="file" accept="image/*" className="hidden" ref={fileInputRef} onChange={handleImageUpload} />
-                        <button onClick={() => fileInputRef.current?.click()} className="text-sm font-semibold text-purple-600 bg-purple-50 px-3 py-1.5 rounded-lg hover:bg-purple-100 transition">
+                        <input type="file" accept="image/*" className="hidden" ref={fileInputRef} onChange={handleImageUpload} onClick={(e) => e.stopPropagation()} />
+                        <button type="button" onClick={() => fileInputRef.current?.click()} className="text-sm font-semibold text-purple-600 bg-purple-50 px-3 py-1.5 rounded-lg hover:bg-purple-100 transition">
                           Upload Image
                         </button>
-                        {form.photo && <button onClick={() => setForm({ ...form, photo: null })} className="text-sm text-gray-500 ml-3 hover:text-red-500">Remove</button>}
+                        {form.photo && <button type="button" onClick={() => setForm({ ...form, photo: null })} className="text-sm text-gray-500 ml-3 hover:text-red-500">Remove</button>}
                       </div>
                     </div>
                   </div>
-                  <Input label="Full Name" field="fullName" placeholder="E.g., Gaurav Mehta" />
+                  <Input form={form} onUpdate={updateField} label="Full Name" field="fullName" placeholder="E.g., Gaurav Mehta" />
                   <div className="grid grid-cols-2 gap-3">
-                    <Input label="Date of Birth" field="dateOfBirth" placeholder="DD-MM-YYYY" />
-                    <Input label="Time of Birth" field="birthTime" placeholder="HH:MM AM/PM" />
+                    <Input form={form} onUpdate={updateField} label="Date of Birth" field="dateOfBirth" placeholder="DD-MM-YYYY" />
+                    <Input form={form} onUpdate={updateField} label="Time of Birth" field="birthTime" placeholder="HH:MM AM/PM" />
                   </div>
-                  <Input label="Place of Birth" field="birthPlace" placeholder="City, State" />
+                  <Input form={form} onUpdate={updateField} label="Place of Birth" field="birthPlace" placeholder="City, State" />
                 </AccordionItem>
 
-                <AccordionItem id="profile" title="Profile Details">
+                <AccordionItem openAccordion={openAccordion} setOpenAccordion={setOpenAccordion} id="profile" title="Profile Details">
                   <div className="grid grid-cols-2 gap-3">
-                    <Input label="Height" field="height" placeholder="E.g., 5'9&quot;" />
-                    <Input label="Religion" field="religion" placeholder="E.g., Hindu" />
-                    <Input label="Caste" field="caste" placeholder="E.g., Brahmin" />
-                    <Input label="Manglik" field="manglik" placeholder="Yes / No / Don't Know" />
+                    <Input form={form} onUpdate={updateField} label="Height" field="height" placeholder="E.g., 5'9&quot;" />
+                    <Input form={form} onUpdate={updateField} label="Religion" field="religion" placeholder="E.g., Hindu" />
+                    <Input form={form} onUpdate={updateField} label="Caste" field="caste" placeholder="E.g., Brahmin" />
+                    <Input form={form} onUpdate={updateField} label="Manglik" field="manglik" placeholder="Yes / No / Don't Know" />
                   </div>
-                  <Input label="Languages Known" field="languages" placeholder="E.g., English, Hindi" />
+                  <Input form={form} onUpdate={updateField} label="Languages Known" field="languages" placeholder="E.g., English, Hindi" />
                 </AccordionItem>
 
-                <AccordionItem id="education" title="Education & Profession">
-                  <Input label="Education" field="education" placeholder="E.g., B.Tech in Computer Science" />
-                  <Input label="Profession / Occupation" field="occupation" placeholder="E.g., Software Engineer at Google" />
-                  <Input label="Annual Income" field="annualIncome" placeholder="E.g., 18 LPA" />
+                <AccordionItem openAccordion={openAccordion} setOpenAccordion={setOpenAccordion} id="education" title="Education & Profession">
+                  <Input form={form} onUpdate={updateField} label="Education" field="education" placeholder="E.g., B.Tech in Computer Science" />
+                  <Input form={form} onUpdate={updateField} label="Profession / Occupation" field="occupation" placeholder="E.g., Software Engineer at Google" />
+                  <Input form={form} onUpdate={updateField} label="Annual Income" field="annualIncome" placeholder="E.g., 18 LPA" />
                 </AccordionItem>
 
-                <AccordionItem id="family" title="Family Details">
+                <AccordionItem openAccordion={openAccordion} setOpenAccordion={setOpenAccordion} id="family" title="Family Details">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <Input label="Father's Name" field="fatherName" />
-                    <Input label="Father's Occupation" field="fatherOccupation" />
-                    <Input label="Mother's Name" field="motherName" />
-                    <Input label="Mother's Occupation" field="motherOccupation" />
+                    <Input form={form} onUpdate={updateField} label="Father's Name" field="fatherName" />
+                    <Input form={form} onUpdate={updateField} label="Father's Occupation" field="fatherOccupation" />
+                    <Input form={form} onUpdate={updateField} label="Mother's Name" field="motherName" />
+                    <Input form={form} onUpdate={updateField} label="Mother's Occupation" field="motherOccupation" />
                   </div>
-                  <Input label="Siblings (Names & Details)" field="siblings" type="textarea" placeholder="List brothers and sisters..." />
+                  <Input form={form} onUpdate={updateField} label="Siblings (Names & Details)" field="siblings" type="textarea" placeholder="List brothers and sisters..." />
                 </AccordionItem>
 
-                <AccordionItem id="about" title="About & Expectations">
-                  <Input label="About Me" field="about" type="textarea" placeholder="Write a short paragraph about yourself..." />
-                  <Input label="Hobbies & Interests" field="hobbies" type="textarea" />
-                  <Input label="Partner Expectations" field="partnerPreferences" type="textarea" placeholder="What are you looking for in a partner?" />
+                <AccordionItem openAccordion={openAccordion} setOpenAccordion={setOpenAccordion} id="about" title="About & Expectations">
+                  <Input form={form} onUpdate={updateField} label="About Me" field="about" type="textarea" placeholder="Write a short paragraph about yourself..." />
+                  <Input form={form} onUpdate={updateField} label="Hobbies & Interests" field="hobbies" type="textarea" />
+                  <Input form={form} onUpdate={updateField} label="Partner Expectations" field="partnerPreferences" type="textarea" placeholder="What are you looking for in a partner?" />
                 </AccordionItem>
 
-                <AccordionItem id="contact" title="Contact Info">
+                <AccordionItem openAccordion={openAccordion} setOpenAccordion={setOpenAccordion} id="contact" title="Contact Info">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <Input label="Mobile Number" field="phone" />
-                    <Input label="Email Address" field="email" />
+                    <Input form={form} onUpdate={updateField} label="Mobile Number" field="phone" />
+                    <Input form={form} onUpdate={updateField} label="Email Address" field="email" />
                   </div>
-                  <Input label="Current / Permanent Address" field="address" type="textarea" />
+                  <Input form={form} onUpdate={updateField} label="Current / Permanent Address" field="address" type="textarea" />
                 </AccordionItem>
               </div>
             )}

@@ -4,4 +4,7 @@ export * from './MinimalistTemplate';
 export * from './HinduTemplate';
 export * from './IslamicTemplate';
 export * from './SikhTemplate';
+export * from './FloralEditorialTemplate';
+export * from './SlateBannerTemplate';
+export * from './RoyalTealTemplate';
 export * from './TemplateWrapper';

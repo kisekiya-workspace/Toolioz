@@ -2,6 +2,7 @@ import { PDFDocument, rgb, StandardFonts, PDFFont, PDFPage, Color } from 'pdf-li
 import type { BiodataForm } from './types';
 import type { TemplateId } from './types';
 import { MOTIF_SVG_PATHS, MOTIF_UNICODE, type BiodataMotifId } from './biodata-motifs';
+import { getBackgroundUrl } from './biodata-backgrounds';
 
 /* ═══════════════════════════════════════════════════════════════════════════
    Vector PDF generator for Biodata — mirrors resume generator architecture.
@@ -157,6 +158,53 @@ async function embedPhoto(doc: PDFDocument, photo: string | null) {
   }
 }
 
+/** Fetch a background image from /public and embed it in the PDF document. */
+async function embedBackgroundImage(
+  doc: PDFDocument,
+  templateId: TemplateId
+): Promise<Awaited<ReturnType<PDFDocument['embedPng']>> | null> {
+  const url = getBackgroundUrl(templateId);
+  if (!url) return null;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) return null;
+    const arrayBuffer = await response.arrayBuffer();
+    const bytes = new Uint8Array(arrayBuffer);
+    // Detect PNG vs JPG
+    const isPng = bytes[0] === 0x89 && bytes[1] === 0x50;
+    return isPng ? await doc.embedPng(bytes) : await doc.embedJpg(bytes);
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Draw a full-page background image on a PDF page using a "cover" strategy.
+ * The image is scaled proportionally to fully cover the A4 page (no stretching),
+ * then centered so any overflow is cropped equally on both sides.
+ */
+function drawBackgroundImage(
+  page: PDFPage,
+  bgImage: Awaited<ReturnType<PDFDocument['embedPng']>>
+) {
+  const imgW = bgImage.width;
+  const imgH = bgImage.height;
+
+  // Scale factor: pick the larger so the image fully covers the page
+  const scaleX = A4.w / imgW;
+  const scaleY = A4.h / imgH;
+  const scale = Math.max(scaleX, scaleY);
+
+  const drawW = imgW * scale;
+  const drawH = imgH * scale;
+
+  // Center the image (overflow is cropped by the page boundary)
+  const x = (A4.w - drawW) / 2;
+  const y = (A4.h - drawH) / 2;
+
+  page.drawImage(bgImage, { x, y, width: drawW, height: drawH });
+}
+
 /** Draw religious motif above header text; returns new y position. */
 function drawMotif(
   page: PDFPage,
@@ -292,21 +340,22 @@ function drawBiodataBody(ctx: DrawCtx, opts?: { skipSidebarFields?: boolean; ski
 async function pdfModern(doc: PDFDocument, data: BiodataForm, fonts: Fonts, photo: Awaited<ReturnType<typeof embedPhoto>>) {
   const page = doc.addPage([A4.w, A4.h]);
   const theme: Theme = {
-    primary: hex('4c1d95'),
-    accent: hex('a78bfa'),
-    text: hex('1e293b'),
-    muted: hex('475569'),
-    bg: hex('ffffff'),
-    border: hex('c4b5fd'),
-    sidebar: hex('581c87'),
-    onSidebar: rgb(1, 1, 1),
+    primary: hex('12343b'),
+    accent: hex('d79a2b'),
+    text: hex('1f2937'),
+    muted: hex('4b5563'),
+    bg: hex('fbfaf7'),
+    border: hex('d79a2b'),
+    sidebar: hex('12343b'),
+    onSidebar: hex('fbfaf7'),
   };
   page.drawRectangle({ x: 0, y: 0, width: A4.w, height: A4.h, color: theme.bg });
   const sw = 185;
   page.drawRectangle({ x: 0, y: 0, width: sw, height: A4.h, color: theme.sidebar! });
+  page.drawRectangle({ x: 0, y: A4.h - 6, width: A4.w, height: 6, color: theme.accent });
 
   const name = sanitize(data.fullName) || 'Biodata';
-  let sy = A4.h - 36;
+  let sy = A4.h - 42;
   if (photo.image) {
     sy = drawPhotoPlain(page, photo.image, sw / 2 - photo.dims.width / 2, sy, photo.dims);
   }
@@ -348,7 +397,7 @@ async function pdfModern(doc: PDFDocument, data: BiodataForm, fonts: Fonts, phot
     sy -= 14;
   }
 
-  const layout: Layout = { mx: sw + 22, mw: A4.w - sw - 44, my: A4.h - 36 };
+  const layout: Layout = { mx: sw + 22, mw: A4.w - sw - 44, my: A4.h - 42 };
   const ctx: DrawCtx = {
     doc,
     page,
@@ -359,7 +408,7 @@ async function pdfModern(doc: PDFDocument, data: BiodataForm, fonts: Fonts, phot
     embeddedImage: photo.image,
     imageDims: photo.dims,
   };
-  safeDraw(page, 'MARRIAGE BIODATA', { x: layout.mx, y: layout.my, size: 8, font: fonts.bold, color: theme.primary });
+  safeDraw(page, 'MARRIAGE BIODATA', { x: layout.mx, y: layout.my, size: 8, font: fonts.bold, color: theme.accent });
   layout.my -= 14;
   drawBiodataBody(ctx, { skipSidebarFields: true, skipContact: true });
 }
@@ -368,17 +417,21 @@ async function pdfModern(doc: PDFDocument, data: BiodataForm, fonts: Fonts, phot
 async function pdfClassic(doc: PDFDocument, data: BiodataForm, fonts: Fonts, photo: Awaited<ReturnType<typeof embedPhoto>>) {
   const page = doc.addPage([A4.w, A4.h]);
   const theme: Theme = {
-    primary: hex('8b2332'),
-    accent: hex('8b2332'),
-    text: hex('1c1917'),
-    muted: hex('57534e'),
-    bg: hex('fdfaf5'),
-    border: hex('8b2332'),
+    primary: hex('17324d'),
+    accent: hex('b8860b'),
+    text: hex('202124'),
+    muted: hex('4f5b62'),
+    bg: hex('f8f5ef'),
+    border: hex('b8860b'),
   };
   page.drawRectangle({ x: 0, y: 0, width: A4.w, height: A4.h, color: theme.bg });
+  page.drawRectangle({ x: 28, y: A4.h - 24, width: A4.w - 56, height: 2, color: theme.accent });
+  page.drawRectangle({ x: 28, y: 22, width: A4.w - 56, height: 2, color: theme.accent });
+  page.drawRectangle({ x: 22, y: 28, width: 2, height: A4.h - 56, color: theme.primary, opacity: 0.18 });
+  page.drawRectangle({ x: A4.w - 24, y: 28, width: 2, height: A4.h - 56, color: theme.primary, opacity: 0.18 });
 
   let my = A4.h - 42;
-  const hdr = 'BIODATA';
+  const hdr = 'MARRIAGE BIODATA';
   const hw = textWidth(fonts.bold, hdr, 10);
   safeDraw(page, hdr, { x: A4.w / 2 - hw / 2, y: my, size: 10, font: fonts.bold, color: theme.accent });
   my -= 22;
@@ -530,6 +583,116 @@ async function pdfCulturalCentered(
 }
 
 /* ── Entry point ────────────────────────────────────────────────────────── */
+async function pdfFloral(doc: PDFDocument, data: BiodataForm, fonts: Fonts, photo: Awaited<ReturnType<typeof embedPhoto>>) {
+  const page = doc.addPage([A4.w, A4.h]);
+  const theme: Theme = {
+    primary: hex('4f5a48'),
+    accent: hex('c8a7a0'),
+    text: hex('252525'),
+    muted: hex('656565'),
+    bg: hex('fbfaf7'),
+    border: hex('c8a7a0'),
+  };
+  page.drawRectangle({ x: 0, y: 0, width: A4.w, height: A4.h, color: theme.bg });
+  // Draw background image
+  const bgImage = await embedBackgroundImage(doc, 'floral');
+  if (bgImage) drawBackgroundImage(page, bgImage);
+  page.drawCircle({ x: A4.w - 78, y: A4.h - 110, size: 44, color: theme.accent, opacity: 0.16 });
+  page.drawCircle({ x: A4.w - 42, y: A4.h - 64, size: 18, color: theme.accent, opacity: 0.22 });
+
+  const name = sanitize(data.fullName) || 'Biodata';
+  safeDraw(page, name, { x: 54, y: A4.h - 72, size: 34, font: fonts.regular, color: theme.text });
+
+  let leftY = A4.h - 118;
+  if (photo.image) leftY = drawPhotoPlain(page, photo.image, 54, leftY, photo.dims);
+  const leftLayout: Layout = { mx: 54, mw: 145, my: leftY };
+  const leftCtx: DrawCtx = { doc, page, fonts, data, theme, layout: leftLayout, embeddedImage: photo.image, imageDims: photo.dims };
+  drawTextBlock(leftCtx, 'Lifestyle', data.hobbies || data.about);
+  drawTextBlock(leftCtx, 'Expectations', data.partnerPreferences);
+  drawSectionHeader(leftCtx, 'Contacts');
+  drawField(leftCtx, 'Mobile', data.phone);
+  drawField(leftCtx, 'Email', data.email);
+  drawField(leftCtx, 'Address', data.address);
+
+  const layout: Layout = { mx: 235, mw: A4.w - 290, my: A4.h - 130 };
+  const ctx: DrawCtx = { doc, page, fonts, data, theme, layout, embeddedImage: photo.image, imageDims: photo.dims };
+  drawBiodataBody(ctx, { skipContact: true });
+}
+
+async function pdfSlate(doc: PDFDocument, data: BiodataForm, fonts: Fonts, photo: Awaited<ReturnType<typeof embedPhoto>>) {
+  const page = doc.addPage([A4.w, A4.h]);
+  const theme: Theme = {
+    primary: hex('595550'),
+    accent: hex('d9d0cb'),
+    text: hex('2f2d2a'),
+    muted: hex('5f5b55'),
+    bg: hex('ffffff'),
+    border: hex('d9d0cb'),
+  };
+  page.drawRectangle({ x: 0, y: 0, width: A4.w, height: A4.h, color: theme.bg });
+  // Draw background image
+  const bgImage = await embedBackgroundImage(doc, 'slate');
+  if (bgImage) drawBackgroundImage(page, bgImage);
+  page.drawRectangle({ x: 0, y: 0, width: 190, height: A4.h, color: hex('f4f1ef'), opacity: bgImage ? 0.85 : 1 });
+  page.drawRectangle({ x: 158, y: A4.h - 156, width: A4.w - 158, height: 92, color: theme.primary });
+
+  if (photo.image) {
+    const dims = photo.image.scaleToFit(112, 112);
+    page.drawCircle({ x: 95, y: A4.h - 96, size: 62, color: rgb(1, 1, 1) });
+    page.drawImage(photo.image, { x: 95 - dims.width / 2, y: A4.h - 96 - dims.height / 2, width: dims.width, height: dims.height });
+  }
+
+  const name = (sanitize(data.fullName) || 'Biodata').toUpperCase();
+  safeDraw(page, name, { x: 235, y: A4.h - 116, size: 22, font: fonts.bold, color: rgb(1, 1, 1) });
+
+  const leftLayout: Layout = { mx: 26, mw: 138, my: A4.h - 226 };
+  const leftCtx: DrawCtx = { doc, page, fonts, data, theme, layout: leftLayout, embeddedImage: photo.image, imageDims: photo.dims };
+  drawTextBlock(leftCtx, 'About', data.about);
+  drawTextBlock(leftCtx, 'Lifestyle', data.hobbies);
+  drawSectionHeader(leftCtx, 'Contact');
+  drawField(leftCtx, 'Mobile', data.phone);
+  drawField(leftCtx, 'Email', data.email);
+
+  const layout: Layout = { mx: 220, mw: A4.w - 260, my: A4.h - 200 };
+  const ctx: DrawCtx = { doc, page, fonts, data, theme, layout, embeddedImage: photo.image, imageDims: photo.dims };
+  drawBiodataBody(ctx, { skipContact: true });
+}
+
+async function pdfRoyal(doc: PDFDocument, data: BiodataForm, fonts: Fonts, photo: Awaited<ReturnType<typeof embedPhoto>>) {
+  const page = doc.addPage([A4.w, A4.h]);
+  const theme: Theme = {
+    primary: hex('006d72'),
+    accent: hex('f2c078'),
+    text: hex('f8e7c4'),
+    muted: hex('f4d99c'),
+    bg: hex('00777c'),
+    border: hex('f2c078'),
+  };
+  page.drawRectangle({ x: 0, y: 0, width: A4.w, height: A4.h, color: theme.bg });
+  // Draw background image
+  const bgImage = await embedBackgroundImage(doc, 'royal');
+  if (bgImage) drawBackgroundImage(page, bgImage);
+  page.drawRectangle({ x: 20, y: 20, width: A4.w - 40, height: A4.h - 40, borderColor: theme.accent, borderWidth: 1.4 });
+  page.drawCircle({ x: A4.w / 2, y: A4.h / 2, size: 126, borderColor: theme.accent, borderWidth: 1, opacity: 0.18 });
+  page.drawCircle({ x: 56, y: A4.h - 56, size: 34, borderColor: theme.accent, borderWidth: 1.2, opacity: 0.55 });
+  page.drawCircle({ x: A4.w - 56, y: 56, size: 34, borderColor: theme.accent, borderWidth: 1.2, opacity: 0.55 });
+
+  const name = sanitize(data.fullName) || 'Biodata';
+  const nw = textWidth(fonts.boldItalic, name, 25);
+  safeDraw(page, name, { x: A4.w / 2 - nw / 2, y: A4.h - 62, size: 25, font: fonts.boldItalic, color: theme.accent });
+  let my = A4.h - 92;
+  if (photo.image) {
+    const dims = photo.image.scaleToFit(104, 104);
+    page.drawCircle({ x: A4.w / 2, y: my - dims.height / 2, size: 58, color: theme.accent });
+    page.drawImage(photo.image, { x: A4.w / 2 - dims.width / 2, y: my - dims.height, width: dims.width, height: dims.height });
+    my -= dims.height + 28;
+  }
+
+  const layout: Layout = { mx: 82, mw: A4.w - 164, my, centeredHeaders: true };
+  const ctx: DrawCtx = { doc, page, fonts, data, theme, layout, embeddedImage: photo.image, imageDims: photo.dims };
+  drawBiodataBody(ctx);
+}
+
 export async function generateBiodataPdf(data: BiodataForm, templateId: string): Promise<Uint8Array> {
   const doc = await PDFDocument.create();
   doc.setTitle(`${sanitize(data.fullName) || 'Biodata'} - Marriage Biodata`);
@@ -565,6 +728,15 @@ export async function generateBiodataPdf(data: BiodataForm, templateId: string):
       break;
     case 'sikh':
       await pdfCulturalCentered(doc, data, fonts, photo, 'sikh');
+      break;
+    case 'floral':
+      await pdfFloral(doc, data, fonts, photo);
+      break;
+    case 'slate':
+      await pdfSlate(doc, data, fonts, photo);
+      break;
+    case 'royal':
+      await pdfRoyal(doc, data, fonts, photo);
       break;
     default:
       await pdfModern(doc, data, fonts, photo);

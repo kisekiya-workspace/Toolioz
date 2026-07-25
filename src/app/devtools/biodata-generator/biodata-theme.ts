@@ -1,7 +1,7 @@
 import type { TemplateId } from './types';
 import type { BiodataMotifId } from './biodata-motifs';
 
-export type BiodataLayoutKind = 'split' | 'centered' | 'minimal';
+export type BiodataLayoutKind = 'split' | 'centered' | 'minimal' | 'floral' | 'banner' | 'ornate';
 
 /** Shared theme tokens — used by HTML preview and PDF export. */
 export type BiodataThemeConfig = {
@@ -27,22 +27,22 @@ export const BIODATA_THEMES: Record<TemplateId, BiodataThemeConfig> = {
   modern: {
     id: 'modern',
     layout: 'split',
-    primary: '#4c1d95',
-    accent: '#a78bfa',
-    text: '#1e293b',
-    muted: '#475569',
-    bg: '#ffffff',
-    sidebar: '#581c87',
-    onSidebar: '#ffffff',
+    primary: '#12343b',
+    accent: '#d79a2b',
+    text: '#1f2937',
+    muted: '#4b5563',
+    bg: '#fbfaf7',
+    sidebar: '#12343b',
+    onSidebar: '#fbfaf7',
   },
   classic: {
     id: 'classic',
     layout: 'centered',
-    primary: '#8b2332',
-    accent: '#8b2332',
-    text: '#1c1917',
-    muted: '#57534e',
-    bg: '#fdfaf5',
+    primary: '#17324d',
+    accent: '#b8860b',
+    text: '#202124',
+    muted: '#4f5b62',
+    bg: '#f8f5ef',
     pageBorder: false,
   },
   minimalist: {
@@ -87,6 +87,33 @@ export const BIODATA_THEMES: Record<TemplateId, BiodataThemeConfig> = {
     subtitle: 'Ik Onkar - Waheguru Ji Ki Fateh',
     motif: 'khanda',
     headerBar: { top: '#1e3a8a', bottom: '#f97316' },
+  },
+  floral: {
+    id: 'floral',
+    layout: 'floral',
+    primary: '#4f5a48',
+    accent: '#c8a7a0',
+    text: '#252525',
+    muted: '#656565',
+    bg: '#fbfaf7',
+  },
+  slate: {
+    id: 'slate',
+    layout: 'banner',
+    primary: '#595550',
+    accent: '#d9d0cb',
+    text: '#2f2d2a',
+    muted: '#5f5b55',
+    bg: '#f4f1ef',
+  },
+  royal: {
+    id: 'royal',
+    layout: 'ornate',
+    primary: '#006d72',
+    accent: '#f2c078',
+    text: '#f8e7c4',
+    muted: '#f4d99c',
+    bg: '#00777c',
   },
 };
 

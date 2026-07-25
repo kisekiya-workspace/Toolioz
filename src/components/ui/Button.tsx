@@ -12,6 +12,7 @@ export const Button: React.FC<ButtonProps> = ({
   size = 'md',
   fullWidth = false,
   className = '',
+  disabled = false,
   ...props
 }) => {
   const variantClasses = {
@@ -39,7 +40,7 @@ export const Button: React.FC<ButtonProps> = ({
   ].join(' ');
 
   return (
-    <button className={buttonClass} {...props}>
+    <button className={buttonClass} disabled={disabled} {...props}>
       {children}
     </button>
   );
