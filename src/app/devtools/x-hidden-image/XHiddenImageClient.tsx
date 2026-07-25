@@ -19,6 +19,7 @@ import { Footer } from '@/components/layout/Footer';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { RelatedTools } from '@/components/ui/RelatedTools';
+import { FAQSchema } from '@/components/ui/FAQSchema';
 import {
   buildOpenViewPreview,
   buildTimelineVisibleOverlay,
@@ -45,6 +46,39 @@ import {
 } from './x-reveal-core';
 
 type ExportFormat = 'png8' | 'rgba';
+
+const X_REVEAL_FAQS = [
+  {
+    question: 'What is the X tap-to-reveal or tap-and-hold image trend?',
+    answer:
+      'Creators post a single PNG that looks washed out or partially hidden in the X timeline, then shows the full artwork when someone opens the post or uses tap-and-hold on mobile. The effect comes from how X composites transparency in the feed versus the full-screen viewer — not from a special X setting.',
+  },
+  {
+    question: 'How do I make a hidden image PNG for X (Twitter)?',
+    answer:
+      'Upload your art, paint where the feed should stay visible (optional), tune line art or open brightness if you want, then export PNG8. Post the file as a normal image on X from desktop web for the most reliable upload path.',
+  },
+  {
+    question: 'Why does my picture look dull in the feed but normal when opened?',
+    answer:
+      'X blends alternating transparent pixels in timeline previews. This tool encodes those regions so the feed shows a muted version while the opened view uses the full-color pixels — the same idea behind many viral “hidden image” posts.',
+  },
+  {
+    question: 'Should I export PNG8 or RGBA for X?',
+    answer:
+      'PNG8 is tuned for posting on X (indexed color, smaller file). RGBA is useful if you want a lossless master or to edit elsewhere; re-export PNG8 before posting if X rejects large RGBA files.',
+  },
+  {
+    question: 'Are my images uploaded to Toolioz?',
+    answer:
+      'No. Encoding, masking, and export run entirely in your browser. Files never leave your device unless you download or upload them to X yourself.',
+  },
+  {
+    question: 'Is this the same as four-tile “tap each corner” split posts?',
+    answer:
+      'No. Split-tile posts use multiple images in one tweet. Tap-to-reveal uses one PNG with a transparency trick for feed vs opened — this tool builds that single-file format.',
+  },
+];
 
 export default function XHiddenImageClient({ title, color }: { title?: string; color?: string }) {
   const accent = color ?? '#0f172a';
@@ -386,11 +420,12 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
               Toolioz · X reveal PNG
             </p>
             <h1 className="text-3xl font-black tracking-tight md:text-5xl">
-              {title ?? 'X Hidden Image Maker'}
+              {title ?? 'X Tap-to-Reveal PNG Maker'}
             </h1>
             <p className="mt-3 text-[var(--text-secondary)] md:text-lg">
-              Encode timeline-safe PNGs that look muted in the feed and pop when opened. Brush masks
-              control what peeks through before tap — processing stays in your browser.
+              Make hidden-image PNGs for the X tap-to-reveal and tap-and-hold trend: muted timeline
+              preview, full color when opened. Brush masks control what shows before tap — all
+              processing stays in your browser.
             </p>
           </div>
           <div className="flex shrink-0 flex-wrap gap-3">
@@ -716,6 +751,8 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
 
         <RelatedTools currentToolId="x-hidden-image" categoryId="devtools" />
       </main>
+
+      <FAQSchema faqs={X_REVEAL_FAQS} />
 
       <Footer />
     </div>

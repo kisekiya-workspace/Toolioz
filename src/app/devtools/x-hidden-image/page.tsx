@@ -1,47 +1,45 @@
 import React from 'react';
-import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import XHiddenImageClient from './XHiddenImageClient';
 import { JSONLD } from '@/components/ui/JSONLD';
 import { TOOLS } from '@/lib/tools';
+import { buildCalculatorJsonLd, buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: 'X Hidden Image Maker — Tap-to-Reveal PNG for Twitter | Toolioz',
+export const metadata = buildPageMetadata({
+  title: 'X Tap-to-Reveal PNG Maker — Hidden Image & Tap-and-Hold Trend | Toolioz',
   description:
-    'Create tap-to-reveal PNGs for X (Twitter): muted feed preview, full-color when opened. Brush masks, line art, PNG8 export — all in the browser.',
-  keywords:
-    'X hidden image, Twitter tap to reveal, transparent PNG timeline, Twitter engagement image, checker mesh PNG, Toolioz',
-  alternates: {
-    canonical: 'https://toolioz.com/devtools/x-hidden-image',
-  },
-  openGraph: {
-    title: 'X Hidden Image Maker | Toolioz DevTools',
-    description: 'Build tap-to-reveal PNG images for X posts — 100% in your browser.',
-    url: 'https://toolioz.com/devtools/x-hidden-image',
-    siteName: 'Toolioz DevTools',
-    type: 'website',
-  },
-};
+    'Free X (Twitter) hidden image maker for the tap-to-reveal trend: muted timeline preview, full color when opened or tap-and-hold. Paint feed masks, optional line art, PNG8 export — 100% in your browser.',
+  path: '/devtools/x-hidden-image',
+  keywords: [
+    'X tap and hold image',
+    'X tap to reveal PNG',
+    'Twitter hidden image maker',
+    'X timeline reveal trend',
+    'tap and hold Twitter image 2026',
+    'Twitter engagement image PNG',
+    'checkerboard PNG X post',
+    'dual view PNG Twitter',
+    'PNG8 X upload',
+    'hidden picture X feed',
+    'open image full color X',
+    'Twitter tap to open image',
+    'X viral image trick',
+    'client-side PNG encoder',
+    'Toolioz',
+  ],
+});
 
 export default function XHiddenImagePage() {
   const tool = TOOLS.find((t) => t.id === 'x-hidden-image');
   if (!tool) return notFound();
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'WebApplication',
-    name: 'X Hidden Image Maker',
+  const jsonLd = buildCalculatorJsonLd({
+    name: 'X Tap-to-Reveal PNG Maker',
     description:
-      'Client-side utility to compose dual-background PNG images for X (Twitter) tap-to-reveal posts.',
+      'Browser-based encoder for X (Twitter) tap-to-reveal and tap-and-hold hidden images: timeline-safe PNG8 with brush masks and feed vs opened previews.',
+    path: '/devtools/x-hidden-image',
     applicationCategory: 'MultimediaApplication',
-    operatingSystem: 'All',
-    url: 'https://toolioz.com/devtools/x-hidden-image',
-    offers: {
-      '@type': 'Offer',
-      price: '0.00',
-      priceCurrency: 'USD',
-    },
-  };
+  });
 
   return (
     <>
