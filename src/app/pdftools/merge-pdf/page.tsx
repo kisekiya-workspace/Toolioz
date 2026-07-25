@@ -6,7 +6,7 @@ import MergePdfClient from './MergePdfClient';
 export const metadata: Metadata = {
   title: 'Merge PDF Online | Combine PDF Files | Toolioz',
   description:
-    'Merge multiple PDF files into one document with validated backend processing and preserved page order.',
+    'Merge multiple PDF files into one document in your browser. Validated uploads, preserved page order, no server processing.',
   alternates: {
     canonical: 'https://toolioz.com/pdftools/merge-pdf',
   },
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Merge PDF Online | Toolioz',
-    description: 'Reliable backend PDF merge with clear validation and download-ready output.',
+    description: 'Client-side PDF merge — combine files in order and download one document.',
     images: ['/tooliozLogo.png'],
   },
 };
@@ -38,7 +38,7 @@ export default function MergePdfPage() {
     '@type': 'SoftwareApplication',
     name: 'Toolioz PDF Merger',
     description:
-      'Backend PDF merge utility for combining multiple documents while preserving selected order.',
+      'Browser-based PDF merge utility for combining multiple documents while preserving selected order.',
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'All',
     isAccessibleForFree: true,

@@ -14,11 +14,11 @@ import {
   FileUp,
   ArrowDownWideNarrow,
   Loader2,
-  Server,
 } from 'lucide-react';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { FAQSchema } from '@/components/ui/FAQSchema';
 import { RelatedTools } from '@/components/ui/RelatedTools';
+import { mergePdfFilesInBrowser } from '@/lib/merge-pdfs-client';
 
 interface FileItem {
   id: string;
@@ -92,35 +92,8 @@ export default function MergePdfClient() {
     setResult(null);
 
     try {
-      const formData = new FormData();
-      files.forEach((item) => {
-        formData.append('files', item.file);
-      });
-
-      const response = await fetch('/api/pdf/merge', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!response.ok) {
-        let message = 'Failed to merge PDF files.';
-        try {
-          const payload = (await response.json()) as { error?: string };
-          if (payload.error) message = payload.error;
-        } catch {
-          // no-op
-        }
-        throw new Error(message);
-      }
-
-      const blob = await response.blob();
-      const mergedCount = Number(response.headers.get('x-merged-files')) || files.length;
-
-      setResult({
-        blob,
-        mergedCount,
-        outputName: `merged_${Date.now()}.pdf`,
-      });
+      const merged = await mergePdfFilesInBrowser(files.map((item) => item.file));
+      setResult(merged);
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Unable to merge files right now.';
       setErrorMessage(message);
@@ -151,7 +124,7 @@ export default function MergePdfClient() {
             Merge <span className="text-[#ef4444]">PDF</span> Files
           </h1>
           <p className="mx-auto max-w-[700px] text-[1.25rem] text-[var(--text-secondary)]">
-            Combine multiple PDF documents into one file using secure backend processing.
+            Combine multiple PDF documents into one file in your browser — nothing is uploaded to our servers.
           </p>
         </div>
       </header>
@@ -233,7 +206,7 @@ export default function MergePdfClient() {
                       ) : (
                         <>
                           Merge PDF Now
-                          <Server className="ml-2.5" size={20} />
+                          <Zap className="ml-2.5" size={20} />
                         </>
                       )}
                     </Button>
@@ -260,8 +233,11 @@ export default function MergePdfClient() {
             <div className="flex items-start gap-4 max-w-[300px]">
               <Zap size={32} className="text-[#ef4444] shrink-0" />
               <div>
-                <h5 className="mb-2 font-bold text-[1.125rem]">Server-Side Merge</h5>
-                <p className="text-[0.875rem] text-[var(--text-secondary)]">Documents are merged on backend APIs to handle larger multi-file batches reliably.</p>
+                <h5 className="mb-2 font-bold text-[1.125rem]">In-browser merge</h5>
+                <p className="text-[0.875rem] text-[var(--text-secondary)]">
+                  pdf-lib runs locally so files stay on your device and the Worker never processes
+                  uploads.
+                </p>
               </div>
             </div>
           </div>
@@ -301,16 +277,16 @@ export default function MergePdfClient() {
 
       <SEOSection
         title="PDF Merge Tool"
-        description="Merge multiple PDF files with a backend workflow built for reliability. Upload your documents, preserve ordering, and download one unified PDF."
+        description="Merge multiple PDF files in your browser. Upload your documents, preserve ordering, and download one unified PDF — no server upload."
         howToUse={[
           'Add two or more PDF files to the queue.',
           'Review the file order in the selected list.',
-          'Click Merge PDF Now to process on the backend.',
+          'Click Merge PDF Now to combine locally.',
           'Download the merged PDF once processing completes.',
         ]}
         benefits={[
-          'Reliable server-side merging for larger batches.',
-          'PDF validation and clear error responses.',
+          'Private client-side merging — files never leave your device.',
+          'PDF validation and clear error messages.',
           'Exact page order preservation across input files.',
           'Quick output for sharing and archival workflows.',
         ]}
