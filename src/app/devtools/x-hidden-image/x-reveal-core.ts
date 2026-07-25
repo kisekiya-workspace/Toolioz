@@ -457,6 +457,60 @@ export function buildTimelineVisibleOverlay(
   return new ImageData(data, width, height);
 }
 
+export type OverlayBrushMode = 'paint' | 'erase';
+
+export function paintOverlayDisk(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  cy: number,
+  radius: number,
+  mode: OverlayBrushMode,
+  opacity: number,
+) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+  if (mode === 'erase') {
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.fillStyle = 'rgba(0,0,0,1)';
+  } else {
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = `rgba(59, 130, 246, ${Math.min(1, Math.max(0, opacity))})`;
+  }
+  ctx.fill();
+  ctx.restore();
+}
+
+export function paintOverlayStroke(
+  ctx: CanvasRenderingContext2D,
+  x0: number,
+  y0: number,
+  x1: number,
+  y1: number,
+  radius: number,
+  mode: OverlayBrushMode,
+  opacity: number,
+) {
+  const dist = Math.hypot(x1 - x0, y1 - y0);
+  if (dist < 0.001) {
+    paintOverlayDisk(ctx, x0, y0, radius, mode, opacity);
+    return;
+  }
+  const step = Math.max(1, radius * 0.4);
+  const steps = Math.max(1, Math.ceil(dist / step));
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps;
+    paintOverlayDisk(
+      ctx,
+      x0 + (x1 - x0) * t,
+      y0 + (y1 - y0) * t,
+      radius,
+      mode,
+      opacity,
+    );
+  }
+}
+
 export function paintMaskDisk(
   mask: Uint8Array,
   width: number,
@@ -493,8 +547,13 @@ export function paintMaskStroke(
   radius: number,
   value: 0 | 1,
 ) {
-  const dist = Math.hypot(x1 - x0, y1 - y0);
-  const step = Math.max(1, radius * 0.35);
+  const dist = Math.hypot(x1 - x0, y1 - y1);
+  if (dist < 0.001) {
+    paintMaskDisk(mask, width, height, x0, y0, radius, value);
+    return;
+  }
+  // Overlap disks so fast strokes stay continuous (step ≤ ~40% of diameter).
+  const step = Math.max(1, radius * 0.4);
   const steps = Math.max(1, Math.ceil(dist / step));
   for (let i = 0; i <= steps; i++) {
     const t = i / steps;
@@ -508,6 +567,39 @@ export function paintMaskStroke(
       value,
     );
   }
+}
+
+/** Map pointer position to canvas-local CSS coords for brush cursor overlay. */
+export function brushCursorOnCanvas(
+  canvas: HTMLCanvasElement,
+  clientX: number,
+  clientY: number,
+  brushRadiusPx: number,
+): { x: number; y: number; diameter: number; inside: boolean } {
+  const rect = canvas.getBoundingClientRect();
+  const cw = canvas.width;
+  const ch = canvas.height;
+  if (cw <= 0 || ch <= 0 || rect.width <= 0 || rect.height <= 0) {
+    return { x: 0, y: 0, diameter: 0, inside: false };
+  }
+
+  const scale = Math.min(rect.width / cw, rect.height / ch);
+  const drawW = cw * scale;
+  const drawH = ch * scale;
+  const offsetX = (rect.width - drawW) / 2;
+  const offsetY = (rect.height - drawH) / 2;
+
+  const localX = clientX - rect.left;
+  const localY = clientY - rect.top;
+  const x = (localX - offsetX) / scale;
+  const y = (localY - offsetY) / scale;
+  const inside = x >= 0 && y >= 0 && x < cw && y < ch;
+
+  const cx = offsetX + x * scale;
+  const cy = offsetY + y * scale;
+  const diameter = Math.max(4, brushRadiusPx * 2 * scale);
+
+  return { x: cx, y: cy, diameter, inside };
 }
 
 export async function encodePngBlob(

@@ -40,7 +40,7 @@ export const Button: React.FC<ButtonProps> = ({
   ].join(' ');
 
   return (
-    <button className={buttonClass} disabled={disabled} {...props}>
+    <button className={buttonClass} {...props} disabled={disabled}>
       {children}
     </button>
   );

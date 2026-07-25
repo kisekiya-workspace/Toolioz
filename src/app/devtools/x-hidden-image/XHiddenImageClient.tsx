@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import {
   Download,
   Eraser,
@@ -23,6 +23,7 @@ import { FAQSchema } from '@/components/ui/FAQSchema';
 import {
   buildOpenViewPreview,
   buildTimelineVisibleOverlay,
+  brushCursorOnCanvas,
   clientToCanvasPixel,
   createHiddenTimelineMask,
   detectFeedLineArtMask,
@@ -35,7 +36,10 @@ import {
   lineStrengthToThreshold,
   loadImageFile,
   OUTPUT_PRESETS,
+  paintMaskDisk,
   paintMaskStroke,
+  paintOverlayDisk,
+  paintOverlayStroke,
   putRgbaOnCanvas,
   rasterizeCoverFit,
   simulateFeedThumbnail,
@@ -46,6 +50,13 @@ import {
 } from './x-reveal-core';
 
 type ExportFormat = 'png8' | 'rgba';
+
+const subscribeNoop = () => () => {};
+
+/** Same value on server and during hydration; true only after client attach. */
+function useIsClient() {
+  return useSyncExternalStore(subscribeNoop, () => true, () => false);
+}
 
 const X_REVEAL_FAQS = [
   {
@@ -81,6 +92,7 @@ const X_REVEAL_FAQS = [
 ];
 
 export default function XHiddenImageClient({ title, color }: { title?: string; color?: string }) {
+  const isClient = useIsClient();
   const accent = color ?? '#0f172a';
   const fileRef = useRef<HTMLInputElement>(null);
   const sourceImageRef = useRef<HTMLImageElement | null>(null);
@@ -90,9 +102,18 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
   const afterCanvasRef = useRef<HTMLCanvasElement>(null);
   const paintingRef = useRef(false);
   const lastPaintPointRef = useRef<{ x: number; y: number } | null>(null);
+  const pendingPaintRef = useRef<{
+    clientX: number;
+    clientY: number;
+    continueStroke: boolean;
+  } | null>(null);
+  const paintFrameRef = useRef<number | null>(null);
   const timelineMaskRef = useRef<Uint8Array | null>(null);
+  /** Immutable snapshot for undo; updated after each stroke (not on mousedown). */
+  const preStrokeMaskRef = useRef<Uint8Array | null>(null);
   const eraserActiveRef = useRef(false);
   const brushSizeRef = useRef(32);
+  const maskOpacityRef = useRef(35);
 
   const [fileName, setFileName] = useState<string | null>(null);
   const [preset, setPreset] = useState<OutputPresetId>('square');
@@ -116,11 +137,6 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
   const [maskHistory, setMaskHistory] = useState<Uint8Array[]>([]);
   const [encodeTick, setEncodeTick] = useState(0);
   const [exporting, setExporting] = useState(false);
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
 
   useEffect(() => {
     timelineMaskRef.current = timelineMask;
@@ -133,6 +149,18 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
   useEffect(() => {
     brushSizeRef.current = brushSize;
   }, [brushSize]);
+
+  useEffect(() => {
+    maskOpacityRef.current = maskOpacity;
+  }, [maskOpacity]);
+
+  useEffect(() => {
+    return () => {
+      if (paintFrameRef.current !== null) {
+        cancelAnimationFrame(paintFrameRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const timer = window.setTimeout(() => setLineStrengthApplied(lineStrength), 220);
@@ -149,6 +177,7 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
         if (resetBrush || !prev || prev.length !== size.width * size.height) {
           const fresh = createHiddenTimelineMask(size.width, size.height);
           timelineMaskRef.current = fresh;
+          preStrokeMaskRef.current = new Uint8Array(fresh);
           return fresh;
         }
         timelineMaskRef.current = prev;
@@ -219,9 +248,9 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
     lineColor,
   ]);
 
-  const canExport = hasMounted && encodedRgba !== null && !exporting;
-  const canResetMask = hasMounted && hasImage;
-  const canUndoMask = hasMounted && maskHistory.length > 0;
+  const exportDisabled = !isClient || encodedRgba === null || exporting;
+  const resetDisabled = !isClient || !hasImage;
+  const undoDisabled = !isClient || maskHistory.length === 0;
 
   const redrawMaskStage = useCallback(
     (maskOverride?: Uint8Array) => {
@@ -291,21 +320,21 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
 
   const applyBrushAt = useCallback(
     (clientX: number, clientY: number, continueStroke: boolean) => {
-      const currentMask = timelineMaskRef.current;
-      if (!currentMask || !sourceRaster) return;
+      const mask = timelineMaskRef.current;
+      if (!mask || !sourceRaster) return;
       const base = baseCanvasRef.current;
-      if (!base) return;
+      const overlay = overlayCanvasRef.current;
+      if (!base || !overlay) return;
       const pt = clientToCanvasPixel(base, clientX, clientY);
       if (!pt) return;
 
       const value: 0 | 1 = eraserActiveRef.current ? TIMELINE_HIDDEN : TIMELINE_VISIBLE;
       const radius = brushSizeRef.current;
-
-      const next = new Uint8Array(currentMask);
       const prev = lastPaintPointRef.current;
+
       if (continueStroke && prev) {
         paintMaskStroke(
-          next,
+          mask,
           sourceRaster.width,
           sourceRaster.height,
           prev.x,
@@ -316,50 +345,101 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
           value,
         );
       } else {
-        paintMaskStroke(
-          next,
-          sourceRaster.width,
-          sourceRaster.height,
-          pt.x,
-          pt.y,
-          pt.x,
-          pt.y,
-          radius,
-          value,
-        );
+        paintMaskDisk(mask, sourceRaster.width, sourceRaster.height, pt.x, pt.y, radius, value);
       }
       lastPaintPointRef.current = pt;
-      timelineMaskRef.current = next;
-      setTimelineMask(next);
-      redrawMaskStage(next);
-      setEncodeTick((t) => t + 1);
+
+      const opacity = maskOpacityRef.current;
+      if (opacity > 0) {
+        const overlayCtx = overlay.getContext('2d');
+        if (overlayCtx) {
+          const mode = eraserActiveRef.current ? 'erase' : 'paint';
+          if (continueStroke && prev) {
+            paintOverlayStroke(
+              overlayCtx,
+              prev.x,
+              prev.y,
+              pt.x,
+              pt.y,
+              radius,
+              mode,
+              opacity / 100,
+            );
+          } else {
+            paintOverlayDisk(overlayCtx, pt.x, pt.y, radius, mode, opacity / 100);
+          }
+        }
+      }
     },
-    [sourceRaster, redrawMaskStage],
+    [sourceRaster],
   );
 
-  const pushHistory = useCallback(() => {
-    const current = timelineMaskRef.current;
-    if (!current) return;
-    setMaskHistory((h) => [...h.slice(-24), new Uint8Array(current)]);
+  const flushPendingPaint = useCallback(() => {
+    paintFrameRef.current = null;
+    const job = pendingPaintRef.current;
+    if (!job || !paintingRef.current) return;
+    pendingPaintRef.current = null;
+    applyBrushAt(job.clientX, job.clientY, job.continueStroke);
+  }, [applyBrushAt]);
+
+  const queuePaint = useCallback(
+    (clientX: number, clientY: number, continueStroke: boolean) => {
+      pendingPaintRef.current = { clientX, clientY, continueStroke };
+      if (paintFrameRef.current === null) {
+        paintFrameRef.current = requestAnimationFrame(flushPendingPaint);
+      }
+    },
+    [flushPendingPaint],
+  );
+
+  const commitMaskToReact = useCallback(() => {
+    const mask = timelineMaskRef.current;
+    if (!mask) return;
+    const snapshot = new Uint8Array(mask);
+    preStrokeMaskRef.current = snapshot;
+    requestAnimationFrame(() => {
+      setTimelineMask(snapshot);
+      setEncodeTick((t) => t + 1);
+    });
+  }, []);
+
+  const queueUndoSnapshot = useCallback(() => {
+    const snap = preStrokeMaskRef.current;
+    if (!snap) return;
+    requestAnimationFrame(() => {
+      setMaskHistory((h) => [...h.slice(-24), snap]);
+    });
   }, []);
 
   const handlePointerDown = (e: React.PointerEvent) => {
     if (!hasImage) return;
     paintingRef.current = true;
     lastPaintPointRef.current = null;
-    pushHistory();
+    queueUndoSnapshot();
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
     applyBrushAt(e.clientX, e.clientY, false);
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
-    if (!paintingRef.current) return;
-    applyBrushAt(e.clientX, e.clientY, true);
+    if (paintingRef.current) {
+      queuePaint(e.clientX, e.clientY, true);
+    }
   };
 
   const endStroke = () => {
+    if (!paintingRef.current) return;
+    if (paintFrameRef.current !== null) {
+      cancelAnimationFrame(paintFrameRef.current);
+      paintFrameRef.current = null;
+    }
+    if (pendingPaintRef.current) {
+      const job = pendingPaintRef.current;
+      pendingPaintRef.current = null;
+      applyBrushAt(job.clientX, job.clientY, job.continueStroke);
+    }
     paintingRef.current = false;
     lastPaintPointRef.current = null;
+    commitMaskToReact();
   };
 
   const handleUndo = () => {
@@ -367,6 +447,7 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
     const prev = maskHistory[maskHistory.length - 1];
     const copy = new Uint8Array(prev);
     timelineMaskRef.current = copy;
+    preStrokeMaskRef.current = new Uint8Array(copy);
     setTimelineMask(copy);
     setMaskHistory((h) => h.slice(0, -1));
     redrawMaskStage(copy);
@@ -375,9 +456,13 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
 
   const handleResetMask = () => {
     if (!sourceRaster) return;
-    pushHistory();
+    const current = timelineMaskRef.current;
+    if (current && preStrokeMaskRef.current) {
+      setMaskHistory((h) => [...h.slice(-24), preStrokeMaskRef.current!]);
+    }
     const fresh = createHiddenTimelineMask(sourceRaster.width, sourceRaster.height);
     timelineMaskRef.current = fresh;
+    preStrokeMaskRef.current = new Uint8Array(fresh);
     setTimelineMask(fresh);
     redrawMaskStage(fresh);
     setEncodeTick((t) => t + 1);
@@ -432,7 +517,7 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
             <Button
               type="button"
               variant="secondary"
-              disabled={!canExport}
+              disabled={exportDisabled}
               onClick={() => void handleExport()}
             >
               <Download size={18} />
@@ -657,6 +742,8 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
                 <BrushStage
                   hasImage={hasImage}
                   canvasSize={canvasSize}
+                  brushSize={brushSize}
+                  eraserActive={eraserActive}
                   baseRef={baseCanvasRef}
                   overlayRef={overlayCanvasRef}
                   onPointerDown={handlePointerDown}
@@ -667,10 +754,10 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
               </div>
 
               <div className="flex flex-wrap gap-2 border-t border-[var(--border)] px-4 py-3">
-                <Button type="button" variant="ghost" size="sm" onClick={handleUndo} disabled={!canUndoMask}>
+                <Button type="button" variant="ghost" size="sm" onClick={handleUndo} disabled={undoDisabled}>
                   <Undo2 size={16} /> Undo
                 </Button>
-                <Button type="button" variant="ghost" size="sm" onClick={handleResetMask} disabled={!canResetMask}>
+                <Button type="button" variant="ghost" size="sm" onClick={handleResetMask} disabled={resetDisabled}>
                   <RotateCcw size={16} /> Reset mask
                 </Button>
               </div>
@@ -741,7 +828,7 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
             <Button
               type="button"
               className="mt-6 w-full xl:hidden"
-              disabled={!canExport}
+              disabled={exportDisabled}
               onClick={() => void handleExport()}
             >
               <Download size={18} /> Download PNG
@@ -762,6 +849,8 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
 function BrushStage({
   hasImage,
   canvasSize,
+  brushSize,
+  eraserActive,
   baseRef,
   overlayRef,
   onPointerDown,
@@ -771,6 +860,8 @@ function BrushStage({
 }: {
   hasImage: boolean;
   canvasSize: { width: number; height: number };
+  brushSize: number;
+  eraserActive: boolean;
   baseRef: React.RefObject<HTMLCanvasElement | null>;
   overlayRef: React.RefObject<HTMLCanvasElement | null>;
   onPointerDown: (e: React.PointerEvent) => void;
@@ -778,20 +869,80 @@ function BrushStage({
   onPointerUp: () => void;
   onPointerLeave: () => void;
 }) {
+  const [cursor, setCursor] = useState<{
+    x: number;
+    y: number;
+    diameter: number;
+    visible: boolean;
+  }>({ x: 0, y: 0, diameter: 32, visible: false });
+
+  const syncCursor = (e: React.PointerEvent) => {
+    if (!hasImage) {
+      setCursor((c) => (c.visible ? { ...c, visible: false } : c));
+      return;
+    }
+    const base = baseRef.current;
+    if (!base) return;
+    const mapped = brushCursorOnCanvas(base, e.clientX, e.clientY, brushSize);
+    setCursor({
+      x: mapped.x,
+      y: mapped.y,
+      diameter: mapped.diameter,
+      visible: mapped.inside,
+    });
+  };
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    syncCursor(e);
+    onPointerDown(e);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    syncCursor(e);
+    onPointerMove(e);
+  };
+
+  const handlePointerLeave = () => {
+    setCursor((c) => ({ ...c, visible: false }));
+    onPointerLeave();
+  };
+
+  const ringColor = eraserActive ? 'rgba(239, 68, 68, 0.95)' : 'rgba(59, 130, 246, 0.95)';
+  const fillColor = eraserActive ? 'rgba(239, 68, 68, 0.12)' : 'rgba(59, 130, 246, 0.12)';
+
   return (
     <div
-      className="relative mx-auto w-full max-w-lg touch-none"
+      className={`relative mx-auto w-full max-w-lg touch-none ${hasImage ? 'cursor-none' : ''}`}
       style={{
         aspectRatio: `${canvasSize.width} / ${canvasSize.height}`,
         maxHeight: 'min(520px, 58vh)',
       }}
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
       onPointerUp={onPointerUp}
-      onPointerLeave={onPointerLeave}
+      onPointerLeave={handlePointerLeave}
+      onPointerEnter={syncCursor}
     >
       <canvas ref={baseRef} className="absolute inset-0 h-full w-full" />
       <canvas ref={overlayRef} className="pointer-events-none absolute inset-0 h-full w-full" />
+      {hasImage && cursor.visible && (
+        <div
+          className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 shadow-[0_0_0_1px_rgba(255,255,255,0.85)]"
+          style={{
+            left: cursor.x,
+            top: cursor.y,
+            width: cursor.diameter,
+            height: cursor.diameter,
+            borderColor: ringColor,
+            backgroundColor: fillColor,
+          }}
+        >
+          <div
+            className="absolute left-1/2 top-1/2 h-1 w-1 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/90"
+            style={{ boxShadow: '0 0 0 1px rgba(15,23,42,0.35)' }}
+          />
+        </div>
+      )}
       {!hasImage && (
         <p className="absolute inset-0 flex items-center justify-center rounded-[var(--radius-md)] border border-dashed border-[var(--border)] bg-white/80 text-sm text-[var(--text-secondary)]">
           Upload an image to edit the feed mask
