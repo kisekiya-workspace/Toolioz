@@ -625,7 +625,7 @@ export const devtoolsBlogPosts: DevToolsBlogPost[] = [
       {
         heading: 'Salt Generation and Re-Hashing Upgrades',
         body: [
-          'Bcrypt automatically incorporates a cryptographically secure 128-bit random salt into the hash string (e.g., $2b$12$eImiTXuWVfxh0Vi...'). This prevents precomputed rainbow table attacks.',
+          'Bcrypt automatically incorporates a cryptographically secure 128-bit random salt into the hash string (e.g., "$2b$12$eImiTXuWVfxh0Vi..."). This prevents precomputed rainbow table attacks.',
           'When upgrading cost factors on existing user accounts, re-hash the password upon successful login when verifying older hashes.',
         ],
       },
