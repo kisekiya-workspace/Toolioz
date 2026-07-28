@@ -83,7 +83,7 @@ export default async function Top5BlogPostPage({ params }: Top5PageProps) {
       <JSONLD data={articleJsonLd} />
       <JSONLD data={faqJsonLd} />
 
-      <article className="mx-auto max-w-4xl px-6 py-12 md:py-20">
+      <article className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
         <Link href="/top5" className="mb-8 inline-flex items-center gap-2 text-sm font-bold text-blue-700 transition hover:text-blue-800">
           <ArrowLeft size={16} />
           Back to Top Lists
@@ -119,12 +119,12 @@ export default async function Top5BlogPostPage({ params }: Top5PageProps) {
           </div>
         </div>
 
-        {/* Direct Answer TL;DR Box (AEO) */}
+        {/* Direct Answer TL;DR Quick Summary (AEO) */}
         <section className="mt-12 rounded-[2rem] border border-blue-200 bg-blue-50/50 p-8 shadow-sm">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-blue-800">
+          <h2 className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-blue-800">
             <Sparkles size={16} className="text-blue-700 shrink-0 animate-pulse" />
             <span>Direct Answer / TL;DR Quick Summary</span>
-          </div>
+          </h2>
           <p className="mt-4 text-lg font-bold leading-8 text-blue-950">
             {post.tldr}
           </p>
@@ -132,10 +132,10 @@ export default async function Top5BlogPostPage({ params }: Top5PageProps) {
 
         {/* Intro Paragraph */}
         <div className="mt-12 rounded-[2rem] border border-slate-200 bg-white p-8 md:p-10 shadow-sm leading-relaxed">
-          <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-blue-700 mb-4">
+          <h2 className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-blue-700 mb-4">
             <Sparkles size={16} />
             Executive Summary
-          </div>
+          </h2>
           <p className="text-lg text-[var(--text-secondary)] leading-8">
             {post.intro}
           </p>
@@ -179,10 +179,10 @@ export default async function Top5BlogPostPage({ params }: Top5PageProps) {
         {/* Mathematical/Technical Proof Callout (GEO) */}
         {post.mathematicalProof && (
           <section className="mt-12 rounded-[2rem] border border-slate-200 bg-slate-950 p-8 text-white shadow-md">
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-blue-400 mb-4">
+            <h2 className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-blue-400 mb-4">
               <BookOpen size={16} />
               <span>Technical & Mathematical Proof</span>
-            </div>
+            </h2>
             {post.mathematicalProof.formula && (
               <div className="mb-4 rounded-xl bg-white/5 border border-white/10 p-5 font-mono text-center text-lg md:text-xl text-blue-300 overflow-x-auto whitespace-nowrap">
                 {post.mathematicalProof.formula}
@@ -220,18 +220,18 @@ export default async function Top5BlogPostPage({ params }: Top5PageProps) {
 
                     <div className="mt-6 grid gap-4 sm:grid-cols-2">
                       <div className="rounded-xl bg-slate-50 border border-slate-100 p-4">
-                        <div className="text-xs font-bold uppercase tracking-[0.08em] text-slate-500 mb-1">
+                        <h4 className="text-xs font-bold uppercase tracking-[0.08em] text-slate-500 mb-1">
                           Why It Matters
-                        </div>
+                        </h4>
                         <p className="text-sm leading-6 text-slate-600">
                           {tool.whyItMatters}
                         </p>
                       </div>
 
                       <div className="rounded-xl bg-slate-50 border border-slate-100 p-4">
-                        <div className="text-xs font-bold uppercase tracking-[0.08em] text-slate-500 mb-1">
+                        <h4 className="text-xs font-bold uppercase tracking-[0.08em] text-slate-500 mb-1">
                           Best For
-                        </div>
+                        </h4>
                         <p className="text-sm leading-6 text-slate-600">
                           {tool.bestFor}
                         </p>
@@ -292,11 +292,11 @@ export default async function Top5BlogPostPage({ params }: Top5PageProps) {
 
         {/* Privacy Note */}
         <section className="mt-12 rounded-[2rem] border border-emerald-100 bg-emerald-50/50 p-6 md:p-8">
-          <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-emerald-700">
+          <h2 className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-emerald-700">
             <ShieldCheck size={18} />
             Data Protection Guarantee
-          </div>
-          <h2 className="mt-3 text-xl font-bold">100% Browser-Local Execution</h2>
+          </h2>
+          <h3 className="mt-3 text-xl font-bold">100% Browser-Local Execution</h3>
           <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
             Toolioz runs entirely within your device's browser memory. Your personal text outputs, keys, documents, numbers, and inputs are never uploaded to any remote database. You can read, format, calculate, and compile safely.
           </p>
@@ -304,14 +304,14 @@ export default async function Top5BlogPostPage({ params }: Top5PageProps) {
 
         {/* References Section */}
         <section className="mt-12 rounded-[2rem] border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
-          <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-blue-700">
+          <h2 className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-blue-700">
             <ExternalLink size={16} />
             Official Research Sources
-          </div>
+          </h2>
           <div className="mt-4 grid gap-3 md:grid-cols-2">
             {post.sources.map((source) => (
               <a
-                key={source.href}
+                key={`${source.label}-${source.href}`}
                 href={source.href}
                 target="_blank"
                 rel="noreferrer"
@@ -338,10 +338,10 @@ export default async function Top5BlogPostPage({ params }: Top5PageProps) {
 
         {/* Other comparison lists */}
         <section className="mt-16 border-t border-slate-200 pt-12">
-          <div className="mb-6 flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-slate-400">
+          <h2 className="mb-6 flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-slate-400">
             <ArrowRight size={14} />
             Explore More Top Lists
-          </div>
+          </h2>
           <div className="grid gap-6 md:grid-cols-3">
             {otherArticles.map((related) => (
               <Link

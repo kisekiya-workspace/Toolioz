@@ -8,6 +8,7 @@ import { calculateTax } from '@/lib/formulas';
 import { CreditCard, Info, AlertTriangle, CheckCircle2, ShieldCheck, BookOpen, Clock, Lightbulb } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
+import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
 
 import { RelatedTools } from '@/components/ui/RelatedTools';
 import { FAQSchema } from '@/components/ui/FAQSchema';
@@ -186,6 +187,10 @@ export default function GSTClient() {
                 </p>
               </div>
             </div>
+          </div>
+
+          <div className="mx-auto mt-8 max-w-[1000px]">
+            <FinancialDisclaimer />
           </div>
         </section>
 

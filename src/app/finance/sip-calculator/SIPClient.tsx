@@ -9,6 +9,7 @@ import { Info, TrendingUp, Sparkles, Target, AlertTriangle, ShieldCheck, BookOpe
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { RelatedTools } from '@/components/ui/RelatedTools';
+import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
 
 import { FAQSchema } from '@/components/ui/FAQSchema';
@@ -254,6 +255,9 @@ export default function SIPClient() {
                 </div>
               </div>
             </Card>
+          </div>
+          <div className="mx-auto mt-8 max-w-[900px]">
+            <FinancialDisclaimer />
           </div>
         </section>
 

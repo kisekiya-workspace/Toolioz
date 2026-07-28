@@ -27,6 +27,7 @@ import {
   Terminal,
   TrendingDown,
   UserRound,
+  Sparkles,
   type LucideIcon
 } from 'lucide-react';
 
@@ -316,6 +317,36 @@ export const TOOLS: Tool[] = [
     isTrending: true
   },
   {
+    id: 'dither-studio',
+    title: 'Image & Video Dither Studio',
+    desc: 'Apply retro 1-bit, Floyd-Steinberg, Bayer ordered, GameBoy, CGA, and pixel art dithering to images and videos live in browser.',
+    icon: Palette,
+    href: '/devtools/dither-studio',
+    color: '#ec4899',
+    category: 'devtools',
+    isTrending: true
+  },
+  {
+    id: 'shader-tool',
+    title: 'WebGL GLSL Shader Studio',
+    desc: 'Interactive real-time GLSL fragment shader editor & playground. Live preview, Shadertoy uniforms, raymarching SDFs, presets, and code export.',
+    icon: Sparkles,
+    href: '/devtools/shader-tool',
+    color: '#8b5cf6',
+    category: 'devtools',
+    isTrending: true
+  },
+  {
+    id: 'background-generator',
+    title: 'Free Shader Background Generator',
+    desc: 'Design beautiful animated shader-based background images for wallpapers, social headers, and website hero sections. Customize colors and export high-res PNGs or CSS.',
+    icon: LayoutDashboard,
+    href: '/devtools/background-generator',
+    color: '#a855f7',
+    category: 'devtools',
+    isTrending: true
+  },
+  {
     id: 'biodata-generator',
     title: 'Biodata Generator',
     desc: 'Create marriage biodata PDFs with religion-based and modern templates.',
@@ -326,37 +357,7 @@ export const TOOLS: Tool[] = [
     isTrending: true
   },
 
-  // PDF Tools (Mocks)
-  {
-    id: 'merge-pdf',
-    title: 'Merge PDF',
-    desc: 'Combine multiple PDF files into one single document.',
-    icon: FileText,
-    href: '/pdftools/merge-pdf',
-    color: '#ef4444',
-    category: 'pdftools',
-    isTrending: true
-  },
-  {
-    id: 'pdf-to-image',
-    title: 'PDF to Image',
-    desc: 'Convert your PDF pages into high-quality JPG or PNG images.',
-    icon: FileSearch,
-    href: '/pdftools/pdf-to-image',
-    color: '#0ea5e9',
-    category: 'pdftools'
-  },
-
-  {
-    id: 'image-compressor',
-    title: 'Image Compressor',
-    desc: 'Reduce image file size for web while maintaining visual quality.',
-    icon: ImagePlus,
-    href: '/pdftools/image-compressor',
-    color: '#3b82f6',
-    category: 'pdftools',
-    isTrending: true
-  },
+  // Resume & PDF Tools
   {
     id: 'resume-generator',
     title: 'ATS Resume Generator',

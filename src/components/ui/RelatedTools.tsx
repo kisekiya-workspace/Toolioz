@@ -26,9 +26,9 @@ export const RelatedTools: React.FC<RelatedToolsProps> = ({
   return (
     <section className="mt-16 border-t border-[var(--border)] bg-[#fafafa] py-16 sm:mt-20 sm:py-20">
       <div className="mx-auto max-w-[1000px] px-6">
-        <h3 className="mb-10 text-center text-[1.8rem] font-black tracking-tight text-[var(--text-primary)]">
+        <h2 className="mb-10 text-center text-[1.8rem] font-black tracking-tight text-[var(--text-primary)]">
           Explore Related Tools
-        </h3>
+        </h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {related.map((tool) => (
             <Link
@@ -43,9 +43,9 @@ export const RelatedTools: React.FC<RelatedToolsProps> = ({
                 >
                   <tool.icon size={24} />
                 </div>
-                <h4 className="mb-2 text-[1.1rem] font-bold text-[var(--text-primary)] transition-colors duration-200 group-hover:text-[var(--primary)]">
+                <h3 className="mb-2 text-[1.1rem] font-bold text-[var(--text-primary)] transition-colors duration-200 group-hover:text-[var(--primary)]">
                   {tool.title}
-                </h4>
+                </h3>
                 <p className="line-clamp-3 text-[0.875rem] leading-[1.6] text-[var(--text-secondary)]">
                   {tool.desc}
                 </p>

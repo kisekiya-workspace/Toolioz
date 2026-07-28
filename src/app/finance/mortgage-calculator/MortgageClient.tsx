@@ -8,6 +8,7 @@ import { calculateMonthlyPayment } from '@/lib/formulas';
 import { Info, HomeIcon, ShieldCheck, PieChart, BookOpen, AlertTriangle, Lightbulb } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
+import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
 
 import { FAQSchema } from '@/components/ui/FAQSchema';
@@ -129,6 +130,56 @@ export default function MortgageClient() {
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* Amortization Breakdown Table */}
+          <div className="mt-12 rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
+            <h3 className="mb-4 text-xl font-bold text-[var(--text-primary)]">Mortgage Amortization Schedule (Yearly)</h3>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm border-collapse min-w-[500px]">
+                <thead>
+                  <tr className="border-b border-[var(--border)] bg-slate-50 text-xs uppercase tracking-wider text-slate-500">
+                    <th className="p-3 font-bold">Year</th>
+                    <th className="p-3 font-bold">Principal Paid</th>
+                    <th className="p-3 font-bold">Interest Paid</th>
+                    <th className="p-3 font-bold">Remaining Balance</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {(() => {
+                    let balance = principal;
+                    const monthlyRate = rate / 100 / 12;
+                    return Array.from({ length: Math.min(years, 30) }, (_, i) => {
+                      const year = i + 1;
+                      let yearPrincipal = 0;
+                      let yearInterest = 0;
+
+                      for (let m = 0; m < 12; m++) {
+                        if (balance <= 0) break;
+                        const interestPayment = balance * monthlyRate;
+                        const principalPayment = Math.min(balance, result - interestPayment);
+                        yearPrincipal += principalPayment;
+                        yearInterest += interestPayment;
+                        balance -= principalPayment;
+                      }
+
+                      return (
+                        <tr key={year} className="hover:bg-slate-50/50">
+                          <td className="p-3 font-bold text-slate-900">Year {year}</td>
+                          <td className="p-3 text-emerald-600 font-medium">{formatCurrency(yearPrincipal)}</td>
+                          <td className="p-3 text-amber-600 font-medium">{formatCurrency(yearInterest)}</td>
+                          <td className="p-3 font-bold text-slate-900">{formatCurrency(Math.max(0, balance))}</td>
+                        </tr>
+                      );
+                    });
+                  })()}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <FinancialDisclaimer />
           </div>
         </section>
 

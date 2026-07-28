@@ -10,6 +10,7 @@ import { SEOSection } from '@/components/ui/SEOSection';
 import { RelatedTools } from '@/components/ui/RelatedTools';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
 import { FAQSchema } from '@/components/ui/FAQSchema';
+import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
 import { BookOpen, Info, Lightbulb, ShieldCheck, Target, Wallet } from 'lucide-react';
 
 const RETIREMENT_FAQS = [
@@ -190,6 +191,10 @@ export default function RetirementCorpusClient() {
                 </div>
               </div>
             </Card>
+          </div>
+
+          <div className="mx-auto mt-8 max-w-[900px]">
+            <FinancialDisclaimer />
           </div>
 
           <section className="mx-auto max-w-[900px] px-6 py-16">

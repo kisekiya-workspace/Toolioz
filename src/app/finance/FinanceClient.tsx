@@ -8,6 +8,7 @@ import { Footer } from '@/components/layout/Footer';
 import Link from 'next/link';
 import { TOOLS } from '@/lib/tools';
 import { financeBlogPosts } from '@/lib/finance-blog-content';
+import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
 
 export default function FinanceClient() {
   const [search, setSearch] = useState('');
@@ -146,6 +147,10 @@ export default function FinanceClient() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section className="container section !py-8">
+        <FinancialDisclaimer />
       </section>
 
       <Footer />

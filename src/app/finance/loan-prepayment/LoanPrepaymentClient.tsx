@@ -10,6 +10,7 @@ import { SEOSection } from '@/components/ui/SEOSection';
 import { RelatedTools } from '@/components/ui/RelatedTools';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
 import { FAQSchema } from '@/components/ui/FAQSchema';
+import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
 import { BookOpen, Info, Lightbulb, ShieldCheck, TrendingDown } from 'lucide-react';
 
 const PREPAYMENT_FAQS = [
@@ -170,6 +171,10 @@ export default function LoanPrepaymentClient() {
                 </div>
               </div>
             </Card>
+          </div>
+
+          <div className="mx-auto mt-8 max-w-[900px]">
+            <FinancialDisclaimer />
           </div>
         </section>
 

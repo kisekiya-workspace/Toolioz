@@ -10,6 +10,7 @@ import { SEOSection } from '@/components/ui/SEOSection';
 import { RelatedTools } from '@/components/ui/RelatedTools';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
 import { FAQSchema } from '@/components/ui/FAQSchema';
+import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
 import { BookOpen, Coins, Info, Lightbulb, ShieldCheck, TrendingUp } from 'lucide-react';
 
 const LUMPSUM_FAQS = [
@@ -160,6 +161,9 @@ export default function LumpsumClient() {
                 </div>
               </div>
             </Card>
+          </div>
+          <div className="mx-auto mt-8 max-w-[900px]">
+            <FinancialDisclaimer />
           </div>
         </section>
 

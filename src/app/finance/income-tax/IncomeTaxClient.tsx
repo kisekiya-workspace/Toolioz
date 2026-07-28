@@ -9,6 +9,7 @@ import { Wallet, Info, AlertTriangle, ShieldCheck, PieChart, Download, BookOpen,
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { RelatedTools } from '@/components/ui/RelatedTools';
+import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
 
 const INCOME_TAX_FAQS = [
   {
@@ -266,7 +267,11 @@ export default function IncomeTaxClient() {
                 </div>
               </Card>
 
-              <div className="flex items-center gap-4 rounded-[var(--radius-md)] border border-[var(--border)] bg-white p-5 shadow-sm">
+              <div className="mt-4">
+                <FinancialDisclaimer />
+              </div>
+
+              <div className="flex items-center gap-4 rounded-[var(--radius-md)] border border-[var(--border)] bg-white p-5 shadow-sm mt-4">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#f8fafc] text-[#3b82f6]"><PieChart size={24} /></div>
                 <p className="m-0 text-[0.85rem] leading-[1.6] text-[var(--text-secondary)]">{country === 'IN' ? 'The New Regime (default) is optimized for higher incomes with lower compliance overhead.' : 'Always check for local state/city taxes as they are not included in this federal estimation.'}</p>
               </div>

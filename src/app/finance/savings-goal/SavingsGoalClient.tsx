@@ -8,6 +8,7 @@ import { calculateSavingsGoal } from '@/lib/formulas';
 import { Info, Target, TrendingUp, Sparkles, ShieldCheck, BookOpen, AlertTriangle, Lightbulb } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
+import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
 
 import { RelatedTools } from '@/components/ui/RelatedTools';
@@ -114,6 +115,10 @@ export default function SavingsGoalClient() {
                 </p>
               </div>
             </div>
+          </div>
+
+          <div className="mt-8">
+            <FinancialDisclaimer />
           </div>
         </section>
 

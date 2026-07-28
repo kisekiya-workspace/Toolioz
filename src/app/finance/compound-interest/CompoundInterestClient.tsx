@@ -8,6 +8,7 @@ import { calculateCompoundInterest } from '@/lib/formulas';
 import { TrendingUp, Info, Sparkles, ShieldCheck, BookOpen, Clock, Lightbulb } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
+import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
 import { calculatorPageStyles as styles } from './page.styles';
 
 import { FAQSchema } from '@/components/ui/FAQSchema';
@@ -127,6 +128,43 @@ export default function CompoundInterestClient() {
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* Year-by-Year Growth Table */}
+          <div className="mt-12 rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
+            <h3 className="mb-4 text-xl font-bold text-[var(--text-primary)]">Year-by-Year Growth Schedule</h3>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-sm border-collapse min-w-[500px]">
+                <thead>
+                  <tr className="border-b border-[var(--border)] bg-slate-50 text-xs uppercase tracking-wider text-slate-500">
+                    <th className="p-3 font-bold">Year</th>
+                    <th className="p-3 font-bold">Starting Principal</th>
+                    <th className="p-3 font-bold">Interest Earned</th>
+                    <th className="p-3 font-bold">Ending Balance</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {Array.from({ length: Math.min(years, 30) }, (_, i) => {
+                    const y = i + 1;
+                    const startBal = calculateCompoundInterest(principal, rate / 100, freq, y - 1);
+                    const endBal = calculateCompoundInterest(principal, rate / 100, freq, y);
+                    const interestEarned = endBal - startBal;
+                    return (
+                      <tr key={y} className="hover:bg-slate-50/50">
+                        <td className="p-3 font-bold text-slate-900">Year {y}</td>
+                        <td className="p-3 text-slate-600">{formatCurrency(startBal)}</td>
+                        <td className="p-3 text-emerald-600 font-semibold">+{formatCurrency(interestEarned)}</td>
+                        <td className="p-3 font-bold text-slate-900">{formatCurrency(endBal)}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <FinancialDisclaimer />
           </div>
         </section>
 
