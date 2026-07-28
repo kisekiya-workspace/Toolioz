@@ -4,9 +4,9 @@ import PortalClient from './PortalClient';
 import { buildItemListJsonLd, buildPageMetadata, buildWebsiteJsonLd, allToolItems } from '@/lib/seo';
 
 export const metadata = buildPageMetadata({
-  title: 'Toolioz | Free Finance Calculators, Dev Tools & PDF Utilities',
+  title: 'Toolioz | Free Finance Calculators, Dev & PDF Utilities',
   description:
-    'Free SIP calculator, income tax, loan EMI, JSON formatter, X tap-to-reveal PNG maker, PDF merge, marriage biodata maker, and ATS resume builder. Fast, private, client-side tools for India and global users.',
+    'Free SIP & tax calculators, JSON formatter, PDF merge, marriage biodata maker, and ATS resume builder. Fast, private, client-side web tools.',
   path: '/',
   keywords: [
     'sip calculator india',

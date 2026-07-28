@@ -9,11 +9,11 @@ import { DEFAULT_OG_IMAGE } from '@/lib/seo';
 export const metadata: Metadata = {
   metadataBase: new URL('https://toolioz.com'),
   title: {
-    default: 'Toolioz | Finance, Dev, and PDF Utilities',
+    default: 'Toolioz | Free Finance Calculators, Dev & PDF Utilities',
     template: '%s | Toolioz',
   },
   description:
-    'A practical suite of finance calculators, developer tools, and PDF utilities built for fast daily workflows.',
+    'Free SIP & tax calculators, JSON formatter, PDF merge, marriage biodata maker, and ATS resume builder. Private, browser-local utilities.',
   applicationName: 'Toolioz',
   alternates: {
     canonical: 'https://toolioz.com',
@@ -28,9 +28,9 @@ export const metadata: Metadata = {
   },
   manifest: '/manifest.webmanifest',
   openGraph: {
-    title: 'Toolioz | Finance, Dev, and PDF Utilities',
+    title: 'Toolioz | Free Finance Calculators, Dev & PDF Utilities',
     description:
-      'Free SIP calculator, income tax, JSON formatter, PDF merge, marriage biodata, and ATS resume builder. Private, client-side tools.',
+      'Free SIP & tax calculators, JSON formatter, PDF merge, marriage biodata maker, and ATS resume builder. Private, client-side tools.',
     url: 'https://toolioz.com',
     siteName: 'Toolioz',
     locale: 'en_US',
@@ -74,6 +74,18 @@ export default function RootLayout({
     name: 'Toolioz',
     url: 'https://toolioz.com',
     logo: 'https://toolioz.com/tooliozLogo.svg',
+    sameAs: [
+      'https://twitter.com/toolioz',
+      'https://facebook.com/toolioz',
+      'https://instagram.com/toolioz',
+      'https://linkedin.com/company/toolioz',
+      'https://youtube.com/@toolioz',
+    ],
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      email: 'support@toolioz.com',
+    },
   };
 
   return (

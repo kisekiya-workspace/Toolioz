@@ -94,6 +94,13 @@ export function buildWebsiteJsonLd() {
       name: SITE_NAME,
       url: SITE_URL,
       logo: `${SITE_URL}/tooliozLogo.svg`,
+      sameAs: [
+        'https://twitter.com/toolioz',
+        'https://facebook.com/toolioz',
+        'https://instagram.com/toolioz',
+        'https://linkedin.com/company/toolioz',
+        'https://youtube.com/@toolioz',
+      ],
     },
     potentialAction: {
       '@type': 'SearchAction',
