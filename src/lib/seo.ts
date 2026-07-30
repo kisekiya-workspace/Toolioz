@@ -193,6 +193,40 @@ export function buildPageMetadata(options: {
   };
 }
 
+export function buildBreadcrumbJsonLd(items: Array<{ name: string; url: string }>) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: absoluteUrl(item.url),
+    })),
+  };
+}
+
+export function buildHowToJsonLd(options: {
+  name: string;
+  description: string;
+  steps: Array<{ name: string; text: string }>;
+  path: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: options.name,
+    description: options.description,
+    url: absoluteUrl(options.path),
+    step: options.steps.map((s, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      name: s.name,
+      text: s.text,
+    })),
+  };
+}
+
 export const allToolItems = TOOLS.map((t) => ({
   name: t.title,
   url: t.href,

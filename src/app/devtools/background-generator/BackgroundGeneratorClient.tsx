@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { DirectAnswerBlock } from '@/components/ui/DirectAnswerBlock';
+import { BreadcrumbJsonLd } from '@/components/ui/BreadcrumbJsonLd';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { FAQSchema } from '@/components/ui/FAQSchema';
 import { RelatedTools } from '@/components/ui/RelatedTools';
@@ -331,6 +333,153 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
     setDragTarget(null);
   };
 
+  // Render WebGL Background (Isolated from Text Dragging)
+  const renderWebGLBackground = useCallback(() => {
+    const webglCanvas = webglCanvasRef.current;
+    const gl = glRef.current;
+    const program = programRef.current;
+
+    if (!webglCanvas || !gl || !program) return;
+
+    const w = activeRatio.width;
+    const h = activeRatio.height;
+
+    if (webglCanvas.width !== w || webglCanvas.height !== h) {
+      webglCanvas.width = w;
+      webglCanvas.height = h;
+      gl.viewport(0, 0, w, h);
+    }
+
+    gl.useProgram(program);
+    gl.uniform2f(gl.getUniformLocation(program, 'iResolution'), w, h);
+    gl.uniform1f(gl.getUniformLocation(program, 'uVariation'), variation / 100.0);
+    gl.uniform1f(gl.getUniformLocation(program, 'uDistortion'), distortion);
+    gl.uniform1f(gl.getUniformLocation(program, 'uSwirl'), swirl);
+    gl.uniform1f(gl.getUniformLocation(program, 'uScale'), scale);
+    gl.uniform1f(gl.getUniformLocation(program, 'uNoise'), noise);
+
+    const colorCount = Math.min(colors.length, 5);
+    gl.uniform1i(gl.getUniformLocation(program, 'uColorCount'), colorCount);
+    for (let i = 0; i < colorCount; i++) {
+      const [r, g, b] = hexToRgb(colors[i]);
+      const loc = gl.getUniformLocation(program, `uColors[${i}]`);
+      if (loc) gl.uniform3f(loc, r, g, b);
+    }
+
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+  }, [
+    activeRatio,
+    variation,
+    distortion,
+    swirl,
+    scale,
+    noise,
+    colors
+  ]);
+
+  // Render combined Canvas (WebGL + Overlays)
+  const renderCompositeCanvas = useCallback(() => {
+    const canvas = canvasRef.current;
+    const webglCanvas = webglCanvasRef.current;
+
+    if (!canvas || !webglCanvas) return;
+
+    const w = activeRatio.width;
+    const h = activeRatio.height;
+
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w;
+      canvas.height = h;
+    }
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    ctx.clearRect(0, 0, w, h);
+    ctx.drawImage(webglCanvas, 0, 0);
+
+    // Render Image / Logo Overlay
+    if (enableImage && uploadedImageObj) {
+      ctx.save();
+      const posX = (imagePosRef.current.x / 100) * w;
+      const posY = (imagePosRef.current.y / 100) * h;
+      const imgW = w * imageScaleState;
+      const imgH = (uploadedImageObj.height / uploadedImageObj.width) * imgW;
+
+      ctx.translate(posX, posY);
+      if (imageRotation !== 0) {
+        ctx.rotate((imageRotation * Math.PI) / 180);
+      }
+      ctx.globalAlpha = imageOpacity;
+
+      if (imageBorderRadius > 0) {
+        ctx.beginPath();
+        const r = Math.min(imageBorderRadius * (w / 1000), imgW / 2, imgH / 2);
+        ctx.roundRect(-imgW / 2, -imgH / 2, imgW, imgH, r);
+        ctx.clip();
+      }
+
+      ctx.drawImage(uploadedImageObj, -imgW / 2, -imgH / 2, imgW, imgH);
+      ctx.restore();
+    }
+
+    // Render Single Text Overlay
+    if (enableText && headingText) {
+      ctx.save();
+      const posX = (textPosRef.current.x / 100) * w;
+      const posY = (textPosRef.current.y / 100) * h;
+      const fontScale = w / 1000;
+      const scaledSize = Math.round(textSize * fontScale);
+
+      ctx.translate(posX, posY);
+      if (textRotation !== 0) {
+        ctx.rotate((textRotation * Math.PI) / 180);
+      }
+
+      const fontStyleStr = activeStyleObj.style === 'italic' ? 'italic ' : '';
+      const fontWeightStr = activeStyleObj.weight === 'bold' ? 'bold ' : '';
+      ctx.font = `${fontStyleStr}${fontWeightStr}${scaledSize}px ${activeFontObj.family}`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      if (textShadowBlur > 0) {
+        ctx.shadowColor = textShadowColor;
+        ctx.shadowBlur = textShadowBlur * fontScale;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 4 * fontScale;
+      }
+
+      if (textStrokeWidth > 0) {
+        ctx.strokeStyle = textStrokeColor;
+        ctx.lineWidth = textStrokeWidth * fontScale;
+        ctx.strokeText(headingText, 0, 0);
+      }
+
+      ctx.fillStyle = textColor;
+      ctx.fillText(headingText, 0, 0);
+      ctx.restore();
+    }
+  }, [
+    activeRatio,
+    enableImage,
+    uploadedImageObj,
+    imageScaleState,
+    imageRotation,
+    imageOpacity,
+    imageBorderRadius,
+    enableText,
+    headingText,
+    textSize,
+    activeFontObj,
+    activeStyleObj,
+    textColor,
+    textRotation,
+    textShadowBlur,
+    textShadowColor,
+    textStrokeWidth,
+    textStrokeColor
+  ]);
+
   // Compile WebGL Fragment Shader Engine — Restored Inward Circle Blending + Anti-Banding Dithering
   useEffect(() => {
     let canvas = webglCanvasRef.current;
@@ -350,8 +499,6 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
     const vs = gl.createShader(gl.VERTEX_SHADER)!;
     gl.shaderSource(vs, vsSource);
     gl.compileShader(vs);
-
-
 
     let shaderBody = '';
 
@@ -604,156 +751,11 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
     const aPos = gl.getAttribLocation(program, 'aPosition');
     gl.enableVertexAttribArray(aPos);
     gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
-  }, [activeShader]);
 
-  // Render WebGL Background (Isolated from Text Dragging)
-  const renderWebGLBackground = useCallback(() => {
-    const webglCanvas = webglCanvasRef.current;
-    const gl = glRef.current;
-    const program = programRef.current;
-
-    if (!webglCanvas || !gl || !program) return;
-
-    const w = activeRatio.width;
-    const h = activeRatio.height;
-
-    if (webglCanvas.width !== w || webglCanvas.height !== h) {
-      webglCanvas.width = w;
-      webglCanvas.height = h;
-      gl.viewport(0, 0, w, h);
-    }
-
-    gl.useProgram(program);
-    gl.uniform2f(gl.getUniformLocation(program, 'iResolution'), w, h);
-    gl.uniform1f(gl.getUniformLocation(program, 'uVariation'), variation / 100.0);
-    gl.uniform1f(gl.getUniformLocation(program, 'uDistortion'), distortion);
-    gl.uniform1f(gl.getUniformLocation(program, 'uSwirl'), swirl);
-    gl.uniform1f(gl.getUniformLocation(program, 'uScale'), scale);
-    gl.uniform1f(gl.getUniformLocation(program, 'uNoise'), noise);
-
-    const colorCount = Math.min(colors.length, 5);
-    gl.uniform1i(gl.getUniformLocation(program, 'uColorCount'), colorCount);
-    for (let i = 0; i < colorCount; i++) {
-      const [r, g, b] = hexToRgb(colors[i]);
-      const loc = gl.getUniformLocation(program, `uColors[${i}]`);
-      if (loc) gl.uniform3f(loc, r, g, b);
-    }
-
-    gl.drawArrays(gl.TRIANGLES, 0, 6);
-  }, [
-    activeRatio,
-    variation,
-    distortion,
-    swirl,
-    scale,
-    noise,
-    colors
-  ]);
-
-  // Render combined Canvas (WebGL + Overlays)
-  const renderCompositeCanvas = useCallback(() => {
-    const canvas = canvasRef.current;
-    const webglCanvas = webglCanvasRef.current;
-
-    if (!canvas || !webglCanvas) return;
-
-    const w = activeRatio.width;
-    const h = activeRatio.height;
-
-    if (canvas.width !== w || canvas.height !== h) {
-      canvas.width = w;
-      canvas.height = h;
-    }
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    ctx.clearRect(0, 0, w, h);
-    ctx.drawImage(webglCanvas, 0, 0);
-
-    // Render Image / Logo Overlay
-    if (enableImage && uploadedImageObj) {
-      ctx.save();
-      const posX = (imagePosRef.current.x / 100) * w;
-      const posY = (imagePosRef.current.y / 100) * h;
-      const imgW = w * imageScaleState;
-      const imgH = (uploadedImageObj.height / uploadedImageObj.width) * imgW;
-
-      ctx.translate(posX, posY);
-      if (imageRotation !== 0) {
-        ctx.rotate((imageRotation * Math.PI) / 180);
-      }
-      ctx.globalAlpha = imageOpacity;
-
-      if (imageBorderRadius > 0) {
-        ctx.beginPath();
-        const r = Math.min(imageBorderRadius * (w / 1000), imgW / 2, imgH / 2);
-        ctx.roundRect(-imgW / 2, -imgH / 2, imgW, imgH, r);
-        ctx.clip();
-      }
-
-      ctx.drawImage(uploadedImageObj, -imgW / 2, -imgH / 2, imgW, imgH);
-      ctx.restore();
-    }
-
-    // Render Single Text Overlay
-    if (enableText && headingText) {
-      ctx.save();
-      const posX = (textPosRef.current.x / 100) * w;
-      const posY = (textPosRef.current.y / 100) * h;
-      const actualHeadSize = Math.floor((textSize / 1000) * w);
-
-      ctx.translate(posX, posY);
-      if (textRotation !== 0) {
-        ctx.rotate((textRotation * Math.PI) / 180);
-      }
-
-      ctx.fillStyle = textColor;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-
-      if (textShadowBlur > 0) {
-        ctx.shadowColor = textShadowColor;
-        ctx.shadowBlur = Math.floor(w * (textShadowBlur / 1000));
-        ctx.shadowOffsetY = Math.floor(w * (textShadowBlur / 3000));
-      } else {
-        ctx.shadowColor = 'transparent';
-        ctx.shadowBlur = 0;
-        ctx.shadowOffsetY = 0;
-      }
-
-      ctx.font = `${activeStyleObj.weight} ${activeStyleObj.style} ${actualHeadSize}px ${activeFontObj.family}`;
-      
-      if (textStrokeWidth > 0) {
-        ctx.strokeStyle = textStrokeColor;
-        ctx.lineWidth = Math.floor(w * (textStrokeWidth / 1000));
-        ctx.strokeText(headingText, 0, 0);
-      }
-      
-      ctx.fillText(headingText, 0, 0);
-
-      ctx.restore();
-    }
-  }, [
-    activeRatio,
-    enableImage,
-    uploadedImageObj,
-    imageScaleState,
-    imageRotation,
-    imageOpacity,
-    imageBorderRadius,
-    enableText,
-    headingText,
-    activeFontObj,
-    activeStyleObj,
-    textColor,
-    textSize,
-    textRotation,
-    textShadowBlur,
-    textShadowColor,
-    textStrokeWidth,
-    textStrokeColor
-  ]);
+    // Trigger instant WebGL and composite canvas render immediately after shader compilation
+    renderWebGLBackground();
+    renderCompositeCanvas();
+  }, [activeShader, renderWebGLBackground, renderCompositeCanvas]);
 
   // Keep a fresh reference for the pointer move event
   useEffect(() => {
@@ -777,6 +779,14 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)]">
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', url: '/' },
+          { name: 'Design Studio', url: '/design' },
+          { name: 'Shader Background Generator', url: '/devtools/background-generator' },
+        ]}
+      />
+
       {/* Header */}
       <header className="bg-white border-b border-slate-200/80 py-6 sm:py-8">
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -1208,6 +1218,18 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
 
         {/* SEO Guide & FAQ Section */}
         <section className="mt-16 border-t border-slate-200 pt-12">
+          <DirectAnswerBlock
+            title="How to generate high-resolution shader wallpaper backgrounds online?"
+            answer="Free Shader Background Generator creates high-resolution animated and static shader wallpapers, mobile lockscreens, and website hero backgrounds using WebGL fragment shaders. You can select shader engines (Mesh Gradient, Warp, Neuro Noise, Swirl, Voronoi, Metaballs), adjust color palettes, add customizable Google Fonts text & transparent logos, and download 4K PNGs with zero watermarks."
+            keyTakeaways={[
+              "6 WebGL Shader Engines — Flowing mesh gradients, domain warping, neural noise, liquid swirl & metaballs.",
+              "Google Fonts Overlay — Add heading text with 12 free Google Fonts, shadows, outlines, and rotation.",
+              "Logo Upload Support — Overlay your brand logo or image with rounded corners, scaling, and opacity.",
+              "4K PNG Download — Export crisp, anti-aliased background wallpapers for any screen ratio."
+            ]}
+            categoryName="Wallpaper Generator"
+          />
+
           <SEOSection
             title="Free Paper Shader Background & Wallpaper Generator"
             description="Design high-resolution static wallpapers, mobile lockscreens, social banners, and website backdrops. Drag the variation slider to morph patterns in a circular arc, customize colors, add text with Google Fonts & logos, and download crisp 4K PNGs."
@@ -1251,7 +1273,7 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
           </div>
 
           <div className="mt-12">
-            <RelatedTools currentToolId="background-generator" categoryId="devtools" />
+            <RelatedTools currentToolId="background-generator" categoryId="design" />
           </div>
         </section>
       </main>

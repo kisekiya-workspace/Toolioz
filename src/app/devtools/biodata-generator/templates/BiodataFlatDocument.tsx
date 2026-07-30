@@ -216,6 +216,18 @@ function OrnateCorner({ position, color }: { position: 'tl' | 'tr' | 'bl' | 'br'
   );
 }
 
+function SectionDivider({ color }: { color: string }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', margin: '12px auto', maxWidth: '240px' }}>
+      <div style={{ flex: 1, height: '1px', background: `linear-gradient(to right, transparent, ${color})` }} />
+      <svg width="14" height="14" viewBox="0 0 24 24" fill={color}>
+        <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" />
+      </svg>
+      <div style={{ flex: 1, height: '1px', background: `linear-gradient(to left, transparent, ${color})` }} />
+    </div>
+  );
+}
+
 export function BiodataFlatDocument({ data, theme }: { data: BiodataForm; theme: BiodataThemeConfig }) {
   const name = data.fullName?.trim() || 'Biodata';
 
@@ -390,30 +402,173 @@ export function BiodataFlatDocument({ data, theme }: { data: BiodataForm; theme:
     );
   }
 
-  if (theme.layout === 'ornate') {
-    const royalBg = BIODATA_BACKGROUND_IMAGES.royal;
+  if (theme.layout === 'ornate_ivory') {
+    const bgImg = BIODATA_BACKGROUND_IMAGES[theme.id];
     return (
-      <TemplateWrapper style={{
-        background: theme.bg,
-        fontFamily: font,
-        padding: '34px 70px',
-        textAlign: 'center',
-        ...(royalBg ? { backgroundImage: `url(${royalBg})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}),
-      }}>
-        <div style={{ position: 'absolute', inset: 20, border: `1.5px solid ${theme.accent}`, opacity: 0.75 }} />
+      <TemplateWrapper
+        style={{
+          background: theme.bg,
+          fontFamily: "'Georgia', 'Times New Roman', serif",
+          padding: '38px 56px',
+          boxSizing: 'border-box',
+          ...(bgImg ? { backgroundImage: `url(${bgImg})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}),
+        }}
+      >
+        <div style={{ position: 'absolute', inset: 16, border: `2px solid ${theme.accent}` }} />
+        <div style={{ position: 'absolute', inset: 20, border: `1px solid ${theme.accent}`, opacity: 0.6 }} />
         <OrnateCorner position="tl" color={theme.accent} />
         <OrnateCorner position="tr" color={theme.accent} />
         <OrnateCorner position="bl" color={theme.accent} />
         <OrnateCorner position="br" color={theme.accent} />
-        <h1 style={{ color: theme.accent, fontSize: '30px', fontFamily: "'Georgia', serif", fontStyle: 'italic', margin: '0 0 16px' }}>{name}</h1>
-        {data.photo && (
-          <img src={data.photo} alt="" crossOrigin="anonymous" style={{ width: '118px', height: '118px', objectFit: 'cover', borderRadius: '999px', border: `4px solid ${theme.accent}`, margin: '0 auto 22px', display: 'block' }} />
-        )}
-        <div style={{ position: 'absolute', left: 247, top: 240, width: 300, height: 300, borderRadius: '50%', border: `2px solid ${theme.accent}`, opacity: 0.12 }} />
-        <main style={{ position: 'relative', zIndex: 1, maxWidth: '520px', margin: '0 auto', textAlign: 'left' }}>
-          <MainSections data={data} theme={theme} centered skipContact />
-          <SectionTitle color={theme.accent} accent={theme.accent} centered>Contact</SectionTitle>
-          <CompactContact data={data} color={theme.text} muted={theme.accent} />
+
+        <header style={{ textAlign: 'center', marginBottom: '20px', position: 'relative', zIndex: 1 }}>
+          <p style={{ fontSize: '9.5px', fontWeight: 700, letterSpacing: '0.2em', color: theme.accent, margin: '0 0 6px', textTransform: 'uppercase' }}>
+            ❖ MARRIAGE BIODATA ❖
+          </p>
+          <h1 style={{ fontSize: '28px', fontWeight: 700, color: theme.primary, margin: '0 0 14px' }}>{name}</h1>
+          {data.photo && (
+            <img
+              src={data.photo}
+              alt=""
+              crossOrigin="anonymous"
+              style={{
+                width: '108px',
+                height: '108px',
+                objectFit: 'cover',
+                borderRadius: '999px',
+                border: `3.5px solid ${theme.accent}`,
+                margin: '0 auto 14px',
+                display: 'block',
+                boxShadow: '0 6px 18px rgba(0,0,0,0.12)',
+              }}
+            />
+          )}
+          <SectionDivider color={theme.accent} />
+        </header>
+
+        <main style={{ position: 'relative', zIndex: 1 }}>
+          <MainSections data={data} theme={theme} centered />
+        </main>
+      </TemplateWrapper>
+    );
+  }
+
+  if (theme.layout === 'maroon_gold') {
+    const bgImg = BIODATA_BACKGROUND_IMAGES[theme.id];
+    return (
+      <TemplateWrapper style={{
+        background: theme.bg,
+        fontFamily: font,
+        padding: '36px 48px',
+        boxSizing: 'border-box',
+        ...(bgImg ? { backgroundImage: `url(${bgImg})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}),
+      }}>
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '10px', background: theme.primary }} />
+        <div style={{ position: 'absolute', top: 10, left: 0, right: 0, height: '3.5px', background: theme.accent }} />
+
+        <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '22px', borderBottom: `2px solid ${theme.accent}`, paddingBottom: '16px' }}>
+          <div>
+            <p style={{ fontSize: '9.5px', fontWeight: 700, letterSpacing: '0.18em', color: theme.accent, margin: '0 0 4px', textTransform: 'uppercase' }}>
+              MATRIMONIAL PROFILE
+            </p>
+            <h1 style={{ fontSize: '26px', fontWeight: 800, color: theme.primary, margin: 0 }}>{name}</h1>
+            {data.occupation && <p style={{ fontSize: '10px', color: theme.muted, margin: '4px 0 0', fontStyle: 'italic' }}>{data.occupation}</p>}
+          </div>
+          {data.photo && (
+            <img
+              src={data.photo}
+              alt=""
+              crossOrigin="anonymous"
+              style={{ width: '98px', height: '106px', objectFit: 'cover', borderRadius: '6px', border: `2.5px solid ${theme.accent}`, boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
+            />
+          )}
+        </header>
+
+        <main>
+          <MainSections data={data} theme={theme} />
+        </main>
+      </TemplateWrapper>
+    );
+  }
+
+  if (theme.layout === 'rose_gold') {
+    const bgImg = BIODATA_BACKGROUND_IMAGES[theme.id];
+    return (
+      <TemplateWrapper style={{
+        background: theme.bg,
+        fontFamily: "'Georgia', serif",
+        padding: '40px 52px',
+        boxSizing: 'border-box',
+        ...(bgImg ? { backgroundImage: `url(${bgImg})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}),
+      }}>
+        <BotanicalAccent color={theme.accent} />
+        <div style={{ position: 'absolute', inset: 18, border: `1.5px solid ${theme.accent}`, opacity: 0.5 }} />
+
+        <header style={{ textAlign: 'center', marginBottom: '24px', position: 'relative', zIndex: 1 }}>
+          <p style={{ fontSize: '9.5px', letterSpacing: '0.2em', color: theme.accent, margin: '0 0 8px', textTransform: 'uppercase', fontWeight: 700 }}>
+            Wedding Biodata
+          </p>
+          <h1 style={{ fontSize: '30px', fontWeight: 400, color: theme.primary, margin: '0 0 14px' }}>{name}</h1>
+          {data.photo && (
+            <img
+              src={data.photo}
+              alt=""
+              crossOrigin="anonymous"
+              style={{
+                width: '102px',
+                height: '120px',
+                objectFit: 'cover',
+                borderRadius: '50%',
+                border: `3px solid ${theme.accent}`,
+                margin: '0 auto 14px',
+                display: 'block',
+                boxShadow: '0 4px 14px rgba(200,141,148,0.25)',
+              }}
+            />
+          )}
+          <SectionDivider color={theme.accent} />
+        </header>
+
+        <main style={{ position: 'relative', zIndex: 1 }}>
+          <MainSections data={data} theme={theme} centered />
+        </main>
+      </TemplateWrapper>
+    );
+  }
+
+  if (theme.layout === 'navy_gold') {
+    return (
+      <TemplateWrapper style={{ background: theme.bg, fontFamily: font, padding: '38px 50px', boxSizing: 'border-box' }}>
+        <div style={{ position: 'absolute', top: 16, bottom: 16, left: 16, right: 16, border: `2px solid ${theme.accent}` }} />
+        <div style={{ position: 'absolute', top: 20, bottom: 20, left: 20, right: 20, border: `1px solid ${theme.primary}`, opacity: 0.18 }} />
+
+        <header style={{ textAlign: 'center', marginBottom: '22px', position: 'relative', zIndex: 1 }}>
+          <p style={{ fontSize: '9.5px', fontWeight: 700, letterSpacing: '0.22em', color: theme.accent, margin: '0 0 6px', textTransform: 'uppercase' }}>
+            MATRIMONIAL BIODATA
+          </p>
+          <h1 style={{ fontSize: '26px', fontWeight: 800, color: theme.primary, margin: '0 0 12px' }}>{name}</h1>
+          {data.photo && (
+            <img
+              src={data.photo}
+              alt=""
+              crossOrigin="anonymous"
+              style={{
+                width: '98px',
+                height: '98px',
+                objectFit: 'cover',
+                borderRadius: '6px',
+                border: `2.5px solid ${theme.accent}`,
+                margin: '0 auto 12px',
+                display: 'block',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+              }}
+            />
+          )}
+          <SectionDivider color={theme.accent} />
+        </header>
+
+        <main style={{ position: 'relative', zIndex: 1 }}>
+          <MainSections data={data} theme={theme} centered />
         </main>
       </TemplateWrapper>
     );

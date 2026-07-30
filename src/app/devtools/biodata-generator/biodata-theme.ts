@@ -1,7 +1,7 @@
 import type { TemplateId } from './types';
 import type { BiodataMotifId } from './biodata-motifs';
 
-export type BiodataLayoutKind = 'split' | 'centered' | 'minimal' | 'floral' | 'banner' | 'ornate';
+export type BiodataLayoutKind = 'split' | 'centered' | 'minimal' | 'floral' | 'banner' | 'ornate_ivory' | 'maroon_gold' | 'rose_gold' | 'navy_gold';
 
 /** Shared theme tokens — used by HTML preview and PDF export. */
 export type BiodataThemeConfig = {
@@ -24,36 +24,6 @@ export type BiodataThemeConfig = {
 };
 
 export const BIODATA_THEMES: Record<TemplateId, BiodataThemeConfig> = {
-  modern: {
-    id: 'modern',
-    layout: 'split',
-    primary: '#12343b',
-    accent: '#d79a2b',
-    text: '#1f2937',
-    muted: '#4b5563',
-    bg: '#fbfaf7',
-    sidebar: '#12343b',
-    onSidebar: '#fbfaf7',
-  },
-  classic: {
-    id: 'classic',
-    layout: 'centered',
-    primary: '#17324d',
-    accent: '#b8860b',
-    text: '#202124',
-    muted: '#4f5b62',
-    bg: '#f8f5ef',
-    pageBorder: false,
-  },
-  minimalist: {
-    id: 'minimalist',
-    layout: 'minimal',
-    primary: '#0f172a',
-    accent: '#0f172a',
-    text: '#0f172a',
-    muted: '#64748b',
-    bg: '#ffffff',
-  },
   hindu: {
     id: 'hindu',
     layout: 'centered',
@@ -64,6 +34,42 @@ export const BIODATA_THEMES: Record<TemplateId, BiodataThemeConfig> = {
     bg: '#fffbf2',
     subtitle: '|| Shree Ganeshay Namah ||',
     motif: 'om',
+  },
+  ivory_gold: {
+    id: 'ivory_gold',
+    layout: 'ornate_ivory',
+    primary: '#701a1e',
+    accent: '#c5a059',
+    text: '#3b1c20',
+    muted: '#63464a',
+    bg: '#fcf9f2',
+  },
+  maroon_gold: {
+    id: 'maroon_gold',
+    layout: 'maroon_gold',
+    primary: '#6b1d2f',
+    accent: '#d4af37',
+    text: '#2e1218',
+    muted: '#543037',
+    bg: '#fdfbf7',
+  },
+  rose_gold: {
+    id: 'rose_gold',
+    layout: 'rose_gold',
+    primary: '#4a1525',
+    accent: '#c88d94',
+    text: '#2d1820',
+    muted: '#614852',
+    bg: '#fffafb',
+  },
+  navy_gold: {
+    id: 'navy_gold',
+    layout: 'navy_gold',
+    primary: '#0f172a',
+    accent: '#d97706',
+    text: '#1e293b',
+    muted: '#475569',
+    bg: '#f8f6f0',
   },
   islamic: {
     id: 'islamic',
@@ -88,6 +94,16 @@ export const BIODATA_THEMES: Record<TemplateId, BiodataThemeConfig> = {
     motif: 'khanda',
     headerBar: { top: '#1e3a8a', bottom: '#f97316' },
   },
+  classic: {
+    id: 'classic',
+    layout: 'centered',
+    primary: '#17324d',
+    accent: '#b8860b',
+    text: '#202124',
+    muted: '#4f5b62',
+    bg: '#f8f5ef',
+    pageBorder: false,
+  },
   floral: {
     id: 'floral',
     layout: 'floral',
@@ -97,6 +113,26 @@ export const BIODATA_THEMES: Record<TemplateId, BiodataThemeConfig> = {
     muted: '#656565',
     bg: '#fbfaf7',
   },
+  minimalist: {
+    id: 'minimalist',
+    layout: 'minimal',
+    primary: '#0f172a',
+    accent: '#0f172a',
+    text: '#0f172a',
+    muted: '#64748b',
+    bg: '#ffffff',
+  },
+  modern: {
+    id: 'modern',
+    layout: 'split',
+    primary: '#12343b',
+    accent: '#d79a2b',
+    text: '#1f2937',
+    muted: '#4b5563',
+    bg: '#fbfaf7',
+    sidebar: '#12343b',
+    onSidebar: '#fbfaf7',
+  },
   slate: {
     id: 'slate',
     layout: 'banner',
@@ -105,15 +141,6 @@ export const BIODATA_THEMES: Record<TemplateId, BiodataThemeConfig> = {
     text: '#2f2d2a',
     muted: '#5f5b55',
     bg: '#f4f1ef',
-  },
-  royal: {
-    id: 'royal',
-    layout: 'ornate',
-    primary: '#006d72',
-    accent: '#f2c078',
-    text: '#f8e7c4',
-    muted: '#f4d99c',
-    bg: '#00777c',
   },
 };
 

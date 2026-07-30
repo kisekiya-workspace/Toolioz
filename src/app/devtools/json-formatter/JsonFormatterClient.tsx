@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/Button';
 import { Code, Copy, Trash2, AlignLeft, Check, AlertCircle } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
+import { DirectAnswerBlock } from '@/components/ui/DirectAnswerBlock';
+import { BreadcrumbJsonLd } from '@/components/ui/BreadcrumbJsonLd';
 
 import yaml from 'js-yaml';
 import JsonToTS from 'json-to-ts';
@@ -88,6 +90,13 @@ export default function JsonFormatterClient() {
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)]">
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', url: '/' },
+          { name: 'Developer Tools', url: '/devtools' },
+          { name: 'JSON Formatter', url: '/devtools/json-formatter' },
+        ]}
+      />
       <header className="bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.05)_0%,transparent_50%)] py-16 text-center md:py-24">
         <div className="container">
           <h1 className="mb-4 text-4xl font-black md:text-6xl">Advanced JSON <span className="text-[#3b82f6]">Transformer</span></h1>
@@ -186,6 +195,17 @@ export default function JsonFormatterClient() {
           "Blazing Speed: Render and format several megabytes of complex JSON structures securely inside the browser environment.",
           "Error Tracing: Highlights exactly where the JSON payload failed execution constraints, improving developer QA speeds."
         ]}
+      />
+      <DirectAnswerBlock
+        title="How to format, validate, and convert JSON to TypeScript or YAML online free?"
+        answer="Toolioz JSON Formatter is a 100% browser-local tool that prettifies (2 or 4 spaces), minifies, and validates raw JSON text with line-number error reporting. It also instantly converts valid JSON payloads into strongly typed TypeScript interface definitions (`json-to-ts`) or YAML configuration files without uploading data to remote servers."
+        keyTakeaways={[
+          "100% Client-Side Processing — Zero API calls or server logs; sensitive API payloads stay private.",
+          "TypeScript Interface Generator — Automatically infers nested types, array interfaces, and optional fields.",
+          "YAML Converter — Transform API responses or config JSON directly into valid YAML syntax.",
+          "Line-Specific Validation — Pinpoints exact bracket, comma, or quotes parse errors in real-time."
+        ]}
+        categoryName="Developer Utilities"
       />
       <FAQSchema faqs={JSON_FAQS} />
     </div>

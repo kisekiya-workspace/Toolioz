@@ -10,6 +10,8 @@ import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { RelatedTools } from '@/components/ui/RelatedTools';
 import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
+import { DirectAnswerBlock } from '@/components/ui/DirectAnswerBlock';
+import { BreadcrumbJsonLd } from '@/components/ui/BreadcrumbJsonLd';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
 
 import { FAQSchema } from '@/components/ui/FAQSchema';
@@ -117,7 +119,14 @@ export default function SIPClient() {
 
   return (
     <>
-      <div className={styles.wrapper}>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', url: '/' },
+          { name: 'Finance Tools', url: '/finance' },
+          { name: 'SIP Calculator', url: '/finance/sip-calculator' },
+        ]}
+      />
+      <div className="min-h-screen bg-[var(--bg-primary)]">
         <header className={styles.header}>
           <div className="container">
             <h1 className={styles.title}>SIP Return Calculator 2026</h1>
@@ -346,6 +355,17 @@ Our professional SIP calculator is designed to help you visualize this journey. 
             "Liquidity & Flexibility: Most SIPs allow you to stop, pause, or increase your investments at any time."
           ]}
           formula="M = P * [ ((1 + i)^n - 1) / i ] * (1 + i)"
+        />
+        <DirectAnswerBlock
+          title="How to calculate SIP returns and target ₹1 Crore with Step-Up SIP?"
+          answer="A Systematic Investment Plan (SIP) compounds monthly contributions over time using Rupee Cost Averaging. To build a ₹1 Crore corpus in 10 years at a 12% CAGR, you need a monthly SIP of ~₹43,500. By enabling a 10% annual Step-Up (Top-Up) SIP aligned with salary increments, you can start with ~₹25,000/month and achieve the same ₹1 Crore goal."
+          keyTakeaways={[
+            "SIP Formula — M = P × [((1 + i)^n - 1) / i] × (1 + i) where P is monthly deposit, i is monthly rate, and n is months.",
+            "Step-Up SIP Advantage — Increasing your SIP by 10% each year reduces initial required monthly outlay by 40%.",
+            "Direct Funds Save Commissions — Investing in Direct mutual fund plans adds 10%–15% more wealth over 20 years.",
+            "LTCG Tax Rule (India) — Equity mutual fund LTCG over ₹1.25 Lakh per financial year is taxed at 12.5%."
+          ]}
+          categoryName="Personal Finance"
         />
         <FAQSchema faqs={SIP_FAQS} />
       <Footer />

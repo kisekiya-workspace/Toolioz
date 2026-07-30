@@ -2821,7 +2821,7 @@ customElements.define('shader-bg', ShaderBg);
 
           {/* Related Tools */}
           <div className="mt-12">
-            <RelatedTools currentToolId="shader-tool" categoryId="devtools" />
+            <RelatedTools currentToolId="shader-tool" categoryId="design" />
           </div>
         </section>
       </main>

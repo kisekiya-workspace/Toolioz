@@ -35,6 +35,9 @@ export const metadata: Metadata = {
   },
 };
 
+import { DirectAnswerBlock } from '@/components/ui/DirectAnswerBlock';
+import { BreadcrumbJsonLd } from '@/components/ui/BreadcrumbJsonLd';
+
 export default function BiodataGeneratorPage() {
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -87,12 +90,30 @@ export default function BiodataGeneratorPage() {
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Home', url: '/' },
+          { name: 'Biodata Tools', url: '/biodata' },
+          { name: 'Marriage Biodata Generator', url: '/biodata/biodata-generator' },
+        ]}
+      />
       <JSONLD data={jsonLd} />
       <JSONLD data={howToJsonLd} />
       <JSONLD data={faqJsonLd} />
       <BiodataGeneratorClient />
       <div className="bg-white py-16">
         <div className="max-w-4xl mx-auto px-6">
+          <DirectAnswerBlock
+            title="How to create a free marriage biodata PDF with photo online?"
+            answer="Toolioz Marriage Biodata Generator is a free, mobile-friendly online tool to create matrimonial profiles for Hindu, Muslim, Sikh, Christian, and modern secular backgrounds. Choose from 13+ A4 templates, add personal, family, and educational details, upload a photo, and instantly download a high-resolution PDF without registration or watermarks."
+            keyTakeaways={[
+              "13+ Religion-Specific & Modern Layouts — Hindu Ganesha/Swastik, Islamic Moon/Calligraphy, Sikh Ik Onkar, and Art Deco styles.",
+              "100% Client-Side Data Privacy — Personal and family details remain in your browser and are never uploaded to servers.",
+              "Live A4 Page Preview — Adjust zoom, text sizes, and section order with mobile-first responsive editing.",
+              "Free Unlimited PDF Downloads — Save print-ready A4 PDF files directly to your phone or laptop."
+            ]}
+            categoryName="Marriage Biodata Maker"
+          />
           <h2 className="text-3xl font-black text-gray-900 mb-8 tracking-tight">Create Your Professional Marriage Biodata in Minutes</h2>
           <div className="prose prose-slate max-w-none space-y-6 text-gray-600 leading-relaxed">
             <p>

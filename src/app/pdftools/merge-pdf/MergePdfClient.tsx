@@ -294,9 +294,7 @@ export default function MergePdfClient() {
 
       <FAQSchema faqs={FAQS} />
 
-      <section className="container section !pt-0">
-        <RelatedTools currentToolId="merge-pdf" categoryId="pdftools" />
-      </section>
+      <RelatedTools currentToolId="merge-pdf" categoryId="pdftools" />
 
       <Footer />
     </div>

@@ -6,9 +6,11 @@ import type { TemplateId } from './types';
  * the HTML preview and PDF export to ensure visual consistency.
  */
 export const BIODATA_BACKGROUND_IMAGES: Partial<Record<TemplateId, string>> = {
+  ivory_gold: '/biodata-backgrounds/ivory-gold-bg.png',
+  rose_gold: '/biodata-backgrounds/rose-gold-bg.png',
+  maroon_gold: '/biodata-backgrounds/maroon-gold-bg.png',
   floral: '/biodata-backgrounds/floral-bg.png',
   slate: '/biodata-backgrounds/slate-bg.png',
-  royal: '/biodata-backgrounds/royal-bg.png',
 };
 
 /**

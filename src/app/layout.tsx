@@ -4,7 +4,7 @@ import './globals.css';
 import { Navbar } from '@/components/layout/Navbar';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { JSONLD } from '@/components/ui/JSONLD';
-import { DEFAULT_OG_IMAGE } from '@/lib/seo';
+import { DEFAULT_OG_IMAGE, buildWebsiteJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://toolioz.com'),
@@ -68,6 +68,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const websiteJsonLd = buildWebsiteJsonLd();
   const orgJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -103,6 +104,7 @@ export default function RootLayout({
             gtag('config', 'G-VM8TJM1RER');
           `}
         </Script>
+        <JSONLD data={websiteJsonLd} />
         <JSONLD data={orgJsonLd} />
         <Navbar />
         <Breadcrumbs />

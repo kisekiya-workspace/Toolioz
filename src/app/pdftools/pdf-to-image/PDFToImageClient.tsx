@@ -511,9 +511,7 @@ export default function PDFToImageClient() {
 
         <FAQSchema faqs={FAQS} />
 
-        <section className="container section !pt-0">
-          <RelatedTools currentToolId="pdf-to-image" categoryId="pdftools" />
-        </section>
+        <RelatedTools currentToolId="pdf-to-image" categoryId="pdftools" />
       </div>
       <Footer />
     </>

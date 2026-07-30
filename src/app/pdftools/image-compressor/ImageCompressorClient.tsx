@@ -415,9 +415,7 @@ export default function ImageCompressorClient() {
 
         <FAQSchema faqs={FAQS} />
 
-        <section className="container section !pt-0">
-          <RelatedTools currentToolId="image-compressor" categoryId="pdftools" />
-        </section>
+        <RelatedTools currentToolId="image-compressor" categoryId="pdftools" />
       </div>
       <Footer />
     </>

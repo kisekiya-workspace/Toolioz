@@ -20,6 +20,8 @@
     "bcryptjs": "^3.0.3",
     "cron-parser": "^5.5.0",
     "cronstrue": "^3.14.0",
+    "framer-motion": "^12.42.2",
+    "gifuct-js": "^2.1.2",
     "html-to-image": "^1.11.13",
     "js-yaml": "^4.1.1",
     "json-to-ts": "^2.1.0",

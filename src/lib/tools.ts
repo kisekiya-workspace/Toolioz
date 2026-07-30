@@ -28,10 +28,11 @@ import {
   TrendingDown,
   UserRound,
   Sparkles,
+  Pencil,
   type LucideIcon
 } from 'lucide-react';
 
-export type Category = 'finance' | 'devtools' | 'pdftools' | 'biodata';
+export type Category = 'finance' | 'devtools' | 'design' | 'pdftools' | 'biodata';
 
 export interface Tool {
   id: string;
@@ -45,7 +46,7 @@ export interface Tool {
 }
 
 export const TOOLS: Tool[] = [
-  // Finance Tools
+  // ═══ FINANCE TOOLS ═══
   {
     id: 'compound-interest',
     title: 'Compound Interest',
@@ -170,7 +171,7 @@ export const TOOLS: Tool[] = [
     isTrending: true
   },
 
-  // Dev Tools
+  // ═══ DEVELOPER TOOLS ═══
   {
     id: 'json-formatter',
     title: 'JSON Formatter',
@@ -278,16 +279,6 @@ export const TOOLS: Tool[] = [
     isTrending: true
   },
   {
-    id: 'layout-generator',
-    title: 'Layout Generator',
-    desc: 'Visually build and test CSS Flexbox and Grid layouts.',
-    icon: LayoutDashboard,
-    href: '/devtools/layout-generator',
-    color: '#0ea5e9',
-    category: 'devtools',
-    isTrending: true
-  },
-  {
     id: 'uuid-generator',
     title: 'UUID Generator',
     desc: 'Generate secure v4 UUIDs in bulk effortlessly.',
@@ -296,24 +287,26 @@ export const TOOLS: Tool[] = [
     color: '#10b981',
     category: 'devtools'
   },
+
+  // ═══ DESIGN & CREATIVE STUDIO ═══
   {
-    id: 'color-converter',
-    title: 'Color Format Suite',
-    desc: 'Convert seamlessly between HEX, RGB, HSL and CMYK.',
-    icon: Palette,
-    href: '/devtools/color-converter',
-    color: '#2563eb',
-    category: 'devtools',
+    id: 'drawesome',
+    title: 'Drawesome Vector Studio ✦ (by Benji Taylor)',
+    desc: 'Freehand vector drawing canvas with 7 realistic pens (pencil, ballpoint, fineliner, marker, highlighter, brush, fountain pen), area eraser, and SVG/PNG export.',
+    icon: Pencil,
+    href: '/devtools/drawesome',
+    color: '#06b6d4',
+    category: 'design',
     isTrending: true
   },
   {
-    id: 'x-hidden-image',
-    title: 'X Tap-to-Reveal PNG Maker',
-    desc: 'Free tap-to-reveal / tap-and-hold hidden PNG for X & Twitter — timeline preview vs opened, brush masks, PNG8. Trending 2026.',
-    icon: ImagePlus,
-    href: '/devtools/x-hidden-image',
-    color: '#0f172a',
-    category: 'devtools',
+    id: 'ditherit',
+    title: 'ditherit ✦ Interactive ASCII & Dot Art (by Prasanjit Dey)',
+    desc: 'Convert images, videos, and GIFs into dithered dot art or ASCII with interactive physics repulsion, WebM export, and React/JS code export.',
+    icon: Sparkles,
+    href: '/devtools/ditherit',
+    color: '#4f46e5',
+    category: 'design',
     isTrending: true
   },
   {
@@ -323,7 +316,7 @@ export const TOOLS: Tool[] = [
     icon: Palette,
     href: '/devtools/dither-studio',
     color: '#ec4899',
-    category: 'devtools',
+    category: 'design',
     isTrending: true
   },
   {
@@ -333,31 +326,51 @@ export const TOOLS: Tool[] = [
     icon: Sparkles,
     href: '/devtools/shader-tool',
     color: '#8b5cf6',
-    category: 'devtools',
+    category: 'design',
     isTrending: true
   },
   {
     id: 'background-generator',
     title: 'Free Shader Background Generator',
-    desc: 'Design beautiful animated shader-based background images for wallpapers, social headers, and website hero sections. Customize colors and export high-res PNGs or CSS.',
+    desc: 'Design beautiful animated shader-based background images for wallpapers, social headers, and website hero sections.',
     icon: LayoutDashboard,
     href: '/devtools/background-generator',
     color: '#a855f7',
-    category: 'devtools',
+    category: 'design',
     isTrending: true
   },
   {
-    id: 'biodata-generator',
-    title: 'Biodata Generator',
-    desc: 'Create marriage biodata PDFs with religion-based and modern templates.',
-    icon: UserRound,
-    href: '/biodata/biodata-generator',
-    color: '#db2777',
-    category: 'biodata',
+    id: 'x-hidden-image',
+    title: 'X Tap-to-Reveal PNG Maker',
+    desc: 'Free tap-to-reveal / tap-and-hold hidden PNG for X & Twitter — timeline preview vs opened, brush masks, PNG8.',
+    icon: ImagePlus,
+    href: '/devtools/x-hidden-image',
+    color: '#0f172a',
+    category: 'design',
+    isTrending: true
+  },
+  {
+    id: 'color-converter',
+    title: 'Color Format Suite',
+    desc: 'Convert seamlessly between HEX, RGB, HSL and CMYK color codes with palette generation.',
+    icon: Palette,
+    href: '/devtools/color-converter',
+    color: '#2563eb',
+    category: 'design',
+    isTrending: true
+  },
+  {
+    id: 'layout-generator',
+    title: 'CSS Layout Generator',
+    desc: 'Visually build and test CSS Flexbox and Grid layouts with code export.',
+    icon: LayoutDashboard,
+    href: '/devtools/layout-generator',
+    color: '#0ea5e9',
+    category: 'design',
     isTrending: true
   },
 
-  // Resume & PDF Tools
+  // ═══ PDF & RESUME UTILITIES ═══
   {
     id: 'resume-generator',
     title: 'ATS Resume Generator',
@@ -366,6 +379,18 @@ export const TOOLS: Tool[] = [
     href: '/pdftools/resume-generator',
     color: '#111827',
     category: 'pdftools',
+    isTrending: true
+  },
+
+  // ═══ BIODATA TOOLS ═══
+  {
+    id: 'biodata-generator',
+    title: 'Biodata Generator',
+    desc: 'Create marriage biodata PDFs with religion-based and modern templates.',
+    icon: UserRound,
+    href: '/biodata/biodata-generator',
+    color: '#db2777',
+    category: 'biodata',
     isTrending: true
   }
 ];
@@ -381,14 +406,21 @@ export const CATEGORIES = [
   {
     id: 'devtools',
     title: 'Developer Tools',
-    desc: 'Utilities for coding, formatting, and data conversion.',
+    desc: 'Utilities for coding, formatting, security, and data conversion.',
     color: '#f59e0b',
     icon: Code
   },
   {
+    id: 'design',
+    title: 'Design & Creative Studio',
+    desc: 'Vector drawing, shader backgrounds, dithering, ASCII art, and visual image generators.',
+    color: '#06b6d4',
+    icon: Palette
+  },
+  {
     id: 'pdftools',
     title: 'PDF Utilities',
-    desc: 'Simple tools to merge, split, and compress PDF files.',
+    desc: 'Simple tools to merge, split, compress PDF files, and create ATS resumes.',
     color: '#ef4444',
     icon: FileText
   },

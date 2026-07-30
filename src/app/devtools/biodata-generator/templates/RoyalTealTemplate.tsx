@@ -3,5 +3,5 @@ import { BiodataFlatDocument } from './BiodataFlatDocument';
 import type { BiodataForm } from '../types';
 
 export const RoyalTealTemplate = ({ data }: { data: BiodataForm }) => (
-  <BiodataFlatDocument data={data} theme={BIODATA_THEMES.royal} />
+  <BiodataFlatDocument data={data} theme={BIODATA_THEMES.modern} />
 );

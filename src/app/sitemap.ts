@@ -26,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { route: '/how-to', priority: 0.96, freq: 'weekly' as const },
     { route: '/finance', priority: 0.95, freq: 'weekly' as const },
     { route: '/finance/blog', priority: 0.88, freq: 'weekly' as const },
+    { route: '/design', priority: 0.95, freq: 'weekly' as const },
     { route: '/devtools', priority: 0.95, freq: 'weekly' as const },
     { route: '/devtools/blog', priority: 0.88, freq: 'weekly' as const },
     { route: '/devtools/biodata-generator', priority: 0.9, freq: 'weekly' as const },

@@ -815,7 +815,7 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
           </Card>
         </div>
 
-        <RelatedTools currentToolId="x-hidden-image" categoryId="devtools" />
+        <RelatedTools currentToolId="x-hidden-image" categoryId="design" />
       </main>
 
       <SEOSection

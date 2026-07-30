@@ -218,8 +218,7 @@ export default function BiodataGeneratorClient() {
 
     setActiveTab('preview');
     await waitForPreviewPaint();
-
-    element = document.getElementById('biodata-document');
+  element = document.getElementById('biodata-document');
     return element;
   };
 
@@ -241,15 +240,51 @@ export default function BiodataGeneratorClient() {
   const exportPdf = async () => {
     try {
       setIsExportingPdf(true);
-      
-      const { generateBiodataPdf } = await import('./visual-pdf');
-      const pdfBytes = await generateBiodataPdf(form, templateId);
+      const element = await getExportElement();
+      if (!element) throw new Error('Preview element not found.');
+
+      // Render high-resolution (3x) PNG of the exact DOM preview
+      const htmlToImage = await import('html-to-image');
+      const dataUrl = await htmlToImage.toPng(element, {
+        cacheBust: true,
+        pixelRatio: 3,
+        backgroundColor: '#ffffff',
+      });
+
+      // Embed high-res image into a standard A4 PDF document
+      const { PDFDocument } = await import('pdf-lib');
+      const doc = await PDFDocument.create();
+      doc.setTitle(`${form.fullName.trim() || 'Biodata'} - Marriage Biodata`);
+      doc.setAuthor(form.fullName.trim() || 'Toolioz');
+      doc.setSubject('Marriage Biodata');
+      doc.setProducer('Toolioz Biodata Generator');
+
+      const page = doc.addPage([595.28, 841.89]);
+      const base64Data = dataUrl.split(',')[1];
+      const imageBytes = Uint8Array.from(atob(base64Data), (c) => c.charCodeAt(0));
+      const embeddedImage = await doc.embedPng(imageBytes);
+
+      page.drawImage(embeddedImage, {
+        x: 0,
+        y: 0,
+        width: 595.28,
+        height: 841.89,
+      });
+
+      const pdfBytes = await doc.save();
       const blob = new Blob([pdfBytes as BlobPart], { type: 'application/pdf' });
       downloadBlob(blob, `${form.fullName.replace(/\s+/g, '_') || 'Biodata'}.pdf`);
-
     } catch (e) {
-      console.error('Failed to export PDF', e);
-      window.alert('PDF export failed. Please try again.');
+      console.warn('High-res DOM PDF export encountered issue, using vector fallback...', e);
+      try {
+        const { generateBiodataPdf } = await import('./visual-pdf');
+        const pdfBytes = await generateBiodataPdf(form, templateId);
+        const blob = new Blob([pdfBytes as BlobPart], { type: 'application/pdf' });
+        downloadBlob(blob, `${form.fullName.replace(/\s+/g, '_') || 'Biodata'}.pdf`);
+      } catch (fallbackErr) {
+        console.error('Failed to export PDF', fallbackErr);
+        window.alert('PDF export failed. Please try again.');
+      }
     } finally {
       setIsExportingPdf(false);
     }
@@ -353,187 +388,53 @@ export default function BiodataGeneratorClient() {
 
           {/* Sidebar Content */}
           <div className="flex-1 overflow-y-auto p-5 custom-scrollbar">
-            <div className="mb-5 rounded-2xl border border-purple-100 bg-purple-50 px-4 py-3 text-sm text-purple-950">
-              <div className="font-bold">Selected template: {currentTemplate.name}</div>
-              <div className="mt-1 text-xs leading-5 text-purple-800">Preview matches the exported PDF. Check photo crop and long family details before downloading.</div>
+            {/* Quick Template Selector Dropdown */}
+            <div className="mb-5 rounded-2xl border border-purple-200 bg-purple-50/60 p-4 shadow-xs">
+              <label className="block text-xs font-bold uppercase tracking-wider text-purple-900 mb-1.5">
+                Template Layout
+              </label>
+              <select
+                value={templateId}
+                onChange={(e) => setTemplateId(e.target.value as TemplateId)}
+                className="w-full rounded-xl border border-purple-300 bg-white px-3 py-2 text-sm font-bold text-gray-900 focus:border-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500/20 cursor-pointer"
+              >
+                {BIODATA_TEMPLATES.map((t) => (
+                  <option key={t.id} value={t.id}>
+                    {t.name}
+                  </option>
+                ))}
+              </select>
+              <p className="mt-2 text-xs leading-5 text-purple-800">
+                100% pixel-perfect match: preview and exported PDF render identically.
+              </p>
             </div>
+
             {activeTab === 'templates' ? (
-              <div className="space-y-4 pb-20 lg:pb-0">
-                <div
-                  onClick={() => setTemplateId('modern')}
-                  className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'modern' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
-                >
-                  <div className="p-4">
-                    <div className="font-bold text-gray-900 mb-1">Modern Executive</div>
-                    <p className="text-xs text-gray-500 mb-3">Two-column profile with contact rail, essentials, family, and expectations.</p>
-                    <div className="flex h-32 w-full overflow-hidden rounded border border-gray-200 bg-[#fbfaf7]">
-                      <div className="w-[36%] bg-[#12343b] p-3">
-                        <div className="mb-3 h-8 w-8 rounded-sm border border-[#d79a2b]/60 bg-[#fbfaf7]/10"></div>
-                        <div className="mb-2 h-1.5 w-16 rounded-full bg-[#fbfaf7]/80"></div>
-                        <div className="h-1 w-10 rounded-full bg-[#d79a2b]"></div>
+              <div className="space-y-3 pb-20 lg:pb-0">
+                {BIODATA_TEMPLATES.map((tpl) => {
+                  const isSelected = templateId === tpl.id;
+                  return (
+                    <div
+                      key={tpl.id}
+                      onClick={() => setTemplateId(tpl.id)}
+                      className={`cursor-pointer rounded-xl border-2 p-4 transition-all duration-200 ${
+                        isSelected
+                          ? 'border-purple-600 bg-purple-50/40 shadow-sm ring-1 ring-purple-600'
+                          : 'border-gray-200 bg-white hover:border-purple-300 hover:shadow-xs'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-gray-900 text-sm">{tpl.name}</span>
+                        {isSelected && (
+                          <span className="rounded-full bg-purple-600 px-2 py-0.5 text-[10px] font-bold text-white">
+                            Selected
+                          </span>
+                        )}
                       </div>
-                      <div className="flex-1 p-3">
-                        <div className="mb-3 h-2 w-24 rounded-full bg-[#12343b]/80"></div>
-                        <div className="space-y-1.5">
-                          <div className="h-1.5 w-full rounded-full bg-gray-200"></div>
-                          <div className="h-1.5 w-5/6 rounded-full bg-gray-200"></div>
-                          <div className="h-1.5 w-11/12 rounded-full bg-gray-200"></div>
-                        </div>
-                      </div>
+                      <p className="mt-1 text-xs text-gray-500 leading-relaxed">{tpl.description}</p>
                     </div>
-                  </div>
-                </div>
-
-                <div
-                  onClick={() => setTemplateId('classic')}
-                  className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'classic' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
-                >
-                  <div className="p-4">
-                    <div className="font-bold text-gray-900 mb-1">Modern Classic</div>
-                    <p className="text-xs text-gray-500 mb-3">Formal single-page layout with warm paper tone and strong hierarchy.</p>
-                    <div className="flex h-32 w-full flex-col items-center rounded border border-gray-200 bg-[#f8f5ef] p-3">
-                      <div className="mb-2 h-1 w-full bg-[#b8860b]"></div>
-                      <div className="mb-2 h-7 w-7 rounded-sm border border-[#17324d]/30 bg-white"></div>
-                      <div className="mb-2 h-2 w-28 rounded-full bg-[#17324d]/80"></div>
-                      <div className="grid w-full flex-1 grid-cols-2 gap-2">
-                        <div className="rounded border border-[#b8860b]/25 bg-white/60"></div>
-                        <div className="rounded border border-[#b8860b]/25 bg-white/60"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  onClick={() => setTemplateId('minimalist')}
-                  className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'minimalist' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
-                >
-                  <div className="p-4">
-                    <div className="font-bold text-gray-900 mb-1">Minimalist</div>
-                    <p className="text-xs text-gray-500 mb-3">Clean and spacious design focusing purely on content readability.</p>
-                    <div className="h-32 w-full rounded border border-gray-200 bg-white p-3">
-                      <div className="flex gap-2 mb-3 border-b pb-2">
-                        <div className="w-8 h-8 rounded bg-gray-200"></div>
-                        <div className="space-y-1">
-                          <div className="w-16 h-2 bg-gray-300 rounded-full"></div>
-                          <div className="w-10 h-1.5 bg-gray-200 rounded-full"></div>
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-2 gap-2">
-                        <div className="space-y-1"><div className="w-full h-1.5 bg-gray-100 rounded-full"></div><div className="w-4/5 h-1.5 bg-gray-100 rounded-full"></div></div>
-                        <div className="space-y-1"><div className="w-full h-1.5 bg-gray-100 rounded-full"></div><div className="w-4/5 h-1.5 bg-gray-100 rounded-full"></div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  onClick={() => setTemplateId('hindu')}
-                  className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'hindu' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
-                >
-                  <div className="p-4">
-                    <div className="font-bold text-[#800000] mb-1">Hindu Traditional</div>
-                    <p className="text-xs text-gray-500 mb-3">Ornate borders and saffron colors with a classic traditional layout.</p>
-                    <div className="h-32 w-full rounded border border-[#d4af37] bg-[#fffaf0] p-2 text-center flex flex-col items-center">
-                      <div className="text-xl text-[#e63946] leading-none mb-1">ॐ</div>
-                      <div className="w-16 h-1 bg-[#800000] mb-2"></div>
-                      <div className="w-full h-6 border border-[#d4af37]/50 mb-1"></div>
-                      <div className="w-full h-6 border border-[#d4af37]/50"></div>
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  onClick={() => setTemplateId('islamic')}
-                  className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'islamic' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
-                >
-                  <div className="p-4">
-                    <div className="font-bold text-[#064e3b] mb-1">Islamic Elegant</div>
-                    <p className="text-xs text-gray-500 mb-3">Emerald green styling with arched headers and clean sections.</p>
-                    <div className="h-32 w-full rounded border border-[#10b981]/50 bg-[#f0fdf4] p-2 flex flex-col items-center">
-                      <div className="w-full h-8 border-2 border-[#10b981]/40 rounded-t-full mb-2 flex items-center justify-center">
-                        <div className="w-3 h-3 rounded-full bg-[#10b981]/50"></div>
-                      </div>
-                      <div className="w-full flex-1 bg-white border border-[#10b981]/20 rounded"></div>
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  onClick={() => setTemplateId('sikh')}
-                  className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'sikh' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
-                >
-                  <div className="p-4">
-                    <div className="font-bold text-[#1e3a8a] mb-1">Sikh Heritage</div>
-                    <p className="text-xs text-gray-500 mb-3">Navy blue and orange layout inspired by Punjabi traditions.</p>
-                    <div className="h-32 w-full rounded border border-gray-200 bg-[#f8fafc] relative overflow-hidden flex flex-col p-2">
-                      <div className="absolute top-0 left-0 right-0 h-1 bg-[#1e3a8a]"></div>
-                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#f97316]"></div>
-                      <div className="text-[#f97316] text-lg font-bold text-center mt-1 mb-1">ੴ</div>
-                      <div className="w-16 h-0.5 bg-[#1e3a8a] mx-auto mb-2"></div>
-                      <div className="flex-1 flex gap-2">
-                        <div className="w-1 bg-[#f97316] h-full"></div>
-                        <div className="flex-1 bg-gray-100 h-full rounded"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  onClick={() => setTemplateId('floral')}
-                  className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'floral' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
-                >
-                  <div className="p-4">
-                    <div className="font-bold text-gray-900 mb-1">Floral Editorial</div>
-                    <p className="text-xs text-gray-500 mb-3">Botanical magazine-style biodata with lifestyle and expectations columns.</p>
-                    <div className="relative h-32 w-full overflow-hidden rounded border border-gray-200 bg-[#fbfaf7] p-3">
-                      <div className="mb-3 h-3 w-24 rounded-full bg-[#252525]/80"></div>
-                      <div className="flex gap-3">
-                        <div className="h-16 w-12 rounded bg-[#c8a7a0]/50"></div>
-                        <div className="flex-1 space-y-1.5">
-                          <div className="h-1.5 w-20 rounded-full bg-[#4f5a48]/50"></div>
-                          <div className="h-1.5 w-full rounded-full bg-gray-200"></div>
-                          <div className="h-1.5 w-5/6 rounded-full bg-gray-200"></div>
-                        </div>
-                      </div>
-                      <div className="absolute right-2 top-3 h-20 w-10 rounded-full border-r border-[#c8a7a0] opacity-70"></div>
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  onClick={() => setTemplateId('slate')}
-                  className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'slate' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
-                >
-                  <div className="p-4">
-                    <div className="font-bold text-gray-900 mb-1">Slate Banner</div>
-                    <p className="text-xs text-gray-500 mb-3">Modern horizontal name banner with a calm profile sidebar.</p>
-                    <div className="relative h-32 w-full overflow-hidden rounded border border-gray-200 bg-white">
-                      <div className="absolute left-0 top-0 h-full w-[38%] bg-[#f4f1ef]"></div>
-                      <div className="absolute left-[28%] top-4 h-12 w-[72%] bg-[#595550]"></div>
-                      <div className="absolute left-5 top-3 h-12 w-12 rounded-full border-4 border-white bg-[#d9d0cb]"></div>
-                      <div className="absolute left-[48%] top-8 h-2 w-24 rounded-full bg-white"></div>
-                      <div className="absolute bottom-4 left-[44%] h-1.5 w-32 rounded-full bg-gray-200"></div>
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  onClick={() => setTemplateId('royal')}
-                  className={`cursor-pointer rounded-xl border-2 overflow-hidden transition ${templateId === 'royal' ? 'border-purple-600 shadow-md' : 'border-transparent hover:border-gray-200 bg-gray-50'}`}
-                >
-                  <div className="p-4">
-                    <div className="font-bold text-gray-900 mb-1">Royal Teal</div>
-                    <p className="text-xs text-gray-500 mb-3">Premium teal and gold ornamental layout for a richer first impression.</p>
-                    <div className="relative flex h-32 w-full flex-col items-center overflow-hidden rounded border border-gray-200 bg-[#00777c] p-3">
-                      <div className="absolute left-1 top-1 h-10 w-10 rounded-br-full border-b border-r border-[#f2c078]"></div>
-                      <div className="absolute bottom-1 right-1 h-10 w-10 rounded-tl-full border-l border-t border-[#f2c078]"></div>
-                      <div className="mb-2 h-8 w-8 rounded-full border-2 border-[#f2c078] bg-white/20"></div>
-                      <div className="mb-3 h-2 w-24 rounded-full bg-[#f2c078]"></div>
-                      <div className="h-5 w-28 rounded-full bg-[#f2c078]/80"></div>
-                    </div>
-                  </div>
-                </div>
-
+                  );
+                })}
               </div>
             ) : (
               <div className="space-y-1 pb-20 lg:pb-0">

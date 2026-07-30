@@ -1,4 +1,16 @@
-export type TemplateId = 'modern' | 'classic' | 'minimalist' | 'hindu' | 'islamic' | 'sikh' | 'floral' | 'slate' | 'royal';
+export type TemplateId =
+  | 'hindu'
+  | 'ivory_gold'
+  | 'maroon_gold'
+  | 'rose_gold'
+  | 'navy_gold'
+  | 'islamic'
+  | 'sikh'
+  | 'classic'
+  | 'floral'
+  | 'minimalist'
+  | 'modern'
+  | 'slate';
 
 export type BiodataForm = {
   photo: string | null;

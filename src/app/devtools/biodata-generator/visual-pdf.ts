@@ -670,7 +670,7 @@ async function pdfRoyal(doc: PDFDocument, data: BiodataForm, fonts: Fonts, photo
   };
   page.drawRectangle({ x: 0, y: 0, width: A4.w, height: A4.h, color: theme.bg });
   // Draw background image
-  const bgImage = await embedBackgroundImage(doc, 'royal');
+  const bgImage = await embedBackgroundImage(doc, 'modern');
   if (bgImage) drawBackgroundImage(page, bgImage);
   page.drawRectangle({ x: 20, y: 20, width: A4.w - 40, height: A4.h - 40, borderColor: theme.accent, borderWidth: 1.4 });
   page.drawCircle({ x: A4.w / 2, y: A4.h / 2, size: 126, borderColor: theme.accent, borderWidth: 1, opacity: 0.18 });
@@ -711,8 +711,21 @@ export async function generateBiodataPdf(data: BiodataForm, templateId: string):
   const id = templateId as TemplateId;
 
   switch (id) {
-    case 'modern':
-      await pdfModern(doc, data, fonts, photo);
+    case 'hindu':
+    case 'ivory_gold':
+    case 'maroon_gold':
+      await pdfCulturalCentered(doc, data, fonts, photo, 'hindu');
+      break;
+    case 'islamic':
+      await pdfCulturalCentered(doc, data, fonts, photo, 'islamic');
+      break;
+    case 'sikh':
+    case 'navy_gold':
+      await pdfCulturalCentered(doc, data, fonts, photo, 'sikh');
+      break;
+    case 'rose_gold':
+    case 'floral':
+      await pdfFloral(doc, data, fonts, photo);
       break;
     case 'classic':
       await pdfClassic(doc, data, fonts, photo);
@@ -720,26 +733,11 @@ export async function generateBiodataPdf(data: BiodataForm, templateId: string):
     case 'minimalist':
       await pdfMinimalist(doc, data, fonts, photo);
       break;
-    case 'hindu':
-      await pdfCulturalCentered(doc, data, fonts, photo, 'hindu');
-      break;
-    case 'islamic':
-      await pdfCulturalCentered(doc, data, fonts, photo, 'islamic');
-      break;
-    case 'sikh':
-      await pdfCulturalCentered(doc, data, fonts, photo, 'sikh');
-      break;
-    case 'floral':
-      await pdfFloral(doc, data, fonts, photo);
-      break;
     case 'slate':
       await pdfSlate(doc, data, fonts, photo);
       break;
-    case 'royal':
-      await pdfRoyal(doc, data, fonts, photo);
-      break;
     default:
-      await pdfModern(doc, data, fonts, photo);
+      await pdfCulturalCentered(doc, data, fonts, photo, 'hindu');
   }
 
   return doc.save();

@@ -19,17 +19,18 @@ import { TOOLS, CATEGORIES, type Tool } from '@/lib/tools';
 const HUB_HREF: Record<string, string> = {
   finance: '/finance',
   devtools: '/devtools',
+  design: '/design',
   pdftools: '/pdftools',
   biodata: '/biodata',
 };
 
 const QUICK_LINKS = [
   { label: 'SIP', href: '/finance/sip-calculator' },
-  { label: 'Tax', href: '/finance/income-tax' },
+  { label: 'Drawesome', href: '/devtools/drawesome' },
   { label: 'JSON', href: '/devtools/json-formatter' },
+  { label: 'ditherit', href: '/devtools/ditherit' },
   { label: 'Merge PDF', href: '/pdftools/merge-pdf' },
   { label: 'Biodata', href: '/biodata/biodata-generator' },
-  { label: 'Resume', href: '/resume-builder' },
 ];
 
 const BLOG_HUBS = [
