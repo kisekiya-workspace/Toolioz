@@ -1,0 +1,29 @@
+# Source PDF Files
+*.pdf
+
+# Extracted PDF Output Directories
+SEO-checklist/
+SEO-Checklist-by-Content-Design/
+[Ebook] How to Optimize Content for GEO and AEO in an AI-Native World/
+
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+build/
+dist/
+*.egg-info/
+
+# Operating System & IDE Files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Antigravity Scratch & Caches
+.gemini/
+scratch/

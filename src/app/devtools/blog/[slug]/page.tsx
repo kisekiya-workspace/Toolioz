@@ -5,6 +5,8 @@ import { ArrowLeft, ArrowRight, BookOpen, ExternalLink } from 'lucide-react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import { Footer } from '@/components/layout/Footer';
 import { devtoolsBlogPosts, getDevtoolsBlogPost } from '@/lib/devtools-blog-content';
+import { buildBreadcrumbJsonLd } from '@/lib/seo';
+import { Sparkles } from 'lucide-react';
 
 type BlogPageProps = {
   params: Promise<{ slug: string }>;
@@ -85,10 +87,16 @@ export default async function DevToolsBlogPostPage({ params }: BlogPageProps) {
     })),
   };
 
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: 'Home', url: '/' },
+    { name: 'Developer Tools', url: '/devtools' },
+    { name: 'Blog', url: '/devtools/blog' },
+    { name: post.title, url: `/devtools/blog/${post.slug}` },
+  ]);
+
   return (
     <main className="bg-[linear-gradient(180deg,#fffaf0_0%,#f8fafc_100%)] text-[var(--text-primary)]">
-      <JSONLD data={articleJsonLd} />
-      <JSONLD data={faqJsonLd} />
+      <JSONLD data={[articleJsonLd, faqJsonLd, breadcrumbJsonLd]} />
 
       <article className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
         <Link href="/devtools/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-bold text-amber-700 hover:text-amber-900 transition">
@@ -109,9 +117,17 @@ export default async function DevToolsBlogPostPage({ params }: BlogPageProps) {
           <h1 className="max-w-3xl text-4xl font-black leading-tight tracking-[-0.03em] md:text-6xl">
             {post.title}
           </h1>
-          <p className="mt-8 max-w-3xl text-xl leading-9 text-[var(--text-secondary)]">
-            {post.description}
-          </p>
+
+          {/* Direct Answer / Quick Takeaway Block for AEO Extraction */}
+          <section className="mt-6 rounded-2xl border border-amber-200 bg-amber-50/70 p-6 shadow-sm">
+            <h2 className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-amber-800 mb-2">
+              <Sparkles size={16} className="text-amber-600 shrink-0" />
+              <span>Direct Answer / Quick Takeaway</span>
+            </h2>
+            <p className="text-base font-bold leading-relaxed text-amber-950">
+              {post.description}
+            </p>
+          </section>
 
           <div className="mt-10 flex flex-wrap gap-2">
             {post.keywords.map((keyword) => (

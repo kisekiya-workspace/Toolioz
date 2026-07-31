@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import { biodataPosts, getBiodataPost } from '@/lib/biodata-content';
+import { buildBreadcrumbJsonLd } from '@/lib/seo';
+import { Sparkles } from 'lucide-react';
 
 type BlogPageProps = {
   params: Promise<{ slug: string }>;
@@ -80,10 +82,16 @@ export default async function BiodataBlogPostPage({ params }: BlogPageProps) {
     })),
   };
 
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: 'Home', url: '/' },
+    { name: 'Biodata', url: '/biodata' },
+    { name: 'Blog', url: '/biodata/blog' },
+    { name: post.title, url: `/biodata/blog/${post.slug}` },
+  ]);
+
   return (
     <main className="bg-white text-[var(--text-primary)]">
-      <JSONLD data={articleJsonLd} />
-      <JSONLD data={faqJsonLd} />
+      <JSONLD data={[articleJsonLd, faqJsonLd, breadcrumbJsonLd]} />
 
       <article className="mx-auto max-w-4xl px-6 py-16 md:py-24">
         <Link href="/biodata/blog" className="mb-10 inline-flex items-center gap-2 text-sm font-bold text-pink-700">
@@ -104,9 +112,17 @@ export default async function BiodataBlogPostPage({ params }: BlogPageProps) {
           <h1 className="max-w-3xl text-4xl font-black leading-tight tracking-[-0.03em] md:text-6xl">
             {post.title}
           </h1>
-          <p className="mt-8 max-w-3xl text-xl leading-9 text-[var(--text-secondary)]">
-            {post.description}
-          </p>
+
+          {/* Direct Answer / Quick Takeaway Block for AEO Extraction */}
+          <section className="mt-6 rounded-2xl border border-pink-200 bg-pink-50/70 p-6 shadow-sm">
+            <h2 className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-pink-800 mb-2">
+              <Sparkles size={16} className="text-pink-600 shrink-0" />
+              <span>Direct Answer / Quick Takeaway</span>
+            </h2>
+            <p className="text-base font-bold leading-relaxed text-pink-950">
+              {post.description}
+            </p>
+          </section>
 
           <div className="mt-10 flex flex-wrap gap-2">
             {post.keywords.map((keyword) => (

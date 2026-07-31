@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Toolioz | Free Finance, Dev & PDF Tools',
     description:
-      'SIP & tax calculators, developer utilities, PDF tools, biodata & resume makers — free in your browser.',
+      'SIP & tax calculators, developer utilities, PDF tools, biodata & resume makers — free in the browser.',
     images: [DEFAULT_OG_IMAGE.url],
   },
   robots: {
@@ -54,6 +54,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
       'max-video-preview': -1,
     },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
   },
 };
 

@@ -2,8 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, BookOpen, HelpCircle, Sparkles, CheckCircle2 } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
+import { JSONLD } from '@/components/ui/JSONLD';
 import { howToPosts } from '@/lib/howto-content';
-import { buildPageMetadata } from '@/lib/seo';
+import { buildCollectionPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'How-To Guides & Step-by-Step Tutorials | Toolioz',
@@ -21,8 +22,15 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 export default function HowToIndexPage() {
+  const collectionJsonLd = buildCollectionPageJsonLd({
+    name: 'Toolioz How-To Guides and Step-by-Step Tutorials',
+    description: 'Technical, financial, and document step-by-step guides.',
+    path: '/how-to',
+  });
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-white">
+      <JSONLD data={collectionJsonLd} />
       <header className="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight text-white group">

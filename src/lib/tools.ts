@@ -29,6 +29,7 @@ import {
   UserRound,
   Sparkles,
   Pencil,
+  Scissors,
   type LucideIcon
 } from 'lucide-react';
 
@@ -372,6 +373,46 @@ export const TOOLS: Tool[] = [
 
   // ═══ PDF & RESUME UTILITIES ═══
   {
+    id: 'merge-pdf',
+    title: 'PDF Merge Tool',
+    desc: 'Combine multiple PDF files into one document in your browser with zero server uploads.',
+    icon: FileText,
+    href: '/pdftools/merge-pdf',
+    color: '#ef4444',
+    category: 'pdftools',
+    isTrending: true
+  },
+  {
+    id: 'pdf-to-image',
+    title: 'PDF to Image Converter',
+    desc: 'Convert PDF pages into high-resolution PNG or JPG images directly in your browser.',
+    icon: FileSearch,
+    href: '/pdftools/pdf-to-image',
+    color: '#f97316',
+    category: 'pdftools',
+    isTrending: true
+  },
+  {
+    id: 'image-to-pdf',
+    title: 'Image to PDF Converter',
+    desc: 'Convert JPG, PNG, and WebP images into a single PDF document in your browser.',
+    icon: ImagePlus,
+    href: '/pdftools/image-to-pdf',
+    color: '#10b981',
+    category: 'pdftools',
+    isTrending: true
+  },
+  {
+    id: 'split-pdf',
+    title: 'Split PDF & Extract Pages',
+    desc: 'Extract specific pages or page ranges from PDF files with zero server uploads.',
+    icon: Scissors,
+    href: '/pdftools/split-pdf',
+    color: '#8b5cf6',
+    category: 'pdftools',
+    isTrending: true
+  },
+  {
     id: 'resume-generator',
     title: 'ATS Resume Generator',
     desc: 'Create polished resumes with a live LaTeX editor and text-based PDF export.',
@@ -381,7 +422,6 @@ export const TOOLS: Tool[] = [
     category: 'pdftools',
     isTrending: true
   },
-
   // ═══ BIODATA TOOLS ═══
   {
     id: 'biodata-generator',

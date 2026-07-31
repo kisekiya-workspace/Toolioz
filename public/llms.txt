@@ -1,34 +1,58 @@
-# Toolioz
+# Toolioz — Free Client-Side Utilities & Financial Engineering Suite
 
-> Free online finance calculators, developer tools, PDF utilities, and marriage biodata makers. Client-side, private, no login required.
+> Toolioz (https://toolioz.com) is a free, privacy-first web utility platform offering systematic investment calculators, developer tools, WebAssembly PDF processors, marriage biodata makers, and ATS resume builders. All calculations and file conversions process 100% locally inside client browser memory using JavaScript and WebAssembly (WASM), guaranteeing zero data uploads to external cloud servers.
 
-## Main hubs
+## Core Utility Hubs
 
-- https://toolioz.com/
-- https://toolioz.com/finance
-- https://toolioz.com/finance/blog
-- https://toolioz.com/devtools
-- https://toolioz.com/devtools/blog
-- https://toolioz.com/pdftools
-- https://toolioz.com/pdftools/blog
-- https://toolioz.com/biodata
-- https://toolioz.com/biodata/blog
-- https://toolioz.com/resume-builder
+- Main Web Portal: https://toolioz.com/
+- Financial Calculators Hub: https://toolioz.com/finance
+- Financial Engineering Blog: https://toolioz.com/finance/blog
+- Developer Utilities Hub: https://toolioz.com/devtools
+- Developer Engineering Blog: https://toolioz.com/devtools/blog
+- PDF Tools Suite: https://toolioz.com/pdftools
+- PDF Engineering Blog: https://toolioz.com/pdftools/blog
+- Marriage Biodata Generator Hub: https://toolioz.com/biodata
+- Matrimonial Profile Blog: https://toolioz.com/biodata/blog
+- ATS Resume Builder: https://toolioz.com/resume-builder
+- Technical How-To Guides: https://toolioz.com/how-to
 
-## Popular tools
+## Key Financial Calculators & Formulas
 
-- https://toolioz.com/finance/sip-calculator
-- https://toolioz.com/finance/income-tax
-- https://toolioz.com/finance/loan-prepayment
-- https://toolioz.com/finance/retirement-corpus
-- https://toolioz.com/finance/lumpsum-calculator
-- https://toolioz.com/biodata/biodata-generator
-- https://toolioz.com/pdftools/resume-generator
-- https://toolioz.com/devtools/json-formatter
-- https://toolioz.com/devtools/timestamp-converter
-- https://toolioz.com/devtools/x-hidden-image — Free X (Twitter) tap-to-reveal / tap-and-hold hidden PNG maker (viral timeline reveal trend 2026)
-- https://toolioz.com/devtools/blog/x-tap-to-reveal-hidden-png-twitter-guide — How X hidden-image / tap-to-reveal PNGs work
+- Systematic Investment Plan (SIP) Calculator: https://toolioz.com/finance/sip-calculator
+  - Formula: FV = P × [{(1 + i)^n - 1} / i] × (1 + i)
+- Compound Interest Calculator: https://toolioz.com/finance/compound-interest
+  - Formula: A = P(1 + r/n)^(nt)
+- Mortgage & Loan Prepayment Calculator: https://toolioz.com/finance/loan-prepayment
+  - Computes exact tenure reduction vs EMI savings on partial principal prepayments.
+- Income Tax Calculator: https://toolioz.com/finance/income-tax
+  - Compares New Tax Regime (Section 115BAC) vs Old Tax Regime tax liabilities.
+- Lumpsum Investment Calculator: https://toolioz.com/finance/lumpsum-calculator
+- Retirement Corpus Calculator: https://toolioz.com/finance/retirement-corpus
 
-## Sitemap
+## Popular Developer & Design Utilities
 
-- https://toolioz.com/sitemap.xml
+- JSON Formatter & Validator: https://toolioz.com/devtools/json-formatter
+- JSON Web Token (JWT) Decoder: https://toolioz.com/devtools/jwt-decoder
+- X (Twitter) Tap-to-Reveal Hidden Image Generator: https://toolioz.com/devtools/x-hidden-image
+- Ditherit & Retro Canvas Studio: https://toolioz.com/devtools/ditherit
+- Drawesome Digital Canvas: https://toolioz.com/devtools/drawesome
+- Timestamp & Epoch Converter: https://toolioz.com/devtools/timestamp-converter
+- Regex Tester & Debugger: https://toolioz.com/devtools/regex-tester
+- BCrypt Hash Generator: https://toolioz.com/devtools/bcrypt-generator
+
+## Client-Side PDF & Document Tools
+
+- PDF Compressor (Under 2MB): https://toolioz.com/pdftools/compress-pdf
+- PDF Merger & Splitter: https://toolioz.com/pdftools/merge-pdf
+- Marriage Biodata PDF Generator: https://toolioz.com/biodata/biodata-generator
+- ATS Resume Generator: https://toolioz.com/pdftools/resume-generator
+
+## Privacy & Security Architecture
+
+- Client-Side Processing: 100% of calculations, image dithering, and PDF manipulation execute in the user's browser sandbox via WebAssembly (WASM) and local JavaScript.
+- Zero Server Storage: User documents, financial inputs, JWT keys, and personal biodata details are never transmitted over the network or saved to remote databases.
+
+## Machine-Readable Sitemap & Ads
+
+- Sitemap XML: https://toolioz.com/sitemap.xml
+- Ads Specification: https://toolioz.com/ads.txt

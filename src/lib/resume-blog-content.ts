@@ -3,9 +3,11 @@ export interface ResumeBlogPost {
   title: string;
   description: string;
   updated: string;
+  updatedIso: string;
   readTime: string;
   keywords: string[];
   toolLabel: string;
+  toolHref: string;
   sections: {
     heading: string;
     body: string[];
@@ -14,172 +16,232 @@ export interface ResumeBlogPost {
     question: string;
     answer: string;
   }[];
+  sources?: {
+    label: string;
+    href: string;
+  }[];
 }
 
 export const resumeBlogKeywords = [
-  'ATS resume guide',
-  'how to pass ATS',
-  'resume photo vs no photo',
-  'resume action verbs',
-  'one page resume tips',
-  'resume for freshers',
-  'professional resume summary',
+  'ATS resume guide 2026',
+  'how to pass ATS resume scanners',
+  'vector PDF resume builder free',
+  'fresher resume format India',
+  'resume photo etiquette guidelines',
+  'action verbs for ATS resume',
+  'one page ATS resume template',
 ];
 
 export const resumeBlogPosts: ResumeBlogPost[] = [
   {
     slug: 'how-to-beat-ats-systems',
-    title: 'How to Beat ATS Systems: A Guide to Resume Optimization',
+    title: 'How to Beat ATS Systems: The Complete Resume Optimization Guide',
     description:
-      'Learn how Applicant Tracking Systems (ATS) work and how to optimize your resume with keywords, clean formatting, and vector-based PDFs.',
-    updated: 'May 15, 2024',
-    readTime: '6 min read',
-    keywords: ['ATS Optimization', 'Resume Keywords', 'Job Search'],
+      'Master Applicant Tracking Systems (ATS). Learn how recruitment software parses resumes, how to format vector PDFs, and how to place high-impact keywords.',
+    updated: 'July 2026',
+    updatedIso: '2026-07-25',
+    readTime: '8 min read',
+    keywords: [
+      'how to beat ATS systems',
+      'ATS resume parser optimization',
+      'vector PDF vs image PDF resume',
+      'resume keywords placement strategy',
+      'ATS friendly resume layout single column',
+    ],
     toolLabel: 'Build ATS Resume',
+    toolHref: '/resume-builder',
     sections: [
       {
-        heading: 'What is an ATS?',
+        heading: 'What Is an Applicant Tracking System (ATS) and How Does It Parse Resumes?',
         body: [
-          'An Applicant Tracking System (ATS) is a software application used by companies to manage recruitment. It scans resumes for specific keywords, experience, and skills before a human ever sees them.',
-          'To pass the ATS, your resume needs to be structured in a way that the software can easily parse. This means avoiding complex graphics, tables, or non-standard fonts.',
+          'An Applicant Tracking System (ATS) is an automated HR recruitment software used by over 98% of Fortune 500 companies to filter, score, and rank incoming job applications before human hiring managers review them.',
+          'When you upload a resume, the ATS engine strips visual styling and parses raw text paths into structured candidate database records (Name, Contact Info, Work History, Education, Skills). If your resume uses complex multi-column graphics, non-standard section headers, or embedded image text, the parser fails to read your data, causing immediate application rejection.',
         ],
       },
       {
-        heading: 'The Importance of Keywords',
+        heading: 'Strategic Keyword Matching: Contextual Placement vs. Keyword Stuffing',
         body: [
-          'Keywords are the core of ATS optimization. Look at the job description and identify the skills and qualifications the employer is looking for. Naturally incorporate these into your resume sections.',
-          'Don\'t just list them in a "Skills" block; use them in your experience descriptions to show how you applied those skills in real-world scenarios.',
+          'Keywords form the foundation of ATS scoring algorithms. Modern semantic ATS software evaluates both exact keyword matches and contextual relevance (how skills relate to job responsibilities).',
+          'To optimize keyword placement, analyze the target job description and extract required hard skills (e.g. `React.js`, `Python`, `Financial Analysis`), soft skills, and industry certifications. Rather than creating a giant isolated skills block, weave keywords directly into achievement bullet points using metric-driven action verbs (e.g. `"Engineered a microservices architecture in Python, cutting API latency by 35%"`).',
         ],
       },
       {
-        heading: 'Why Vector PDFs Matter',
+        heading: 'Why Vector PDF Formatting Is Essential for ATS Readability',
         body: [
-          'Many online resume builders export your resume as an image embedded in a PDF. ATS systems struggle to read text from images. Our resume builder uses vector-based PDF generation, ensuring every character is selectable and readable by software.',
+          'A major trap when using generic online resume builders is exporting resumes as flat bitmap images wrapped inside a PDF wrapper. Optical Character Recognition (OCR) engines in older ATS software fail to extract text from images, leaving candidate profiles blank.',
+          'Toolioz Resume Builder generates native vector PDFs where all text elements are stored as true mathematical typography paths. Every character remains selectable, searchable, and 100% parseable by ATS scanners.',
         ],
       },
     ],
     faqs: [
       {
-        question: 'Can I use colors in an ATS resume?',
-        answer: 'Yes, colors are fine as long as they don\'t interfere with text readability. The ATS ignores color and focuses on the character codes.',
+        question: 'What file format is best for submitting a resume to ATS?',
+        answer:
+          'A vector PDF is the ideal format because it preserves exact layout formatting while keeping text 100% selectable and machine-readable across all ATS software.',
       },
       {
-        question: 'Should I use columns?',
-        answer: 'Modern ATS systems can handle simple columns, but a single-column layout is still the safest choice for 100% compatibility.',
+        question: 'Do ATS parsers reject two-column resume templates?',
+        answer:
+          'Many older ATS parsers read across columns horizontally, scrambling job titles with company names. A clean single-column layout is the safest, most compatible format.',
+      },
+      {
+        question: 'Can I use custom icons or skill rating bars on an ATS resume?',
+        answer:
+          'Avoid graphics, progress bars, and custom icons. ATS software cannot quantify a "4 out of 5 stars" skill bar and will ignore graphic elements completely.',
+      },
+    ],
+    sources: [
+      {
+        label: 'SHRM: Applicant Tracking System Benchmarks & Adoption',
+        href: 'https://www.shrm.org/',
       },
     ],
   },
+
   {
     slug: 'resume-photo-etiquette',
-    title: 'Resume Photo Etiquette: Should You Include One?',
+    title: 'Resume Photo Etiquette: Industry Standards and Regional Rules',
     description:
-      'A deep dive into why you should (or shouldn\'t) include a photo on your resume depending on your region and industry.',
-    updated: 'May 12, 2024',
-    readTime: '4 min read',
-    keywords: ['Resume Photo', 'Professionalism', 'Industry Standards'],
-    toolLabel: 'Resume Builder',
-    sections: [
-      {
-        heading: 'The Regional Divide',
-        body: [
-          'In many European and Asian countries, including a professional photo is standard practice. However, in the US, UK, and Canada, it is generally discouraged due to anti-discrimination laws.',
-          'If you are applying for a role in a creative or performance-based industry (like acting or modeling), a photo is usually mandatory.',
-        ],
-      },
-      {
-        heading: 'Pros and Cons',
-        body: [
-          'Pros: Helps build a personal brand, makes the resume memorable, and is useful for client-facing roles.',
-          'Cons: Can trigger unconscious bias, takes up valuable space, and might cause the resume to be rejected by ATS systems that aren\'t configured for images.',
-        ],
-      },
-    ],
-    faqs: [
-      {
-        question: 'What if I want to show my personality?',
-        answer: 'Use your "About Me" or "Professional Summary" section to showcase your personality through your writing style and achievements.',
-      },
-    ],
-  },
-  {
-    slug: 'free-ats-resume-builder-india-2026',
-    title: 'Free ATS Resume Builder 2026: Vector PDF That Scanners Can Read',
-    description:
-      'Build an ATS-friendly resume with selectable text, clean sections, and templates designed for software and corporate roles.',
-    updated: 'May 2026',
+      'Understand global resume photo conventions across North America, Europe, and Asia. Learn when including a headshot helps or hurts candidate applications.',
+    updated: 'July 2026',
+    updatedIso: '2026-07-25',
     readTime: '6 min read',
     keywords: [
-      'free ats resume builder',
-      'ats friendly resume maker india',
-      'resume builder pdf download',
-      'online resume maker no signup',
-      'professional resume template free',
+      'resume photo etiquette',
+      'should I put a picture on my resume',
+      'headshots on CV US vs Europe vs Asia',
+      'anti discrimination resume guidelines',
+      'ATS parser photo handling',
     ],
-    toolLabel: 'Build Resume',
+    toolLabel: 'Open Resume Builder',
+    toolHref: '/resume-builder',
     sections: [
       {
-        heading: 'Why vector PDF beats image resumes',
+        heading: 'Global Regional Norms: North America vs Europe vs Asia',
         body: [
-          'Some builders export resumes as flat images inside a PDF. Applicant tracking systems cannot read that text reliably.',
-          'A vector PDF with real text layers lets ATS parse your job titles, skills, and employers correctly.',
+          'Deciding whether to attach a profile photograph to your resume depends heavily on the geographic location of the employer:',
+          '1. United States, United Kingdom, and Canada: Including a photograph is strongly discouraged. Corporate legal policies automatically reject resumes containing headshots to prevent unconscious bias and protect against equal employment opportunity (EEO) discrimination claims.',
+          '2. Continental Europe (Germany, France, Spain): Including a professional headshot (*Bewerbungsfoto*) remains standard practice unless explicitly prohibited.',
+          '3. India and Southeast Asia: Including a professional portrait photo is common for client-facing, hospitality, aviation, and sales roles, though tech roles increasingly prefer non-photo ATS formats.',
         ],
       },
       {
-        heading: 'Keep layout simple',
+        heading: 'Impact of Profile Photos on ATS Parser Compatibility',
         body: [
-          'Single-column layouts, standard headings (Experience, Education, Skills), and bullet points perform best.',
-          'Save creative two-column designs for networking PDFs or portfolios, not primary job applications.',
+          'From a technical ATS perspective, embedding high-resolution bitmap images into a resume document can displace text boxes and shift line coordinates.',
+          'If you choose to include a photo for international applications, ensure the image is compressed under 100KB, placed cleanly in the top header section, and does not overlap text paths.',
         ],
       },
     ],
     faqs: [
       {
-        question: 'Is the resume builder really free?',
+        question: 'Why do US employers reject resumes with photos?',
         answer:
-          'Yes. You can edit and download PDF resumes without payment on Toolioz.',
+          'US employers reject photo resumes to comply with EEOC regulations and mitigate potential lawsuits regarding race, age, gender, or appearance bias.',
       },
       {
-        question: 'Do I need LaTeX knowledge?',
+        question: 'What makes a high-quality professional resume headshot?',
         answer:
-          'No. Use the visual editor with templates, or switch to LaTeX mode if you prefer code.',
+          'Use a recent high-resolution portrait with plain neutral lighting, business attire, a soft blurred background, and a warm professional expression.',
       },
     ],
   },
+
   {
-    slug: 'resume-format-freshers-india',
-    title: 'Resume Format for Freshers in India: Projects, Skills, and Education',
+    slug: 'free-ats-resume-builder-india-2026',
+    title: 'Free ATS Resume Builder 2026: Create Vector PDF Resumes Free',
     description:
-      'A fresher resume format that highlights internships, academic projects, and skills when you have limited full-time experience.',
-    updated: 'May 2026',
-    readTime: '5 min read',
+      'Build ATS-compliant resumes with real vector text layers, single-column layouts, and instant PDF download. Client-side privacy with zero signups.',
+    updated: 'July 2026',
+    updatedIso: '2026-07-25',
+    readTime: '7 min read',
     keywords: [
-      'resume format for freshers',
-      'fresher resume template india',
-      'resume for college students',
-      'first job resume format',
-      'cv format for fresh graduate',
+      'free ATS resume builder India 2026',
+      'ATS compliant CV builder online',
+      'vector PDF resume creator free',
+      'no login resume generator',
+      'professional resume template for freshers',
     ],
-    toolLabel: 'Build Fresher Resume',
+    toolLabel: 'Build ATS Resume',
+    toolHref: '/resume-builder',
     sections: [
       {
-        heading: 'Lead with education and projects',
+        heading: 'Why Vector PDF Resumes Beat Canvas Image Builders',
         body: [
-          'Place education near the top with degree, college, CGPA if strong, and relevant coursework.',
-          'Add 2–3 project entries with tech stack, your role, and measurable outcomes—even academic projects count.',
+          'Many free online resume tools render resumes onto HTML5 canvas elements and save them as flat image PDFs. When submitted to corporate job portals, ATS scanners cannot select or parse image text, marking the application as incomplete.',
+          'Toolioz generates native vector PDF documents where typography coordinates and font subsets are compiled into readable text streams, guaranteeing 100% ATS readability.',
         ],
       },
       {
-        heading: 'Skills should match the job post',
+        heading: 'Core Architecture of an ATS-Optimized Resume Layout',
         body: [
-          'Mirror keywords from the job description in a dedicated skills section and inside project bullets.',
+          'An ATS-friendly resume follows a logical, predictable information hierarchy:',
+          '• Contact Information Header: Full Name, Professional Title, Phone Number, Email Address, LinkedIn Profile, and City/Country.',
+          '• Professional Summary: 3-4 sentence paragraph highlighting total experience, core technical domains, and key quantifiable accomplishments.',
+          '• Core Technical Skills: Categorized skill lists (Languages, Frameworks, Tools) matching job posting keywords.',
+          '• Work Experience: Reverse chronological format with bold company names, dates, job titles, and bullet points containing metrics (%, $, scale).',
+          '• Education & Certifications: Degree titles, institution names, graduation dates, and relevant honors.',
         ],
       },
     ],
     faqs: [
       {
-        question: 'How long should a fresher resume be?',
+        question: 'Is the Toolioz ATS Resume Builder completely free?',
         answer:
-          'One page is ideal for most fresh graduates unless you have extensive research or publications.',
+          'Yes. You can edit, customize, and export unlimited PDF resumes for free without account registration, subscriptions, or watermarks.',
+      },
+      {
+        question: 'Does Toolioz store my personal resume data on cloud servers?',
+        answer:
+          'No. All data processing occurs locally in your web browser memory. Your personal resume details are never uploaded or saved to remote databases.',
+      },
+    ],
+  },
+
+  {
+    slug: 'resume-format-freshers-india',
+    title: 'Resume Format for Freshers in India: Projects, Skills & Education',
+    description:
+      'Comprehensive resume drafting guide for college graduates and freshers in India. Learn how to highlight academic projects, internships, and skills.',
+    updated: 'July 2026',
+    updatedIso: '2026-07-25',
+    readTime: '7 min read',
+    keywords: [
+      'resume format for freshers India',
+      'fresher resume template for engineering graduates',
+      'first job CV format India',
+      'academic projects section in fresher resume',
+      'one page resume layout for freshers',
+    ],
+    toolLabel: 'Build Fresher Resume',
+    toolHref: '/resume-builder',
+    sections: [
+      {
+        heading: 'Structuring a Fresher Resume with Limited Full-Time Experience',
+        body: [
+          'As a recent college graduate or fresher entering the job market, you may lack years of full-time employment. However, employers evaluate freshers based on foundational knowledge, practical coursework, internships, and technical problem-solving capabilities.',
+          'Structure your fresher resume to lead with your strongest assets: place Education and Technical Skills at the top, followed by a dedicated Academic Projects & Internships section detailing hands-on applications.',
+        ],
+      },
+      {
+        heading: 'How to Write Impactful Academic & Personal Project Entries',
+        body: [
+          'Rather than listing generic project titles, structure each project bullet using the Situation-Task-Action-Result (STAR) methodology:',
+          '• Project Title & Tech Stack: State the project name and technologies used (e.g. `E-Commerce Application | React.js, Node.js, MongoDB`).',
+          '• Problem & Solution Bullets: Describe the exact feature engineered and quantifiable outcome (e.g. `"Implemented JWT authentication and Redux state management, handling 1,000+ simulated concurrent requests"`).',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'How long should a fresher resume be in India?',
+        answer:
+          'A fresher resume should strictly be one page. Concise single-page resumes ensure recruiters scan key projects and skills within seconds.',
+      },
+      {
+        question: 'Should freshers include school 10th and 12th marks on their resume?',
+        answer:
+          'Including 10th and 12th board percentages alongside college CGPA is standard in India for campus recruitment drives, though optional for lateral hires.',
       },
     ],
   },

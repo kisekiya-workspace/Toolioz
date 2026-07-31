@@ -6,7 +6,7 @@ import { JSONLD } from '@/components/ui/JSONLD';
 import { ReadingProgressBar } from '@/components/ui/ReadingProgressBar';
 import { Footer } from '@/components/layout/Footer';
 import { standaloneBlogs, getStandaloneBlog } from '@/../blogs';
-import { buildArticleMetadata } from '@/lib/seo';
+import { buildArticleMetadata, buildBreadcrumbJsonLd } from '@/lib/seo';
 
 type BlogPageProps = {
   params: Promise<{ slug: string }>;
@@ -79,10 +79,15 @@ export default async function StandaloneBlogPostPage({ params }: BlogPageProps) 
     })),
   };
 
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: 'Home', url: '/' },
+    { name: 'Blog', url: '/blog' },
+    { name: post.title, url: `/blog/${post.slug}` },
+  ]);
+
   return (
     <main className="min-h-screen bg-white text-slate-900 antialiased selection:bg-blue-600 selection:text-white">
-      <JSONLD data={articleJsonLd} />
-      <JSONLD data={faqJsonLd} />
+      <JSONLD data={[articleJsonLd, faqJsonLd, breadcrumbJsonLd]} />
       <ReadingProgressBar />
 
       {/* Glassmorphic Navigation Bar */}
@@ -120,9 +125,16 @@ export default async function StandaloneBlogPostPage({ params }: BlogPageProps) 
             {post.title}
           </h1>
 
-          <p className="mt-6 text-lg leading-8 text-slate-600 sm:text-xl sm:leading-9 font-medium">
-            {post.description}
-          </p>
+          {/* Direct Answer / Quick Takeaway Block for AEO Extraction */}
+          <section className="mt-6 rounded-2xl border border-blue-200 bg-blue-50/70 p-6 shadow-sm">
+            <h2 className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-blue-800 mb-2">
+              <Sparkles size={16} className="text-blue-600 shrink-0" />
+              <span>Direct Answer / Quick Takeaway</span>
+            </h2>
+            <p className="text-base font-bold leading-relaxed text-blue-950">
+              {post.description}
+            </p>
+          </section>
 
           <div className="mt-8 flex flex-wrap gap-2 pt-2 border-t border-slate-200/60">
             {post.keywords.map((keyword) => (

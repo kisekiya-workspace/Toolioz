@@ -5,6 +5,8 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import { Footer } from '@/components/layout/Footer';
 import { pdftoolsBlogPosts, getPdfPost } from '@/lib/pdftools-blog-content';
+import { buildBreadcrumbJsonLd } from '@/lib/seo';
+import { Sparkles } from 'lucide-react';
 
 type BlogPageProps = {
   params: Promise<{ slug: string }>;
@@ -52,7 +54,7 @@ export default async function PdfBlogPostPage({ params }: BlogPageProps) {
     '@type': 'Article',
     headline: post.title,
     description: post.description,
-    dateModified: post.updated,
+    dateModified: post.updatedIso || post.updated,
     author: {
       '@type': 'Organization',
       name: 'Toolioz',
@@ -81,10 +83,16 @@ export default async function PdfBlogPostPage({ params }: BlogPageProps) {
     })),
   };
 
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: 'Home', url: '/' },
+    { name: 'PDF Tools', url: '/pdftools' },
+    { name: 'Blog', url: '/pdftools/blog' },
+    { name: post.title, url: `/pdftools/blog/${post.slug}` },
+  ]);
+
   return (
     <main className="bg-white text-slate-950">
-      <JSONLD data={articleJsonLd} />
-      <JSONLD data={faqJsonLd} />
+      <JSONLD data={[articleJsonLd, faqJsonLd, breadcrumbJsonLd]} />
 
       <article className="mx-auto max-w-4xl px-6 py-16 md:py-24">
         <Link href="/pdftools" className="mb-10 inline-flex items-center gap-2 text-sm font-bold text-indigo-700 hover:text-indigo-800 transition-colors">
@@ -98,9 +106,17 @@ export default async function PdfBlogPostPage({ params }: BlogPageProps) {
         <h1 className="text-4xl font-black leading-tight tracking-[-0.03em] md:text-6xl text-slate-950">
           {post.title}
         </h1>
-        <p className="mt-8 text-xl leading-9 text-slate-600">
-          {post.description}
-        </p>
+
+        {/* Direct Answer / Quick Takeaway Block for AEO Extraction */}
+        <section className="mt-8 rounded-2xl border border-indigo-200 bg-indigo-50/70 p-6 shadow-sm">
+          <h2 className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-indigo-800 mb-2">
+            <Sparkles size={16} className="text-indigo-600 shrink-0" />
+            <span>Direct Answer / Quick Takeaway</span>
+          </h2>
+          <p className="text-base font-bold leading-relaxed text-indigo-950">
+            {post.description}
+          </p>
+        </section>
 
         <div className="mt-8 flex flex-wrap gap-2">
           {post.keywords.map((keyword) => (

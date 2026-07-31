@@ -5,6 +5,8 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import { Footer } from '@/components/layout/Footer';
 import { resumeBlogPosts, getResumePost } from '@/lib/resume-blog-content';
+import { buildBreadcrumbJsonLd } from '@/lib/seo';
+import { Sparkles } from 'lucide-react';
 
 type BlogPageProps = {
   params: Promise<{ slug: string }>;
@@ -81,10 +83,16 @@ export default async function ResumeBlogPostPage({ params }: BlogPageProps) {
     })),
   };
 
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: 'Home', url: '/' },
+    { name: 'Resume Builder', url: '/resume-builder' },
+    { name: 'Blog', url: '/resume-builder/blog' },
+    { name: post.title, url: `/resume-builder/blog/${post.slug}` },
+  ]);
+
   return (
     <main className="bg-white text-slate-950">
-      <JSONLD data={articleJsonLd} />
-      <JSONLD data={faqJsonLd} />
+      <JSONLD data={[articleJsonLd, faqJsonLd, breadcrumbJsonLd]} />
 
       <article className="mx-auto max-w-4xl px-6 py-16 md:py-24">
         <Link href="/resume-builder" className="mb-10 inline-flex items-center gap-2 text-sm font-bold text-blue-700 hover:text-blue-800 transition-colors">
@@ -98,9 +106,17 @@ export default async function ResumeBlogPostPage({ params }: BlogPageProps) {
         <h1 className="text-4xl font-black leading-tight tracking-[-0.03em] md:text-6xl text-slate-950">
           {post.title}
         </h1>
-        <p className="mt-8 text-xl leading-9 text-slate-600">
-          {post.description}
-        </p>
+
+        {/* Direct Answer / Quick Takeaway Block for AEO Extraction */}
+        <section className="mt-8 rounded-2xl border border-blue-200 bg-blue-50/70 p-6 shadow-sm">
+          <h2 className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-blue-800 mb-2">
+            <Sparkles size={16} className="text-blue-600 shrink-0" />
+            <span>Direct Answer / Quick Takeaway</span>
+          </h2>
+          <p className="text-base font-bold leading-relaxed text-blue-950">
+            {post.description}
+          </p>
+        </section>
 
         <div className="mt-8 flex flex-wrap gap-2">
           {post.keywords.map((keyword) => (

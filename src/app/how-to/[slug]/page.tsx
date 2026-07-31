@@ -77,15 +77,33 @@ export default async function HowToDetailPage({ params }: HowToPageProps) {
       name: 'Toolioz',
       logo: {
         '@type': 'ImageObject',
-        url: `${SITE_URL}/favicon.ico`,
+        url: `${SITE_URL}/tooliozLogo.png`,
       },
     },
     mainEntityOfPage: `${SITE_URL}/how-to/${post.slug}`,
   };
 
+  const faqSchema =
+    post.faqs && post.faqs.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: post.faqs.map((faq) => ({
+            '@type': 'Question',
+            name: faq.question,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: faq.answer,
+            },
+          })),
+        }
+      : null;
+
+  const schemas = [howToSchema, articleSchema, faqSchema].filter(Boolean);
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-white">
-      <JSONLD data={[howToSchema, articleSchema]} />
+      <JSONLD data={schemas} />
 
       <header className="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
