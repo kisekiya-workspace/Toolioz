@@ -10,24 +10,18 @@ import {
   X,
   ChevronRight,
   LayoutGrid,
-  Landmark,
-  Code,
+  BookOpen,
   FileText,
   ExternalLink,
-  UserRound,
   Briefcase,
-  Palette,
   Wrench,
 } from 'lucide-react';
 import { CATEGORIES as TOOL_CATEGORIES, TOOLS } from '@/lib/tools';
 
 const MAIN_NAV = [
-  { name: 'Tools', href: '/tools', id: 'tools', icon: Wrench, color: '#2563eb' },
-  { name: 'Finance', href: '/finance', id: 'finance', icon: Landmark, color: '#3b82f6' },
-  { name: 'DevTools', href: '/devtools', id: 'devtools', icon: Code, color: '#f59e0b' },
-  { name: 'Design Studio', href: '/design', id: 'design', icon: Palette, color: '#06b6d4' },
-  { name: 'PDFTools', href: '/pdftools', id: 'pdftools', icon: FileText, color: '#ef4444' },
-  { name: 'Biodata', href: '/biodata', id: 'biodata', icon: UserRound, color: '#db2777' },
+  { name: 'Guides', href: '/blog', id: 'guides', icon: BookOpen, color: '#2563eb' },
+  { name: 'How-To', href: '/how-to', id: 'how-to', icon: FileText, color: '#06b6d4' },
+  { name: 'Comparisons', href: '/top5', id: 'comparisons', icon: LayoutGrid, color: '#f59e0b' },
 ];
 
 export const Navbar = () => {
@@ -38,7 +32,9 @@ export const Navbar = () => {
 
   const pathname = usePathname();
 
-  const currentCategoryId = MAIN_NAV.find((item) => pathname.startsWith(item.href))?.id;
+  const currentCategoryId = TOOL_CATEGORIES.find((category) =>
+    pathname === `/${category.id}` || pathname.startsWith(`/${category.id}/`)
+  )?.id;
   const currentCategory = TOOL_CATEGORIES.find((category) => category.id === currentCategoryId);
   const categoryTools = TOOLS.filter((tool) => tool.category === currentCategoryId);
 
@@ -89,23 +85,7 @@ export const Navbar = () => {
             <span>Toolioz</span>
           </Link>
 
-          <div className="hidden items-center gap-6 md:flex lg:gap-8">
-            {MAIN_NAV.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={[
-                  'flex items-center gap-2 py-2 text-sm font-medium transition-colors',
-                  pathname.startsWith(item.href)
-                    ? 'text-[var(--primary)]'
-                    : 'text-[var(--text-secondary)] hover:text-[var(--primary)]',
-                ].join(' ')}
-              >
-                <item.icon size={16} className="opacity-70" style={{ color: item.color }} />
-                <span>{item.name}</span>
-              </Link>
-            ))}
-
+          <div className="hidden items-center gap-3 md:flex lg:gap-4">
             <div
               className="relative flex h-full items-center"
               onMouseEnter={handleMouseEnter}
@@ -113,12 +93,15 @@ export const Navbar = () => {
             >
               <button
                 className={[
-                  'flex items-center gap-2 rounded-full bg-[var(--bg-secondary)] px-4 py-2 text-sm font-semibold text-[var(--text-secondary)] transition-all hover:bg-[rgba(37,99,235,0.08)] hover:text-[var(--primary)]',
-                  currentCategoryId ? 'bg-[rgba(37,99,235,0.08)] text-[var(--primary)]' : '',
+                  'flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all',
+                  currentCategoryId || pathname === '/tools'
+                    ? 'bg-[rgba(37,99,235,0.1)] text-[var(--primary)]'
+                    : 'text-[var(--text-secondary)] hover:bg-[var(--bg-secondary)] hover:text-[var(--primary)]',
                 ].join(' ')}
+                aria-expanded={activeDropdown === 'tools'}
               >
-                <LayoutGrid size={16} />
-                <span>{currentCategoryId ? currentCategory?.title : 'Categories'}</span>
+                <Wrench size={16} className="text-blue-600" />
+                <span>Tools</span>
                 <ChevronDown
                   size={14}
                   className={activeDropdown === 'tools' ? 'rotate-180 transition-transform' : 'transition-transform'}
@@ -126,75 +109,56 @@ export const Navbar = () => {
               </button>
 
               {activeDropdown === 'tools' && (
-                <div className="absolute right-0 top-[calc(100%+10px)] z-[1000] w-[600px] rounded-[var(--radius-xl)] border border-[var(--border)] bg-white p-6 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.1)]">
-                  {currentCategoryId ? (
-                    <div className="flex flex-col">
-                      <div className="mb-4 flex items-center justify-between border-b border-[var(--border)] pb-3">
-                        <h4 className="text-sm font-bold uppercase tracking-[0.05em] text-[var(--text-secondary)]">
-                          {currentCategory?.title} Collection
-                        </h4>
-                        <Link
-                          href={`/${currentCategoryId}`}
-                          className="flex items-center gap-1 text-[0.8125rem] font-semibold text-[var(--primary)]"
-                        >
-                          View All <ChevronRight size={14} />
-                        </Link>
-                      </div>
-                      <div className="grid grid-cols-2 gap-3">
-                        {categoryTools.map((tool) => (
-                          <Link
-                            key={tool.id}
-                            href={tool.href}
-                            className="flex items-center gap-3 rounded-[var(--radius-md)] p-3 transition-all hover:translate-x-1 hover:bg-[var(--bg-secondary)]"
-                          >
-                            <div
-                              className="flex h-8 w-8 items-center justify-center rounded-lg border border-[var(--border)] bg-white"
-                              style={{ color: tool.color }}
-                            >
-                              <tool.icon size={18} />
-                            </div>
-                            <div className="flex flex-col">
-                              <span className="text-sm font-semibold text-[var(--text-primary)]">
-                                {tool.title}
-                              </span>
-                              <span className="max-w-[150px] truncate text-xs text-[var(--text-secondary)]">
-                                {tool.desc}
-                              </span>
-                            </div>
-                          </Link>
-                        ))}
-                      </div>
+                <div className="absolute left-0 top-[calc(100%+10px)] z-[1000] w-[680px] rounded-3xl border border-[var(--border)] bg-white p-6 shadow-[0_24px_60px_-18px_rgba(15,23,42,0.22)]">
+                  <div className="mb-5 flex items-end justify-between border-b border-[var(--border)] pb-4">
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-600">Toolioz toolbox</p>
+                      <h4 className="mt-1 text-xl font-black text-[var(--text-primary)]">Choose a tool category</h4>
                     </div>
-                  ) : (
-                    <div className="grid grid-cols-2 gap-4">
-                      {TOOL_CATEGORIES.map((category) => (
-                        <Link
-                          key={category.id}
-                          href={`/${category.id}`}
-                          className="flex gap-4 rounded-[var(--radius-lg)] p-4 transition-colors hover:bg-[var(--bg-secondary)]"
-                        >
-                          <div
-                            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-[var(--bg-secondary)]"
-                            style={{ color: category.color }}
-                          >
-                            <category.icon size={20} />
-                          </div>
-                          <div>
-                            <h4 className="mb-1 text-[0.9375rem] font-bold text-[var(--text-primary)]">
-                              {category.title}
-                            </h4>
-                            <p className="text-[0.8125rem] leading-5 text-[var(--text-secondary)]">
-                              {category.desc}
-                            </p>
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  )}
+                    <Link href="/tools" className="flex items-center gap-1 text-sm font-bold text-[var(--primary)] hover:underline">
+                      View all tools <ChevronRight size={14} />
+                    </Link>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    {TOOL_CATEGORIES.map((category) => (
+                      <Link
+                        key={category.id}
+                        href={`/${category.id}`}
+                        className={[
+                          'flex items-center gap-3 rounded-2xl border p-3 transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:bg-[var(--bg-secondary)]',
+                          currentCategoryId === category.id ? 'border-blue-200 bg-blue-50/60' : 'border-transparent',
+                        ].join(' ')}
+                      >
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[var(--bg-secondary)]" style={{ color: category.color }}>
+                          <category.icon size={18} />
+                        </div>
+                        <div className="min-w-0">
+                          <span className="block text-sm font-bold text-[var(--text-primary)]">{category.title}</span>
+                          <span className="block truncate text-xs text-[var(--text-secondary)]">{category.desc}</span>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
-            
+
+            {MAIN_NAV.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={[
+                  'flex items-center gap-2 rounded-full px-3.5 py-2 text-sm font-semibold transition-colors',
+                  pathname.startsWith(item.href)
+                    ? 'bg-[rgba(37,99,235,0.1)] text-[var(--primary)]'
+                    : 'text-[var(--text-secondary)] hover:bg-[var(--bg-secondary)] hover:text-[var(--primary)]',
+                ].join(' ')}
+              >
+                <item.icon size={16} className="opacity-70" style={{ color: item.color }} />
+                <span>{item.name}</span>
+              </Link>
+            ))}
+
             <Link
               href="/resume-builder"
               className="hidden lg:flex items-center gap-2 rounded-full bg-[var(--primary)] px-5 py-2 text-sm font-semibold text-white transition-all hover:bg-blue-700"
@@ -258,8 +222,24 @@ export const Navbar = () => {
                 <ChevronRight size={14} />
               </Link>
               
-              <h4 className="mb-4 pl-2 text-xs font-bold uppercase text-[var(--text-secondary)]">
-                Categories
+              <h4 className="mb-4 pl-2 text-xs font-bold uppercase tracking-[0.14em] text-[var(--text-secondary)]">
+                Explore
+              </h4>
+              <div className="mb-5 grid grid-cols-1 gap-2">
+                {[
+                  { label: 'All guides', href: '/blog', icon: BookOpen },
+                  { label: 'How-to tutorials', href: '/how-to', icon: FileText },
+                  { label: 'Tool comparisons', href: '/top5', icon: LayoutGrid },
+                ].map(({ label, href, icon: Icon }) => (
+                  <Link key={href} href={href} className="flex items-center gap-4 rounded-xl bg-white/70 p-4 font-semibold text-[var(--text-primary)]" onClick={() => setIsOpen(false)}>
+                    <Icon size={20} className="text-blue-600" />
+                    <span className="flex-1">{label}</span>
+                    <ChevronRight size={14} />
+                  </Link>
+                ))}
+              </div>
+              <h4 className="mb-4 pl-2 text-xs font-bold uppercase tracking-[0.14em] text-[var(--text-secondary)]">
+                Tool categories
               </h4>
               <div className="flex flex-col gap-2">
                 {TOOL_CATEGORIES.map((category) => (

@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { ArrowUpRight, BookOpen } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { getTooliozGuidesForPath } from "@/lib/toolioz-blog-index";
+import { getToolGuideLinks } from "@/lib/tool-guide-links";
 
 export function RelatedGuides() {
   const pathname = usePathname();
-  const guides = getTooliozGuidesForPath(pathname);
+  const guides = getToolGuideLinks(pathname);
 
   if (!guides.length) return null;
 
