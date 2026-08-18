@@ -12,6 +12,7 @@ export type PenId =
   | "marker"
   | "highlighter"
   | "brush"
+  | "watercolor"
   | "fountain";
 
 export type ToolId = PenId | "eraser";

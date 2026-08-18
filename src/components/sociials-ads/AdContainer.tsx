@@ -1,0 +1,48 @@
+"use client";
+
+import { useEffect } from "react";
+
+declare global {
+    interface Window {
+        adsbygoogle?: unknown[];
+    }
+}
+
+interface AdContainerProps {
+    slot: string;
+    format?: "auto" | "fluid" | "rectangle";
+    responsive?: "true" | "false";
+    className?: string;
+}
+
+export function AdContainer({ slot, format = "auto", responsive = "true", className = "" }: AdContainerProps) {
+    const publisherId = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
+    useEffect(() => {
+        if (!publisherId) return;
+        try {
+            window.adsbygoogle = window.adsbygoogle || [];
+            window.adsbygoogle.push({});
+        } catch (err) {
+            console.error("AdSense push error:", err);
+        }
+    }, [publisherId, slot]);
+
+    return (
+        <div className={`my-8 overflow-hidden min-h-[100px] flex items-center justify-center bg-muted/20 border border-dashed rounded-xl transition-all ${className}`}>
+            {!publisherId ? (
+                <div className="text-xs text-muted-foreground uppercase tracking-widest font-bold opacity-30">
+                    Advertisement Placement
+                </div>
+            ) : (
+                <ins
+                    className="adsbygoogle"
+                    style={{ display: "block", textAlign: "center" }}
+                    data-ad-client={publisherId}
+                    data-ad-slot={slot}
+                    data-ad-format={format}
+                    data-full-width-responsive={responsive}
+                />
+            )}
+        </div>
+    );
+}

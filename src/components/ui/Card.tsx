@@ -13,9 +13,9 @@ export const Card: React.FC<CardProps> = ({
   ...props
 }) => {
   const cardClass = [
-    'rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 ease-out text-slate-900',
+    'rounded-2xl border border-slate-200 bg-white p-6 shadow-sm text-slate-900',
     hoverable
-      ? 'cursor-pointer hover:-translate-y-1 hover:border-slate-300 hover:shadow-md'
+      ? 'cursor-pointer hover:border-slate-300 hover:shadow-md'
       : '',
     className,
   ].join(' ');

@@ -111,7 +111,7 @@ export default function RootLayout({
         <JSONLD data={orgJsonLd} />
         <Navbar />
         <Breadcrumbs />
-        <main>{children}</main>
+        <div id="main-content">{children}</div>
       </body>
     </html>
   );

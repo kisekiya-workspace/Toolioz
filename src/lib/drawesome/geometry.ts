@@ -86,6 +86,58 @@ export function polylinePath(points: Point[]): string {
   return d;
 }
 
+export type WatercolorBloom = {
+  x: number;
+  y: number;
+  radius: number;
+  opacity: number;
+};
+
+export function watercolorBlooms(
+  points: Point[],
+  size: number
+): WatercolorBloom[] {
+  if (points.length < 2) return [];
+
+  const blooms: WatercolorBloom[] = [];
+  const spacing = Math.max(14, size * 1.15);
+  let distanceToNext = spacing * 0.7;
+  let bloomIndex = 0;
+
+  for (let i = 1; i < points.length; i++) {
+    const from = points[i - 1];
+    const to = points[i];
+    const dx = to[0] - from[0];
+    const dy = to[1] - from[1];
+    const segmentLength = Math.hypot(dx, dy);
+    if (!segmentLength) continue;
+
+    let traveled = 0;
+    while (traveled + distanceToNext <= segmentLength) {
+      traveled += distanceToNext;
+      const t = traveled / segmentLength;
+      const x = from[0] + dx * t;
+      const y = from[1] + dy * t;
+      const hash = Math.abs(
+        Math.sin(x * 12.9898 + y * 78.233 + bloomIndex * 37.719)
+      );
+
+      blooms.push({
+        x,
+        y,
+        radius: size * (0.28 + hash * 0.24),
+        opacity: 0.05 + hash * 0.07,
+      });
+
+      bloomIndex++;
+      distanceToNext = spacing * (0.72 + hash * 0.7);
+    }
+    distanceToNext -= segmentLength - traveled;
+  }
+
+  return blooms;
+}
+
 export function eraseLayers(
   strokes: { erase?: boolean }[]
 ): { ink: number[]; erasers: number[] }[] {

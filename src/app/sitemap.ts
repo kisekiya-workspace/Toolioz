@@ -3,11 +3,14 @@ import { TOOLS } from '@/lib/tools';
 import { biodataPosts } from '@/lib/biodata-content';
 import { devtoolsBlogPosts } from '@/lib/devtools-blog-content';
 import { financeBlogPosts } from '@/lib/finance-blog-content';
+import { financeEditorialPosts } from '@/lib/finance-editorial-content';
 import { pdftoolsBlogPosts } from '@/lib/pdftools-blog-content';
 import { resumeBlogPosts } from '@/lib/resume-blog-content';
 import { top5Articles } from '@/lib/top5-content';
+import { standaloneBlogs } from '@/../blogs';
 import { howToPosts } from '@/lib/howto-content';
 import { SITE_URL } from '@/lib/seo';
+import { importedToolItems } from '@/lib/sociials-tool-index';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
@@ -19,6 +22,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'weekly' as const,
     priority:
       tool.id === 'x-hidden-image' ? 0.96 : trendingIds.has(tool.id) ? 0.92 : 0.85,
+  }));
+
+  const importedToolRoutes = importedToolItems.map((tool) => ({
+    url: `${SITE_URL}${tool.url}`,
+    lastModified,
+    changeFrequency: 'weekly' as const,
+    priority: 0.82,
   }));
 
   const hubRoutes: MetadataRoute.Sitemap = [
@@ -71,14 +81,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...hubRoutes,
     ...toolRoutes,
+    { url: `${SITE_URL}/tools`, lastModified, changeFrequency: 'weekly' as const, priority: 0.94 },
+    ...importedToolRoutes,
     ...directHowToRoutes,
-    ...blogRoutes(howToPosts, '/how-to', 0.90),
+    ...blogRoutes(standaloneBlogs, '/blog', 0.82),
     ...blogRoutes(biodataPosts, '/biodata/blog', 0.82),
-    ...blogRoutes(financeBlogPosts, '/finance/blog', 0.84),
+    ...blogRoutes([...financeEditorialPosts, ...financeBlogPosts], '/finance/blog', 0.86),
     ...blogRoutes(devtoolsBlogPosts, '/devtools/blog', 0.8),
     ...blogRoutes(pdftoolsBlogPosts, '/pdftools/blog', 0.78),
     ...blogRoutes(resumeBlogPosts, '/resume-builder/blog', 0.78),
     ...blogRoutes(top5Articles, '/top5', 0.88),
   ];
 }
-

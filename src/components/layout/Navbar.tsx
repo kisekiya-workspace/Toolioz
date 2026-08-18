@@ -17,10 +17,12 @@ import {
   UserRound,
   Briefcase,
   Palette,
+  Wrench,
 } from 'lucide-react';
 import { CATEGORIES as TOOL_CATEGORIES, TOOLS } from '@/lib/tools';
 
 const MAIN_NAV = [
+  { name: 'Tools', href: '/tools', id: 'tools', icon: Wrench, color: '#2563eb' },
   { name: 'Finance', href: '/finance', id: 'finance', icon: Landmark, color: '#3b82f6' },
   { name: 'DevTools', href: '/devtools', id: 'devtools', icon: Code, color: '#f59e0b' },
   { name: 'Design Studio', href: '/design', id: 'design', icon: Palette, color: '#06b6d4' },

@@ -2,7 +2,13 @@
  * SVG & PNG Serialization
  * Based on drawesome by Benji Taylor (MIT License)
  */
-import { dotRadius, eraseLayers, polylinePath, strokePath } from "./geometry";
+import {
+  dotRadius,
+  eraseLayers,
+  polylinePath,
+  strokePath,
+  watercolorBlooms,
+} from "./geometry";
 import { PEN_BY_ID } from "./pens";
 import type { Stroke } from "./types";
 
@@ -14,7 +20,58 @@ export function esc(value: string): string {
     .replace(/"/g, "&quot;");
 }
 
-function strokeMarkup(stroke: Stroke): string {
+function watercolorFilterMarkup(id: string, seed: number, size: number): string {
+  return (
+    `<filter id="${id}" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">` +
+    `<feTurbulence type="fractalNoise" baseFrequency="0.012 0.045" numOctaves="2" seed="${seed}" result="paper"/>` +
+    `<feDisplacementMap in="SourceGraphic" in2="paper" scale="${Math.max(3, size * 0.16)}" xChannelSelector="R" yChannelSelector="G" result="rough"/>` +
+    `<feGaussianBlur in="rough" stdDeviation="${Math.max(0.35, size * 0.018)}"/>` +
+    `</filter>`
+  );
+}
+
+function strokeMarkup(stroke: Stroke, index: number): string {
+  if (stroke.pen === "watercolor") {
+    const filterId = `wc${index}`;
+    const centerline = polylinePath(stroke.points);
+    const blooms = watercolorBlooms(stroke.points, stroke.size)
+      .map(
+        (bloom) =>
+          `<circle cx="${bloom.x}" cy="${bloom.y}" r="${bloom.radius}"` +
+          ` fill="${esc(stroke.color)}" fill-opacity="${stroke.opacity * bloom.opacity}"/>`
+      )
+      .join("");
+    const washes = [
+      { width: 1.5, opacity: 0.16 },
+      { width: 1.02, opacity: 0.3 },
+      { width: 0.58, opacity: 0.2 },
+    ]
+      .map((wash) => {
+        return (
+          `<path d="${centerline}" fill="none" stroke="${esc(stroke.color)}"` +
+          ` stroke-width="${stroke.size * wash.width}" stroke-linecap="round"` +
+          ` stroke-linejoin="round" stroke-opacity="${stroke.opacity * wash.opacity}"/>`
+        );
+      })
+      .join("");
+
+    if (centerline && stroke.points.length > 1) {
+      return (
+        watercolorFilterMarkup(filterId, (index % 97) + 1, stroke.size) +
+        `<g filter="url(#${filterId})">${blooms}${washes}</g>`
+      );
+    }
+
+    if (stroke.points.length) {
+      const [x, y] = stroke.points[0];
+      return (
+        `<circle cx="${x}" cy="${y}" r="${dotRadius(stroke.size)}"` +
+        ` fill="${esc(stroke.color)}" fill-opacity="${stroke.opacity * 0.7}"/>`
+      );
+    }
+    return "";
+  }
+
   const style =
     PEN_BY_ID[stroke.pen].blend === "multiply"
       ? ` style="mix-blend-mode:multiply"`
@@ -57,7 +114,7 @@ export function toSvg(
   const body = layers
     .map((layer, i) => {
       const ink = layer.ink
-        .map((n) => strokeMarkup(strokes[n]))
+        .map((n) => strokeMarkup(strokes[n], n))
         .filter(Boolean)
         .join("");
       if (!ink) return "";

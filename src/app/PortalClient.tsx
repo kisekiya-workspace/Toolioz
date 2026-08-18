@@ -65,7 +65,7 @@ const HEADING_LG = 'text-2xl font-black tracking-tight text-[var(--text-primary)
 function ToolCard({ tool }: { tool: Tool }) {
   return (
     <Link href={tool.href} className="group block min-w-0">
-      <article className="flex h-full items-start gap-3 rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--surface)] p-4 transition-all duration-200 hover:border-[var(--border-strong)] hover:shadow-[var(--shadow-md)] sm:gap-4 sm:p-5 sm:hover:-translate-y-0.5">
+      <article className="flex h-full items-start gap-3 rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--surface)] p-4 hover:border-[var(--border-strong)] hover:shadow-[var(--shadow-md)] sm:gap-4 sm:p-5">
         <div
           className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl sm:h-11 sm:w-11"
           style={{ backgroundColor: `${tool.color}18`, color: tool.color }}
@@ -80,7 +80,7 @@ function ToolCard({ tool }: { tool: Tool }) {
         </div>
         <ArrowRight
           size={16}
-          className="mt-0.5 hidden shrink-0 text-[var(--text-tertiary)] opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100 sm:mt-1 sm:block"
+          className="mt-0.5 hidden shrink-0 text-[var(--text-tertiary)] opacity-0 group-hover:opacity-100 sm:mt-1 sm:block"
           style={{ color: tool.color }}
         />
       </article>
@@ -116,7 +116,7 @@ export default function PortalClient() {
         />
 
         <div className="relative mx-auto max-w-6xl py-10 sm:py-14 md:py-20">
-          <div className="landing-stagger mx-auto max-w-3xl text-center lg:max-w-4xl">
+          <div className="mx-auto max-w-3xl text-center lg:max-w-4xl">
             <p className="mb-4 inline-flex max-w-full flex-wrap items-center justify-center gap-1.5 rounded-full border border-[var(--border-strong)] bg-[var(--surface)] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.08em] text-[var(--text-secondary)] shadow-[var(--shadow-sm)] sm:mb-5 sm:gap-2 sm:px-4 sm:text-xs sm:tracking-[0.12em]">
               <Sparkles size={13} className="shrink-0 text-[var(--primary)] sm:size-[14px]" />
               <span>{toolCount}+ free tools · Private by default</span>
@@ -161,7 +161,7 @@ export default function PortalClient() {
             <div className="flex w-full flex-col items-stretch gap-2.5 sm:flex-row sm:items-center sm:justify-center sm:gap-3">
               <Link
                 href="/finance"
-                className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[var(--primary)] px-5 text-sm font-bold text-white shadow-[var(--shadow-md)] transition-all hover:bg-[var(--primary-hover)] sm:h-12 sm:px-7 sm:text-base"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[var(--primary)] px-5 text-sm font-bold text-white shadow-[var(--shadow-md)] transition-colors hover:bg-[var(--primary-hover)] sm:h-12 sm:px-7 sm:text-base"
               >
                 Browse finance tools
                 <ArrowRight size={16} className="sm:size-[18px]" />
@@ -207,7 +207,7 @@ export default function PortalClient() {
                 <Link
                   key={tool.id}
                   href={tool.href}
-                  className="group flex min-w-0 items-center gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-3.5 transition-all hover:shadow-[var(--shadow-md)] sm:p-4 sm:hover:-translate-y-0.5"
+                  className="group flex min-w-0 items-center gap-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] p-3.5 hover:shadow-[var(--shadow-md)] sm:p-4"
                 >
                   <span
                     className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg sm:h-10 sm:w-10"
@@ -245,7 +245,7 @@ export default function PortalClient() {
                   <Link
                     key={cat.id}
                     href={HUB_HREF[cat.id]}
-                    className="group relative overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--surface)] p-5 transition-all hover:shadow-[var(--shadow-lg)] sm:p-8 sm:hover:-translate-y-1"
+                    className="group relative overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--surface)] p-5 hover:shadow-[var(--shadow-lg)] sm:p-8"
                   >
                     <div
                       className="absolute right-0 top-0 h-24 w-24 translate-x-6 -translate-y-6 rounded-full opacity-[0.08] sm:h-32 sm:w-32 sm:translate-x-8 sm:-translate-y-8"
@@ -258,7 +258,7 @@ export default function PortalClient() {
                     <p className="text-xs font-semibold text-[var(--text-tertiary)] sm:text-sm">
                       {count} tools ·{' '}
                       <span className="inline-flex items-center gap-1 text-[var(--primary)]">
-                        Open hub <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+                        Open hub <ArrowRight size={14} />
                       </span>
                     </p>
                   </Link>
@@ -418,7 +418,7 @@ export default function PortalClient() {
                 <Link
                   key={hub.href}
                   href={hub.href}
-                  className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 transition-all hover:shadow-[var(--shadow-md)] sm:p-5 sm:hover:-translate-y-0.5"
+                  className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4 hover:shadow-[var(--shadow-md)] sm:p-5"
                 >
                   <h3 className="text-sm font-bold text-[var(--text-primary)] sm:text-base">{hub.title}</h3>
                   <p className="mt-1 text-xs text-[var(--text-secondary)] sm:text-sm">{hub.desc}</p>

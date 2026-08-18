@@ -7,10 +7,10 @@ import type { TemplateId } from './types';
  */
 export const BIODATA_BACKGROUND_IMAGES: Partial<Record<TemplateId, string>> = {
   ivory_gold: '/biodata-backgrounds/ivory-gold-bg.png',
-  rose_gold: '/biodata-backgrounds/rose-gold-bg.png',
-  maroon_gold: '/biodata-backgrounds/maroon-gold-bg.png',
-  floral: '/biodata-backgrounds/floral-bg.png',
-  slate: '/biodata-backgrounds/slate-bg.png',
+  floral: '/biodata-backgrounds/floral-editorial-v2.png',
+  rose_gold: '/biodata-backgrounds/rose-gold-editorial-v2.png',
+  slate: '/biodata-backgrounds/slate-editorial-v2.png',
+  modern: '/biodata-backgrounds/modern-architectural-v2.png',
 };
 
 /**

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, BookOpen, HelpCircle, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, HelpCircle, CheckCircle2 } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { JSONLD } from '@/components/ui/JSONLD';
 import { howToPosts } from '@/lib/howto-content';
@@ -66,7 +66,7 @@ export default function HowToIndexPage() {
           {howToPosts.map((post) => (
             <Link
               key={post.slug}
-              href={`/how-to/${post.slug}`}
+              href={post.directUrl}
               className="group flex flex-col justify-between p-6 rounded-2xl bg-slate-900/60 border border-slate-800/80 hover:border-cyan-500/40 hover:bg-slate-900 transition-all duration-200"
             >
               <div>

@@ -1,15 +1,16 @@
 import type { Metadata } from 'next';
 import { TOOLS } from '@/lib/tools';
+import { importedToolItems } from '@/lib/sociials-tool-index';
 
 export const SITE_URL = 'https://toolioz.com';
 export const SITE_NAME = 'Toolioz';
 
 /** Default social preview — static asset (keeps Worker bundle under Cloudflare free-tier limits). */
 export const DEFAULT_OG_IMAGE = {
-  url: 'https://toolioz.com/opengraph.png',
-  width: 1200,
-  height: 630,
-  alt: 'Toolioz — Free finance calculators, developer tools, PDF utilities, and marriage biodata maker',
+  url: 'https://toolioz.com/opengraph-toolioz.png',
+  width: 1731,
+  height: 909,
+  alt: 'Toolioz — Free tools for finance, code, and creators, shown as a glowing ASCII toolkit',
 } as const;
 
 export function ogImageMetadata() {
@@ -227,8 +228,11 @@ export function buildHowToJsonLd(options: {
   };
 }
 
-export const allToolItems = TOOLS.map((t) => ({
-  name: t.title,
-  url: t.href,
-  description: t.desc,
-}));
+export const allToolItems = [
+  ...TOOLS.map((t) => ({
+    name: t.title,
+    url: t.href,
+    description: t.desc,
+  })),
+  ...importedToolItems,
+];

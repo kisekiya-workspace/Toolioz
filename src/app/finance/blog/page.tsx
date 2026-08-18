@@ -4,12 +4,18 @@ import { ArrowRight, BookOpen, CalendarDays, Sparkles, Target, TrendingUp } from
 import { JSONLD } from '@/components/ui/JSONLD';
 import { Footer } from '@/components/layout/Footer';
 import { financeBlogKeywords, financeBlogPosts } from '@/lib/finance-blog-content';
+import { financeEditorialPosts } from '@/lib/finance-editorial-content';
+
+const allFinanceBlogKeywords = Array.from(new Set([
+  ...financeBlogKeywords,
+  ...financeEditorialPosts.flatMap((post) => post.keywords),
+]));
 
 export const metadata: Metadata = {
   title: 'Finance Blog | SIP, Retirement, Loan Payoff & Savings Guides | Toolioz',
   description:
     'Research-backed finance articles on step-up SIP, lumpsum vs SIP, retirement corpus planning, loan prepayment, and inflation-adjusted savings goals.',
-  keywords: financeBlogKeywords,
+  keywords: allFinanceBlogKeywords,
   alternates: {
     canonical: 'https://toolioz.com/finance/blog',
   },
@@ -27,7 +33,7 @@ export default function FinanceBlogIndexPage() {
   const itemListJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    itemListElement: financeBlogPosts.map((post, index) => ({
+    itemListElement: [...financeEditorialPosts, ...financeBlogPosts].map((post, index) => ({
       '@type': 'ListItem',
       position: index + 1,
       url: `https://toolioz.com/finance/blog/${post.slug}`,
@@ -96,7 +102,7 @@ export default function FinanceBlogIndexPage() {
                   <div className="mt-2 text-2xl font-black">Search-friendly finance topics</div>
                 </div>
                 <div className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-white/80">
-                  5 Guides
+                  {financeEditorialPosts.length + financeBlogPosts.length} Guides
                 </div>
               </div>
 
@@ -148,7 +154,7 @@ export default function FinanceBlogIndexPage() {
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-            {financeBlogPosts.map((post) => (
+            {[...financeEditorialPosts, ...financeBlogPosts].map((post) => (
               <Link
                 key={post.slug}
                 href={`/finance/blog/${post.slug}`}

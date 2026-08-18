@@ -199,6 +199,22 @@ const TOOLS: Record<
     );
   },
 
+  watercolor({ color, g }) {
+    return (
+      <g>
+        <path
+          d={`M9 ${SHOULDER} Q10 ${APEX + 9} ${W / 2} ${APEX} Q20 ${APEX + 9} 21 ${SHOULDER} Z`}
+          fill={color}
+          fillOpacity="0.72"
+        />
+        <path d={`M10 ${SHOULDER} Q${W / 2} ${APEX + 7} 20 ${SHOULDER}`} stroke="#fff" strokeOpacity="0.28" />
+        <rect x="7" y={SHOULDER} width="16" height="9" rx="1" fill={`url(#${g.metal})`} />
+        <rect x="8" y={SHOULDER + 9} width="14" height={H - SHOULDER - 9} rx="3" fill="#5b3a29" />
+        <rect x="8" y={SHOULDER + 9} width="14" height={H - SHOULDER - 9} rx="3" fill={`url(#${g.shade})`} />
+      </g>
+    );
+  },
+
   fountain({ color, g }) {
     return (
       <g>

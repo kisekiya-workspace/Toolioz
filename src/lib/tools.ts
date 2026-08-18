@@ -30,6 +30,8 @@ import {
   Sparkles,
   Pencil,
   Scissors,
+  RotateCcw,
+  BadgePercent,
   type LucideIcon
 } from 'lucide-react';
 
@@ -170,6 +172,43 @@ export const TOOLS: Tool[] = [
     color: '#2563eb',
     category: 'finance',
     isTrending: true
+  },
+  {
+    id: 'percentage-calculator',
+    title: 'Percentage Calculator',
+    desc: 'Find a percentage of a number or what percent one value is of another, with steps.',
+    icon: Percent,
+    href: '/finance/percentage-calculator',
+    color: '#2563eb',
+    category: 'finance',
+    isTrending: true
+  },
+  {
+    id: 'percentage-change-calculator',
+    title: 'Percentage Change',
+    desc: 'Calculate percentage increase or decrease from an original value to a new value.',
+    icon: TrendingUp,
+    href: '/finance/percentage-change-calculator',
+    color: '#0891b2',
+    category: 'finance'
+  },
+  {
+    id: 'reverse-percentage-calculator',
+    title: 'Reverse Percentage',
+    desc: 'Recover an original amount before a percentage increase or decrease.',
+    icon: RotateCcw,
+    href: '/finance/reverse-percentage-calculator',
+    color: '#0f766e',
+    category: 'finance'
+  },
+  {
+    id: 'discount-calculator-after-tax',
+    title: 'Discount After Tax',
+    desc: 'Break down sale savings, tax on the reduced price, and the final amount.',
+    icon: BadgePercent,
+    href: '/finance/discount-calculator-after-tax',
+    color: '#d97706',
+    category: 'finance'
   },
 
   // ═══ DEVELOPER TOOLS ═══

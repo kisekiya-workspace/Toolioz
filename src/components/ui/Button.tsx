@@ -32,7 +32,7 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   const buttonClass = [
-    'inline-flex items-center justify-center rounded-[var(--radius-md)] font-medium outline-none transition-all duration-200 ease-out active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50',
+    'inline-flex items-center justify-center rounded-[var(--radius-md)] font-medium outline-none transition-colors disabled:cursor-not-allowed disabled:opacity-50',
     variantClasses[variant],
     sizeClasses[size],
     fullWidth ? 'w-full' : '',

@@ -98,6 +98,22 @@ export const PENS: Pen[] = [
     }),
   },
   {
+    id: "watercolor",
+    name: "Watercolor",
+    key: "w",
+    defaultSize: 34,
+    defaultOpacity: 0.65,
+    options: (size) => ({
+      size,
+      thinning: 0.24,
+      streamline: 0.66,
+      simulatePressure: true,
+      easing: contrast,
+      taperEnd: size * 0.45,
+      variance: 0.7,
+    }),
+  },
+  {
     id: "fountain",
     name: "Fountain Pen",
     key: "g",

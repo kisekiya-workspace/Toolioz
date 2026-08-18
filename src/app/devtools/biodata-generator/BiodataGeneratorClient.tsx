@@ -73,9 +73,9 @@ const AccordionItem = ({ id, title, openAccordion, setOpenAccordion, children }:
 
 type BiodataInputProps = {
   label: string;
-  field: keyof BiodataForm;
+  field: Exclude<keyof BiodataForm, 'customFields'>;
   form: BiodataForm;
-  onUpdate: (field: keyof BiodataForm, value: string) => void;
+  onUpdate: (field: Exclude<keyof BiodataForm, 'customFields'>, value: string) => void;
   placeholder?: string;
   type?: string;
 };
@@ -196,7 +196,7 @@ export default function BiodataGeneratorClient() {
     }
   }, [form, templateId, isLoaded]);
 
-  const updateField = (field: keyof BiodataForm, value: string) => {
+  const updateField = (field: Exclude<keyof BiodataForm, 'customFields'>, value: string) => {
     setForm((current) => ({ ...current, [field]: value }));
   };
 

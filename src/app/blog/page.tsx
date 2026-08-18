@@ -4,6 +4,7 @@ import { ArrowRight, BookOpen, Clock, Layers, ShieldCheck, Sparkles, TrendingUp,
 import { JSONLD } from '@/components/ui/JSONLD';
 import { Footer } from '@/components/layout/Footer';
 import { standaloneBlogs } from '@/../blogs';
+import { allTooliozBlogPosts } from '@/lib/toolioz-blog-index';
 
 export const metadata: Metadata = {
   title: 'Research Blog & Technical Guides | Toolioz Knowledge Portal',
@@ -23,16 +24,14 @@ export const metadata: Metadata = {
 
 export default function BlogIndexPage() {
   const featuredPost = standaloneBlogs[0]; // Financial Engineering Masterclass
-  const secondaryFeatured = standaloneBlogs[1]; // Client-Side Engineering Masterclass
-  const remainingBlogs = standaloneBlogs.slice(2);
 
   const itemListJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    itemListElement: standaloneBlogs.map((post, index) => ({
+    itemListElement: allTooliozBlogPosts.map((post, index) => ({
       '@type': 'ListItem',
       position: index + 1,
-      url: `https://toolioz.com/blog/${post.slug}`,
+      url: `https://toolioz.com${post.href}`,
       name: post.title,
     })),
   };
@@ -165,12 +164,12 @@ export default function BlogIndexPage() {
               </h2>
             </div>
             <div className="rounded-full border border-slate-800 bg-slate-900 px-4 py-2 text-xs font-bold text-slate-400">
-              {standaloneBlogs.length} Published Articles
+              {allTooliozBlogPosts.length} Published Articles
             </div>
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {standaloneBlogs.map((post) => (
+            {allTooliozBlogPosts.map((post) => (
               <article
                 key={post.slug}
                 className="group flex flex-col justify-between rounded-[2rem] border border-slate-800 bg-slate-900/60 p-8 transition-all duration-300 hover:-translate-y-2 hover:border-blue-500/40 hover:bg-slate-900 hover:shadow-2xl hover:shadow-blue-500/10"
@@ -186,7 +185,7 @@ export default function BlogIndexPage() {
                   </div>
 
                   <h3 className="text-xl font-black leading-snug text-white transition-colors group-hover:text-blue-400">
-                    <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                      <Link href={post.href}>{post.title}</Link>
                   </h3>
 
                   <p className="mt-4 text-xs leading-6 text-slate-400 line-clamp-3">
@@ -207,7 +206,7 @@ export default function BlogIndexPage() {
                   </div>
 
                   <Link
-                    href={`/blog/${post.slug}`}
+                    href={post.href}
                     className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.14em] text-blue-400 transition group-hover:translate-x-1"
                   >
                     Read Masterclass <ArrowRight size={14} />

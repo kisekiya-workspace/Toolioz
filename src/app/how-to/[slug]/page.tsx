@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2, HelpCircle, Sparkles } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle2, HelpCircle, Sparkles } from 'lucide-react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import { Footer } from '@/components/layout/Footer';
 import { howToPosts, getHowToPost } from '@/lib/howto-content';
@@ -23,13 +23,16 @@ export async function generateMetadata({ params }: HowToPageProps): Promise<Meta
     return {};
   }
 
-  return buildArticleMetadata({
+  return {
+    ...buildArticleMetadata({
     title: `${post.title} | Toolioz`,
     description: post.description,
-    path: `/how-to/${post.slug}`,
+    path: post.directUrl,
     keywords: post.keywords,
     modifiedTime: post.updatedIso,
-  });
+    }),
+    robots: { index: false, follow: true },
+  };
 }
 
 export default async function HowToDetailPage({ params }: HowToPageProps) {
@@ -80,7 +83,7 @@ export default async function HowToDetailPage({ params }: HowToPageProps) {
         url: `${SITE_URL}/tooliozLogo.png`,
       },
     },
-    mainEntityOfPage: `${SITE_URL}/how-to/${post.slug}`,
+    mainEntityOfPage: `${SITE_URL}${post.directUrl}`,
   };
 
   const faqSchema =
@@ -226,7 +229,7 @@ export default async function HowToDetailPage({ params }: HowToPageProps) {
               {otherPosts.map((rel) => (
                 <Link
                   key={rel.slug}
-                  href={`/how-to/${rel.slug}`}
+                  href={rel.directUrl}
                   className="p-4 rounded-xl bg-slate-900/40 border border-slate-800 hover:border-cyan-500/40 transition-colors group"
                 >
                   <h3 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors line-clamp-2 mb-2">

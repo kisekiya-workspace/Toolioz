@@ -34,7 +34,7 @@ export default function FinanceClient() {
             </p>
 
             <div className="mx-auto mb-12 max-w-[650px]">
-              <div className="rounded-xl border border-(--border) bg-white p-2 shadow-[0_15px_40px_-10px_rgba(0,0,0,0.08)] transition-all duration-300 focus-within:-translate-y-0.5 focus-within:border-(--primary) focus-within:shadow-[0_15px_45px_-10px_rgba(37,99,235,0.15)]">
+              <div className="rounded-xl border border-(--border) bg-white p-2 shadow-[0_15px_40px_-10px_rgba(0,0,0,0.08)] focus-within:border-(--primary) focus-within:shadow-[0_15px_45px_-10px_rgba(37,99,235,0.15)]">
                 <Input
                   placeholder="Search for a finance tool (e.g. SIP, Tax, ROI)"
                   prefix={<Search size={22} />}
@@ -109,7 +109,7 @@ export default function FinanceClient() {
             </div>
             <Link
               href="/finance/blog"
-              className="inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-white px-5 py-3 text-sm font-bold text-[var(--text-primary)] transition hover:-translate-y-0.5 hover:border-[var(--primary)] hover:text-[var(--primary)]"
+              className="inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-white px-5 py-3 text-sm font-bold text-[var(--text-primary)] hover:border-[var(--primary)] hover:text-[var(--primary)]"
             >
               View all articles <ArrowRight size={16} />
             </Link>
@@ -118,7 +118,7 @@ export default function FinanceClient() {
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {financeBlogPosts.slice(0, 4).map((post) => (
               <Link key={post.slug} href={`/finance/blog/${post.slug}`} className="block">
-                <div className="group h-full rounded-[var(--radius-lg)] border border-[var(--border)] bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-[var(--primary)] hover:shadow-[var(--shadow-lg)]">
+                <div className="group h-full rounded-[var(--radius-lg)] border border-[var(--border)] bg-white p-6 shadow-sm hover:border-[var(--primary)] hover:shadow-[var(--shadow-lg)]">
                   <div className="mb-4 flex items-center justify-between">
                     <span className="inline-flex items-center gap-2 rounded-full bg-[var(--bg-secondary)] px-3 py-1 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-[var(--text-secondary)]">
                       <BookOpen size={12} />

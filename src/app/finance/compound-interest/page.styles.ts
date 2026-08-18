@@ -3,14 +3,14 @@ export const calculatorPageStyles = {
   header: 'px-6 py-8 text-center md:py-16',
   title: 'mb-4 text-[1.75rem] font-extrabold text-[var(--text-primary)] sm:text-[2.5rem]',
   subtitle: 'text-lg text-[var(--text-secondary)]',
-  grid: 'grid items-start gap-8 px-6 lg:grid-cols-[minmax(0,1fr)_400px]',
+  grid: 'grid items-start gap-10 px-6 lg:grid-cols-[minmax(0,1fr)_400px]',
   inputCard: 'p-6 sm:p-10',
   inputGroup: 'flex flex-col gap-6',
   selectGroup: 'flex flex-col gap-2',
   label: 'text-sm font-medium text-[var(--text-secondary)]',
   select:
     'rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-3 text-base text-[var(--text-primary)] outline-none transition-all duration-200 focus:border-[var(--primary)] focus:shadow-[0_0_0_2px_rgba(37,99,235,0.1)]',
-  resultCol: 'flex flex-col gap-6',
+  resultCol: 'flex flex-col gap-8',
   resultCard:
     'border-none bg-[var(--primary)] p-6 text-center text-white sm:p-10',
   resultLabel: 'mb-2 text-base font-medium opacity-90',

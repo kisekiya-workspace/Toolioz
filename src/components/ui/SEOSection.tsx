@@ -29,9 +29,9 @@ export const SEOSection: React.FC<SEOSectionProps> = ({
             </p>
           </div>
           
-          <div className="grid gap-6 sm:gap-8 sm:grid-cols-2">
+          <div className="grid gap-8 md:grid-cols-2 md:gap-10">
             {/* How to Use Card */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm transition-shadow hover:shadow-md">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
                   <ArrowRightCircle size={22} />
@@ -51,7 +51,7 @@ export const SEOSection: React.FC<SEOSectionProps> = ({
             </div>
             
             {/* Benefits Card */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm transition-shadow hover:shadow-md">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
               <div className="mb-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
                   <CheckCircle2 size={22} />

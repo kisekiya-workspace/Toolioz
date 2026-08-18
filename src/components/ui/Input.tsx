@@ -20,7 +20,7 @@ export const Input: React.FC<InputProps> = ({
       {label && <label className="text-[0.85rem] font-semibold uppercase tracking-widest text-(--text-secondary)">{label}</label>}
       <div
         className={[
-          'flex items-center overflow-hidden rounded-md border border-(--border) bg-white px-4 transition-all duration-200 focus-within:border-(--primary) focus-within:ring-4 focus-within:ring-(--primary)/10 dark:bg-(--bg-secondary)',
+          'flex items-center overflow-hidden rounded-md border border-(--border) bg-white px-4 transition-colors focus-within:border-(--primary) focus-within:ring-4 focus-within:ring-(--primary)/10 dark:bg-(--bg-secondary)',
           error ? '!border-red-500 focus-within:ring-red-500/10' : '',
         ].join(' ')}
       >

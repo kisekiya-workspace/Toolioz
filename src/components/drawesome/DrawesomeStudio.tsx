@@ -13,7 +13,7 @@ import { useDrawing } from "@/lib/drawesome/useDrawing";
 import { PENS, PEN_BY_ID } from "@/lib/drawesome/pens";
 import { SWATCHES } from "@/lib/drawesome/palette";
 import { toSvg, toPng } from "@/lib/drawesome/serialize";
-import { strokePath, dotRadius, polylinePath, eraseLayers } from "@/lib/drawesome/geometry";
+import { strokePath, dotRadius, polylinePath, eraseLayers, watercolorBlooms } from "@/lib/drawesome/geometry";
 import type { PenId, Point, Stroke, Board } from "@/lib/drawesome/types";
 import { ToolIcon } from "./ToolIcon";
 
@@ -32,6 +32,99 @@ function runPoints(from: Point, to: Point, pressure: number): Point[] {
     ]);
   }
   return out;
+}
+
+function WatercolorStroke({
+  color,
+  size,
+  opacity,
+  points,
+  filterId,
+  seed,
+}: {
+  color: string;
+  size: number;
+  opacity: number;
+  points: Point[];
+  filterId: string;
+  seed: number;
+}) {
+  const washes = [
+    { width: 1.5, opacity: 0.16 },
+    { width: 1.02, opacity: 0.3 },
+    { width: 0.58, opacity: 0.2 },
+  ];
+  const centerline = polylinePath(points);
+  const blooms = watercolorBlooms(points, size);
+
+  if (points.length === 1) {
+    const [x, y] = points[0];
+    return (
+      <circle
+        cx={x}
+        cy={y}
+        r={dotRadius(size)}
+        fill={color}
+        fillOpacity={opacity * 0.7}
+      />
+    );
+  }
+
+  return (
+    <>
+      <defs>
+        <filter
+          id={filterId}
+          x="-20%"
+          y="-20%"
+          width="140%"
+          height="140%"
+          colorInterpolationFilters="sRGB"
+        >
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.012 0.045"
+            numOctaves={2}
+            seed={seed}
+            result="paper"
+          />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="paper"
+            scale={Math.max(3, size * 0.16)}
+            xChannelSelector="R"
+            yChannelSelector="G"
+            result="rough"
+          />
+          <feGaussianBlur in="rough" stdDeviation={Math.max(0.35, size * 0.018)} />
+        </filter>
+      </defs>
+      <g filter={`url(#${filterId})`}>
+        {blooms.map((bloom, index) => (
+          <circle
+            key={`bloom-${index}`}
+            cx={bloom.x}
+            cy={bloom.y}
+            r={bloom.radius}
+            fill={color}
+            fillOpacity={opacity * bloom.opacity}
+          />
+        ))}
+        {washes.map((wash) => (
+          <path
+            key={wash.width}
+            d={centerline}
+            fill="none"
+            stroke={color}
+            strokeWidth={size * wash.width}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeOpacity={opacity * wash.opacity}
+          />
+        ))}
+      </g>
+    </>
+  );
 }
 
 export default function DrawesomeStudio() {
@@ -513,6 +606,19 @@ export default function DrawesomeStudio() {
                   <g mask={layer.erasers.length > 0 ? `url(#${maskId})` : undefined}>
                     {layer.ink.map((sIdx) => {
                       const s = drawing.strokes[sIdx];
+                      if (s.pen === "watercolor") {
+                        return (
+                          <WatercolorStroke
+                            key={s.id}
+                            color={s.color}
+                            size={s.size}
+                            opacity={s.opacity}
+                            points={s.points}
+                            filterId={`watercolor-${uid}-${sIdx}`}
+                            seed={(sIdx % 97) + 1}
+                          />
+                        );
+                      }
                       const d = strokePath(s.pen, s.size, s.points, true, s.shape);
                       const style = PEN_BY_ID[s.pen].blend === "multiply" ? { mixBlendMode: "multiply" as const } : {};
                       if (d) {
@@ -559,12 +665,23 @@ export default function DrawesomeStudio() {
                   fill="none"
                 />
               ) : (
-                <path
-                  d={strokePath(activeTool, size, currentPoints, false)}
-                  fill={color}
-                  fillOpacity={opacity}
-                  style={PEN_BY_ID[activeTool].blend === "multiply" ? { mixBlendMode: "multiply" } : {}}
-                />
+                activeTool === "watercolor" ? (
+                  <WatercolorStroke
+                    color={color}
+                    size={size}
+                    opacity={opacity}
+                    points={currentPoints}
+                    filterId={`watercolor-${uid}-active`}
+                    seed={41}
+                  />
+                ) : (
+                  <path
+                    d={strokePath(activeTool, size, currentPoints, false)}
+                    fill={color}
+                    fillOpacity={opacity}
+                    style={PEN_BY_ID[activeTool].blend === "multiply" ? { mixBlendMode: "multiply" } : {}}
+                  />
+                )
               )
             )}
           </svg>

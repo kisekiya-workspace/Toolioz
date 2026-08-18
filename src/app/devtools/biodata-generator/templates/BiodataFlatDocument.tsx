@@ -108,6 +108,8 @@ function MainSections({
       <FieldRow label="Date of Birth" value={data.dateOfBirth} textColor={theme.text} mutedColor={theme.muted} />
       <FieldRow label="Time of Birth" value={data.birthTime} textColor={theme.text} mutedColor={theme.muted} />
       <FieldRow label="Place of Birth" value={data.birthPlace} textColor={theme.text} mutedColor={theme.muted} />
+      <FieldRow label="Gender" value={data.gender} textColor={theme.text} mutedColor={theme.muted} />
+      <FieldRow label="Marital Status" value={data.maritalStatus} textColor={theme.text} mutedColor={theme.muted} />
       {!skipPersonalSidebarFields && (
         <>
           <FieldRow label="Height" value={data.height} textColor={theme.text} mutedColor={theme.muted} />
@@ -115,6 +117,13 @@ function MainSections({
           <FieldRow label="Caste" value={data.caste} textColor={theme.text} mutedColor={theme.muted} />
           <FieldRow label="Manglik" value={data.manglik} textColor={theme.text} mutedColor={theme.muted} />
           <FieldRow label="Languages" value={data.languages} textColor={theme.text} mutedColor={theme.muted} />
+          <FieldRow label="Mother Tongue" value={data.motherTongue} textColor={theme.text} mutedColor={theme.muted} />
+          <FieldRow label="Gotra" value={data.gotra} textColor={theme.text} mutedColor={theme.muted} />
+          <FieldRow label="Rashi" value={data.rashi} textColor={theme.text} mutedColor={theme.muted} />
+          <FieldRow label="Nakshatra" value={data.nakshatra} textColor={theme.text} mutedColor={theme.muted} />
+          <FieldRow label="Diet" value={data.diet} textColor={theme.text} mutedColor={theme.muted} />
+          <FieldRow label="Blood Group" value={data.bloodGroup} textColor={theme.text} mutedColor={theme.muted} />
+          <FieldRow label="Weight" value={data.weight} textColor={theme.text} mutedColor={theme.muted} />
         </>
       )}
 
@@ -122,7 +131,10 @@ function MainSections({
         Education & Career
       </SectionTitle>
       <FieldRow label="Education" value={data.education} textColor={theme.text} mutedColor={theme.muted} />
+      <FieldRow label="College" value={data.college} textColor={theme.text} mutedColor={theme.muted} />
       <FieldRow label="Occupation" value={data.occupation} textColor={theme.text} mutedColor={theme.muted} />
+      <FieldRow label="Company" value={data.company} textColor={theme.text} mutedColor={theme.muted} />
+      <FieldRow label="Work Location" value={data.workLocation} textColor={theme.text} mutedColor={theme.muted} />
       <FieldRow label="Annual Income" value={data.annualIncome} textColor={theme.text} mutedColor={theme.muted} />
 
       <SectionTitle color={theme.primary} accent={theme.accent} centered={centered}>
@@ -133,6 +145,18 @@ function MainSections({
       <FieldRow label="Mother's Name" value={data.motherName} textColor={theme.text} mutedColor={theme.muted} />
       <FieldRow label="Mother's Occupation" value={data.motherOccupation} textColor={theme.text} mutedColor={theme.muted} />
       <FieldRow label="Siblings" value={data.siblings} textColor={theme.text} mutedColor={theme.muted} />
+      <FieldRow label="Native Place" value={data.nativePlace} textColor={theme.text} mutedColor={theme.muted} />
+      <FieldRow label="Family Type" value={data.familyType} textColor={theme.text} mutedColor={theme.muted} />
+      <FieldRow label="Family Status" value={data.familyStatus} textColor={theme.text} mutedColor={theme.muted} />
+
+      {data.customFields?.some((field) => field.label.trim() && field.value.trim()) && (
+        <>
+          <SectionTitle color={theme.primary} accent={theme.accent} centered={centered}>Additional Details</SectionTitle>
+          {data.customFields.map((field) => (
+            <FieldRow key={field.id} label={field.label} value={field.value} textColor={theme.text} mutedColor={theme.muted} />
+          ))}
+        </>
+      )}
 
       <TextBlock title="Hobbies & Interests" text={data.hobbies} theme={theme} centered={centered} />
       <TextBlock title="Partner Expectations" text={data.partnerPreferences} theme={theme} centered={centered} />
@@ -183,18 +207,6 @@ function CompactContact({ data, color, muted }: { data: BiodataForm; color: stri
   );
 }
 
-function BotanicalAccent({ color }: { color: string }) {
-  return (
-    <svg width="138" height="230" viewBox="0 0 138 230" style={{ position: 'absolute', right: 18, top: 54, opacity: 0.42 }} aria-hidden>
-      <path d="M92 214C74 172 74 128 92 82c8-22 14-42 9-66" fill="none" stroke={color} strokeWidth="2" />
-      <path d="M92 84c-24-13-44-13-60 2 20 9 39 8 60-2ZM86 132c-26-7-46-3-60 14 23 5 42 0 60-14ZM91 184c-21-5-37 0-48 15 18 2 34-3 48-15Z" fill={color} />
-      <circle cx="108" cy="30" r="7" fill={color} />
-      <circle cx="101" cy="60" r="5" fill={color} />
-      <circle cx="77" cy="112" r="4" fill={color} />
-    </svg>
-  );
-}
-
 function OrnateCorner({ position, color }: { position: 'tl' | 'tr' | 'bl' | 'br'; color: string }) {
   const style: React.CSSProperties = {
     position: 'absolute',
@@ -233,7 +245,15 @@ export function BiodataFlatDocument({ data, theme }: { data: BiodataForm; theme:
 
   if (theme.layout === 'split') {
     return (
-      <TemplateWrapper className="flex" style={{ background: theme.bg, fontFamily: font }}>
+      <TemplateWrapper className="flex" style={{
+        background: theme.bg,
+        fontFamily: font,
+        ...(BIODATA_BACKGROUND_IMAGES[theme.id] ? {
+          backgroundImage: `url(${BIODATA_BACKGROUND_IMAGES[theme.id]})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        } : {}),
+      }}>
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '6px', background: theme.accent }} />
         <aside
           style={{
@@ -341,8 +361,7 @@ export function BiodataFlatDocument({ data, theme }: { data: BiodataForm; theme:
         padding: '48px 54px',
         ...(floralBg ? { backgroundImage: `url(${floralBg})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}),
       }}>
-        <BotanicalAccent color={theme.accent} />
-        <header style={{ marginBottom: '26px' }}>
+      <header style={{ marginBottom: '26px' }}>
           <h1 style={{ fontSize: '44px', fontWeight: 400, color: theme.text, margin: 0, letterSpacing: '0.02em' }}>{name}</h1>
         </header>
         <div style={{ display: 'grid', gridTemplateColumns: '190px 1fr', gap: '34px', position: 'relative', zIndex: 1 }}>
@@ -501,7 +520,6 @@ export function BiodataFlatDocument({ data, theme }: { data: BiodataForm; theme:
         boxSizing: 'border-box',
         ...(bgImg ? { backgroundImage: `url(${bgImg})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}),
       }}>
-        <BotanicalAccent color={theme.accent} />
         <div style={{ position: 'absolute', inset: 18, border: `1.5px solid ${theme.accent}`, opacity: 0.5 }} />
 
         <header style={{ textAlign: 'center', marginBottom: '24px', position: 'relative', zIndex: 1 }}>
