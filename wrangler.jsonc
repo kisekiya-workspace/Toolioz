@@ -1,24 +1,10 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "main": ".open-next/worker.js",
   "name": "finance-calculator",
   "compatibility_date": "2026-04-14",
-  "compatibility_flags": [
-    "nodejs_compat"
-  ],
   "assets": {
-    "directory": ".open-next/assets",
-    "binding": "ASSETS",
-    "run_worker_first": false
-  },
-  "services": [
-    {
-      "binding": "WORKER_SELF_REFERENCE",
-      "service": "finance-calculator"
-    }
-  ],
-  "images": {
-    "binding": "IMAGES"
+    "directory": "out",
+    "not_found_handling": "404-page"
   },
   "observability": {
     "enabled": true

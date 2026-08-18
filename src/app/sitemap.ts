@@ -12,6 +12,8 @@ import { howToPosts } from '@/lib/howto-content';
 import { SITE_URL } from '@/lib/seo';
 import { importedToolItems } from '@/lib/sociials-tool-index';
 
+export const dynamic = 'force-static';
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
   const trendingIds = new Set(TOOLS.filter((t) => t.isTrending).map((t) => t.id));

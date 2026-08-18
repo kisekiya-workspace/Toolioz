@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: 'export',
   serverExternalPackages: ['pdfjs-dist', 'pdf-lib'],
   images: {
     unoptimized: true,
@@ -8,5 +9,3 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-
-import('@opennextjs/cloudflare').then(m => m.initOpenNextCloudflareForDev());
