@@ -1,0 +1,8 @@
+import type { Metadata } from 'next';
+import { JSONLD } from '@/components/ui/JSONLD';
+import TaxDocumentClient from '@/components/tax-documents/TaxDocumentClient';
+import { FAQSchema } from '@/components/ui/FAQSchema';
+import { buildCalculatorJsonLd } from '@/lib/seo';
+export const metadata: Metadata = { title: 'Income Computation from JSON | Tax Summary | Toolioz', description: 'Generates income computation from JSON with gross income, deductions, and taxable income. Files remain in the browser.', keywords: 'generate computation of income from json file, income computation from json, income tax computation json, taxable income calculator from json', alternates: { canonical: 'https://toolioz.com/finance/income-computation-from-json' } };
+const faqs = [{ question: 'How can a computation of income be generated from a JSON file?', answer: 'Upload or paste a JSON object containing income and deduction fields, then select Generate computation. The tool identifies numeric tax fields and creates gross-income, deduction, and estimated taxable-income totals.' }, { question: 'Is income JSON uploaded to a server?', answer: 'No. The JSON file is parsed in the browser, and the generated computation can be downloaded without sending the tax data to Toolioz.' }];
+export default function Page() { return <><JSONLD data={buildCalculatorJsonLd({ name: 'Income Computation from JSON', description: 'Generate an income tax computation summary from a JSON file.', path: '/finance/income-computation-from-json', applicationCategory: 'FinanceApplication' })} /><TaxDocumentClient mode="income" /><FAQSchema faqs={faqs} /></>; }

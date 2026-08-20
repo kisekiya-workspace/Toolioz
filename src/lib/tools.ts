@@ -10,6 +10,7 @@ import {
   Car,
   Wallet,
   FileText,
+  FileJson,
   Binary,
   Code,
   FileSearch,
@@ -32,6 +33,11 @@ import {
   Scissors,
   RotateCcw,
   BadgePercent,
+  GraduationCap,
+  Trophy,
+  Scale,
+  Activity,
+  Sigma,
   type LucideIcon
 } from 'lucide-react';
 
@@ -174,6 +180,36 @@ export const TOOLS: Tool[] = [
     isTrending: true
   },
   {
+    id: 'income-computation-from-json',
+    title: 'Income Computation from JSON',
+    desc: 'Upload or paste income JSON and generate a clear taxable-income computation summary locally.',
+    icon: FileJson,
+    href: '/finance/income-computation-from-json',
+    color: '#0f766e',
+    category: 'finance',
+    isTrending: true
+  },
+  {
+    id: 'itr-json-to-computation-pdf',
+    title: 'ITR JSON to Computation PDF',
+    desc: 'Turn an ITR JSON export into a printable income-tax computation PDF without uploading data.',
+    icon: FileText,
+    href: '/finance/itr-json-to-computation-pdf',
+    color: '#b45309',
+    category: 'finance',
+    isTrending: true
+  },
+  {
+    id: 'form-16-to-json',
+    title: 'Form 16 to JSON Converter',
+    desc: 'Convert copied Form 16 text or a structured file into clean JSON for tax workflows.',
+    icon: FileJson,
+    href: '/finance/form-16-to-json',
+    color: '#7c3aed',
+    category: 'finance',
+    isTrending: true
+  },
+  {
     id: 'percentage-calculator',
     title: 'Percentage Calculator',
     desc: 'Find a percentage of a number or what percent one value is of another, with steps.',
@@ -209,6 +245,31 @@ export const TOOLS: Tool[] = [
     href: '/finance/discount-calculator-after-tax',
     color: '#d97706',
     category: 'finance'
+  },
+  {
+    id: 'grade-percentage-calculator', title: 'Grade Percentage Calculator',
+    desc: 'Convert points or marks earned into a percentage and indicative letter grade.',
+    icon: GraduationCap, href: '/finance/grade-percentage-calculator', color: '#4f46e5', category: 'finance', isTrending: true
+  },
+  {
+    id: 'win-percentage-calculator', title: 'Win Percentage Calculator',
+    desc: 'Calculate winning percentage from wins, losses, and ties or draws.',
+    icon: Trophy, href: '/finance/win-percentage-calculator', color: '#ca8a04', category: 'finance'
+  },
+  {
+    id: 'weight-loss-percentage-calculator', title: 'Weight Loss Percentage',
+    desc: 'Measure percentage of starting body weight lost or gained.',
+    icon: Scale, href: '/finance/weight-loss-percentage-calculator', color: '#059669', category: 'finance'
+  },
+  {
+    id: 'body-fat-percentage-calculator', title: 'Body Fat Percentage',
+    desc: 'Estimate body-fat percentage with the U.S. Navy circumference method.',
+    icon: Activity, href: '/finance/body-fat-percentage-calculator', color: '#e11d48', category: 'finance'
+  },
+  {
+    id: 'average-percentage-calculator', title: 'Average Percentage',
+    desc: 'Find the arithmetic mean of multiple percentage values.',
+    icon: Sigma, href: '/finance/average-percentage-calculator', color: '#0284c7', category: 'finance'
   },
 
   // ═══ DEVELOPER TOOLS ═══
