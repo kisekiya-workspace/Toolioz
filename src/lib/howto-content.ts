@@ -35,7 +35,7 @@ export interface HowToPost {
 export const howToPosts: HowToPost[] = [
   {
     slug: 'compress-pdf-under-2mb',
-    directUrl: '/how-to-compress-pdf-under-2mb',
+    directUrl: '/how-to/compress-pdf-under-2mb',
     title: 'How to Compress a PDF File Under 2MB Online Free (Without Quality Loss)',
     description:
       'A comprehensive, step-by-step technical guide on shrinking heavy PDF documents under 2MB for email attachments, university admissions, and government job portal submissions while preserving vector text and font legibility.',
@@ -140,7 +140,7 @@ export const howToPosts: HowToPost[] = [
 
   {
     slug: 'calculate-sip-returns',
-    directUrl: '/how-to-calculate-sip-returns',
+    directUrl: '/how-to/calculate-sip-returns',
     title: 'How to Calculate SIP Mutual Fund Returns: Complete Step-by-Step Guide & Compound Interest Formula',
     description:
       'Master systematic investment plan (SIP) return calculations. Learn the mathematical compound interest formula, compare XIRR vs CAGR, and learn how annual step-up contributions dramatically expand long-term wealth.',
@@ -245,7 +245,7 @@ export const howToPosts: HowToPost[] = [
 
   {
     slug: 'decode-jwt-token',
-    directUrl: '/how-to-decode-jwt-token',
+    directUrl: '/how-to/decode-jwt-token',
     title: 'How to Decode, Inspect, and Debug JSON Web Tokens (JWT) Safely',
     description:
       'Learn how JSON Web Tokens (JWT) work under the hood. Step-by-step guide to decoding Base64URL string headers and payloads, validating signature algorithms, and preventing critical security vulnerabilities.',
@@ -346,7 +346,7 @@ export const howToPosts: HowToPost[] = [
 
   {
     slug: 'format-json-and-fix-errors',
-    directUrl: '/how-to-format-json-and-fix-errors',
+    directUrl: '/how-to/format-json-and-fix-errors',
     title: 'How to Format, Validate, and Fix JSON Parse Errors: The Ultimate Developer Guide',
     description:
       'A complete developer guide to formatting, prettifying, and validating JSON syntax. Learn how to diagnose JSON.parse crashes, fix trailing commas, single quotes, unescaped characters, and export clean JSON structures.',
@@ -435,7 +435,7 @@ export const howToPosts: HowToPost[] = [
 
   {
     slug: 'create-marriage-biodata-pdf',
-    directUrl: '/how-to-create-marriage-biodata-pdf',
+    directUrl: '/how-to/create-marriage-biodata-pdf',
     title: 'How to Create a Marriage Biodata PDF: Templates, Layout Tips & Mobile Guide',
     description:
       'A complete guide to designing an impressive marriage biodata PDF profile. Learn essential sections, photo placement tips, horoscope details, and how to export print-ready A4 PDFs for free without login.',
@@ -519,7 +519,7 @@ export const howToPosts: HowToPost[] = [
 
   {
     slug: 'reduce-home-loan-interest',
-    directUrl: '/how-to-reduce-home-loan-interest',
+    directUrl: '/how-to/reduce-home-loan-interest',
     title: 'How to Reduce Home Loan Interest with Partial Prepayments: A Complete Financial Guide',
     description:
       'Learn how making annual partial prepayments on your mortgage or home loan can cut interest costs by lakhs and shorten repayment tenures by years. Includes tenure vs EMI reduction calculations and tax considerations.',

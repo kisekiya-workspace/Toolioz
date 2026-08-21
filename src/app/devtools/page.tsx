@@ -2,7 +2,6 @@ import React from 'react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import DevToolsClient from './DevToolsClient';
 import { buildCollectionPageJsonLd, buildPageMetadata } from '@/lib/seo';
-import { devtoolsBlogKeywords } from '@/lib/devtools-blog-content';
 
 export const metadata = buildPageMetadata({
   title: 'Developer Tools Online | JSON, JWT, Regex, X Tap-to-Reveal PNG | Toolioz',
@@ -12,7 +11,13 @@ export const metadata = buildPageMetadata({
   keywords: [
     'x tap to reveal png',
     'twitter hidden image maker',
-    ...devtoolsBlogKeywords.slice(0, 15),
+    'free developer tools online',
+    'json formatter pretty print',
+    'jwt decoder online',
+    'regex tester tool',
+    'base64 encode decode',
+    'timestamp converter',
+    'uuid generator',
   ],
 });
 

@@ -73,13 +73,13 @@ function computeDims(w: number, h: number) {
 function Section({ title, children, defaultOpen = true }: { title: string; children: React.ReactNode; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="border-b border-slate-800/80 last:border-b-0">
+    <div className="border-b border-zinc-200 dark:border-zinc-800 last:border-b-0">
       <button
         onClick={() => setOpen(o => !o)}
-        className="flex items-center justify-between w-full py-2.5 px-3 hover:bg-slate-800/50 transition text-left cursor-pointer"
+        className="flex items-center justify-between w-full py-2.5 px-3 hover:bg-zinc-100 dark:hover:bg-zinc-800/50 transition text-left cursor-pointer"
       >
-        <span className="text-[10px] font-bold tracking-widest uppercase text-slate-400 flex items-center gap-1.5">
-          {open ? <ChevronDown size={12} className="text-slate-500" /> : <ChevronRight size={12} className="text-slate-500" />}
+        <span className="text-[10px] font-bold tracking-widest uppercase text-zinc-500 dark:text-zinc-400 flex items-center gap-1.5">
+          {open ? <ChevronDown size={12} className="text-zinc-400 dark:text-zinc-500" /> : <ChevronRight size={12} className="text-zinc-400 dark:text-zinc-500" />}
           {title}
         </span>
       </button>
@@ -90,11 +90,11 @@ function Section({ title, children, defaultOpen = true }: { title: string; child
 
 function ColorRow({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
   return (
-    <div className="flex items-center justify-between bg-slate-800/90 border border-slate-700/60 rounded-xl h-9 px-3 mb-1.5">
-      <span className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider">{label}</span>
+    <div className="flex items-center justify-between bg-white dark:bg-zinc-800/90 border border-zinc-200 dark:border-zinc-700/80 rounded-xl h-9 px-3 mb-1.5">
+      <span className="text-[11px] font-semibold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">{label}</span>
       <div className="flex items-center gap-2">
-        <span className="text-[10px] font-mono text-slate-400 font-bold">{value}</span>
-        <label className="relative w-5 h-5 rounded-full border border-slate-600 overflow-hidden cursor-pointer flex-shrink-0 shadow-sm" style={{ background: value }}>
+        <span className="text-[10px] font-mono text-zinc-500 dark:text-zinc-400 font-bold">{value}</span>
+        <label className="relative w-5 h-5 rounded-full border border-zinc-300 dark:border-zinc-600 overflow-hidden cursor-pointer flex-shrink-0" style={{ background: value }}>
           <input
             type="color"
             value={value}
@@ -1000,21 +1000,21 @@ export default function DitherStudio() {
   }, [showCompare, hasMedia, isVideo, videoCurrentFrame]);
 
   return (
-    <div className="flex flex-col h-[calc(100vh-64px)] min-h-[650px] bg-slate-950 text-slate-100 overflow-hidden font-sans border-b border-slate-800">
+    <div className="flex flex-col h-[calc(100vh-64px)] min-h-[650px] bg-white dark:bg-zinc-950 text-zinc-950 dark:text-zinc-50 overflow-hidden font-sans border-b border-zinc-200 dark:border-zinc-800">
 
       {/* ═══ TOP BREADCRUMB & HEADER NAV BAR ═══ */}
-      <header className="h-11 bg-slate-900/90 backdrop-blur border-b border-slate-800/80 px-4 flex items-center justify-between shrink-0 text-xs">
-        <div className="flex items-center gap-2 font-medium text-slate-300">
-          <Link href="/" className="hover:text-white transition flex items-center gap-1 text-slate-400">
+      <header className="h-11 bg-white/90 dark:bg-zinc-950/90 backdrop-blur border-b border-zinc-200 dark:border-zinc-800 px-4 flex items-center justify-between shrink-0 text-xs">
+        <div className="flex items-center gap-2 font-medium text-zinc-600 dark:text-zinc-400">
+          <Link href="/" className="hover:text-zinc-950 dark:hover:text-zinc-50 transition flex items-center gap-1 text-zinc-500 dark:text-zinc-400">
             <ArrowLeft className="w-3.5 h-3.5" /> Home
           </Link>
-          <span className="text-slate-600">/</span>
-          <Link href="/devtools" className="hover:text-white transition text-slate-400">
+          <span className="text-zinc-300 dark:text-zinc-700">/</span>
+          <Link href="/devtools" className="hover:text-zinc-950 dark:hover:text-zinc-50 transition text-zinc-500 dark:text-zinc-400">
             Developer Tools
           </Link>
-          <span className="text-slate-600">/</span>
-          <span className="font-extrabold text-white flex items-center gap-1.5">
-            ditherit ✦ (by Prasanjit Dey)
+          <span className="text-zinc-300 dark:text-zinc-700">/</span>
+          <span className="font-extrabold text-zinc-950 dark:text-zinc-50 flex items-center gap-1.5">
+            ditherit (Interactive Studio)
           </span>
         </div>
 
@@ -1023,11 +1023,11 @@ export default function DitherStudio() {
             href="https://github.com/prasanjit-dey-ux/ditherit"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg px-2.5 py-1 text-[11px] font-mono transition"
+            className="flex items-center gap-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 rounded-lg px-2.5 py-1 text-[11px] font-mono transition"
           >
-            <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
+            <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
             <span>GitHub</span>
-            <span className="text-[10px] text-indigo-400 bg-slate-900 border border-slate-700 rounded px-1 font-bold">MIT</span>
+            <span className="text-[10px] text-zinc-600 dark:text-zinc-400 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded px-1 font-bold">MIT</span>
           </a>
         </div>
       </header>
@@ -1036,11 +1036,11 @@ export default function DitherStudio() {
       <div className="flex flex-1 overflow-hidden relative">
 
         {/* ═══ LEFT CONTROL SIDEBAR ═══ */}
-        <aside className="w-72 sm:w-80 bg-slate-900 border-r border-slate-800/90 flex flex-col shrink-0 overflow-hidden z-20 shadow-xl">
+        <aside className="w-72 sm:w-80 bg-zinc-50 dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-800 flex flex-col shrink-0 overflow-hidden z-20">
 
           {/* Dither vs ASCII Mode Switcher */}
-          <div className="p-3 border-b border-slate-800 shrink-0 bg-slate-900/90">
-            <div className="grid grid-cols-2 gap-1.5 p-1 bg-slate-950/80 rounded-xl border border-slate-800">
+          <div className="p-3 border-b border-zinc-200 dark:border-zinc-800 shrink-0 bg-zinc-50 dark:bg-zinc-900">
+            <div className="grid grid-cols-2 gap-1.5 p-1 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200 dark:border-zinc-800">
               {(["dither", "ascii"] as VideoRender[]).map(v => (
                 <button
                   key={v}
@@ -1060,8 +1060,8 @@ export default function DitherStudio() {
                   }}
                   className={`py-1.5 text-xs font-extrabold rounded-lg transition cursor-pointer ${
                     videoRender === v
-                      ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
-                      : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
+                      ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-950"
+                      : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60"
                   }`}
                 >
                   {v === "dither" ? "Dither Dot Art" : "ASCII Art"}
@@ -1073,8 +1073,8 @@ export default function DitherStudio() {
               onClick={() => setBgEraseEnabled(b => !b)}
               className={`w-full mt-2.5 py-1.5 px-3 rounded-xl border text-xs font-semibold flex items-center justify-center gap-2 transition cursor-pointer ${
                 bgEraseEnabled
-                  ? "bg-indigo-600 border-indigo-500 text-white shadow-md shadow-indigo-600/30"
-                  : "bg-slate-800/80 border-slate-700/80 text-slate-300 hover:bg-slate-800 hover:text-white"
+                  ? "bg-zinc-900 border-zinc-900 text-white dark:bg-zinc-100 dark:border-zinc-100 dark:text-zinc-950"
+                  : "bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700"
               }`}
             >
               <Eraser className="w-3.5 h-3.5" /> {bgEraseEnabled ? "Background Eraser: ON" : "Remove Background"}
@@ -1082,7 +1082,7 @@ export default function DitherStudio() {
           </div>
 
           {/* Scrollable Control Accordions */}
-          <div className="flex-1 overflow-y-auto divide-y divide-slate-800/60 custom-scrollbar">
+          <div className="flex-1 overflow-y-auto divide-y divide-zinc-200 dark:divide-zinc-800/80 custom-scrollbar">
 
             {showDots && (<>
               <Section title="Algorithm & Dots">
@@ -1093,8 +1093,8 @@ export default function DitherStudio() {
                       onClick={() => setParamLive("algorithm", a.value)}
                       className={`py-1.5 px-2 text-[10px] font-bold rounded-lg border transition cursor-pointer text-center ${
                         params.algorithm === a.value
-                          ? "bg-indigo-600 border-indigo-500 text-white shadow-sm"
-                          : "bg-slate-800/80 border-slate-700/60 text-slate-300 hover:bg-slate-800"
+                          ? "bg-zinc-900 border-zinc-900 text-white dark:bg-zinc-100 dark:border-zinc-100 dark:text-zinc-950"
+                          : "bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700"
                       }`}
                     >
                       {a.label}
@@ -1148,7 +1148,7 @@ export default function DitherStudio() {
                 <ColorRow label="Tint Color" value={params.overlayColor} onChange={v => setParamLive("overlayColor", v)} />
                 <Slider label="Opacity" value={params.overlayOpacity} min={0} max={1} step={0.01} decimals={2} onChange={v => setParamLive("overlayOpacity", v)} />
                 <div className="flex flex-col gap-1.5 mt-1">
-                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Blend Mode</span>
+                  <span className="text-[9px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest">Blend Mode</span>
                   <div className="grid grid-cols-2 gap-1.5">
                     {BLEND_MODES.map(b => (
                       <button
@@ -1156,8 +1156,8 @@ export default function DitherStudio() {
                         onClick={() => setParamLive("blendMode", b.value)}
                         className={`py-1 px-1.5 text-[9px] font-bold rounded-lg border transition cursor-pointer text-center ${
                           params.blendMode === b.value
-                            ? "bg-indigo-600 border-indigo-500 text-white"
-                            : "bg-slate-800/80 border-slate-700/60 text-slate-400 hover:text-slate-200"
+                            ? "bg-zinc-900 border-zinc-900 text-white dark:bg-zinc-100 dark:border-zinc-100 dark:text-zinc-950"
+                            : "bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700"
                         }`}
                       >
                         {b.label}
@@ -1175,7 +1175,7 @@ export default function DitherStudio() {
               <Section title="Export Resolution" defaultOpen={false}>
                 <div className="grid grid-cols-2 gap-2 mb-1.5">
                   <div className="flex flex-col gap-1">
-                    <span className="text-[10px] font-mono text-slate-400">WIDTH</span>
+                    <span className="text-[10px] font-mono text-zinc-500 dark:text-zinc-400">WIDTH</span>
                     <input
                       type="number"
                       value={params.exportWidth}
@@ -1187,11 +1187,11 @@ export default function DitherStudio() {
                           setParamLive("exportHeight", Math.round(w * (canvasSizeRef.current.h / canvasSizeRef.current.w)));
                         }
                       }}
-                      className="bg-slate-950 border border-slate-700 text-slate-200 px-2 py-1 text-xs font-mono rounded-lg outline-none focus:border-indigo-500"
+                      className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 px-2 py-1 text-xs font-mono rounded-lg outline-none focus:border-zinc-500"
                     />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <span className="text-[10px] font-mono text-slate-400">HEIGHT</span>
+                    <span className="text-[10px] font-mono text-zinc-500 dark:text-zinc-400">HEIGHT</span>
                     <input
                       type="number"
                       value={params.exportHeight}
@@ -1203,7 +1203,7 @@ export default function DitherStudio() {
                           setParamLive("exportWidth", Math.round(h * (canvasSizeRef.current.w / canvasSizeRef.current.h)));
                         }
                       }}
-                      className="bg-slate-950 border border-slate-700 text-slate-200 px-2 py-1 text-xs font-mono rounded-lg outline-none focus:border-indigo-500"
+                      className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 px-2 py-1 text-xs font-mono rounded-lg outline-none focus:border-zinc-500"
                     />
                   </div>
                 </div>
@@ -1220,8 +1220,8 @@ export default function DitherStudio() {
                       onClick={() => setAsciiParamLive("charset", o.value)}
                       className={`py-1.5 px-2 text-[10px] font-mono font-bold rounded-lg border transition cursor-pointer text-center ${
                         asciiParams.charset === o.value
-                          ? "bg-indigo-600 border-indigo-500 text-white shadow-sm"
-                          : "bg-slate-800/80 border-slate-700/60 text-slate-300 hover:bg-slate-800"
+                          ? "bg-zinc-900 border-zinc-900 text-white dark:bg-zinc-100 dark:border-zinc-100 dark:text-zinc-950"
+                          : "bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700"
                       }`}
                     >
                       {o.label}
@@ -1233,7 +1233,7 @@ export default function DitherStudio() {
                     value={asciiParams.customCharset}
                     onChange={e => setAsciiParamLive("customCharset", e.target.value)}
                     placeholder="@#%+:. "
-                    className="bg-slate-950 border border-slate-700 text-slate-200 px-3 py-1.5 text-xs font-mono rounded-xl outline-none w-full focus:border-indigo-500"
+                    className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 px-3 py-1.5 text-xs font-mono rounded-xl outline-none w-full focus:border-zinc-500"
                   />
                 )}
               </Section>
@@ -1248,8 +1248,8 @@ export default function DitherStudio() {
                       onClick={() => setAsciiParamLive("fontFamily", f)}
                       className={`py-1 text-[10px] font-bold capitalize rounded-lg border transition cursor-pointer text-center ${
                         asciiParams.fontFamily === f
-                          ? "bg-indigo-600 border-indigo-500 text-white"
-                          : "bg-slate-800/80 border-slate-700/60 text-slate-400 hover:text-slate-200"
+                          ? "bg-zinc-900 border-zinc-900 text-white dark:bg-zinc-100 dark:border-zinc-100 dark:text-zinc-950"
+                          : "bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700"
                       }`}
                     >
                       {f}
@@ -1263,34 +1263,28 @@ export default function DitherStudio() {
                 <Slider label="Gamma" value={asciiParams.gamma} min={0.2} max={3} step={0.05} decimals={2} onChange={v => setAsciiParamLive("gamma", v)} />
                 <Toggle label="Invert Brightness" value={asciiParams.invertBrightness} onChange={v => setAsciiParamLive("invertBrightness", v)} />
               </Section>
-              <Section title="ASCII Palette & Glow">
+              <Section title="ASCII Palette">
                 <Toggle label="Source Colors" value={asciiParams.colored} onChange={v => setAsciiParamLive("colored", v)} />
                 {!asciiParams.colored && <ColorRow label="Text Color" value={asciiParams.fgColor} onChange={v => setAsciiParamLive("fgColor", v)} />}
                 <ColorRow label="Background" value={asciiParams.bgColor} onChange={v => setAsciiParamLive("bgColor", v)} />
-
-                <Toggle label="Neon Glow" value={asciiParams.glow} onChange={v => setAsciiParamLive("glow", v)} />
-                {asciiParams.glow && (<>
-                  <ColorRow label="Glow Color" value={asciiParams.glowColor} onChange={v => setAsciiParamLive("glowColor", v)} />
-                  <Slider label="Glow Radius" value={asciiParams.glowRadius} min={1} max={20} step={1} onChange={v => setAsciiParamLive("glowRadius", v)} unit="px" />
-                </>)}
               </Section>
             </>)}
 
             {isVideo && (
               <Section title="Video Extract Options">
                 <Slider label="Target FPS" value={videoFps} min={6} max={60} step={1} onChange={setVideoFps} unit="fps" />
-                <p className="text-[10px] text-slate-500 font-mono mt-1">Re-upload file to apply new frame rate.</p>
+                <p className="text-[10px] text-zinc-500 font-mono mt-1">Re-upload file to apply new frame rate.</p>
               </Section>
             )}
           </div>
 
           {/* Export Action Buttons */}
-          <div className="p-3 border-t border-slate-800 shrink-0 flex flex-col gap-2 bg-slate-900/90">
+          <div className="p-3 border-t border-zinc-200 dark:border-zinc-800 shrink-0 flex flex-col gap-2 bg-zinc-50 dark:bg-zinc-900">
             <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={exportPNG}
                 disabled={!hasMedia}
-                className="py-2 px-3 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 text-white font-extrabold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-md shadow-indigo-600/20 transition cursor-pointer"
+                className="py-2 px-3 bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-zinc-200 text-white dark:text-zinc-950 font-extrabold text-xs rounded-xl flex items-center justify-center gap-1.5 disabled:opacity-40 transition cursor-pointer"
               >
                 <Download className="w-3.5 h-3.5" /> Export PNG
               </button>
@@ -1298,7 +1292,7 @@ export default function DitherStudio() {
               <button
                 onClick={showReactCode}
                 disabled={!hasMedia}
-                className="py-2 px-3 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-indigo-400 hover:text-indigo-300 disabled:opacity-40 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition cursor-pointer"
+                className="py-2 px-3 bg-white dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 disabled:opacity-40 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition cursor-pointer"
               >
                 <Code className="w-3.5 h-3.5" /> React Code
               </button>
@@ -1309,9 +1303,9 @@ export default function DitherStudio() {
                 <button
                   onClick={copyCode}
                   disabled={!hasMedia}
-                  className="py-1.5 px-2 bg-slate-800/80 hover:bg-slate-800 text-slate-300 disabled:opacity-40 font-bold text-[11px] rounded-lg flex items-center justify-center gap-1 border border-slate-700/60 transition cursor-pointer"
+                  className="py-1.5 px-2 bg-white dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 disabled:opacity-40 font-bold text-[11px] rounded-lg flex items-center justify-center gap-1 border border-zinc-200 dark:border-zinc-700 transition cursor-pointer"
                 >
-                  {copied === "code" ? <Check className="w-3 h-3 text-emerald-400" /> : <Code className="w-3 h-3 text-slate-400" />}
+                  {copied === "code" ? <Check className="w-3 h-3 text-emerald-500" /> : <Code className="w-3 h-3 text-zinc-400" />}
                   {copied === "code" ? "Copied!" : "Copy JS"}
                 </button>
               )}
@@ -1320,9 +1314,9 @@ export default function DitherStudio() {
                 <button
                   onClick={exportSVG}
                   disabled={!hasMedia}
-                  className="py-1.5 px-2 bg-slate-800/80 hover:bg-slate-800 text-slate-300 disabled:opacity-40 font-bold text-[11px] rounded-lg flex items-center justify-center gap-1 border border-slate-700/60 transition cursor-pointer"
+                  className="py-1.5 px-2 bg-white dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 disabled:opacity-40 font-bold text-[11px] rounded-lg flex items-center justify-center gap-1 border border-zinc-200 dark:border-zinc-700 transition cursor-pointer"
                 >
-                  <Download className="w-3 h-3 text-slate-400" /> SVG Vector
+                  <Download className="w-3 h-3 text-zinc-400" /> SVG Vector
                 </button>
               )}
             </div>
@@ -1331,7 +1325,7 @@ export default function DitherStudio() {
               <button
                 onClick={exportWebM}
                 disabled={!hasMedia || exportingWebM}
-                className="w-full py-2 px-3 bg-indigo-950/80 hover:bg-indigo-900 border border-indigo-800/80 text-indigo-300 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition cursor-pointer"
+                className="w-full py-2 px-3 bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-zinc-200 text-white dark:text-zinc-950 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition cursor-pointer disabled:opacity-40"
               >
                 <FileVideo className="w-3.5 h-3.5" /> {exportingWebM ? "Recording WebM Clip…" : "Export WebM Video"}
               </button>
@@ -1340,18 +1334,18 @@ export default function DitherStudio() {
         </aside>
 
         {/* ═══ RIGHT MAIN CANVAS VIEWPORT ═══ */}
-        <main className="flex-1 flex flex-col bg-slate-950 overflow-hidden relative">
+        <main className="flex-1 flex flex-col bg-zinc-100 dark:bg-zinc-950 overflow-hidden relative">
 
           {/* Sub Header Toolbar */}
-          <div className="h-11 bg-slate-900/80 border-b border-slate-800/80 px-4 flex items-center justify-between shrink-0">
+          <div className="h-11 bg-white/90 dark:bg-zinc-950/90 border-b border-zinc-200 dark:border-zinc-800 px-4 flex items-center justify-between shrink-0">
             {/* Studio / Preview Tabs */}
-            <div className="flex items-center gap-1 bg-slate-950/80 p-1 rounded-xl border border-slate-800">
+            <div className="flex items-center gap-1 bg-zinc-100 dark:bg-zinc-900 p-1 rounded-xl border border-zinc-200 dark:border-zinc-800">
               <button
                 onClick={() => setTab("studio")}
                 className={`py-1 px-3 text-xs font-bold rounded-lg transition cursor-pointer ${
                   tab === "studio"
-                    ? "bg-indigo-600 text-white shadow-sm"
-                    : "text-slate-400 hover:text-slate-200"
+                    ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-950"
+                    : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100"
                 }`}
               >
                 Studio Editor
@@ -1360,8 +1354,8 @@ export default function DitherStudio() {
                 onClick={() => setTab("preview")}
                 className={`py-1 px-3 text-xs font-bold rounded-lg transition cursor-pointer ${
                   tab === "preview"
-                    ? "bg-indigo-600 text-white shadow-sm"
-                    : "text-slate-400 hover:text-slate-200"
+                    ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-950"
+                    : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100"
                 }`}
               >
                 Physics Preview
@@ -1371,13 +1365,13 @@ export default function DitherStudio() {
             {/* Contextual Toolbar Options */}
             <div className="flex items-center gap-3">
               {isVideo && hasMedia && !isLoading && tab === "studio" && (
-                <div className="flex items-center gap-3 bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-1">
-                  <span className="text-xs font-mono text-slate-400">
-                    Frame <strong className="text-indigo-400">{videoCurrentFrame + 1}</strong>/{videoFrameCount}
+                <div className="flex items-center gap-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-1">
+                  <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
+                    Frame <strong className="text-zinc-900 dark:text-zinc-100">{videoCurrentFrame + 1}</strong>/{videoFrameCount}
                   </span>
                   <button
                     onClick={togglePlay}
-                    className="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-lg flex items-center gap-1 transition cursor-pointer"
+                    className="px-2.5 py-1 bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-zinc-200 text-white dark:text-zinc-950 font-bold text-xs rounded-lg flex items-center gap-1 transition cursor-pointer"
                   >
                     {videoPlaying ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3" />}
                     {videoPlaying ? "Pause" : "Play"}
@@ -1391,10 +1385,10 @@ export default function DitherStudio() {
                     <button
                       key={e}
                       onClick={() => setEffect(e)}
-                      className={`px-2.5 py-1 text-[11px] font-bold capitalize rounded-lg transition cursor-pointer ${
+                      className={`px-2.5 py-1 text-[11px] font-bold capitalize rounded-lg transition cursor-pointer border ${
                         effect === e
-                          ? "bg-indigo-600 text-white shadow-sm"
-                          : "bg-slate-800 text-slate-400 hover:text-slate-200"
+                          ? "bg-zinc-900 border-zinc-900 text-white dark:bg-zinc-100 dark:border-zinc-100 dark:text-zinc-950"
+                          : "bg-white dark:bg-zinc-850 border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700"
                       }`}
                     >
                       {e}
@@ -1408,8 +1402,8 @@ export default function DitherStudio() {
                   onClick={() => { setShowCompare(c => !c); if (!showCompare) setTab("studio"); }}
                   className={`px-3 py-1.5 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition cursor-pointer ${
                     showCompare
-                      ? "bg-indigo-600 border-indigo-500 text-white"
-                      : "bg-slate-800/80 border-slate-700/80 text-slate-300 hover:bg-slate-800"
+                      ? "bg-zinc-900 border-zinc-900 text-white dark:bg-zinc-100 dark:border-zinc-100 dark:text-zinc-950"
+                      : "bg-white dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700"
                   }`}
                 >
                   <Columns2 className="w-3.5 h-3.5" /> Compare Split
@@ -1430,8 +1424,8 @@ export default function DitherStudio() {
               }}
               onPointerUp={() => { isDraggingSplitRef.current = false; }}
             >
-              <div style={{ width: `${splitRatio * 100}%` }} className="flex-shrink-0 bg-slate-950 flex items-center justify-center overflow-hidden relative">
-                <span className="absolute top-3 left-3 text-[10px] font-mono font-bold bg-slate-900/90 text-slate-300 border border-slate-700 px-2 py-0.5 rounded-lg z-10 shadow">
+              <div style={{ width: `${splitRatio * 100}%` }} className="flex-shrink-0 bg-zinc-900 flex items-center justify-center overflow-hidden relative">
+                <span className="absolute top-3 left-3 text-[10px] font-mono font-bold bg-zinc-900/90 text-zinc-200 border border-zinc-700 px-2 py-0.5 rounded-lg z-10">
                   ORIGINAL SOURCE
                 </span>
                 <canvas ref={compareCanvasRef} className="max-w-full max-h-full object-contain" />
@@ -1439,15 +1433,15 @@ export default function DitherStudio() {
 
               <div
                 onPointerDown={e => { isDraggingSplitRef.current = true; (e.target as HTMLElement).setPointerCapture(e.pointerId); }}
-                className="w-1 bg-indigo-500 cursor-ew-resize flex-shrink-0 z-20 relative group"
+                className="w-1 bg-zinc-400 dark:bg-zinc-600 cursor-ew-resize flex-shrink-0 z-20 relative group"
               >
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-indigo-600 text-white border-2 border-slate-950 flex items-center justify-center shadow-lg">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-950 border-2 border-white dark:border-zinc-900 flex items-center justify-center">
                   <Columns2 className="w-3.5 h-3.5" />
                 </div>
               </div>
 
-              <div className="flex-1 bg-slate-950 flex items-center justify-center overflow-hidden relative" style={{ background: canBg }}>
-                <span className="absolute top-3 right-3 text-[10px] font-mono font-bold bg-slate-900/90 text-indigo-300 border border-slate-700 px-2 py-0.5 rounded-lg z-10 shadow">
+              <div className="flex-1 bg-zinc-900 flex items-center justify-center overflow-hidden relative" style={{ background: canBg }}>
+                <span className="absolute top-3 right-3 text-[10px] font-mono font-bold bg-zinc-900/90 text-zinc-200 border border-zinc-700 px-2 py-0.5 rounded-lg z-10">
                   DITHERED OUTPUT
                 </span>
                 <canvas ref={studioCanvasRef} className="max-w-full max-h-full object-contain" />
@@ -1459,13 +1453,13 @@ export default function DitherStudio() {
               className="flex-1 flex items-center justify-center overflow-hidden relative p-4"
               style={{
                 background: bgEraseEnabled
-                  ? `repeating-conic-gradient(#334155 0% 25%, #0f172a 0% 50%) 0 0 / 20px 20px`
+                  ? `repeating-conic-gradient(#e2e8f0 0% 25%, #f8fafc 0% 50%) 0 0 / 20px 20px`
                   : canBg
               }}
             >
               <canvas
                 ref={studioCanvasRef}
-                className={`max-w-full max-h-full object-contain shadow-2xl rounded-lg ${tab === "studio" ? "block" : "hidden"}`}
+                className={`max-w-full max-h-full object-contain border border-zinc-200/80 dark:border-zinc-800 rounded-lg ${tab === "studio" ? "block" : "hidden"}`}
               />
 
               <canvas
@@ -1481,7 +1475,7 @@ export default function DitherStudio() {
                   };
                 }}
                 onTouchEnd={() => { mouseRef.current = { x: -9999, y: -9999 }; }}
-                className={`max-w-full max-h-full object-contain shadow-2xl rounded-lg ${tab === "preview" ? "block" : "hidden"}`}
+                className={`max-w-full max-h-full object-contain border border-zinc-200/80 dark:border-zinc-800 rounded-lg ${tab === "preview" ? "block" : "hidden"}`}
                 style={{ cursor: !isAscii ? "none" : "default", touchAction: "none" }}
               />
 
@@ -1489,16 +1483,16 @@ export default function DitherStudio() {
                 <div
                   onClick={() => fileInputRef.current?.click()}
                   className={`absolute inset-0 flex flex-col items-center justify-center cursor-pointer gap-4 z-10 transition ${
-                    dragging ? "bg-indigo-600/10 border-2 border-dashed border-indigo-500" : "bg-transparent"
+                    dragging ? "bg-zinc-200/40 dark:bg-zinc-800/40 border-2 border-dashed border-zinc-400 dark:border-zinc-600" : "bg-transparent"
                   }`}
                 >
-                  <div className="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-800 shadow-xl flex items-center justify-center text-indigo-400 group-hover:scale-105 transition">
+                  <div className="w-16 h-16 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-700 dark:text-zinc-300">
                     {isVideo ? <Film className="w-8 h-8" /> : mode === "ascii" ? <Type className="w-8 h-8" /> : <Upload className="w-8 h-8" />}
                   </div>
                   <div className="text-center space-y-1.5">
-                    <h3 className="font-extrabold text-white text-base sm:text-lg">Drop your image, video, or GIF</h3>
-                    <p className="text-xs text-slate-400">Supports PNG, JPG, WebP, GIF, MP4, WebM, MOV</p>
-                    <button className="mt-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs rounded-xl shadow-lg shadow-indigo-600/30 inline-flex items-center gap-2 transition pointer-events-none">
+                    <h3 className="font-extrabold text-zinc-950 dark:text-zinc-50 text-base sm:text-lg">Drop your image, video, or GIF</h3>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400">Supports PNG, JPG, WebP, GIF, MP4, WebM, MOV</p>
+                    <button className="mt-2 px-5 py-2.5 bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-zinc-200 text-white dark:text-zinc-950 font-extrabold text-xs rounded-xl inline-flex items-center gap-2 transition pointer-events-none">
                       <Upload className="w-4 h-4" /> Browse Local File
                     </button>
                   </div>
@@ -1506,23 +1500,23 @@ export default function DitherStudio() {
               )}
 
               {isLoading && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-slate-950/90 backdrop-blur z-30">
-                  <div className="w-64 h-2 bg-slate-800 rounded-full overflow-hidden">
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-white/90 dark:bg-zinc-950/90 backdrop-blur z-30">
+                  <div className="w-64 h-2 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-indigo-500 to-indigo-400 rounded-full transition-all duration-200"
+                      className="h-full bg-zinc-900 dark:bg-zinc-100 rounded-full transition-all duration-200"
                       style={{ width: `${videoProgress * 100}%` }}
                     />
                   </div>
-                  <span className="font-mono text-xs font-bold text-slate-300">{progressLabel}</span>
+                  <span className="font-mono text-xs font-bold text-zinc-700 dark:text-zinc-300">{progressLabel}</span>
                 </div>
               )}
 
               {hasMedia && !isLoading && (
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="absolute bottom-4 right-4 px-3.5 py-2 bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-bold rounded-xl shadow-lg flex items-center gap-2 backdrop-blur transition cursor-pointer z-20"
+                  className="absolute bottom-4 right-4 px-3.5 py-2 bg-white/90 hover:bg-white dark:bg-zinc-900/90 dark:hover:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 text-xs font-bold rounded-xl flex items-center gap-2 backdrop-blur transition cursor-pointer z-20"
                 >
-                  <Upload className="w-3.5 h-3.5 text-indigo-400" /> Change Media File
+                  <Upload className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" /> Change Media File
                 </button>
               )}
             </div>
@@ -1540,37 +1534,37 @@ export default function DitherStudio() {
 
       {codeModal && (
         <div
-          className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 sm:p-6"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 sm:p-6"
           onClick={() => setCodeModal(null)}
         >
           <div
-            className="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-2xl w-full max-h-[80vh] flex flex-col gap-4 shadow-2xl"
+            className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 max-w-2xl w-full max-h-[80vh] flex flex-col gap-4"
             onClick={e => e.stopPropagation()}
           >
             <div className="flex items-center justify-between">
-              <h3 className="font-extrabold text-white text-base flex items-center gap-2">
-                <Code className="w-4 h-4 text-indigo-400" /> React Component Code
+              <h3 className="font-extrabold text-zinc-950 dark:text-zinc-50 text-base flex items-center gap-2">
+                <Code className="w-4 h-4 text-zinc-600 dark:text-zinc-400" /> React Component Code
               </h3>
               <div className="flex items-center gap-2">
                 <button
-                  className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 transition cursor-pointer"
+                  className="px-3 py-1.5 bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-zinc-200 text-white dark:text-zinc-950 font-bold text-xs rounded-xl flex items-center gap-1.5 transition cursor-pointer"
                   onClick={() => { if (codeModal) navigator.clipboard.writeText(codeModal); setCopied("react"); setTimeout(() => setCopied(null), 2000); }}
                 >
                   {copied === "react" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                   {copied === "react" ? "Copied!" : "Copy React Code"}
                 </button>
                 <button
-                  className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs rounded-xl border border-slate-700 transition cursor-pointer"
+                  className="px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 font-bold text-xs rounded-xl border border-zinc-200 dark:border-zinc-700 transition cursor-pointer"
                   onClick={() => setCodeModal(null)}
                 >
                   Close
                 </button>
               </div>
             </div>
-            <pre className="flex-1 overflow-y-auto bg-slate-950 border border-slate-800 rounded-xl p-4 text-xs font-mono text-slate-200 leading-relaxed whitespace-pre-wrap custom-scrollbar">
+            <pre className="flex-1 overflow-y-auto bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 text-xs font-mono text-zinc-800 dark:text-zinc-200 leading-relaxed whitespace-pre-wrap custom-scrollbar">
               {codeModal}
             </pre>
-            <p className="text-[11px] text-slate-400 font-mono">
+            <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-mono">
               Requires <strong>ditherit-react</strong> package installed in your React or Next.js project.
             </p>
           </div>

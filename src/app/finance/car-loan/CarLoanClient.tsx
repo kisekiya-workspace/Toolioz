@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Card } from '@/components/ui/Card';
-import { Input } from '@/components/ui/Input';
-import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { calculateMonthlyPayment } from '@/lib/formulas';
-import { Info, Car, ShieldCheck, TrendingUp, BookOpen, AlertTriangle, Lightbulb } from 'lucide-react';
+import { Info, Car, ShieldCheck, TrendingUp, BookOpen, AlertTriangle, Lightbulb, Download } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
@@ -57,7 +57,7 @@ export default function CarLoanClient() {
           </div>
         </header>
 
-        <section className="mx-auto max-w-6xl py-16">
+        <section className="mx-auto max-w-6xl pb-12 pt-4">
           <div className={styles.grid}>
             <Card className={styles.inputCard}>
               <div className={styles.inputGroup}>
@@ -86,8 +86,8 @@ export default function CarLoanClient() {
             </Card>
 
             <div className={styles.resultCol}>
-              <Card className={styles.resultCard} style={{ background: 'linear-gradient(135deg, #06b6d4, #0891b2)' }}>
-                <h2 className={styles.resultLabel}>Monthly EMI</h2>
+              <Card className="rounded-2xl border border-sky-500/30 bg-sky-700 dark:bg-[#1f2430] dark:border-[#333a4d] p-6 text-center text-white shadow-md sm:p-8 relative">
+                <h2 className="mb-2 text-xs font-bold uppercase tracking-wider text-sky-100 dark:text-sky-400">Monthly EMI</h2>
                 <div className={styles.resultValue}>{formatCurrency(result)}</div>
                 <div className={styles.stats}>
                   <div className={styles.statItem}>
@@ -108,6 +108,7 @@ export default function CarLoanClient() {
                   className={styles.btn}
                   onClick={() => window.print()}
                 >
+                  <Download className="mr-2 size-4" />
                   Download EMI Schedule
                 </Button>
               </Card>

@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, ArrowRight, BookOpen, ExternalLink, ShieldCheck, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, Clock, Calendar, ExternalLink, ShieldCheck } from 'lucide-react';
 import { JSONLD } from '@/components/ui/JSONLD';
+import { ReadingProgressBar } from '@/components/ui/ReadingProgressBar';
 import { Footer } from '@/components/layout/Footer';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { top5Articles, getTop5Article } from '@/lib/top5-content';
 import { buildArticleMetadata, SITE_URL } from '@/lib/seo';
 
@@ -52,7 +55,8 @@ export default async function Top5BlogPostPage({ params }: Top5PageProps) {
     dateModified: post.updatedIso,
     author: {
       '@type': 'Organization',
-      name: 'Toolioz',
+      name: 'Toolioz Research',
+      url: `${SITE_URL}/about`,
     },
     publisher: {
       '@type': 'Organization',
@@ -78,291 +82,276 @@ export default async function Top5BlogPostPage({ params }: Top5PageProps) {
     })),
   };
 
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}` },
+      { '@type': 'ListItem', position: 2, name: 'Top 5 Lists', item: `${SITE_URL}/top5` },
+      { '@type': 'ListItem', position: 3, name: post.title, item: `${SITE_URL}/top5/${post.slug}` },
+    ],
+  };
+
   return (
-    <main className="bg-[linear-gradient(180deg,#fffdf9_0%,#f8fafc_100%)] text-[var(--text-primary)] min-h-screen">
-      <JSONLD data={articleJsonLd} />
-      <JSONLD data={faqJsonLd} />
+    <div className="min-h-screen bg-white text-zinc-900 antialiased selection:bg-indigo-600 selection:text-white dark:bg-zinc-950 dark:text-zinc-100">
+      <JSONLD data={[articleJsonLd, faqJsonLd, breadcrumbJsonLd]} />
+      <ReadingProgressBar />
 
-      <article className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
-        <Link href="/top5" className="mb-8 inline-flex items-center gap-2 text-sm font-bold text-blue-700 transition hover:text-blue-800">
-          <ArrowLeft size={16} />
-          Back to Top Lists
-        </Link>
-
-        {/* Article Intro Card */}
-        <div className="rounded-[2.5rem] border border-slate-200 bg-white p-8 shadow-sm md:p-12">
-          <div className="mb-6 flex flex-wrap items-center gap-3">
-            <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-blue-700">
-              {post.readTime}
-            </span>
-            <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-emerald-700">
-              Updated {post.updated}
-            </span>
-            <span className="rounded-full bg-slate-50 border border-slate-100 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
-              Category: {post.category}
-            </span>
+      {/* Article Header */}
+      <header className="pt-8 pb-6 border-b border-zinc-100 dark:border-zinc-800 bg-white dark:bg-zinc-950">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <div className="mb-3 flex items-center justify-between">
+            <Link
+              href="/top5"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 transition-colors"
+            >
+              <ArrowLeft size={13} /> Back to Top 5 Reviews
+            </Link>
+            <div className="flex items-center gap-3 text-xs font-mono text-zinc-400">
+              <span className="flex items-center gap-1">
+                <Clock size={12} /> {post.readTime}
+              </span>
+              <span>•</span>
+              <span>{post.updated}</span>
+            </div>
           </div>
 
-          <h1 className="max-w-3xl text-3xl font-black leading-tight tracking-[-0.03em] md:text-5xl lg:text-6xl">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-950 dark:text-zinc-50 leading-snug">
             {post.title}
           </h1>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-[var(--text-secondary)]">
+
+          <p className="mt-3 text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">
             {post.description}
           </p>
+        </div>
+      </header>
 
-          <div className="mt-8 flex flex-wrap gap-2">
-            {post.keywords.map((keyword) => (
-              <span key={keyword} className="rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-                #{keyword}
-              </span>
+      {/* Main Content Layout */}
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 py-8 sm:py-12 lg:grid lg:grid-cols-[180px_1fr] lg:gap-10 lg:items-start">
+        
+        {/* Sticky Sidebar */}
+        <aside className="hidden lg:block lg:sticky lg:top-20 space-y-4">
+          <p className="text-[11px] font-mono font-bold uppercase tracking-wider text-zinc-400 mb-2">
+            Sections
+          </p>
+          <nav className="space-y-1.5 border-l border-zinc-200 dark:border-zinc-800 pl-2.5">
+            <a
+              href="#comparison-table"
+              className="block text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors leading-snug"
+            >
+              Matrix
+            </a>
+            <a
+              href="#top-picks"
+              className="block text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors leading-snug"
+            >
+              Ranked Picks
+            </a>
+            {post.sections.map((section, idx) => (
+              <a
+                key={section.heading}
+                href={`#guide-section-${idx + 1}`}
+                className="block text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors leading-snug line-clamp-2"
+              >
+                {section.heading}
+              </a>
             ))}
+            <a
+              href="#faqs"
+              className="block text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors pt-1"
+            >
+              Q&A
+            </a>
+          </nav>
+        </aside>
+
+        {/* Main Article Body */}
+        <article className="max-w-2xl">
+          
+          {/* Executive Summary */}
+          <div className="mb-8 border-l-2 border-indigo-600 pl-3.5 py-0.5">
+            <p className="text-[11px] font-mono font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-1">
+              Summary
+            </p>
+            <p className="text-sm sm:text-base text-zinc-800 dark:text-zinc-200 leading-relaxed font-medium">
+              {post.tldr}
+            </p>
           </div>
-        </div>
 
-        {/* Direct Answer TL;DR Quick Summary (AEO) */}
-        <section className="mt-12 rounded-[2rem] border border-blue-200 bg-blue-50/50 p-8 shadow-sm">
-          <h2 className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-blue-800">
-            <Sparkles size={16} className="text-blue-700 shrink-0 animate-pulse" />
-            <span>Direct Answer / TL;DR Quick Summary</span>
-          </h2>
-          <p className="mt-4 text-lg font-bold leading-8 text-blue-950">
-            {post.tldr}
-          </p>
-        </section>
+          {/* Comparison Table Section */}
+          <section id="comparison-table" className="scroll-mt-20 mb-10">
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50 mb-4">
+              Comparison Matrix
+            </h2>
 
-        {/* Intro Paragraph */}
-        <div className="mt-12 rounded-[2rem] border border-slate-200 bg-white p-8 md:p-10 shadow-sm leading-relaxed">
-          <h2 className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-blue-700 mb-4">
-            <Sparkles size={16} />
-            Executive Summary
-          </h2>
-          <p className="text-lg text-[var(--text-secondary)] leading-8">
-            {post.intro}
-          </p>
-        </div>
-
-        {/* Comparison Matrix Table (GEO) */}
-        <section className="mt-12 rounded-[2rem] border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
-          <h2 className="text-2xl font-black tracking-[-0.02em] mb-6">Comparison Matrix</h2>
-          <div className="overflow-x-auto border border-slate-100 rounded-2xl">
-            <table className="w-full text-left border-collapse min-w-[600px]">
-              <thead>
-                <tr className="bg-slate-50 border-b border-slate-100">
-                  <th className="px-6 py-4 text-xs font-bold uppercase tracking-[0.1em] text-slate-500">
-                    {post.tableHeaders[0]}
-                  </th>
-                  {post.tableHeaders.slice(1).map((h) => (
-                    <th key={h} className="px-6 py-4 text-xs font-bold uppercase tracking-[0.1em] text-slate-500">
-                      {h}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                {post.tableRows.map((row, idx) => (
-                  <tr key={idx} className="hover:bg-slate-50/50 transition-colors">
-                    <td className="px-6 py-4 text-sm font-bold text-slate-900">
-                      {row.toolName}
-                    </td>
-                    {row.values.map((v, vIdx) => (
-                      <td key={vIdx} className="px-6 py-4 text-sm text-slate-600">
-                        {v}
-                      </td>
+            <div className="overflow-x-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800">
+                  <tr>
+                    <th className="py-2.5 px-3.5 font-bold text-zinc-900 dark:text-zinc-100">Tool / Feature</th>
+                    {post.tableHeaders.map((header) => (
+                      <th key={header} className="py-2.5 px-3.5 font-bold text-zinc-900 dark:text-zinc-100">
+                        {header}
+                      </th>
                     ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        {/* Mathematical/Technical Proof Callout (GEO) */}
-        {post.mathematicalProof && (
-          <section className="mt-12 rounded-[2rem] border border-slate-200 bg-slate-950 p-8 text-white shadow-md">
-            <h2 className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-blue-400 mb-4">
-              <BookOpen size={16} />
-              <span>Technical & Mathematical Proof</span>
-            </h2>
-            {post.mathematicalProof.formula && (
-              <div className="mb-4 rounded-xl bg-white/5 border border-white/10 p-5 font-mono text-center text-lg md:text-xl text-blue-300 overflow-x-auto whitespace-nowrap">
-                {post.mathematicalProof.formula}
-              </div>
-            )}
-            <p className="text-sm leading-7 text-white/80">
-              {post.mathematicalProof.explanation}
-            </p>
+                </thead>
+                <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
+                  {post.tableRows.map((row) => (
+                    <tr key={row.toolName} className="hover:bg-zinc-50/50 dark:hover:bg-zinc-900/50 transition-colors">
+                      <td className="py-2.5 px-3.5 font-semibold text-zinc-950 dark:text-zinc-50">{row.toolName}</td>
+                      {row.values.map((val, vIdx) => (
+                        <td key={vIdx} className="py-2.5 px-3.5 text-zinc-600 dark:text-zinc-400">
+                          {val}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </section>
-        )}
 
-        {/* Comparison list section */}
-        <div className="mt-16 space-y-12">
-          <h2 className="text-3xl font-black tracking-[-0.02em]">
-            Ranked Recommendations
-          </h2>
-          <div className="space-y-8">
+          {/* Top Tools Ranked Breakdown */}
+          <section id="top-picks" className="scroll-mt-20 mb-10 space-y-5">
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50 mb-4">
+              Detailed Evaluations
+            </h2>
+
             {post.tools.map((tool) => (
-              <div key={tool.id} className="relative rounded-[2rem] border border-slate-200 bg-white p-8 shadow-md transition hover:border-slate-300 hover:shadow-lg">
-                <div className="flex flex-col sm:flex-row gap-6">
-                  {/* Rank badge */}
-                  <div 
-                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-2xl font-black text-white"
-                    style={{ backgroundColor: tool.color }}
-                  >
-                    #{tool.rank}
+              <div
+                key={tool.id}
+                className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-4 sm:p-5 shadow-2xs"
+              >
+                <div className="flex items-center justify-between gap-3 mb-2">
+                  <div className="flex items-center gap-2.5">
+                    <span className="flex size-6 items-center justify-center rounded-full bg-indigo-600 text-white font-mono text-xs font-bold">
+                      {tool.rank}
+                    </span>
+                    <h3 className="text-base font-bold text-zinc-950 dark:text-zinc-50">
+                      {tool.title}
+                    </h3>
                   </div>
 
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-black tracking-[-0.02em]">{tool.title}</h3>
-                    
-                    <p className="mt-3 text-base leading-7 text-[var(--text-secondary)]">
-                      {tool.description}
-                    </p>
+                  <Badge variant="mono" size="sm">
+                    {tool.bestFor}
+                  </Badge>
+                </div>
 
-                    <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                      <div className="rounded-xl bg-slate-50 border border-slate-100 p-4">
-                        <h4 className="text-xs font-bold uppercase tracking-[0.08em] text-slate-500 mb-1">
-                          Why It Matters
-                        </h4>
-                        <p className="text-sm leading-6 text-slate-600">
-                          {tool.whyItMatters}
-                        </p>
-                      </div>
+                <p className="text-xs sm:text-sm leading-relaxed text-zinc-600 dark:text-zinc-300 mt-2">
+                  {tool.description}
+                </p>
 
-                      <div className="rounded-xl bg-slate-50 border border-slate-100 p-4">
-                        <h4 className="text-xs font-bold uppercase tracking-[0.08em] text-slate-500 mb-1">
-                          Best For
-                        </h4>
-                        <p className="text-sm leading-6 text-slate-600">
-                          {tool.bestFor}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-slate-100 pt-5">
-                      <span className="flex items-center gap-1.5 text-xs font-bold text-emerald-600">
-                        <CheckCircle2 size={14} /> Client-Side Safe
-                      </span>
-                      <Link
-                        href={tool.href}
-                        className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold text-white transition hover:scale-[1.02]"
-                        style={{ backgroundColor: tool.color }}
-                      >
-                        Open Interactive Tool <ArrowRight size={14} />
-                      </Link>
-                    </div>
+                <div className="mt-3 pt-2.5 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+                  <div className="text-xs text-zinc-500 dark:text-zinc-400">
+                    <strong className="text-zinc-900 dark:text-zinc-100 font-medium">Why:</strong> {tool.whyItMatters}
                   </div>
+                  <Button asChild size="sm" className="ml-3 shrink-0 text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-xs">
+                    <Link href={tool.href}>
+                      Launch <ArrowRight size={11} className="ml-1" />
+                    </Link>
+                  </Button>
                 </div>
               </div>
             ))}
-          </div>
-        </div>
+          </section>
 
-        {/* Detailed context articles */}
-        <div className="mt-16 space-y-12">
-          {post.sections.map((section) => (
-            <section key={section.heading} className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm md:p-10">
-              <h2 className="text-2xl font-black tracking-[-0.02em] md:text-3xl">{section.heading}</h2>
-              <div className="mt-6 space-y-6">
-                {section.body.map((paragraph) => (
-                  <p key={paragraph} className="text-base leading-8 text-[var(--text-secondary)]">
+          {/* Mathematical Proof or Technical Architecture */}
+          {post.mathematicalProof && (
+            <section className="mb-10 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-4 sm:p-5">
+              <div className="text-[11px] font-mono font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-1">
+                Verification Formula
+              </div>
+              <h3 className="text-base font-bold text-zinc-950 dark:text-zinc-50 mb-2">
+                Algorithm & Proof
+              </h3>
+              {post.mathematicalProof.formula && (
+                <div className="my-2 rounded-md bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3 font-mono text-xs overflow-x-auto text-zinc-900 dark:text-zinc-100">
+                  {post.mathematicalProof.formula}
+                </div>
+              )}
+              <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                {post.mathematicalProof.explanation}
+              </p>
+            </section>
+          )}
+
+          {/* Context Sections */}
+          {post.sections.map((section, idx) => (
+            <section
+              key={section.heading}
+              id={`guide-section-${idx + 1}`}
+              className="scroll-mt-20 mb-10 border-b border-zinc-100 dark:border-zinc-800/80 pb-8 last:border-0"
+            >
+              <h2 className="text-lg sm:text-xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50 mb-3">
+                {section.heading}
+              </h2>
+
+              <div className="space-y-3 text-zinc-700 dark:text-zinc-300 text-sm sm:text-base leading-relaxed">
+                {section.body.map((paragraph, pIdx) => (
+                  <p key={pIdx}>
                     {paragraph}
                   </p>
                 ))}
               </div>
             </section>
           ))}
-        </div>
 
-        {/* Glossary Definition List (AEO/GEO) */}
-        <section className="mt-12 rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm">
-          <h2 className="text-2xl font-black tracking-[-0.02em] mb-6">Key Term Glossary</h2>
-          <dl className="grid gap-6 md:grid-cols-2">
-            {post.glossary.map((item) => (
-              <div key={item.term} className="rounded-xl border border-slate-100 bg-slate-50/50 p-5">
-                <dt className="text-base font-bold text-slate-900 mb-2">
-                  <dfn className="not-italic font-black text-blue-800">{item.term}</dfn>
-                </dt>
-                <dd className="text-sm leading-6 text-slate-600">
-                  {item.definition}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </section>
+          {/* Frequently Asked Questions */}
+          <section id="faqs" className="scroll-mt-20 mt-10 pt-8 border-t border-zinc-200 dark:border-zinc-800">
+            <div className="mb-4">
+              <h2 className="text-xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50">
+                Frequently Asked Questions
+              </h2>
+            </div>
 
-        {/* Privacy Note */}
-        <section className="mt-12 rounded-[2rem] border border-emerald-100 bg-emerald-50/50 p-6 md:p-8">
-          <h2 className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-emerald-700">
-            <ShieldCheck size={18} />
-            Data Protection Guarantee
-          </h2>
-          <h3 className="mt-3 text-xl font-bold">100% Browser-Local Execution</h3>
-          <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
-            Toolioz runs entirely within your device's browser memory. Your personal text outputs, keys, documents, numbers, and inputs are never uploaded to any remote database. You can read, format, calculate, and compile safely.
-          </p>
-        </section>
-
-        {/* References Section */}
-        <section className="mt-12 rounded-[2rem] border border-slate-200 bg-white p-6 md:p-8 shadow-sm">
-          <h2 className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-blue-700">
-            <ExternalLink size={16} />
-            Official Research Sources
-          </h2>
-          <div className="mt-4 grid gap-3 md:grid-cols-2">
-            {post.sources.map((source) => (
-              <a
-                key={`${source.label}-${source.href}`}
-                href={source.href}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs font-semibold text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-800"
-              >
-                {source.label}
-              </a>
-            ))}
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section className="mt-12">
-          <h2 className="text-2xl font-extrabold mb-5">Frequently Asked Questions</h2>
-          <div className="space-y-4">
-            {post.faqs.map((faq) => (
-              <div key={faq.question} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                <h3 className="font-bold text-base">{faq.question}</h3>
-                <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">{faq.answer}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Other comparison lists */}
-        <section className="mt-16 border-t border-slate-200 pt-12">
-          <h2 className="mb-6 flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-slate-400">
-            <ArrowRight size={14} />
-            Explore More Top Lists
-          </h2>
-          <div className="grid gap-6 md:grid-cols-3">
-            {otherArticles.map((related) => (
-              <Link
-                key={related.slug}
-                href={`/top5/${related.slug}`}
-                className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg"
-              >
-                <div className="text-xs font-bold uppercase tracking-[0.12em] text-blue-600">
-                  {related.readTime}
+            <div className="divide-y divide-zinc-100 dark:divide-zinc-800">
+              {post.faqs.map((faq) => (
+                <div key={faq.question} className="py-4">
+                  <h3 className="text-sm sm:text-base font-semibold text-zinc-950 dark:text-zinc-50">
+                    {faq.question}
+                  </h3>
+                  <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                    {faq.answer}
+                  </p>
                 </div>
-                <h3 className="mt-2 text-base font-black leading-snug">{related.title}</h3>
-                <p className="mt-2 text-xs leading-5 text-[var(--text-secondary)] line-clamp-2">
-                  {related.description}
-                </p>
+              ))}
+            </div>
+          </section>
+
+          {/* Related Articles */}
+          <section className="mt-10 pt-6 border-t border-zinc-200 dark:border-zinc-800">
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">
+                More Top 5 Guides
+              </h2>
+              <Link href="/top5" className="text-xs font-semibold text-indigo-600 hover:underline">
+                View all →
               </Link>
-            ))}
-          </div>
-        </section>
-      </article>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-3">
+              {otherArticles.map((related) => (
+                <Link
+                  key={related.slug}
+                  href={`/top5/${related.slug}`}
+                  className="group block rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-3.5 shadow-2xs hover:border-zinc-400 transition-all"
+                >
+                  <span className="text-[10px] font-mono text-zinc-400">
+                    {related.readTime}
+                  </span>
+                  <h3 className="mt-1 text-xs font-semibold leading-snug text-zinc-950 dark:text-zinc-50 group-hover:text-indigo-600 transition-colors line-clamp-2">
+                    {related.title}
+                  </h3>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+        </article>
+      </div>
 
       <Footer />
-    </main>
+    </div>
   );
 }

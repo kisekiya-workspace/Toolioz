@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Card } from '@/components/ui/Card';
-import { Input } from '@/components/ui/Input';
-import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { calculateInflation } from '@/lib/formulas';
-import { Info, Landmark, TrendingDown, AlertTriangle, ShieldCheck, BookOpen, Lightbulb, TrendingUp } from 'lucide-react';
+import { Info, Landmark, TrendingDown, AlertTriangle, ShieldCheck, BookOpen, Lightbulb, TrendingUp, Download } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
@@ -61,7 +61,7 @@ export default function InflationClient() {
           </div>
         </header>
 
-        <section className="container section">
+        <section className="container pb-12 pt-4">
           <div className={styles.grid}>
             <Card className={styles.inputCard}>
               <div className={styles.inputGroup}>
@@ -90,8 +90,8 @@ export default function InflationClient() {
             </Card>
 
             <div className={styles.resultCol}>
-              <Card className={styles.resultCard} style={{ background: 'linear-gradient(135deg, #ef4444, #b91c1c)' }}>
-                <h2 className={styles.resultLabel}>Future Cost (After {years} Years)</h2>
+              <Card className="rounded-2xl border border-rose-500/30 bg-rose-700 dark:bg-[#1f2430] dark:border-[#333a4d] p-6 text-center text-white shadow-md sm:p-8 relative">
+                <h2 className="mb-2 text-xs font-bold uppercase tracking-wider text-rose-100 dark:text-rose-400">Future Purchasing Cost (After {years} Years)</h2>
                 <div className={styles.resultValue}>{formatCurrency(futurePrice)}</div>
                 <div className={styles.stats}>
                   <div className={styles.statItem}>
@@ -108,6 +108,7 @@ export default function InflationClient() {
                   className={styles.btn}
                   onClick={() => window.print()}
                 >
+                  <Download className="mr-2 size-4" />
                   Download Report
                 </Button>
               </Card>

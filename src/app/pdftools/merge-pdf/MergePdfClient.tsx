@@ -2,8 +2,8 @@
 
 import React, { useRef, useState } from 'react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import {
   FileText,
   Plus,
@@ -117,19 +117,19 @@ export default function MergePdfClient() {
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)]">
-      <header className="border-b border-[var(--border)] bg-[var(--bg-secondary)] py-16 pb-12 text-center md:py-24 md:pb-16">
+      <header className="border-b border-[var(--border)] bg-red-50/50 px-4 py-5 text-center sm:py-7">
         <div className="container">
-          <div className="mb-8 inline-flex rounded-full border border-[rgba(239,68,68,0.2)] bg-[rgba(239,68,68,0.1)] px-4 py-2 text-[0.875rem] font-bold text-[#dc2626]">PDF Suite Professional</div>
-          <h1 className="mb-4 text-[2.25rem] font-black sm:text-[3.5rem]">
+          <div className="mb-2 inline-flex rounded-full border border-red-200 bg-red-100 px-3 py-1 text-xs font-bold text-red-700">PDF Suite Professional</div>
+          <h1 className="mb-2 text-2xl font-black tracking-tight sm:text-3xl">
             Merge <span className="text-[#ef4444]">PDF</span> Files
           </h1>
-          <p className="mx-auto max-w-[700px] text-[1.25rem] text-[var(--text-secondary)]">
+          <p className="mx-auto max-w-[700px] text-sm leading-6 text-[var(--text-secondary)] sm:text-base">
             Combine multiple PDF documents into one file in your browser — nothing is uploaded to our servers.
           </p>
         </div>
       </header>
 
-      <main className="container section">
+      <main className="container pb-12 pt-5 sm:pt-7">
         <div className="mx-auto max-w-[900px]">
           <Card className="!flex min-h-[400px] flex-col !rounded-[var(--radius-xl)] !border-2 !border-dashed !border-[var(--border)] !bg-[var(--bg-secondary)] !p-6 transition-all duration-300 sm:!p-10">
             <input

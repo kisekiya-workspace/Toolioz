@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Card } from '@/components/ui/Card';
-import { Input } from '@/components/ui/Input';
-import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { calculateIncomeTax, Country, FilingStatus } from '@/lib/formulas';
 import { Wallet, Info, AlertTriangle, ShieldCheck, PieChart, Download, BookOpen, Scale, Lightbulb } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
@@ -114,25 +114,31 @@ export default function IncomeTaxClient() {
 
   return (
     <>
-      <div className="min-h-[calc(100vh-64px)] bg-[var(--bg-secondary)] pb-16 max-[900px]:pb-32">
-        <header className="px-6 py-8 text-center md:py-16">
-          <div className="container">
-            <h1 className="mb-4 text-[1.75rem] font-extrabold text-[var(--text-primary)] sm:text-[2.5rem]">Income Tax Calculator 2026-27</h1>
-            <p className="mx-auto max-w-[600px] text-[0.95rem] leading-[1.5] text-[var(--text-secondary)] sm:text-[1.1rem]">Estimate your income tax under the New Regime (default from FY 2023-24). Supports India, USA &amp; UK.</p>
-            <div className="mx-auto mt-6 max-w-[700px] rounded-lg border border-[#fbbf24] bg-[#fffbeb] px-4 py-3 text-left text-[0.8rem] leading-[1.6] text-[#92400e]">
-              <strong>⚠️ Disclaimer:</strong> This calculator provides <strong>approximate estimates</strong> for educational and planning purposes only. Tax laws change frequently and vary by jurisdiction. The figures shown may not reflect your actual tax liability. Always consult a qualified Chartered Accountant or Tax Professional before filing returns.
+      <div className="min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50 pb-16">
+        <header className="bg-white pt-8 pb-6 text-center dark:bg-zinc-950">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-3 inline-flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50/80 px-3 py-0.5 text-xs font-semibold text-blue-700 dark:border-blue-900/60 dark:bg-blue-950/40 dark:text-blue-300">
+                Tax Optimization Engine
+              </span>
             </div>
+            <h1 className="text-3xl font-extrabold tracking-tight text-zinc-950 sm:text-4xl md:text-5xl dark:text-zinc-50">
+              Income Tax Calculator 2026-27
+            </h1>
+            <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
+              Estimate your income tax under the New Regime (default from FY 2023-24). Supports India, USA & UK.
+            </p>
           </div>
         </header>
 
-        <section className="container section">
-          <div className="mx-auto mb-8 flex max-w-[300px] rounded-[var(--radius-md)] bg-white p-1 shadow-sm">
+        <section className="container pb-12 pt-2">
+          <div className="mx-auto mb-8 flex max-w-[280px] rounded-xl bg-zinc-100 dark:bg-zinc-800/80 p-1 border border-zinc-200 dark:border-zinc-700">
             <button 
-              className={`flex-1 rounded-[calc(var(--radius-md)-4px)] px-4 py-2.5 text-[0.9rem] font-bold transition-all ${mode === 'yearly' ? 'bg-[#1e293b] text-white shadow-md' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
+              className={`flex-1 rounded-lg px-3.5 py-2 text-xs font-bold transition-all cursor-pointer ${mode === 'yearly' ? 'bg-white text-blue-600 shadow-xs dark:bg-zinc-900 dark:text-blue-400' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100'}`}
               onClick={() => setMode('yearly')}
             >Yearly View</button>
             <button 
-              className={`flex-1 rounded-[calc(var(--radius-md)-4px)] px-4 py-2.5 text-[0.9rem] font-bold transition-all ${mode === 'monthly' ? 'bg-[#1e293b] text-white shadow-md' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
+              className={`flex-1 rounded-lg px-3.5 py-2 text-xs font-bold transition-all cursor-pointer ${mode === 'monthly' ? 'bg-white text-blue-600 shadow-xs dark:bg-zinc-900 dark:text-blue-400' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100'}`}
               onClick={() => setMode('monthly')}
             >Monthly View</button>
           </div>

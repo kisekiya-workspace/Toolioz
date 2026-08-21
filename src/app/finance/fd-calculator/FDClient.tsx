@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Card } from '@/components/ui/Card';
-import { Input } from '@/components/ui/Input';
-import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { calculateCompoundInterest } from '@/lib/formulas';
-import { Info, Banknote, ShieldCheck, AlertTriangle, BookOpen, TrendingUp, Lightbulb } from 'lucide-react';
+import { Info, Banknote, ShieldCheck, AlertTriangle, BookOpen, TrendingUp, Lightbulb, Download } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
@@ -63,7 +63,7 @@ export default function FDClient() {
           </div>
         </header>
 
-        <section className="container section">
+        <section className="container pb-12 pt-4">
           <div className={styles.grid}>
             <Card className={styles.inputCard}>
               <div className={styles.inputGroup}>
@@ -105,8 +105,8 @@ export default function FDClient() {
             </Card>
 
             <div className={styles.resultCol}>
-              <Card className={styles.resultCard} style={{ background: 'linear-gradient(135deg, #0369a1, #075985)' }}>
-                <h2 className={styles.resultLabel}>Maturity Value</h2>
+              <Card className="rounded-2xl border border-sky-500/30 bg-sky-700 dark:bg-[#1f2430] dark:border-[#333a4d] p-6 text-center text-white shadow-md sm:p-8 relative">
+                <h2 className="mb-2 text-xs font-bold uppercase tracking-wider text-sky-100 dark:text-sky-400">Total Maturity Amount</h2>
                 <div className={styles.resultValue}>{formatCurrency(result)}</div>
                 <div className={styles.stats}>
                   <div className={styles.statItem}>
@@ -123,6 +123,7 @@ export default function FDClient() {
                   className={styles.btn}
                   onClick={() => window.print()}
                 >
+                  <Download className="mr-2 size-4" />
                   Download FD Summary
                 </Button>
               </Card>

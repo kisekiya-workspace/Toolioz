@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/Card';
+import { Card } from '@/components/ui/card';
 import { SEOSection } from '@/components/ui/SEOSection';
 
 import { SearchCode, AlertCircle, Copy, Check } from 'lucide-react';
@@ -82,16 +82,25 @@ ${mode === 'replace' ? `\nconst subst = \`${replaceString}\`;\nconst result = st
     };
 
     return (
-        <>
-            <div className="min-h-screen bg-[var(--bg-primary)]">
-                <header className="bg-[radial-gradient(circle_at_50%_0%,rgba(16,185,129,0.05)_0%,transparent_50%)] py-12 text-center md:py-24">
-                    <div className="container">
-                        <h1 className="mb-4 text-[clamp(2.5rem,5vw,4rem)] font-black">Advanced RegExp <span className="text-[#10b981]">Engine</span></h1>
-                        <p className="text-xl text-[var(--text-secondary)]">Debug patterns, run complex replacements, and generate exportable code instantly.</p>
+        <div className="min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50 flex flex-col justify-between">
+            <div>
+                <header className="bg-white pt-8 pb-6 text-center dark:bg-zinc-950">
+                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div className="mb-3 inline-flex items-center gap-2">
+                            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50/80 px-3 py-0.5 text-xs font-semibold text-emerald-700 dark:border-emerald-900/60 dark:bg-emerald-950/40 dark:text-emerald-300">
+                                Pattern Matching
+                            </span>
+                        </div>
+                        <h1 className="text-3xl font-extrabold tracking-tight text-zinc-950 sm:text-4xl md:text-5xl dark:text-zinc-50">
+                            Advanced RegExp Engine
+                        </h1>
+                        <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
+                            Debug patterns, run complex replacements, and generate exportable code instantly.
+                        </p>
                     </div>
                 </header>
 
-                <section className="container section">
+                <section className="container pb-12 pt-2 sm:pt-4">
                     <div className="mx-auto max-w-[1000px]">
                         <Card className="!p-6 md:!p-10">
 
@@ -253,6 +262,6 @@ ${mode === 'replace' ? `\nconst subst = \`${replaceString}\`;\nconst result = st
                 </section>
             </div>
             <Footer />
-        </>
+        </div>
     );
 }

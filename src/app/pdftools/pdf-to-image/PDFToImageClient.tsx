@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import {
   Upload,
   FileImage,
@@ -161,16 +161,16 @@ export default function PDFToImageClient() {
   return (
     <>
       <div className="min-h-screen bg-[var(--bg-primary)]">
-        <header className="border-b border-[var(--border)] bg-[var(--bg-secondary)] py-16 pb-12 text-center md:py-24 md:pb-16">
+        <header className="border-b border-[var(--border)] bg-red-50/50 px-4 py-5 text-center sm:py-7">
           <div className="container">
-            <h1 className="mb-4 text-[2.25rem] font-black sm:text-[3.5rem]">PDF to Image Converter</h1>
-            <p className="mx-auto max-w-[700px] text-[1.25rem] text-[var(--text-secondary)]">
+            <h1 className="mb-2 text-2xl font-black tracking-tight sm:text-3xl">PDF to Image Converter</h1>
+            <p className="mx-auto max-w-[700px] text-sm leading-6 text-[var(--text-secondary)] sm:text-base">
               Convert PDF pages to high-resolution PNG or JPEG images safely and securely right in your browser.
             </p>
           </div>
         </header>
 
-        <section className="container section">
+        <section className="container pb-12 pt-5 sm:pt-7">
           <div className={`mx-auto grid max-w-[1100px] gap-12 ${file && images.length > 0 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
             <div>
               <Card className="!flex min-h-[400px] flex-col !rounded-[var(--radius-xl)] !border-2 !border-dashed !border-[var(--border)] !bg-[var(--bg-secondary)] !p-6 transition-all duration-300 sm:!p-10">

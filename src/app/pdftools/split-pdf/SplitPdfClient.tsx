@@ -2,9 +2,9 @@
 
 import React, { useRef, useState } from 'react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
-import { Input } from '@/components/ui/Input';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   FileText,
   ShieldCheck,
@@ -142,21 +142,21 @@ export default function SplitPdfClient() {
   };
 
   return (
-    <main className="bg-slate-950 text-slate-100 min-h-screen py-10">
+    <main className="min-h-screen bg-cyan-50/40 py-5 text-slate-900 sm:py-7">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <header className="mb-10 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-4">
+        <header className="mb-5 text-center">
+          <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-cyan-800">
             <ShieldCheck className="w-3.5 h-3.5" /> 100% Client-Side In-Browser Extraction
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+          <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
             Split PDF & Extract Pages
           </h1>
-          <p className="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto">
+          <p className="mx-auto mt-2 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
             Extract specific pages or page ranges into a separate PDF file. Zero server uploads.
           </p>
         </header>
 
-        <Card className="p-6 sm:p-8 bg-slate-900 border-slate-800 rounded-3xl shadow-xl">
+        <Card className="rounded-3xl border-cyan-200 bg-white p-6 shadow-sm sm:p-8">
           <input
             ref={fileInputRef}
             type="file"
@@ -168,23 +168,23 @@ export default function SplitPdfClient() {
           {!file ? (
             <div
               onClick={() => fileInputRef.current?.click()}
-              className="border-2 border-dashed border-cyan-800/60 hover:border-cyan-500/80 rounded-2xl p-10 text-center cursor-pointer transition-colors bg-slate-950/40 hover:bg-slate-950/80 group"
+              className="cursor-pointer rounded-2xl border-2 border-dashed border-cyan-300 bg-cyan-50/60 p-10 text-center hover:border-cyan-500 hover:bg-cyan-50"
             >
-              <div className="mx-auto w-14 h-14 rounded-2xl bg-cyan-950 border border-cyan-800 flex items-center justify-center text-cyan-400 mb-4 group-hover:scale-105 transition-transform">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-200 bg-cyan-100 text-cyan-700">
                 <FileUp className="w-7 h-7" />
               </div>
-              <p className="text-lg font-bold text-white mb-1">Click to select PDF document</p>
+              <p className="mb-1 text-lg font-bold text-slate-900">Click to select PDF document</p>
               <p className="text-xs text-slate-400">Select any PDF file up to 200MB</p>
             </div>
           ) : (
             <div className="space-y-6">
-              <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-950 border border-slate-800">
+              <div className="flex items-center justify-between rounded-2xl border border-cyan-200 bg-cyan-50 p-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-cyan-950 text-cyan-400 flex items-center justify-center font-bold text-xs">
                     PDF
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-white">{file.name}</p>
+                    <p className="text-sm font-bold text-slate-900">{file.name}</p>
                     <p className="text-xs text-slate-400">
                       {formatFileSize(file.size)} • {totalPages} {totalPages === 1 ? 'Page' : 'Pages'}
                     </p>
@@ -197,21 +197,21 @@ export default function SplitPdfClient() {
                     setSplitPdfBlobUrl(null);
                   }}
                   variant="outline"
-                  className="border-slate-800 text-xs text-slate-400 hover:text-white"
+                  className="border-cyan-200 text-xs text-slate-500 hover:bg-cyan-100 hover:text-cyan-800"
                 >
                   Change File
                 </Button>
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-slate-300 mb-2">
+                <label className="mb-2 block text-sm font-bold text-slate-700">
                   Pages to Extract (Total: {totalPages} Pages)
                 </label>
                 <Input
                   value={pageRange}
                   onChange={(e) => setPageRange(e.target.value)}
                   placeholder="e.g. 1-3, 5, 8-10"
-                  className="bg-slate-950 border-slate-800 text-white font-mono"
+                  className="border-cyan-200 bg-white font-mono text-slate-900"
                 />
                 <p className="text-xs text-slate-400 mt-2">
                   Format: Individual pages separated by commas or ranges with hyphens (e.g. 1-4, 7, 10-12).
@@ -246,14 +246,14 @@ export default function SplitPdfClient() {
 
           {splitPdfBlobUrl && (
             <div className="mt-8 p-6 rounded-2xl bg-cyan-950/60 border border-cyan-500/40 text-center">
-              <h3 className="text-lg font-bold text-white mb-2">Split PDF Ready!</h3>
-              <p className="text-sm text-slate-300 mb-4">
+              <h3 className="mb-2 text-lg font-bold text-slate-900">Split PDF Ready!</h3>
+              <p className="mb-4 text-sm text-slate-600">
                 Selected pages were extracted into a new PDF document in browser memory.
               </p>
               <a
                 href={splitPdfBlobUrl}
                 download={`extracted_pages_${Date.now()}.pdf`}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm shadow-lg shadow-cyan-500/25 transition-all"
+                className="inline-flex items-center gap-2 rounded-xl bg-cyan-600 px-6 py-3 text-sm font-bold text-white hover:bg-cyan-700"
               >
                 <Download className="w-4 h-4" /> Download Extracted PDF
               </a>

@@ -54,29 +54,29 @@ export default function Slider({
       onPointerMove={onMove}
       onPointerUp={onUp}
       onPointerCancel={onUp}
-      className="relative bg-slate-800/90 hover:bg-slate-800 border border-slate-700/60 rounded-xl h-9 mb-1.5 cursor-ew-resize flex items-center overflow-hidden select-none transition-colors group shadow-inner"
+      className="relative bg-white dark:bg-zinc-800/90 hover:bg-zinc-50 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/80 rounded-xl h-9 mb-1.5 cursor-ew-resize flex items-center overflow-hidden select-none transition-colors group"
     >
       {/* Decorative Track Dots */}
       <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-between px-3">
         {Array.from({ length: DOT_COUNT }).map((_, i) => (
-          <span key={i} className="block w-1 h-1 rounded-full bg-slate-700/50" />
+          <span key={i} className="block w-1 h-1 rounded-full bg-zinc-200 dark:bg-zinc-700/60" />
         ))}
       </div>
 
       {/* Dynamic Progress Fill */}
       <div
-        className="absolute left-0 top-0 bottom-0 bg-indigo-600/30 group-hover:bg-indigo-600/40 rounded-xl pointer-events-none z-10 transition-all"
+        className="absolute left-0 top-0 bottom-0 bg-zinc-200/80 dark:bg-zinc-700/70 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-700 rounded-xl pointer-events-none z-10 transition-all"
         style={{ width: `${thumbPct}%` }}
       >
-        <div className="absolute right-1.5 top-1/2 -translate-y-1/2 w-1 h-4 rounded-full bg-indigo-400 shadow-sm" />
+        <div className="absolute right-1 top-1/2 -translate-y-1/2 w-1 h-4 rounded-full bg-zinc-600 dark:bg-zinc-300" />
       </div>
 
       {/* Label and Value Text */}
-      <span className="absolute left-3 pointer-events-none z-20 text-[11px] font-semibold text-slate-300 uppercase tracking-wider">
+      <span className="absolute left-3 pointer-events-none z-20 text-[11px] font-semibold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
         {label}
       </span>
 
-      <span className="absolute right-3 pointer-events-none z-20 text-[11px] font-mono font-bold text-indigo-300">
+      <span className="absolute right-3 pointer-events-none z-20 text-[11px] font-mono font-bold text-zinc-900 dark:text-zinc-100">
         {display}{unit}
       </span>
     </div>

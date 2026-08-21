@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { Card } from '@/components/ui/Card';
-import { Input } from '@/components/ui/Input';
-import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { calculateRetirementCorpus } from '@/lib/formulas';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
@@ -11,7 +11,7 @@ import { RelatedTools } from '@/components/ui/RelatedTools';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
 import { FAQSchema } from '@/components/ui/FAQSchema';
 import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
-import { BookOpen, Info, Lightbulb, ShieldCheck, Target, Wallet } from 'lucide-react';
+import { BookOpen, Info, Lightbulb, ShieldCheck, Target, Wallet, Download } from 'lucide-react';
 
 const RETIREMENT_FAQS = [
   {
@@ -73,7 +73,7 @@ export default function RetirementCorpusClient() {
           </div>
         </header>
 
-        <section className="container section">
+        <section className="container pb-12 pt-4">
           <div className={styles.grid}>
             <Card className={styles.inputCard}>
               <div className={styles.inputGroup}>
@@ -130,8 +130,8 @@ export default function RetirementCorpusClient() {
             </Card>
 
             <div className={styles.resultCol}>
-              <Card className={styles.resultCard} style={{ background: 'linear-gradient(135deg, #d97706, #92400e)' }}>
-                <h2 className={styles.resultLabel}>Estimated Corpus Needed</h2>
+              <Card className="rounded-2xl border border-amber-500/30 bg-amber-700 dark:bg-[#1f2430] dark:border-[#333a4d] p-6 text-center text-white shadow-md sm:p-8 relative">
+                <h2 className="mb-2 text-xs font-bold uppercase tracking-wider text-amber-100 dark:text-amber-400">Required Retirement Corpus</h2>
                 <div className={styles.resultValue}>{formatCurrency(result.corpusNeeded)}</div>
                 <div className={styles.stats}>
                   <div className={styles.statItem}>
@@ -144,6 +144,7 @@ export default function RetirementCorpusClient() {
                   </div>
                 </div>
                 <Button fullWidth className={styles.btn} onClick={() => window.print()}>
+                  <Download className="mr-2 size-4" />
                   Download Retirement Plan
                 </Button>
               </Card>

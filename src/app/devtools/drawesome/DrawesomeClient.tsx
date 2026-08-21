@@ -4,7 +4,7 @@ import React from "react";
 import DrawesomeStudio from "@/components/drawesome/DrawesomeStudio";
 import { Footer } from "@/components/layout/Footer";
 import { RelatedTools } from "@/components/ui/RelatedTools";
-import { Card } from "@/components/ui/Card";
+import { Card } from "@/components/ui/card";
 import { ExternalLink, Sparkles, Pencil, Eraser, FileCode } from "lucide-react";
 
 import { DirectAnswerBlock } from "@/components/ui/DirectAnswerBlock";
@@ -14,7 +14,7 @@ import { SEOSection } from "@/components/ui/SEOSection";
 
 export default function DrawesomeClient() {
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-900 flex flex-col">
+    <div className="min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50 flex flex-col justify-between">
       <BreadcrumbJsonLd
         items={[
           { name: 'Home', url: '/' },
@@ -45,98 +45,79 @@ export default function DrawesomeClient() {
         />
 
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-10">
-          <Card className="bg-white border-slate-200 p-6 space-y-3 shadow-sm hover:shadow-md transition">
-            <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 mb-3">
+          <Card className="p-6 space-y-3 shadow-xs">
+            <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-900/60 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-3">
               <Pencil className="w-5 h-5" />
             </div>
-            <h3 className="font-bold text-slate-900 text-base">7 Realistic Pens</h3>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <h3 className="font-bold text-zinc-950 dark:text-zinc-50 text-base">7 Realistic Pens</h3>
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
               Pencil, ballpoint, technical fineliner, felt marker, highlighter, paint brush, and 45° calligraphy fountain pen with pressure-sensitive stroke smoothing.
             </p>
           </Card>
 
-          <Card className="bg-white border-slate-200 p-6 space-y-3 shadow-sm hover:shadow-md transition">
-            <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 mb-3">
+          <Card className="p-6 space-y-3 shadow-xs">
+            <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-900/60 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-3">
               <Eraser className="w-5 h-5" />
             </div>
-            <h3 className="font-bold text-slate-900 text-base">Area Subtraction Eraser</h3>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Unlike traditional stroke erasers that delete whole lines, the area eraser subtracts precise SVG mask geometry exactly like erasing on real paper.
+            <h3 className="font-bold text-zinc-950 dark:text-zinc-50 text-base">Area Subtraction Eraser</h3>
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              A precise vector eraser that cuts through paths with polygon clipping algorithms rather than blindly deleting whole strokes.
             </p>
           </Card>
 
-          <Card className="bg-white border-slate-200 p-6 space-y-3 shadow-sm hover:shadow-md transition">
-            <div className="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 mb-3">
+          <Card className="p-6 space-y-3 shadow-xs">
+            <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-900/60 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-3">
               <FileCode className="w-5 h-5" />
             </div>
-            <h3 className="font-bold text-slate-900 text-base">SVG, PNG & JSON Export</h3>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Export high-resolution standalone SVG vector graphics, 2x raster PNGs, or raw stroke JSON payloads to save and restore your drawings anytime.
+            <h3 className="font-bold text-zinc-950 dark:text-zinc-50 text-base">Crisp SVG & JSON Export</h3>
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              Download clean vector SVG markup formatted for web illustrations, export high-res transparent PNGs, or save project JSON to edit later.
             </p>
           </Card>
         </section>
 
+        {/* SEO Structured Content */}
         <SEOSection
-          title="Free Online Vector Drawing & Sketch Studio"
-          description="Drawesome is a professional freehand vector studio operating entirely inside your browser. Draw with natural pressure dynamics, erase geometry with pixel-perfect masks, and export clean SVG code or transparent 2x PNGs for websites, UI designs, and digital art."
+          title="Drawesome Free Online Vector Drawing Studio"
+          description="A professional, open-source web whiteboard and vector canvas for creating sketches, diagrams, wireframes, and handwritten calligraphy with zero lag."
           howToUse={[
-            "Select a tool from the left toolbar (Pencil, Pen, Fineliner, Marker, Highlighter, Brush, Fountain Pen, Eraser).",
-            "Adjust nib size, opacity slider, and pick a custom color or swatch from the palette.",
-            "Draw or sketch freehand on the canvas with touch, stylus, or mouse.",
-            "Use the Area Eraser to carve out stroke geometry or erase specific parts without deleting entire paths.",
-            "Click 'Export SVG' for resolution-independent vector graphics or 'Export PNG' for transparent images."
+            "Select your preferred pen tool (Pencil, Fineliner, Marker, Calligraphy Pen, or Brush).",
+            "Adjust line thickness, opacity, smoothing tension, and color from the palette.",
+            "Draw naturally with mouse, trackpad, or stylus — pressure and speed are calculated in real-time.",
+            "Use the subtraction eraser to carve out fine details or slice paths.",
+            "Click Export to download your artwork as an SVG vector, 2x PNG, or project backup file."
           ]}
           benefits={[
-            "100% Free & No Sign-up Required.",
-            "Scalable SVG Output — Infinite resolution for web development and graphic design.",
-            "Area Mask Eraser — Subtraction masking rather than destructive path deletions.",
-            "Stroke JSON Export — Save raw vector drawing state to disk and restore later."
+            "100% Free & No Sign-up — Immediate access to full drawing capabilities with no registration or watermarks.",
+            "True Vector Output — Scalable SVG curves that look pin-sharp on 4K retina displays and large format prints.",
+            "Stylus & Pressure Simulation — Realistic stroke taper and velocity thinning curves mimicking natural ink flow.",
+            "Completely Private — All vector geometry and raster buffers are processed strictly in browser memory."
           ]}
         />
 
+        {/* Structured FAQ Section */}
         <FAQSchema
           faqs={[
             {
-              question: "Can I export SVG vector files for commercial use?",
-              answer: "Yes! All SVG vector graphics and PNG images created in Drawesome Vector Studio are 100% yours to download and use for personal or commercial projects without watermarks."
+              question: "Is Drawesome completely free with no watermarks?",
+              answer: "Yes, Drawesome is 100% free with no account creation, limits, or watermark stamps. All exported SVG and PNG files belong to you."
             },
             {
-              question: "How does the Area Eraser differ from standard stroke erasers?",
-              answer: "Standard canvas erasers either erase pixels (losing vector quality) or delete entire vector lines. Drawesome's area eraser creates non-destructive SVG clipping masks that cut out stroke sub-regions, preserving vector geometry."
+              question: "Can I use Drawesome graphics in commercial web projects?",
+              answer: "Yes, SVG vectors exported from Drawesome can be used freely in personal and commercial web designs, apps, logos, and print products without attribution."
             },
             {
-              question: "Are my drawings saved on a cloud server?",
-              answer: "No. Your drawings stay entirely private in your browser's local memory. You can click 'Save JSON' to download your raw vector drawing payload to your computer and reload it anytime."
+              question: "How does the Area Subtraction Eraser work?",
+              answer: "Unlike standard whiteboards that delete entire connected strokes when touched by an eraser, Drawesome uses geometric path boolean subtraction to carve holes and split lines exactly where the eraser passes."
+            },
+            {
+              question: "Can I save my drawing to finish editing later?",
+              answer: "Yes. Click 'Export JSON' to download your project file. Later, click 'Open Project' to restore your exact stroke vectors, layers, and pen configurations."
             }
           ]}
         />
 
-        {/* Owner Credit Card Section (MIT Compliance) */}
-        <div className="my-10">
-          <Card className="bg-white border-slate-200 p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
-            <div className="space-y-2">
-              <h2 className="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
-                Open Source Attribution & Credit
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-600 max-w-3xl leading-relaxed">
-                This tool is built upon the open-source <strong>drawesome</strong> vector drawing engine created by <strong>Benji Taylor (@benjitaylor)</strong> under the MIT License. All stroke algorithms, freehand geometry math, and realistic pen physics were authored by Benji Taylor.
-              </p>
-            </div>
-
-            <a
-              href="https://github.com/benjitaylor/drawesome"
-              target="_blank"
-              rel="noreferrer"
-              className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-xs sm:text-sm rounded-xl flex items-center gap-2 shadow-sm shrink-0 transition"
-            >
-              Visit GitHub Repository <ExternalLink className="w-4 h-4" />
-            </a>
-          </Card>
-        </div>
-
-        <div className="my-12">
-          <RelatedTools currentToolId="drawesome" categoryId="design" />
-        </div>
+        <RelatedTools currentToolId="drawesome" categoryId="devtools" />
       </main>
 
       <Footer />

@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { Card } from '@/components/ui/Card';
-import { Input } from '@/components/ui/Input';
-import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { calculateLumpsum } from '@/lib/formulas';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
@@ -11,7 +11,7 @@ import { RelatedTools } from '@/components/ui/RelatedTools';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
 import { FAQSchema } from '@/components/ui/FAQSchema';
 import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
-import { BookOpen, Coins, Info, Lightbulb, ShieldCheck, TrendingUp } from 'lucide-react';
+import { BookOpen, Coins, Info, Lightbulb, ShieldCheck, TrendingUp, Download } from 'lucide-react';
 
 const LUMPSUM_FAQS = [
   {
@@ -61,7 +61,7 @@ export default function LumpsumClient() {
           </div>
         </header>
 
-        <section className="container section">
+        <section className="container pb-12 pt-4">
           <div className={styles.grid}>
             <Card className={styles.inputCard}>
               <div className={styles.inputGroup}>
@@ -90,8 +90,8 @@ export default function LumpsumClient() {
             </Card>
 
             <div className={styles.resultCol}>
-              <Card className={styles.resultCard} style={{ background: 'linear-gradient(135deg, #0f766e, #115e59)' }}>
-                <h2 className={styles.resultLabel}>Projected Future Value</h2>
+              <Card className="rounded-2xl border border-teal-500/30 bg-teal-700 dark:bg-[#1f2430] dark:border-[#333a4d] p-6 text-center text-white shadow-md sm:p-8 relative">
+                <h2 className="mb-2 text-xs font-bold uppercase tracking-wider text-teal-100 dark:text-teal-400">Total Maturity Value</h2>
                 <div className={styles.resultValue}>{formatCurrency(futureValue)}</div>
                 <div className={styles.stats}>
                   <div className={styles.statItem}>
@@ -110,6 +110,7 @@ export default function LumpsumClient() {
                   </div>
                 </div>
                 <Button fullWidth className={styles.btn} onClick={() => window.print()}>
+                  <Download className="mr-2 size-4" />
                   Download Projection
                 </Button>
               </Card>

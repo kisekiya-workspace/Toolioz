@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/Card';
+import { Card } from '@/components/ui/card';
 import { SEOSection } from '@/components/ui/SEOSection';
 
 import { Key, AlertCircle, ShieldCheck } from 'lucide-react';
@@ -174,16 +174,25 @@ export default function JwtDecoderClient() {
     };
 
     return (
-        <>
-            <div className="min-h-screen bg-[var(--bg-primary)]">
-                <header className="bg-[radial-gradient(circle_at_50%_0%,rgba(244,63,94,0.05)_0%,transparent_50%)] py-16 text-center md:py-24">
-                    <div className="container">
-                        <h1 className="mb-4 text-4xl font-black md:text-6xl">Advanced JWT <span className="text-[#f43f5e]">Debugger</span></h1>
-                        <p className="text-xl text-[var(--text-secondary)]">Decode tokens, verify HS256 signatures, and inspect payload schemas accurately.</p>
+        <div className="min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50 flex flex-col justify-between">
+            <div>
+                <header className="bg-white pt-8 pb-6 text-center dark:bg-zinc-950">
+                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div className="mb-3 inline-flex items-center gap-2">
+                            <span className="inline-flex items-center gap-1.5 rounded-full border border-rose-200 bg-rose-50/80 px-3 py-0.5 text-xs font-semibold text-rose-700 dark:border-rose-900/60 dark:bg-rose-950/40 dark:text-rose-300">
+                                Auth & Token Debugger
+                            </span>
+                        </div>
+                        <h1 className="text-3xl font-extrabold tracking-tight text-zinc-950 sm:text-4xl md:text-5xl dark:text-zinc-50">
+                            Advanced JWT Debugger
+                        </h1>
+                        <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
+                            Decode tokens, verify HS256 signatures, and inspect payload schemas accurately.
+                        </p>
                     </div>
                 </header>
 
-                <section className="container section">
+                <section className="container pb-12 pt-2 sm:pt-4">
                     <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-8 lg:grid-cols-2">
                         <div>
                             <Card className="flex h-full flex-col">
@@ -292,6 +301,6 @@ export default function JwtDecoderClient() {
                 <FAQSchema faqs={JWT_FAQS} />
             </div>
             <Footer />
-        </>
+        </div>
     );
 }

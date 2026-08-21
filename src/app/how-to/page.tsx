@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { ArrowRight, HelpCircle, CheckCircle2 } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { JSONLD } from '@/components/ui/JSONLD';
+import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
 import { howToPosts } from '@/lib/howto-content';
 import { buildCollectionPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
@@ -29,75 +31,71 @@ export default function HowToIndexPage() {
   });
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-white">
+    <div className="min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50 flex flex-col justify-between">
       <JSONLD data={collectionJsonLd} />
-      <header className="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight text-white group">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
-              T
-            </div>
-            <span>Toolioz</span>
-          </Link>
-          <nav className="flex items-center gap-6 text-sm font-medium text-slate-400">
-            <Link href="/finance" className="hover:text-cyan-400 transition-colors">Finance</Link>
-            <Link href="/devtools" className="hover:text-cyan-400 transition-colors">DevTools</Link>
-            <Link href="/pdftools" className="hover:text-cyan-400 transition-colors">PDF Tools</Link>
-            <Link href="/biodata" className="hover:text-cyan-400 transition-colors">Biodata</Link>
-          </nav>
-        </div>
-      </header>
 
-      <main className="flex-1 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-4">
-            <HelpCircle className="w-3.5 h-3.5" />
-            Direct Step-by-Step Guides
+      <div>
+        {/* Hero Header */}
+        <section className="relative border-b border-zinc-200 bg-white vercel-grid py-16 sm:py-20 md:py-28 text-center dark:border-zinc-800 dark:bg-zinc-950">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+            <Badge variant="outline" dot pulse size="sm" className="mb-4 font-mono text-[11px]">
+              <HelpCircle size={12} className="mr-1 text-cyan-600" />
+              Direct Step-by-Step Solutions
+            </Badge>
+
+            <h1 className="mb-5 text-4xl font-extrabold tracking-tight text-zinc-950 sm:text-6xl dark:text-zinc-50">
+              How-To Guides & Practical Tutorials
+            </h1>
+
+            <p className="mx-auto max-w-2xl text-base leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-400">
+              Actionable tutorials for everyday tasks—from compressing large PDFs under 2MB to calculating investment compound growth and parsing API data.
+            </p>
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4 leading-tight">
-            How-To Guides & Tutorials
-          </h1>
-          <p className="text-lg text-slate-400 leading-relaxed">
-            Direct, step-by-step solutions for everyday tasks—from compressing large PDFs under 2MB to calculating investment compound growth and parsing API data.
-          </p>
-        </div>
+        </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {howToPosts.map((post) => (
-            <Link
-              key={post.slug}
-              href={post.directUrl}
-              className="group flex flex-col justify-between p-6 rounded-2xl bg-slate-900/60 border border-slate-800/80 hover:border-cyan-500/40 hover:bg-slate-900 transition-all duration-200"
-            >
-              <div>
-                <div className="flex items-center justify-between text-xs text-slate-400 mb-3">
-                  <span className="font-mono text-cyan-400 font-semibold bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800/40">
-                    {post.readTime}
-                  </span>
-                  <span>Updated {post.updated}</span>
-                </div>
-                <h2 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors mb-3 leading-snug">
-                  {post.title}
-                </h2>
-                <p className="text-sm text-slate-400 line-clamp-3 mb-6 leading-relaxed">
-                  {post.description}
-                </p>
-              </div>
+        {/* Guides Grid */}
+        <main className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {howToPosts.map((post) => (
+              <Link
+                key={post.slug}
+                href={post.directUrl}
+                className="group block h-full"
+              >
+                <Card hoverable className="h-full p-6 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between text-xs mb-3">
+                      <Badge variant="mono" size="sm">
+                        {post.readTime}
+                      </Badge>
+                      <span className="text-[11px] font-mono text-zinc-400">Updated {post.updated}</span>
+                    </div>
 
-              <div className="pt-4 border-t border-slate-800/60 flex items-center justify-between text-xs font-semibold text-cyan-400 group-hover:text-cyan-300">
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400" />
-                  {post.steps.length} Step Guide
-                </span>
-                <span className="flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                  Read Tutorial
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </main>
+                    <h2 className="text-lg font-bold text-zinc-950 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-2 leading-snug dark:text-zinc-50">
+                      {post.title}
+                    </h2>
+
+                    <p className="text-xs text-zinc-500 line-clamp-3 leading-relaxed mb-4 dark:text-zinc-400">
+                      {post.description}
+                    </p>
+                  </div>
+
+                  <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between text-xs font-semibold text-blue-600 dark:text-blue-400">
+                    <span className="flex items-center gap-1.5 text-zinc-500 dark:text-zinc-400">
+                      <CheckCircle2 size={14} className="text-emerald-500" />
+                      <span>{post.steps.length} Step Guide</span>
+                    </span>
+                    <span className="flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                      Read Tutorial
+                      <ArrowRight size={13} />
+                    </span>
+                  </div>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </main>
+      </div>
 
       <Footer />
     </div>

@@ -40,6 +40,7 @@ import {
   Sigma,
   type LucideIcon
 } from 'lucide-react';
+import { NEW_DEV_TOOLS, NEW_PDF_TOOLS } from '@/lib/new-tool-catalog';
 
 export type Category = 'finance' | 'devtools' | 'design' | 'pdftools' | 'biodata';
 
@@ -522,6 +523,26 @@ export const TOOLS: Tool[] = [
     category: 'pdftools',
     isTrending: true
   },
+  ...NEW_PDF_TOOLS.map((tool) => ({
+    id: tool.slug,
+    title: tool.shortTitle,
+    desc: tool.description,
+    icon: FileText,
+    href: tool.path,
+    color: '#0f766e',
+    category: 'pdftools' as const,
+    isTrending: ['organize', 'page-numbers', 'text'].includes(tool.mode),
+  })),
+  ...NEW_DEV_TOOLS.map((tool) => ({
+    id: tool.slug,
+    title: tool.shortTitle,
+    desc: tool.description,
+    icon: tool.group === 'image' ? ImagePlus : tool.group === 'seo' ? SearchCode : Code,
+    href: tool.path,
+    color: tool.group === 'image' ? '#0891b2' : tool.group === 'seo' ? '#0f766e' : '#d97706',
+    category: (tool.group === 'image' ? 'design' : 'devtools') as Category,
+    isTrending: ['ocr', 'yaml-json', 'utm', 'schema'].includes(tool.mode),
+  })),
   // ═══ BIODATA TOOLS ═══
   {
     id: 'biodata-generator',

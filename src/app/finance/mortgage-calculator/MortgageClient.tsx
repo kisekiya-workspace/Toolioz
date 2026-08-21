@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Card } from '@/components/ui/Card';
-import { Input } from '@/components/ui/Input';
-import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { calculateMonthlyPayment } from '@/lib/formulas';
-import { Info, HomeIcon, ShieldCheck, PieChart, BookOpen, AlertTriangle, Lightbulb } from 'lucide-react';
+import { Info, HomeIcon, ShieldCheck, PieChart, BookOpen, AlertTriangle, Lightbulb, Download } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
@@ -72,7 +72,7 @@ export default function MortgageClient() {
           </div>
         </header>
 
-        <section className="container section">
+        <section className="container pb-12 pt-4">
           <div className={styles.grid}>
             <Card className={styles.inputCard}>
               <div className={styles.inputGroup}>
@@ -101,8 +101,8 @@ export default function MortgageClient() {
             </Card>
 
             <div className={styles.resultCol}>
-              <Card className={styles.resultCard} style={{ background: 'linear-gradient(135deg, #8b5cf6, #6d28d9)' }}>
-                <h2 className={styles.resultLabel}>Monthly Payment</h2>
+              <Card className="rounded-2xl border border-violet-500/30 bg-violet-700 dark:bg-[#1f2430] dark:border-[#333a4d] p-6 text-center text-white shadow-md sm:p-8 relative">
+                <h2 className="mb-2 text-xs font-bold uppercase tracking-wider text-violet-100 dark:text-violet-400">Monthly Mortgage Payment</h2>
                 <div className={styles.resultValue}>{formatCurrency(result)}</div>
                 <div className={styles.stats}>
                   <div className={styles.statItem}>
@@ -119,6 +119,7 @@ export default function MortgageClient() {
                   className={styles.btn}
                   onClick={() => window.print()}
                 >
+                  <Download className="mr-2 size-4" />
                   Download Amortization Schedule
                 </Button>
               </Card>

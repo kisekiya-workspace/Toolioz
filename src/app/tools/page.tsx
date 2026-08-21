@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { JSONLD } from '@/components/ui/JSONLD';
-import { importedToolItems } from '@/lib/sociials-tool-index';
-import { buildItemListJsonLd, buildPageMetadata } from '@/lib/seo';
+import { allToolItems, buildItemListJsonLd, buildPageMetadata } from '@/lib/seo';
 import ToolsLibraryClient from './ToolsLibraryClient';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -30,7 +29,7 @@ export default function ToolsLibraryPage() {
       name: 'Toolioz online tools',
       description: 'Free browser-based tools for finance, development, design, media, and productivity.',
       path: '/tools',
-      items: importedToolItems,
+      items: Array.from(new Map(allToolItems.map((tool) => [tool.url, tool])).values()),
     }),
   };
 

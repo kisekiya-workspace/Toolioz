@@ -1,13 +1,13 @@
 export const secondaryPageStyles = {
-  wrapper: 'flex min-h-screen flex-col bg-[var(--bg-primary)]',
+  wrapper: 'flex min-h-screen flex-col bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50',
   header:
-    'py-24 text-center md:py-32',
+    'relative border-b border-zinc-200 bg-white vercel-grid py-16 sm:py-24 text-center dark:border-zinc-800 dark:bg-zinc-950',
   title:
-    'mb-6 text-4xl font-black tracking-[-0.02em] text-[var(--text-primary)] md:text-[3.5rem]',
-  subtitle: 'mx-auto max-w-[650px] text-xl text-[var(--text-secondary)]',
-  contentSection: 'px-6 py-20 md:py-24 lg:py-28',
+    'mb-5 text-4xl font-extrabold tracking-tight text-zinc-950 sm:text-5xl md:text-6xl dark:text-zinc-50',
+  subtitle: 'mx-auto max-w-2xl text-base leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-400',
+  contentSection: 'px-4 sm:px-6 lg:px-8 py-16 sm:py-20 bg-zinc-50/50 flex-1 dark:bg-zinc-950/50',
   card:
-    'mx-auto max-w-[850px] rounded-[var(--radius-xl)] p-8 text-[1.0625rem] leading-8 md:p-16 [&_h2]:mb-6 [&_h2]:mt-12 [&_h2]:text-[1.75rem] [&_h2]:font-extrabold [&_h2]:text-[var(--text-primary)] [&_h2:first-of-type]:mt-0 [&_li]:mb-3 [&_li]:text-[var(--text-secondary)] [&_p]:mb-6 [&_p]:text-[var(--text-secondary)] [&_strong]:text-[var(--text-primary)] [&_ul]:mb-8 [&_ul]:pl-6',
+    'mx-auto max-w-4xl rounded-2xl border border-zinc-200 bg-white p-8 sm:p-12 text-sm sm:text-base leading-relaxed text-zinc-950 shadow-xs dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-50 [&_h2]:mb-4 [&_h2]:mt-10 [&_h2]:text-xl sm:[&_h2]:text-2xl [&_h2]:font-bold [&_h2]:tracking-tight [&_h2]:text-zinc-950 dark:[&_h2]:text-zinc-50 [&_h2:first-of-type]:mt-0 [&_li]:mb-2.5 [&_li]:text-zinc-600 dark:[&_li]:text-zinc-400 [&_p]:mb-5 [&_p]:text-zinc-600 dark:[&_p]:text-zinc-400 [&_strong]:text-zinc-950 dark:[&_strong]:text-zinc-50 [&_strong]:font-semibold [&_ul]:mb-6 [&_ul]:list-disc [&_ul]:pl-5',
   lastUpdated:
-    'mt-16 border-t border-[var(--border)] pt-8 text-sm italic text-[var(--text-tertiary)]',
+    'mt-12 border-t border-zinc-100 dark:border-zinc-800 pt-6 text-xs font-mono text-zinc-400',
 } as const;

@@ -2,8 +2,8 @@
 
 import React, { useRef, useState } from 'react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import {
   FileImage,
   Plus,
@@ -104,7 +104,7 @@ export default function ImageToPdfClient() {
 
       for (const item of images) {
         const file = item.file;
-        let imageBytes = new Uint8Array(await file.arrayBuffer());
+        const imageBytes = new Uint8Array(await file.arrayBuffer());
 
         let embeddedImage;
         if (file.type === 'image/jpeg' || file.type === 'image/jpg') {
@@ -157,22 +157,22 @@ export default function ImageToPdfClient() {
   };
 
   return (
-    <main className="bg-slate-950 text-slate-100 min-h-screen py-10">
+    <main className="min-h-screen bg-cyan-50/40 py-5 text-slate-900 sm:py-7">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <header className="mb-10 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-4">
+        <header className="mb-5 text-center">
+          <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-cyan-800">
             <ShieldCheck className="w-3.5 h-3.5" /> 100% Client-Side In-Browser Conversion
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+          <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
             Image to PDF Converter
           </h1>
-          <p className="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto">
+          <p className="mx-auto mt-2 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
             Convert JPG, PNG, and WebP photos into a clean single PDF document. Zero server uploads.
           </p>
         </header>
 
         {/* Action Card */}
-        <Card className="p-6 sm:p-8 bg-slate-900 border-slate-800 rounded-3xl shadow-xl">
+        <Card className="rounded-3xl border-cyan-200 bg-white p-6 shadow-sm sm:p-8">
           <input
             ref={fileInputRef}
             type="file"
@@ -184,12 +184,12 @@ export default function ImageToPdfClient() {
 
           <div
             onClick={() => fileInputRef.current?.click()}
-            className="border-2 border-dashed border-cyan-800/60 hover:border-cyan-500/80 rounded-2xl p-8 text-center cursor-pointer transition-colors bg-slate-950/40 hover:bg-slate-950/80 group"
+            className="cursor-pointer rounded-2xl border-2 border-dashed border-cyan-300 bg-cyan-50/60 p-8 text-center hover:border-cyan-500 hover:bg-cyan-50"
           >
-            <div className="mx-auto w-14 h-14 rounded-2xl bg-cyan-950 border border-cyan-800 flex items-center justify-center text-cyan-400 mb-4 group-hover:scale-105 transition-transform">
+            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-200 bg-cyan-100 text-cyan-700">
               <FileUp className="w-7 h-7" />
             </div>
-            <p className="text-lg font-bold text-white mb-1">Click to upload image files</p>
+            <p className="mb-1 text-lg font-bold text-slate-900">Click to upload image files</p>
             <p className="text-xs text-slate-400">Supports JPG, PNG, WebP, GIF, and BMP formats</p>
           </div>
 
@@ -211,19 +211,19 @@ export default function ImageToPdfClient() {
                 {images.map((item) => (
                   <div
                     key={item.id}
-                    className="relative group rounded-xl border border-slate-800 bg-slate-950 p-2 overflow-hidden"
+                    className="relative overflow-hidden rounded-xl border border-cyan-200 bg-cyan-50 p-2"
                   >
                     <img
                       src={item.previewUrl}
                       alt={item.name}
                       className="w-full h-28 object-cover rounded-lg mb-2"
                     />
-                    <p className="text-xs font-semibold text-white truncate px-1">{item.name}</p>
+                    <p className="truncate px-1 text-xs font-semibold text-slate-800">{item.name}</p>
                     <p className="text-[10px] text-slate-400 px-1">{item.size}</p>
 
                     <button
                       onClick={() => removeImage(item.id)}
-                      className="absolute top-3 right-3 p-1 rounded-full bg-slate-900/80 text-slate-400 hover:text-red-400 hover:bg-slate-900 transition-colors"
+                      className="absolute right-3 top-3 rounded-full bg-white/90 p-1 text-slate-500 hover:bg-red-50 hover:text-red-600"
                       title="Remove image"
                     >
                       <X className="w-4 h-4" />
@@ -265,14 +265,14 @@ export default function ImageToPdfClient() {
           {/* Download Generated PDF */}
           {pdfBlobUrl && (
             <div className="mt-8 p-6 rounded-2xl bg-cyan-950/60 border border-cyan-500/40 text-center">
-              <h3 className="text-lg font-bold text-white mb-2">PDF Document Ready!</h3>
-              <p className="text-sm text-slate-300 mb-4">
+              <h3 className="mb-2 text-lg font-bold text-slate-900">PDF Document Ready!</h3>
+              <p className="mb-4 text-sm text-slate-600">
                 Your images were merged into a PDF file locally in browser memory.
               </p>
               <a
                 href={pdfBlobUrl}
                 download={`images_doc_${Date.now()}.pdf`}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm shadow-lg shadow-cyan-500/25 transition-all"
+                className="inline-flex items-center gap-2 rounded-xl bg-cyan-600 px-6 py-3 text-sm font-bold text-white hover:bg-cyan-700"
               >
                 <Download className="w-4 h-4" /> Download PDF File
               </a>

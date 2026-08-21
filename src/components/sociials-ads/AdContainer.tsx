@@ -17,6 +17,7 @@ interface AdContainerProps {
 
 export function AdContainer({ slot, format = "auto", responsive = "true", className = "" }: AdContainerProps) {
     const publisherId = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
+
     useEffect(() => {
         if (!publisherId) return;
         try {
@@ -27,22 +28,21 @@ export function AdContainer({ slot, format = "auto", responsive = "true", classN
         }
     }, [publisherId, slot]);
 
+    // If AdSense publisher ID is not configured, do not render placeholder to prevent AdSense "Site Under Construction" rejections
+    if (!publisherId) {
+        return null;
+    }
+
     return (
-        <div className={`my-8 overflow-hidden min-h-[100px] flex items-center justify-center bg-muted/20 border border-dashed rounded-xl transition-all ${className}`}>
-            {!publisherId ? (
-                <div className="text-xs text-muted-foreground uppercase tracking-widest font-bold opacity-30">
-                    Advertisement Placement
-                </div>
-            ) : (
-                <ins
-                    className="adsbygoogle"
-                    style={{ display: "block", textAlign: "center" }}
-                    data-ad-client={publisherId}
-                    data-ad-slot={slot}
-                    data-ad-format={format}
-                    data-full-width-responsive={responsive}
-                />
-            )}
+        <div className={`my-8 overflow-hidden min-h-[100px] flex items-center justify-center rounded-xl transition-all ${className}`}>
+            <ins
+                className="adsbygoogle"
+                style={{ display: "block", textAlign: "center" }}
+                data-ad-client={publisherId}
+                data-ad-slot={slot}
+                data-ad-format={format}
+                data-full-width-responsive={responsive}
+            />
         </div>
     );
 }

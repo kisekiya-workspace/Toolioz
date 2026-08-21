@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Card } from '@/components/ui/Card';
-import { Input } from '@/components/ui/Input';
-import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { calculateCompoundInterest } from '@/lib/formulas';
-import { TrendingUp, Info, Sparkles, ShieldCheck, BookOpen, Clock, Lightbulb } from 'lucide-react';
+import { TrendingUp, Info, Sparkles, ShieldCheck, BookOpen, Clock, Lightbulb, Download } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
@@ -57,7 +57,7 @@ export default function CompoundInterestClient() {
           </div>
         </header>
 
-        <section className="mx-auto max-w-6xl py-16">
+        <section className="mx-auto max-w-6xl pb-12 pt-4">
           <div className={styles.grid}>
             <Card className={styles.inputCard}>
               <div className={styles.inputGroup}>
@@ -99,8 +99,8 @@ export default function CompoundInterestClient() {
             </Card>
 
             <div className={styles.resultCol}>
-              <Card className={styles.resultCard}>
-                <h2 className={styles.resultLabel}>Future Value</h2>
+              <Card className="rounded-2xl border border-indigo-500/30 bg-indigo-700 dark:bg-[#1f2430] dark:border-[#333a4d] p-6 text-center text-white shadow-md sm:p-8 relative">
+                <h2 className="mb-2 text-xs font-bold uppercase tracking-wider text-indigo-100 dark:text-indigo-400">Total Future Value</h2>
                 <div className={styles.resultValue}>{formatCurrency(result)}</div>
                 <div className={styles.stats}>
                   <div className={styles.statItem}>
@@ -117,6 +117,7 @@ export default function CompoundInterestClient() {
                   className={styles.btn}
                   onClick={() => window.print()}
                 >
+                  <Download className="mr-2 size-4" />
                   Download Report
                 </Button>
               </Card>

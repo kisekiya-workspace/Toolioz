@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/Card';
+import { Card } from '@/components/ui/card';
 import { secondaryPageStyles as styles } from '@/app/SecondaryPage.styles';
 
 export default function AboutClient() {

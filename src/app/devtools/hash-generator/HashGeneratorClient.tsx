@@ -2,8 +2,8 @@
 
 import React, { useState, useCallback } from 'react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import {
   Hash,
   Copy,
@@ -113,21 +113,25 @@ export default function HashGeneratorClient() {
   };
 
   return (
-    <>
-      <div className="flex min-h-screen flex-col bg-[var(--bg-primary)]">
-        <header className="bg-[radial-gradient(circle_at_100%_0%,rgba(37,99,235,0.05)_0%,transparent_50%)] py-16 text-center md:py-32">
-          <div className="container">
-            <h1 className="mb-6 text-4xl font-black tracking-tight md:text-6xl">
-              Hash <span className="text-[var(--primary)]">Generator</span>
+    <div className="min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50 flex flex-col justify-between">
+      <div>
+        <header className="bg-white pt-8 pb-6 text-center dark:bg-zinc-950">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-3 inline-flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50/80 px-3 py-0.5 text-xs font-semibold text-blue-700 dark:border-blue-900/60 dark:bg-blue-950/40 dark:text-blue-300">
+                Cryptographic Hashing
+              </span>
+            </div>
+            <h1 className="text-3xl font-extrabold tracking-tight text-zinc-950 sm:text-4xl md:text-5xl dark:text-zinc-50">
+              Hash Generator
             </h1>
-            <p className="mx-auto max-w-[650px] text-lg text-[var(--text-secondary)] md:text-xl">
-              Generate SHA-1, SHA-256, SHA-384, and SHA-512 hashes from text or
-              files — 100% client-side using the Web Crypto API.
+            <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
+              Generate SHA-1, SHA-256, SHA-384, and SHA-512 hashes from text or files — 100% client-side using the Web Crypto API.
             </p>
           </div>
         </header>
 
-        <section className="container section">
+        <section className="container pb-12 pt-2 sm:pt-4">
           <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
             {/* Input Panel */}
             <Card className="flex flex-col !p-6">
@@ -314,6 +318,6 @@ export default function HashGeneratorClient() {
         </section>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }

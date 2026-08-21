@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
-import { Input } from '@/components/ui/Input';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { Check, Clock, Copy, RotateCcw, CalendarDays } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
@@ -140,24 +140,25 @@ export default function TimestampConverterClient() {
   const dateEpochMilliseconds = dateFromInput ? dateFromInput.getTime() : null;
 
   return (
-    <>
-      <div className="flex min-h-screen flex-col bg-[var(--bg-primary)]">
-        <header className="bg-[radial-gradient(circle_at_50%_0%,rgba(217,119,6,0.08)_0%,transparent_50%)] py-16 text-center md:py-24">
-          <div className="container">
-            <div className="mb-8 inline-block rounded-full bg-[rgba(217,119,6,0.1)] px-4 py-2 text-[0.8125rem] font-bold uppercase tracking-widest text-[#b45309]">
-              Time Utility
+    <div className="flex min-h-screen flex-col justify-between bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
+      <div>
+        <header className="bg-white pt-8 pb-6 text-center dark:bg-zinc-950">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-3 inline-flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50/80 px-3 py-0.5 text-xs font-semibold text-amber-700 dark:border-amber-900/60 dark:bg-amber-950/40 dark:text-amber-300">
+                Time Utilities
+              </span>
             </div>
-            <h1 className="mb-6 text-[clamp(2.5rem,5vw,4rem)] font-black tracking-tight">
-              Unix <span className="text-[#d97706]">Timestamp</span> Converter
+            <h1 className="text-3xl font-extrabold tracking-tight text-zinc-950 sm:text-4xl md:text-5xl dark:text-zinc-50">
+              Unix Timestamp Converter
             </h1>
-            <p className="mx-auto max-w-[720px] text-xl text-[var(--text-secondary)]">
-              Convert epoch seconds or milliseconds into readable dates, then turn a date string
-              back into Unix time without leaving the browser.
+            <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
+              Convert epoch seconds or milliseconds into readable dates, then turn a date string back into Unix time.
             </p>
           </div>
         </header>
 
-        <main className="container section">
+        <main className="container pb-12 pt-2 sm:pt-4">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
             <Card className="flex flex-col gap-6 !p-6">
               <div className="flex flex-wrap items-center justify-between gap-4">
@@ -316,6 +317,6 @@ export default function TimestampConverterClient() {
       </div>
 
       <Footer />
-    </>
+    </div>
   );
 }

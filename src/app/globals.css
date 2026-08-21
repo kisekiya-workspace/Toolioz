@@ -1,87 +1,202 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
-@import "tailwindcss/theme";
-@import "tailwindcss/utilities";
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, :where(.dark *)));
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-geist-sans), var(--font-outfit), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
 
 :root {
-  /* Color Palette - Professional & Accessible */
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-  --bg-primary: #ffffff;
-  --bg-secondary: #f1f5f9;
-  --bg-tertiary: #e2e8f0;
-  --text-primary: #0f172a;
-  --text-secondary: #334155;
+  /* Layered Light Theme Hierarchy (Linear/Apple-style warm subtle canvas with crisp white cards) */
+  --background: #f8fafc;        /* Level 0: Soft, clean off-white base canvas */
+  --foreground: #09090b;        /* Crisp primary dark text */
+  --card: #ffffff;              /* Level 2: Pure crisp white elevated surface */
+  --card-foreground: #09090b;
+  --popover: #ffffff;           /* Dropdowns & Popovers */
+  --popover-foreground: #09090b;
+  --primary: #09090b;
+  --primary-foreground: #ffffff;
+  --primary-hover: #18181b;
+  --primary-blue: #2563eb;
+  --primary-blue-hover: #1d4ed8;
+  --secondary: #f1f5f9;         /* Level 3: Inactive pills, secondary action surfaces */
+  --secondary-foreground: #0f172a;
+  --muted: #f1f5f9;             /* Level 1.5: Inner well backgrounds */
+  --muted-foreground: #64748b;  /* Descriptive secondary text */
+  --accent: #e2e8f0;            /* Hover highlights */
+  --accent-foreground: #0f172a;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #e2e8f0;            /* Level 1: Clean micro-borders */
+  --border-strong: #cbd5e1;     /* Emphasized active container borders */
+  --input: #ffffff;             /* Crisp input surfaces */
+  --ring: #2563eb;
+  --radius: 0.625rem;
+
+  --bg-primary: #f8fafc;        /* Canvas */
+  --bg-secondary: #f1f5f9;      /* Header / Section Band */
+  --bg-tertiary: #ffffff;       /* Workbenches & Cards */
+  --text-primary: #09090b;
+  --text-secondary: #475569;
   --text-tertiary: #64748b;
-  --accent: #0ea5e9;
-  --border: #e2e8f0;
-  --border-strong: #cbd5e1;
-  --success: #10b981;
-  --warning: #f59e0b;
-  --error: #ef4444;
-  
-  /* Remove Glass - Use Solid Surfaces */
   --surface: #ffffff;
   --surface-hover: #f8fafc;
-  --glass: rgba(255, 255, 255, 0.75);
-  
-  /* Spacing */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  
-  /* Section Spacing */
-  --section-padding-y: 6rem;
-  --section-padding-y-mobile: 3rem;
-  --section-padding-y-sm: 4rem;
 
-  /* Mobile Grid / Swipe */
-  --mobile-swipe-peek: 40px;
-  --mobile-swipe-gap: 1rem;
-  
-  /* Shadow */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 40px -10px rgb(0 0 0 / 0.15);
-  
-  --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07);
 }
 
-[data-theme='dark'] {
-  --primary: #3b82f6;
-  --primary-hover: #60a5fa;
-  --bg-primary: #020617;
-  --bg-secondary: #0f172a;
-  --bg-tertiary: #1e293b;
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-tertiary: #94a3b8;
-  --border: #1e293b;
-  --border-strong: #334155;
-  --surface: #0f172a;
-  --surface-hover: #1e293b;
-  --glass: rgba(15, 23, 42, 0.65);
+.dark {
+  /* True Neutral IDE Charcoal Gray Hierarchy (Zero Blue Tint - Pure Neutral Grays) */
+  color-scheme: dark;
+  --background: #1c1c1c;        /* Level 0: Pure neutral IDE dark canvas */
+  --foreground: #f0f0f0;        /* Crisp primary light text */
+  --card: #282828;              /* Level 2: Elevated card & panel surface */
+  --card-foreground: #f0f0f0;
+  --popover: #282828;           /* Dropdowns & popovers */
+  --popover-foreground: #f0f0f0;
+  --primary: #f0f0f0;
+  --primary-foreground: #1c1c1c;
+  --primary-hover: #e0e0e0;
+  --primary-blue: #3b82f6;
+  --primary-blue-hover: #60a5fa;
+  --secondary: #323232;         /* Level 3: Interactive pills & buttons */
+  --secondary-foreground: #f0f0f0;
+  --muted: #222222;             /* Level 1.5: Input wells & muted backgrounds */
+  --muted-foreground: #8e8e8e;  /* Descriptive secondary text */
+  --accent: #353535;            /* Hover highlights */
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #383838;            /* Neutral IDE micro-borders */
+  --border-strong: #4a4a4a;     /* Active container borders */
+  --input: #222222;
+  --ring: #3b82f6;
+
+  --bg-primary: #1c1c1c;        /* Canvas */
+  --bg-secondary: #222222;      /* Sections & Header */
+  --bg-tertiary: #282828;       /* Workbenches */
+  --text-primary: #f0f0f0;
+  --text-secondary: #cccccc;
+  --text-tertiary: #8e8e8e;
+  --surface: #282828;
+  --surface-hover: #353535;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.dark,
+.dark body {
+  background-color: #1c1c1c !important;
+  color: #f0f0f0 !important;
+}
+
+/* Explicit class mappings for Tailwind zinc & slate classes in dark mode (Zero Blue Tint) */
+.dark .dark\:bg-zinc-950,
+.dark .dark\:bg-slate-950 {
+  background-color: #1c1c1c !important;
+}
+
+.dark .dark\:bg-zinc-900,
+.dark .dark\:bg-slate-900 {
+  background-color: #282828 !important;
+}
+
+.dark .dark\:bg-zinc-900\/60,
+.dark .dark\:bg-slate-900\/60 {
+  background-color: rgba(40, 40, 40, 0.6) !important;
+}
+
+.dark .dark\:bg-zinc-900\/40,
+.dark .dark\:bg-slate-900\/40 {
+  background-color: rgba(40, 40, 40, 0.4) !important;
+}
+
+.dark .dark\:bg-zinc-950\/95,
+.dark .dark\:bg-slate-950\/95 {
+  background-color: rgba(28, 28, 28, 0.95) !important;
+}
+
+.dark .dark\:bg-zinc-950\/90,
+.dark .dark\:bg-slate-950\/90 {
+  background-color: rgba(28, 28, 28, 0.9) !important;
+}
+
+.dark .dark\:bg-zinc-950\/50,
+.dark .dark\:bg-slate-950\/50 {
+  background-color: rgba(28, 28, 28, 0.5) !important;
+}
+
+.dark .dark\:border-zinc-800,
+.dark .dark\:border-slate-800 {
+  border-color: #383838 !important;
+}
+
+.dark .dark\:border-zinc-700,
+.dark .dark\:border-slate-700 {
+  border-color: #4a4a4a !important;
+}
+
+.dark .dark\:text-zinc-50,
+.dark .dark\:text-slate-50,
+.dark .dark\:text-zinc-100,
+.dark .dark\:text-slate-100 {
+  color: #f0f0f0 !important;
+}
+
+.dark .dark\:text-zinc-200,
+.dark .dark\:text-slate-200,
+.dark .dark\:text-zinc-300,
+.dark .dark\:text-slate-300 {
+  color: #cccccc !important;
+}
+
+.dark .dark\:text-zinc-400,
+.dark .dark\:text-slate-400,
+.dark .dark\:text-zinc-500,
+.dark .dark\:text-slate-500 {
+  color: #8e8e8e !important;
+}
+
+*,
+::after,
+::before,
+::backdrop,
+::file-selector-button {
+  border-color: var(--border, currentColor);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  line-height: 1.5;
+  background-color: var(--background);
+  color: var(--foreground);
   -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-html {
-  overflow-x: hidden;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -93,33 +208,20 @@ a:hover {
   text-decoration: none !important;
 }
 
-.card, [class*='Card'] {
-  text-decoration: none !important;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  background: none;
-  font-family: inherit;
-}
-
-input {
-  font-family: inherit;
-}
-
+/* Global Centered Responsive Container */
 .container {
-  max-width: 1200px;
+  width: 100%;
+  max-width: 80rem !important; /* 1280px (max-w-7xl) */
   margin-left: auto !important;
   margin-right: auto !important;
-  padding-left: 1rem !important;
-  padding-right: 1rem !important;
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
 }
 
 @media (min-width: 640px) {
   .container {
-    padding-left: 1.5rem !important;
-    padding-right: 1.5rem !important;
+    padding-left: 1.75rem !important;
+    padding-right: 1.75rem !important;
   }
 }
 
@@ -130,57 +232,18 @@ input {
   }
 }
 
-/* Surface utility */
-.surface {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
+/* Custom Minimalist Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
-
-/* Transitions */
-.transition-all {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+::-webkit-scrollbar-track {
+  background: transparent;
 }
-
-.section {
-  padding-top: var(--section-padding-y);
-  padding-bottom: var(--section-padding-y);
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 9999px;
 }
-
-@media (max-width: 768px) {
-  .section {
-    padding-top: var(--section-padding-y-mobile);
-    padding-bottom: var(--section-padding-y-mobile);
-  }
-}
-
-/* Spin animation utility */
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.animate-spin {
-  animation: spin 1s linear infinite;
-}
-
-.landing-hero-grid {
-  background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--border) 55%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--border) 55%, transparent) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 75% 65% at 50% 0%, black 25%, transparent 100%);
-}
-
-/* Keep stacked information cards visibly separated on focused tool pages. */
-.percentage-tool-content > section.grid,
-.percentage-tool-content section > .grid {
-  gap: 2rem;
-}
-
-@media (min-width: 1024px) {
-  .percentage-tool-content > section.grid,
-  .percentage-tool-content section > .grid {
-    gap: 2.5rem;
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
 }

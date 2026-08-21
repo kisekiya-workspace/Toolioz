@@ -5,17 +5,15 @@ import {
   CheckCircle2,
   Download,
   Eye,
-  FileText,
   Lock,
-  Palette,
-  ShieldCheck,
   Sparkles,
-  Star,
   UserRound,
 } from 'lucide-react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import { Footer } from '@/components/layout/Footer';
-import { biodataFaqs, biodataKeywords, biodataPosts } from '@/lib/biodata-content';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { biodataFaqs, biodataKeywords } from '@/lib/biodata-content';
 
 export const metadata: Metadata = {
   title: 'Free Marriage Biodata Maker | PDF Download No Login',
@@ -43,55 +41,51 @@ const features = [
     color: '#2563eb',
   },
   {
-    title: 'PDF Download',
+    title: 'Instant PDF Download',
     body: 'Export a share-ready biodata PDF from mobile or desktop without waiting for a designer.',
     icon: Download,
     color: '#db2777',
   },
   {
-    title: 'Private Drafts',
-    body: 'Your draft stays in your browser so you can return and edit details without creating an account.',
+    title: '100% Private Local Drafts',
+    body: 'Your draft stays in your browser RAM/storage so you can return and edit without creating an account.',
     icon: Lock,
-    color: '#0f766e',
+    color: '#10b981',
   },
 ];
 
 const templateCards = [
   {
     title: 'Hindu Traditional',
-    label: 'Orange, gold, Om border',
+    label: 'Om motif, saffron gold palette',
     mark: 'ॐ',
-    className: 'border-orange-200 bg-orange-50 text-orange-900',
-    accent: 'text-orange-600',
+    color: '#ea580c',
   },
   {
     title: 'Islamic Elegant',
-    label: 'Emerald arch styling',
+    label: 'Bismillah header, emerald borders',
     mark: 'بسم الله',
-    className: 'border-emerald-200 bg-emerald-50 text-emerald-950',
-    accent: 'text-emerald-700',
+    color: '#059669',
   },
   {
     title: 'Sikh Heritage',
-    label: 'Navy and saffron layout',
+    label: 'Ik Onkar motif, navy accents',
     mark: 'ੴ',
-    className: 'border-blue-200 bg-blue-50 text-blue-950',
-    accent: 'text-amber-600',
+    color: '#2563eb',
   },
   {
-    title: 'Modern Minimal',
-    label: 'Clean SaaS-style profile',
+    title: 'Modern Minimalist',
+    label: 'Clean profile, modern typography',
     mark: 'Aa',
-    className: 'border-slate-200 bg-slate-50 text-slate-950',
-    accent: 'text-slate-700',
+    color: '#4f46e5',
   },
 ];
 
 const steps = [
-  ['Choose', 'Pick a modern, classic, Hindu, Islamic, Sikh, or minimalist template.'],
-  ['Write', 'Add personal details, birth details, profession, family, and partner expectations.'],
-  ['Preview', 'Check the A4 preview and adjust long entries before exporting.'],
-  ['Download', 'Save a PDF that is ready for WhatsApp, email, or print.'],
+  ['Choose Template', 'Pick a modern, classic, Hindu, Islamic, Sikh, or minimalist layout.'],
+  ['Input Profile', 'Add personal details, horoscope fields, profession, family, and partner expectations.'],
+  ['Live Preview', 'Review the pixel-perfect A4 canvas and format photo alignment in real-time.'],
+  ['Vector PDF Export', 'Download a crisp, print-ready PDF ready for WhatsApp, email, or print.'],
 ];
 
 export default function BiodataPage() {
@@ -110,154 +104,151 @@ export default function BiodataPage() {
 
   return (
     <>
-      <main className="min-h-screen overflow-hidden bg-[#f8fafc] text-slate-950">
+      <main className="min-h-screen overflow-hidden bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
         <JSONLD data={faqJsonLd} />
 
-        <section className="relative border-b border-slate-200 bg-white">
-          <div className="absolute inset-x-0 top-0 h-32 bg-[linear-gradient(90deg,#fff7ed,#fdf2f8,#ecfeff)]" />
-          <div className="relative mx-auto grid max-w-7xl gap-12 px-6 pb-16 pt-14 lg:grid-cols-[1fr_520px] lg:items-center lg:pb-24 lg:pt-20">
-            <div>
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-pink-200 bg-white px-4 py-2 text-xs font-extrabold uppercase tracking-[0.16em] text-pink-700 shadow-sm">
-                <Sparkles size={14} />
-                Biodata Tools
-              </div>
-              <h1 className="max-w-4xl text-4xl font-black leading-[1.02] tracking-[-0.02em] text-slate-950 sm:text-5xl lg:text-7xl">
-                Marriage biodata maker built for fast PDF sharing
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-                Create a polished biodata with photo, family details, horoscope fields,
-                religion-based templates, live preview, and mobile PDF download. No login,
-                no design software, no waiting.
-              </p>
+        {/* Skimmed Hero Header */}
+        <section className="bg-white pt-8 pb-8 text-left dark:bg-zinc-950">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-8 lg:grid-cols-[1fr_420px] lg:items-center">
+              <div>
+                <Badge variant="outline" dot pulse size="sm" className="mb-3 font-mono text-xs">
+                  <Sparkles size={12} className="mr-1 text-pink-600" />
+                  Marriage Biodata Studio
+                </Badge>
 
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link
-                  href="/biodata/biodata-generator"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-950 px-6 py-3 text-sm font-bold text-white shadow-xl shadow-slate-300 transition hover:-translate-y-0.5 hover:bg-slate-800"
-                >
-                  Create Biodata Free <ArrowRight size={16} />
-                </Link>
-                <a
-                  href="#templates"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-slate-800 transition hover:-translate-y-0.5 hover:border-pink-300 hover:text-pink-700"
-                >
-                  View Templates
-                </a>
-              </div>
+                <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl text-zinc-950 dark:text-zinc-50">
+                  Marriage Biodata Maker for <span className="text-pink-600">Instant PDF Sharing</span>
+                </h1>
 
-              <div className="mt-10 grid max-w-xl grid-cols-3 divide-x divide-slate-200 rounded-3xl border border-slate-200 bg-white shadow-sm">
-                {[
-                  ['6', 'Templates'],
-                  ['PDF', 'Export'],
-                  ['0', 'Login'],
-                ].map(([value, label]) => (
-                  <div key={label} className="px-4 py-5 text-center">
-                    <div className="text-2xl font-black text-slate-950">{value}</div>
-                    <div className="mt-1 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
-                      {label}
+                <p className="mt-2 max-w-xl text-xs sm:text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
+                  Create a polished marriage biodata with photo upload, family tree fields, horoscope details,
+                  and community-specific templates. 100% free, no login required.
+                </p>
+
+                <div className="mt-5 flex flex-wrap items-center gap-3">
+                  <Button asChild size="default" className="gap-2 shadow-xs">
+                    <Link href="/biodata/biodata-generator">
+                      Create Biodata Free <ArrowRight size={14} />
+                    </Link>
+                  </Button>
+                  <Button asChild variant="outline" size="default">
+                    <a href="#templates">
+                      View Templates
+                    </a>
+                  </Button>
+                </div>
+
+                <div className="mt-6 grid max-w-md grid-cols-3 divide-x divide-zinc-200 rounded-xl border border-zinc-200 bg-zinc-50/50 shadow-2xs dark:divide-zinc-800 dark:border-zinc-800 dark:bg-zinc-900">
+                  {[
+                    ['6+', 'Templates'],
+                    ['Vector', 'PDF Export'],
+                    ['0', 'Signups Needed'],
+                  ].map(([value, label]) => (
+                    <div key={label} className="p-3 text-center">
+                      <div className="text-lg font-extrabold text-zinc-950 dark:text-zinc-50">{value}</div>
+                      <div className="mt-0.5 text-[10px] font-mono text-zinc-400 uppercase">{label}</div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
 
-            <div className="relative">
-              <div className="absolute -left-6 -top-6 hidden rounded-3xl bg-orange-100 px-4 py-3 text-sm font-bold text-orange-800 shadow-sm lg:block">
-                Hindu / Muslim / Sikh / Modern
-              </div>
-              <div className="rounded-[2rem] border border-slate-200 bg-white p-4 shadow-[0_30px_90px_-45px_rgba(15,23,42,0.55)]">
-                <div className="rounded-[1.5rem] border border-orange-200 bg-[#fffaf0] p-6">
-                  <div className="mb-4 flex items-center justify-between">
-                    <div className="text-4xl text-orange-600">ॐ</div>
-                    <div className="rounded-full bg-white px-3 py-1 text-xs font-bold text-orange-700">
-                      A4 Preview
-                    </div>
+              {/* Preview Mockup Card */}
+              <div className="relative">
+                <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-xl relative overflow-hidden dark:border-zinc-800 dark:bg-zinc-900">
+                  <div className="mb-4 flex items-center justify-between border-b border-zinc-100 pb-3 dark:border-zinc-800">
+                    <span className="text-2xl font-bold text-pink-600">ॐ</span>
+                    <Badge variant="mono" size="sm">
+                      Live A4 Preview
+                    </Badge>
                   </div>
-                  <div className="rounded-2xl border border-orange-200 bg-white p-5">
-                    <div className="flex items-center gap-4 border-b border-orange-100 pb-5">
-                      <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-slate-100">
-                        <UserRound className="text-slate-400" />
+                  
+                  <div className="rounded-xl border border-zinc-200 bg-zinc-50/60 p-5 dark:border-zinc-800 dark:bg-zinc-950/40">
+                    <div className="flex items-center gap-4 border-b border-zinc-200 pb-4 dark:border-zinc-800">
+                      <div className="flex size-14 items-center justify-center rounded-xl bg-zinc-200 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
+                        <UserRound size={26} />
                       </div>
                       <div>
-                        <div className="text-2xl font-black text-slate-950">Aarav Sharma</div>
-                        <div className="mt-1 text-sm font-medium text-slate-500">
-                          Product Manager / Bengaluru
-                        </div>
+                        <div className="text-lg font-bold text-zinc-950 dark:text-zinc-50">Aarav Sharma</div>
+                        <div className="text-xs text-zinc-500">Product Engineer · Bengaluru</div>
                       </div>
                     </div>
-                    <div className="mt-5 grid gap-3 sm:grid-cols-2">
+
+                    <div className="mt-4 grid grid-cols-2 gap-2">
                       {['Date of Birth', 'Height', 'Religion', 'Education'].map((item) => (
-                        <div key={item} className="rounded-xl bg-slate-50 px-3 py-3">
-                          <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-400">
-                            {item}
-                          </div>
-                          <div className="mt-1 h-2.5 rounded-full bg-slate-200" />
+                        <div key={item} className="rounded-md bg-white p-2.5 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800">
+                          <div className="text-[10px] font-mono text-zinc-400 uppercase">{item}</div>
+                          <div className="mt-1.5 h-2 w-3/4 rounded-full bg-zinc-200 dark:bg-zinc-800" />
                         </div>
                       ))}
                     </div>
-                    <div className="mt-5 space-y-2">
-                      <div className="h-2 rounded-full bg-slate-200" />
-                      <div className="h-2 w-5/6 rounded-full bg-slate-200" />
-                      <div className="h-2 w-2/3 rounded-full bg-slate-200" />
-                    </div>
+                  </div>
+
+                  <div className="mt-4 flex items-center justify-between text-xs font-semibold text-emerald-600">
+                    <span className="flex items-center gap-1.5">
+                      <CheckCircle2 size={16} />
+                      <span>Ready for WhatsApp & Print</span>
+                    </span>
+                    <span className="font-mono text-[11px] text-zinc-400">High DPI Vector</span>
                   </div>
                 </div>
               </div>
-              <div className="absolute -bottom-5 right-6 rounded-2xl border border-emerald-200 bg-white px-4 py-3 text-sm font-bold text-emerald-700 shadow-lg">
-                <CheckCircle2 className="mr-2 inline" size={16} />
-                Mobile PDF ready
-              </div>
             </div>
           </div>
         </section>
 
-        <section className="px-6 py-12">
-          <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
-            {features.map((feature) => (
-              <div key={feature.title} className="rounded-[1.5rem] border border-slate-200 bg-white p-6 shadow-sm">
-                <div
-                  className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl"
-                  style={{ backgroundColor: `${feature.color}16`, color: feature.color }}
-                >
-                  <feature.icon size={22} />
+        {/* Feature Cards */}
+        <section className="py-16 sm:py-20 bg-zinc-50/50 border-b border-zinc-200 dark:border-zinc-800 dark:bg-zinc-950/50">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-5 md:grid-cols-3">
+              {features.map((feature) => (
+                <div key={feature.title} className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-zinc-400 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700">
+                  <div
+                    className="flex size-11 items-center justify-center rounded-xl mb-4"
+                    style={{ backgroundColor: `${feature.color}15`, color: feature.color }}
+                  >
+                    <feature.icon size={22} />
+                  </div>
+                  <h3 className="text-base font-bold text-zinc-950 dark:text-zinc-50">{feature.title}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">{feature.body}</p>
                 </div>
-                <h2 className="text-xl font-black text-slate-950">{feature.title}</h2>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{feature.body}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </section>
 
-        <section id="templates" className="border-y border-slate-200 bg-white px-6 py-16 lg:py-20">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-10 flex flex-col justify-between gap-5 lg:flex-row lg:items-end">
+        {/* Template Showcase */}
+        <section id="templates" className="py-16 sm:py-20 border-b border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-10 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between border-b border-zinc-200/80 pb-4 dark:border-zinc-800">
               <div>
-                <div className="mb-3 inline-flex items-center gap-2 text-sm font-bold text-pink-700">
-                  <Palette size={16} />
+                <p className="text-xs font-bold uppercase tracking-wider text-pink-600">
                   Template Library
-                </div>
-                <h2 className="max-w-3xl text-3xl font-black tracking-[-0.02em] text-slate-950 md:text-5xl">
-                  Cultural templates that still feel clean and modern
+                </p>
+                <h2 className="text-2xl font-extrabold tracking-tight text-zinc-950 sm:text-3xl dark:text-zinc-50 mt-1">
+                  Community & Cultural Formats
                 </h2>
               </div>
-              <Link
-                href="/biodata/biodata-generator"
-                className="inline-flex w-fit items-center gap-2 rounded-full border border-slate-300 px-5 py-3 text-sm font-bold text-slate-800 transition hover:border-pink-300 hover:text-pink-700"
-              >
-                Open editor <ArrowRight size={15} />
-              </Link>
+              <Button asChild size="sm" variant="outline">
+                <Link href="/biodata/biodata-generator">
+                  Open Studio Editor <ArrowRight size={14} className="ml-1" />
+                </Link>
+              </Button>
             </div>
 
-            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {templateCards.map((template) => (
-                <div key={template.title} className={`rounded-[1.5rem] border p-5 ${template.className}`}>
-                  <div className={`mb-8 text-4xl font-black ${template.accent}`}>{template.mark}</div>
-                  <h3 className="text-xl font-black">{template.title}</h3>
-                  <p className="mt-2 text-sm font-semibold opacity-75">{template.label}</p>
-                  <div className="mt-6 rounded-2xl bg-white/80 p-4">
-                    <div className="mb-3 h-2 rounded-full bg-current opacity-20" />
-                    <div className="mb-3 h-2 w-4/5 rounded-full bg-current opacity-20" />
-                    <div className="h-16 rounded-xl border border-current/10 bg-white/70" />
+                <div key={template.title} className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-zinc-400 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700 flex flex-col justify-between">
+                  <div>
+                    <div className="text-3xl font-black mb-4" style={{ color: template.color }}>
+                      {template.mark}
+                    </div>
+                    <h3 className="text-base font-bold text-zinc-950 dark:text-zinc-50">{template.title}</h3>
+                    <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{template.label}</p>
+                  </div>
+                  <div className="mt-6 pt-3 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between text-xs font-semibold text-pink-600">
+                    <span>Use Template</span>
+                    <ArrowRight size={13} />
                   </div>
                 </div>
               ))}
@@ -265,31 +256,30 @@ export default function BiodataPage() {
           </div>
         </section>
 
-        <section className="px-6 py-16 lg:py-20">
-          <div className="mx-auto max-w-7xl">
-            <div className="grid gap-10 lg:grid-cols-[420px_1fr] lg:items-start">
+        {/* Steps Workflow */}
+        <section className="py-16 sm:py-20 border-b border-zinc-200 bg-zinc-50/50 dark:border-zinc-800 dark:bg-zinc-950/50">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-10 lg:grid-cols-[380px_1fr] lg:items-start">
               <div>
-                <div className="mb-3 inline-flex items-center gap-2 text-sm font-bold text-blue-700">
-                  <FileText size={16} />
-                  Workflow
-                </div>
-                <h2 className="text-3xl font-black tracking-[-0.02em] md:text-5xl">
-                  From blank page to biodata PDF in minutes
+                <Badge variant="outline" size="sm" className="mb-3">
+                  Quick Workflow
+                </Badge>
+                <h2 className="text-2xl font-extrabold tracking-tight text-zinc-950 sm:text-3xl dark:text-zinc-50">
+                  From Blank Canvas to PDF in Under 3 Minutes
                 </h2>
-                <p className="mt-4 text-lg leading-8 text-slate-600">
-                  The editor is built like a compact SaaS workspace: left-side inputs, right-side
-                  preview, template switching, zoom controls, and one-tap export.
+                <p className="mt-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                  Engineered with an interactive split workspace: live form inputs on the left, real-time A4 PDF preview on the right.
                 </p>
               </div>
 
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-2">
                 {steps.map(([title, body], index) => (
-                  <div key={title} className="rounded-[1.5rem] border border-slate-200 bg-white p-6 shadow-sm">
-                    <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-full bg-slate-950 text-sm font-black text-white">
+                  <div key={title} className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-xs dark:border-zinc-800 dark:bg-zinc-900">
+                    <div className="flex size-8 items-center justify-center rounded-full bg-zinc-950 text-white text-xs font-bold mb-4 dark:bg-zinc-100 dark:text-zinc-950">
                       {index + 1}
                     </div>
-                    <h3 className="text-xl font-black text-slate-950">{title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-slate-600">{body}</p>
+                    <h3 className="text-sm font-bold text-zinc-950 dark:text-zinc-50">{title}</h3>
+                    <p className="mt-1.5 text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">{body}</p>
                   </div>
                 ))}
               </div>
@@ -297,38 +287,57 @@ export default function BiodataPage() {
           </div>
         </section>
 
-        <section id="guides" className="border-y border-slate-200 bg-white px-6 py-16 lg:py-20">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-10 max-w-3xl">
-              <div className="mb-3 inline-flex items-center gap-2 text-sm font-bold text-emerald-700">
-                <Star size={16} />
-                SEO Guides
+        {/* Guides Section */}
+        <section id="guides" className="py-16 sm:py-20 bg-white dark:bg-zinc-950">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-10 flex items-center justify-between border-b border-zinc-200/80 pb-4 dark:border-zinc-800">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wider text-pink-600">
+                  Biodata Guides
+                </p>
+                <h2 className="text-2xl font-extrabold tracking-tight text-zinc-950 sm:text-3xl dark:text-zinc-50 mt-1">
+                  Format Guides & Templates
+                </h2>
               </div>
-              <h2 className="text-3xl font-black tracking-[-0.02em] md:text-5xl">
-                Helpful biodata guides for specific search needs
-              </h2>
-              <p className="mt-4 text-lg leading-8 text-slate-600">
-                Read practical articles for Hindu, Muslim, modern, and PDF biodata formats, then
-                jump straight into the generator.
-              </p>
+              <Button asChild variant="outline" size="sm">
+                <Link href="/biodata/blog">
+                  View All Guides →
+                </Link>
+              </Button>
             </div>
 
-            <div className="grid gap-5 md:grid-cols-2">
-              {biodataPosts.map((post) => (
-                <Link
-                  key={post.slug}
-                  href={`/biodata/blog/${post.slug}`}
-                  className="group rounded-[1.5rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-pink-200 hover:shadow-xl"
-                >
-                  <div className="mb-3 text-xs font-bold uppercase tracking-[0.14em] text-pink-600">
-                    {post.readTime}
-                  </div>
-                  <h3 className="text-2xl font-black tracking-[-0.01em] text-slate-950 group-hover:text-pink-700">
-                    {post.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">{post.description}</p>
-                  <div className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-pink-700">
-                    Read guide <ArrowRight size={15} />
+            <div className="grid gap-5 sm:grid-cols-2">
+              {[
+                {
+                  title: 'How to Create a Marriage Biodata PDF: Step-by-Step Guide',
+                  description: 'Complete tutorial on photo placement, family tree formatting, horoscope fields, and mobile vector PDF export.',
+                  href: '/how-to/create-marriage-biodata-pdf',
+                  readTime: '6 min read',
+                },
+                {
+                  title: 'Top 5 Marriage Biodata Makers & Template Comparison',
+                  description: 'Detailed comparative review of Hindu, Muslim, Sikh, and Modern minimalist matrimony profile generators.',
+                  href: '/top5/best-marriage-biodata-makers',
+                  readTime: '8 min read',
+                },
+              ].map((post) => (
+                <Link key={post.href} href={post.href} className="group block">
+                  <div className="h-full rounded-2xl border border-zinc-200 bg-white p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-zinc-400 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700 flex flex-col justify-between">
+                    <div>
+                      <Badge variant="mono" size="sm" className="mb-3">
+                        {post.readTime}
+                      </Badge>
+                      <h3 className="text-base font-bold text-zinc-950 transition-colors group-hover:text-pink-600 mb-2 dark:text-zinc-50">
+                        {post.title}
+                      </h3>
+                      <p className="text-xs text-zinc-500 leading-relaxed dark:text-zinc-400">
+                        {post.description}
+                      </p>
+                    </div>
+                    <div className="mt-5 pt-3 border-t border-zinc-100 dark:border-zinc-800 flex items-center gap-1 text-xs font-semibold text-pink-600">
+                      <span>Read guide</span>
+                      <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
+                    </div>
                   </div>
                 </Link>
               ))}
@@ -336,24 +345,23 @@ export default function BiodataPage() {
           </div>
         </section>
 
-        <section className="px-6 py-16 lg:py-20">
-          <div className="mx-auto max-w-7xl rounded-[2rem] bg-slate-950 p-8 text-white md:p-12">
-            <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
-              <div>
-                <h2 className="text-3xl font-black tracking-[-0.02em] md:text-5xl">
-                  Ready to create a clean marriage biodata?
-                </h2>
-                <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-300">
-                  Start with a template, add your details, preview the A4 layout, and download a
-                  PDF that is ready to share.
-                </p>
+        {/* CTA Banner */}
+        <section className="py-16 sm:py-20 bg-zinc-50/50 border-t border-zinc-200 dark:border-zinc-800 dark:bg-zinc-950/50">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 text-center">
+            <div className="rounded-3xl border border-zinc-200 bg-white p-8 sm:p-14 shadow-xs dark:border-zinc-800 dark:bg-zinc-900">
+              <h2 className="text-2xl font-extrabold tracking-tight text-zinc-950 sm:text-3xl dark:text-zinc-50">
+                Ready to Create Your Marriage Biodata?
+              </h2>
+              <p className="mt-3 text-xs text-zinc-500 sm:text-sm dark:text-zinc-400">
+                Choose from 6+ templates, customize details, and download a crisp vector PDF instantly.
+              </p>
+              <div className="mt-8 flex justify-center">
+                <Button asChild size="lg" className="shadow-xs">
+                  <Link href="/biodata/biodata-generator">
+                    Launch Biodata Studio Free <ArrowRight size={16} className="ml-1.5" />
+                  </Link>
+                </Button>
               </div>
-              <Link
-                href="/biodata/biodata-generator"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-black text-slate-950 transition hover:bg-pink-100"
-              >
-                Launch Generator <ArrowRight size={16} />
-              </Link>
             </div>
           </div>
         </section>

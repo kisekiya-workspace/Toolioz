@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/Card';
-import { Input } from '@/components/ui/Input';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { Ruler, Weight, Thermometer, Database, ArrowRightLeft, Copy, Check } from 'lucide-react';
 
 
@@ -95,16 +95,25 @@ export default function UnitConverterClient() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-[var(--bg-primary)]">
-      <header className="bg-[radial-gradient(circle_at_100%_0%,rgba(37,99,235,0.05)_0%,transparent_50%)] py-16 text-center md:py-32">
-        <div className="container">
-          <div className="mb-8 inline-block rounded-full bg-[var(--primary-light)] px-4 py-2 text-[0.8125rem] font-bold uppercase tracking-widest text-[var(--primary)]">Precision Utility</div>
-          <h1 className="mb-6 text-[2.5rem] font-black tracking-tight md:text-[3.5rem]">Unit <span className="text-[var(--primary)]">Converter</span></h1>
-          <p className="mx-auto max-w-[650px] text-xl text-[var(--text-secondary)]">Scientific grade conversion for length, mass, temperature, and digital data.</p>
-        </div>
-      </header>
+    <div className="flex min-h-screen flex-col justify-between bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
+      <div>
+        <header className="bg-white pt-8 pb-6 text-center dark:bg-zinc-950">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-3 inline-flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50/80 px-3 py-0.5 text-xs font-semibold text-blue-700 dark:border-blue-900/60 dark:bg-blue-950/40 dark:text-blue-300">
+                Precision Conversion
+              </span>
+            </div>
+            <h1 className="text-3xl font-extrabold tracking-tight text-zinc-950 sm:text-4xl md:text-5xl dark:text-zinc-50">
+              Unit Converter
+            </h1>
+            <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
+              Scientific grade conversion for length, mass, temperature, and digital data.
+            </p>
+          </div>
+        </header>
 
-      <main className="container section">
+        <main className="container pb-12 pt-2 sm:pt-4">
         <div className="mb-12 flex flex-wrap justify-center gap-4">
           <button className={`flex cursor-pointer items-center gap-2 rounded-full border px-6 py-3 text-[0.9375rem] font-bold transition-all ${category === 'length' ? 'border-[var(--primary)] bg-[var(--primary)] text-white hover:text-white dark:bg-[var(--primary)]' : 'border-[var(--border)] bg-white text-[var(--text-secondary)] hover:border-[var(--primary)] hover:text-[var(--primary)] dark:bg-[var(--bg-secondary)]'}`} onClick={() => setCategory('length')}>
             <Ruler size={18} /> Length
@@ -157,6 +166,7 @@ export default function UnitConverterClient() {
           </Card>
         </div>
       </main>
+      </div>
 
       <Footer />
     </div>

@@ -1,30 +1,47 @@
+"use client";
+
+import React from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Card } from "@/components/ui/card";
+
 interface ContentSectionProps {
-    title: string;
-    children: React.ReactNode;
+  title: string;
+  children: React.ReactNode;
 }
 
 export function ToolContentSection({ title, children }: ContentSectionProps) {
-    return (
-        <section className="space-y-4 py-8 border-t first:border-t-0">
-            <h2 className="text-2xl font-bold tracking-tight">{title}</h2>
-            <div className="prose prose-zinc dark:prose-invert max-w-none text-muted-foreground leading-relaxed">
-                {children}
-            </div>
-        </section>
-    );
+  return (
+    <section className="space-y-4 py-8 border-t border-border/80 first:border-t-0">
+      <h2 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">{title}</h2>
+      <div className="prose prose-zinc dark:prose-invert max-w-none text-muted-foreground leading-relaxed text-sm">
+        {children}
+      </div>
+    </section>
+  );
 }
 
 export function ToolFAQ({ questions }: { questions: { q: string; a: string }[] }) {
-    return (
-        <ToolContentSection title="Frequently Asked Questions">
-            <div className="grid gap-6">
-                {questions.map((item, i) => (
-                    <div key={i} className="space-y-2">
-                        <h3 className="font-semibold text-foreground text-lg">{item.q}</h3>
-                        <p>{item.a}</p>
-                    </div>
-                ))}
-            </div>
-        </ToolContentSection>
-    );
+  return (
+    <ToolContentSection title="Frequently Asked Questions">
+      <Card className="border-border bg-card p-6 shadow-xs mt-4">
+        <Accordion type="single" collapsible className="w-full">
+          {questions.map((item, i) => (
+            <AccordionItem key={i} value={`faq-${i}`}>
+              <AccordionTrigger className="text-sm font-semibold text-foreground">
+                {item.q}
+              </AccordionTrigger>
+              <AccordionContent className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                {item.a}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </Card>
+    </ToolContentSection>
+  );
 }

@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { ArrowRight, BookOpen, Sparkles, Landmark, Code, FileText, Shield } from 'lucide-react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import { Footer } from '@/components/layout/Footer';
+import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
 import { top5Articles } from '@/lib/top5-content';
 import { SITE_URL } from '@/lib/seo';
 
@@ -36,13 +38,6 @@ const categoryIcons: Record<string, any> = {
   security: Shield,
 };
 
-const categoryColors: Record<string, string> = {
-  finance: 'text-blue-600 bg-blue-50 border-blue-100',
-  devtools: 'text-amber-600 bg-amber-50 border-amber-100',
-  pdftools: 'text-rose-600 bg-rose-50 border-rose-100',
-  security: 'text-emerald-600 bg-emerald-50 border-emerald-100',
-};
-
 export default function Top5IndexPage() {
   const itemListJsonLd = {
     '@context': 'https://schema.org',
@@ -60,104 +55,94 @@ export default function Top5IndexPage() {
   };
 
   return (
-    <main className="bg-[linear-gradient(180deg,#fffdf9_0%,#f8fafc_100%)] text-[var(--text-primary)] min-h-screen flex flex-col">
+    <main className="min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50 flex flex-col justify-between">
       <JSONLD data={itemListJsonLd} />
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden border-b border-slate-200 bg-white">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(37,99,235,0.08)_0%,transparent_35%),radial-gradient(circle_at_90%_20%,rgba(16,185,129,0.08)_0%,transparent_32%)]" />
-        <div className="relative mx-auto max-w-6xl px-6 py-16 lg:py-24 text-center">
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 text-xs font-extrabold uppercase tracking-[0.16em] text-blue-700 shadow-sm">
-            <Sparkles size={14} className="animate-pulse" />
-            Curated Top Lists
-          </div>
-          <h1 className="max-w-4xl mx-auto text-4xl font-black leading-tight tracking-[-0.03em] sm:text-5xl lg:text-6xl">
-            Streamline your digital workflow with the best browser-native tools
-          </h1>
-          <p className="mt-6 max-w-2xl mx-auto text-lg leading-8 text-slate-600">
-            Our expert comparison reviews evaluate free online developer utilities, finance planners,
-            PDF systems, and cryptography helpers so you can choose the optimal tools for your goals.
-          </p>
+      <div>
+        {/* Hero Section */}
+        <section className="relative border-b border-zinc-200 bg-white vercel-grid py-16 sm:py-20 md:py-28 text-center dark:border-zinc-800 dark:bg-zinc-950">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+            <Badge variant="outline" dot pulse size="sm" className="mb-4 font-mono text-[11px]">
+              <Sparkles size={12} className="mr-1 text-amber-500" />
+              Curated Top 5 Comparisons
+            </Badge>
 
-          <div className="mt-10 flex justify-center gap-3">
-            <Link
-              href="/"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-950 px-6 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-slate-800"
-            >
-              Browse All Tools <ArrowRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </section>
+            <h1 className="mb-5 text-4xl font-extrabold tracking-tight text-zinc-950 sm:text-6xl dark:text-zinc-50">
+              Streamline Your Workflow with the Best Browser Tools
+            </h1>
 
-      {/* Grid of Articles */}
-      <section className="flex-1 px-6 py-16 lg:py-20">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <p className="mx-auto max-w-2xl text-base leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-400">
+              Expert comparisons evaluating free developer utilities, finance engines, PDF systems, and cryptography helpers.
+            </p>
+          </div>
+        </section>
+
+        {/* Grid of Articles */}
+        <main className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <div className="mb-10 flex items-center justify-between border-b border-zinc-200/80 pb-4 dark:border-zinc-800">
             <div>
-              <div className="mb-2 inline-flex items-center gap-2 text-sm font-bold text-blue-700">
-                <BookOpen size={18} />
-                Expert Comparison Reviews
-              </div>
-              <h2 className="text-3xl font-black tracking-[-0.02em] md:text-4xl">
-                Read our in-depth lists
+              <h2 className="text-2xl font-extrabold tracking-tight text-zinc-950 sm:text-3xl dark:text-zinc-50">
+                In-Depth Comparison Lists
               </h2>
+              <p className="text-xs text-zinc-500 sm:text-sm mt-1 dark:text-zinc-400">
+                Benchmark reviews comparing performance, privacy, and feature sets.
+              </p>
             </div>
-            <div className="rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-bold text-slate-600 shadow-sm">
-              100% Client-Side Processing • Ad-Free
-            </div>
+            <Badge variant="mono" size="sm">
+              {top5Articles.length} Guides
+            </Badge>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {top5Articles.map((article) => {
               const Icon = categoryIcons[article.category] || BookOpen;
-              const colorClasses = categoryColors[article.category] || 'text-slate-600 bg-slate-50 border-slate-100';
 
               return (
                 <Link
                   key={article.slug}
                   href={`/top5/${article.slug}`}
-                  className="group flex h-full flex-col justify-between rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-blue-300 hover:shadow-2xl"
+                  className="group block h-full"
                 >
-                  <div>
-                    <div className="mb-4 flex items-center justify-between">
-                      <span className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] ${colorClasses}`}>
-                        <Icon size={12} />
-                        {article.category}
-                      </span>
-                      <span className="text-xs font-semibold text-slate-400">
-                        {article.readTime}
-                      </span>
-                    </div>
-                    <h3 className="text-2xl font-black tracking-[-0.02em] text-slate-950 transition-colors group-hover:text-blue-700 leading-snug">
-                      {article.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-6 text-slate-600">
-                      {article.description}
-                    </p>
-                  </div>
-
-                  <div className="mt-8 border-t border-slate-100 pt-6">
-                    <div className="mb-4 flex flex-wrap gap-1.5">
-                      {article.keywords.slice(0, 2).map((kw) => (
-                        <span
-                          key={kw}
-                          className="rounded-md bg-slate-50 border border-slate-100 px-2 py-0.5 text-[0.6875rem] font-semibold text-slate-500"
-                        >
-                          {kw}
+                  <Card hoverable className="h-full p-6 flex flex-col justify-between">
+                    <div>
+                      <div className="mb-3 flex items-center justify-between">
+                        <Badge variant="secondary" size="sm" className="gap-1 font-mono text-[10px]">
+                          <Icon size={11} />
+                          <span>{article.category}</span>
+                        </Badge>
+                        <span className="text-[11px] font-mono text-zinc-400">
+                          {article.readTime}
                         </span>
-                      ))}
+                      </div>
+
+                      <h3 className="text-base font-bold text-zinc-950 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-2 leading-snug line-clamp-2 dark:text-zinc-50">
+                        {article.title}
+                      </h3>
+
+                      <p className="text-xs text-zinc-500 line-clamp-3 leading-relaxed dark:text-zinc-400">
+                        {article.description}
+                      </p>
                     </div>
-                    <div className="inline-flex items-center gap-2 text-sm font-bold text-blue-700">
-                      View Comparison <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+
+                    <div className="mt-6 pt-3 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+                      <div className="flex flex-wrap gap-1">
+                        {article.keywords.slice(0, 2).map((kw) => (
+                          <span key={kw} className="font-mono text-[10px] text-zinc-400">
+                            #{kw}
+                          </span>
+                        ))}
+                      </div>
+                      <span className="text-xs font-semibold text-blue-600 dark:text-blue-400 group-hover:underline inline-flex items-center gap-0.5">
+                        Compare <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
+                      </span>
                     </div>
-                  </div>
+                  </Card>
                 </Link>
               );
             })}
           </div>
-        </div>
-      </section>
+        </main>
+      </div>
 
       <Footer />
     </main>

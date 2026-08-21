@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Code, Copy, Trash2, AlignLeft, Check, AlertCircle } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
@@ -89,7 +89,7 @@ export default function JsonFormatterClient() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)]">
+    <div className="min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50 flex flex-col justify-between">
       <BreadcrumbJsonLd
         items={[
           { name: 'Home', url: '/' },
@@ -97,14 +97,24 @@ export default function JsonFormatterClient() {
           { name: 'JSON Formatter', url: '/devtools/json-formatter' },
         ]}
       />
-      <header className="bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.05)_0%,transparent_50%)] py-16 text-center md:py-24">
-        <div className="container">
-          <h1 className="mb-4 text-4xl font-black md:text-6xl">Advanced JSON <span className="text-[#3b82f6]">Transformer</span></h1>
-          <p className="text-lg text-[var(--text-secondary)]">Format, validate, and convert JSON payloads to YAML and TS Interfaces in real-time.</p>
-        </div>
-      </header>
+      <div>
+        <header className="bg-white pt-8 pb-6 text-center dark:bg-zinc-950">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="mb-3 inline-flex items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50/80 px-3 py-0.5 text-xs font-semibold text-blue-700 dark:border-blue-900/60 dark:bg-blue-950/40 dark:text-blue-300">
+                  Data Formatting
+                </span>
+              </div>
+              <h1 className="text-3xl font-extrabold tracking-tight text-zinc-950 sm:text-4xl md:text-5xl dark:text-zinc-50">
+                Advanced JSON Transformer
+              </h1>
+              <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
+                Format, validate, and convert JSON payloads to YAML and TS Interfaces in real-time.
+              </p>
+            </div>
+          </header>
 
-      <main className="container section">
+          <main className="container pb-12 pt-2 sm:pt-4">
         <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-8 lg:grid-cols-2">
           <div>
             <Card className="flex h-full flex-col !p-6">
@@ -208,6 +218,8 @@ export default function JsonFormatterClient() {
         categoryName="Developer Utilities"
       />
       <FAQSchema faqs={JSON_FAQS} />
+      </div>
+      <Footer />
     </div>
   );
 }

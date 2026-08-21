@@ -3,177 +3,213 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ShieldCheck, Zap, Instagram, Twitter, Mail } from 'lucide-react';
-
-const socialLinks = [
-  { href: '#', icon: Instagram, label: 'Instagram' },
-  { href: '#', icon: Twitter, label: 'Twitter' },
-  { href: '#', icon: Mail, label: 'Email' },
-];
+import { ArrowUpRight, ShieldCheck, Mail, Sparkles, Terminal, FileText, Calculator } from 'lucide-react';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto overflow-x-hidden border-t border-[var(--border)] bg-[var(--bg-secondary)] py-12 pb-10 sm:py-16 sm:pb-12">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="mb-12 grid gap-10 sm:mb-16 sm:gap-12 md:grid-cols-2 lg:grid-cols-[2fr_1.2fr_1.2fr_1fr_1.5fr]">
-          <div className="flex flex-col gap-6">
+    <footer className="mt-auto border-t border-zinc-200 bg-zinc-50/50 py-12 text-zinc-950 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-50 sm:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        {/* Brand & Mission Header */}
+        <div className="mb-10 flex flex-col gap-4 border-b border-zinc-200/80 pb-8 dark:border-zinc-800 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
             <Link
               href="/"
-              className="inline-flex items-center gap-3 text-[1.75rem] font-black tracking-[-0.02em]"
+              className="inline-flex items-center gap-2.5 text-lg font-extrabold tracking-tight text-zinc-950 dark:text-zinc-50"
             >
               <Image
                 src="/tooliozLogo.svg"
                 alt="Toolioz logo"
-                width={36}
-                height={36}
-                className="rounded-lg"
+                width={30}
+                height={30}
+                className="rounded-lg shadow-2xs"
               />
               <span>Toolioz</span>
             </Link>
-            <p className="max-w-[320px] text-base leading-7 text-[var(--text-secondary)]">
-              Empowering your digital life with precision-engineered tools. Always free, always
-              private, always browser-local.
+            <span className="hidden sm:inline-block text-zinc-300 dark:text-zinc-700">•</span>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 max-w-lg leading-relaxed">
+              Fast, privacy-first client-side calculation engines and developer utilities running entirely in your browser RAM.
             </p>
-            <div className="flex gap-4">
-              {socialLinks.map(({ href, icon: Icon, label }) => (
-                <Link
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] bg-white text-[var(--text-secondary)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--primary)] hover:text-[var(--primary)]"
-                >
-                  <Icon size={20} />
-                </Link>
-              ))}
-            </div>
           </div>
 
-          <div className="flex flex-col gap-5">
-            <h4 className="mb-2 text-sm font-extrabold uppercase tracking-[0.1em] text-[var(--text-primary)]">
-              Tools Hub
+          <div className="flex items-center gap-2">
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] font-medium text-emerald-700 dark:border-emerald-900/60 dark:bg-emerald-950/40 dark:text-emerald-400">
+              <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>100% Client-Side • Zero Data Uploaded</span>
+            </div>
+          </div>
+        </div>
+
+        {/* 5-Column Navigation Grid */}
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-5 mb-12">
+          
+          {/* Column 1: Financial Engines */}
+          <div className="flex flex-col gap-2.5">
+            <h4 className="flex items-center gap-1.5 text-[11px] font-mono font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100">
+              <Calculator size={13} className="text-blue-600 dark:text-blue-400" />
+              Finance Suite
             </h4>
-            <Link
-              href="/how-to"
-              className="text-[0.9375rem] font-semibold text-[var(--primary)] transition-colors hover:underline"
-            >
-              How-To Guides
+            <Link href="/finance" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Finance Hub
             </Link>
-            <Link
-              href="/finance"
-              className="text-[0.9375rem] text-[var(--text-secondary)] transition-colors hover:text-[var(--primary)]"
-            >
-              Finance Calculators
-            </Link>
-            <Link
-              href="/devtools"
-              className="text-[0.9375rem] text-[var(--text-secondary)] transition-colors hover:text-[var(--primary)]"
-            >
-              Developer Tools
-            </Link>
-            <Link
-              href="/pdftools"
-              className="text-[0.9375rem] text-[var(--text-secondary)] transition-colors hover:text-[var(--primary)]"
-            >
-              PDF Utilities
-            </Link>
-            <Link
-              href="/finance/sip-calculator"
-              className="text-[0.9375rem] text-[var(--text-secondary)] transition-colors hover:text-[var(--primary)]"
-            >
+            <Link href="/finance/sip-calculator" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
               SIP Calculator
             </Link>
-          </div>
-
-          <div className="flex flex-col gap-5">
-            <h4 className="mb-2 text-sm font-extrabold uppercase tracking-[0.1em] text-[var(--text-primary)]">
-              Top Lists
-            </h4>
-            <Link
-              href="/top5"
-              className="text-[0.9375rem] text-[var(--text-secondary)] transition-colors hover:text-[var(--primary)]"
-            >
-              All Comparisons
+            <Link href="/finance/income-tax" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Income Tax Calculator
             </Link>
-            <Link
-              href="/top5/best-finance-calculators-india"
-              className="text-[0.9375rem] text-[var(--text-secondary)] transition-colors hover:text-[var(--primary)]"
-            >
-              Finance Calculators
+            <Link href="/finance/compound-interest" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Compound Interest
             </Link>
-            <Link
-              href="/top5/essential-web-developer-tools"
-              className="text-[0.9375rem] text-[var(--text-secondary)] transition-colors hover:text-[var(--primary)]"
-            >
-              Developer Utilities
+            <Link href="/finance/car-loan" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Car Loan EMI
             </Link>
-            <Link
-              href="/top5/best-pdf-document-creators"
-              className="text-[0.9375rem] text-[var(--text-secondary)] transition-colors hover:text-[var(--primary)]"
-            >
-              PDF & Document Tools
+            <Link href="/finance/fd-calculator" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Fixed Deposit (FD)
+            </Link>
+            <Link href="/finance/retirement-corpus" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Retirement Corpus
+            </Link>
+            <Link href="/finance/gst-calculator" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              GST Calculator
             </Link>
           </div>
 
-          <div className="flex flex-col gap-5">
-            <h4 className="mb-2 text-sm font-extrabold uppercase tracking-[0.1em] text-[var(--text-primary)]">
-              Company
+          {/* Column 2: Developer Suite */}
+          <div className="flex flex-col gap-2.5">
+            <h4 className="flex items-center gap-1.5 text-[11px] font-mono font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100">
+              <Terminal size={13} className="text-amber-600 dark:text-amber-400" />
+              Dev Tools
             </h4>
-            <Link
-              href="/about"
-              className="text-[0.9375rem] text-[var(--text-secondary)] transition-colors hover:text-[var(--primary)]"
-            >
-              About Us
+            <Link href="/devtools" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Developer Hub
             </Link>
-            <Link
-              href="/privacy-policy"
-              className="text-[0.9375rem] text-[var(--text-secondary)] transition-colors hover:text-[var(--primary)]"
-            >
+            <Link href="/devtools/json-formatter" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              JSON Formatter
+            </Link>
+            <Link href="/devtools/jwt-decoder" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              JWT Token Decoder
+            </Link>
+            <Link href="/devtools/regex-tester" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Regex Tester & Debugger
+            </Link>
+            <Link href="/devtools/base64-converter" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Base64 Encoder/Decoder
+            </Link>
+            <Link href="/devtools/timestamp-converter" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Timestamp Converter
+            </Link>
+            <Link href="/devtools/uuid-generator" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              UUID Generator
+            </Link>
+            <Link href="/devtools/x-hidden-image" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              X Tap-to-Reveal PNG
+            </Link>
+          </div>
+
+          {/* Column 3: PDF & Document Tools */}
+          <div className="flex flex-col gap-2.5">
+            <h4 className="flex items-center gap-1.5 text-[11px] font-mono font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100">
+              <FileText size={13} className="text-red-600 dark:text-red-400" />
+              PDF & Studio
+            </h4>
+            <Link href="/pdftools" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              PDF Utilities Hub
+            </Link>
+            <Link href="/pdftools/image-compressor" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Compress PDF & Images
+            </Link>
+            <Link href="/pdftools/merge-pdf" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Merge Multiple PDFs
+            </Link>
+            <Link href="/pdftools/split-pdf" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Split PDF Pages
+            </Link>
+            <Link href="/pdftools/image-to-pdf" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Images to PDF
+            </Link>
+            <Link href="/pdftools/pdf-to-image" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              PDF to Image Converter
+            </Link>
+            <Link href="/biodata" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Marriage Biodata Studio
+            </Link>
+            <Link href="/resume-builder" className="inline-flex items-center gap-1 text-xs text-blue-600 dark:text-blue-400 font-semibold hover:underline">
+              ATS Resume Builder <ArrowUpRight size={11} />
+            </Link>
+          </div>
+
+          {/* Column 4: Guides & Comparisons */}
+          <div className="flex flex-col gap-2.5">
+            <h4 className="flex items-center gap-1.5 text-[11px] font-mono font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100">
+              <Sparkles size={13} className="text-purple-600 dark:text-purple-400" />
+              Editorial Guides
+            </h4>
+            <Link href="/blog" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Research Masterclasses
+            </Link>
+            <Link href="/how-to" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Step-by-Step How-To
+            </Link>
+            <Link href="/top5" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Top 5 Benchmark Lists
+            </Link>
+            <Link href="/tools" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Full Tools Directory (60+)
+            </Link>
+            <Link href="/how-to/compress-pdf-under-2mb" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors truncate">
+              Compress PDF Under 2MB
+            </Link>
+            <Link href="/how-to/calculate-sip-returns" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors truncate">
+              Calculate SIP Returns
+            </Link>
+            <Link href="/top5/best-finance-calculators-india" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors truncate">
+              Top Finance Calculators
+            </Link>
+          </div>
+
+          {/* Column 5: Company & Support */}
+          <div className="flex flex-col gap-2.5">
+            <h4 className="text-[11px] font-mono font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100">
+              Company & Legal
+            </h4>
+            <Link href="/about" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              About Toolioz
+            </Link>
+            <Link href="/privacy-policy" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
               Privacy Policy
             </Link>
-            <Link
-              href="/terms"
-              className="text-[0.9375rem] text-[var(--text-secondary)] transition-colors hover:text-[var(--primary)]"
-            >
+            <Link href="/terms" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
               Terms of Service
             </Link>
-            <Link
-              href="/contact"
-              className="text-[0.9375rem] text-[var(--text-secondary)] transition-colors hover:text-[var(--primary)]"
-            >
-              Contact Support
+            <Link href="/contact" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Contact & Feedback
             </Link>
-          </div>
-
-          <div className="flex flex-col gap-6">
-            <div className="rounded-[var(--radius-lg)] border border-[var(--border)] bg-white p-6">
-              <ShieldCheck className="mb-4 text-emerald-500" />
-              <h5 className="mb-2 text-base font-bold text-[var(--text-primary)]">Privacy First</h5>
-              <p className="text-[0.8125rem] leading-6 text-[var(--text-secondary)]">
-                We use zero-server processing. Your data never leaves your machine.
-              </p>
-            </div>
-            <div className="rounded-[var(--radius-lg)] border border-[var(--border)] bg-white p-6">
-              <Zap className="mb-4 text-emerald-500" />
-              <h5 className="mb-2 text-base font-bold text-[var(--text-primary)]">Fast & Free</h5>
-              <p className="text-[0.8125rem] leading-6 text-[var(--text-secondary)]">
-                Professional grade tools with no ads and no credit cards required.
-              </p>
-            </div>
+            <a
+              href="mailto:support@toolioz.com"
+              className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors pt-2"
+            >
+              <Mail size={12} />
+              <span>support@toolioz.com</span>
+            </a>
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-4 border-t border-[var(--border)] pt-8 text-center sm:flex-row sm:gap-6 sm:pt-12 sm:text-left">
-          <p className="text-sm text-[var(--text-tertiary)]">
-            © {currentYear} Toolioz. All rights reserved.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-3 text-[0.8125rem] font-semibold text-[var(--text-tertiary)] sm:gap-5">
-            <span>Version 2.0.4</span>
-            <div className="hidden h-1 w-1 rounded-full bg-[var(--border)] sm:block" />
-            <span className="hidden sm:inline">Serverless Architecture</span>
+        {/* Modern Bottom Bar */}
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-zinc-200/80 pt-6 text-xs text-zinc-400 dark:border-zinc-800 sm:flex-row">
+          <p>© {currentYear} Toolioz. Built for speed, privacy, and precision.</p>
+          <div className="flex items-center gap-4 text-zinc-400">
+            <span className="flex items-center gap-1">
+              <ShieldCheck size={13} className="text-emerald-500" />
+              <span>Client-Side Isolation</span>
+            </span>
+            <span>•</span>
+            <span>Zero-Logging Policy</span>
           </div>
         </div>
+
       </div>
     </footer>
   );

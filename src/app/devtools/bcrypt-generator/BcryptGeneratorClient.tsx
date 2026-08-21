@@ -1,24 +1,22 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import bcrypt from 'bcryptjs';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { Asterisk, CheckCircle2, XCircle, Copy, Check, Loader2 } from 'lucide-react';
-import bcrypt from 'bcryptjs';
 
-import { FAQSchema } from '@/components/ui/FAQSchema';
-import { RelatedTools } from '@/components/ui/RelatedTools';
 export default function BcryptGeneratorClient() {
-    // Generator State
     const [plainText, setPlainText] = useState('');
     const [rounds, setRounds] = useState(10);
     const [hashResult, setHashResult] = useState('');
     const [isHashing, setIsHashing] = useState(false);
     const [copied, setCopied] = useState(false);
 
-    // Checker State
+    // Verification state
     const [checkHash, setCheckHash] = useState('');
     const [checkString, setCheckString] = useState('');
     const [isMatch, setIsMatch] = useState<boolean | null>(null);
@@ -26,18 +24,18 @@ export default function BcryptGeneratorClient() {
     const generateHash = () => {
         if (!plainText) return;
         setIsHashing(true);
-
-        // Use timeout to allow UI to show loader before blocking main thread
+        // Defer to next tick so UI loader renders
         setTimeout(() => {
             try {
                 const salt = bcrypt.genSaltSync(rounds);
                 const hash = bcrypt.hashSync(plainText, salt);
                 setHashResult(hash);
-            } catch (e) {
-                setHashResult('Error generating hash');
+            } catch (err) {
+                console.error(err);
+            } finally {
+                setIsHashing(false);
             }
-            setIsHashing(false);
-        }, 10);
+        }, 50);
     };
 
     const copyToClipboard = () => {
@@ -47,12 +45,13 @@ export default function BcryptGeneratorClient() {
         setTimeout(() => setCopied(false), 2000);
     };
 
+    // Live verification check
     useEffect(() => {
         if (checkHash && checkString) {
             try {
                 const match = bcrypt.compareSync(checkString, checkHash);
                 setIsMatch(match);
-            } catch (e) {
+            } catch {
                 setIsMatch(false);
             }
         } else {
@@ -61,118 +60,144 @@ export default function BcryptGeneratorClient() {
     }, [checkHash, checkString]);
 
     return (
-        <>
-            <div className="min-h-screen bg-[var(--bg-primary)]">
-                <header className="bg-[radial-gradient(circle_at_50%_0%,rgba(245,158,11,0.05)_0%,transparent_50%)] py-24 pb-12 text-center">
-                    <div className="container">
-                        <h1 className="mb-4 text-[clamp(2.5rem,5vw,4rem)] font-black">Bcrypt <span className="text-[#f59e0b]">Generator</span></h1>
-                        <p className="text-[1.25rem] text-[var(--text-secondary)]">Generate hashes and verify passwords securely directly in your browser.</p>
+        <div className="flex min-h-screen flex-col justify-between bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
+            <div>
+                <header className="bg-white pt-8 pb-6 text-center dark:bg-zinc-950">
+                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div className="mb-3 inline-flex items-center gap-2">
+                            <Badge variant="outline" dot pulse size="sm" className="font-mono text-xs">
+                                Cryptographic Security
+                            </Badge>
+                        </div>
+                        <h1 className="text-3xl font-extrabold tracking-tight text-zinc-950 sm:text-4xl md:text-5xl dark:text-zinc-50">
+                            Bcrypt Generator & Verifier
+                        </h1>
+                        <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
+                            Generate secure hashes and verify passwords safely directly in your browser.
+                        </p>
                     </div>
                 </header>
 
-                <section className="container section">
-                    <div className="mx-auto grid max-w-[1000px] grid-cols-1 gap-8 lg:grid-cols-2">
-
+                <section className="mx-auto max-w-5xl px-4 pb-16 pt-2 sm:px-6">
+                    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                         {/* Generate Card */}
-                        <Card className="!flex flex-col !p-10">
-                            <div className="mb-8 flex items-center gap-4">
-                                <div className="flex h-[48px] w-[48px] items-center justify-center rounded-[12px]" style={{ color: '#f59e0b', background: 'rgba(245, 158, 11, 0.1)' }}>
-                                    <Asterisk size={24} />
+                        <Card className="flex flex-col p-6 sm:p-8 space-y-5 shadow-xs">
+                            <div className="flex items-center gap-3 border-b border-zinc-100 pb-3 dark:border-zinc-800">
+                                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400">
+                                    <Asterisk size={18} />
                                 </div>
-                                <h3 className="text-[1.25rem] font-extrabold">Generate Hash</h3>
+                                <h3 className="text-sm font-bold text-zinc-950 dark:text-zinc-50 uppercase tracking-wider">
+                                    Generate Hash
+                                </h3>
                             </div>
 
-                            <div className="mb-6 flex flex-col gap-2">
-                                <label className="text-[0.875rem] font-bold uppercase text-[var(--text-secondary)]">String to Hash</label>
+                            <div className="space-y-1.5">
+                                <label className="text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+                                    String to Hash
+                                </label>
                                 <input
                                     type="text"
-                                    className="rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-secondary)] p-4 text-[1rem] text-[var(--text-primary)] outline-none transition-all duration-200 focus:border-[#f59e0b] focus:shadow-[0_0_0_2px_rgba(245,158,11,0.1)]"
+                                    className="w-full rounded-xl border border-zinc-200 bg-zinc-50 p-3 text-xs sm:text-sm font-mono text-zinc-900 outline-none transition focus:border-blue-600 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
                                     placeholder="Enter password or string..."
                                     value={plainText}
                                     onChange={(e) => setPlainText(e.target.value)}
                                 />
                             </div>
 
-                            <div className="mb-6 flex flex-col gap-2">
-                                <label className="text-[0.875rem] font-bold uppercase text-[var(--text-secondary)]">Salt Rounds: {rounds}</label>
+                            <div className="space-y-1.5">
+                                <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+                                    <span>Salt Rounds</span>
+                                    <span className="font-mono text-blue-600 dark:text-blue-400">{rounds}</span>
+                                </div>
                                 <input
                                     type="range"
                                     min="4"
                                     max="14"
                                     value={rounds}
                                     onChange={(e) => setRounds(parseInt(e.target.value))}
-                                    className="w-full accent-[#f59e0b]"
+                                    className="w-full accent-blue-600"
                                 />
-                                <span className="text-[0.75rem] font-medium text-[var(--text-tertiary)]">Higher rounds = more secure but slower. 10 is standard.</span>
+                                <span className="text-[11px] text-zinc-500 dark:text-zinc-400">Higher rounds = more secure compute cost. 10 is standard.</span>
                             </div>
 
                             <Button
                                 onClick={generateHash}
-                                className="mt-4 !h-[52px] font-extrabold"
+                                className="w-full"
                                 disabled={isHashing || !plainText}
-                                style={{ background: '#f59e0b' }}
                             >
-                                {isHashing ? <Loader2 className="animate-spin" /> : 'Generate Bcrypt Hash'}
+                                {isHashing ? <Loader2 className="animate-spin h-4 w-4 mr-2" /> : null}
+                                {isHashing ? 'Hashing...' : 'Generate Bcrypt Hash'}
                             </Button>
 
                             {hashResult && (
-                                <div className="mt-8 flex items-center rounded-[var(--radius-lg)] border border-[rgba(255,255,255,0.1)] bg-[#1e293b] p-4">
-                                    <div className="flex-1 select-all break-all font-mono text-[0.875rem] text-[#e2e8f0]">{hashResult}</div>
-                                    <button className="ml-4 flex h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-[8px] border-none bg-[rgba(255,255,255,0.1)] text-white transition-all duration-200 hover:bg-[rgba(255,255,255,0.2)]" onClick={copyToClipboard} title="Copy Hash">
-                                        {copied ? <Check size={20} color="#10b981" /> : <Copy size={20} />}
+                                <div className="mt-4 flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900 p-3 text-xs dark:bg-zinc-950">
+                                    <div className="flex-1 select-all break-all font-mono text-zinc-200">{hashResult}</div>
+                                    <button
+                                        className="ml-3 flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-lg bg-zinc-800 text-white hover:bg-zinc-700 transition"
+                                        onClick={copyToClipboard}
+                                        title="Copy Hash"
+                                    >
+                                        {copied ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
                                     </button>
                                 </div>
                             )}
                         </Card>
 
                         {/* Check Card */}
-                        <Card className="!flex flex-col !p-10">
-                            <div className="mb-8 flex items-center gap-4">
-                                <div className="flex h-[48px] w-[48px] items-center justify-center rounded-[12px]" style={{ color: '#10b981', background: 'rgba(16, 185, 129, 0.1)' }}>
-                                    <CheckCircle2 size={24} />
+                        <Card className="flex flex-col p-6 sm:p-8 space-y-5 shadow-xs">
+                            <div className="flex items-center gap-3 border-b border-zinc-100 pb-3 dark:border-zinc-800">
+                                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400">
+                                    <CheckCircle2 size={18} />
                                 </div>
-                                <h3 className="text-[1.25rem] font-extrabold">Check Hash Match</h3>
+                                <h3 className="text-sm font-bold text-zinc-950 dark:text-zinc-50 uppercase tracking-wider">
+                                    Verify Hash Match
+                                </h3>
                             </div>
 
-                            <div className="mb-6 flex flex-col gap-2">
-                                <label className="text-[0.875rem] font-bold uppercase text-[var(--text-secondary)]">Hash to Check against</label>
+                            <div className="space-y-1.5">
+                                <label className="text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+                                    Hash to Check Against
+                                </label>
                                 <input
                                     type="text"
-                                    className="rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-secondary)] p-4 text-[1rem] text-[var(--text-primary)] outline-none transition-all duration-200 focus:border-[#f59e0b] focus:shadow-[0_0_0_2px_rgba(245,158,11,0.1)]"
+                                    className="w-full rounded-xl border border-zinc-200 bg-zinc-50 p-3 text-xs sm:text-sm font-mono text-zinc-900 outline-none transition focus:border-blue-600 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
                                     placeholder="e.g. $2a$10$..."
                                     value={checkHash}
                                     onChange={(e) => setCheckHash(e.target.value)}
                                 />
                             </div>
 
-                            <div className="mb-6 flex flex-col gap-2">
-                                <label className="text-[0.875rem] font-bold uppercase text-[var(--text-secondary)]">String to Test</label>
+                            <div className="space-y-1.5">
+                                <label className="text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+                                    String to Test
+                                </label>
                                 <input
                                     type="text"
-                                    className="rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-secondary)] p-4 text-[1rem] text-[var(--text-primary)] outline-none transition-all duration-200 focus:border-[#f59e0b] focus:shadow-[0_0_0_2px_rgba(245,158,11,0.1)]"
-                                    placeholder="Enter password..."
+                                    className="w-full rounded-xl border border-zinc-200 bg-zinc-50 p-3 text-xs sm:text-sm font-mono text-zinc-900 outline-none transition focus:border-blue-600 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50"
+                                    placeholder="Enter candidate password..."
                                     value={checkString}
                                     onChange={(e) => setCheckString(e.target.value)}
                                 />
                             </div>
 
-                            <div className="mt-auto pt-8">
+                            <div className="mt-auto pt-4">
                                 {isMatch === null ? (
-                                    <div className="rounded-[var(--radius-md)] border border-dashed border-[var(--border)] bg-[var(--bg-secondary)] p-6 text-center font-semibold text-[var(--text-secondary)]">Enter hash and string to verify match.</div>
+                                    <div className="rounded-xl border border-dashed border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900/50 p-4 text-center text-xs font-semibold text-zinc-500 dark:text-zinc-400">
+                                        Enter hash and string above to test verification.
+                                    </div>
                                 ) : isMatch ? (
-                                    <div className="flex items-center gap-4 rounded-[var(--radius-md)] border border-[rgba(16,185,129,0.2)] bg-[rgba(16,185,129,0.1)] p-6 font-bold text-[#10b981]">
-                                        <CheckCircle2 size={24} />
-                                        <span>Match! The string validates against the hash.</span>
+                                    <div className="flex items-center gap-2.5 rounded-xl border border-emerald-200 bg-emerald-50/70 dark:border-emerald-900/60 dark:bg-emerald-950/30 p-4 text-xs font-bold text-emerald-800 dark:text-emerald-300">
+                                        <CheckCircle2 size={16} />
+                                        <span>Match! The string validates successfully against the hash.</span>
                                     </div>
                                 ) : (
-                                    <div className="flex items-center gap-4 rounded-[var(--radius-md)] border border-[rgba(239,68,68,0.2)] bg-[rgba(239,68,68,0.1)] p-6 font-bold text-[#ef4444]">
-                                        <XCircle size={24} />
-                                        <span>No Match. The string does not equal the hashed value.</span>
+                                    <div className="flex items-center gap-2.5 rounded-xl border border-rose-200 bg-rose-50/70 dark:border-rose-900/60 dark:bg-rose-950/30 p-4 text-xs font-bold text-rose-800 dark:text-rose-300">
+                                        <XCircle size={16} />
+                                        <span>No Match. The string does not match the hashed value.</span>
                                     </div>
                                 )}
                             </div>
                         </Card>
-
                     </div>
                 </section>
 
@@ -191,21 +216,8 @@ export default function BcryptGeneratorClient() {
                         "Adjustable rounds (cost factors) let you simulate different security setups and compute times."
                     ]}
                 />
-
-                <section className="container section" style={{ padding: '2rem 0 6rem' }}>
-                    <Card style={{ padding: '3rem', background: 'var(--bg-secondary)', border: 'none' }}>
-                        <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1.5rem', color: 'var(--text-primary)' }}>What is the Bcrypt Algorithm?</h2>
-                        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1.5rem', fontSize: '1.05rem' }}>
-                            <strong>Bcrypt</strong> is a highly secure, industry-standard password hashing function based on the Blowfish cipher. Unlike fast algorithms like MD5 or SHA-256, Bcrypt is intentionally slow and computationally expensive. Using a <strong>Bcrypt password hash generator</strong> allows developers to natively apply a randomized "salt" (a random string appended to the password before hashing) to defend effectively against rainbow table and brute-force attacks.
-                        </p>
-                        <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1.5rem', color: 'var(--text-primary)' }}>Why adjust the Salt Rounds (Cost Factor)?</h2>
-                        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1.5rem', fontSize: '1.05rem' }}>
-                            Bcrypt allows developers to define "work factors" or salt rounds (typically 10 to 12). As hardware gets faster, you can increase this number to ensure the hashing timeframe remains slow enough to deter attackers while fast enough for legitimate users logging in. Our <strong>verify bcrypt hash online</strong> tool allows you to simulate hashes from 4 rounds up to 14 rounds seamlessly, operating entirely via client-side WebAssembly and JS logic for absolute security.
-                        </p>
-                    </Card>
-                </section>
             </div>
             <Footer />
-        </>
+        </div>
     );
 }

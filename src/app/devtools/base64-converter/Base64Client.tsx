@@ -2,12 +2,12 @@
 
 import React, { useState } from 'react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
-import { Binary, Copy, Trash2, SwitchCamera, Check, FileUp, Download } from 'lucide-react';
-
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Copy, Trash2, SwitchCamera, Check, FileUp } from 'lucide-react';
 import { FAQSchema } from '@/components/ui/FAQSchema';
-import { RelatedTools } from '@/components/ui/RelatedTools';
+
 const BASE64_FAQS = [
   {
     question: "What is Base64 encoding?",
@@ -34,7 +34,7 @@ export default function Base64Client() {
       } else {
         setOutput(atob(input.trim()));
       }
-    } catch (e) {
+    } catch {
       setError(mode === 'encode' ? 'Unable to encode. String contains non-Latin1 characters.' : 'Invalid Base64 string.');
       setOutput('');
     }
@@ -62,7 +62,6 @@ export default function Base64Client() {
       const result = event.target?.result as string;
       setInput(result);
       if (mode === 'encode') {
-        // For files, we usually want the data URI base64
         setOutput(result.split(',')[1] || result);
       }
     };
@@ -75,69 +74,87 @@ export default function Base64Client() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-[var(--bg-primary)]">
-      <header className="bg-[radial-gradient(circle_at_100%_0%,rgba(37,99,235,0.05)_0%,transparent_50%)] pb-16 pt-32 text-center">
-        <div className="container">
-          <div className="mb-8 inline-block rounded-full bg-[var(--primary-light)] px-4 py-2 text-[0.8125rem] font-bold uppercase tracking-[0.05em] text-[var(--primary)]">Security & Data</div>
-          <h1 className="mb-6 text-[3.5rem] font-black tracking-[-0.02em]">Base64 <span className="text-[var(--primary)]">Converter</span></h1>
-          <p className="mx-auto max-w-[650px] text-[1.25rem] text-[var(--text-secondary)]">Encode text or files to Base64, or decode them back to their original form. 100% private.</p>
-        </div>
-      </header>
+    <div className="flex min-h-screen flex-col justify-between bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
+      <div>
+        <header className="bg-white pt-8 pb-6 text-center dark:bg-zinc-950">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-3 inline-flex items-center gap-2">
+              <Badge variant="outline" dot pulse size="sm" className="font-mono text-xs">
+                Security & Data
+              </Badge>
+            </div>
+            <h1 className="text-3xl font-extrabold tracking-tight text-zinc-950 sm:text-4xl md:text-5xl dark:text-zinc-50">
+              Base64 Converter
+            </h1>
+            <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
+              Encode text or files to Base64, or decode them back to their original form. 100% private.
+            </p>
+          </div>
+        </header>
 
-      <main className="container section flex-1">
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_150px_1fr]">
-          <div>
-            <Card className="!flex h-[450px] flex-col !p-6">
-              <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-[1rem] font-bold text-[var(--text-primary)]">{mode === 'encode' ? 'Binary / Text Input' : 'Base64 Input'}</h3>
-                <div className="flex gap-2">
-                  <label className="flex cursor-pointer items-center gap-2 rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-secondary)] px-[0.8rem] py-[0.4rem] text-[0.8125rem] font-semibold transition-all duration-200 hover:border-[var(--primary)] hover:bg-white">
-                    <FileUp size={16} /> Upload File
-                    <input type="file" onChange={handleFileUpload} style={{ display: 'none' }} />
-                  </label>
-                  <Button variant="ghost" size="sm" onClick={() => setInput('')}><Trash2 size={16} /></Button>
+        <main className="mx-auto max-w-6xl px-4 pb-16 pt-2 sm:px-6">
+          <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-[1fr_140px_1fr]">
+            <div>
+              <Card className="flex h-[440px] flex-col p-6 space-y-4 shadow-xs">
+                <div className="flex items-center justify-between border-b border-zinc-100 pb-3 dark:border-zinc-800">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                    {mode === 'encode' ? 'Binary / Text Input' : 'Base64 Input'}
+                  </h3>
+                  <div className="flex gap-2">
+                    <label className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-semibold text-zinc-700 hover:bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 transition">
+                      <FileUp size={14} /> Upload
+                      <input type="file" onChange={handleFileUpload} className="hidden" />
+                    </label>
+                    <Button variant="ghost" size="sm" onClick={() => setInput('')}>
+                      <Trash2 size={14} />
+                    </Button>
+                  </div>
                 </div>
-              </div>
-              <textarea
-                className="w-full flex-1 resize-none rounded-[var(--radius-md)] border-none bg-[var(--bg-secondary)] p-4 font-mono text-[0.9375rem] text-[var(--text-primary)] outline-none focus:bg-[rgba(37,99,235,0.02)]"
-                placeholder={mode === 'encode' ? 'Type or paste text here...' : 'Paste Base64 string here...'}
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-              />
-            </Card>
-          </div>
+                <textarea
+                  className="w-full flex-1 resize-none rounded-xl border border-zinc-200 bg-zinc-50 dark:bg-zinc-950 dark:border-zinc-800 p-3 font-mono text-xs leading-relaxed text-zinc-900 dark:text-zinc-100 outline-none transition focus:border-blue-600"
+                  placeholder={mode === 'encode' ? 'Type or paste text here...' : 'Paste Base64 string here...'}
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                />
+              </Card>
+            </div>
 
-          <div className="flex flex-row justify-center gap-6 lg:flex-col lg:items-center">
-            <Button size="lg" onClick={handleProcess} className="!h-[60px] !w-[200px] !rounded-full !text-[1.125rem] lg:!w-full">
-              {mode === 'encode' ? 'Encode' : 'Decode'}
-            </Button>
-            <Button variant="outline" size="sm" onClick={toggleMode} className="!rounded-full">
-              <SwitchCamera size={16} /> Switch Mode
-            </Button>
-          </div>
+            <div className="flex flex-row justify-center gap-3 lg:flex-col lg:items-center">
+              <Button size="lg" onClick={handleProcess} className="w-full">
+                {mode === 'encode' ? 'Encode' : 'Decode'}
+              </Button>
+              <Button variant="outline" size="sm" onClick={toggleMode} className="w-full">
+                <SwitchCamera size={14} className="mr-1.5" /> Swap
+              </Button>
+            </div>
 
-          <div>
-            <Card className="!flex h-[450px] flex-col !p-6">
-              <div className="mb-4 flex items-center justify-between">
-                <h3 className="text-[1rem] font-bold text-[var(--text-primary)]">Result</h3>
-                {output && (
-                  <Button variant="ghost" size="sm" onClick={handleCopy}>
-                    {copied ? <Check size={16} color="#10b981" /> : <Copy size={16} />}
-                    {copied ? 'Copied' : 'Copy'}
-                  </Button>
-                )}
-              </div>
-              <div className="relative flex-1 overflow-auto rounded-[var(--radius-md)] bg-[#1e293b] p-6">
-                {error ? (
-                  <div className="text-[0.875rem] font-semibold text-[#fb7185]">{error}</div>
-                ) : (
-                  <pre className="m-0 whitespace-pre-wrap break-all font-mono text-[0.875rem] leading-[1.6] text-[#e2e8f0]">{output || 'Result will appear here...'}</pre>
-                )}
-              </div>
-            </Card>
+            <div>
+              <Card className="flex h-[440px] flex-col p-6 space-y-4 shadow-xs">
+                <div className="flex items-center justify-between border-b border-zinc-100 pb-3 dark:border-zinc-800">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                    Result
+                  </h3>
+                  {output && (
+                    <Button variant="ghost" size="sm" onClick={handleCopy}>
+                      {copied ? <Check size={14} className="text-emerald-500 mr-1" /> : <Copy size={14} className="mr-1" />}
+                      {copied ? 'Copied' : 'Copy'}
+                    </Button>
+                  )}
+                </div>
+                <div className="relative flex-1 overflow-auto rounded-xl border border-zinc-800 bg-zinc-900 dark:bg-zinc-950 p-4 font-mono text-xs">
+                  {error ? (
+                    <div className="text-rose-400 font-semibold">{error}</div>
+                  ) : (
+                    <pre className="m-0 whitespace-pre-wrap break-all text-zinc-200 leading-relaxed">
+                      {output || 'Result will appear here...'}
+                    </pre>
+                  )}
+                </div>
+              </Card>
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
 
       <FAQSchema faqs={BASE64_FAQS} />
       <Footer />

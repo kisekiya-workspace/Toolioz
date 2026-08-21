@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Upload, ImageIcon, Download, Zap, ShieldCheck, Settings, Info, Loader2, ArrowRight } from 'lucide-react';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { RelatedTools } from '@/components/ui/RelatedTools';
@@ -172,14 +172,14 @@ export default function ImageCompressorClient() {
   return (
     <>
       <div className="min-h-screen bg-[var(--bg-primary)]">
-        <header className="border-b border-[var(--border)] bg-[var(--bg-secondary)] py-16 pb-12 text-center md:py-24 md:pb-16">
+        <header className="border-b border-[var(--border)] bg-red-50/50 px-4 py-5 text-center sm:py-7">
           <div className="container">
-            <h1 className="mb-4 text-[2.25rem] font-black sm:text-[3.5rem]">Image Compressor</h1>
-            <p className="mx-auto max-w-[700px] text-[1.25rem] text-[var(--text-secondary)]">Reduce image file size instantly with professional-grade compression settings.</p>
+            <h1 className="mb-2 text-2xl font-black tracking-tight sm:text-3xl">Image Compressor</h1>
+            <p className="mx-auto max-w-[700px] text-sm leading-6 text-[var(--text-secondary)] sm:text-base">Reduce image file size instantly with professional-grade compression settings.</p>
           </div>
         </header>
 
-        <section className="container section">
+        <section className="container pb-12 pt-5 sm:pt-7">
           <div className={`mx-auto grid max-w-[1100px] gap-12 ${file ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
             <div>
               <Card className="!flex min-h-[400px] flex-col !rounded-[var(--radius-xl)] !border-2 !border-dashed !border-[var(--border)] !bg-[var(--bg-secondary)] !p-6 transition-all duration-300 sm:!p-10">

@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, ArrowRight, CheckCircle2, HelpCircle, Sparkles } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, Clock, Calendar, ShieldCheck } from 'lucide-react';
 import { JSONLD } from '@/components/ui/JSONLD';
+import { ReadingProgressBar } from '@/components/ui/ReadingProgressBar';
 import { Footer } from '@/components/layout/Footer';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { howToPosts, getHowToPost } from '@/lib/howto-content';
 import { buildArticleMetadata, SITE_URL } from '@/lib/seo';
 
@@ -23,16 +26,13 @@ export async function generateMetadata({ params }: HowToPageProps): Promise<Meta
     return {};
   }
 
-  return {
-    ...buildArticleMetadata({
+  return buildArticleMetadata({
     title: `${post.title} | Toolioz`,
     description: post.description,
-    path: post.directUrl,
+    path: `/how-to/${post.slug}`,
     keywords: post.keywords,
     modifiedTime: post.updatedIso,
-    }),
-    robots: { index: false, follow: true },
-  };
+  });
 }
 
 export default async function HowToDetailPage({ params }: HowToPageProps) {
@@ -73,7 +73,8 @@ export default async function HowToDetailPage({ params }: HowToPageProps) {
     dateModified: post.updatedIso,
     author: {
       '@type': 'Organization',
-      name: 'Toolioz',
+      name: 'Toolioz Technical Guides',
+      url: 'https://toolioz.com/about',
     },
     publisher: {
       '@type': 'Organization',
@@ -102,148 +103,223 @@ export default async function HowToDetailPage({ params }: HowToPageProps) {
         }
       : null;
 
-  const schemas = [howToSchema, articleSchema, faqSchema].filter(Boolean);
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}` },
+      { '@type': 'ListItem', position: 2, name: 'How-To Guides', item: `${SITE_URL}/how-to` },
+      { '@type': 'ListItem', position: 3, name: post.title, item: `${SITE_URL}/how-to/${post.slug}` },
+    ],
+  };
+
+  const schemas = [howToSchema, articleSchema, faqSchema, breadcrumbSchema].filter(Boolean);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-white">
+    <div className="min-h-screen bg-white text-zinc-900 antialiased selection:bg-emerald-600 selection:text-white dark:bg-zinc-950 dark:text-zinc-100">
       <JSONLD data={schemas} />
+      <ReadingProgressBar />
 
-      <header className="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight text-white group">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
-              T
+      {/* Article Header */}
+      <header className="pt-8 pb-6 border-b border-zinc-100 dark:border-zinc-800 bg-white dark:bg-zinc-950">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6">
+          <div className="mb-3 flex items-center justify-between">
+            <Link
+              href="/how-to"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 transition-colors"
+            >
+              <ArrowLeft size={13} /> Back to Guides
+            </Link>
+            <div className="flex items-center gap-3 text-xs font-mono text-zinc-400">
+              <span className="flex items-center gap-1">
+                <Clock size={12} /> {post.readTime}
+              </span>
+              <span>•</span>
+              <span>{post.updated}</span>
             </div>
-            <span>Toolioz</span>
-          </Link>
-          <nav className="flex items-center gap-6 text-sm font-medium text-slate-400">
-            <Link href="/how-to" className="text-cyan-400 font-semibold">How-To Guides</Link>
-            <Link href="/finance" className="hover:text-cyan-400 transition-colors">Finance</Link>
-            <Link href="/devtools" className="hover:text-cyan-400 transition-colors">DevTools</Link>
-            <Link href="/pdftools" className="hover:text-cyan-400 transition-colors">PDF Tools</Link>
-          </nav>
-        </div>
-      </header>
-
-      <main className="flex-1 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
-        <div className="mb-8">
-          <Link
-            href="/how-to"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-cyan-400 hover:text-cyan-300 transition-colors mb-6"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to All How-To Guides
-          </Link>
-
-          <div className="flex items-center gap-3 text-xs text-slate-400 mb-4">
-            <span className="bg-cyan-950/80 text-cyan-400 px-2.5 py-1 rounded-full font-mono border border-cyan-800/50">
-              {post.readTime}
-            </span>
-            <span>Updated {post.updated}</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-6">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-950 dark:text-zinc-50 leading-snug">
             {post.title}
           </h1>
-          <p className="text-lg text-slate-300 leading-relaxed bg-slate-900/60 p-6 rounded-2xl border border-slate-800/80">
+
+          <p className="mt-3 text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">
             {post.description}
           </p>
         </div>
+      </header>
 
-        {/* Interactive Tool Banner CTA */}
-        <div className="my-8 p-6 rounded-2xl bg-gradient-to-r from-cyan-950/80 via-slate-900 to-blue-950/80 border border-cyan-500/30 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl shadow-cyan-950/20">
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-cyan-400 mb-1 flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5" /> Direct Interactive Tool
-            </div>
-            <p className="text-base font-bold text-white">Execute this task live in your browser</p>
-          </div>
-          <Link
-            href={post.toolHref}
-            className="px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm shadow-lg shadow-cyan-500/25 transition-all flex items-center gap-2 whitespace-nowrap"
-          >
-            {post.toolLabel}
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-
-        {/* Step-by-Step Instructions */}
-        <section className="my-12">
-          <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-            <CheckCircle2 className="w-6 h-6 text-cyan-400" />
-            Step-by-Step Guide
-          </h2>
-          <div className="space-y-6">
-            {post.steps.map((step, idx) => (
-              <div
-                key={idx}
-                className="p-6 rounded-2xl bg-slate-900/50 border border-slate-800 flex gap-4 items-start hover:border-slate-700 transition-colors"
+      {/* Main Content Layout */}
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 py-8 sm:py-12 lg:grid lg:grid-cols-[180px_1fr] lg:gap-10 lg:items-start">
+        
+        {/* Sticky Table of Contents */}
+        <aside className="hidden lg:block lg:sticky lg:top-20 space-y-4">
+          <p className="text-[11px] font-mono font-bold uppercase tracking-wider text-zinc-400 mb-2">
+            Contents
+          </p>
+          <nav className="space-y-1.5 border-l border-zinc-200 dark:border-zinc-800 pl-2.5">
+            <a
+              href="#step-by-step"
+              className="block text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors leading-snug"
+            >
+              Step-by-Step
+            </a>
+            {post.sections.map((section, idx) => (
+              <a
+                key={section.heading}
+                href={`#section-${idx + 1}`}
+                className="block text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors leading-snug line-clamp-2"
               >
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-cyan-400 font-bold flex items-center justify-center text-sm">
-                  {idx + 1}
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-white mb-2">{step.name}</h3>
-                  <p className="text-slate-300 text-sm leading-relaxed">{step.text}</p>
-                </div>
-              </div>
+                {section.heading}
+              </a>
             ))}
+            {post.faqs && post.faqs.length > 0 && (
+              <a
+                href="#faqs"
+                className="block text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors pt-1"
+              >
+                Q&A
+              </a>
+            )}
+          </nav>
+
+          <div className="pt-3">
+            <Button asChild size="sm" className="w-full text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs">
+              <Link href={post.toolHref}>
+                Launch Tool <ArrowRight size={12} className="ml-1" />
+              </Link>
+            </Button>
           </div>
-        </section>
+        </aside>
 
-        {/* Informational Sections */}
-        {post.sections.map((section, idx) => (
-          <section key={idx} className="my-10">
-            <h2 className="text-2xl font-bold text-white mb-4">{section.heading}</h2>
-            <div className="space-y-4 text-slate-300 leading-relaxed text-base">
-              {section.body.map((para, pIdx) => (
-                <p key={pIdx}>{para}</p>
-              ))}
-            </div>
-          </section>
-        ))}
-
-        {/* FAQs */}
-        {post.faqs && post.faqs.length > 0 && (
-          <section className="my-12 pt-8 border-t border-slate-800">
-            <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-              <HelpCircle className="w-6 h-6 text-cyan-400" />
-              Frequently Asked Questions
+        {/* Article Body */}
+        <article className="max-w-2xl">
+          
+          {/* Step by Step Section */}
+          <section id="step-by-step" className="scroll-mt-20 mb-10">
+            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50 mb-5">
+              Step-by-Step Instructions
             </h2>
+
             <div className="space-y-4">
-              {post.faqs.map((faq, idx) => (
-                <div key={idx} className="p-5 rounded-xl bg-slate-900/60 border border-slate-800">
-                  <h3 className="text-base font-bold text-white mb-2">{faq.question}</h3>
-                  <p className="text-sm text-slate-300 leading-relaxed">{faq.answer}</p>
+              {post.steps.map((step, idx) => (
+                <div
+                  key={step.name}
+                  className="flex gap-3.5 items-start p-3.5 rounded-xl border border-zinc-100 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-900/50"
+                >
+                  <div className="flex size-6 items-center justify-center rounded-full bg-emerald-600 text-white font-mono text-xs font-bold shrink-0 mt-0.5">
+                    {idx + 1}
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-zinc-950 dark:text-zinc-50">
+                      {step.name}
+                    </h3>
+                    <p className="mt-1 text-xs sm:text-sm leading-relaxed text-zinc-600 dark:text-zinc-300">
+                      {step.text}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
           </section>
-        )}
 
-        {/* Related Guides */}
-        {otherPosts.length > 0 && (
-          <section className="my-12 pt-8 border-t border-slate-800">
-            <h2 className="text-xl font-bold text-white mb-6">More How-To Guides</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {otherPosts.map((rel) => (
+          {/* Core Deep-Dive Sections */}
+          {post.sections.map((section, idx) => (
+            <section
+              key={section.heading}
+              id={`section-${idx + 1}`}
+              className="scroll-mt-20 mb-10 border-b border-zinc-100 dark:border-zinc-800/80 pb-8 last:border-0"
+            >
+              <h2 className="text-lg sm:text-xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50 mb-3">
+                {section.heading}
+              </h2>
+
+              <div className="space-y-3 text-zinc-700 dark:text-zinc-300 text-sm sm:text-base leading-relaxed">
+                {section.body.map((paragraph, pIdx) => (
+                  <p key={pIdx}>
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </section>
+          ))}
+
+          {/* Interactive Tool Banner */}
+          <div className="my-8 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <div className="inline-flex items-center gap-1 text-xs font-mono font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-0.5">
+                <BookOpen size={13} /> Interactive Tool
+              </div>
+              <h3 className="text-base font-bold text-zinc-950 dark:text-zinc-50">
+                {post.toolLabel}
+              </h3>
+              <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+                Run this guide directly in your browser with 100% private processing.
+              </p>
+            </div>
+
+            <Button asChild size="sm" className="shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-xs">
+              <Link href={post.toolHref}>
+                Open Tool <ArrowRight size={13} className="ml-1" />
+              </Link>
+            </Button>
+          </div>
+
+          {/* FAQ Section */}
+          {post.faqs && post.faqs.length > 0 && (
+            <section id="faqs" className="scroll-mt-20 mt-10 pt-8 border-t border-zinc-200 dark:border-zinc-800">
+              <div className="mb-4">
+                <h2 className="text-xl font-bold tracking-tight text-zinc-950 dark:text-zinc-50">
+                  Frequently Asked Questions
+                </h2>
+              </div>
+
+              <div className="divide-y divide-zinc-100 dark:divide-zinc-800">
+                {post.faqs.map((faq) => (
+                  <div key={faq.question} className="py-4">
+                    <h3 className="text-sm sm:text-base font-semibold text-zinc-950 dark:text-zinc-50">
+                      {faq.question}
+                    </h3>
+                    <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                      {faq.answer}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Related How-To Guides */}
+          <section className="mt-10 pt-6 border-t border-zinc-200 dark:border-zinc-800">
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">
+                More Practical Guides
+              </h2>
+              <Link href="/how-to" className="text-xs font-semibold text-emerald-600 hover:underline">
+                View all →
+              </Link>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-3">
+              {otherPosts.map((related) => (
                 <Link
-                  key={rel.slug}
-                  href={rel.directUrl}
-                  className="p-4 rounded-xl bg-slate-900/40 border border-slate-800 hover:border-cyan-500/40 transition-colors group"
+                  key={related.slug}
+                  href={related.directUrl}
+                  className="group block rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-3.5 shadow-2xs hover:border-zinc-400 transition-all"
                 >
-                  <h3 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors line-clamp-2 mb-2">
-                    {rel.title}
-                  </h3>
-                  <span className="text-xs text-cyan-400 font-semibold inline-flex items-center gap-1">
-                    Read Guide <ArrowRight className="w-3 h-3" />
+                  <span className="text-[10px] font-mono text-zinc-400">
+                    {related.readTime}
                   </span>
+                  <h3 className="mt-1 text-xs font-semibold leading-snug text-zinc-950 dark:text-zinc-50 group-hover:text-emerald-600 transition-colors line-clamp-2">
+                    {related.title}
+                  </h3>
                 </Link>
               ))}
             </div>
           </section>
-        )}
-      </main>
+
+        </article>
+      </div>
 
       <Footer />
     </div>

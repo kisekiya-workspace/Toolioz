@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { DirectAnswerBlock } from '@/components/ui/DirectAnswerBlock';
 import { BreadcrumbJsonLd } from '@/components/ui/BreadcrumbJsonLd';
 import { SEOSection } from '@/components/ui/SEOSection';

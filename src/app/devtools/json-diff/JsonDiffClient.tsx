@@ -2,8 +2,8 @@
 
 import React, { useMemo, useState } from 'react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { AlertCircle, Check, Copy, GitCompareArrows, RefreshCw } from 'lucide-react';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { RelatedTools } from '@/components/ui/RelatedTools';
@@ -174,20 +174,25 @@ export default function JsonDiffClient() {
   };
 
   return (
-    <>
-      <div className="min-h-screen">
-        <header className="bg-[linear-gradient(180deg,rgba(15,118,110,0.1),transparent_70%)] py-16 text-center md:py-24">
-          <div className="container">
-            <h1 className="mb-4 text-4xl font-black tracking-tight md:text-5xl">
-              JSON <span className="text-[#0f766e]">Diff Checker</span>
+    <div className="min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50 flex flex-col justify-between">
+      <div>
+        <header className="bg-white pt-8 pb-6 text-center dark:bg-zinc-950">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-3 inline-flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-teal-200 bg-teal-50/80 px-3 py-0.5 text-xs font-semibold text-teal-700 dark:border-teal-900/60 dark:bg-teal-950/40 dark:text-teal-300">
+                Data Comparison
+              </span>
+            </div>
+            <h1 className="text-3xl font-extrabold tracking-tight text-zinc-950 sm:text-4xl md:text-5xl dark:text-zinc-50">
+              JSON Diff Checker
             </h1>
-            <p className="mx-auto max-w-[760px] text-[var(--text-secondary)] text-lg">
+            <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
               Compare two JSON payloads and inspect field-level changes before merging API or config updates.
             </p>
           </div>
         </header>
 
-        <section className="container section">
+        <section className="container pb-12 pt-2 sm:pt-4">
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             <Card className="min-w-0 !p-4">
               <h2 className="mb-3 text-[0.95rem] font-semibold">Before JSON</h2>
@@ -286,6 +291,6 @@ export default function JsonDiffClient() {
         </section>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }

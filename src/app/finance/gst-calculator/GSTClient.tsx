@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Card } from '@/components/ui/Card';
-import { Input } from '@/components/ui/Input';
-import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { calculateTax } from '@/lib/formulas';
 import { CreditCard, Info, AlertTriangle, CheckCircle2, ShieldCheck, BookOpen, Clock, Lightbulb } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
@@ -51,17 +51,17 @@ export default function GSTClient() {
   return (
     <>
       <div className="min-h-[calc(100vh-64px)] bg-[var(--bg-secondary)] pb-16 max-[900px]:pb-32">
-        <header className="px-6 py-8 text-center md:py-16">
+        <header className="px-6 pb-4 pt-6 text-center md:pb-6 md:pt-8">
           <div className="container">
-            <h1 className="mb-4 text-[1.75rem] font-extrabold text-[var(--text-primary)] sm:text-[2.5rem]">GST Calculator Online India 2026</h1>
+            <h1 className="mb-2 text-2xl font-extrabold tracking-tight text-[var(--text-primary)] sm:text-3xl">GST Calculator Online India 2026</h1>
             <p className="mx-auto max-w-[600px] text-[0.95rem] leading-[1.5] text-[var(--text-secondary)] sm:text-[1.1rem]">Calculate GST with CGST/SGST &amp; IGST split for accurate invoicing.</p>
-            <div className="mx-auto mt-6 max-w-[700px] rounded-lg border border-[#fbbf24] bg-[#fffbeb] px-4 py-3 text-left text-[0.8rem] leading-[1.6] text-[#92400e]">
+            <div className="mx-auto mt-3 max-w-[700px] rounded-lg border border-[#fbbf24] bg-[#fffbeb] px-4 py-2 text-left text-[0.75rem] leading-5 text-[#92400e]">
               <strong>⚠️ Disclaimer:</strong> This calculator provides <strong>approximate GST computations</strong> for general reference. Actual GST rates vary by product/service (HSN/SAC code). This tool is for <strong>assumption &amp; planning purposes only</strong>. Always verify with the official GST portal or a CA before filing.
             </div>
           </div>
         </header>
 
-        <section className="container section">
+        <section className="container pb-12 pt-4">
           <div className="mx-auto grid max-w-[1000px] grid-cols-[1fr] gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:gap-8 lg:items-start">
             <div className="flex flex-col gap-6">
               <Card className="!p-5 sm:!p-8">

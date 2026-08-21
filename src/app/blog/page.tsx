@@ -3,6 +3,9 @@ import Link from 'next/link';
 import { ArrowRight, BookOpen, Clock, Layers, ShieldCheck, Sparkles, TrendingUp, Zap } from 'lucide-react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import { Footer } from '@/components/layout/Footer';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import { standaloneBlogs } from '@/../blogs';
 import { allTooliozBlogPosts } from '@/lib/toolioz-blog-index';
 
@@ -23,7 +26,7 @@ export const metadata: Metadata = {
 };
 
 export default function BlogIndexPage() {
-  const featuredPost = standaloneBlogs[0]; // Financial Engineering Masterclass
+  const featuredPost = standaloneBlogs[0];
 
   const itemListJsonLd = {
     '@context': 'https://schema.org',
@@ -37,203 +40,167 @@ export default function BlogIndexPage() {
   };
 
   return (
-    <main className="bg-slate-950 text-slate-100 min-h-screen antialiased selection:bg-blue-500 selection:text-white">
+    <main className="min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50 flex flex-col justify-between">
       <JSONLD data={itemListJsonLd} />
 
-      {/* Hero Header with Glow Gradients */}
-      <section className="relative overflow-hidden border-b border-slate-800/80 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(37,99,235,0.25),rgba(255,255,255,0))] py-20 lg:py-28">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(16,185,129,0.08)_0%,transparent_40%)]" />
-        
-        <div className="relative mx-auto max-w-7xl px-6">
-          <div className="mx-auto max-w-4xl text-center">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-blue-400 backdrop-blur-md">
-              <Sparkles size={14} className="animate-pulse text-blue-400" />
-              Toolioz Research Portal
+      <div>
+        {/* Skimmed Hero Header */}
+        <section className="bg-white pt-8 pb-6 text-center dark:bg-zinc-950">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-3 inline-flex items-center gap-2">
+              <Badge variant="outline" dot pulse size="sm" className="font-mono text-xs">
+                Toolioz Technical Library
+              </Badge>
             </div>
 
-            <h1 className="text-4xl font-black leading-[1.05] tracking-[-0.04em] text-white sm:text-6xl lg:text-7xl">
-              Quantitative Engineering, Retro Graphics & Privacy
+            <h1 className="text-3xl font-extrabold tracking-tight text-zinc-950 sm:text-4xl dark:text-zinc-50">
+              Quantitative Engineering, <br className="hidden sm:block" />
+              <span className="text-blue-600">Retro Graphics & Privacy</span>
             </h1>
 
-            <p className="mt-6 text-lg leading-8 text-slate-400 sm:text-xl sm:leading-9">
+            <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
               Long-form masterclass essays on financial mathematics, browser security sandboxing,
               zero-latency WebAssembly, and interactive calculation engines.
             </p>
 
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
               {[
                 { label: 'Quantitative Finance', icon: TrendingUp },
                 { label: 'Client-Side Privacy', icon: ShieldCheck },
                 { label: 'Retro Graphics', icon: Layers },
                 { label: 'Web Performance', icon: Zap },
               ].map(({ label, icon: Icon }) => (
-                <span
-                  key={label}
-                  className="inline-flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/80 px-4 py-2 text-xs font-bold text-slate-300 backdrop-blur-md transition hover:border-blue-500/50 hover:text-white"
-                >
-                  <Icon size={14} className="text-blue-400" />
-                  {label}
-                </span>
+                <Badge key={label} variant="secondary" size="default" className="gap-1.5 py-1 px-3">
+                  <Icon size={13} className="text-blue-600" />
+                  <span>{label}</span>
+                </Badge>
               ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Featured Masterclass Banner Spotlight */}
-      {featuredPost && (
-        <section className="relative -mt-10 px-6 z-10">
-          <div className="mx-auto max-w-7xl">
-            <div className="relative overflow-hidden rounded-[2.5rem] border border-blue-500/30 bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950/40 p-8 shadow-[0_20px_70px_-15px_rgba(37,99,235,0.25)] lg:p-12">
-              <div className="absolute right-0 top-0 -mr-20 -mt-20 h-96 w-96 rounded-full bg-blue-600/10 blur-3xl" />
+        {/* Featured Masterclass Spotlight */}
+        {featuredPost && (
+          <section className="py-8 sm:py-12 border-b border-zinc-100 bg-zinc-50/50 dark:border-zinc-800 dark:bg-zinc-950/50">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="rounded-3xl border border-zinc-200 bg-white p-6 sm:p-10 shadow-xs relative overflow-hidden dark:border-zinc-800 dark:bg-zinc-900">
+                <div className="grid gap-8 lg:grid-cols-[1.3fr_0.7fr] lg:items-center">
+                  <div>
+                    <div className="mb-3 flex items-center gap-2">
+                      <Badge variant="info" size="sm">
+                        Featured Masterclass
+                      </Badge>
+                      <span className="flex items-center gap-1 text-xs font-mono text-zinc-400">
+                        <Clock size={13} /> {featuredPost.readTime}
+                      </span>
+                    </div>
 
-              <div className="relative grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-                <div>
-                  <div className="mb-4 flex flex-wrap items-center gap-3">
-                    <span className="rounded-full bg-blue-500/20 px-3.5 py-1 text-xs font-black uppercase tracking-[0.16em] text-blue-300 border border-blue-400/30">
-                      ★ Featured Masterclass
-                    </span>
-                    <span className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.14em] text-slate-400">
-                      <Clock size={14} /> {featuredPost.readTime}
-                    </span>
+                    <h2 className="text-xl font-bold tracking-tight text-zinc-950 sm:text-2xl mb-3 dark:text-zinc-50">
+                      <Link href={`/blog/${featuredPost.slug}`} className="hover:text-blue-600 transition-colors">
+                        {featuredPost.title}
+                      </Link>
+                    </h2>
+
+                    <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed mb-5 dark:text-zinc-400">
+                      {featuredPost.description}
+                    </p>
+
+                    <div className="flex flex-wrap items-center gap-3">
+                      <Button asChild size="default" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-xs">
+                        <Link href={`/blog/${featuredPost.slug}`}>
+                          Read Masterclass <ArrowRight size={14} className="ml-1" />
+                        </Link>
+                      </Button>
+                      <Button asChild variant="outline" size="default" className="font-semibold text-zinc-800 dark:text-zinc-200 border-zinc-300 hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800">
+                        <Link href={featuredPost.toolHref}>
+                          <BookOpen size={14} className="mr-1.5" />
+                          Launch Interactive Tool
+                        </Link>
+                      </Button>
+                    </div>
                   </div>
 
-                  <h2 className="text-3xl font-black leading-tight text-white sm:text-4xl lg:text-5xl">
-                    <Link
-                      href={`/blog/${featuredPost.slug}`}
-                      className="transition hover:text-blue-400"
-                    >
-                      {featuredPost.title}
-                    </Link>
-                  </h2>
-
-                  <p className="mt-6 text-base leading-8 text-slate-300 sm:text-lg">
-                    {featuredPost.description}
-                  </p>
-
-                  <div className="mt-8 flex flex-wrap items-center gap-4">
-                    <Link
-                      href={`/blog/${featuredPost.slug}`}
-                      className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-7 py-3.5 text-sm font-black text-white shadow-lg transition hover:scale-105 hover:bg-blue-500"
-                    >
-                      Read Full Masterclass <ArrowRight size={16} />
-                    </Link>
-                    <Link
-                      href={featuredPost.toolHref}
-                      className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900 px-6 py-3.5 text-sm font-bold text-slate-200 transition hover:border-slate-500 hover:text-white"
-                    >
-                      <BookOpen size={16} /> Launch Interactive Tool
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="rounded-3xl border border-slate-800 bg-slate-900/90 p-6 backdrop-blur-xl">
-                  <div className="text-xs font-black uppercase tracking-[0.16em] text-blue-400 mb-4">
-                    Masterclass Chapters & Topics
-                  </div>
-                  <div className="space-y-3">
-                    {featuredPost.sections.slice(0, 4).map((section, idx) => (
-                      <div
-                        key={section.heading}
-                        className="flex items-start gap-3 rounded-2xl bg-slate-950/60 p-3.5 text-xs font-semibold text-slate-300 border border-slate-800/60"
-                      >
-                        <span className="rounded-full bg-blue-500/20 px-2 py-0.5 text-[0.7rem] font-bold text-blue-300 shrink-0">
-                          0{idx + 1}
-                        </span>
-                        <span className="leading-5">{section.heading}</span>
-                      </div>
-                    ))}
+                  <div className="rounded-2xl border border-zinc-200 bg-zinc-50/60 p-5 dark:border-zinc-800 dark:bg-zinc-950/40">
+                    <p className="text-xs font-mono font-bold text-blue-600 uppercase tracking-wider mb-2.5">
+                      Chapters Covered
+                    </p>
+                    <div className="space-y-1.5">
+                      {featuredPost.sections.slice(0, 4).map((section, idx) => (
+                        <div
+                          key={section.heading}
+                          className="flex items-start gap-2 rounded-lg bg-white p-2.5 text-xs text-zinc-950 border border-zinc-200 dark:bg-zinc-900 dark:text-zinc-50 dark:border-zinc-800"
+                        >
+                          <span className="rounded bg-blue-500/10 px-1.5 py-0.5 font-mono text-[10px] font-bold text-blue-600 shrink-0">
+                            0{idx + 1}
+                          </span>
+                          <span className="line-clamp-1 leading-snug">{section.heading}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </section>
+        )}
+
+        {/* All Articles Grid */}
+        <section className="py-12 sm:py-16 bg-white dark:bg-zinc-950">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-8 flex items-center justify-between border-b border-zinc-100 pb-3 dark:border-zinc-800">
+              <div>
+                <h2 className="text-xl font-extrabold tracking-tight text-zinc-950 sm:text-2xl dark:text-zinc-50">
+                  All Masterclass Essays & Guides
+                </h2>
+                <p className="text-xs text-zinc-500 mt-0.5 dark:text-zinc-400">
+                  Deep-dive research on algorithms, math, and browser tools.
+                </p>
+              </div>
+              <Badge variant="mono" size="sm">
+                {allTooliozBlogPosts.length} Articles
+              </Badge>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {allTooliozBlogPosts.map((post) => (
+                <Link key={post.slug} href={post.href} className="group block">
+                  <Card hoverable className="h-full p-5 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-3">
+                        <Badge variant="mono" size="sm">
+                          {post.category}
+                        </Badge>
+                        <span className="text-[10px] font-mono text-zinc-400">{post.readTime}</span>
+                      </div>
+
+                      <h3 className="text-base font-bold text-zinc-950 transition-colors group-hover:text-blue-600 line-clamp-2 mb-1.5 dark:text-zinc-50 dark:group-hover:text-blue-400">
+                        {post.title}
+                      </h3>
+
+                      <p className="text-xs text-zinc-500 leading-relaxed line-clamp-3 dark:text-zinc-400">
+                        {post.description}
+                      </p>
+                    </div>
+
+                    <div className="mt-5 pt-3 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
+                      <div className="flex flex-wrap gap-1">
+                        {post.keywords.slice(0, 2).map((keyword) => (
+                          <span key={keyword} className="font-mono text-[10px] text-zinc-400">
+                            #{keyword}
+                          </span>
+                        ))}
+                      </div>
+                      <span className="text-xs font-semibold text-blue-600 dark:text-blue-400 group-hover:underline inline-flex items-center gap-0.5">
+                        Read <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
+                      </span>
+                    </div>
+                  </Card>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
-      )}
-
-      {/* Masterclasses Grid */}
-      <section className="px-6 py-20">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between border-b border-slate-800 pb-6">
-            <div>
-              <div className="text-xs font-black uppercase tracking-[0.18em] text-blue-400">
-                Explore Library
-              </div>
-              <h2 className="mt-2 text-3xl font-black text-white sm:text-4xl">
-                All Masterclass Essays & Guides
-              </h2>
-            </div>
-            <div className="rounded-full border border-slate-800 bg-slate-900 px-4 py-2 text-xs font-bold text-slate-400">
-              {allTooliozBlogPosts.length} Published Articles
-            </div>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {allTooliozBlogPosts.map((post) => (
-              <article
-                key={post.slug}
-                className="group flex flex-col justify-between rounded-[2rem] border border-slate-800 bg-slate-900/60 p-8 transition-all duration-300 hover:-translate-y-2 hover:border-blue-500/40 hover:bg-slate-900 hover:shadow-2xl hover:shadow-blue-500/10"
-              >
-                <div>
-                  <div className="mb-4 flex items-center justify-between">
-                    <span className="rounded-full bg-blue-500/10 border border-blue-500/20 px-3 py-1 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-blue-400">
-                      {post.readTime}
-                    </span>
-                    <span className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-slate-500">
-                      {post.updated}
-                    </span>
-                  </div>
-
-                  <h3 className="text-xl font-black leading-snug text-white transition-colors group-hover:text-blue-400">
-                      <Link href={post.href}>{post.title}</Link>
-                  </h3>
-
-                  <p className="mt-4 text-xs leading-6 text-slate-400 line-clamp-3">
-                    {post.description}
-                  </p>
-                </div>
-
-                <div className="mt-8 border-t border-slate-800/80 pt-6">
-                  <div className="mb-4 flex flex-wrap gap-1.5">
-                    {post.keywords.slice(0, 2).map((keyword) => (
-                      <span
-                        key={keyword}
-                        className="rounded-full bg-slate-950 px-2.5 py-1 text-[0.65rem] font-semibold text-slate-400 border border-slate-800"
-                      >
-                        #{keyword}
-                      </span>
-                    ))}
-                  </div>
-
-                  <Link
-                    href={post.href}
-                    className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.14em] text-blue-400 transition group-hover:translate-x-1"
-                  >
-                    Read Masterclass <ArrowRight size={14} />
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Privacy Guarantee Footer Section */}
-      <section className="px-6 pb-20">
-        <div className="mx-auto max-w-7xl rounded-[2.5rem] border border-emerald-500/30 bg-gradient-to-r from-slate-900 via-emerald-950/30 to-slate-900 p-8 sm:p-12">
-          <div className="flex flex-col sm:flex-row items-center gap-6">
-            <div className="rounded-full bg-emerald-500/20 p-4 border border-emerald-500/30 shrink-0">
-              <ShieldCheck size={32} className="text-emerald-400" />
-            </div>
-            <div>
-              <h3 className="text-2xl font-black text-white">100% Client-Side Data Privacy Architecture</h3>
-              <p className="mt-2 text-sm leading-7 text-slate-300">
-                All Toolioz tools, financial engines, image dithering routines, and document utilities run 100% locally inside your browser tab memory. No numbers, files, or inputs are transmitted to external servers.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      </div>
 
       <Footer />
     </main>

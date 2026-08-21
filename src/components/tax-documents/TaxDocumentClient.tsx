@@ -4,8 +4,10 @@ import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { AlertTriangle, CheckCircle2, Download, FileJson, FileText, Loader2, ShieldCheck, Upload } from 'lucide-react';
 import { jsPDF } from 'jspdf';
-import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Footer } from '@/components/layout/Footer';
 import { form16ToComputation, parseForm16Text, parseIncomeJson, type NormalizedForm16, type TaxComputation } from '@/lib/tax-document-parser';
 
 type Mode = 'income' | 'pdf' | 'form16';
@@ -115,30 +117,214 @@ export default function TaxDocumentClient({ mode }: { mode: Mode }) {
 
   const summary = computation?.summary;
   return (
-    <main className="min-h-screen bg-[#f6f4ee] px-4 py-12 text-slate-950">
-      <div className="mx-auto max-w-6xl">
-        <header className="relative mb-8 overflow-hidden rounded-[2rem] bg-slate-950 px-6 py-10 text-white shadow-xl md:px-10">
-          <div className="absolute right-[-4rem] top-[-5rem] h-56 w-56 rounded-full border-[36px] border-teal-400/10" />
-          <div className="relative max-w-4xl"><div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-teal-300"><ShieldCheck size={14} /> Local tax document workspace</div><h1 className="text-4xl font-black tracking-[-0.04em] md:text-6xl">{copy.title}</h1><p className="mt-5 max-w-3xl text-base leading-7 text-slate-300 md:text-lg">{copy.description}</p></div>
+    <div className="min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50 flex flex-col justify-between">
+      <div>
+        {/* Standard Clean Hero Header */}
+        <header className="bg-white pt-8 pb-6 text-center dark:bg-zinc-950">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-3 inline-flex items-center gap-2">
+              <Badge variant="outline" dot pulse size="sm" className="font-mono text-xs">
+                Local Tax Document Workspace
+              </Badge>
+            </div>
+            <h1 className="text-3xl font-extrabold tracking-tight text-zinc-950 sm:text-4xl md:text-5xl dark:text-zinc-50">
+              {copy.title}
+            </h1>
+            <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
+              {copy.description}
+            </p>
+          </div>
         </header>
-        <div className="grid gap-6 lg:grid-cols-[1.04fr_.96fr]">
-          <Card className="overflow-hidden !rounded-[1.5rem] !border-slate-300 !p-0 shadow-[0_18px_60px_-35px_rgba(15,23,42,.45)]">
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 bg-white px-5 py-4"><div><p className="font-black">{copy.input}</p><p className="text-xs text-slate-500">{fileName || (mode === 'form16' ? 'Searchable PDF or pasted text' : 'UTF-8 JSON object')}</p></div><label className="inline-flex cursor-pointer items-center gap-2 rounded-full bg-slate-950 px-4 py-2.5 text-sm font-bold text-white hover:bg-teal-800"><Upload size={16} /> Choose file<input className="hidden" type="file" accept={mode === 'form16' ? '.pdf,.txt,application/pdf,text/plain' : '.json,application/json'} onChange={event => { const file = event.target.files?.[0]; if (file) void readFile(file); }} /></label></div>
-            <div className="relative"><textarea aria-label={copy.input} value={text} onChange={event => setText(event.target.value)} spellCheck={false} className="min-h-[470px] w-full resize-y border-0 bg-[#07130f] p-5 font-mono text-[13px] leading-6 text-emerald-200 outline-none" />{isReading && <div className="absolute inset-0 flex items-center justify-center bg-slate-950/80 text-white"><Loader2 className="mr-2 animate-spin" /> Reading PDF text locally...</div>}</div>
-            <div className="flex flex-wrap items-center gap-3 border-t border-slate-200 bg-white p-5"><Button onClick={processInput} disabled={isReading}>{copy.action}</Button><Button variant="secondary" onClick={() => { setText(mode === 'form16' ? FORM16_EXAMPLE : GENERIC_EXAMPLE); setComputation(null); setForm16(null); setError(''); setFileName(''); }}>Reset example</Button>{error && <div className="flex items-center gap-2 text-sm font-semibold text-red-700"><AlertTriangle size={16} /> {error}</div>}</div>
+
+        <main className="mx-auto max-w-6xl px-4 pb-16 pt-2">
+          <div className="grid gap-6 lg:grid-cols-[1.04fr_.96fr] items-start">
+            {/* Left Card: Input */}
+            <Card className="p-0 overflow-hidden shadow-xs">
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-100 dark:border-zinc-800 bg-zinc-50/60 dark:bg-zinc-900 px-5 py-4">
+                <div>
+                  <p className="font-bold text-sm text-zinc-950 dark:text-zinc-50">{copy.input}</p>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                    {fileName || (mode === 'form16' ? 'Searchable PDF or pasted text' : 'UTF-8 JSON object')}
+                  </p>
+                </div>
+                <label className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-blue-600 px-3.5 py-2 text-xs font-bold text-white hover:bg-blue-700 transition">
+                  <Upload size={14} /> Choose file
+                  <input
+                    className="hidden"
+                    type="file"
+                    accept={mode === 'form16' ? '.pdf,.txt,application/pdf,text/plain' : '.json,application/json'}
+                    onChange={(event) => {
+                      const file = event.target.files?.[0];
+                      if (file) void readFile(file);
+                    }}
+                  />
+                </label>
+              </div>
+
+              <div className="relative p-4">
+                <textarea
+                  aria-label={copy.input}
+                  value={text}
+                  onChange={(event) => setText(event.target.value)}
+                  spellCheck={false}
+                  className="min-h-[420px] w-full resize-y rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 p-4 font-mono text-xs leading-relaxed text-zinc-900 dark:text-zinc-100 outline-none focus:border-blue-600 transition"
+                />
+                {isReading && (
+                  <div className="absolute inset-4 flex items-center justify-center rounded-xl bg-zinc-950/80 text-white backdrop-blur-xs text-xs font-bold">
+                    <Loader2 className="mr-2 animate-spin h-4 w-4" /> Reading PDF text locally...
+                  </div>
+                )}
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3 border-t border-zinc-100 dark:border-zinc-800 bg-zinc-50/60 dark:bg-zinc-900 p-4">
+                <Button onClick={processInput} disabled={isReading} size="sm">
+                  {copy.action}
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setText(mode === 'form16' ? FORM16_EXAMPLE : GENERIC_EXAMPLE);
+                    setComputation(null);
+                    setForm16(null);
+                    setError('');
+                    setFileName('');
+                  }}
+                >
+                  Reset Example
+                </Button>
+                {error && (
+                  <div className="flex items-center gap-1.5 text-xs font-semibold text-red-600 dark:text-red-400">
+                    <AlertTriangle size={14} /> {error}
+                  </div>
+                )}
+              </div>
+            </Card>
+
+            {/* Right Card: Result */}
+            <Card className="p-6 sm:p-8 space-y-6 shadow-xs">
+              <div className="flex items-start justify-between gap-4 border-b border-zinc-100 dark:border-zinc-800 pb-4">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">
+                    Normalized Result
+                  </p>
+                  <h2 className="mt-1 text-xl font-bold text-zinc-950 dark:text-zinc-50">
+                    {computation ? computation.sourceFormat : 'Waiting for input'}
+                  </h2>
+                </div>
+                {computation && (
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300">
+                    <CheckCircle2 size={13} /> Parsed
+                  </span>
+                )}
+              </div>
+
+              {summary ? (
+                <div className="space-y-6">
+                  <div className="grid gap-2 sm:grid-cols-2">
+                    <Metric label="Gross total income" value={summary.grossTotalIncome} />
+                    <Metric label="Chapter VI-A deductions" value={summary.totalDeductions} />
+                    <Metric label="Total income" value={summary.totalIncome} accent />
+                    <Metric label="Tax liability" value={summary.totalTaxLiability} />
+                    <Metric label="Taxes paid" value={summary.totalTaxesPaid} />
+                    <Metric label={summary.refundDue ? 'Refund due' : 'Balance payable'} value={summary.refundDue ?? summary.balancePayable} />
+                  </div>
+
+                  <div className="max-h-60 overflow-auto rounded-xl border border-zinc-200 dark:border-zinc-800">
+                    <table className="w-full text-xs">
+                      <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
+                        {[...computation.income, ...computation.deductions, ...computation.taxes].map((line, index) => (
+                          <tr key={`${line.code}-${line.sourcePath ?? index}`} className="hover:bg-zinc-50/50 dark:hover:bg-zinc-900/50">
+                            <td className="px-4 py-2.5 text-zinc-600 dark:text-zinc-400">{line.label}</td>
+                            <td className="px-4 py-2.5 text-right font-bold text-zinc-950 dark:text-zinc-50 font-mono">{inr(line.amount)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {computation.warnings.length > 0 && (
+                    <div className="rounded-xl border border-amber-200 bg-amber-50/60 dark:border-amber-900/40 dark:bg-amber-950/20 p-4">
+                      <p className="mb-2 text-xs font-bold uppercase tracking-wider text-amber-800 dark:text-amber-300">
+                        Validation Notes
+                      </p>
+                      <ul className="space-y-1.5 text-xs text-amber-900 dark:text-amber-200 leading-relaxed">
+                        {computation.warnings.map((warning) => (
+                          <li key={warning} className="flex gap-2">
+                            <AlertTriangle className="mt-0.5 shrink-0" size={13} />
+                            {warning}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  <div className="flex flex-wrap gap-2.5 pt-2">
+                    <Button onClick={saveJson} size="sm">
+                      <Download size={14} className="mr-1.5" /> Download JSON
+                    </Button>
+                    <Button variant="outline" onClick={savePdf} size="sm">
+                      <FileText size={14} className="mr-1.5" /> Download PDF
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex min-h-[380px] flex-col items-center justify-center text-center text-zinc-400">
+                  <FileJson size={44} className="mb-3 text-zinc-300 dark:text-zinc-700" />
+                  <p className="max-w-xs text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
+                    The output shows mapped summary fields only. Repeated schedule values are never added together.
+                  </p>
+                </div>
+              )}
+            </Card>
+          </div>
+
+          {normalizedOutput && (
+            <Card className="mt-6 p-6 space-y-3">
+              <div className="flex items-center gap-2">
+                <FileJson className="text-blue-600 dark:text-blue-400" size={18} />
+                <h2 className="font-bold text-sm text-zinc-950 dark:text-zinc-50">Output JSON Structure</h2>
+              </div>
+              <pre className="max-h-72 overflow-auto rounded-xl bg-zinc-900 dark:bg-zinc-950 p-4 text-xs font-mono leading-relaxed text-zinc-200 border border-zinc-800">
+                {JSON.stringify(normalizedOutput, null, 2)}
+              </pre>
+            </Card>
+          )}
+
+          <Card className="mt-8 p-6 space-y-4">
+            <h2 className="text-lg font-bold text-zinc-950 dark:text-zinc-50">Related Tax Document Tools</h2>
+            <div className="flex flex-wrap gap-2 text-xs font-semibold">
+              <Link className="rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2 text-zinc-800 transition hover:bg-zinc-100 hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800" href="/finance/income-computation-from-json">
+                Income Computation from JSON
+              </Link>
+              <Link className="rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2 text-zinc-800 transition hover:bg-zinc-100 hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800" href="/finance/itr-json-to-computation-pdf">
+                ITR JSON to Computation PDF
+              </Link>
+              <Link className="rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2 text-zinc-800 transition hover:bg-zinc-100 hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800" href="/finance/form-16-to-json">
+                Form 16 to JSON Converter
+              </Link>
+            </div>
+            <p className="max-w-4xl text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
+              Official ITR values are read from return summary and tax-computation sections. Generic JSON receives arithmetic totals only. Form 16 extraction runs completely client-side in browser memory.
+            </p>
           </Card>
-          <Card className="!rounded-[1.5rem] !border-slate-300 !p-6 shadow-[0_18px_60px_-35px_rgba(15,23,42,.45)] md:!p-8">
-            <div className="mb-6 flex items-start justify-between gap-4"><div><p className="text-xs font-black uppercase tracking-[0.15em] text-teal-700">Normalized result</p><h2 className="mt-1 text-2xl font-black">{computation ? computation.sourceFormat : 'Waiting for input'}</h2></div>{computation && <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-800"><CheckCircle2 size={14} /> Parsed</span>}</div>
-            {summary ? <><div className="grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 sm:grid-cols-2"><Metric label="Gross total income" value={summary.grossTotalIncome} /><Metric label="Chapter VI-A deductions" value={summary.totalDeductions} /><Metric label="Total income" value={summary.totalIncome} accent /><Metric label="Tax liability" value={summary.totalTaxLiability} /><Metric label="Taxes paid" value={summary.totalTaxesPaid} /><Metric label={summary.refundDue ? 'Refund due' : 'Balance payable'} value={summary.refundDue ?? summary.balancePayable} /></div><div className="mt-6 max-h-64 overflow-auto rounded-xl border border-slate-200"><table className="w-full text-sm"><tbody>{[...computation.income, ...computation.deductions, ...computation.taxes].map((line, index) => <tr key={`${line.code}-${line.sourcePath ?? index}`} className="border-b border-slate-100 last:border-0"><td className="px-4 py-3 text-slate-600">{line.label}</td><td className="px-4 py-3 text-right font-bold">{inr(line.amount)}</td></tr>)}</tbody></table></div>{computation.warnings.length > 0 && <div className="mt-5 rounded-xl border border-amber-200 bg-amber-50 p-4"><p className="mb-2 text-xs font-black uppercase tracking-[0.12em] text-amber-900">Validation notes</p><ul className="space-y-2 text-sm leading-5 text-amber-950">{computation.warnings.map(warning => <li key={warning} className="flex gap-2"><AlertTriangle className="mt-0.5 shrink-0" size={15} />{warning}</li>)}</ul></div>}<div className="mt-6 flex flex-wrap gap-3"><Button onClick={saveJson}><Download size={16} /> Download normalized JSON</Button><Button variant="outline" onClick={savePdf}><FileText size={16} /> Download computation PDF</Button></div></> : <div className="flex min-h-[430px] flex-col items-center justify-center text-center text-slate-500"><FileJson size={48} className="mb-4 text-slate-300" /><p className="max-w-sm leading-6">The output shows mapped summary fields only. Repeated schedule values are never added together.</p></div>}
-          </Card>
-        </div>
-        {normalizedOutput && <section className="mt-6 rounded-2xl border border-slate-300 bg-white p-6"><div className="mb-4 flex items-center gap-2"><FileJson className="text-teal-700" size={20} /><h2 className="font-black">Output JSON format</h2></div><pre className="max-h-80 overflow-auto rounded-xl bg-slate-950 p-5 text-xs leading-5 text-emerald-200">{JSON.stringify(normalizedOutput, null, 2)}</pre></section>}
-        <section className="mt-8 rounded-2xl border border-slate-300 bg-white p-6"><h2 className="text-xl font-black">Related tax document tools</h2><div className="mt-4 flex flex-wrap gap-3 text-sm font-bold"><Link className="rounded-full bg-teal-50 px-4 py-2 text-teal-900" href="/finance/income-computation-from-json">Income computation from JSON</Link><Link className="rounded-full bg-amber-50 px-4 py-2 text-amber-900" href="/finance/itr-json-to-computation-pdf">ITR JSON to computation PDF</Link><Link className="rounded-full bg-sky-50 px-4 py-2 text-sky-900" href="/finance/form-16-to-json">Form 16 to JSON converter</Link></div><p className="mt-5 max-w-4xl text-sm leading-6 text-slate-600">Official ITR values are read from return summary and tax-computation sections. Generic JSON receives arithmetic totals only. Form 16 extraction requires verification because certificate layouts and PDF text order vary.</p></section>
+        </main>
       </div>
-    </main>
+
+      <Footer />
+    </div>
   );
 }
 
 function Metric({ label, value, accent = false }: { label: string; value: number | null; accent?: boolean }) {
-  return <div className={accent ? 'bg-teal-950 p-4 text-white' : 'bg-white p-4'}><p className={accent ? 'text-xs font-bold uppercase text-teal-200' : 'text-xs font-bold uppercase text-slate-500'}>{label}</p><p className="mt-2 text-xl font-black">{inr(value)}</p></div>;
+  return (
+    <div className={`p-4 rounded-xl border ${accent ? 'bg-blue-600 text-white border-blue-700 dark:bg-blue-600 dark:border-blue-500' : 'bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800'}`}>
+      <p className={`text-[11px] font-bold uppercase tracking-wider ${accent ? 'text-blue-100' : 'text-zinc-500 dark:text-zinc-400'}`}>
+        {label}
+      </p>
+      <p className="mt-1 text-lg font-bold font-mono">
+        {inr(value)}
+      </p>
+    </div>
+  );
 }

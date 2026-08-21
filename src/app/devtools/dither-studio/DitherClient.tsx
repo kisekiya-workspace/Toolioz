@@ -26,7 +26,7 @@ import {
 } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { RelatedTools } from '@/components/ui/RelatedTools';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/Card';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import DitherStudio from '@/components/ditherit/DitherStudio';
 import {
   DitherAlgorithm,
@@ -301,7 +301,7 @@ export default function DitherClient() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-900 flex flex-col">
+    <div className="min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50 flex flex-col justify-between">
       {dashboardMode === 'ditherit' ? (
         <div className="flex-1">
           <DitherStudio />
@@ -309,28 +309,28 @@ export default function DitherClient() {
       ) : (
         <>
           {/* Title & View Switcher Banner for Classic Mode */}
-          <div className="bg-white border-b border-slate-200 py-6 px-4">
+          <div className="bg-white border-b border-zinc-200 py-6 px-4 dark:border-zinc-800 dark:bg-zinc-950">
             <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
               <div>
-                <h1 className="text-2xl sm:text-3xl font-black text-slate-900 flex items-center gap-2">
-                  Image & Video <span className="text-indigo-600">Dither Studio</span>
+                <h1 className="text-2xl sm:text-3xl font-black text-zinc-950 dark:text-zinc-50 flex items-center gap-2">
+                  Image & Video <span className="text-blue-600 dark:text-blue-400">Dither Studio</span>
                 </h1>
-                <p className="text-xs sm:text-sm text-slate-600 mt-1">
+                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1">
                   Apply retro 1-bit, Floyd-Steinberg, Bayer matrix, GameBoy, and ASCII dithering live in your browser.
                 </p>
               </div>
 
-              <div className="flex items-center gap-2 bg-slate-100 p-1.5 rounded-xl border border-slate-200">
+              <div className="flex items-center gap-2 bg-zinc-100 dark:bg-zinc-900 p-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800">
                 <button
                   onClick={() => setDashboardMode('ditherit')}
-                  className="px-3.5 py-2 rounded-lg text-xs font-bold flex items-center gap-2 transition cursor-pointer text-slate-600 hover:text-slate-900"
+                  className="px-3.5 py-2 rounded-lg text-xs font-bold flex items-center gap-2 transition cursor-pointer text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100"
                 >
                   <Sparkles className="w-3.5 h-3.5" /> ditherit ✦ Studio (by Prasanjit Dey)
                 </button>
 
                 <button
                   onClick={() => setDashboardMode('classic')}
-                  className={`px-3.5 py-2 rounded-lg text-xs font-bold flex items-center gap-2 transition cursor-pointer ${dashboardMode === 'classic' ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'}`}
+                  className={`px-3.5 py-2 rounded-lg text-xs font-bold flex items-center gap-2 transition cursor-pointer ${dashboardMode === 'classic' ? 'bg-blue-600 text-white shadow-xs' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100'}`}
                 >
                   <Sliders className="w-3.5 h-3.5" /> Classic Studio
                 </button>
@@ -342,7 +342,7 @@ export default function DitherClient() {
           <main className="max-w-7xl mx-auto px-4 py-8 w-full space-y-8 flex-1">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 items-start">
               {/* Controls Panel Card (Left Column) */}
-              <Card className="lg:col-span-5 border-slate-200 bg-white p-6 space-y-5 shadow-sm">
+              <Card className="lg:col-span-5 p-6 space-y-5 shadow-xs">
                 <CardHeader className="px-0 pt-0 pb-2">
                   <CardTitle className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-2">
                     <Upload className="w-4 h-4 text-indigo-600" /> Media Source

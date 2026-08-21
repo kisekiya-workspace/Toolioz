@@ -2,8 +2,8 @@
 
 import React, { useMemo, useState } from 'react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { ArrowLeftRight, Check, Copy, TerminalSquare, AlertCircle } from 'lucide-react';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { RelatedTools } from '@/components/ui/RelatedTools';
@@ -365,20 +365,25 @@ export default function CurlConverterClient() {
   };
 
   return (
-    <>
-      <div className="min-h-screen bg-[var(--bg-primary)]">
-        <header className="bg-[linear-gradient(180deg,rgba(37,99,235,0.08),transparent_70%)] py-12 text-center md:py-24">
-          <div className="container">
-            <h1 className="text-[clamp(2rem,6vw,3.25rem)] font-black tracking-[-0.02em]">
-              cURL <span className="text-[#1d4ed8]">Converter</span>
+    <div className="min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50 flex flex-col justify-between">
+      <div>
+        <header className="bg-white pt-8 pb-6 text-center dark:bg-zinc-950">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-3 inline-flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50/80 px-3 py-0.5 text-xs font-semibold text-blue-700 dark:border-blue-900/60 dark:bg-blue-950/40 dark:text-blue-300">
+                API & Network Utilities
+              </span>
+            </div>
+            <h1 className="text-3xl font-extrabold tracking-tight text-zinc-950 sm:text-4xl md:text-5xl dark:text-zinc-50">
+              cURL Converter
             </h1>
-            <p className="mx-auto mt-4 max-w-[760px] text-[var(--text-secondary)]">
+            <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
               Convert terminal-ready cURL commands into production snippets for Fetch, Axios, and Python requests.
             </p>
           </div>
         </header>
 
-        <section className="container section">
+        <section className="container pb-12 pt-2 sm:pt-4">
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             <Card className="min-w-0 !p-5">
               <div className="mb-4 flex flex-wrap items-start justify-between gap-2.5">
@@ -488,6 +493,6 @@ export default function CurlConverterClient() {
         </section>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }

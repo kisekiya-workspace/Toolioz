@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/Card';
+import { Card } from '@/components/ui/card';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { CalendarClock, Copy, Check, Info, Settings2, Clock, CalendarDays, Calendar as CalendarIcon, Hash } from 'lucide-react';
 import { CronExpressionParser } from 'cron-parser';
@@ -281,16 +281,25 @@ export default function CronGeneratorClient() {
     ] as const;
 
     return (
-        <>
-            <div className="min-h-screen bg-[var(--bg-primary)]">
-                <header className="bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,0.05)_0%,transparent_50%)] py-12 text-center md:py-24 border-b border-[var(--border)]">
-                    <div className="container">
-                        <h1 className="mb-4 text-[clamp(2.5rem,5vw,4rem)] font-black text-[var(--text-primary)] tracking-tight">Advanced Cron <span className="text-[#8b5cf6]">Builder</span></h1>
-                        <p className="text-xl text-[var(--text-secondary)] max-w-2xl mx-auto">Visually construct valid cron schedules, parse existing expressions into plain English, and preview execution timelines safely in your browser.</p>
+        <div className="min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50 flex flex-col justify-between">
+            <div>
+                <header className="bg-white pt-8 pb-6 text-center dark:bg-zinc-950">
+                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div className="mb-3 inline-flex items-center gap-2">
+                            <span className="inline-flex items-center gap-1.5 rounded-full border border-purple-200 bg-purple-50/80 px-3 py-0.5 text-xs font-semibold text-purple-700 dark:border-purple-900/60 dark:bg-purple-950/40 dark:text-purple-300">
+                                Automation & Scheduling
+                            </span>
+                        </div>
+                        <h1 className="text-3xl font-extrabold tracking-tight text-zinc-950 sm:text-4xl md:text-5xl dark:text-zinc-50">
+                            Advanced Cron Builder
+                        </h1>
+                        <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
+                            Visually construct valid cron schedules, parse expressions into plain English, and preview execution timelines safely in your browser.
+                        </p>
                     </div>
                 </header>
 
-                <section className="container section">
+                <section className="container pb-12 pt-2 sm:pt-4">
                     <div className="mx-auto max-w-[1200px]">
                         
                         {/* Massive Display & Input */}
@@ -421,6 +430,6 @@ export default function CronGeneratorClient() {
                 />
             </div>
             <Footer />
-        </>
+        </div>
     );
 }

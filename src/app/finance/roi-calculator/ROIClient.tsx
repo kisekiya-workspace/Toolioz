@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Card } from '@/components/ui/Card';
-import { Input } from '@/components/ui/Input';
-import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { calculateROI } from '@/lib/formulas';
-import { Info, BarChart3, TrendingUp, ShieldCheck, BookOpen, AlertTriangle, Lightbulb } from 'lucide-react';
+import { Info, BarChart3, TrendingUp, ShieldCheck, BookOpen, AlertTriangle, Lightbulb, Download } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
@@ -62,7 +62,7 @@ export default function ROIClient() {
           </div>
         </header>
 
-        <section className="mx-auto max-w-6xl py-16">
+        <section className="mx-auto max-w-6xl pb-12 pt-4">
           <div className={styles.grid}>
             <Card className={styles.inputCard}>
               <div className={styles.inputGroup}>
@@ -91,8 +91,8 @@ export default function ROIClient() {
             </Card>
 
             <div className={styles.resultCol}>
-              <Card className={styles.resultCard} style={{ background: 'linear-gradient(135deg, #10b981, #059669)' }}>
-                <h2 className={styles.resultLabel}>Total Return (ROI)</h2>
+              <Card className="rounded-2xl border border-emerald-500/30 bg-emerald-700 dark:bg-[#1f2430] dark:border-[#333a4d] p-6 text-center text-white shadow-md sm:p-8 relative">
+                <h2 className="mb-2 text-xs font-bold uppercase tracking-wider text-emerald-100 dark:text-emerald-400">Total Return on Investment</h2>
                 <div className={styles.resultValue}>{result.toFixed(2)}%</div>
                 <div className={styles.stats}>
                   <div className={styles.statItem}>
@@ -109,6 +109,7 @@ export default function ROIClient() {
                   className={styles.btn}
                   onClick={() => window.print()}
                 >
+                  <Download className="mr-2 size-4" />
                   Download Report
                 </Button>
               </Card>

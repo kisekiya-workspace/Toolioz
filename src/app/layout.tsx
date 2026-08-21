@@ -1,10 +1,30 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
+import { Geist, Geist_Mono, Outfit } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/layout/Navbar';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { JSONLD } from '@/components/ui/JSONLD';
 import { DEFAULT_OG_IMAGE, buildWebsiteJsonLd } from '@/lib/seo';
+import { ThemeProvider } from '@/components/theme/ThemeProvider';
+
+const geistSans = Geist({
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+const outfit = Outfit({
+  variable: '--font-outfit',
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://toolioz.com'),
@@ -63,8 +83,29 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#2563eb',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#1c1c1c' },
+  ],
 };
+
+const themeScript = `
+  (function() {
+    try {
+      var key = 'toolioz-theme';
+      var theme = localStorage.getItem(key);
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var isDark = theme === 'dark' || ((!theme || theme === 'system') && prefersDark);
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+        document.documentElement.style.colorScheme = 'dark';
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.style.colorScheme = 'light';
+      }
+    } catch (e) {}
+  })();
+`;
 
 export default function RootLayout({
   children,
@@ -78,13 +119,6 @@ export default function RootLayout({
     name: 'Toolioz',
     url: 'https://toolioz.com',
     logo: 'https://toolioz.com/tooliozLogo.svg',
-    sameAs: [
-      'https://twitter.com/toolioz',
-      'https://facebook.com/toolioz',
-      'https://instagram.com/toolioz',
-      'https://linkedin.com/company/toolioz',
-      'https://youtube.com/@toolioz',
-    ],
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer support',
@@ -93,8 +127,15 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
-      <body>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} antialiased`}
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="min-h-screen bg-background font-sans text-foreground selection:bg-blue-600 selection:text-white">
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-VM8TJM1RER"
           strategy="afterInteractive"
@@ -109,9 +150,11 @@ export default function RootLayout({
         </Script>
         <JSONLD data={websiteJsonLd} />
         <JSONLD data={orgJsonLd} />
-        <Navbar />
-        <Breadcrumbs />
-        <div id="main-content">{children}</div>
+        <ThemeProvider>
+          <Navbar />
+          <Breadcrumbs />
+          <div id="main-content">{children}</div>
+        </ThemeProvider>
       </body>
     </html>
   );
