@@ -6,7 +6,7 @@ import { JSONLD } from '@/components/ui/JSONLD';
 import { ReadingProgressBar } from '@/components/ui/ReadingProgressBar';
 import { Footer } from '@/components/layout/Footer';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/Button';
 import { top5Articles, getTop5Article } from '@/lib/top5-content';
 import { buildArticleMetadata, SITE_URL } from '@/lib/seo';
 

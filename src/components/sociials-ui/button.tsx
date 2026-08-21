@@ -1,4 +1,4 @@
 "use client";
 
-export { Button, buttonVariants } from "@/components/ui/button";
-export type { ButtonProps } from "@/components/ui/button";
+export { Button, buttonVariants } from "@/components/ui/Button";
+export type { ButtonProps } from "@/components/ui/Button";

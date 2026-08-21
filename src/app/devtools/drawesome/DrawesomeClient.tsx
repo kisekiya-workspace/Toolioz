@@ -4,7 +4,7 @@ import React from "react";
 import DrawesomeStudio from "@/components/drawesome/DrawesomeStudio";
 import { Footer } from "@/components/layout/Footer";
 import { RelatedTools } from "@/components/ui/RelatedTools";
-import { Card } from "@/components/ui/card";
+import { Card } from "@/components/ui/Card";
 import { ExternalLink, Sparkles, Pencil, Eraser, FileCode } from "lucide-react";
 
 import { DirectAnswerBlock } from "@/components/ui/DirectAnswerBlock";

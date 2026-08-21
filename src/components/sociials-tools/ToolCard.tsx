@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { LucideIcon, ArrowRight } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/badge";
 import { PinButton } from "@/components/sociials-tools/PinButton";
 

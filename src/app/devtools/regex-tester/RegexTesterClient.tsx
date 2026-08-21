@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/ui/Card';
 import { SEOSection } from '@/components/ui/SEOSection';
 
 import { SearchCode, AlertCircle, Copy, Check } from 'lucide-react';

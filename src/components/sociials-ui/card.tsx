@@ -6,5 +6,5 @@ export {
   CardDescription,
   CardContent,
   CardAction,
-} from "@/components/ui/card";
-export type { CardProps } from "@/components/ui/card";
+} from "@/components/ui/Card";
+export type { CardProps } from "@/components/ui/Card";

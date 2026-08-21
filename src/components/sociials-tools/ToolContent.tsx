@@ -7,7 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Card } from "@/components/ui/card";
+import { Card } from "@/components/ui/Card";
 
 interface ContentSectionProps {
   title: string;

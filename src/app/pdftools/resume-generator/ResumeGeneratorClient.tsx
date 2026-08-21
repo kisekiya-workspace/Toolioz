@@ -16,8 +16,8 @@ import {
   Eye,
 } from 'lucide-react';
 import { generateVisualPdf } from './visual-pdf';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
 import { RESUME_TEMPLATES } from './resume-templates';
 import { VISUAL_TEMPLATES } from './visual-templates';
 import { SAMPLE_RESUME, type ResumeData } from './resume-types';

@@ -16,8 +16,8 @@ import {
   Upload,
 } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
 import { RelatedTools } from '@/components/ui/RelatedTools';
 import { FAQSchema } from '@/components/ui/FAQSchema';

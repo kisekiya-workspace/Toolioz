@@ -20,7 +20,7 @@ import {
   Boxes,
 } from 'lucide-react';
 import { CATEGORIES as TOOL_CATEGORIES, TOOLS } from '@/lib/tools';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/Button';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 
 const MAIN_NAV = [

@@ -4,7 +4,7 @@ import React from 'react';
 import DitherStudio from '@/components/ditherit/DitherStudio';
 import { Footer } from '@/components/layout/Footer';
 import { RelatedTools } from '@/components/ui/RelatedTools';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/ui/Card';
 import { ExternalLink, Sparkles, Code2, Film } from 'lucide-react';
 
 import { DirectAnswerBlock } from '@/components/ui/DirectAnswerBlock';

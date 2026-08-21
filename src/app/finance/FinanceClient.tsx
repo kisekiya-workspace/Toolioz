@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/Button';
 import { Search, Landmark, ShieldCheck, Zap, BookOpen, ArrowRight, X } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import Link from 'next/link';

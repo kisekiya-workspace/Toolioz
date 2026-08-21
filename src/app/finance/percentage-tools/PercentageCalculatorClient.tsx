@@ -2,8 +2,8 @@
 
 import { useMemo, useState } from 'react';
 import { ArrowDownRight, ArrowUpRight, Calculator, RotateCcw, ShieldCheck } from 'lucide-react';
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
+import { Card } from '@/components/ui/Card';
+import { Input } from '@/components/ui/Input';
 import type { PercentageToolKind } from './percentage-tool-data';
 
 const formatNumber = (value: number, digits = 4) =>

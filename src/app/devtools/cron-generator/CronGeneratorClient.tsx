@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/ui/Card';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { CalendarClock, Copy, Check, Info, Settings2, Clock, CalendarDays, Calendar as CalendarIcon, Hash } from 'lucide-react';
 import { CronExpressionParser } from 'cron-parser';

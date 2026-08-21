@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { CheckCircle2, LockKeyhole, Sparkles } from 'lucide-react';
 import type { ReactNode } from 'react';
 import type { NewToolDefinition } from '@/lib/new-tool-catalog';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/badge';
 import { Footer } from '@/components/layout/Footer';
 

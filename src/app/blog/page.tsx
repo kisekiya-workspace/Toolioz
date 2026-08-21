@@ -4,8 +4,8 @@ import { ArrowRight, BookOpen, Clock, Layers, ShieldCheck, Sparkles, TrendingUp,
 import { JSONLD } from '@/components/ui/JSONLD';
 import { Footer } from '@/components/layout/Footer';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/Card';
 import { standaloneBlogs } from '@/../blogs';
 import { allTooliozBlogPosts } from '@/lib/toolioz-blog-index';
 

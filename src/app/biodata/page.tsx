@@ -12,7 +12,7 @@ import {
 import { JSONLD } from '@/components/ui/JSONLD';
 import { Footer } from '@/components/layout/Footer';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/Button';
 import { biodataFaqs, biodataKeywords } from '@/lib/biodata-content';
 
 export const metadata: Metadata = {

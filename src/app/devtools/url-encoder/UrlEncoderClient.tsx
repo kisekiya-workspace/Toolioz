@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/ui/Card';
 import { SEOSection } from '@/components/ui/SEOSection';
 
 import { Check, Copy, Link as LinkIcon, Plus, Trash2 } from 'lucide-react';

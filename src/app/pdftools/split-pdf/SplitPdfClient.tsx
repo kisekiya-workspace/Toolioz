@@ -2,9 +2,9 @@
 
 import React, { useRef, useState } from 'react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Card } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
 import {
   FileText,
   ShieldCheck,

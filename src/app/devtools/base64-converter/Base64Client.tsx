@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/badge';
 import { Copy, Trash2, SwitchCamera, Check, FileUp } from 'lucide-react';
 import { FAQSchema } from '@/components/ui/FAQSchema';

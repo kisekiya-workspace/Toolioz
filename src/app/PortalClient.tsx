@@ -18,8 +18,8 @@ import {
 import { Footer } from '@/components/layout/Footer';
 import { TOOLS, CATEGORIES, type Tool } from '@/lib/tools';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/Card';
 import {
   Accordion,
   AccordionContent,

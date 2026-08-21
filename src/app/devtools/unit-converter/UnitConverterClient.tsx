@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { Footer } from '@/components/layout/Footer';
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
+import { Card } from '@/components/ui/Card';
+import { Input } from '@/components/ui/Input';
 import { Ruler, Weight, Thermometer, Database, ArrowRightLeft, Copy, Check } from 'lucide-react';
 
 

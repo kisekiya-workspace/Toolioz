@@ -7,8 +7,8 @@ import { ArrowRight, Command, Grid3X3, Search, ShieldCheck, Sparkles, X } from '
 import { TOOLS as IMPORTED_TOOLS } from '@/data/sociials-tools';
 import { TOOLS as CORE_TOOLS } from '@/lib/tools';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/ui/Card';
 import { Footer } from '@/components/layout/Footer';
 
 type LibraryTool = {

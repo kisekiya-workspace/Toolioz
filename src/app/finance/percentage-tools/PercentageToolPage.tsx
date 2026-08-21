@@ -5,7 +5,7 @@ import { DirectAnswerBlock } from '@/components/ui/DirectAnswerBlock';
 import { FAQSchema } from '@/components/ui/FAQSchema';
 import { RelatedTools } from '@/components/ui/RelatedTools';
 import { Badge } from '@/components/ui/badge';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/ui/Card';
 import PercentageCalculatorClient from './PercentageCalculatorClient';
 import { PERCENTAGE_TOOL_CONFIGS, type PercentageToolKind } from './percentage-tool-data';
 

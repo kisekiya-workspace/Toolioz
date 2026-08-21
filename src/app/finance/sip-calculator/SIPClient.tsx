@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/Card';
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
 import { calculateSIP } from '@/lib/formulas';
 import { Info, TrendingUp, Sparkles, Target, AlertTriangle, ShieldCheck, BookOpen, Lightbulb, Download } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';

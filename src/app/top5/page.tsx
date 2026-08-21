@@ -4,7 +4,7 @@ import { ArrowRight, BookOpen, Sparkles, Landmark, Code, FileText, Shield } from
 import { JSONLD } from '@/components/ui/JSONLD';
 import { Footer } from '@/components/layout/Footer';
 import { Badge } from '@/components/ui/badge';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/ui/Card';
 import { top5Articles } from '@/lib/top5-content';
 import { SITE_URL } from '@/lib/seo';
 

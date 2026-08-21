@@ -26,7 +26,7 @@ import {
 } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { RelatedTools } from '@/components/ui/RelatedTools';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/Card';
 import DitherStudio from '@/components/ditherit/DitherStudio';
 import {
   DitherAlgorithm,

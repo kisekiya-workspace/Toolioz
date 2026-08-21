@@ -4,7 +4,7 @@ import { ArrowRight, HelpCircle, CheckCircle2 } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { JSONLD } from '@/components/ui/JSONLD';
 import { Badge } from '@/components/ui/badge';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/ui/Card';
 import { howToPosts } from '@/lib/howto-content';
 import { buildCollectionPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
