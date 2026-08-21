@@ -12,7 +12,7 @@ export const fieldClass =
   'w-full rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3.5 py-2.5 text-xs sm:text-sm font-medium text-zinc-900 dark:text-zinc-50 outline-none transition focus:border-blue-600 dark:focus:border-blue-500';
 export const areaClass = `${fieldClass} min-h-44 resize-y font-mono text-xs leading-relaxed`;
 export const primaryButtonClass =
-  'inline-flex min-h-10 items-center justify-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 px-4 py-2 text-xs sm:text-sm font-bold text-white shadow-xs transition cursor-pointer disabled:cursor-not-allowed disabled:opacity-50';
+  'inline-flex min-h-10 items-center justify-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 px-4 py-2 text-xs sm:text-sm font-bold text-white transition cursor-pointer disabled:cursor-not-allowed disabled:opacity-50';
 export const secondaryButtonClass =
   'inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 px-3.5 py-2 text-xs sm:text-sm font-bold text-zinc-700 dark:text-zinc-200 transition cursor-pointer disabled:cursor-not-allowed disabled:opacity-50';
 
@@ -55,7 +55,7 @@ export function ToolWorkbench({
 
         {/* Main Workspace Card */}
         <section className="mx-auto max-w-5xl px-4 pb-16 pt-2 sm:px-6">
-          <Card className="p-6 sm:p-8 shadow-xs space-y-6">
+          <Card className="p-6 sm:p-8 space-y-6">
             {children}
           </Card>
 

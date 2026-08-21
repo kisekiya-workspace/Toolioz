@@ -17,7 +17,7 @@ export function SqlSchemaDisplay({ schemas, dbState, onReset }: SqlSchemaDisplay
     return (
         <div className="pt-8">
             <div className="flex items-center justify-between mb-4">
-                <Label className="text-sm text-foreground font-bold flex items-center gap-2 bg-background px-3 py-1 rounded-full border shadow-sm">
+                <Label className="text-sm text-foreground font-bold flex items-center gap-2 bg-background px-3 py-1 rounded-full border">
                     <Database className="w-4 h-4 text-blue-500" /> Current Database State
                 </Label>
                 <div className="flex items-center gap-2">
@@ -45,7 +45,7 @@ export function SqlSchemaDisplay({ schemas, dbState, onReset }: SqlSchemaDisplay
 
                 {Object.keys(schemas).map(table => (
                     <TabsContent key={table} value={table} className="mt-0 animate-in fade-in slide-in-from-left-2 duration-300">
-                        <div className="border rounded-xl overflow-hidden bg-background shadow-sm">
+                        <div className="border rounded-xl overflow-hidden bg-background">
                             <div className="overflow-x-auto max-h-[300px]">
                                 <table className="w-full text-sm text-left">
                                     <thead className="text-xs bg-muted/40 text-muted-foreground sticky top-0 uppercase tracking-wider">

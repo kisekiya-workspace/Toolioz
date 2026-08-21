@@ -2270,7 +2270,7 @@ customElements.define('shader-bg', ShaderBg);
         </div>
 
         {/* Category Filter Chips + Preset Selector */}
-        <Card className="mb-8 border border-slate-200 bg-white p-5 shadow-sm">
+        <Card className="mb-8 border border-slate-200 bg-white p-5">
           {/* Category Filter Chips */}
           <div className="mb-4 flex flex-wrap items-center gap-2">
             <div className="flex items-center gap-1.5 text-xs font-bold text-slate-500 mr-1">
@@ -2281,7 +2281,7 @@ customElements.define('shader-bg', ShaderBg);
               onClick={() => setActiveCategory('all')}
               className={`rounded-full border px-3 py-1 text-xs font-bold transition-all ${
                 activeCategory === 'all'
-                  ? 'border-purple-600 bg-purple-600 text-white shadow-sm'
+                  ? 'border-purple-600 bg-purple-600 text-white'
                   : 'border-slate-200 text-slate-600 hover:border-purple-300 hover:text-purple-700'
               }`}
             >
@@ -2293,7 +2293,7 @@ customElements.define('shader-bg', ShaderBg);
                 onClick={() => setActiveCategory(cat)}
                 className={`rounded-full border px-3 py-1 text-xs font-bold transition-all ${
                   activeCategory === cat
-                    ? 'border-purple-600 bg-purple-600 text-white shadow-sm'
+                    ? 'border-purple-600 bg-purple-600 text-white'
                     : 'border-slate-200 text-slate-600 hover:border-purple-300 hover:text-purple-700'
                 }`}
               >
@@ -2328,7 +2328,7 @@ customElements.define('shader-bg', ShaderBg);
                 title={preset.desc}
                 className={`group flex flex-col rounded-xl border p-2.5 text-left transition-all ${
                   selectedPreset === preset.id
-                    ? 'border-purple-600 bg-purple-50 shadow-sm ring-1 ring-purple-600'
+                    ? 'border-purple-600 bg-purple-50 ring-1 ring-purple-600'
                     : 'border-slate-200 bg-slate-50/50 hover:border-purple-300 hover:bg-white'
                 }`}
               >
@@ -2351,7 +2351,7 @@ customElements.define('shader-bg', ShaderBg);
                 onClick={() => handlePresetSelect(preset.id)}
                 className={`group relative flex flex-col rounded-xl border p-2.5 text-left transition-all ${
                   selectedPreset === preset.id
-                    ? 'border-purple-600 bg-purple-50 shadow-sm ring-1 ring-purple-600'
+                    ? 'border-purple-600 bg-purple-50 ring-1 ring-purple-600'
                     : 'border-slate-200 bg-amber-50/30 hover:border-purple-300 hover:bg-white'
                 }`}
               >
@@ -2376,7 +2376,7 @@ customElements.define('shader-bg', ShaderBg);
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
           {/* Left Column: WebGL Live Canvas Preview */}
           <div className="flex flex-col gap-4 lg:col-span-6">
-            <Card className="relative overflow-hidden border border-slate-200 bg-slate-950 p-0 shadow-md">
+            <Card className="relative overflow-hidden border border-slate-200 bg-slate-950 p-0">
               {/* Canvas Container */}
               <div className="relative aspect-square w-full sm:aspect-[4/3] bg-black">
                 <canvas
@@ -2472,7 +2472,7 @@ customElements.define('shader-bg', ShaderBg);
             </Card>
 
             {/* Designer Controls: Colors + Uniforms + Textures */}
-            <Card className="border border-slate-200 bg-white p-5 shadow-sm">
+            <Card className="border border-slate-200 bg-white p-5">
               <h2 className="mb-4 flex items-center gap-2 text-sm font-bold text-slate-900">
                 <Palette className="h-4 w-4 text-purple-600" />
                 <span>Designer Controls &amp; Color Palette</span>
@@ -2648,7 +2648,7 @@ customElements.define('shader-bg', ShaderBg);
 
           {/* Right Column: Code Editor & Quick Snippets */}
           <div className="flex flex-col gap-4 lg:col-span-6">
-            <Card className="flex flex-1 flex-col overflow-hidden border border-slate-800 bg-slate-950 p-0 shadow-md">
+            <Card className="flex flex-1 flex-col overflow-hidden border border-slate-800 bg-slate-950 p-0">
               {/* Editor Header Toolbar */}
               <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900 px-4 py-2.5 text-xs text-slate-300">
                 <div className="flex items-center gap-2">
@@ -2710,7 +2710,7 @@ customElements.define('shader-bg', ShaderBg);
             </Card>
 
             {/* Export Code Box */}
-            <Card className="border border-slate-200 bg-white p-5 shadow-sm">
+            <Card className="border border-slate-200 bg-white p-5">
               <div className="mb-3 flex items-center justify-between">
                 <div className="flex items-center gap-2 text-sm font-bold text-slate-900">
                   <FileCode className="h-4 w-4 text-purple-600" />

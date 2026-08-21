@@ -23,7 +23,7 @@ export function PinButton({ href, className }: PinButtonProps) {
             variant="ghost"
             size="icon"
             className={cn(
-                "h-8 w-8 rounded-full bg-background/50 backdrop-blur-sm hover:bg-primary/10 hover:text-primary shadow-sm",
+                "h-8 w-8 rounded-full bg-background/50 backdrop-blur-sm hover:bg-primary/10 hover:text-primary",
                 className
             )}
             onClick={(e) => {

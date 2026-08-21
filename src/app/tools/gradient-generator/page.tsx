@@ -269,7 +269,7 @@ export default function GradientGeneratorPage() {
                 <TabsContent value="classic">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         {/* Preview */}
-                        <Card className="border-2 shadow-2xl h-[400px] lg:h-auto overflow-hidden relative group rounded-3xl">
+                        <Card className="border-2 h-[400px] lg:h-auto overflow-hidden relative group rounded-3xl">
                             <div className="absolute inset-0 transition-all duration-500" style={{ background: classicGradient }} />
                             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/10 backdrop-blur-sm">
                                 <span className="text-white font-mono bg-black/50 px-4 py-2 rounded">Preview</span>
@@ -278,7 +278,7 @@ export default function GradientGeneratorPage() {
 
                         {/* Controls */}
                         <div className="space-y-6">
-                            <Card className="border-2 shadow-lg">
+                            <Card className="border-2">
                                 <CardHeader>
                                     <div className="flex justify-between items-center">
                                         <CardTitle>Classic Settings</CardTitle>
@@ -342,7 +342,7 @@ export default function GradientGeneratorPage() {
                                         <button
                                             key={i}
                                             onClick={() => loadClassicPreset(p)}
-                                            className="w-full aspect-square rounded-lg shadow-sm hover:ring-2 hover:ring-primary hover:scale-105 transition-all overflow-hidden border relative group"
+                                            className="w-full aspect-square rounded-lg hover:ring-2 hover:ring-primary hover:scale-105 transition-all overflow-hidden border relative group"
                                             title={p.name}
                                         >
                                             <div
@@ -363,7 +363,7 @@ export default function GradientGeneratorPage() {
                     <div className="grid grid-cols-1 xl:grid-cols-[1.5fr_1fr] gap-8">
                         {/* Interactive Preview */}
                         <div className="space-y-6">
-                            <Card className="border-2 shadow-2xl h-[600px] overflow-hidden relative rounded-3xl group bg-black">
+                            <Card className="border-2 h-[600px] overflow-hidden relative rounded-3xl group bg-black">
                                 {/* LAYER 1: Base Color */}
                                 <div className="absolute inset-0" style={{ backgroundColor: baseColor }} />
 
@@ -391,7 +391,7 @@ export default function GradientGeneratorPage() {
                                         {meshPoints.map((p) => (
                                             <div
                                                 key={p.id}
-                                                className="absolute w-8 h-8 -ml-4 -mt-4 border-2 border-white rounded-full shadow-[0_0_10px_rgba(0,0,0,0.5)] cursor-move hover:scale-110 transition-transform group/point z-10"
+                                                className="absolute w-8 h-8 -ml-4 -mt-4 border-2 border-white rounded-full cursor-move hover:scale-110 transition-transform group/point z-10"
                                                 style={{ left: `${p.x}%`, top: `${p.y}%`, backgroundColor: p.color }}
                                             >
                                                 {/* Handle dot center */}
@@ -425,7 +425,7 @@ export default function GradientGeneratorPage() {
                                         <button
                                             key={i}
                                             onClick={() => loadModernPreset(p)}
-                                            className="w-full aspect-square rounded-xl shadow-sm hover:ring-2 hover:ring-primary hover:scale-105 transition-all overflow-hidden border relative group ring-offset-2 ring-offset-background"
+                                            className="w-full aspect-square rounded-xl hover:ring-2 hover:ring-primary hover:scale-105 transition-all overflow-hidden border relative group ring-offset-2 ring-offset-background"
                                             title={p.name}
                                         >
                                             <div className="absolute inset-0" style={{ backgroundColor: p.baseColor }}>
@@ -508,7 +508,7 @@ export default function GradientGeneratorPage() {
                                     <div className="space-y-4">
                                         <h3 className="text-sm font-semibold uppercase text-muted-foreground tracking-wider mb-2">Color Orbs</h3>
                                         {meshPoints.map((p, i) => (
-                                            <div key={p.id} className="p-3 bg-card border rounded-lg shadow-sm space-y-3 relative group transition-all hover:border-primary/50">
+                                            <div key={p.id} className="p-3 bg-card border rounded-lg space-y-3 relative group transition-all hover:border-primary/50">
                                                 <div className="flex items-center gap-3">
                                                     <MiniColorPicker value={p.color} onChange={(val) => updateMeshPoint(p.id, { color: val })} />
 

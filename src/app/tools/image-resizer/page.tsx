@@ -83,7 +83,7 @@ export default function ImageResizerPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
                 {/* Upload & Controls */}
                 <div className="space-y-8">
-                    <Card className="border-2 shadow-lg">
+                    <Card className="border-2">
                         <CardContent className="p-8 space-y-8">
                             <div
                                 className={`border-2 border-dashed rounded-2xl p-8 text-center transition-colors cursor-pointer ${file ? 'border-primary/50 bg-primary/5' : 'border-muted-foreground/20 hover:border-primary/50 hover:bg-muted'}`}
@@ -143,7 +143,7 @@ export default function ImageResizerPage() {
                 {/* Preview */}
                 <div className="flex items-center justify-center bg-muted/30 border-2 border-dashed rounded-3xl min-h-[400px] p-8 overflow-hidden">
                     {preview ? (
-                        <img src={preview} alt="Preview" className="max-w-full max-h-[400px] object-contain shadow-xl rounded-lg" />
+                        <img src={preview} alt="Preview" className="max-w-full max-h-[400px] object-contain rounded-lg" />
                     ) : (
                         <div className="text-muted-foreground text-center opacity-50">
                             <ImageIcon size={64} className="mx-auto mb-4" />

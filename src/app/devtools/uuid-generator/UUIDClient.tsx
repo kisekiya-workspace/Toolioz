@@ -126,7 +126,7 @@ export default function UUIDClient({ title, color }: { title?: string, color?: s
             </label>
           </div>
 
-          <button className="cursor-pointer rounded-[var(--radius-sm)] border-none bg-[var(--primary)] px-[30px] py-[12px] text-[1rem] font-semibold text-white shadow-[0_4px_14px_0_rgba(37,99,235,0.39)] transition-all hover:-translate-y-[2px] hover:bg-[var(--primary-hover)]" onClick={handleGenerate}>
+          <button className="cursor-pointer rounded-[var(--radius-sm)] border-none bg-[var(--primary)] px-[30px] py-[12px] text-[1rem] font-semibold text-white transition-all hover:-translate-y-[2px] hover:bg-[var(--primary-hover)]" onClick={handleGenerate}>
             <RefreshCw size={16} style={{ display: 'inline', marginRight: '8px', verticalAlign: 'text-bottom' }} />
             Generate New Batch
           </button>
@@ -147,7 +147,7 @@ export default function UUIDClient({ title, color }: { title?: string, color?: s
             
             <div className="absolute right-[15px] top-[15px]">
               <button 
-                className={`flex cursor-pointer items-center gap-2 rounded-[var(--radius-xl)] border border-[var(--border)] px-[16px] py-[8px] text-[0.85rem] font-medium shadow-sm transition-all ${copied ? '!border-[#10b981] !bg-[#10b981] text-white' : 'bg-[var(--bg-primary)] text-[var(--text-primary)] hover:border-[var(--text-secondary)] hover:bg-[var(--bg-secondary)]'}`} 
+                className={`flex cursor-pointer items-center gap-2 rounded-[var(--radius-xl)] border border-[var(--border)] px-[16px] py-[8px] text-[0.85rem] font-medium transition-all ${copied ? '!border-[#10b981] !bg-[#10b981] text-white' : 'bg-[var(--bg-primary)] text-[var(--text-primary)] hover:border-[var(--text-secondary)] hover:bg-[var(--bg-secondary)]'}`} 
                 onClick={handleCopy}
               >
                 {copied ? <Check size={16} /> : <Copy size={16} />}

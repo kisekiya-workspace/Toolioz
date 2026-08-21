@@ -24,7 +24,7 @@ export function Footer() {
                 alt="Toolioz logo"
                 width={30}
                 height={30}
-                className="rounded-lg shadow-2xs"
+                className="rounded-lg"
               />
               <span>Toolioz</span>
             </Link>

@@ -209,7 +209,7 @@ export default function BoxShadowGeneratorPage() {
                 {/* LEFT COLUMN: Controls */}
                 <div className="lg:col-span-4 space-y-6">
                     {/* Layer Manager */}
-                    <Card className="border shadow-sm">
+                    <Card className="border">
                         <CardHeader className="pb-3 bg-muted/30">
                             <div className="flex items-center justify-between">
                                 <CardTitle className="text-sm font-bold flex items-center gap-2">
@@ -226,11 +226,11 @@ export default function BoxShadowGeneratorPage() {
                                 <div
                                     key={layer.id}
                                     onClick={() => setSelectedId(layer.id)}
-                                    className={`flex items-center justify-between p-2 rounded-lg cursor-pointer text-sm transition-all border ${selectedId === layer.id ? "bg-primary/10 border-primary/20 shadow-sm" : "hover:bg-muted border-transparent"}`}
+                                    className={`flex items-center justify-between p-2 rounded-lg cursor-pointer text-sm transition-all border ${selectedId === layer.id ? "bg-primary/10 border-primary/20" : "hover:bg-muted border-transparent"}`}
                                 >
                                     <div className="flex items-center gap-3">
                                         <div
-                                            className="w-4 h-4 rounded shadow-sm border"
+                                            className="w-4 h-4 rounded border"
                                             style={{ backgroundColor: layer.color }}
                                         />
                                         <span className={`font-medium ${selectedId === layer.id ? "text-primary" : "text-muted-foreground"}`}>
@@ -264,7 +264,7 @@ export default function BoxShadowGeneratorPage() {
 
                     {/* Sliders */}
                     {selectedLayer && (
-                        <Card className="border shadow-sm">
+                        <Card className="border">
                             <CardHeader className="pb-4 bg-muted/30">
                                 <CardTitle className="text-sm font-bold flex items-center gap-2">
                                     <Sliders className="h-4 w-4" /> Properties
@@ -369,7 +369,7 @@ export default function BoxShadowGeneratorPage() {
                 {/* RIGHT COLUMN: Preview */}
                 <div className="lg:col-span-8 flex flex-col gap-6">
                     {/* Viewport */}
-                    <Card className="flex-1 min-h-[400px] border-0 shadow-lg overflow-hidden flex flex-col">
+                    <Card className="flex-1 min-h-[400px] border-0 overflow-hidden flex flex-col">
                         <div className="p-2 bg-muted/10 border-b flex justify-between items-center px-4">
                             <span className="text-xs font-bold uppercase text-muted-foreground tracking-wider">Live Preview</span>
                             <div className="flex gap-4">
@@ -400,7 +400,7 @@ export default function BoxShadowGeneratorPage() {
                     </Card>
 
                     {/* Output */}
-                    <Card className="bg-slate-950 text-slate-200 border-slate-900 shadow-xl">
+                    <Card className="bg-slate-950 text-slate-200 border-slate-900">
                         <CardHeader className="py-3 px-4 border-b border-white/10 flex flex-row items-center justify-between">
                             <div className="flex items-center gap-2">
                                 <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />

@@ -99,7 +99,7 @@ export default function CompoundInterestClient() {
             </Card>
 
             <div className={styles.resultCol}>
-              <Card className="rounded-2xl border border-indigo-500/30 bg-indigo-700 dark:bg-[#1f2430] dark:border-[#333a4d] p-6 text-center text-white shadow-md sm:p-8 relative">
+              <Card className="rounded-2xl border border-indigo-500/30 bg-indigo-700 dark:bg-[#1f2430] dark:border-[#333a4d] p-6 text-center text-white sm:p-8 relative">
                 <h2 className="mb-2 text-xs font-bold uppercase tracking-wider text-indigo-100 dark:text-indigo-400">Total Future Value</h2>
                 <div className={styles.resultValue}>{formatCurrency(result)}</div>
                 <div className={styles.stats}>
@@ -132,7 +132,7 @@ export default function CompoundInterestClient() {
           </div>
 
           {/* Year-by-Year Growth Table */}
-          <div className="mt-12 rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
+          <div className="mt-12 rounded-2xl border border-[var(--border)] bg-white p-6">
             <h3 className="mb-4 text-xl font-bold text-[var(--text-primary)]">Year-by-Year Growth Schedule</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm border-collapse min-w-[500px]">
@@ -203,7 +203,7 @@ export default function CompoundInterestClient() {
           </div>
           
           <div className="grid gap-6 md:grid-cols-2">
-            <div className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
+            <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
               <div className="mb-4 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-50 text-cyan-600">
                   <BookOpen size={20} />
@@ -218,7 +218,7 @@ export default function CompoundInterestClient() {
               </ul>
             </div>
 
-            <div className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
+            <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
               <div className="mb-4 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
                   <Clock size={20} />
@@ -233,7 +233,7 @@ export default function CompoundInterestClient() {
               </ul>
             </div>
 
-            <div className="col-span-1 rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm md:col-span-2">
+            <div className="col-span-1 rounded-2xl border border-[var(--border)] bg-white p-6 md:col-span-2">
               <div className="mb-4 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
                   <Lightbulb size={20} />

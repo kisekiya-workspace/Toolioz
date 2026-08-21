@@ -90,7 +90,7 @@ export default function InflationClient() {
             </Card>
 
             <div className={styles.resultCol}>
-              <Card className="rounded-2xl border border-rose-500/30 bg-rose-700 dark:bg-[#1f2430] dark:border-[#333a4d] p-6 text-center text-white shadow-md sm:p-8 relative">
+              <Card className="rounded-2xl border border-rose-500/30 bg-rose-700 dark:bg-[#1f2430] dark:border-[#333a4d] p-6 text-center text-white sm:p-8 relative">
                 <h2 className="mb-2 text-xs font-bold uppercase tracking-wider text-rose-100 dark:text-rose-400">Future Purchasing Cost (After {years} Years)</h2>
                 <div className={styles.resultValue}>{formatCurrency(futurePrice)}</div>
                 <div className={styles.stats}>
@@ -174,7 +174,7 @@ export default function InflationClient() {
           </div>
           
           <div className="grid gap-6 md:grid-cols-2">
-            <div className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
+            <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
               <div className="mb-4 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600">
                   <BookOpen size={20} />
@@ -189,7 +189,7 @@ export default function InflationClient() {
               </ul>
             </div>
 
-            <div className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
+            <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
               <div className="mb-4 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
                   <TrendingUp size={20} />
@@ -204,7 +204,7 @@ export default function InflationClient() {
               </ul>
             </div>
 
-            <div className="col-span-1 rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm md:col-span-2">
+            <div className="col-span-1 rounded-2xl border border-[var(--border)] bg-white p-6 md:col-span-2">
               <div className="mb-4 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
                   <Lightbulb size={20} />

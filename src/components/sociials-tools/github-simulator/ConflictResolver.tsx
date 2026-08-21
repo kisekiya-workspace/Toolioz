@@ -51,7 +51,7 @@ export function ConflictResolver({ conflict, onResolve }: ConflictResolverProps)
     if (!currentFileConflict) return <div>Loading...</div>;
 
     return (
-        <Card className="bg-slate-900 border-red-900/50 shadow-2xl animate-in fade-in zoom-in-95 duration-200 w-full max-w-5xl h-[80vh] flex flex-col">
+        <Card className="bg-slate-900 border-red-900/50 animate-in fade-in zoom-in-95 duration-200 w-full max-w-5xl h-[80vh] flex flex-col">
             <CardHeader className="bg-red-950/20 border-b border-red-900/30 py-4 flex-shrink-0">
                 <div className="flex justify-between items-start">
                     <div>
@@ -71,7 +71,7 @@ export function ConflictResolver({ conflict, onResolve }: ConflictResolverProps)
                                     key={f.name}
                                     onClick={() => setActiveFile(f.name)}
                                     className={`px-3 py-1 text-xs rounded border transition-all ${activeFile === f.name
-                                            ? 'bg-red-500/20 border-red-500/50 text-red-200 shadow-sm shadow-red-900'
+                                            ? 'bg-red-500/20 border-red-500/50 text-red-200 shadow-red-900'
                                             : 'bg-slate-800 border-slate-700 text-slate-400 hover:bg-slate-700'
                                         }`}
                                 >
@@ -166,7 +166,7 @@ export function ConflictResolver({ conflict, onResolve }: ConflictResolverProps)
                 </div>
                 <Button
                     onClick={handleComplete}
-                    className="bg-green-600 hover:bg-green-700 text-white gap-2 shadow-lg shadow-green-900/20"
+                    className="bg-green-600 hover:bg-green-700 text-white gap-2 shadow-green-900/20"
                 >
                     <Check size={16} /> Mark as Resolved
                 </Button>

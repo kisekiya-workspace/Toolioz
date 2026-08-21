@@ -348,7 +348,7 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
                 {pages.map((page, index) => (
                   <div
                     key={`${page.sourceIndex}-${index}`}
-                    className="flex items-center gap-1.5 rounded-xl border border-zinc-200 bg-white p-3 shadow-2xs dark:border-zinc-800 dark:bg-zinc-950"
+                    className="flex items-center gap-1.5 rounded-xl border border-zinc-200 bg-white p-3 dark:border-zinc-800 dark:bg-zinc-950"
                   >
                     <span className="mr-auto text-xs font-bold text-zinc-950 dark:text-zinc-50">
                       Page {page.label}
@@ -602,13 +602,13 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
                 </strong>
                 <div className="flex flex-wrap gap-2">
                   <button
-                    className="rounded-lg bg-white dark:bg-zinc-700 px-3 py-1.5 text-xs font-bold text-zinc-800 dark:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-600 transition shadow-2xs cursor-pointer"
+                    className="rounded-lg bg-white dark:bg-zinc-700 px-3 py-1.5 text-xs font-bold text-zinc-800 dark:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-600 transition cursor-pointer"
                     onClick={() => navigator.clipboard.writeText(result)}
                   >
                     Copy Text
                   </button>
                   <button
-                    className="rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-blue-700 transition shadow-2xs cursor-pointer"
+                    className="rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-blue-700 transition cursor-pointer"
                     onClick={() =>
                       downloadBlob(
                         result,

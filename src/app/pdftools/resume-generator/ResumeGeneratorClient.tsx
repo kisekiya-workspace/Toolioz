@@ -192,7 +192,7 @@ export default function ResumeGeneratorClient() {
       <button
         type="button"
         onClick={() => setShowLatexTemplates(!showLatexTemplates)}
-        className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-3 py-2 text-xs font-semibold text-zinc-700 dark:text-zinc-300 shadow-2xs hover:bg-zinc-50 dark:hover:bg-zinc-800 sm:w-auto cursor-pointer"
+        className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-3 py-2 text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 sm:w-auto cursor-pointer"
       >
         <FileText size={13} />
         {currentLatexTpl?.name || 'Templates'}
@@ -201,7 +201,7 @@ export default function ResumeGeneratorClient() {
       {showLatexTemplates && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setShowLatexTemplates(false)} aria-hidden />
-          <div className="absolute left-0 right-0 top-full z-50 mt-1.5 max-h-[60vh] overflow-y-auto rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-1.5 shadow-xl sm:left-auto sm:right-0 sm:w-72">
+          <div className="absolute left-0 right-0 top-full z-50 mt-1.5 max-h-[60vh] overflow-y-auto rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-1.5 sm:left-auto sm:right-0 sm:w-72">
             {RESUME_TEMPLATES.map((tpl) => (
               <button
                 key={tpl.id}
@@ -234,7 +234,7 @@ export default function ResumeGeneratorClient() {
       <button
         type="button"
         onClick={() => setShowVisualTemplates(!showVisualTemplates)}
-        className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-3 py-2 text-xs font-semibold text-zinc-700 dark:text-zinc-300 shadow-2xs hover:bg-zinc-50 dark:hover:bg-zinc-800 cursor-pointer"
+        className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-3 py-2 text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 cursor-pointer"
       >
         <Palette size={13} />
         {currentVisualTpl?.name || 'Template'}
@@ -243,7 +243,7 @@ export default function ResumeGeneratorClient() {
       {showVisualTemplates && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setShowVisualTemplates(false)} aria-hidden />
-          <div className="absolute left-0 right-0 top-full z-50 mt-1.5 max-h-[50vh] overflow-y-auto rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-1.5 shadow-xl">
+          <div className="absolute left-0 right-0 top-full z-50 mt-1.5 max-h-[50vh] overflow-y-auto rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-1.5">
             {VISUAL_TEMPLATES.map((tpl) => (
               <button
                 key={tpl.id}
@@ -287,7 +287,7 @@ export default function ResumeGeneratorClient() {
                   setMode('visual');
                   setMobilePanel('edit');
                 }}
-                className={`flex items-center gap-1 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-all sm:px-3 sm:text-xs cursor-pointer ${mode === 'visual' ? 'bg-white dark:bg-zinc-800 text-blue-700 dark:text-blue-300 shadow-2xs font-bold' : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100'}`}
+                className={`flex items-center gap-1 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-all sm:px-3 sm:text-xs cursor-pointer ${mode === 'visual' ? 'bg-white dark:bg-zinc-800 text-blue-700 dark:text-blue-300 font-bold' : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100'}`}
               >
                 <Palette size={12} /> Visual
               </button>
@@ -297,7 +297,7 @@ export default function ResumeGeneratorClient() {
                   setMode('latex');
                   setMobilePanel('edit');
                 }}
-                className={`flex items-center gap-1 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-all sm:px-3 sm:text-xs cursor-pointer ${mode === 'latex' ? 'bg-white dark:bg-zinc-800 text-blue-700 dark:text-blue-300 shadow-2xs font-bold' : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100'}`}
+                className={`flex items-center gap-1 rounded-md px-2.5 py-1 text-[11px] font-semibold transition-all sm:px-3 sm:text-xs cursor-pointer ${mode === 'latex' ? 'bg-white dark:bg-zinc-800 text-blue-700 dark:text-blue-300 font-bold' : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100'}`}
               >
                 <Code2 size={12} /> LaTeX
               </button>
@@ -322,7 +322,7 @@ export default function ResumeGeneratorClient() {
                   size="sm"
                   onClick={compilePdf}
                   disabled={isCompiling}
-                  className="bg-blue-600 text-white hover:bg-blue-700 font-semibold shadow-xs cursor-pointer"
+                  className="bg-blue-600 text-white hover:bg-blue-700 font-semibold cursor-pointer"
                 >
                   {isCompiling ? <LoaderCircle size={14} className="animate-spin" /> : <Play size={14} fill="currentColor" />}
                   {isCompiling ? 'Compiling…' : 'Compile PDF'}
@@ -341,7 +341,7 @@ export default function ResumeGeneratorClient() {
                   size="sm"
                   onClick={downloadVisualPdf}
                   disabled={isGenerating}
-                  className="bg-blue-600 text-white hover:bg-blue-700 font-semibold shadow-xs cursor-pointer"
+                  className="bg-blue-600 text-white hover:bg-blue-700 font-semibold cursor-pointer"
                 >
                   {isGenerating ? <LoaderCircle size={14} className="animate-spin" /> : <Download size={14} />}
                   {isGenerating ? 'Generating…' : 'Download PDF'}
@@ -384,7 +384,7 @@ export default function ResumeGeneratorClient() {
             <section
               className={`relative flex min-h-0 min-w-0 flex-1 flex-col bg-zinc-100 dark:bg-zinc-900/60 ${showPreviewPanel ? 'flex' : 'hidden xl:flex'}`}
             >
-              <div className="z-10 flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-3 py-2 shadow-2xs sm:px-4">
+              <div className="z-10 flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-3 py-2 sm:px-4">
                 <span className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">PDF Preview</span>
                 {pdfUrl && (
                   <Button variant="ghost" size="sm" onClick={downloadPdf} className="hidden h-7 text-xs xl:flex">
@@ -395,7 +395,7 @@ export default function ResumeGeneratorClient() {
               </div>
               <div className="flex min-h-0 flex-1 items-center justify-center overflow-hidden p-3 sm:p-4 xl:pb-4 xl:p-8">
                 {compileError ? (
-                  <Card className="max-w-lg border-red-200 bg-red-50 p-4 text-red-900 shadow-sm sm:p-6 dark:border-red-900/50 dark:bg-red-950/40 dark:text-red-200">
+                  <Card className="max-w-lg border-red-200 bg-red-50 p-4 text-red-900 sm:p-6 dark:border-red-900/50 dark:bg-red-950/40 dark:text-red-200">
                     <div className="flex items-start gap-3">
                       <AlertCircle className="mt-0.5 shrink-0 text-red-500" size={20} />
                       <div>
@@ -409,7 +409,7 @@ export default function ResumeGeneratorClient() {
                 ) : pdfUrl ? (
                   <iframe
                     src={pdfUrl}
-                    className="h-full w-full max-h-full rounded-md border border-zinc-200 bg-white shadow-lg dark:border-zinc-800"
+                    className="h-full w-full max-h-full rounded-md border border-zinc-200 bg-white dark:border-zinc-800"
                     title="PDF Preview"
                   />
                 ) : (
@@ -463,14 +463,14 @@ export default function ResumeGeneratorClient() {
             <section
               className={`relative flex min-h-0 min-w-0 flex-1 flex-col bg-zinc-100 dark:bg-zinc-900/60 ${showPreviewPanel ? 'flex' : 'hidden xl:flex'}`}
             >
-              <div className="z-10 flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-3 py-2 shadow-2xs sm:px-4">
+              <div className="z-10 flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-3 py-2 sm:px-4">
                 <span className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Live Preview</span>
                 <span className="text-[11px] text-zinc-400">1:1 Matches Exported PDF</span>
               </div>
               <div className="min-h-0 flex-1 overflow-auto px-2 py-4 sm:px-4 xl:pb-6">
                 <div className="mx-auto flex justify-center">
                   <div
-                    className="origin-top shrink-0 rounded-sm border border-zinc-200/80 bg-white shadow-xl"
+                    className="origin-top shrink-0 rounded-sm border border-zinc-200/80 bg-white"
                     style={{
                       width: `${A4_WIDTH_PX * previewScale}px`,
                       height: `${1123 * previewScale}px`,

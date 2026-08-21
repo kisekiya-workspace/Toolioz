@@ -12,7 +12,7 @@ export function SqlResultDisplay({ result, mode }: SqlResultDisplayProps) {
     if (mode !== "SELECT" || !result) return null;
 
     return (
-        <Card className="overflow-hidden border-2 border-primary/10 shadow-md">
+        <Card className="overflow-hidden border-2 border-primary/10">
             <CardHeader className="py-2 px-4 bg-muted/40 border-b flex flex-row items-center justify-between">
                 <CardTitle className="text-sm font-mono flex items-center gap-2">
                     <TableIcon className="w-4 h-4 text-muted-foreground" />

@@ -73,7 +73,7 @@ export function FileExplorer({ files: initialFiles, onFileChange, disabled }: Fi
     };
 
     return (
-        <Card className="bg-slate-950 border-slate-800 h-full flex flex-col shadow-xl">
+        <Card className="bg-slate-950 border-slate-800 h-full flex flex-col">
             <CardHeader className="py-3 px-4 border-b border-slate-800 flex flex-row justify-between items-center space-y-0">
                 <CardTitle className="text-sm font-medium text-slate-200 flex items-center gap-2">
                     <Code size={16} className="text-blue-400" />

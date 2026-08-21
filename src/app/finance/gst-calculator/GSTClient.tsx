@@ -67,13 +67,13 @@ export default function GSTClient() {
               <Card className="!p-5 sm:!p-8">
                 <div className="mb-6 flex rounded-[var(--radius-md)] bg-[var(--bg-secondary)] p-1">
                   <button 
-                    className={`flex-1 rounded-[calc(var(--radius-md)-4px)] px-3 py-2 text-[0.85rem] font-bold transition-all sm:text-[0.95rem] ${!isInclusive ? 'bg-white text-[#1e293b] shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
+                    className={`flex-1 rounded-[calc(var(--radius-md)-4px)] px-3 py-2 text-[0.85rem] font-bold transition-all sm:text-[0.95rem] ${!isInclusive ? 'bg-white text-[#1e293b]' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
                     onClick={() => setIsInclusive(false)}
                   >
                     Tax Exclusive (Add Tax)
                   </button>
                   <button 
-                    className={`flex-1 rounded-[calc(var(--radius-md)-4px)] px-3 py-2 text-[0.85rem] font-bold transition-all sm:text-[0.95rem] ${isInclusive ? 'bg-white text-[#1e293b] shadow-sm' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
+                    className={`flex-1 rounded-[calc(var(--radius-md)-4px)] px-3 py-2 text-[0.85rem] font-bold transition-all sm:text-[0.95rem] ${isInclusive ? 'bg-white text-[#1e293b]' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
                     onClick={() => setIsInclusive(true)}
                   >
                     Tax Inclusive (Remove Tax)
@@ -173,14 +173,14 @@ export default function GSTClient() {
                 </div>
                 <Button 
                   fullWidth 
-                  className="h-14 text-[1.05rem] font-bold shadow-[0_4px_14px_0_rgba(59,130,246,0.39)] hover:shadow-[0_6px_20px_rgba(59,130,246,0.23)]"
+                  className="h-14 text-[1.05rem] font-bold"
                   onClick={() => window.print()}
                 >
                   Download Tax Invoice
                 </Button>
               </Card>
 
-              <div className="flex items-start gap-4 rounded-[var(--radius-md)] bg-white p-5 shadow-sm">
+              <div className="flex items-start gap-4 rounded-[var(--radius-md)] bg-white p-5">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#f1f5f9]" style={{ color: '#1e293b' }}><Info size={20} /></div>
                 <p className="m-0 text-[0.85rem] leading-[1.6] text-[var(--text-secondary)]">
                   Accurate tax calculation is critical for business compliance. Our engine uses standard accounting rounding to ensure your numbers stay consistent with professional software.
@@ -229,7 +229,7 @@ export default function GSTClient() {
           </div>
           
           <div className="grid gap-6 md:grid-cols-2">
-            <div className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
+            <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
               <div className="mb-4 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50 text-orange-600">
                   <BookOpen size={20} />
@@ -244,7 +244,7 @@ export default function GSTClient() {
               </ul>
             </div>
 
-            <div className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
+            <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
               <div className="mb-4 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600">
                   <Clock size={20} />
@@ -259,7 +259,7 @@ export default function GSTClient() {
               </ul>
             </div>
 
-            <div className="col-span-1 rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm md:col-span-2">
+            <div className="col-span-1 rounded-2xl border border-[var(--border)] bg-white p-6 md:col-span-2">
               <div className="mb-4 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
                   <Lightbulb size={20} />

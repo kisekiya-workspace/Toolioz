@@ -122,7 +122,7 @@ export function GitGraph({ state }: GitGraphProps) {
                                 fill={color}
                                 stroke={isHead ? '#fff' : 'rgba(0,0,0,0.5)'}
                                 strokeWidth={isHead ? 3 : 1}
-                                className="drop-shadow-lg z-10 relative transition-all duration-200 group-hover:r-10"
+                                className="z-10 relative transition-all duration-200 group-hover:r-10"
                             >
                                 <title>{node.message} ({node.id})</title>
                             </circle>

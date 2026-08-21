@@ -89,7 +89,7 @@ export default function MetaTagGeneratorPage() {
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-16">
                 {/* Inputs Column */}
                 <div className="space-y-6">
-                    <Card className="border-2 shadow-md">
+                    <Card className="border-2">
                         <CardHeader className="pb-4 border-b bg-muted/20">
                             <CardTitle>Configuration</CardTitle>
                         </CardHeader>
@@ -238,7 +238,7 @@ export default function MetaTagGeneratorPage() {
                     </Card>
 
                     {/* Output Code */}
-                    <Card className="border-2 shadow-md">
+                    <Card className="border-2">
                         <CardHeader className="flex flex-row items-center justify-between pb-4 border-b bg-muted/20">
                             <CardTitle>Generated Code</CardTitle>
                             <Button variant="outline" size="sm" onClick={copyTags}>
@@ -261,7 +261,7 @@ export default function MetaTagGeneratorPage() {
                     {/* Google Preview */}
                     <div className="space-y-2">
                         <Label className="text-muted-foreground font-semibold">Google Search Result</Label>
-                        <Card className="border p-4 shadow-sm bg-background">
+                        <Card className="border p-4 bg-background">
                             <div className="max-w-[600px] font-sans">
                                 <div className="flex items-center gap-2 mb-1">
                                     <div className="bg-gray-200 rounded-full w-7 h-7 flex items-center justify-center text-[10px] text-gray-500 overflow-hidden">
@@ -285,7 +285,7 @@ export default function MetaTagGeneratorPage() {
                     {/* Facebook Preview */}
                     <div className="space-y-2">
                         <Label className="text-muted-foreground font-semibold">Facebook Post</Label>
-                        <Card className="border shadow-sm overflow-hidden bg-background max-w-[500px]">
+                        <Card className="border overflow-hidden bg-background max-w-[500px]">
                             <div className="aspect-[1.91/1] bg-muted w-full flex items-center justify-center overflow-hidden">
                                 {image ? (
                                     <img src={image} className="w-full h-full object-cover" alt="OG Preview" />
@@ -304,7 +304,7 @@ export default function MetaTagGeneratorPage() {
                     {/* Twitter Preview */}
                     <div className="space-y-2">
                         <Label className="text-muted-foreground font-semibold">Twitter Card (Summary Large)</Label>
-                        <Card className="border shadow-sm overflow-hidden bg-background max-w-[500px] rounded-xl">
+                        <Card className="border overflow-hidden bg-background max-w-[500px] rounded-xl">
                             <div className="aspect-[2/1] bg-muted w-full flex items-center justify-center overflow-hidden">
                                 {image ? (
                                     <img src={image} className="w-full h-full object-cover" alt="Twitter Preview" />

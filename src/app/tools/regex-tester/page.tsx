@@ -146,7 +146,7 @@ export default function RegexTesterPage() {
 
                 {/* Center: Editor */}
                 <div className="xl:col-span-2 space-y-6 order-1 xl:order-2">
-                    <Card className="border-2 shadow-md">
+                    <Card className="border-2">
                         <CardContent className="p-6 space-y-4">
                             <div className="space-y-2">
                                 <label className="text-sm font-medium text-muted-foreground">Regular Expression</label>
@@ -221,7 +221,7 @@ export default function RegexTesterPage() {
                     {/* Match Results (Only show on Test tab conceptually, but we keep it visible or maybe stick to below?) */}
                     {/* Actually, it makes sense to always show matches if test string is relevant. */}
 
-                    <Card className="border-2 shadow-md">
+                    <Card className="border-2">
                         <CardHeader className="pb-3 border-b">
                             <div className="flex justify-between items-center">
                                 <CardTitle className="text-lg">Match Preview</CardTitle>

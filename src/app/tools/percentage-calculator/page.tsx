@@ -41,7 +41,7 @@ export default function PercentageCalculatorPage() {
             <div className="max-w-4xl mx-auto mb-16 space-y-8">
 
                 {/* Calc 1 */}
-                <Card className="border-2 shadow-sm">
+                <Card className="border-2">
                     <CardContent className="p-8">
                         <h3 className="font-bold text-lg mb-6 flex items-center gap-2"><Percent size={20} className="text-primary" /> Percentage of a Number</h3>
                         <div className="flex flex-col md:flex-row items-center gap-4 text-lg">
@@ -58,7 +58,7 @@ export default function PercentageCalculatorPage() {
                 </Card>
 
                 {/* Calc 2 */}
-                <Card className="border-2 shadow-sm">
+                <Card className="border-2">
                     <CardContent className="p-8">
                         <h3 className="font-bold text-lg mb-6 flex items-center gap-2"><Percent size={20} className="text-purple-500" /> What Percentage?</h3>
                         <div className="flex flex-col md:flex-row items-center gap-4 text-lg">
@@ -74,7 +74,7 @@ export default function PercentageCalculatorPage() {
                 </Card>
 
                 {/* Calc 3 */}
-                <Card className="border-2 shadow-sm">
+                <Card className="border-2">
                     <CardContent className="p-8">
                         <h3 className="font-bold text-lg mb-6 flex items-center gap-2"><Percent size={20} className="text-orange-500" /> Percentage Change</h3>
                         <div className="flex flex-col md:flex-row items-center gap-4 text-lg">

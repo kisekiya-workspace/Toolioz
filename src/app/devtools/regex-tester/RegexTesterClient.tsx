@@ -111,7 +111,7 @@ ${mode === 'replace' ? `\nconst subst = \`${replaceString}\`;\nconst result = st
                             </div>
 
                             <div className="mb-4 rounded-lg bg-[#1e293b] p-6">
-                                <div className="flex flex-wrap items-center gap-2 rounded-md border border-white/10 bg-[#0f172a] px-4 py-2 focus-within:border-[#10b981] focus-within:shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+                                <div className="flex flex-wrap items-center gap-2 rounded-md border border-white/10 bg-[#0f172a] px-4 py-2 focus-within:border-[#10b981]">
                                     <span className="font-['Fira_Code',monospace] text-2xl font-semibold text-[#94a3b8]">/</span>
                                     <input
                                         type="text"
@@ -133,7 +133,7 @@ ${mode === 'replace' ? `\nconst subst = \`${replaceString}\`;\nconst result = st
                                 </div>
 
                                 {mode === 'replace' && (
-                                    <div className="mt-4 flex flex-wrap items-center gap-2 rounded-md border border-white/10 bg-[#0f172a] px-4 py-2 focus-within:border-[#3b82f6] focus-within:shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+                                    <div className="mt-4 flex flex-wrap items-center gap-2 rounded-md border border-white/10 bg-[#0f172a] px-4 py-2 focus-within:border-[#3b82f6]">
                                         <span className="font-['Fira_Code',monospace] text-2xl font-semibold text-[#94a3b8]" style={{ fontSize: '1rem', marginRight: '1rem', color: '#64748b' }}>Replace with: </span>
                                         <input
                                             type="text"

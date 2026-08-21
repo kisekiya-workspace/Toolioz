@@ -139,7 +139,7 @@ export default function StopwatchPage() {
             />
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
-                <Card className="lg:col-span-2 border-2 shadow-xl">
+                <Card className="lg:col-span-2 border-2">
                     <CardContent className="p-8">
                         <Tabs defaultValue="stopwatch" className="space-y-8">
                             <TabsList className="grid w-full grid-cols-2 h-12">
@@ -269,7 +269,7 @@ export default function StopwatchPage() {
 
                 {/* Info Panel */}
                 <div className="space-y-6">
-                    <Card className="border-2 shadow-md bg-blue-50/50 dark:bg-blue-950/20 border-blue-100 dark:border-blue-900">
+                    <Card className="border-2 bg-blue-50/50 dark:bg-blue-950/20 border-blue-100 dark:border-blue-900">
                         <CardContent className="p-6">
                             <h3 className="font-bold text-blue-700 dark:text-blue-300 mb-2 flex items-center gap-2">
                                 <Play size={18} /> Pro Tip

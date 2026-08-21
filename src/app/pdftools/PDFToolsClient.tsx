@@ -40,7 +40,7 @@ export default function PDFToolsClient() {
 
           {/* Search Box */}
           <div className="mx-auto mt-5 max-w-xl">
-            <div className="relative flex items-center rounded-xl border border-zinc-300 bg-white p-2 shadow-xs transition-all focus-within:border-red-500 focus-within:ring-2 focus-within:ring-red-500/20 dark:border-zinc-700 dark:bg-zinc-900">
+            <div className="relative flex items-center rounded-xl border border-zinc-300 bg-white p-2 transition-all focus-within:border-red-500 focus-within:ring-2 focus-within:ring-red-500/20 dark:border-zinc-700 dark:bg-zinc-900">
               <Search size={18} className="ml-3 shrink-0 text-zinc-400" />
               <input
                 type="search"

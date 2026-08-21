@@ -312,7 +312,7 @@ export default function LayoutGeneratorClient({
         </header>
 
         {/* Top Controls */}
-        <section className="mb-6 md:mb-10 flex w-full flex-wrap justify-center gap-4 md:gap-[30px] rounded-[var(--radius-xl)] border border-[var(--border)] bg-[var(--bg-secondary)] p-4 md:px-10 md:py-6 shadow-[var(--shadow-md)]" aria-labelledby="grid-settings">
+        <section className="mb-6 md:mb-10 flex w-full flex-wrap justify-center gap-4 md:gap-[30px] rounded-[var(--radius-xl)] border border-[var(--border)] bg-[var(--bg-secondary)] p-4 md:px-10 md:py-6" aria-labelledby="grid-settings">
           <NumberInput label="Columns" value={columns} setter={setColumns} />
           <NumberInput label="Rows" value={rows} setter={setRows} />
           <NumberInput label="Gap(px)" value={gap} setter={setGap} />
@@ -322,14 +322,14 @@ export default function LayoutGeneratorClient({
         <div className="flex w-full flex-col items-center overflow-x-auto py-5 [scrollbar-color:var(--border)_transparent] [scrollbar-width:thin]">
           <div className="mb-2.5 ml-[38px] md:ml-[42px] grid w-max" style={{ gridTemplateColumns: containerStyle.gridTemplateColumns, gap: containerStyle.gap }}>
             {colDefs.map((def, i) => (
-              <input key={`col-def-${i}`} className="h-full w-full min-w-[30px] rounded border border-[var(--border)] bg-[var(--bg-secondary)] p-0.5 text-center text-[0.75rem] font-medium text-[var(--text-primary)] transition-all focus:border-[var(--primary)] focus:bg-[var(--bg-primary)] focus:shadow-[0_0_0_2px_rgba(37,99,235,0.2)] focus:outline-none" value={def} onChange={(e) => updateColDef(i, e.target.value)} title={`Column ${i+1}`} />
+              <input key={`col-def-${i}`} className="h-full w-full min-w-[30px] rounded border border-[var(--border)] bg-[var(--bg-secondary)] p-0.5 text-center text-[0.75rem] font-medium text-[var(--text-primary)] transition-all focus:border-[var(--primary)] focus:bg-[var(--bg-primary)] focus:outline-none" value={def} onChange={(e) => updateColDef(i, e.target.value)} title={`Column ${i+1}`} />
             ))}
           </div>
           
           <div className="flex w-max gap-1.5 md:gap-2.5">
             <div className="grid w-[28px] md:w-[32px]" style={{ gridTemplateRows: containerStyle.gridTemplateRows, gap: containerStyle.gap }}>
               {rowDefs.map((def, i) => (
-                <input key={`row-def-${i}`} className="h-full w-full min-w-[30px] rounded border border-[var(--border)] bg-[var(--bg-secondary)] p-0.5 text-center text-[0.75rem] font-medium text-[var(--text-primary)] transition-all focus:border-[var(--primary)] focus:bg-[var(--bg-primary)] focus:shadow-[0_0_0_2px_rgba(37,99,235,0.2)] focus:outline-none" value={def} onChange={(e) => updateRowDef(i, e.target.value)} title={`Row ${i+1}`} />
+                <input key={`row-def-${i}`} className="h-full w-full min-w-[30px] rounded border border-[var(--border)] bg-[var(--bg-secondary)] p-0.5 text-center text-[0.75rem] font-medium text-[var(--text-primary)] transition-all focus:border-[var(--primary)] focus:bg-[var(--bg-primary)] focus:outline-none" value={def} onChange={(e) => updateRowDef(i, e.target.value)} title={`Row ${i+1}`} />
               ))}
             </div>
 
@@ -351,7 +351,7 @@ export default function LayoutGeneratorClient({
               {areas.map(area => (
                 <div 
                   key={`area-${area.id}`}
-                  className={`group relative z-10 flex items-center justify-center overflow-hidden rounded-[var(--radius-sm)] border-2 border-[var(--primary)] bg-[var(--glass)] text-[1.25rem] font-semibold text-[var(--text-primary)] shadow-[0_4px_20px_-2px_rgba(0,0,0,0.2)] backdrop-blur-[12px] ${activeDrag ? 'pointer-events-none' : ''}`}
+                  className={`group relative z-10 flex items-center justify-center overflow-hidden rounded-[var(--radius-sm)] border-2 border-[var(--primary)] bg-[var(--glass)] text-[1.25rem] font-semibold text-[var(--text-primary)] backdrop-blur-[12px] ${activeDrag ? 'pointer-events-none' : ''}`}
                   id={`visual-area-${area.id}`}
                   style={{ 
                     gridColumn: `${area.colStart} / ${area.colEnd}`, 
@@ -402,13 +402,13 @@ export default function LayoutGeneratorClient({
         </div>
 
         <div className="mt-[30px] md:mt-[50px] flex w-full flex-wrap justify-center gap-3">
-          <button className="w-full sm:w-auto cursor-pointer rounded-[var(--radius-sm)] border-none bg-[var(--primary)] px-8 py-3 text-[1rem] font-semibold text-white shadow-[0_4px_14px_0_rgba(37,99,235,0.39)] transition-all hover:-translate-y-[1px] hover:bg-[var(--primary-hover)] active:translate-y-[1px]" onClick={() => setShowCode(showCode === 'html' ? null : 'html')}>Copy HTML</button>
-          <button className="w-full sm:w-auto cursor-pointer rounded-[var(--radius-sm)] border-none bg-[var(--primary)] px-8 py-3 text-[1rem] font-semibold text-white shadow-[0_4px_14px_0_rgba(37,99,235,0.39)] transition-all hover:-translate-y-[1px] hover:bg-[var(--primary-hover)] active:translate-y-[1px]" onClick={() => setShowCode(showCode === 'css' ? null : 'css')}>Copy CSS</button>
+          <button className="w-full sm:w-auto cursor-pointer rounded-[var(--radius-sm)] border-none bg-[var(--primary)] px-8 py-3 text-[1rem] font-semibold text-white transition-all hover:-translate-y-[1px] hover:bg-[var(--primary-hover)] active:translate-y-[1px]" onClick={() => setShowCode(showCode === 'html' ? null : 'html')}>Copy HTML</button>
+          <button className="w-full sm:w-auto cursor-pointer rounded-[var(--radius-sm)] border-none bg-[var(--primary)] px-8 py-3 text-[1rem] font-semibold text-white transition-all hover:-translate-y-[1px] hover:bg-[var(--primary-hover)] active:translate-y-[1px]" onClick={() => setShowCode(showCode === 'css' ? null : 'css')}>Copy CSS</button>
         </div>
 
         {showCode && (
           <div className="fixed left-0 top-0 z-[9999] flex h-screen w-screen items-center justify-center bg-[rgba(0,0,0,0.7)] p-4 backdrop-blur-[4px]" onClick={() => setShowCode(null)}>
-            <div className="relative max-h-[90vh] w-[min(700px,calc(100vw-2rem))] overflow-hidden rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-primary)] p-5 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)]" onClick={e => e.stopPropagation()}>
+            <div className="relative max-h-[90vh] w-[min(700px,calc(100vw-2rem))] overflow-hidden rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-primary)] p-5" onClick={e => e.stopPropagation()}>
               <button className="absolute right-[15px] top-[15px] flex cursor-pointer items-center justify-center rounded-full border-none bg-transparent p-1.5 text-[var(--text-secondary)] transition-colors hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)]" onClick={() => setShowCode(null)}>
                  <X size={20} />
               </button>

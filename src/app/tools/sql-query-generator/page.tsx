@@ -368,7 +368,7 @@ export default function SqlQueryGeneratorPage() {
             <div className="grid lg:grid-cols-12 gap-8 mb-16">
                 {/* LEFT: Controls */}
                 <div className="lg:col-span-5 space-y-6">
-                    <Card className="border-0 shadow-lg ring-1 ring-border/50 h-full">
+                    <Card className="border-0 ring-1 ring-border/50 h-full">
                         <CardHeader className="pb-4 border-b bg-muted/20">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-2">
@@ -565,7 +565,7 @@ export default function SqlQueryGeneratorPage() {
                                             </div>
                                         )}
                                         {whereClauses.map((w, i) => (
-                                            <div key={i} className="flex gap-1 items-center bg-background p-1 rounded border shadow-sm">
+                                            <div key={i} className="flex gap-1 items-center bg-background p-1 rounded border">
                                                 {joinConfig.enabled && (
                                                     <Select value={w.table} onValueChange={(v) => {
                                                         const newW = [...whereClauses]; newW[i].table = v; setWhereClauses(newW);
@@ -624,7 +624,7 @@ export default function SqlQueryGeneratorPage() {
                 {/* RIGHT: Results & Simulation */}
                 <div className="lg:col-span-7 space-y-6">
                     {/* Code Output */}
-                    <Card className="bg-slate-900 text-slate-100 border-slate-800 shadow-xl overflow-hidden">
+                    <Card className="bg-slate-900 text-slate-100 border-slate-800 overflow-hidden">
                         <div className="flex items-center justify-between px-4 py-2 bg-slate-950/50 border-b border-white/5">
                             <span className="text-xs font-mono text-slate-500 flex items-center gap-2"><Terminal className="w-3 h-3" /> SQL Preview</span>
                             <div className="flex gap-2">
@@ -640,7 +640,7 @@ export default function SqlQueryGeneratorPage() {
                             </div>
 
                             <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <Button size="sm" className="h-9 px-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold shadow-lg shadow-blue-900/20" onClick={runSimulation}>
+                                <Button size="sm" className="h-9 px-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold shadow-blue-900/20" onClick={runSimulation}>
                                     <Play className="h-3 w-3 mr-2 fill-current" /> Run Query
                                 </Button>
                             </div>
@@ -649,7 +649,7 @@ export default function SqlQueryGeneratorPage() {
 
                     {/* Simulation Result / Message */}
                     {executionMessage ? (
-                        <div className={`p-4 rounded-xl text-sm font-medium flex items-center gap-3 border shadow-sm animate-in zoom-in-95 duration-200
+                        <div className={`p-4 rounded-xl text-sm font-medium flex items-center gap-3 border animate-in zoom-in-95 duration-200
                             ${executionMessage.type === 'success' ? "bg-green-50 text-green-900 border-green-200 dark:bg-green-900/20 dark:text-green-300 dark:border-green-900/50" :
                                 executionMessage.type === 'error' ? "bg-red-50 text-red-900 border-red-200 dark:bg-red-900/20 dark:text-red-300 dark:border-red-900/50" :
                                     "bg-blue-50 text-blue-900 border-blue-200 dark:bg-blue-900/20 dark:text-blue-300 dark:border-blue-900/50"}`}>

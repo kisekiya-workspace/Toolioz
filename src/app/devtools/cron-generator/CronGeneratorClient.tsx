@@ -104,7 +104,7 @@ const SegmentBuilder = ({
                         onClick={() => setMode(m)}
                         className={`rounded-full px-5 py-2.5 text-[0.9rem] font-bold capitalize transition-all duration-200 ${
                             state.mode === m 
-                                ? 'bg-[#8b5cf6] text-white shadow-[0_4px_12px_rgba(139,92,246,0.3)]' 
+                                ? 'bg-[#8b5cf6] text-white' 
                                 : 'bg-[var(--bg-primary)] text-[var(--text-secondary)] hover:bg-[rgba(139,92,246,0.1)] hover:text-[#8b5cf6] border border-[var(--border)]'
                         }`}
                     >
@@ -113,7 +113,7 @@ const SegmentBuilder = ({
                 ))}
             </div>
 
-            <div className="min-h-[200px] rounded-xl border border-[var(--border)] bg-[var(--bg-primary)] p-6 shadow-sm">
+            <div className="min-h-[200px] rounded-xl border border-[var(--border)] bg-[var(--bg-primary)] p-6">
                 {state.mode === 'every' && (
                     <div className="flex h-full items-center justify-center text-center text-[var(--text-secondary)] font-medium">
                         Executes on every valid {title.toLowerCase()}.
@@ -169,7 +169,7 @@ const SegmentBuilder = ({
                                     onClick={() => toggleSpecific(i)}
                                     className={`flex h-12 w-full items-center justify-center rounded-lg text-sm font-bold transition-all duration-150 ${
                                         selected 
-                                            ? 'bg-[#8b5cf6] text-white shadow-md scale-105' 
+                                            ? 'bg-[#8b5cf6] text-white scale-105' 
                                             : 'bg-[var(--bg-secondary)] text-[var(--text-secondary)] hover:bg-[rgba(139,92,246,0.1)] hover:text-[#8b5cf6] border border-[var(--border)]'
                                     }`}
                                 >
@@ -303,7 +303,7 @@ export default function CronGeneratorClient() {
                     <div className="mx-auto max-w-[1200px]">
                         
                         {/* Massive Display & Input */}
-                        <Card className="!p-6 md:!p-10 mb-8 border-2 border-[#8b5cf6]/20 bg-[var(--bg-secondary)] shadow-xl shadow-[#8b5cf6]/5">
+                        <Card className="!p-6 md:!p-10 mb-8 border-2 border-[#8b5cf6]/20 bg-[var(--bg-secondary)]/5">
                             <div className="flex flex-col xl:flex-row gap-8 items-center justify-between">
                                 <div className="flex-1 w-full">
                                     <label className="text-[0.8rem] font-black uppercase tracking-widest text-[#8b5cf6] mb-3 block">Raw Cron Expression</label>
@@ -325,7 +325,7 @@ export default function CronGeneratorClient() {
                                         </div>
                                     )}
                                 </div>
-                                <button className="w-full xl:w-auto shrink-0 cursor-pointer flex justify-center items-center gap-3 rounded-xl border-none bg-[#8b5cf6] px-8 py-5 text-[1.1rem] font-extrabold text-white transition-all duration-200 hover:bg-[#7c3aed] hover:shadow-lg hover:-translate-y-1 active:translate-y-0" onClick={copyToClipboard} disabled={!!error}>
+                                <button className="w-full xl:w-auto shrink-0 cursor-pointer flex justify-center items-center gap-3 rounded-xl border-none bg-[#8b5cf6] px-8 py-5 text-[1.1rem] font-extrabold text-white transition-all duration-200 hover:bg-[#7c3aed] hover:-translate-y-1 active:translate-y-0" onClick={copyToClipboard} disabled={!!error}>
                                     {copied ? <Check size={24} /> : <Copy size={24} />}
                                     <span>{copied ? 'Copied to Clipboard' : 'Copy Expression'}</span>
                                 </button>
@@ -336,7 +336,7 @@ export default function CronGeneratorClient() {
                         <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8">
                             
                             {/* Visual Builder */}
-                            <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] overflow-hidden shadow-sm">
+                            <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] overflow-hidden">
                                 <div className="flex overflow-x-auto border-b border-[var(--border)] bg-[var(--bg-primary)] p-2 gap-2 custom-scrollbar">
                                     {tabs.map(tab => (
                                         <button
@@ -344,7 +344,7 @@ export default function CronGeneratorClient() {
                                             onClick={() => setActiveTab(tab.id as any)}
                                             className={`flex items-center gap-2 whitespace-nowrap rounded-lg px-6 py-3 font-bold transition-all duration-200 ${
                                                 activeTab === tab.id
-                                                    ? 'bg-[#8b5cf6] text-white shadow-md'
+                                                    ? 'bg-[#8b5cf6] text-white'
                                                     : 'text-[var(--text-secondary)] hover:bg-[var(--bg-secondary)] hover:text-[var(--text-primary)]'
                                             }`}
                                         >
@@ -363,7 +363,7 @@ export default function CronGeneratorClient() {
 
                             {/* Sidebar Info */}
                             <div className="flex flex-col gap-8">
-                                <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-6 shadow-sm">
+                                <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
                                     <h3 className="mb-6 flex items-center gap-3 text-[1.1rem] font-extrabold text-[var(--text-primary)]">
                                         <CalendarClock size={22} className="text-[#8b5cf6]" />
                                         Next 5 Executions
@@ -375,7 +375,7 @@ export default function CronGeneratorClient() {
                                     ) : (
                                         <div className="ml-2 flex flex-col gap-2 border-l-[3px] border-[#8b5cf6]/30 pl-5 relative before:absolute before:top-0 before:-left-[3px] before:bottom-0 before:w-[3px] before:bg-gradient-to-b before:from-[#8b5cf6] before:to-transparent">
                                             {nextDates.map((nd, idx) => (
-                                                <div key={idx} className="relative py-3 before:absolute before:-left-[1.6rem] before:top-1/2 before:h-[14px] before:w-[14px] before:-translate-y-1/2 before:rounded-full before:border-[3px] before:border-[#8b5cf6] before:bg-[var(--bg-secondary)] first:before:bg-[#8b5cf6] first:before:shadow-[0_0_12px_rgba(139,92,246,0.5)] transition-all hover:translate-x-1">
+                                                <div key={idx} className="relative py-3 before:absolute before:-left-[1.6rem] before:top-1/2 before:h-[14px] before:w-[14px] before:-translate-y-1/2 before:rounded-full before:border-[3px] before:border-[#8b5cf6] before:bg-[var(--bg-secondary)] first:before:bg-[#8b5cf6] transition-all hover:translate-x-1">
                                                     <div className="text-[1rem] font-extrabold text-[var(--text-primary)]">{nd.date}</div>
                                                     <div className="mt-1 flex items-center gap-2 font-mono text-[0.85rem] font-bold text-[#8b5cf6] bg-[#8b5cf6]/10 w-fit px-2 py-0.5 rounded-md"><Clock size={12}/> {nd.time}</div>
                                                 </div>
@@ -384,7 +384,7 @@ export default function CronGeneratorClient() {
                                     )}
                                 </div>
 
-                                <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-6 shadow-sm">
+                                <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
                                     <h4 className="mb-5 text-[1.1rem] font-extrabold text-[var(--text-primary)] flex items-center gap-2"><Hash size={20} className="text-[#8b5cf6]"/> Quick Presets</h4>
                                     <div className="flex flex-wrap gap-2.5">
                                         {[

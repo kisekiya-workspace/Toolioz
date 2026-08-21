@@ -76,7 +76,7 @@ export const Navbar = () => {
     <header
       className={[
         'sticky top-0 z-50 w-full border-b border-zinc-200/80 bg-white/90 backdrop-blur-md transition-all duration-200 dark:border-zinc-800/80 dark:bg-zinc-950/90',
-        scrolled ? 'h-16 shadow-xs' : 'h-[72px]',
+        scrolled ? 'h-16' : 'h-[72px]',
       ].join(' ')}
     >
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -90,7 +90,7 @@ export const Navbar = () => {
               alt="Toolioz logo"
               width={40}
               height={40}
-              className="h-9 w-9 shrink-0 rounded-lg object-contain shadow-xs"
+              className="h-9 w-9 shrink-0 rounded-lg object-contain"
               priority
             />
             <span className="text-xl font-black tracking-tight text-zinc-950 dark:text-zinc-50">
@@ -137,7 +137,7 @@ export const Navbar = () => {
             </button>
 
             {activeDropdown === 'tools' && (
-              <div className="absolute left-0 top-[calc(100%+8px)] z-50 w-[640px] rounded-2xl border border-zinc-200 bg-white p-5 text-zinc-950 shadow-xl animate-in fade-in-0 zoom-in-95 duration-150 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-50">
+              <div className="absolute left-0 top-[calc(100%+8px)] z-50 w-[640px] rounded-2xl border border-zinc-200 bg-white p-5 text-zinc-950 animate-in fade-in-0 zoom-in-95 duration-150 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-50">
                 <div className="mb-4 flex items-center justify-between border-b border-zinc-100 pb-3 dark:border-zinc-800">
                   <div className="flex items-center gap-2">
                     <Boxes size={16} className="text-zinc-900 dark:text-zinc-100" />
@@ -247,7 +247,7 @@ export const Navbar = () => {
                 asChild
                 size="lg"
                 variant="outline"
-                className="w-full justify-center gap-2 border-zinc-200 bg-zinc-100 text-zinc-900 hover:bg-zinc-200 font-semibold shadow-xs dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
+                className="w-full justify-center gap-2 border-zinc-200 bg-zinc-100 text-zinc-900 hover:bg-zinc-200 font-semibold dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
               >
                 <Link href="/resume-builder" onClick={() => setIsOpen(false)}>
                   <Briefcase size={16} />

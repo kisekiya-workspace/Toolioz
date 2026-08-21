@@ -82,14 +82,14 @@ export default function ColorConverterPage() {
                 {/* Left Column: Visual & Smart Input */}
                 <div className="lg:col-span-5 space-y-8">
                     {/* Main Preview */}
-                    <Card className="border-0 shadow-lg ring-1 ring-border/50 overflow-hidden">
+                    <Card className="border-0 ring-1 ring-border/50 overflow-hidden">
                         <div
                             className="h-64 w-full transition-colors duration-300 flex items-center justify-center"
                             style={{ backgroundColor: hex }}
                         >
-                            <div className="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 text-center shadow-xl">
-                                <p className="font-mono text-3xl font-bold text-white drop-shadow-md mb-2">{hex.toUpperCase()}</p>
-                                <p className="text-white/90 font-medium drop-shadow-sm">{colorName}</p>
+                            <div className="bg-white/20 backdrop-blur-md p-6 rounded-2xl border border-white/30 text-center">
+                                <p className="font-mono text-3xl font-bold text-white mb-2">{hex.toUpperCase()}</p>
+                                <p className="text-white/90 font-medium">{colorName}</p>
                             </div>
                         </div>
                     </Card>

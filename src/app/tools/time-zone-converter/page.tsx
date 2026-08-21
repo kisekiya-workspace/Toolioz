@@ -65,7 +65,7 @@ export default function TimeZoneConverterPage() {
             />
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-                <Card className="border-2 shadow-lg h-fit">
+                <Card className="border-2 h-fit">
                     <CardContent className="p-8 space-y-6">
                         <div className="space-y-2">
                             <Label>Date & Time</Label>
@@ -91,7 +91,7 @@ export default function TimeZoneConverterPage() {
                     </CardContent>
                 </Card>
 
-                <Card className="border-2 shadow-xl bg-indigo-50/50 dark:bg-indigo-950/20 border-indigo-100 dark:border-indigo-900 flex flex-col justify-center">
+                <Card className="border-2 bg-indigo-50/50 dark:bg-indigo-950/20 border-indigo-100 dark:border-indigo-900 flex flex-col justify-center">
                     <CardContent className="p-8 text-center space-y-6">
                         <div className="space-y-2">
                             <Globe className="mx-auto h-12 w-12 text-indigo-500 mb-4 opacity-50" />

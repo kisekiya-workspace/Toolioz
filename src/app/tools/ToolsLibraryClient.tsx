@@ -117,7 +117,7 @@ export default function ToolsLibraryClient() {
 
             {/* Search Box */}
             <div className="mx-auto mt-5 max-w-xl">
-              <div className="relative flex items-center rounded-xl border border-zinc-300 bg-white p-2 shadow-xs transition-all focus-within:border-blue-600 focus-within:ring-2 focus-within:ring-blue-500/20 dark:border-zinc-700 dark:bg-zinc-900">
+              <div className="relative flex items-center rounded-xl border border-zinc-300 bg-white p-2 transition-all focus-within:border-blue-600 focus-within:ring-2 focus-within:ring-blue-500/20 dark:border-zinc-700 dark:bg-zinc-900">
                 <Search size={18} className="ml-3 shrink-0 text-zinc-400" />
                 <input
                   ref={searchRef}
@@ -155,7 +155,7 @@ export default function ToolsLibraryClient() {
                     onClick={() => setCategory(name)}
                     className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold transition-all ${
                       active
-                        ? 'border border-zinc-900 bg-zinc-900 text-white shadow-xs dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900'
+                        ? 'border border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900'
                         : 'border border-zinc-200 bg-zinc-50 text-zinc-600 hover:border-zinc-300 hover:bg-zinc-100 hover:text-zinc-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-zinc-100'
                     }`}
                   >

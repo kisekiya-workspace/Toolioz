@@ -28,7 +28,7 @@ export function ToolContentSection({ title, children }: ContentSectionProps) {
 export function ToolFAQ({ questions }: { questions: { q: string; a: string }[] }) {
   return (
     <ToolContentSection title="Frequently Asked Questions">
-      <Card className="border-border bg-card p-6 shadow-xs mt-4">
+      <Card className="border-border bg-card p-6 mt-4">
         <Accordion type="single" collapsible className="w-full">
           {questions.map((item, i) => (
             <AccordionItem key={i} value={`faq-${i}`}>

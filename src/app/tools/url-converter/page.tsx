@@ -53,7 +53,7 @@ export default function UrlConverterPage() {
                     </TabsList>
 
                     <TabsContent value="encode">
-                        <Card className="border-2 shadow-lg">
+                        <Card className="border-2">
                             <CardContent className="p-8 space-y-6">
                                 <Textarea
                                     placeholder="Enter text to encode (e.g. Hello World!)"
@@ -88,7 +88,7 @@ export default function UrlConverterPage() {
                     </TabsContent>
 
                     <TabsContent value="decode">
-                        <Card className="border-2 shadow-lg">
+                        <Card className="border-2">
                             <CardContent className="p-8 space-y-6">
                                 <Textarea
                                     placeholder="Enter URL string to decode..."

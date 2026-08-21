@@ -130,7 +130,7 @@ export default function RetirementCorpusClient() {
             </Card>
 
             <div className={styles.resultCol}>
-              <Card className="rounded-2xl border border-amber-500/30 bg-amber-700 dark:bg-[#1f2430] dark:border-[#333a4d] p-6 text-center text-white shadow-md sm:p-8 relative">
+              <Card className="rounded-2xl border border-amber-500/30 bg-amber-700 dark:bg-[#1f2430] dark:border-[#333a4d] p-6 text-center text-white sm:p-8 relative">
                 <h2 className="mb-2 text-xs font-bold uppercase tracking-wider text-amber-100 dark:text-amber-400">Required Retirement Corpus</h2>
                 <div className={styles.resultValue}>{formatCurrency(result.corpusNeeded)}</div>
                 <div className={styles.stats}>
@@ -210,7 +210,7 @@ export default function RetirementCorpusClient() {
             </div>
 
             <div className="grid gap-6 md:grid-cols-2">
-              <div className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
+              <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
                 <div className="mb-4 flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50 text-orange-600">
                     <BookOpen size={20} />
@@ -229,7 +229,7 @@ export default function RetirementCorpusClient() {
                 </ul>
               </div>
 
-              <div className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
+              <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
                 <div className="mb-4 flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-green-50 text-green-600">
                     <Wallet size={20} />
@@ -248,7 +248,7 @@ export default function RetirementCorpusClient() {
                 </ul>
               </div>
 
-              <div className="col-span-1 rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm md:col-span-2">
+              <div className="col-span-1 rounded-2xl border border-[var(--border)] bg-white p-6 md:col-span-2">
                 <div className="mb-4 flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-50 text-cyan-600">
                     <Lightbulb size={20} />

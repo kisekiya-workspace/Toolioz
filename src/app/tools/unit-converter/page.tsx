@@ -127,7 +127,7 @@ export default function UnitConverterPage() {
                     ))}
                 </div>
 
-                <Card className="lg:col-span-3 border-2 shadow-xl">
+                <Card className="lg:col-span-3 border-2">
                     <CardContent className="p-8 space-y-8">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                             <div className="space-y-4">

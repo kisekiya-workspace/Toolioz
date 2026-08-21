@@ -95,7 +95,7 @@ export default function Base64Client() {
         <main className="mx-auto max-w-6xl px-4 pb-16 pt-2 sm:px-6">
           <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-[1fr_140px_1fr]">
             <div>
-              <Card className="flex h-[440px] flex-col p-6 space-y-4 shadow-xs">
+              <Card className="flex h-[440px] flex-col p-6 space-y-4">
                 <div className="flex items-center justify-between border-b border-zinc-100 pb-3 dark:border-zinc-800">
                   <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
                     {mode === 'encode' ? 'Binary / Text Input' : 'Base64 Input'}
@@ -129,7 +129,7 @@ export default function Base64Client() {
             </div>
 
             <div>
-              <Card className="flex h-[440px] flex-col p-6 space-y-4 shadow-xs">
+              <Card className="flex h-[440px] flex-col p-6 space-y-4">
                 <div className="flex items-center justify-between border-b border-zinc-100 pb-3 dark:border-zinc-800">
                   <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
                     Result

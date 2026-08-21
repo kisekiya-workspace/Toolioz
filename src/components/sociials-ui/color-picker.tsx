@@ -32,7 +32,7 @@ export function ColorPicker({
         <div className={cn("flex items-center gap-2 cursor-pointer group", className)}>
           <div
             className={cn(
-              "w-10 h-10 rounded-md border border-border shadow-xs transition-transform group-hover:scale-105",
+              "w-10 h-10 rounded-md border border-border transition-transform group-hover:scale-105",
               squareClassName
             )}
             style={{ backgroundColor: safeValue }}

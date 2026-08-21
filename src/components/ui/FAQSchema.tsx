@@ -44,8 +44,8 @@ export const FAQSchema: React.FC<FAQSchemaProps> = ({ faqs }) => {
               <div 
                 key={i} 
                 className={[
-                  'overflow-hidden rounded-2xl border bg-white shadow-sm transition-all duration-200',
-                  openIndex === i ? 'border-indigo-500 shadow-md ring-1 ring-indigo-500/20' : 'border-slate-200 hover:border-slate-300',
+                  'overflow-hidden rounded-2xl border bg-white transition-all duration-200',
+                  openIndex === i ? 'border-indigo-500 ring-1 ring-indigo-500/20' : 'border-slate-200 hover:border-slate-300',
                 ].join(' ')}
               >
                 <button

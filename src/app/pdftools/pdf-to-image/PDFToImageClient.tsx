@@ -184,7 +184,7 @@ export default function PDFToImageClient() {
                       className="hidden"
                     />
                     <label htmlFor="pdf-upload" className="w-full cursor-pointer">
-                      <div className="mx-auto mb-8 flex h-[100px] w-[100px] items-center justify-center rounded-full bg-white text-[#ef4444] shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
+                      <div className="mx-auto mb-8 flex h-[100px] w-[100px] items-center justify-center rounded-full bg-white text-[#ef4444]">
                         <ImageIcon size={32} />
                       </div>
                       <h3 className="mb-2 text-[1.5rem] font-extrabold">Drop your PDF file</h3>

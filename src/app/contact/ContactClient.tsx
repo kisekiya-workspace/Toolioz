@@ -25,7 +25,7 @@ export default function ContactClient() {
       </header>
 
       <section className="mx-auto flex max-w-xl flex-col gap-6 px-4 py-12 sm:px-6 sm:py-16 flex-1">
-        <Card className="border-border bg-card p-8 sm:p-10 text-center shadow-xs">
+        <Card className="border-border bg-card p-8 sm:p-10 text-center">
           <div className="mb-6 flex justify-center">
             <div className="flex size-14 items-center justify-center rounded-2xl bg-blue-500/10 text-blue-600 dark:bg-blue-950/40">
               <Mail size={28} />

@@ -62,7 +62,7 @@ export default function CompoundInterestPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
                 <div className="lg:col-span-1 space-y-8">
-                    <Card className="border-2 shadow-lg">
+                    <Card className="border-2">
                         <CardContent className="p-8 space-y-6">
                             <div className="space-y-4">
                                 <Label>Initial Deposit (₹)</Label>
@@ -109,7 +109,7 @@ export default function CompoundInterestPage() {
                     </Card>
                 </div>
 
-                <div className="lg:col-span-2 h-[500px] border rounded-xl p-4 shadow-sm bg-card">
+                <div className="lg:col-span-2 h-[500px] border rounded-xl p-4 bg-card">
                     {isClient && (
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={data}>

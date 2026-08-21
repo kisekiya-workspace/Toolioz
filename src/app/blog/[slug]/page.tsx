@@ -156,7 +156,7 @@ export default async function StandaloneBlogPostPage({ params }: BlogPageProps) 
           </nav>
 
           <div className="pt-3">
-            <Button asChild size="sm" className="w-full text-xs font-semibold bg-blue-600 hover:bg-blue-700 text-white shadow-xs">
+            <Button asChild size="sm" className="w-full text-xs font-semibold bg-blue-600 hover:bg-blue-700 text-white">
               <Link href={post.toolHref}>
                 Launch Tool <ArrowRight size={12} className="ml-1" />
               </Link>
@@ -205,7 +205,7 @@ export default async function StandaloneBlogPostPage({ params }: BlogPageProps) 
               </p>
             </div>
 
-            <Button asChild size="sm" className="shrink-0 bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-xs">
+            <Button asChild size="sm" className="shrink-0 bg-blue-600 hover:bg-blue-700 text-white font-semibold">
               <Link href={post.toolHref}>
                 Open Tool <ArrowRight size={13} className="ml-1" />
               </Link>
@@ -272,7 +272,7 @@ export default async function StandaloneBlogPostPage({ params }: BlogPageProps) 
                 <Link
                   key={related.slug}
                   href={`/blog/${related.slug}`}
-                  className="group block rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-3.5 shadow-2xs hover:border-zinc-400 transition-all"
+                  className="group block rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-3.5 hover:border-zinc-400 transition-all"
                 >
                   <span className="text-[10px] font-mono text-zinc-400">
                     {related.readTime}

@@ -156,7 +156,7 @@ export default function Base64ConverterPage() {
             />
 
             <div className="max-w-4xl mx-auto mb-16 space-y-8">
-                <Card className="border-2 shadow-lg">
+                <Card className="border-2">
                     <CardContent className="p-8 space-y-8">
                         {/* Controls */}
                         <div className="flex flex-col md:flex-row justify-between gap-6 pb-6 border-b">
@@ -278,7 +278,7 @@ export default function Base64ConverterPage() {
                                         // Decode output: Show preview if image, allow download file
                                         <div className="border rounded-xl p-6 bg-muted/30 flex flex-col items-center gap-6">
                                             {fileInput?.startsWith("data:image") && (
-                                                <img src={fileInput} alt="Preview" className="max-h-64 rounded-lg shadow-md" />
+                                                <img src={fileInput} alt="Preview" className="max-h-64 rounded-lg" />
                                             )}
                                             <Button size="lg" onClick={downloadFile} disabled={!fileInput} className="gap-2">
                                                 <Download size={18} /> Download Decoded File

@@ -186,7 +186,7 @@ export default function CodeToImagePage() {
                             className="transition-all duration-300 min-w-[300px] max-w-full"
                         >
                             <div
-                                className="rounded-xl overflow-hidden shadow-2xl"
+                                className="rounded-xl overflow-hidden"
                                 style={{ backgroundColor: THEMES[theme].bg }}
                             >
                                 {/* Window Controls */}

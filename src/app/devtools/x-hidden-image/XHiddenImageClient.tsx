@@ -532,14 +532,14 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
             <div className="flex rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-secondary)] p-1">
               <button
                 type="button"
-                className={`flex-1 rounded-[var(--radius-sm)] py-2 text-xs font-bold uppercase tracking-wide ${leftPanel === 'source' ? 'bg-white shadow-sm' : 'text-[var(--text-tertiary)]'}`}
+                className={`flex-1 rounded-[var(--radius-sm)] py-2 text-xs font-bold uppercase tracking-wide ${leftPanel === 'source' ? 'bg-white' : 'text-[var(--text-tertiary)]'}`}
                 onClick={() => setLeftPanel('source')}
               >
                 Source
               </button>
               <button
                 type="button"
-                className={`flex-1 rounded-[var(--radius-sm)] py-2 text-xs font-bold uppercase tracking-wide ${leftPanel === 'effects' ? 'bg-white shadow-sm' : 'text-[var(--text-tertiary)]'}`}
+                className={`flex-1 rounded-[var(--radius-sm)] py-2 text-xs font-bold uppercase tracking-wide ${leftPanel === 'effects' ? 'bg-white' : 'text-[var(--text-tertiary)]'}`}
                 onClick={() => setLeftPanel('effects')}
               >
                 Effects
@@ -913,7 +913,7 @@ function BrushStage({
       <canvas ref={overlayRef} className="pointer-events-none absolute inset-0 h-full w-full" />
       {hasImage && cursor.visible && (
         <div
-          className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 shadow-[0_0_0_1px_rgba(255,255,255,0.85)]"
+          className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-1/2 rounded-full border-2"
           style={{
             left: cursor.x,
             top: cursor.y,

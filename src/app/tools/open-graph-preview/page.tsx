@@ -32,7 +32,7 @@ export default function OpenGraphPreviewPage() {
             <div className="grid lg:grid-cols-2 gap-12 mb-16">
                 {/* Inputs */}
                 <div className="space-y-6">
-                    <Card className="border-0 shadow-lg ring-1 ring-border/50">
+                    <Card className="border-0 ring-1 ring-border/50">
                         <CardContent className="p-6 space-y-4">
                             <div className="space-y-2">
                                 <Label>Og Title</Label>

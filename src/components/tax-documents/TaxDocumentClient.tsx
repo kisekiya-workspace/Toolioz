@@ -139,7 +139,7 @@ export default function TaxDocumentClient({ mode }: { mode: Mode }) {
         <main className="mx-auto max-w-6xl px-4 pb-16 pt-2">
           <div className="grid gap-6 lg:grid-cols-[1.04fr_.96fr] items-start">
             {/* Left Card: Input */}
-            <Card className="p-0 overflow-hidden shadow-xs">
+            <Card className="p-0 overflow-hidden">
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-100 dark:border-zinc-800 bg-zinc-50/60 dark:bg-zinc-900 px-5 py-4">
                 <div>
                   <p className="font-bold text-sm text-zinc-950 dark:text-zinc-50">{copy.input}</p>
@@ -202,7 +202,7 @@ export default function TaxDocumentClient({ mode }: { mode: Mode }) {
             </Card>
 
             {/* Right Card: Result */}
-            <Card className="p-6 sm:p-8 space-y-6 shadow-xs">
+            <Card className="p-6 sm:p-8 space-y-6">
               <div className="flex items-start justify-between gap-4 border-b border-zinc-100 dark:border-zinc-800 pb-4">
                 <div>
                   <p className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400">

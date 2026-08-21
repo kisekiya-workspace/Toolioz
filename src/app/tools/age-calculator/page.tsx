@@ -174,7 +174,7 @@ export default function AgeCalculatorPage() {
 
                 {/* Input Section */}
                 <div className="lg:col-span-4 space-y-6">
-                    <Card className="border-2 shadow-lg">
+                    <Card className="border-2">
                         <CardContent className="p-6 space-y-6">
                             <div className="space-y-3">
                                 <Label className="text-lg font-semibold">Date of Birth</Label>
@@ -193,7 +193,7 @@ export default function AgeCalculatorPage() {
 
                     {/* Result Summary - Mobile First Stack */}
                     {result && (
-                        <Card className="border-2 shadow-md bg-slate-50 dark:bg-slate-900/50">
+                        <Card className="border-2 bg-slate-50 dark:bg-slate-900/50">
                             <CardContent className="p-6 space-y-4">
                                 <div>
                                     <div className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-1">Day of Birth</div>
@@ -212,7 +212,7 @@ export default function AgeCalculatorPage() {
 
                 {/* Main Result Section */}
                 <div className="lg:col-span-8 space-y-6">
-                    <Card className="border-2 shadow-xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border-blue-100 dark:border-blue-900 min-h-[400px] flex flex-col justify-center relative overflow-hidden">
+                    <Card className="border-2 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border-blue-100 dark:border-blue-900 min-h-[400px] flex flex-col justify-center relative overflow-hidden">
                         {/* Decorative background elements */}
                         <div className="absolute top-0 right-0 w-64 h-64 bg-blue-200/20 dark:bg-blue-500/10 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
                         <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-200/20 dark:bg-indigo-500/10 rounded-full blur-3xl -ml-16 -mb-16 pointer-events-none"></div>
@@ -239,11 +239,11 @@ export default function AgeCalculatorPage() {
                                     </div>
 
                                     <div className="grid grid-cols-2 gap-4 sm:gap-6 max-w-lg mx-auto">
-                                        <div className="bg-background/60 dark:bg-background/20 backdrop-blur-sm rounded-xl p-4 border shadow-sm">
+                                        <div className="bg-background/60 dark:bg-background/20 backdrop-blur-sm rounded-xl p-4 border">
                                             <div className="text-2xl sm:text-3xl font-bold text-foreground">{result.age.months}</div>
                                             <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mt-1">Months</div>
                                         </div>
-                                        <div className="bg-background/60 dark:bg-background/20 backdrop-blur-sm rounded-xl p-4 border shadow-sm">
+                                        <div className="bg-background/60 dark:bg-background/20 backdrop-blur-sm rounded-xl p-4 border">
                                             <div className="text-2xl sm:text-3xl font-bold text-foreground">{result.age.days}</div>
                                             <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mt-1">Days</div>
                                         </div>
@@ -264,7 +264,7 @@ export default function AgeCalculatorPage() {
                                 { label: "Total Minutes", value: result.summary.minutes },
                                 { label: "Total Seconds", value: result.summary.seconds },
                             ].map((stat, i) => (
-                                <Card key={i} className="border shadow-sm hover:shadow-md transition-shadow">
+                                <Card key={i} className="border transition-shadow">
                                     <CardContent className="p-4 sm:p-6 text-center space-y-1">
                                         <div className="text-lg sm:text-2xl font-bold break-all">{stat.value}</div>
                                         <div className="text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</div>

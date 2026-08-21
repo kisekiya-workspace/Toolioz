@@ -150,7 +150,7 @@ export default function ColorPalettePage() {
             className="group flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors w-full text-left"
         >
             <div
-                className="w-12 h-12 rounded-lg shadow-sm border flex-shrink-0"
+                className="w-12 h-12 rounded-lg border flex-shrink-0"
                 style={{ backgroundColor: color }}
             />
             <div className="flex-1 min-w-0">
@@ -191,7 +191,7 @@ export default function ColorPalettePage() {
                             <ColorPicker
                                 value={baseColor}
                                 onChange={setBaseColor}
-                                squareClassName="h-24 w-24 rounded-xl shadow-lg border-4 border-background"
+                                squareClassName="h-24 w-24 rounded-xl border-4 border-background"
                                 className="w-auto h-auto"
                             />
                             <div className="space-y-3 flex-1">

@@ -100,7 +100,7 @@ export default function PDFMergerPage() {
             <AdContainer slot="pdf-merger-top" />
 
             <div className="max-w-4xl mx-auto mb-16 space-y-8">
-                <Card className="border-2 shadow-lg">
+                <Card className="border-2">
                     <CardContent className="p-8 space-y-6">
                         <div
                             className="border-2 border-dashed rounded-xl p-8 text-center cursor-pointer hover:bg-muted/50 transition-colors"
@@ -132,7 +132,7 @@ export default function PDFMergerPage() {
                                 <div className="grid gap-3">
                                     {files.map((file, i) => (
                                         <div key={i} className="flex items-center gap-4 p-3 bg-muted rounded-lg border group">
-                                            <span className="w-8 h-8 flex items-center justify-center bg-background rounded-full font-mono text-sm border shadow-sm shrink-0">
+                                            <span className="w-8 h-8 flex items-center justify-center bg-background rounded-full font-mono text-sm border shrink-0">
                                                 {i + 1}
                                             </span>
                                             <div className="flex-1 min-w-0">

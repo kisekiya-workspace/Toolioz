@@ -113,7 +113,7 @@ export default function JsonFormatterPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
                 {/* Input */}
-                <Card className="h-full border-2 shadow-md">
+                <Card className="h-full border-2">
                     <CardContent className="p-0 flex flex-col h-full min-h-[500px]">
                         <div className="p-4 border-b bg-muted/30 flex items-center justify-between">
                             <span className="font-semibold text-sm flex items-center gap-2">
@@ -132,7 +132,7 @@ export default function JsonFormatterPage() {
                 </Card>
 
                 {/* Output */}
-                <Card className={`h-full border-2 shadow-md ${error ? 'border-destructive/50' : ''}`}>
+                <Card className={`h-full border-2 ${error ? 'border-destructive/50' : ''}`}>
                     <CardContent className="p-0 flex flex-col h-full min-h-[500px]">
                         <div className="p-4 border-b bg-muted/30 flex items-center justify-between">
                             <span className="font-semibold text-sm flex items-center gap-2">

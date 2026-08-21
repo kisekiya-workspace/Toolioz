@@ -73,7 +73,7 @@ export function Controls({ state, onCommit, onNewBranch, onCheckout, onMerge, on
                         className="bg-slate-950 border-slate-700 h-9 text-sm text-slate-200 placeholder:text-slate-600 focus:border-blue-500/50 focus:ring-blue-500/20"
                         disabled={disabled}
                     />
-                    <Button onClick={() => onCommit(commitMsg)} disabled={disabled} size="sm" className="w-full bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/20">
+                    <Button onClick={() => onCommit(commitMsg)} disabled={disabled} size="sm" className="w-full bg-blue-600 hover:bg-blue-500 text-white shadow-blue-900/20">
                         Commit
                     </Button>
                 </div>

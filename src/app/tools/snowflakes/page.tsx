@@ -74,7 +74,7 @@ export default function SnowflakeParserPage() {
                 )}
 
                 {result && (
-                    <Card className="border-2 shadow-xl animate-in fade-in slide-in-from-bottom-4">
+                    <Card className="border-2 animate-in fade-in slide-in-from-bottom-4">
                         <CardContent className="p-8 space-y-6">
                             <div className="text-center space-y-2">
                                 <User className="h-12 w-12 mx-auto text-primary bg-primary/10 p-2 rounded-full mb-4" />

@@ -329,7 +329,7 @@ export default function BiodataGeneratorClient() {
       onMouseDownCapture={retainEditorFocus}
     >
       {/* Header */}
-      <header className="h-16 border-b border-gray-200 bg-white flex items-center justify-between px-4 sm:px-6 shrink-0 z-10 shadow-sm">
+      <header className="h-16 border-b border-gray-200 bg-white flex items-center justify-between px-4 sm:px-6 shrink-0 z-10">
         <div className="min-w-0 flex items-center gap-2 text-lg sm:text-xl font-black text-gray-900 tracking-tight">
           <Sparkles className="text-purple-600" size={20} />
           <span className="hidden sm:inline">Biodata<span className="text-purple-600">Generator</span></span>
@@ -358,7 +358,7 @@ export default function BiodataGeneratorClient() {
             type="button"
             onClick={exportPdf}
             disabled={isExportingPdf}
-            className="hidden items-center gap-2 rounded-full bg-purple-600 px-5 py-2 text-sm font-semibold text-white shadow-md shadow-purple-200 transition hover:bg-purple-700 disabled:opacity-50 lg:flex"
+            className="hidden items-center gap-2 rounded-full bg-purple-600 px-5 py-2 text-sm font-semibold text-white shadow-purple-200 transition hover:bg-purple-700 disabled:opacity-50 lg:flex"
           >
             <Download size={16} />
             {isExportingPdf ? 'Wait…' : 'Export PDF'}
@@ -369,18 +369,18 @@ export default function BiodataGeneratorClient() {
       {/* Main Workspace */}
       <div className="flex min-h-0 flex-1 overflow-hidden">
         {/* Left Sidebar / Mobile Full Area */}
-        <aside className={`z-10 flex w-full shrink-0 flex-col border-r border-gray-200 bg-white shadow-[4px_0_24px_rgba(0,0,0,0.02)] lg:w-[min(400px,100%)] ${isPreviewTab ? 'hidden lg:flex' : 'flex'} pb-16 lg:pb-0`}>
+        <aside className={`z-10 flex w-full shrink-0 flex-col border-r border-gray-200 bg-white lg:w-[min(400px,100%)] ${isPreviewTab ? 'hidden lg:flex' : 'flex'} pb-16 lg:pb-0`}>
           {/* Tabs */}
           <div className="flex p-2 gap-1 bg-gray-100/50 border-b border-gray-200">
             <button
               onClick={() => setActiveTab('templates')}
-              className={`flex-1 flex items-center justify-center gap-1 sm:gap-2 py-2.5 text-xs sm:text-sm font-semibold rounded-lg transition ${activeTab === 'templates' ? 'bg-white text-purple-700 shadow-sm' : 'text-gray-500 hover:text-gray-800'}`}
+              className={`flex-1 flex items-center justify-center gap-1 sm:gap-2 py-2.5 text-xs sm:text-sm font-semibold rounded-lg transition ${activeTab === 'templates' ? 'bg-white text-purple-700' : 'text-gray-500 hover:text-gray-800'}`}
             >
               <LayoutTemplate size={14} className="sm:w-4 sm:h-4" /> <span className="hidden xs:inline">Templates</span><span className="xs:hidden">Tmplts</span>
             </button>
             <button
               onClick={() => setActiveTab('edit')}
-              className={`flex-1 flex items-center justify-center gap-1 sm:gap-2 py-2.5 text-xs sm:text-sm font-semibold rounded-lg transition ${activeTab === 'edit' ? 'bg-white text-purple-700 shadow-sm' : 'text-gray-500 hover:text-gray-800'}`}
+              className={`flex-1 flex items-center justify-center gap-1 sm:gap-2 py-2.5 text-xs sm:text-sm font-semibold rounded-lg transition ${activeTab === 'edit' ? 'bg-white text-purple-700' : 'text-gray-500 hover:text-gray-800'}`}
             >
               <Edit3 size={14} className="sm:w-4 sm:h-4" /> Edit
             </button>
@@ -389,7 +389,7 @@ export default function BiodataGeneratorClient() {
           {/* Sidebar Content */}
           <div className="flex-1 overflow-y-auto p-5 custom-scrollbar">
             {/* Quick Template Selector Dropdown */}
-            <div className="mb-5 rounded-2xl border border-purple-200 bg-purple-50/60 p-4 shadow-xs">
+            <div className="mb-5 rounded-2xl border border-purple-200 bg-purple-50/60 p-4">
               <label className="block text-xs font-bold uppercase tracking-wider text-purple-900 mb-1.5">
                 Template Layout
               </label>
@@ -419,8 +419,8 @@ export default function BiodataGeneratorClient() {
                       onClick={() => setTemplateId(tpl.id)}
                       className={`cursor-pointer rounded-xl border-2 p-4 transition-all duration-200 ${
                         isSelected
-                          ? 'border-purple-600 bg-purple-50/40 shadow-sm ring-1 ring-purple-600'
-                          : 'border-gray-200 bg-white hover:border-purple-300 hover:shadow-xs'
+                          ? 'border-purple-600 bg-purple-50/40 ring-1 ring-purple-600'
+                          : 'border-gray-200 bg-white hover:border-purple-300'
                       }`}
                     >
                       <div className="flex items-center justify-between">
@@ -526,7 +526,7 @@ export default function BiodataGeneratorClient() {
                 style={{ width: `${794 * zoom}px`, height: `${1123 * zoom}px` }}
               >
                 <div
-                  className="absolute left-0 top-0 origin-top-left transition-transform duration-200 ease-out shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] ring-1 ring-gray-900/5 bg-white"
+                  className="absolute left-0 top-0 origin-top-left transition-transform duration-200 ease-out ring-1 ring-gray-900/5 bg-white"
                   style={{ transform: `scale(${zoom})`, width: '794px', height: '1123px' }}
                 >
                   {renderTemplate()}
@@ -548,7 +548,7 @@ export default function BiodataGeneratorClient() {
               <button type="button" onClick={exportPdf} disabled={isExportingPdf} className="flex h-11 flex-[2] items-center justify-center gap-2 rounded-xl bg-purple-600 text-sm font-bold text-white disabled:opacity-50"><Download size={18} />{isExportingPdf ? 'Exporting…' : 'Download PDF'}</button>
             </div>
           </div>
-          <div className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-gray-200 bg-white/90 p-1.5 shadow-lg backdrop-blur lg:flex">
+          <div className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-gray-200 bg-white/90 p-1.5 backdrop-blur lg:flex">
             <button onClick={() => setZoom(z => Math.max(0.2, z - 0.1))} className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-full transition">
               <ZoomOut size={18} />
             </button>

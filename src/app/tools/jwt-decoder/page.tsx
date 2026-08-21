@@ -48,7 +48,7 @@ export default function JwtDecoderPage() {
 
             <div className="grid lg:grid-cols-2 gap-12 mb-16">
                 <div className="space-y-6">
-                    <Card className="border-0 shadow-lg ring-1 ring-border/50">
+                    <Card className="border-0 ring-1 ring-border/50">
                         <CardContent className="p-6 space-y-4">
                             <div className="flex justify-between items-center">
                                 <h3 className="font-semibold text-lg">Encoded Token</h3>
@@ -70,7 +70,7 @@ export default function JwtDecoderPage() {
                 </div>
 
                 <div className="space-y-6">
-                    <Card className="border-0 shadow-lg ring-1 ring-border/50">
+                    <Card className="border-0 ring-1 ring-border/50">
                         <CardContent className="p-6 space-y-4">
                             <div className="flex justify-between items-center">
                                 <h3 className="font-semibold text-lg">Header</h3>

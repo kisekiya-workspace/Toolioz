@@ -48,7 +48,7 @@ export default function CronGeneratorPage() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-12">
                 {/* Result & Visualizer */}
                 <div className="lg:col-span-2 space-y-6">
-                    <Card className="border-2 shadow-md">
+                    <Card className="border-2">
                         <CardHeader className="pb-4">
                             <CardTitle>Schedule Editor</CardTitle>
                         </CardHeader>

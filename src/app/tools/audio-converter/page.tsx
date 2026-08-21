@@ -95,7 +95,7 @@ export default function AudioConverterPage() {
             />
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-                <Card className="border-2 shadow-lg h-fit">
+                <Card className="border-2 h-fit">
                     <CardContent className="p-8 space-y-8">
                         <div
                             className={`border-2 border-dashed rounded-2xl p-12 text-center transition-colors cursor-pointer ${file ? 'border-primary/50 bg-primary/5' : 'border-muted-foreground/20 hover:border-primary/50 hover:bg-muted'}`}
@@ -162,7 +162,7 @@ export default function AudioConverterPage() {
                 </Card>
 
                 <div className="space-y-6">
-                    <Card className="border-2 shadow-sm">
+                    <Card className="border-2">
                         <CardContent className="p-6">
                             <h3 className="font-semibold mb-4">Conversion Status</h3>
                             {!convertedUrl ? (

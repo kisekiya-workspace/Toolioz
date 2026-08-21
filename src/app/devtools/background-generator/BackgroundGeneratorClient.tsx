@@ -805,7 +805,7 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
           <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={handleRandomize}
-              className="flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-slate-50 hover:border-purple-300 transition-all shadow-sm"
+              className="flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-slate-50 hover:border-purple-300 transition-all"
             >
               <Shuffle className="h-3.5 w-3.5 text-purple-600" />
               Randomize
@@ -813,7 +813,7 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
             <Button
               onClick={handleDownloadPNG}
               size="sm"
-              className="!px-5 !py-2.5 border border-blue-600 bg-blue-600 text-white font-bold text-xs hover:bg-blue-700 shadow-md rounded-xl"
+              className="!px-5 !py-2.5 border border-blue-600 bg-blue-600 text-white font-bold text-xs hover:bg-blue-700 rounded-xl"
             >
               <Download className="mr-1.5 h-4 w-4" /> Download PNG
             </Button>
@@ -831,9 +831,9 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
           <div className="lg:col-span-6 sticky top-6 flex flex-col gap-3 z-10">
 
             {/* Canvas Preview Container */}
-            <div className="relative flex items-center justify-center rounded-2xl bg-white border border-slate-200/90 p-4 sm:p-6 min-h-[400px] sm:min-h-[460px] shadow-sm overflow-hidden select-none">
+            <div className="relative flex items-center justify-center rounded-2xl bg-white border border-slate-200/90 p-4 sm:p-6 min-h-[400px] sm:min-h-[460px] overflow-hidden select-none">
               <div
-                className={`relative overflow-hidden rounded-xl shadow-xl transition-all duration-300 border border-slate-200/80 bg-black ${enableText || enableImage ? (isDragging ? 'cursor-grabbing' : 'cursor-grab') : ''
+                className={`relative overflow-hidden rounded-xl transition-all duration-300 border border-slate-200/80 bg-black ${enableText || enableImage ? (isDragging ? 'cursor-grabbing' : 'cursor-grab') : ''
                   }`}
                 style={{
                   aspectRatio: `${activeRatio.width} / ${activeRatio.height}`,
@@ -852,13 +852,13 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
               </div>
 
               {/* Resolution Badge */}
-              <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-slate-600 text-[10px] font-bold px-2.5 py-1 rounded-full border border-slate-200/80 flex items-center gap-1 shadow-sm">
+              <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-slate-600 text-[10px] font-bold px-2.5 py-1 rounded-full border border-slate-200/80 flex items-center gap-1">
                 <Maximize2 className="h-3 w-3 text-purple-600" />
                 <span>{activeRatio.width}×{activeRatio.height}</span>
               </div>
 
               {(enableText || enableImage) && (
-                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 backdrop-blur-sm text-white text-[10px] font-bold px-3 py-1.5 rounded-full border border-slate-700/50 flex items-center gap-1.5 shadow-sm">
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-900/80 backdrop-blur-sm text-white text-[10px] font-bold px-3 py-1.5 rounded-full border border-slate-700/50 flex items-center gap-1.5">
                   <Move className="h-3 w-3 text-purple-400" />
                   <span>Drag to move overlays</span>
                 </div>
@@ -866,7 +866,7 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
             </div>
 
             {/* VARIATION SLIDER — Compact inline */}
-            <Card className="border border-slate-200/90 bg-white px-4 py-3 shadow-sm rounded-2xl">
+            <Card className="border border-slate-200/90 bg-white px-4 py-3 rounded-2xl">
               <div className="flex items-center gap-3">
                 <span className="font-bold text-slate-900 text-xs shrink-0">Variation</span>
                 <input
@@ -885,13 +885,13 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
             </Card>
 
             {/* OVERLAY TOOLBAR CARD — ALL GOOGLE FONTS & OVERLAY CONTROLS PLACED DIRECTLY BELOW PREVIEW! */}
-            <Card className="border border-slate-200/90 bg-white p-4 shadow-sm rounded-2xl space-y-3.5">
+            <Card className="border border-slate-200/90 bg-white p-4 rounded-2xl space-y-3.5">
 
               {/* Quick Action Toggle Buttons */}
               <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
                 <button
                   onClick={() => setEnableText(!enableText)}
-                  className={`flex-1 py-2 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all ${enableText ? 'bg-purple-600 text-white shadow-sm' : 'border border-slate-200 text-slate-700 hover:bg-slate-50'
+                  className={`flex-1 py-2 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all ${enableText ? 'bg-purple-600 text-white' : 'border border-slate-200 text-slate-700 hover:bg-slate-50'
                     }`}
                 >
                   <Type className="h-3.5 w-3.5" />
@@ -899,7 +899,7 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
                 </button>
 
                 <label className="flex-1 cursor-pointer">
-                  <div className={`py-2 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all ${enableImage ? 'bg-purple-600 text-white shadow-sm' : 'border border-slate-200 text-slate-700 hover:bg-slate-50'
+                  <div className={`py-2 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all ${enableImage ? 'bg-purple-600 text-white' : 'border border-slate-200 text-slate-700 hover:bg-slate-50'
                     }`}>
                     <ImageIcon className="h-3.5 w-3.5" />
                     <span>{uploadedImageSrc ? 'Change Logo' : '+ Add Logo'}</span>
@@ -1060,7 +1060,7 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
           <div className="lg:col-span-6 grid grid-cols-2 gap-4 h-fit">
 
             {/* Bento 1: Shaders */}
-            <Card className="col-span-2 border border-slate-200/90 bg-white p-4 shadow-sm rounded-2xl">
+            <Card className="col-span-2 border border-slate-200/90 bg-white p-4 rounded-2xl">
               <div className="mb-3 flex items-center justify-between">
                 <div className="flex items-center gap-1.5 font-bold text-slate-900 text-sm">
                   <LayoutGrid className="h-4 w-4 text-purple-600" />
@@ -1076,7 +1076,7 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
                     key={s.id}
                     onClick={() => setSelectedShaderId(s.id)}
                     className={`rounded-xl py-2 px-1 text-[11px] font-bold text-center transition-all ${selectedShaderId === s.id
-                        ? 'bg-blue-600 text-white shadow-md scale-[1.02]'
+                        ? 'bg-blue-600 text-white scale-[1.02]'
                         : 'bg-slate-50 border border-slate-200 text-slate-600 hover:bg-slate-100 hover:scale-[1.02]'
                       }`}
                   >
@@ -1087,7 +1087,7 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
             </Card>
 
             {/* Bento 2: Aspect Ratio */}
-            <Card className="col-span-1 border border-slate-200/90 bg-white p-4 shadow-sm rounded-2xl">
+            <Card className="col-span-1 border border-slate-200/90 bg-white p-4 rounded-2xl">
               <div className="mb-2 flex items-center gap-1.5 font-bold text-slate-900 text-sm">
                 <Crop className="h-4 w-4 text-purple-600" />
                 <span>Aspect Ratio</span>
@@ -1104,7 +1104,7 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
             </Card>
 
             {/* Bento 3: Presets */}
-            <Card className="col-span-1 border border-slate-200/90 bg-white p-4 shadow-sm rounded-2xl">
+            <Card className="col-span-1 border border-slate-200/90 bg-white p-4 rounded-2xl">
               <div className="mb-2 flex items-center gap-1.5 font-bold text-slate-900 text-sm">
                 <Layers className="h-4 w-4 text-purple-600" />
                 <span>Theme</span>
@@ -1122,7 +1122,7 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
                   >
                     <div className="flex -space-x-1">
                       {p.colors.slice(0, 4).map((c, i) => (
-                        <div key={i} className="h-3.5 w-3.5 rounded-full border-2 border-white shadow-sm" style={{ backgroundColor: c }} />
+                        <div key={i} className="h-3.5 w-3.5 rounded-full border-2 border-white" style={{ backgroundColor: c }} />
                       ))}
                     </div>
                     <span>{p.name}</span>
@@ -1132,7 +1132,7 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
             </Card>
 
             {/* Bento 4: Colors */}
-            <Card className="col-span-2 border border-slate-200/90 bg-white p-4 shadow-sm rounded-2xl">
+            <Card className="col-span-2 border border-slate-200/90 bg-white p-4 rounded-2xl">
               <div className="mb-3 flex items-center justify-between font-bold text-slate-900 text-sm">
                 <div className="flex items-center gap-1.5">
                   <Palette className="h-4 w-4 text-purple-600" />
@@ -1157,7 +1157,7 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
                     {colors.length > 2 && (
                       <button
                         onClick={() => handleRemoveColor(index)}
-                        className="absolute -top-1.5 -right-1.5 bg-red-500 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity shadow-sm"
+                        className="absolute -top-1.5 -right-1.5 bg-red-500 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
                       >
                         <X className="h-3 w-3" />
                       </button>
@@ -1168,7 +1168,7 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
             </Card>
 
             {/* Bento 5: Engine Controls */}
-            <Card className="col-span-2 border border-slate-200/90 bg-white p-4 shadow-sm rounded-2xl">
+            <Card className="col-span-2 border border-slate-200/90 bg-white p-4 rounded-2xl">
               <div className="mb-3 flex items-center justify-between">
                 <div className="flex items-center gap-1.5 font-bold text-slate-900 text-sm">
                   <Sliders className="h-4 w-4 text-purple-600" />

@@ -31,7 +31,7 @@ export const SEOSection: React.FC<SEOSectionProps> = ({
 
           <div className="grid gap-6 md:grid-cols-2">
             {/* How to Use Card */}
-            <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-xs sm:p-8 dark:border-zinc-800 dark:bg-zinc-900">
+            <div className="rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8 dark:border-zinc-800 dark:bg-zinc-900">
               <div className="mb-5 flex items-center gap-3">
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-950/50 dark:text-blue-400">
                   <ArrowRightCircle size={18} />
@@ -51,7 +51,7 @@ export const SEOSection: React.FC<SEOSectionProps> = ({
             </div>
 
             {/* Benefits Card */}
-            <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-xs sm:p-8 dark:border-zinc-800 dark:bg-zinc-900">
+            <div className="rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8 dark:border-zinc-800 dark:bg-zinc-900">
               <div className="mb-5 flex items-center gap-3">
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 dark:bg-emerald-950/50 dark:text-emerald-400">
                   <CheckCircle2 size={18} />
@@ -70,7 +70,7 @@ export const SEOSection: React.FC<SEOSectionProps> = ({
           </div>
 
           {formula && (
-            <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-xs my-6 dark:border-zinc-800 dark:bg-zinc-900">
+            <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white my-6 dark:border-zinc-800 dark:bg-zinc-900">
               <div className="border-b border-zinc-200/80 bg-zinc-50 px-6 py-3 dark:border-zinc-800 dark:bg-zinc-950/60">
                 <div className="flex items-center gap-2.5">
                   <Calculator className="text-blue-600 dark:text-blue-400" size={16} />

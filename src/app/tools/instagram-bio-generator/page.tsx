@@ -72,7 +72,7 @@ export default function BioGeneratorPage() {
             <div className="grid lg:grid-cols-2 gap-8 mb-16">
                 {/* Input Section */}
                 <div className="space-y-6">
-                    <Card className="border-0 shadow-lg ring-1 ring-border/50 sticky top-24">
+                    <Card className="border-0 ring-1 ring-border/50 sticky top-24">
                         <CardContent className="p-6 md:p-8 space-y-4">
                             <div className="flex items-center justify-between">
                                 <label className="text-sm font-bold uppercase tracking-wider text-muted-foreground">Type something</label>
@@ -104,7 +104,7 @@ export default function BioGeneratorPage() {
 
                     <div className="space-y-4">
                         {styles.map((style) => (
-                            <Card key={style.id} className="group overflow-hidden border-2 border-border/40 hover:border-primary/50 transition-all hover:shadow-md">
+                            <Card key={style.id} className="group overflow-hidden border-2 border-border/40 hover:border-primary/50 transition-all">
                                 <CardContent className="p-0 flex">
                                     <div className="flex-1 p-5 min-w-0">
                                         <div className="text-xs text-muted-foreground font-medium mb-2 uppercase tracking-tight">{style.name}</div>

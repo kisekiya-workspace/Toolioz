@@ -97,7 +97,7 @@ export default function LoanEligibilityPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
                 <div className="space-y-8">
-                    <Card className="border-2 shadow-lg">
+                    <Card className="border-2">
                         <CardContent className="p-8 space-y-6">
                             <div className="space-y-4">
                                 <Label>Net Monthly Income (₹)</Label>
@@ -121,7 +121,7 @@ export default function LoanEligibilityPage() {
                 </div>
 
                 <div className="flex flex-col gap-6">
-                    <Card className="border-2 shadow-xl bg-green-50/50 dark:bg-green-950/20 border-green-100 dark:border-green-900 border-l-4 border-l-green-500">
+                    <Card className="border-2 bg-green-50/50 dark:bg-green-950/20 border-green-100 dark:border-green-900 border-l-4 border-l-green-500">
                         <CardContent className="p-8 text-center space-y-2">
                             <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Maximum Loan Amount</p>
                             <h3 className="text-5xl font-extrabold text-green-700 dark:text-green-400">
@@ -129,7 +129,7 @@ export default function LoanEligibilityPage() {
                             </h3>
                         </CardContent>
                     </Card>
-                    <Card className="border-2 shadow-md">
+                    <Card className="border-2">
                         <CardContent className="p-6 text-center space-y-2">
                             <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider">Max Affordable EMI</p>
                             <h3 className="text-2xl font-bold text-foreground">

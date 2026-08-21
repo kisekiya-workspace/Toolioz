@@ -221,7 +221,7 @@ export default async function Top5BlogPostPage({ params }: Top5PageProps) {
             {post.tools.map((tool) => (
               <div
                 key={tool.id}
-                className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-4 sm:p-5 shadow-2xs"
+                className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-4 sm:p-5"
               >
                 <div className="flex items-center justify-between gap-3 mb-2">
                   <div className="flex items-center gap-2.5">
@@ -246,7 +246,7 @@ export default async function Top5BlogPostPage({ params }: Top5PageProps) {
                   <div className="text-xs text-zinc-500 dark:text-zinc-400">
                     <strong className="text-zinc-900 dark:text-zinc-100 font-medium">Why:</strong> {tool.whyItMatters}
                   </div>
-                  <Button asChild size="sm" className="ml-3 shrink-0 text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-xs">
+                  <Button asChild size="sm" className="ml-3 shrink-0 text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-semibold">
                     <Link href={tool.href}>
                       Launch <ArrowRight size={11} className="ml-1" />
                     </Link>
@@ -335,7 +335,7 @@ export default async function Top5BlogPostPage({ params }: Top5PageProps) {
                 <Link
                   key={related.slug}
                   href={`/top5/${related.slug}`}
-                  className="group block rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-3.5 shadow-2xs hover:border-zinc-400 transition-all"
+                  className="group block rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-3.5 hover:border-zinc-400 transition-all"
                 >
                   <span className="text-[10px] font-mono text-zinc-400">
                     {related.readTime}

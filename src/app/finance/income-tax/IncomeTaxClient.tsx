@@ -134,11 +134,11 @@ export default function IncomeTaxClient() {
         <section className="container pb-12 pt-2">
           <div className="mx-auto mb-8 flex max-w-[280px] rounded-xl bg-zinc-100 dark:bg-zinc-800/80 p-1 border border-zinc-200 dark:border-zinc-700">
             <button 
-              className={`flex-1 rounded-lg px-3.5 py-2 text-xs font-bold transition-all cursor-pointer ${mode === 'yearly' ? 'bg-white text-blue-600 shadow-xs dark:bg-zinc-900 dark:text-blue-400' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100'}`}
+              className={`flex-1 rounded-lg px-3.5 py-2 text-xs font-bold transition-all cursor-pointer ${mode === 'yearly' ? 'bg-white text-blue-600 dark:bg-zinc-900 dark:text-blue-400' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100'}`}
               onClick={() => setMode('yearly')}
             >Yearly View</button>
             <button 
-              className={`flex-1 rounded-lg px-3.5 py-2 text-xs font-bold transition-all cursor-pointer ${mode === 'monthly' ? 'bg-white text-blue-600 shadow-xs dark:bg-zinc-900 dark:text-blue-400' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100'}`}
+              className={`flex-1 rounded-lg px-3.5 py-2 text-xs font-bold transition-all cursor-pointer ${mode === 'monthly' ? 'bg-white text-blue-600 dark:bg-zinc-900 dark:text-blue-400' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100'}`}
               onClick={() => setMode('monthly')}
             >Monthly View</button>
           </div>
@@ -149,13 +149,13 @@ export default function IncomeTaxClient() {
                 <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div className="flex flex-col gap-2">
                     <label className="text-sm font-medium text-[var(--text-secondary)]">Country</label>
-                    <select className="rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-3 text-base text-[var(--text-primary)] outline-none transition-all duration-200 focus:border-[var(--primary)] focus:shadow-[0_0_0_2px_rgba(37,99,235,0.1)]" value={country} onChange={(e) => setCountry(e.target.value as Country)}>
+                    <select className="rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-3 text-base text-[var(--text-primary)] outline-none transition-all duration-200 focus:border-[var(--primary)]" value={country} onChange={(e) => setCountry(e.target.value as Country)}>
                       {COUNTRIES.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                     </select>
                   </div>
                   <div className="flex flex-col gap-2">
                     <label className="text-sm font-medium text-[var(--text-secondary)]">Filing Status</label>
-                    <select className="rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-3 text-base text-[var(--text-primary)] outline-none transition-all duration-200 focus:border-[var(--primary)] focus:shadow-[0_0_0_2px_rgba(37,99,235,0.1)]" value={status} onChange={(e) => setStatus(e.target.value as FilingStatus)}>
+                    <select className="rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-3 text-base text-[var(--text-primary)] outline-none transition-all duration-200 focus:border-[var(--primary)]" value={status} onChange={(e) => setStatus(e.target.value as FilingStatus)}>
                       <option value="single">Single Individual</option>
                       {country === 'IN' && <option value="senior">Senior Citizen (60+)</option>}
                       {country === 'US' && <option value="married">Married Filing Jointly</option>}
@@ -165,7 +165,7 @@ export default function IncomeTaxClient() {
 
                 <div className="flex flex-col gap-2 mb-6">
                   <label className="text-sm font-medium text-[var(--text-secondary)]">Tax Year</label>
-                  <select className="rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-3 text-base text-[var(--text-primary)] outline-none transition-all duration-200 focus:border-[var(--primary)] focus:shadow-[0_0_0_2px_rgba(37,99,235,0.1)]" value={year} onChange={(e) => setYear(Number(e.target.value))}>
+                  <select className="rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-primary)] px-3 py-3 text-base text-[var(--text-primary)] outline-none transition-all duration-200 focus:border-[var(--primary)]" value={year} onChange={(e) => setYear(Number(e.target.value))}>
                     {YEARS.map(y => <option key={y} value={y}>{y}</option>)}
                   </select>
                 </div>
@@ -277,7 +277,7 @@ export default function IncomeTaxClient() {
                 <FinancialDisclaimer />
               </div>
 
-              <div className="flex items-center gap-4 rounded-[var(--radius-md)] border border-[var(--border)] bg-white p-5 shadow-sm mt-4">
+              <div className="flex items-center gap-4 rounded-[var(--radius-md)] border border-[var(--border)] bg-white p-5 mt-4">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#f8fafc] text-[#3b82f6]"><PieChart size={24} /></div>
                 <p className="m-0 text-[0.85rem] leading-[1.6] text-[var(--text-secondary)]">{country === 'IN' ? 'The New Regime (default) is optimized for higher incomes with lower compliance overhead.' : 'Always check for local state/city taxes as they are not included in this federal estimation.'}</p>
               </div>
@@ -320,7 +320,7 @@ export default function IncomeTaxClient() {
           </div>
           
           <div className="grid gap-6 md:grid-cols-2">
-            <div className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
+            <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
               <div className="mb-4 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-50 text-purple-600">
                   <BookOpen size={20} />
@@ -335,7 +335,7 @@ export default function IncomeTaxClient() {
               </ul>
             </div>
 
-            <div className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
+            <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
               <div className="mb-4 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
                   <Scale size={20} />
@@ -350,7 +350,7 @@ export default function IncomeTaxClient() {
               </ul>
             </div>
 
-            <div className="col-span-1 rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm md:col-span-2">
+            <div className="col-span-1 rounded-2xl border border-[var(--border)] bg-white p-6 md:col-span-2">
               <div className="mb-4 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
                   <Lightbulb size={20} />

@@ -81,7 +81,7 @@ export default function BcryptGeneratorClient() {
                 <section className="mx-auto max-w-5xl px-4 pb-16 pt-2 sm:px-6">
                     <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                         {/* Generate Card */}
-                        <Card className="flex flex-col p-6 sm:p-8 space-y-5 shadow-xs">
+                        <Card className="flex flex-col p-6 sm:p-8 space-y-5">
                             <div className="flex items-center gap-3 border-b border-zinc-100 pb-3 dark:border-zinc-800">
                                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400">
                                     <Asterisk size={18} />
@@ -144,7 +144,7 @@ export default function BcryptGeneratorClient() {
                         </Card>
 
                         {/* Check Card */}
-                        <Card className="flex flex-col p-6 sm:p-8 space-y-5 shadow-xs">
+                        <Card className="flex flex-col p-6 sm:p-8 space-y-5">
                             <div className="flex items-center gap-3 border-b border-zinc-100 pb-3 dark:border-zinc-800">
                                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400">
                                     <CheckCircle2 size={18} />

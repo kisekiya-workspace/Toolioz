@@ -380,7 +380,7 @@ export default function DrawesomeStudio() {
 
           <button
             onClick={handleExportSVG}
-            className="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-[11px] rounded-lg shadow-sm flex items-center gap-1 transition cursor-pointer"
+            className="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-[11px] rounded-lg flex items-center gap-1 transition cursor-pointer"
           >
             <Download className="w-3 h-3" /> SVG
           </button>
@@ -402,7 +402,7 @@ export default function DrawesomeStudio() {
       <div className="flex-1 flex overflow-hidden relative">
 
         {/* Floating Left/Bottom Controls Overlay */}
-        <aside className="w-72 sm:w-80 bg-slate-900 border-r border-slate-800/90 flex flex-col shrink-0 overflow-y-auto z-20 custom-scrollbar p-3 space-y-4 shadow-xl">
+        <aside className="w-72 sm:w-80 bg-slate-900 border-r border-slate-800/90 flex flex-col shrink-0 overflow-y-auto z-20 custom-scrollbar p-3 space-y-4">
 
           {/* Pen Tool Selector */}
           <div>
@@ -416,7 +416,7 @@ export default function DrawesomeStudio() {
                   onClick={() => selectPen(p.id)}
                   className={`p-2 rounded-xl border flex items-center gap-2.5 transition text-left cursor-pointer ${
                     activeTool === p.id
-                      ? "bg-indigo-600/20 border-indigo-500 text-white shadow-md shadow-indigo-600/10"
+                      ? "bg-indigo-600/20 border-indigo-500 text-white shadow-indigo-600/10"
                       : "bg-slate-800/70 border-slate-700/60 text-slate-300 hover:bg-slate-800"
                   }`}
                 >
@@ -432,7 +432,7 @@ export default function DrawesomeStudio() {
                 onClick={() => setActiveTool("eraser")}
                 className={`p-2 rounded-xl border flex items-center gap-2.5 transition text-left cursor-pointer ${
                   activeTool === "eraser"
-                    ? "bg-rose-600/20 border-rose-500 text-white shadow-md"
+                    ? "bg-rose-600/20 border-rose-500 text-white"
                     : "bg-slate-800/70 border-slate-700/60 text-slate-300 hover:bg-slate-800"
                 }`}
               >
@@ -518,7 +518,7 @@ export default function DrawesomeStudio() {
                     key={sw}
                     onClick={() => setColor(sw)}
                     className={`w-7 h-7 rounded-lg border flex items-center justify-center transition cursor-pointer ${
-                      color === sw ? "border-indigo-400 scale-110 shadow-md" : "border-slate-700/60 hover:scale-105"
+                      color === sw ? "border-indigo-400 scale-110" : "border-slate-700/60 hover:scale-105"
                     }`}
                     style={{ backgroundColor: sw }}
                   />
@@ -688,7 +688,7 @@ export default function DrawesomeStudio() {
 
           {drawing.strokes.length === 0 && currentPoints.length === 0 && (
             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none text-center p-6 space-y-3 bg-slate-950/40 backdrop-blur-[2px]">
-              <div className="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-indigo-400 shadow-xl">
+              <div className="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-indigo-400">
                 <Pencil className="w-8 h-8" />
               </div>
               <h3 className="text-lg font-extrabold text-white">Start Drawing on Canvas</h3>

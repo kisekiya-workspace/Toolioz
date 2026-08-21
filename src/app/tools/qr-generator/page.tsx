@@ -116,7 +116,7 @@ export default function QrCodePage() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
                 {/* Controls */}
                 <div className="lg:col-span-2 space-y-6">
-                    <Card className="border-2 shadow-md">
+                    <Card className="border-2">
                         <CardContent className="p-8">
                             <Tabs defaultValue="content" className="space-y-8">
                                 <TabsList className="grid w-full grid-cols-3 h-12">
@@ -246,9 +246,9 @@ export default function QrCodePage() {
 
                 {/* Preview */}
                 <div className="space-y-6">
-                    <Card className="border-2 shadow-xl bg-muted/20 sticky top-6">
+                    <Card className="border-2 bg-muted/20 sticky top-6">
                         <CardContent className="p-8 flex flex-col items-center justify-center space-y-8">
-                            <div className="bg-white p-4 rounded-xl shadow-sm" ref={qrRef}>
+                            <div className="bg-white p-4 rounded-xl" ref={qrRef}>
                                 <QRCodeCanvas
                                     value={value}
                                     size={size[0]}

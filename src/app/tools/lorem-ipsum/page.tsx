@@ -71,7 +71,7 @@ export default function LoremIpsumPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
                 <div className="lg:col-span-1 space-y-6">
-                    <Card className="border-2 shadow-md">
+                    <Card className="border-2">
                         <CardContent className="p-6 space-y-6">
                             <div className="space-y-4">
                                 <div className="flex justify-between items-center">
@@ -96,7 +96,7 @@ export default function LoremIpsumPage() {
                 </div>
 
                 <div className="lg:col-span-2">
-                    <Card className="border-2 shadow-md h-full min-h-[500px] flex flex-col">
+                    <Card className="border-2 h-full min-h-[500px] flex flex-col">
                         <div className="p-4 border-b bg-muted/30 flex justify-between items-center">
                             <span className="text-sm font-medium text-muted-foreground">Generated Text</span>
                             <Button size="sm" variant="ghost" className="gap-2" onClick={copyToClipboard}>

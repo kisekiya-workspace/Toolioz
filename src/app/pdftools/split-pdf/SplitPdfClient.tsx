@@ -156,7 +156,7 @@ export default function SplitPdfClient() {
           </p>
         </header>
 
-        <Card className="rounded-3xl border-cyan-200 bg-white p-6 shadow-sm sm:p-8">
+        <Card className="rounded-3xl border-cyan-200 bg-white p-6 sm:p-8">
           <input
             ref={fileInputRef}
             type="file"
@@ -227,7 +227,7 @@ export default function SplitPdfClient() {
               <Button
                 onClick={handleSplit}
                 disabled={isProcessing}
-                className="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-3 rounded-xl shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2 text-base"
+                className="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-3 rounded-xl shadow-cyan-500/20 flex items-center justify-center gap-2 text-base"
               >
                 {isProcessing ? (
                   <>

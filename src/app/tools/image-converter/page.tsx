@@ -67,7 +67,7 @@ export default function ImageConverterPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
                 {/* Upload & Controls */}
-                <Card className="border-2 shadow-lg h-fit">
+                <Card className="border-2 h-fit">
                     <CardContent className="p-8 space-y-6">
                         <div
                             className={`border-2 border-dashed rounded-2xl p-12 text-center transition-colors cursor-pointer ${file ? 'border-primary/50 bg-primary/5' : 'border-muted-foreground/20 hover:border-primary/50 hover:bg-muted'}`}

@@ -100,7 +100,7 @@ export default function LoanPrepaymentClient() {
             </Card>
 
             <div className={styles.resultCol}>
-              <Card className="rounded-2xl border border-red-500/30 bg-red-700 dark:bg-[#1f2430] dark:border-[#333a4d] p-6 text-center text-white shadow-md sm:p-8 relative">
+              <Card className="rounded-2xl border border-red-500/30 bg-red-700 dark:bg-[#1f2430] dark:border-[#333a4d] p-6 text-center text-white sm:p-8 relative">
                 <h2 className="mb-2 text-xs font-bold uppercase tracking-wider text-red-100 dark:text-red-400">Total Interest Saved</h2>
                 <div className={styles.resultValue}>{formatCurrency(result.interestSaved)}</div>
                 <div className={styles.stats}>
@@ -191,7 +191,7 @@ export default function LoanPrepaymentClient() {
             </div>
 
             <div className="grid gap-6 md:grid-cols-2">
-              <div className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
+              <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
                 <div className="mb-4 flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600">
                     <BookOpen size={20} />
@@ -210,7 +210,7 @@ export default function LoanPrepaymentClient() {
                 </ul>
               </div>
 
-              <div className="rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm">
+              <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
                 <div className="mb-4 flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50 text-orange-600">
                     <Info size={20} />
@@ -229,7 +229,7 @@ export default function LoanPrepaymentClient() {
                 </ul>
               </div>
 
-              <div className="col-span-1 rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm md:col-span-2">
+              <div className="col-span-1 rounded-2xl border border-[var(--border)] bg-white p-6 md:col-span-2">
                 <div className="mb-4 flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-50 text-cyan-600">
                     <Lightbulb size={20} />

@@ -80,7 +80,7 @@ export default function EMICalculatorPage() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
                 {/* Controls */}
                 <div className="lg:col-span-2 space-y-8">
-                    <Card className="border-2 shadow-lg">
+                    <Card className="border-2">
                         <CardContent className="p-8 space-y-8">
                             <div className="space-y-4">
                                 <div className="flex justify-between">
@@ -129,7 +129,7 @@ export default function EMICalculatorPage() {
 
                 {/* Results */}
                 <div className="lg:col-span-1 space-y-6">
-                    <Card className="border-2 shadow-xl bg-orange-50/50 dark:bg-orange-950/20 border-orange-100 dark:border-orange-900">
+                    <Card className="border-2 bg-orange-50/50 dark:bg-orange-950/20 border-orange-100 dark:border-orange-900">
                         <CardContent className="p-8 space-y-6">
                             <div className="text-center space-y-2">
                                 <p className="text-muted-foreground font-medium uppercase tracking-wide text-xs">Monthly EMI</p>

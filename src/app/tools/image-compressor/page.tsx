@@ -122,7 +122,7 @@ export default function ImageCompressorPage() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
                 {/* Main Interface */}
                 <div className="lg:col-span-2 space-y-8">
-                    <Card className="border-2 shadow-lg">
+                    <Card className="border-2">
                         <CardContent className="p-8 space-y-8">
                             {/* Upload Area */}
                             <div
@@ -237,7 +237,7 @@ export default function ImageCompressorPage() {
 
                 {/* Results Panel */}
                 <div className="lg:col-span-1 space-y-6">
-                    <Card className="border-2 shadow-xl h-full flex flex-col">
+                    <Card className="border-2 h-full flex flex-col">
                         <CardContent className="p-8 flex-1 flex flex-col justify-center space-y-6">
                             {!compressedFile ? (
                                 <div className="text-center text-muted-foreground space-y-4 opacity-50">

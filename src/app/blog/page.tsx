@@ -83,7 +83,7 @@ export default function BlogIndexPage() {
         {featuredPost && (
           <section className="py-8 sm:py-12 border-b border-zinc-100 bg-zinc-50/50 dark:border-zinc-800 dark:bg-zinc-950/50">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="rounded-3xl border border-zinc-200 bg-white p-6 sm:p-10 shadow-xs relative overflow-hidden dark:border-zinc-800 dark:bg-zinc-900">
+              <div className="rounded-3xl border border-zinc-200 bg-white p-6 sm:p-10 relative overflow-hidden dark:border-zinc-800 dark:bg-zinc-900">
                 <div className="grid gap-8 lg:grid-cols-[1.3fr_0.7fr] lg:items-center">
                   <div>
                     <div className="mb-3 flex items-center gap-2">
@@ -106,7 +106,7 @@ export default function BlogIndexPage() {
                     </p>
 
                     <div className="flex flex-wrap items-center gap-3">
-                      <Button asChild size="default" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-xs">
+                      <Button asChild size="default" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold">
                         <Link href={`/blog/${featuredPost.slug}`}>
                           Read Masterclass <ArrowRight size={14} className="ml-1" />
                         </Link>

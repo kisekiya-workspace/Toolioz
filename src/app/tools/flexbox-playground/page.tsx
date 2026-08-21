@@ -120,7 +120,7 @@ ${items.map(item => `.item-${item.id} {
                 <div className="lg:col-span-8 order-2 lg:order-1 flex flex-col gap-4">
                     <div className="bg-muted/30 rounded-xl border-dashed border-2 border-border p-4 relative h-[600px] overflow-auto">
                         <div
-                            className="bg-background border shadow-sm w-full min-h-full rounded-lg transition-all duration-300"
+                            className="bg-background border w-full min-h-full rounded-lg transition-all duration-300"
                             style={{
                                 display: 'flex',
                                 flexDirection: flexDirection as any,
@@ -136,7 +136,7 @@ ${items.map(item => `.item-${item.id} {
                                 <Popover key={item.id}>
                                     <PopoverTrigger asChild>
                                         <div
-                                            className="bg-primary/10 border-2 border-primary/20 hover:border-primary cursor-pointer rounded-xl flex items-center justify-center font-bold text-xl text-primary shadow-sm relative group transition-all"
+                                            className="bg-primary/10 border-2 border-primary/20 hover:border-primary cursor-pointer rounded-xl flex items-center justify-center font-bold text-xl text-primary relative group transition-all"
                                             style={{
                                                 flexGrow: item.flexGrow,
                                                 flexShrink: item.flexShrink,
@@ -219,7 +219,7 @@ ${items.map(item => `.item-${item.id} {
 
                 {/* Sidebar Controls */}
                 <div className="lg:col-span-4 order-1 lg:order-2 space-y-6">
-                    <Card className="border-0 shadow-lg ring-1 ring-border/50 sticky top-4">
+                    <Card className="border-0 ring-1 ring-border/50 sticky top-4">
                         <CardContent className="p-6 space-y-6">
                             <div className="flex items-center justify-between pb-4 border-b">
                                 <h3 className="font-semibold">Container Properties</h3>

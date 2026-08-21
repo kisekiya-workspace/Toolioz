@@ -172,7 +172,7 @@ export default function ImageToPdfClient() {
         </header>
 
         {/* Action Card */}
-        <Card className="rounded-3xl border-cyan-200 bg-white p-6 shadow-sm sm:p-8">
+        <Card className="rounded-3xl border-cyan-200 bg-white p-6 sm:p-8">
           <input
             ref={fileInputRef}
             type="file"
@@ -244,7 +244,7 @@ export default function ImageToPdfClient() {
                 <Button
                   onClick={convertToPdf}
                   disabled={isProcessing}
-                  className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-6 py-2.5 rounded-xl shadow-lg shadow-cyan-500/20 flex items-center gap-2"
+                  className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-6 py-2.5 rounded-xl shadow-cyan-500/20 flex items-center gap-2"
                 >
                   {isProcessing ? (
                     <>

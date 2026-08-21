@@ -97,7 +97,7 @@ export default function PasswordGeneratorPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
                 <div className="lg:col-span-2 space-y-6">
-                    <Card className="border-2 shadow-lg overflow-visible">
+                    <Card className="border-2 overflow-visible">
                         <CardContent className="p-8 space-y-8">
                             {/* Display Area */}
                             <div className="relative">
@@ -108,7 +108,7 @@ export default function PasswordGeneratorPage() {
                                     <Button size="icon" variant="ghost" className="hover:text-primary" onClick={generatePassword}>
                                         <RefreshCw size={20} />
                                     </Button>
-                                    <Button size="icon" className="bg-primary text-primary-foreground shadow-sm" onClick={copyToClipboard}>
+                                    <Button size="icon" className="bg-primary text-primary-foreground" onClick={copyToClipboard}>
                                         <Copy size={20} />
                                     </Button>
                                 </div>
@@ -155,7 +155,7 @@ export default function PasswordGeneratorPage() {
 
                 {/* Strength Meter */}
                 <div className="space-y-6">
-                    <Card className={`border-2 shadow-md transition-colors ${strength === "Strong" ? "bg-green-50/50 border-green-200 dark:bg-green-950/10 dark:border-green-900" : ""}`}>
+                    <Card className={`border-2 transition-colors ${strength === "Strong" ? "bg-green-50/50 border-green-200 dark:bg-green-950/10 dark:border-green-900" : ""}`}>
                         <CardContent className="p-8 text-center space-y-4">
                             <div className={`mx-auto w-16 h-16 rounded-full flex items-center justify-center ${strength === "Strong" ? "bg-green-100 text-green-600" : "bg-gray-100 text-gray-400"}`}>
                                 {strength === "Strong" ? <ShieldCheck size={32} /> : <ShieldAlert size={32} />}

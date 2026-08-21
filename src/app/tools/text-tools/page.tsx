@@ -56,7 +56,7 @@ export default function TextToolsPage() {
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-16">
                 {/* Main Editor */}
                 <div className="lg:col-span-3 space-y-4">
-                    <Card className="border-2 shadow-lg overflow-hidden">
+                    <Card className="border-2 overflow-hidden">
                         <CardContent className="p-0">
                             <div className="flex items-center justify-between px-4 py-2 bg-muted/50 border-b">
                                 <span className="text-sm font-medium text-muted-foreground flex items-center gap-2">
@@ -101,7 +101,7 @@ export default function TextToolsPage() {
 
                 {/* Sidebar Stats */}
                 <div className="space-y-6">
-                    <Card className="border-2 shadow-md">
+                    <Card className="border-2">
                         <CardContent className="p-6">
                             <h3 className="font-bold text-lg mb-6 flex items-center gap-2">
                                 <span className="p-1 bg-primary/10 rounded-md text-primary">📊</span>

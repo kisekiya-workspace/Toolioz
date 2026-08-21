@@ -330,7 +330,7 @@ export default function DitherClient() {
 
                 <button
                   onClick={() => setDashboardMode('classic')}
-                  className={`px-3.5 py-2 rounded-lg text-xs font-bold flex items-center gap-2 transition cursor-pointer ${dashboardMode === 'classic' ? 'bg-blue-600 text-white shadow-xs' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100'}`}
+                  className={`px-3.5 py-2 rounded-lg text-xs font-bold flex items-center gap-2 transition cursor-pointer ${dashboardMode === 'classic' ? 'bg-blue-600 text-white' : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100'}`}
                 >
                   <Sliders className="w-3.5 h-3.5" /> Classic Studio
                 </button>
@@ -342,7 +342,7 @@ export default function DitherClient() {
           <main className="max-w-7xl mx-auto px-4 py-8 w-full space-y-8 flex-1">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 items-start">
               {/* Controls Panel Card (Left Column) */}
-              <Card className="lg:col-span-5 p-6 space-y-5 shadow-xs">
+              <Card className="lg:col-span-5 p-6 space-y-5">
                 <CardHeader className="px-0 pt-0 pb-2">
                   <CardTitle className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-2">
                     <Upload className="w-4 h-4 text-indigo-600" /> Media Source
@@ -383,7 +383,7 @@ export default function DitherClient() {
                       <select
                         value={algorithm}
                         onChange={(e) => setAlgorithm(e.target.value as DitherAlgorithm)}
-                        className="w-full appearance-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs font-bold text-slate-800 outline-none transition-colors focus:border-indigo-500 focus:bg-white pr-10 cursor-pointer shadow-sm"
+                        className="w-full appearance-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs font-bold text-slate-800 outline-none transition-colors focus:border-indigo-500 focus:bg-white pr-10 cursor-pointer"
                       >
                         {ALGORITHM_CATEGORIES.map((cat) => (
                           <optgroup key={cat.categoryName} label={cat.categoryName} className="font-extrabold text-indigo-700">
@@ -409,7 +409,7 @@ export default function DitherClient() {
                         {activePalette().map((c, i) => (
                           <div
                             key={i}
-                            className="w-3.5 h-3.5 rounded-full border border-black/10 shadow-sm"
+                            className="w-3.5 h-3.5 rounded-full border border-black/10"
                             style={{ backgroundColor: rgbToHex(c) }}
                           />
                         ))}
@@ -420,7 +420,7 @@ export default function DitherClient() {
                       <select
                         value={paletteId}
                         onChange={(e) => setPaletteId(e.target.value as PaletteId)}
-                        className="w-full appearance-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs font-bold text-slate-800 outline-none transition-colors focus:border-indigo-500 focus:bg-white pr-10 cursor-pointer shadow-sm"
+                        className="w-full appearance-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs font-bold text-slate-800 outline-none transition-colors focus:border-indigo-500 focus:bg-white pr-10 cursor-pointer"
                       >
                         {(Object.keys(PALETTES) as PaletteId[]).map((pid) => (
                           <option key={pid} value={pid} className="text-slate-800 font-medium">
@@ -533,7 +533,7 @@ export default function DitherClient() {
 
               {/* Interactive Preview Panel (Right Column) */}
               <div className="lg:col-span-7 space-y-6">
-                <Card className="border-slate-200 bg-white p-6 sm:p-8 shadow-sm relative overflow-hidden flex flex-col items-center">
+                <Card className="border-slate-200 bg-white p-6 sm:p-8 relative overflow-hidden flex flex-col items-center">
                   <div className="w-full flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                       <span className="h-3 w-3 rounded-full bg-indigo-600 animate-ping" />
@@ -580,7 +580,7 @@ export default function DitherClient() {
 
                     <canvas
                       ref={canvasRef}
-                      className="max-w-full max-h-[500px] object-contain rounded-lg shadow-2xl image-rendering-pixelated"
+                      className="max-w-full max-h-[500px] object-contain rounded-lg image-rendering-pixelated"
                       style={{ imageRendering: 'pixelated' }}
                     />
                   </div>
@@ -599,7 +599,7 @@ export default function DitherClient() {
                             setIsPlaying(true);
                           }
                         }}
-                        className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs flex items-center gap-2 transition shadow-sm cursor-pointer"
+                        className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs flex items-center gap-2 transition cursor-pointer"
                       >
                         {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                         {isPlaying ? 'Pause Video' : 'Play Video'}
@@ -613,7 +613,7 @@ export default function DitherClient() {
                 </Card>
 
                 {/* Export & Download Card */}
-                <Card className="border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-4">
+                <Card className="border-slate-200 bg-white p-6 sm:p-8 space-y-4">
                   <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2 flex items-center gap-2">
                     <Download className="w-4 h-4 text-indigo-600" /> Download & Export Actions
                   </h2>
@@ -623,7 +623,7 @@ export default function DitherClient() {
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <button
                           onClick={() => downloadImage('png')}
-                          className="px-4 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-sm transition cursor-pointer"
+                          className="px-4 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition cursor-pointer"
                         >
                           <ImageIcon className="w-4 h-4" /> Export PNG
                         </button>
@@ -657,7 +657,7 @@ export default function DitherClient() {
                         {!isRecording ? (
                           <button
                             onClick={startRecording}
-                            className="px-5 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-sm transition cursor-pointer"
+                            className="px-5 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition cursor-pointer"
                           >
                             <Video className="w-4 h-4" /> Record Canvas Dither Clip
                           </button>
@@ -773,7 +773,7 @@ export default function DitherClient() {
                       a: 'Select ASCII Blocks or ASCII Character Matrix algorithm, then click "Copy ASCII Text Grid to Clipboard" under Export Actions.',
                     },
                   ].map((faq, idx) => (
-                    <Card key={idx} className="p-6 bg-white border-slate-200 shadow-sm hover:shadow-md transition">
+                    <Card key={idx} className="p-6 bg-white border-slate-200 transition">
                       <h3 className="font-bold text-slate-900 text-base mb-2">{faq.q}</h3>
                       <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{faq.a}</p>
                     </Card>

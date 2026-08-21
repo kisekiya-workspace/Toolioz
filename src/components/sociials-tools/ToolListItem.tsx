@@ -22,10 +22,10 @@ export function ToolListItem({ title, description, href, icon: Icon, category, i
 
     return (
         <div className="relative mb-3 last:mb-0 group">
-            <Link href={href} className="flex items-center gap-4 p-4 bg-card rounded-2xl border shadow-sm active:scale-[0.98] transition-all hover:bg-card/50">
+            <Link href={href} className="flex items-center gap-4 p-4 bg-card rounded-2xl border active:scale-[0.98] transition-all hover:bg-card/50">
                 {/* Icon Box */}
                 <div className="shrink-0 relative">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary shadow-sm group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                         <Icon className="h-6 w-6" strokeWidth={2} />
                     </div>
                     {isNew && (

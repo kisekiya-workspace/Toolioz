@@ -48,7 +48,7 @@ export default function BarcodeGeneratorPage() {
             />
 
             <div className="max-w-4xl mx-auto mb-16 space-y-8">
-                <Card className="border-2 shadow-lg">
+                <Card className="border-2">
                     <CardContent className="p-8 space-y-8">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div className="md:col-span-2 space-y-2">

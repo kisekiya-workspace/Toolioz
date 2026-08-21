@@ -124,7 +124,7 @@ export default function IncomeTaxCalculatorPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
                 <div className="lg:col-span-2 space-y-8">
-                    <Card className="border-2 shadow-lg">
+                    <Card className="border-2">
                         <CardContent className="p-8 space-y-8">
                             <div className="space-y-4">
                                 <Label>Annual CTC / Gross Salary (₹)</Label>
@@ -143,7 +143,7 @@ export default function IncomeTaxCalculatorPage() {
                 </div>
 
                 <div className="lg:col-span-1 space-y-6">
-                    <Card className="border-2 shadow-xl bg-orange-50/50 dark:bg-orange-950/20 border-orange-100 dark:border-orange-900 h-full">
+                    <Card className="border-2 bg-orange-50/50 dark:bg-orange-950/20 border-orange-100 dark:border-orange-900 h-full">
                         <CardContent className="p-8 space-y-6 flex flex-col justify-center h-full">
                             <div className="space-y-4">
                                 <div className="flex justify-between items-center text-sm text-muted-foreground">

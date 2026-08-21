@@ -80,7 +80,7 @@ export default function BMICalculatorPage() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
                 {/* Controls */}
                 <div className="lg:col-span-2 space-y-8">
-                    <Card className="border-2 shadow-lg h-full">
+                    <Card className="border-2 h-full">
                         <CardContent className="p-8 space-y-8">
                             <div className="flex gap-2 p-1 bg-muted rounded-lg w-fit">
                                 <Button
@@ -134,7 +134,7 @@ export default function BMICalculatorPage() {
 
                 {/* Results */}
                 <div className="lg:col-span-1 space-y-6">
-                    <Card className="border-2 shadow-xl bg-teal-50/50 dark:bg-teal-950/20 border-teal-100 dark:border-teal-900 h-full">
+                    <Card className="border-2 bg-teal-50/50 dark:bg-teal-950/20 border-teal-100 dark:border-teal-900 h-full">
                         <CardContent className="p-8 space-y-6 flex flex-col justify-center h-full">
                             <div className="text-center space-y-4">
                                 <Activity className="h-12 w-12 mx-auto text-teal-600 dark:text-teal-400" />

@@ -204,7 +204,7 @@ export default function PercentageCalculatorClient({ kind }: { kind: PercentageT
                   onClick={() => setBasicMode('of')}
                   className={`rounded-lg px-3 py-2 text-xs font-bold transition cursor-pointer ${
                     basicMode === 'of'
-                      ? 'bg-white text-blue-600 shadow-xs dark:bg-zinc-900 dark:text-blue-400'
+                      ? 'bg-white text-blue-600 dark:bg-zinc-900 dark:text-blue-400'
                       : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100'
                   }`}
                 >
@@ -215,7 +215,7 @@ export default function PercentageCalculatorClient({ kind }: { kind: PercentageT
                   onClick={() => setBasicMode('ratio')}
                   className={`rounded-lg px-3 py-2 text-xs font-bold transition cursor-pointer ${
                     basicMode === 'ratio'
-                      ? 'bg-white text-blue-600 shadow-xs dark:bg-zinc-900 dark:text-blue-400'
+                      ? 'bg-white text-blue-600 dark:bg-zinc-900 dark:text-blue-400'
                       : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100'
                   }`}
                 >
@@ -231,7 +231,7 @@ export default function PercentageCalculatorClient({ kind }: { kind: PercentageT
                   onClick={() => setReverseMode('decrease')}
                   className={`rounded-lg px-3 py-2 text-xs font-bold transition cursor-pointer ${
                     reverseMode === 'decrease'
-                      ? 'bg-white text-blue-600 shadow-xs dark:bg-zinc-900 dark:text-blue-400'
+                      ? 'bg-white text-blue-600 dark:bg-zinc-900 dark:text-blue-400'
                       : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100'
                   }`}
                 >
@@ -242,7 +242,7 @@ export default function PercentageCalculatorClient({ kind }: { kind: PercentageT
                   onClick={() => setReverseMode('increase')}
                   className={`rounded-lg px-3 py-2 text-xs font-bold transition cursor-pointer ${
                     reverseMode === 'increase'
-                      ? 'bg-white text-blue-600 shadow-xs dark:bg-zinc-900 dark:text-blue-400'
+                      ? 'bg-white text-blue-600 dark:bg-zinc-900 dark:text-blue-400'
                       : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-zinc-100'
                   }`}
                 >
@@ -361,7 +361,7 @@ export default function PercentageCalculatorClient({ kind }: { kind: PercentageT
         </Card>
 
         {/* Right Result Card (Solid IDE-Grade Dark Surface) */}
-        <div className="flex flex-col justify-between rounded-2xl border border-zinc-200 bg-zinc-900 p-6 sm:p-8 text-zinc-50 shadow-xs dark:border-zinc-800 dark:bg-zinc-900">
+        <div className="flex flex-col justify-between rounded-2xl border border-zinc-200 bg-zinc-900 p-6 sm:p-8 text-zinc-50 dark:border-zinc-800 dark:bg-zinc-900">
           {'error' in calculation ? (
             <div className="my-auto rounded-xl border border-amber-500/40 bg-amber-500/10 p-4 text-xs leading-relaxed text-amber-200">
               {calculation.error}

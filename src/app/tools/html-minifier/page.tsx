@@ -80,7 +80,7 @@ export default function HTMLMinifierPage() {
                             <Button
                                 size="icon"
                                 variant="secondary"
-                                className="absolute top-4 right-4 shadow-sm"
+                                className="absolute top-4 right-4"
                                 onClick={copy}
                             >
                                 {copied ? <Check size={18} /> : <Copy size={18} />}

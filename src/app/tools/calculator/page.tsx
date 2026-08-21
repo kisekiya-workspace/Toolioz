@@ -80,7 +80,7 @@ export default function CalculatorPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
                 {/* Calculator UI */}
-                <Card className="lg:col-span-2 overflow-hidden border-2 shadow-xl">
+                <Card className="lg:col-span-2 overflow-hidden border-2">
                     <CardContent className="p-0">
                         <div className="bg-zinc-900 p-8 text-right">
                             <div className="text-zinc-400 text-sm h-6 overflow-hidden mb-1">
@@ -130,7 +130,7 @@ export default function CalculatorPage() {
                 </Card>
 
                 {/* History Panel */}
-                <Card className="border-2 shadow-md">
+                <Card className="border-2">
                     <CardContent className="p-6">
                         <div className="flex items-center gap-2 mb-6 text-primary">
                             <History size={20} />

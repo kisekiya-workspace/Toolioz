@@ -5,7 +5,7 @@ import { BookOpen, ArrowRight, PlayCircle, Database, Filter, Layers, PlusCircle,
 
 export function SqlCheatSheet() {
     return (
-        <Card className="mt-12 border-muted/60 shadow-sm">
+        <Card className="mt-12 border-muted/60">
             <CardHeader className="bg-muted/20 border-b">
                 <div className="flex items-center gap-2">
                     <BookOpen className="h-5 w-5 text-blue-500" />
@@ -38,7 +38,7 @@ export function SqlCheatSheet() {
                                     <PlayCircle className="w-3 h-3 text-green-500" /> Try this:
                                 </h5>
                                 <div className="space-y-2">
-                                    <code className="block bg-slate-950 text-slate-200 p-2 rounded text-xs font-mono shadow-inner border border-slate-800">
+                                    <code className="block bg-slate-950 text-slate-200 p-2 rounded text-xs font-mono border border-slate-800">
                                         SELECT * FROM users;
                                     </code>
                                     <p className="text-[10px] text-muted-foreground">
@@ -49,7 +49,7 @@ export function SqlCheatSheet() {
                             <div className="bg-muted/30 p-3 rounded-lg border border-border/50">
                                 <h5 className="text-xs font-semibold mb-2">Refining the View:</h5>
                                 <div className="space-y-2">
-                                    <code className="block bg-slate-950 text-slate-200 p-2 rounded text-xs font-mono shadow-inner border border-slate-800">
+                                    <code className="block bg-slate-950 text-slate-200 p-2 rounded text-xs font-mono border border-slate-800">
                                         SELECT name, email FROM users;
                                     </code>
                                     <p className="text-[10px] text-muted-foreground">

@@ -154,7 +154,7 @@ export default function PortalClient() {
 
           {/* Ultra-Prominent Search Bar */}
           <div className="mx-auto mt-6 max-w-3xl">
-            <div className="relative flex items-center rounded-2xl border-2 border-zinc-200 bg-white p-2 shadow-sm transition-all focus-within:border-blue-600 focus-within:ring-4 focus-within:ring-blue-500/10 dark:border-zinc-800 dark:bg-zinc-900">
+            <div className="relative flex items-center rounded-2xl border-2 border-zinc-200 bg-white p-2 transition-all focus-within:border-blue-600 focus-within:ring-4 focus-within:ring-blue-500/10 dark:border-zinc-800 dark:bg-zinc-900">
               <Search size={22} className="ml-3 shrink-0 text-zinc-400" />
               <input
                 ref={searchInputRef}
@@ -174,7 +174,7 @@ export default function PortalClient() {
                 </button>
               )}
               <div className="hidden items-center gap-1 pr-2 sm:flex">
-                <kbd className="pointer-events-none rounded-md border border-zinc-200 bg-zinc-100 px-2 py-0.5 font-mono text-[11px] font-semibold text-zinc-500 shadow-2xs dark:border-zinc-700 dark:bg-zinc-800">
+                <kbd className="pointer-events-none rounded-md border border-zinc-200 bg-zinc-100 px-2 py-0.5 font-mono text-[11px] font-semibold text-zinc-500 dark:border-zinc-700 dark:bg-zinc-800">
                   <Command size={11} className="inline mr-0.5" /> K
                 </kbd>
               </div>
@@ -194,7 +194,7 @@ export default function PortalClient() {
                     onClick={() => setActiveCategory(tag.id)}
                     className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs font-semibold transition-all ${
                       isActive
-                        ? 'border border-zinc-900 bg-zinc-900 text-white shadow-xs dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900'
+                        ? 'border border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900'
                         : 'border border-zinc-200 bg-zinc-50 text-zinc-600 hover:border-zinc-300 hover:bg-zinc-100 hover:text-zinc-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:border-zinc-700 dark:hover:text-zinc-100'
                     }`}
                   >
@@ -339,7 +339,7 @@ export default function PortalClient() {
                 <Card hoverable className="h-full p-5 flex flex-col justify-between border-blue-200 bg-blue-50/50 dark:border-blue-900/60 dark:bg-blue-950/20">
                   <div>
                     <div className="flex items-start justify-between mb-3">
-                      <div className="flex size-10 items-center justify-center rounded-xl bg-blue-600 text-white shadow-xs">
+                      <div className="flex size-10 items-center justify-center rounded-xl bg-blue-600 text-white">
                         <Sparkles size={18} />
                       </div>
                       <Badge variant="info" size="sm">
@@ -457,7 +457,7 @@ export default function PortalClient() {
                   desc: 'Standardized compound growth, amortizations, tax deductions, and cryptographic hash engines.',
                 },
               ].map(({ icon: Icon, title, desc }) => (
-                <div key={title} className="flex items-start gap-3 rounded-xl border border-zinc-200 bg-white p-3.5 shadow-xs dark:border-zinc-800 dark:bg-zinc-900">
+                <div key={title} className="flex items-start gap-3 rounded-xl border border-zinc-200 bg-white p-3.5 dark:border-zinc-800 dark:bg-zinc-900">
                   <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-950/40">
                     <Icon size={18} />
                   </div>
@@ -471,7 +471,7 @@ export default function PortalClient() {
           </div>
 
           {/* Interactive Visual Card */}
-          <div className="relative rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+          <div className="relative rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8 dark:border-zinc-800 dark:bg-zinc-900">
             <div className="mb-5 flex items-center justify-between border-b border-zinc-100 pb-3 dark:border-zinc-800">
               <div className="flex items-center gap-2">
                 <span className="size-2.5 rounded-full bg-red-500/80" />
@@ -579,7 +579,7 @@ export default function PortalClient() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8 shadow-xs dark:border-zinc-800 dark:bg-zinc-900">
+          <div className="rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8 dark:border-zinc-800 dark:bg-zinc-900">
             <Accordion type="single" collapsible className="w-full">
               {FAQS.map((faq, idx) => (
                 <AccordionItem key={faq.q} value={`item-${idx}`}>
@@ -599,7 +599,7 @@ export default function PortalClient() {
       {/* CTA Section */}
       <section className="py-14 sm:py-16 bg-white dark:bg-zinc-950">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 text-center">
-          <div className="rounded-3xl border border-zinc-200 bg-zinc-50/60 p-8 sm:p-12 shadow-xs dark:border-zinc-800 dark:bg-zinc-900">
+          <div className="rounded-3xl border border-zinc-200 bg-zinc-50/60 p-8 sm:p-12 dark:border-zinc-800 dark:bg-zinc-900">
             <h2 className="text-2xl font-extrabold tracking-tight text-zinc-950 sm:text-3xl dark:text-zinc-50">
               Ready to Calculate, Convert or Build?
             </h2>
@@ -607,7 +607,7 @@ export default function PortalClient() {
               Choose a tool and start solving immediately. No credit card, no sign-in required.
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <Button asChild size="default" className="shadow-xs">
+              <Button asChild size="default">
                 <Link href="/finance/sip-calculator">
                   SIP Calculator
                 </Link>

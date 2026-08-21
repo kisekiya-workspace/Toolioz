@@ -111,7 +111,7 @@ export default function GithubSimulatorPage() {
             {/* Educational Message Banner */}
             {state.educationalMessage && (
               <div
-                className={`p-3 border rounded-lg text-sm leading-relaxed shadow-sm transition-colors duration-500 ${state.conflict
+                className={`p-3 border rounded-lg text-sm leading-relaxed transition-colors duration-500 ${state.conflict
                     ? "bg-red-950/20 border-red-900/40 text-red-200"
                     : "bg-blue-950/20 border-blue-900/40 text-blue-200/90"
                   }`}
@@ -149,7 +149,7 @@ export default function GithubSimulatorPage() {
           `}
         >
           {/* Graph Header overlay */}
-          <div className="absolute top-4 left-4 z-20 bg-slate-900/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-slate-800 flex items-center gap-3 shadow-lg pointer-events-none">
+          <div className="absolute top-4 left-4 z-20 bg-slate-900/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-slate-800 flex items-center gap-3 pointer-events-none">
             <div className="flex items-center gap-2 text-xs text-slate-400">
               <span className="w-2 h-2 rounded-full bg-blue-500 box-shadow-glow"></span>
               {state.currentBranch}
@@ -167,7 +167,7 @@ export default function GithubSimulatorPage() {
           </div>
 
           {/* Bottom: Tabs for Log / Terminal */}
-          <div className="h-64 flex-shrink-0 z-10 bg-slate-950 border-t border-slate-800 shadow-xl relative pb-16 md:pb-0">
+          <div className="h-64 flex-shrink-0 z-10 bg-slate-950 border-t border-slate-800 relative pb-16 md:pb-0">
             <Tabs
               defaultValue="log"
               className="h-full flex flex-col text-white"

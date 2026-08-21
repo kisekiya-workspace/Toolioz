@@ -174,7 +174,7 @@ export default function FaviconGeneratorPage() {
                             <CardContent className="flex items-center justify-center p-8">
                                 <canvas
                                     ref={canvasRef}
-                                    className="w-40 h-40 rounded-2xl shadow-lg"
+                                    className="w-40 h-40 rounded-2xl"
                                 />
                             </CardContent>
                         </Card>

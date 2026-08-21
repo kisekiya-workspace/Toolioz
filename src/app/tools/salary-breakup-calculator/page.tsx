@@ -95,7 +95,7 @@ export default function SalaryBreakupPage() {
 
                 {/* LEFT COLUMN: CONTROLS */}
                 <div className="lg:col-span-5 space-y-6">
-                    <Card className="border-2 shadow-md">
+                    <Card className="border-2">
                         <CardHeader>
                             <CardTitle>Configuration</CardTitle>
                         </CardHeader>
@@ -190,7 +190,7 @@ export default function SalaryBreakupPage() {
                     </div>
 
                     {/* Tabs for Table/Chart */}
-                    <Card className="border-2 shadow-sm">
+                    <Card className="border-2">
                         <CardContent className="p-0">
                             {breakup && (
                                 <div className="divide-y">

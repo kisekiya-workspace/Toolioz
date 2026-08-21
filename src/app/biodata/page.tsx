@@ -127,7 +127,7 @@ export default function BiodataPage() {
                 </p>
 
                 <div className="mt-5 flex flex-wrap items-center gap-3">
-                  <Button asChild size="default" className="gap-2 shadow-xs">
+                  <Button asChild size="default" className="gap-2">
                     <Link href="/biodata/biodata-generator">
                       Create Biodata Free <ArrowRight size={14} />
                     </Link>
@@ -139,7 +139,7 @@ export default function BiodataPage() {
                   </Button>
                 </div>
 
-                <div className="mt-6 grid max-w-md grid-cols-3 divide-x divide-zinc-200 rounded-xl border border-zinc-200 bg-zinc-50/50 shadow-2xs dark:divide-zinc-800 dark:border-zinc-800 dark:bg-zinc-900">
+                <div className="mt-6 grid max-w-md grid-cols-3 divide-x divide-zinc-200 rounded-xl border border-zinc-200 bg-zinc-50/50 dark:divide-zinc-800 dark:border-zinc-800 dark:bg-zinc-900">
                   {[
                     ['6+', 'Templates'],
                     ['Vector', 'PDF Export'],
@@ -155,7 +155,7 @@ export default function BiodataPage() {
 
               {/* Preview Mockup Card */}
               <div className="relative">
-                <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-xl relative overflow-hidden dark:border-zinc-800 dark:bg-zinc-900">
+                <div className="rounded-2xl border border-zinc-200 bg-white p-6 relative overflow-hidden dark:border-zinc-800 dark:bg-zinc-900">
                   <div className="mb-4 flex items-center justify-between border-b border-zinc-100 pb-3 dark:border-zinc-800">
                     <span className="text-2xl font-bold text-pink-600">ॐ</span>
                     <Badge variant="mono" size="sm">
@@ -202,7 +202,7 @@ export default function BiodataPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid gap-5 md:grid-cols-3">
               {features.map((feature) => (
-                <div key={feature.title} className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-zinc-400 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700">
+                <div key={feature.title} className="rounded-2xl border border-zinc-200 bg-white p-6 transition-all duration-200 hover:-translate-y-1 hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700">
                   <div
                     className="flex size-11 items-center justify-center rounded-xl mb-4"
                     style={{ backgroundColor: `${feature.color}15`, color: feature.color }}
@@ -238,7 +238,7 @@ export default function BiodataPage() {
 
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {templateCards.map((template) => (
-                <div key={template.title} className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-zinc-400 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700 flex flex-col justify-between">
+                <div key={template.title} className="rounded-2xl border border-zinc-200 bg-white p-6 transition-all duration-200 hover:-translate-y-1 hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700 flex flex-col justify-between">
                   <div>
                     <div className="text-3xl font-black mb-4" style={{ color: template.color }}>
                       {template.mark}
@@ -274,7 +274,7 @@ export default function BiodataPage() {
 
               <div className="grid gap-4 sm:grid-cols-2">
                 {steps.map(([title, body], index) => (
-                  <div key={title} className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-xs dark:border-zinc-800 dark:bg-zinc-900">
+                  <div key={title} className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
                     <div className="flex size-8 items-center justify-center rounded-full bg-zinc-950 text-white text-xs font-bold mb-4 dark:bg-zinc-100 dark:text-zinc-950">
                       {index + 1}
                     </div>
@@ -322,7 +322,7 @@ export default function BiodataPage() {
                 },
               ].map((post) => (
                 <Link key={post.href} href={post.href} className="group block">
-                  <div className="h-full rounded-2xl border border-zinc-200 bg-white p-6 shadow-xs transition-all duration-200 hover:-translate-y-1 hover:border-zinc-400 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700 flex flex-col justify-between">
+                  <div className="h-full rounded-2xl border border-zinc-200 bg-white p-6 transition-all duration-200 hover:-translate-y-1 hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700 flex flex-col justify-between">
                     <div>
                       <Badge variant="mono" size="sm" className="mb-3">
                         {post.readTime}
@@ -348,7 +348,7 @@ export default function BiodataPage() {
         {/* CTA Banner */}
         <section className="py-16 sm:py-20 bg-zinc-50/50 border-t border-zinc-200 dark:border-zinc-800 dark:bg-zinc-950/50">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 text-center">
-            <div className="rounded-3xl border border-zinc-200 bg-white p-8 sm:p-14 shadow-xs dark:border-zinc-800 dark:bg-zinc-900">
+            <div className="rounded-3xl border border-zinc-200 bg-white p-8 sm:p-14 dark:border-zinc-800 dark:bg-zinc-900">
               <h2 className="text-2xl font-extrabold tracking-tight text-zinc-950 sm:text-3xl dark:text-zinc-50">
                 Ready to Create Your Marriage Biodata?
               </h2>
@@ -356,7 +356,7 @@ export default function BiodataPage() {
                 Choose from 6+ templates, customize details, and download a crisp vector PDF instantly.
               </p>
               <div className="mt-8 flex justify-center">
-                <Button asChild size="lg" className="shadow-xs">
+                <Button asChild size="lg">
                   <Link href="/biodata/biodata-generator">
                     Launch Biodata Studio Free <ArrowRight size={16} className="ml-1.5" />
                   </Link>

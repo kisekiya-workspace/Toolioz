@@ -78,7 +78,7 @@ export default function PDFToImagePage() {
             />
 
             <div className="max-w-6xl mx-auto mb-16 space-y-8">
-                <Card className="border-2 shadow-lg">
+                <Card className="border-2">
                     <CardContent className="p-8 space-y-8">
                         {!file ? (
                             <div
@@ -116,7 +116,7 @@ export default function PDFToImagePage() {
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-6 border-t">
                                 {previews.map((src, i) => (
                                     <div key={i} className="space-y-2">
-                                        <div className="border rounded-lg overflow-hidden shadow-sm bg-muted/20 p-2">
+                                        <div className="border rounded-lg overflow-hidden bg-muted/20 p-2">
                                             <img src={src} alt={`Page ${i + 1}`} className="w-full object-contain" />
                                         </div>
                                         <div className="flex justify-between items-center px-1">

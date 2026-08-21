@@ -26,7 +26,7 @@ export function GitCheatSheet() {
                     />
 
                     {/* Modal Content */}
-                    <div className="relative bg-slate-900 border border-slate-800 text-slate-200 w-full max-w-3xl rounded-xl shadow-2xl p-6 overflow-hidden animate-in zoom-in-95 duration-200">
+                    <div className="relative bg-slate-900 border border-slate-800 text-slate-200 w-full max-w-3xl rounded-xl p-6 overflow-hidden animate-in zoom-in-95 duration-200">
 
                         {/* Header */}
                         <div className="flex items-center justify-between mb-2">

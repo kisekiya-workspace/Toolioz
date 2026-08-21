@@ -187,7 +187,7 @@ export default function ImageCompressorClient() {
                   <div className="flex flex-1 flex-col items-center justify-center text-center">
                     <input type="file" accept="image/*" onChange={handleFileChange} id="img-upload" className="hidden" />
                     <label htmlFor="img-upload" className="w-full cursor-pointer">
-                      <div className="mx-auto mb-8 flex h-[100px] w-[100px] items-center justify-center rounded-full bg-white text-[#ef4444] shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
+                      <div className="mx-auto mb-8 flex h-[100px] w-[100px] items-center justify-center rounded-full bg-white text-[#ef4444]">
                         <Upload size={32} />
                       </div>
                       <h3 className="mb-2 text-[1.5rem] font-extrabold">Select Image</h3>

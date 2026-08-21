@@ -59,7 +59,7 @@ export default function TweetGeneratorPage() {
             <div className="grid lg:grid-cols-2 gap-12 mb-16">
                 {/* Controls */}
                 <div className="space-y-6">
-                    <Card className="border-0 shadow-lg ring-1 ring-border/50">
+                    <Card className="border-0 ring-1 ring-border/50">
                         <CardContent className="p-6 space-y-6">
                             <div className="space-y-4">
                                 <Label className="text-base font-semibold">User Info</Label>
@@ -132,7 +132,7 @@ export default function TweetGeneratorPage() {
 
                 {/* Preview */}
                 <div className="flex items-center justify-center pt-8 lg:pt-0">
-                    <div ref={tweetRef} className="w-full max-w-[600px] bg-black text-white rounded-xl border border-gray-800 shadow-xl overflow-hidden p-6 font-sans">
+                    <div ref={tweetRef} className="w-full max-w-[600px] bg-black text-white rounded-xl border border-gray-800 overflow-hidden p-6 font-sans">
                         {/* Header */}
                         <div className="flex items-start justify-between mb-4">
                             <div className="flex gap-3">

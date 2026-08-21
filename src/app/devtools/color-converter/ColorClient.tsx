@@ -237,7 +237,7 @@ export default function ColorClient({ title, color }: { title?: string, color?: 
     <div className="flex flex-col gap-2.5">
       <span className="text-[0.9rem] font-bold uppercase tracking-[0.05em] text-[var(--text-secondary)]">{name}</span>
       <div 
-        className="relative flex h-[80px] cursor-pointer items-end justify-between overflow-hidden rounded-[var(--radius-md)] border border-[rgba(255,255,255,0.1)] p-2.5 shadow-[var(--shadow-sm)] transition-all duration-200 hover:-translate-y-[2px] hover:shadow-[var(--shadow-md)]" 
+        className="relative flex h-[80px] cursor-pointer items-end justify-between overflow-hidden rounded-[var(--radius-md)] border border-[rgba(255,255,255,0.1)] p-2.5 transition-all duration-200 hover:-translate-y-[2px]"
         style={{ backgroundColor: hx }}
         onClick={() => { updateFromHex(hx); copyToClipboard(hx, hx); }}
       >
@@ -372,7 +372,7 @@ export default function ColorClient({ title, color }: { title?: string, color?: 
           <h2 className="mb-6 border-b border-[var(--border)] pb-2.5 text-[1.5rem] font-bold text-[var(--text-primary)]">Interactive Mesh Generator</h2>
           
           <div className="flex flex-col gap-5">
-            <div className="h-[300px] w-full rounded-[var(--radius-lg)] border border-[var(--border)] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.05)] transition-colors duration-200" style={currentMeshStyle} />
+            <div className="h-[300px] w-full rounded-[var(--radius-lg)] border border-[var(--border)] transition-colors duration-200" style={currentMeshStyle} />
             
             <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-5 rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--bg-primary)] p-5">
               {nodes.map((node, i) => (

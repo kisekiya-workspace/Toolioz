@@ -46,7 +46,7 @@ box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);`;
             <div className="grid lg:grid-cols-2 gap-12 mb-16">
                 {/* Controls */}
                 <div className="space-y-6">
-                    <Card className="border-0 shadow-lg ring-1 ring-border/50">
+                    <Card className="border-0 ring-1 ring-border/50">
                         <CardContent className="p-8 space-y-8">
                             <div className="space-y-4">
                                 <div className="flex justify-between">
@@ -79,7 +79,7 @@ box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);`;
                         </CardContent>
                     </Card>
 
-                    <Card className="border-0 shadow-lg ring-1 ring-border/50 bg-slate-900 text-slate-100">
+                    <Card className="border-0 ring-1 ring-border/50 bg-slate-900 text-slate-100">
                         <CardContent className="p-6 relative group">
                             <pre className="font-mono text-sm overflow-x-auto whitespace-pre-wrap rounded-lg">
                                 {cssCode}

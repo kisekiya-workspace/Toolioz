@@ -93,7 +93,7 @@ export default function PDFSplitterPage() {
             />
 
             <div className="max-w-4xl mx-auto mb-16 space-y-8">
-                <Card className="border-2 shadow-lg">
+                <Card className="border-2">
                     <CardContent className="p-8 space-y-8">
                         {!file ? (
                             <div

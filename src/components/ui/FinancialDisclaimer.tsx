@@ -15,7 +15,7 @@ export const FinancialDisclaimer: React.FC<FinancialDisclaimerProps> = ({
   if (variant === 'compact') {
     return (
       <div
-        className={`rounded-xl border border-amber-200 bg-amber-50/70 p-4 text-amber-900 shadow-2xs dark:border-amber-900/50 dark:bg-amber-950/20 dark:text-amber-200 ${className}`}
+        className={`rounded-xl border border-amber-200 bg-amber-50/70 p-4 text-amber-900 dark:border-amber-900/50 dark:bg-amber-950/20 dark:text-amber-200 ${className}`}
       >
         <div className="flex items-start gap-3">
           <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400" />
@@ -29,7 +29,7 @@ export const FinancialDisclaimer: React.FC<FinancialDisclaimerProps> = ({
 
   return (
     <div
-      className={`rounded-2xl border border-amber-200/80 bg-amber-50/60 p-6 text-amber-950 shadow-2xs dark:border-amber-900/40 dark:bg-[#1c1a17] dark:text-amber-100 sm:p-8 ${className}`}
+      className={`rounded-2xl border border-amber-200/80 bg-amber-50/60 p-6 text-amber-950 dark:border-amber-900/40 dark:bg-[#1c1a17] dark:text-amber-100 sm:p-8 ${className}`}
     >
       <div className="flex flex-col sm:flex-row items-start gap-4">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-400">

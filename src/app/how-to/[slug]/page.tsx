@@ -184,7 +184,7 @@ export default async function HowToDetailPage({ params }: HowToPageProps) {
           </nav>
 
           <div className="pt-3">
-            <Button asChild size="sm" className="w-full text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs">
+            <Button asChild size="sm" className="w-full text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white">
               <Link href={post.toolHref}>
                 Launch Tool <ArrowRight size={12} className="ml-1" />
               </Link>
@@ -258,7 +258,7 @@ export default async function HowToDetailPage({ params }: HowToPageProps) {
               </p>
             </div>
 
-            <Button asChild size="sm" className="shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-xs">
+            <Button asChild size="sm" className="shrink-0 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold">
               <Link href={post.toolHref}>
                 Open Tool <ArrowRight size={13} className="ml-1" />
               </Link>
@@ -305,7 +305,7 @@ export default async function HowToDetailPage({ params }: HowToPageProps) {
                 <Link
                   key={related.slug}
                   href={related.directUrl}
-                  className="group block rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-3.5 shadow-2xs hover:border-zinc-400 transition-all"
+                  className="group block rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-3.5 hover:border-zinc-400 transition-all"
                 >
                   <span className="text-[10px] font-mono text-zinc-400">
                     {related.readTime}

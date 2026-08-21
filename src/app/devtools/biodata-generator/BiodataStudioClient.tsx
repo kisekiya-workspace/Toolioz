@@ -386,7 +386,7 @@ export default function BiodataStudioClient() {
           </div>
           <div ref={previewRef} className="min-h-0 flex-1 overflow-auto p-6 sm:p-10">
             <div className="mx-auto" style={{ width: `${794 * zoom}px`, height: `${1123 * zoom}px` }}>
-              <div className="origin-top-left bg-white shadow-[0_25px_80px_-30px_rgba(55,35,20,0.45)]" style={{ width: 794, height: 1123, transform: `scale(${zoom})` }}><Template data={form} /></div>
+              <div className="origin-top-left bg-white" style={{ width: 794, height: 1123, transform: `scale(${zoom})` }}><Template data={form} /></div>
             </div>
           </div>
           <div className="flex shrink-0 items-center justify-between border-t border-stone-300 bg-[#f8f4ed] px-4 py-3"><p className="hidden items-center gap-2 text-xs font-bold text-stone-600 sm:flex"><ShieldCheck size={15} className="text-emerald-700" />No upload. No watermark.</p><div className="ml-auto flex items-center gap-2"><button type="button" onClick={() => setZoom((value) => Math.max(0.25, value - 0.05))} className="grid h-8 w-8 place-items-center rounded-full border border-stone-300 bg-white text-sm font-bold">−</button><span className="w-12 text-center text-xs font-bold text-stone-600">{Math.round(zoom * 100)}%</span><button type="button" onClick={() => setZoom((value) => Math.min(1, value + 0.05))} className="grid h-8 w-8 place-items-center rounded-full border border-stone-300 bg-white text-sm font-bold">+</button></div></div>

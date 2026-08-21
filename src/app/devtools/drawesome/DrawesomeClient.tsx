@@ -45,7 +45,7 @@ export default function DrawesomeClient() {
         />
 
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-10">
-          <Card className="p-6 space-y-3 shadow-xs">
+          <Card className="p-6 space-y-3">
             <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-900/60 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-3">
               <Pencil className="w-5 h-5" />
             </div>
@@ -55,7 +55,7 @@ export default function DrawesomeClient() {
             </p>
           </Card>
 
-          <Card className="p-6 space-y-3 shadow-xs">
+          <Card className="p-6 space-y-3">
             <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-900/60 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-3">
               <Eraser className="w-5 h-5" />
             </div>
@@ -65,7 +65,7 @@ export default function DrawesomeClient() {
             </p>
           </Card>
 
-          <Card className="p-6 space-y-3 shadow-xs">
+          <Card className="p-6 space-y-3">
             <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-900/60 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-3">
               <FileCode className="w-5 h-5" />
             </div>
