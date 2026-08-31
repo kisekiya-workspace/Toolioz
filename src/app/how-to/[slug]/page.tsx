@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, ArrowRight, BookOpen, Clock, Calendar, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, Clock } from 'lucide-react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import { ReadingProgressBar } from '@/components/ui/ReadingProgressBar';
 import { Footer } from '@/components/layout/Footer';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/Button';
 import { howToPosts, getHowToPost } from '@/lib/howto-content';
 import { buildArticleMetadata, SITE_URL } from '@/lib/seo';
@@ -73,8 +72,8 @@ export default async function HowToDetailPage({ params }: HowToPageProps) {
     dateModified: post.updatedIso,
     author: {
       '@type': 'Organization',
-      name: 'Toolioz Technical Guides',
-      url: 'https://toolioz.com/about',
+      name: 'Toolioz Editorial Team',
+      url: 'https://toolioz.com/editorial-policy',
     },
     publisher: {
       '@type': 'Organization',
@@ -131,6 +130,10 @@ export default async function HowToDetailPage({ params }: HowToPageProps) {
               <ArrowLeft size={13} /> Back to Guides
             </Link>
             <div className="flex items-center gap-3 text-xs font-mono text-zinc-400">
+              <Link href="/editorial-policy" className="hover:text-emerald-600 dark:hover:text-emerald-400">
+                Toolioz Editorial Team
+              </Link>
+              <span>•</span>
               <span className="flex items-center gap-1">
                 <Clock size={12} /> {post.readTime}
               </span>

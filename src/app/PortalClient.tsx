@@ -9,14 +9,15 @@ import {
   ShieldCheck,
   Lock,
   BookOpen,
-  Sparkles,
+  Blocks,
+  FileText,
   Command,
   CheckCircle2,
   X,
   Filter,
 } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
-import { TOOLS, CATEGORIES, type Tool } from '@/lib/tools';
+import { PUBLISHER_READY_TOOLS as TOOLS, CATEGORIES, type Tool } from '@/lib/tools';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
@@ -58,11 +59,11 @@ const FAQS = [
   },
   {
     q: 'How does client-side zero-server privacy work?',
-    a: 'Calculations, parsing, document rendering, and image dithering execute entirely in your web browser sandbox using modern JavaScript and WebAssembly. Your financial inputs, confidential documents, and personal details never leave your device.',
+    a: 'When a page is labelled local processing, its tool inputs and files are handled in your browser rather than uploaded to Toolioz. The website still loads normal page assets and analytics services; see the privacy policy for those separate network requests.',
   },
   {
     q: 'Do the financial formulas match banking and tax standards?',
-    a: 'Yes. Our financial calculators implement exact compound interest, systematic investment plan (SIP), loan prepayment amortization, and tax slab formulas adhering to financial industry standards.',
+    a: 'Each published calculator documents its formula, assumptions, and limitations. Results are planning estimates rather than financial or tax advice, and time-sensitive rules should be verified with an official source.',
   },
   {
     q: 'Can I export, print, or download my results?',
@@ -142,8 +143,8 @@ export default function PortalClient() {
           {/* Top Feature Pill */}
           <div className="mb-3 inline-flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50/80 px-3 py-0.5 text-xs font-semibold text-blue-700 dark:border-blue-900/60 dark:bg-blue-950/40 dark:text-blue-300">
-              <Sparkles size={13} className="text-blue-600 dark:text-blue-400" />
-              60+ Browser-Native Precision Utilities
+              <Blocks size={13} className="text-blue-600 dark:text-blue-400" />
+              {TOOLS.length} reviewed browser-native utilities
             </span>
           </div>
 
@@ -216,7 +217,7 @@ export default function PortalClient() {
                 href="/resume-builder"
                 className="inline-flex items-center gap-1.5 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1 text-xs font-semibold text-blue-700 transition-colors hover:bg-blue-100 dark:border-blue-900/60 dark:bg-blue-950/40 dark:text-blue-300"
               >
-                <Sparkles size={12} className="text-blue-600" />
+                <FileText size={12} className="text-blue-600" />
                 <span>Resume Builder</span>
               </Link>
             </div>
@@ -259,7 +260,7 @@ export default function PortalClient() {
                   No tools found matching your criteria.
                 </p>
                 <p className="mt-1 text-xs text-zinc-500">
-                  Try searching with generic terms like "PDF", "SIP", "JSON", or "Converter".
+                  Try searching with generic terms like &quot;PDF&quot;, &quot;SIP&quot;, &quot;JSON&quot;, or &quot;Converter&quot;.
                 </p>
                 <Button
                   variant="outline"
@@ -340,7 +341,7 @@ export default function PortalClient() {
                   <div>
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex size-10 items-center justify-center rounded-xl bg-blue-600 text-white">
-                        <Sparkles size={18} />
+                        <FileText size={18} />
                       </div>
                       <Badge variant="info" size="sm">
                         Featured
@@ -431,20 +432,20 @@ export default function PortalClient() {
               Engineered for Precision
             </Badge>
             <h2 className="mb-4 text-2xl font-extrabold tracking-tight sm:text-3xl lg:text-4xl text-zinc-950 dark:text-zinc-50">
-              Zero-Knowledge Processing. <br />
-              Zero Compromise on Speed.
+              Local Tool Processing. <br />
+              Clear Assumptions and Fast Results.
             </h2>
             <p className="mb-6 text-sm text-zinc-600 leading-relaxed dark:text-zinc-400">
-              Traditional web utilities upload your personal financial data, confidential documents, and code to remote servers.
-              Toolioz executes everything in local WebAssembly and browser memory.
+              Tool pages labelled local processing keep their inputs and files inside your browser. Calculators also show the
+              assumptions and formulas needed to understand the result.
             </p>
 
             <div className="space-y-3.5">
               {[
                 {
                   icon: Lock,
-                  title: 'Data Sovereignty Guarantee',
-                  desc: 'All computations run locally in client-side RAM. No logs, no telemetry on calculations.',
+                  title: 'Local Inputs Where Stated',
+                  desc: 'Pages identify when calculations or file processing stay in browser memory.',
                 },
                 {
                   icon: Zap,
@@ -453,8 +454,8 @@ export default function PortalClient() {
                 },
                 {
                   icon: ShieldCheck,
-                  title: 'Bank-Grade Mathematical Accuracy',
-                  desc: 'Standardized compound growth, amortizations, tax deductions, and cryptographic hash engines.',
+                  title: 'Documented Calculation Methods',
+                  desc: 'Published calculators explain their equations, assumptions, examples, and limitations.',
                 },
               ].map(({ icon: Icon, title, desc }) => (
                 <div key={title} className="flex items-start gap-3 rounded-xl border border-zinc-200 bg-white p-3.5 dark:border-zinc-800 dark:bg-zinc-900">

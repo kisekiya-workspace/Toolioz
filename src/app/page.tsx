@@ -39,7 +39,7 @@ const homeFaqJsonLd = {
       name: 'Is user data secure on Toolioz?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Calculations and file processing run locally inside your web browser sandbox using JavaScript and WebAssembly. Sensitive inputs and uploaded documents are never stored or transmitted to external servers.',
+        text: 'Tool inputs and uploaded files stay in your browser when a page is labelled local processing. The site still makes normal network requests for page assets and analytics; the privacy policy explains those services.',
       },
     },
     {
@@ -47,7 +47,7 @@ const homeFaqJsonLd = {
       name: 'Do Toolioz financial formulas match real-world bank standards?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Toolioz uses exact compound interest, systematic investment plan (SIP), loan prepayment amortization, and tax formulas used by financial planning institutions.',
+        text: 'Toolioz documents the formula and assumptions used by its published financial calculators. Results are educational estimates and should be checked against current rules or a qualified professional before a financial decision.',
       },
     },
     {

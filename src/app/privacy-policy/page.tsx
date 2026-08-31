@@ -3,15 +3,15 @@ import PrivacyClient from './PrivacyClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Your Data Security Matters | Toolioz",
-  description: "Our commitment to 100% client-side data privacy. Learn how Toolioz handles information without server storage for maximum transparency.",
-  keywords: 'Privacy policy, client-side security, no server storage, data protection transparency',
+  title: "Privacy Policy | Tool Inputs, Analytics & Advertising | Toolioz",
+  description: "Learn which Toolioz inputs stay in your browser and how analytics, advertising, CDNs, and support messages process information.",
+  keywords: 'Toolioz privacy policy, browser processing, Google Analytics, advertising privacy',
   alternates: {
     canonical: 'https://toolioz.com/privacy-policy',
   },
   openGraph: {
     title: 'Privacy & Data Security Policy | Toolioz',
-    description: 'Transparency in how we handle your data—mostly by not handling it at all.',
+    description: 'How local tool processing, analytics, advertising, CDNs, and support messages handle information.',
     url: 'https://toolioz.com/privacy-policy',
     type: 'website',
   }

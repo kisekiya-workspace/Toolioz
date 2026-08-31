@@ -18,6 +18,11 @@ export const metadata: Metadata = buildPageMetadata({
   ],
 });
 
+metadata.robots = {
+  index: true,
+  follow: true,
+};
+
 export default function ToolsLibraryPage() {
   const jsonLd = {
     '@context': 'https://schema.org',

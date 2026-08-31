@@ -30,14 +30,14 @@ export function Footer() {
             </Link>
             <span className="hidden sm:inline-block text-zinc-300 dark:text-zinc-700">•</span>
             <p className="text-xs text-zinc-500 dark:text-zinc-400 max-w-lg leading-relaxed">
-              Fast, privacy-first client-side calculation engines and developer utilities running entirely in your browser RAM.
+              Practical calculators and utilities with working tools, documented assumptions, and browser-local processing where stated.
             </p>
           </div>
 
           <div className="flex items-center gap-2">
             <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] font-medium text-emerald-700 dark:border-emerald-900/60 dark:bg-emerald-950/40 dark:text-emerald-400">
               <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span>100% Client-Side • Zero Data Uploaded</span>
+              <span>Tool inputs stay local where stated</span>
             </div>
           </div>
         </div>
@@ -178,6 +178,9 @@ export function Footer() {
             <Link href="/about" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
               About Toolioz
             </Link>
+            <Link href="/editorial-policy" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
+              Editorial &amp; Review Policy
+            </Link>
             <Link href="/privacy-policy" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors">
               Privacy Policy
             </Link>
@@ -203,10 +206,10 @@ export function Footer() {
           <div className="flex items-center gap-4 text-zinc-400">
             <span className="flex items-center gap-1">
               <ShieldCheck size={13} className="text-emerald-500" />
-              <span>Client-Side Isolation</span>
+              <span>Local Tool Processing</span>
             </span>
             <span>•</span>
-            <span>Zero-Logging Policy</span>
+            <Link href="/privacy-policy" className="hover:text-zinc-700 dark:hover:text-zinc-200">Privacy details</Link>
           </div>
         </div>
 

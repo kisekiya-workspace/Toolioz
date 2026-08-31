@@ -8,21 +8,21 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default:
-          "border-transparent bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900",
+          "border border-transparent bg-primary text-primary-foreground",
         secondary:
-          "border-transparent bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200",
+          "border border-border bg-secondary text-secondary-foreground",
         destructive:
-          "border-red-200 bg-red-50 text-red-700 dark:border-red-900 dark:bg-red-950 dark:text-red-300",
+          "border-red-200 bg-red-50 text-red-700 dark:border-red-400/20 dark:bg-red-400/10 dark:text-red-300",
         outline:
-          "border border-zinc-200 text-zinc-800 bg-white dark:border-zinc-800 dark:text-zinc-200 dark:bg-zinc-900",
+          "border border-border bg-card text-muted-foreground",
         success:
-          "border border-emerald-200 bg-emerald-50 text-emerald-800 dark:border-emerald-900 dark:bg-emerald-950 dark:text-emerald-300",
+          "border border-emerald-200 bg-emerald-50 text-emerald-800 dark:border-emerald-400/20 dark:bg-emerald-400/10 dark:text-emerald-300",
         warning:
-          "border border-amber-200 bg-amber-50 text-amber-800 dark:border-amber-900 dark:bg-amber-950 dark:text-amber-300",
+          "border border-amber-200 bg-amber-50 text-amber-800 dark:border-amber-400/20 dark:bg-amber-400/10 dark:text-amber-300",
         info:
-          "border border-blue-200 bg-blue-50 text-blue-800 dark:border-blue-900 dark:bg-blue-950 dark:text-blue-300",
+          "border border-blue-200 bg-blue-50 text-blue-800 dark:border-blue-400/20 dark:bg-blue-400/10 dark:text-blue-300",
         mono:
-          "font-mono text-[11px] border border-zinc-200 bg-zinc-50 text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300",
+          "font-mono text-[11px] border border-border bg-muted text-muted-foreground",
       },
       size: {
         default: "px-2.5 py-0.5 text-xs",

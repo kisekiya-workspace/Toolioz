@@ -117,7 +117,7 @@ export const TOOLS: Tool[] = [
   {
     id: 'fd-calculator',
     title: 'Fixed Deposit',
-    desc: 'Guaranteed returns on your lump sum bank deposits.',
+    desc: 'Estimate maturity value for a fixed-rate bank deposit.',
     icon: Banknote,
     href: '/finance/fd-calculator',
     color: '#0369a1',
@@ -555,6 +555,20 @@ export const TOOLS: Tool[] = [
     isTrending: true
   }
 ];
+
+const NEW_TOOL_PATHS = new Set(
+  [...NEW_PDF_TOOLS, ...NEW_DEV_TOOLS].map((tool) => tool.path)
+);
+
+/**
+ * Tools that have a complete, independently useful page and are ready to be
+ * promoted in the primary navigation and search index. New workbench tools
+ * remain available by URL while their documentation and editorial review are
+ * completed, but they are intentionally not presented as finished content.
+ */
+export const PUBLISHER_READY_TOOLS = TOOLS.filter(
+  (tool) => !NEW_TOOL_PATHS.has(tool.href)
+);
 
 export const CATEGORIES = [
   {

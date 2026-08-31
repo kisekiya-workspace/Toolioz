@@ -45,7 +45,7 @@ export function ThemeToggle({
       onClick={toggleTheme}
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
       title={`Current: ${theme} mode (Click to toggle)`}
-      className={`relative flex size-8 items-center justify-center rounded-md border border-zinc-200/80 bg-white text-zinc-700 transition-all duration-150 hover:border-zinc-300 hover:bg-zinc-100 hover:text-zinc-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:border-zinc-700 dark:hover:bg-zinc-800 dark:hover:text-zinc-100 ${className}`}
+      className={`relative flex size-8 items-center justify-center rounded-md border border-border bg-card text-muted-foreground transition-colors duration-150 hover:border-[var(--border-strong)] hover:bg-accent hover:text-accent-foreground ${className}`}
     >
       {isDark ? (
         <Sun size={15} className="text-amber-400 transition-transform duration-200 rotate-0 hover:rotate-45" />

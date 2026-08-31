@@ -3,9 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ElementType } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Command, Grid3X3, Search, ShieldCheck, Sparkles, X } from 'lucide-react';
-import { TOOLS as IMPORTED_TOOLS } from '@/data/sociials-tools';
-import { TOOLS as CORE_TOOLS } from '@/lib/tools';
+import { ArrowRight, Search, X } from 'lucide-react';
+import { PUBLISHER_READY_TOOLS } from '@/lib/tools';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
@@ -20,7 +19,6 @@ type LibraryTool = {
   popular?: boolean;
 };
 
-const importedPaths = new Set(IMPORTED_TOOLS.map((tool) => tool.href));
 const categoryNames = {
   finance: 'Finance',
   devtools: 'Developer',
@@ -30,8 +28,7 @@ const categoryNames = {
 } as const;
 
 const TOOLS: LibraryTool[] = [
-  ...IMPORTED_TOOLS,
-  ...CORE_TOOLS.filter((tool) => !importedPaths.has(tool.href)).map((tool) => ({
+  ...PUBLISHER_READY_TOOLS.map((tool) => ({
     title: tool.title,
     description: tool.desc,
     href: tool.href,
@@ -112,7 +109,7 @@ export default function ToolsLibraryClient() {
             </h1>
             
             <p className="mx-auto mt-2 max-w-xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-              Browse or instantly filter through 60+ finance calculators, developer helpers, PDF converters, and design tools.
+              Browse reviewed finance calculators, developer helpers, PDF converters, and design tools. Each listed page includes a working browser-based utility.
             </p>
 
             {/* Search Box */}

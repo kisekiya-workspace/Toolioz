@@ -15,11 +15,10 @@ import {
   Briefcase,
   Wrench,
   Search,
-  Layers,
   Command,
   Boxes,
 } from 'lucide-react';
-import { CATEGORIES as TOOL_CATEGORIES, TOOLS } from '@/lib/tools';
+import { CATEGORIES as TOOL_CATEGORIES, PUBLISHER_READY_TOOLS as TOOLS } from '@/lib/tools';
 import { Button } from '@/components/ui/Button';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 

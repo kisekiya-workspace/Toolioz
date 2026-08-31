@@ -70,113 +70,210 @@
 }
 
 .dark {
-  /* True Neutral IDE Charcoal Gray Hierarchy (Zero Blue Tint - Pure Neutral Grays) */
+  /* IDE-inspired dark system: quiet neutral layers, one blue interaction accent. */
   color-scheme: dark;
-  --background: #1c1c1c;        /* Level 0: Pure neutral IDE dark canvas */
-  --foreground: #f0f0f0;        /* Crisp primary light text */
-  --card: #282828;              /* Level 2: Elevated card & panel surface */
-  --card-foreground: #f0f0f0;
-  --popover: #282828;           /* Dropdowns & popovers */
-  --popover-foreground: #f0f0f0;
-  --primary: #f0f0f0;
-  --primary-foreground: #1c1c1c;
-  --primary-hover: #e0e0e0;
-  --primary-blue: #3b82f6;
-  --primary-blue-hover: #60a5fa;
-  --secondary: #323232;         /* Level 3: Interactive pills & buttons */
-  --secondary-foreground: #f0f0f0;
-  --muted: #222222;             /* Level 1.5: Input wells & muted backgrounds */
-  --muted-foreground: #8e8e8e;  /* Descriptive secondary text */
-  --accent: #353535;            /* Hover highlights */
-  --accent-foreground: #ffffff;
-  --destructive: #ef4444;
+  --background: #0d1117;        /* Canvas / editor background */
+  --foreground: #e6edf3;        /* Primary content, 16.02:1 on canvas */
+  --card: #151b23;              /* Panels and cards */
+  --card-foreground: #e6edf3;
+  --popover: #1b222c;           /* Floating surfaces */
+  --popover-foreground: #e6edf3;
+  --primary: #2563eb;           /* Accessible action blue */
+  --primary-foreground: #ffffff;
+  --primary-hover: #1d4ed8;
+  --primary-blue: #60a5fa;      /* Links and non-filled accents */
+  --primary-blue-hover: #93c5fd;
+  --secondary: #21262d;         /* Controls and selected rows */
+  --secondary-foreground: #e6edf3;
+  --muted: #11161d;             /* Inputs and inset wells */
+  --muted-foreground: #9ba7b4;  /* Secondary copy, 7.07:1 on cards */
+  --accent: #232b35;            /* Hover/pressed surface */
+  --accent-foreground: #f0f6fc;
+  --destructive: #f85149;
   --destructive-foreground: #ffffff;
-  --border: #383838;            /* Neutral IDE micro-borders */
-  --border-strong: #4a4a4a;     /* Active container borders */
-  --input: #222222;
-  --ring: #3b82f6;
+  --border: #30363d;
+  --border-strong: #3d4652;
+  --input: #0f141a;
+  --ring: #60a5fa;
 
-  --bg-primary: #1c1c1c;        /* Canvas */
-  --bg-secondary: #222222;      /* Sections & Header */
-  --bg-tertiary: #282828;       /* Workbenches */
-  --text-primary: #f0f0f0;
-  --text-secondary: #cccccc;
-  --text-tertiary: #8e8e8e;
-  --surface: #282828;
-  --surface-hover: #353535;
+  --bg-primary: #0d1117;
+  --bg-secondary: #11161d;
+  --bg-tertiary: #151b23;
+  --text-primary: #e6edf3;
+  --text-secondary: #c9d1d9;
+  --text-tertiary: #9ba7b4;
+  --surface: #151b23;
+  --surface-hover: #232b35;
 }
 
 .dark,
 .dark body {
-  background-color: #1c1c1c !important;
-  color: #f0f0f0 !important;
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
 }
 
-/* Explicit class mappings for Tailwind zinc & slate classes in dark mode (Zero Blue Tint) */
+/* Normalize legacy zinc/slate dark utilities onto the shared surface ladder. */
 .dark .dark\:bg-zinc-950,
 .dark .dark\:bg-slate-950 {
-  background-color: #1c1c1c !important;
+  background-color: var(--background) !important;
 }
 
 .dark .dark\:bg-zinc-900,
 .dark .dark\:bg-slate-900 {
-  background-color: #282828 !important;
+  background-color: var(--card) !important;
+}
+
+.dark .dark\:bg-zinc-800,
+.dark .dark\:bg-slate-800 {
+  background-color: var(--secondary) !important;
+}
+
+.dark .dark\:bg-zinc-700,
+.dark .dark\:bg-slate-700 {
+  background-color: #29313b !important;
+}
+
+/* Old inverted controls became white in dark mode. Keep them as the single action accent. */
+.dark .dark\:bg-zinc-100,
+.dark .dark\:bg-slate-100 {
+  background-color: var(--primary) !important;
+}
+
+.dark .dark\:border-zinc-100,
+.dark .dark\:border-slate-100 {
+  border-color: var(--primary) !important;
 }
 
 .dark .dark\:bg-zinc-900\/60,
 .dark .dark\:bg-slate-900\/60 {
-  background-color: rgba(40, 40, 40, 0.6) !important;
+  background-color: rgb(21 27 35 / 0.72) !important;
 }
 
 .dark .dark\:bg-zinc-900\/40,
 .dark .dark\:bg-slate-900\/40 {
-  background-color: rgba(40, 40, 40, 0.4) !important;
+  background-color: rgb(21 27 35 / 0.58) !important;
 }
 
 .dark .dark\:bg-zinc-950\/95,
 .dark .dark\:bg-slate-950\/95 {
-  background-color: rgba(28, 28, 28, 0.95) !important;
+  background-color: rgb(13 17 23 / 0.95) !important;
 }
 
 .dark .dark\:bg-zinc-950\/90,
 .dark .dark\:bg-slate-950\/90 {
-  background-color: rgba(28, 28, 28, 0.9) !important;
+  background-color: rgb(13 17 23 / 0.9) !important;
 }
 
 .dark .dark\:bg-zinc-950\/50,
 .dark .dark\:bg-slate-950\/50 {
-  background-color: rgba(28, 28, 28, 0.5) !important;
+  background-color: rgb(13 17 23 / 0.72) !important;
 }
 
 .dark .dark\:border-zinc-800,
 .dark .dark\:border-slate-800 {
-  border-color: #383838 !important;
+  border-color: var(--border) !important;
 }
 
 .dark .dark\:border-zinc-700,
 .dark .dark\:border-slate-700 {
-  border-color: #4a4a4a !important;
+  border-color: var(--border-strong) !important;
 }
 
 .dark .dark\:text-zinc-50,
 .dark .dark\:text-slate-50,
 .dark .dark\:text-zinc-100,
 .dark .dark\:text-slate-100 {
-  color: #f0f0f0 !important;
+  color: var(--foreground) !important;
 }
 
 .dark .dark\:text-zinc-200,
 .dark .dark\:text-slate-200,
 .dark .dark\:text-zinc-300,
 .dark .dark\:text-slate-300 {
-  color: #cccccc !important;
+  color: var(--text-secondary) !important;
 }
 
 .dark .dark\:text-zinc-400,
 .dark .dark\:text-slate-400,
 .dark .dark\:text-zinc-500,
 .dark .dark\:text-slate-500 {
-  color: #8e8e8e !important;
+  color: var(--muted-foreground) !important;
+}
+
+.dark .dark\:text-zinc-900,
+.dark .dark\:text-slate-900,
+.dark .dark\:text-zinc-950,
+.dark .dark\:text-slate-950 {
+  color: var(--primary-foreground) !important;
+}
+
+/* Hover is a one-level surface shift, never a flash to white. */
+.dark .dark\:hover\:bg-zinc-900:hover,
+.dark .dark\:hover\:bg-slate-900:hover {
+  background-color: var(--popover) !important;
+}
+
+.dark .dark\:hover\:bg-zinc-800:hover,
+.dark .dark\:hover\:bg-slate-800:hover,
+.dark .dark\:hover\:bg-zinc-700:hover,
+.dark .dark\:hover\:bg-slate-700:hover,
+.dark .dark\:hover\:bg-zinc-600:hover,
+.dark .dark\:hover\:bg-slate-600:hover {
+  background-color: var(--accent) !important;
+}
+
+.dark .dark\:hover\:bg-zinc-200:hover,
+.dark .dark\:hover\:bg-slate-200:hover {
+  background-color: var(--primary-hover) !important;
+}
+
+/* Light-only utility compatibility for imported tool panels. */
+.dark .bg-white:not([class*="dark:bg-"]) {
+  background-color: var(--card) !important;
+}
+
+.dark .bg-slate-50:not([class*="dark:bg-"]),
+.dark .bg-zinc-50:not([class*="dark:bg-"]) {
+  background-color: var(--muted) !important;
+}
+
+.dark .bg-slate-100:not([class*="dark:bg-"]),
+.dark .bg-zinc-100:not([class*="dark:bg-"]) {
+  background-color: var(--secondary) !important;
+}
+
+.dark .text-slate-900:not([class*="dark:text-"]),
+.dark .text-zinc-900:not([class*="dark:text-"]),
+.dark .text-slate-800:not([class*="dark:text-"]),
+.dark .text-zinc-800:not([class*="dark:text-"]) {
+  color: var(--foreground) !important;
+}
+
+.dark .text-slate-700:not([class*="dark:text-"]),
+.dark .text-zinc-700:not([class*="dark:text-"]),
+.dark .text-slate-600:not([class*="dark:text-"]),
+.dark .text-zinc-600:not([class*="dark:text-"]) {
+  color: var(--text-secondary) !important;
+}
+
+.dark .text-slate-500:not([class*="dark:text-"]),
+.dark .text-zinc-500:not([class*="dark:text-"]) {
+  color: var(--muted-foreground) !important;
+}
+
+.dark .border-slate-100:not([class*="dark:border-"]),
+.dark .border-zinc-100:not([class*="dark:border-"]),
+.dark .border-slate-200:not([class*="dark:border-"]),
+.dark .border-zinc-200:not([class*="dark:border-"]) {
+  border-color: var(--border) !important;
+}
+
+.dark .hover\:bg-white:hover:not([class*="dark:hover:bg-"]),
+.dark .hover\:bg-slate-50:hover:not([class*="dark:hover:bg-"]),
+.dark .hover\:bg-zinc-50:hover:not([class*="dark:hover:bg-"]),
+.dark .hover\:bg-slate-100:hover:not([class*="dark:hover:bg-"]),
+.dark .hover\:bg-zinc-100:hover:not([class*="dark:hover:bg-"]) {
+  background-color: var(--accent) !important;
 }
 
 *,

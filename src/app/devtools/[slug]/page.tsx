@@ -11,7 +11,10 @@ export function generateStaticParams() { return NEW_DEV_TOOLS.map(({ slug }) => 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const tool = getNewTool((await params).slug, 'dev');
   if (!tool) return {};
-  return buildPageMetadata({ title: `${tool.title} | Toolioz`, description: tool.description, path: tool.path, keywords: tool.keywords });
+  return {
+    ...buildPageMetadata({ title: `${tool.title} | Toolioz`, description: tool.description, path: tool.path, keywords: tool.keywords }),
+    robots: { index: false, follow: true },
+  };
 }
 
 export default async function NewDeveloperToolPage({ params }: { params: Promise<{ slug: string }> }) {

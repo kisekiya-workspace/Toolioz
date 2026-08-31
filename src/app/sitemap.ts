@@ -1,30 +1,22 @@
 import { MetadataRoute } from 'next';
-import { TOOLS } from '@/lib/tools';
+import { PUBLISHER_READY_TOOLS } from '@/lib/tools';
 import { top5Articles } from '@/lib/top5-content';
 import { standaloneBlogs } from '@/../blogs';
 import { howToPosts } from '@/lib/howto-content';
 import { SITE_URL } from '@/lib/seo';
-import { importedToolItems } from '@/lib/sociials-tool-index';
 
 export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
-  const trendingIds = new Set(TOOLS.filter((t) => t.isTrending).map((t) => t.id));
+  const trendingIds = new Set(PUBLISHER_READY_TOOLS.filter((t) => t.isTrending).map((t) => t.id));
 
-  const toolRoutes = TOOLS.map((tool) => ({
+  const toolRoutes = PUBLISHER_READY_TOOLS.map((tool) => ({
     url: `${SITE_URL}${tool.href}`,
     lastModified,
     changeFrequency: 'weekly' as const,
     priority:
       tool.id === 'x-hidden-image' ? 0.96 : trendingIds.has(tool.id) ? 0.92 : 0.85,
-  }));
-
-  const importedToolRoutes = importedToolItems.map((tool) => ({
-    url: `${SITE_URL}${tool.url}`,
-    lastModified,
-    changeFrequency: 'weekly' as const,
-    priority: 0.82,
   }));
 
   const hubRoutes: MetadataRoute.Sitemap = [
@@ -42,6 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { route: '/top5', priority: 0.90, freq: 'weekly' as const },
     { route: '/about', priority: 0.5, freq: 'monthly' as const },
     { route: '/contact', priority: 0.5, freq: 'monthly' as const },
+    { route: '/editorial-policy', priority: 0.5, freq: 'monthly' as const },
     { route: '/privacy-policy', priority: 0.3, freq: 'yearly' as const },
     { route: '/terms', priority: 0.3, freq: 'yearly' as const },
   ].map(({ route, priority, freq }) => ({
@@ -76,7 +69,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...hubRoutes,
     ...toolRoutes,
     { url: `${SITE_URL}/tools`, lastModified, changeFrequency: 'weekly' as const, priority: 0.94 },
-    ...importedToolRoutes,
     ...blogRoutes,
     ...howToRoutes,
     ...top5Routes,

@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://toolioz.com',
   },
-  authors: [{ name: 'Toolioz Team' }],
+  authors: [{ name: 'Toolioz Editorial Team', url: '/editorial-policy' }],
   icons: {
     icon: [
       { url: '/tooliozLogo.svg', type: 'image/svg+xml' },
@@ -85,7 +85,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#1c1c1c' },
+    { media: '(prefers-color-scheme: dark)', color: '#0d1117' },
   ],
 };
 
@@ -112,6 +112,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const adsensePublisherId = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
   const websiteJsonLd = buildWebsiteJsonLd();
   const orgJsonLd = {
     '@context': 'https://schema.org',
@@ -134,6 +135,9 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {adsensePublisherId ? (
+          <meta name="google-adsense-account" content={adsensePublisherId} />
+        ) : null}
       </head>
       <body className="min-h-screen bg-background font-sans text-foreground selection:bg-blue-600 selection:text-white">
         <Script

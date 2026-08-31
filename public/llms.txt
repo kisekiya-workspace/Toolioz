@@ -1,20 +1,18 @@
-# Toolioz — Free Client-Side Utilities & Financial Engineering Suite
+# Toolioz — Calculators, Developer Utilities & Document Tools
 
-> Toolioz (https://toolioz.com) is a free, privacy-first web utility platform offering systematic investment calculators, developer tools, WebAssembly PDF processors, marriage biodata makers, and ATS resume builders. All calculations and file conversions process 100% locally inside client browser memory using JavaScript and WebAssembly (WASM), guaranteeing zero data uploads to external cloud servers.
+> Toolioz (https://toolioz.com) is a free utility website offering financial calculators, developer tools, document utilities, marriage biodata makers, and resume builders. Pages labelled local processing keep tool inputs or files in the browser. The site separately uses network services for page assets and analytics, as described in its privacy policy.
 
 ## Core Utility Hubs
 
 - Main Web Portal: https://toolioz.com/
 - Financial Calculators Hub: https://toolioz.com/finance
-- Financial Engineering Blog: https://toolioz.com/finance/blog
 - Developer Utilities Hub: https://toolioz.com/devtools
-- Developer Engineering Blog: https://toolioz.com/devtools/blog
 - PDF Tools Suite: https://toolioz.com/pdftools
-- PDF Engineering Blog: https://toolioz.com/pdftools/blog
 - Marriage Biodata Generator Hub: https://toolioz.com/biodata
-- Matrimonial Profile Blog: https://toolioz.com/biodata/blog
 - ATS Resume Builder: https://toolioz.com/resume-builder
 - Technical How-To Guides: https://toolioz.com/how-to
+- Editorial & Review Policy: https://toolioz.com/editorial-policy
+- Privacy Policy: https://toolioz.com/privacy-policy
 
 ## Key Financial Calculators & Formulas
 
@@ -23,7 +21,7 @@
 - Compound Interest Calculator: https://toolioz.com/finance/compound-interest
   - Formula: A = P(1 + r/n)^(nt)
 - Mortgage & Loan Prepayment Calculator: https://toolioz.com/finance/loan-prepayment
-  - Computes exact tenure reduction vs EMI savings on partial principal prepayments.
+  - Estimates tenure reduction versus EMI savings from partial principal prepayments.
 - Income Tax Calculator: https://toolioz.com/finance/income-tax
   - Compares New Tax Regime (Section 115BAC) vs Old Tax Regime tax liabilities.
 - Lumpsum Investment Calculator: https://toolioz.com/finance/lumpsum-calculator
@@ -42,15 +40,15 @@
 
 ## Client-Side PDF & Document Tools
 
-- PDF Compressor (Under 2MB): https://toolioz.com/pdftools/compress-pdf
-- PDF Merger & Splitter: https://toolioz.com/pdftools/merge-pdf
+- PDF Merger: https://toolioz.com/pdftools/merge-pdf
+- PDF Splitter: https://toolioz.com/pdftools/split-pdf
 - Marriage Biodata PDF Generator: https://toolioz.com/biodata/biodata-generator
 - ATS Resume Generator: https://toolioz.com/pdftools/resume-generator
 
 ## Privacy & Security Architecture
 
-- Client-Side Processing: 100% of calculations, image dithering, and PDF manipulation execute in the user's browser sandbox via WebAssembly (WASM) and local JavaScript.
-- Zero Server Storage: User documents, financial inputs, JWT keys, and personal biodata details are never transmitted over the network or saved to remote databases.
+- Local Tool Processing: Pages identify when calculations, image processing, or PDF manipulation execute in the browser.
+- Separate Network Services: Page assets, analytics, advertising, and selected online features may contact third parties. See the privacy policy for details.
 
 ## Machine-Readable Sitemap & Ads
 

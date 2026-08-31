@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, ArrowRight, BookOpen, Clock, Calendar, ExternalLink, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Clock } from 'lucide-react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import { ReadingProgressBar } from '@/components/ui/ReadingProgressBar';
 import { Footer } from '@/components/layout/Footer';
@@ -55,8 +55,8 @@ export default async function Top5BlogPostPage({ params }: Top5PageProps) {
     dateModified: post.updatedIso,
     author: {
       '@type': 'Organization',
-      name: 'Toolioz Research',
-      url: `${SITE_URL}/about`,
+      name: 'Toolioz Editorial Team',
+      url: `${SITE_URL}/editorial-policy`,
     },
     publisher: {
       '@type': 'Organization',
@@ -108,6 +108,10 @@ export default async function Top5BlogPostPage({ params }: Top5PageProps) {
               <ArrowLeft size={13} /> Back to Top 5 Reviews
             </Link>
             <div className="flex items-center gap-3 text-xs font-mono text-zinc-400">
+              <Link href="/editorial-policy" className="hover:text-indigo-600 dark:hover:text-indigo-400">
+                Toolioz Editorial Team
+              </Link>
+              <span>•</span>
               <span className="flex items-center gap-1">
                 <Clock size={12} /> {post.readTime}
               </span>

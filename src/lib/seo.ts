@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-import { TOOLS } from '@/lib/tools';
-import { importedToolItems } from '@/lib/sociials-tool-index';
+import { PUBLISHER_READY_TOOLS } from '@/lib/tools';
 
 export const SITE_URL = 'https://toolioz.com';
 export const SITE_NAME = 'Toolioz';
@@ -95,21 +94,6 @@ export function buildWebsiteJsonLd() {
       name: SITE_NAME,
       url: SITE_URL,
       logo: `${SITE_URL}/tooliozLogo.svg`,
-      sameAs: [
-        'https://twitter.com/toolioz',
-        'https://facebook.com/toolioz',
-        'https://instagram.com/toolioz',
-        'https://linkedin.com/company/toolioz',
-        'https://youtube.com/@toolioz',
-      ],
-    },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: 'https://toolioz.com/?q={search_term_string}',
-      },
-      'query-input': 'required name=search_term_string',
     },
     inLanguage: 'en',
   };
@@ -120,7 +104,7 @@ export function buildCollectionPageJsonLd(options: {
   description: string;
   path: string;
 }) {
-  const categoryTools = TOOLS.filter((t) => t.href.startsWith(options.path));
+  const categoryTools = PUBLISHER_READY_TOOLS.filter((t) => t.href.startsWith(options.path));
   return {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -229,10 +213,9 @@ export function buildHowToJsonLd(options: {
 }
 
 export const allToolItems = [
-  ...TOOLS.map((t) => ({
+  ...PUBLISHER_READY_TOOLS.map((t) => ({
     name: t.title,
     url: t.href,
     description: t.desc,
   })),
-  ...importedToolItems,
 ];

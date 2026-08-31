@@ -37,3 +37,22 @@ The root layout wrapped every page in `<main>` while many pages already used the
 Create one genuinely useful page per distinct user task. Prefer improving an existing direct tool page or linking one canonical guide from the tool page over creating near-duplicate URL variants for every keyword permutation. Each article should have a clear audience, first-hand explanation or test, dated sources, an author/reviewer identity, and a direct path back to the working tool.
 
 Google references: [canonicalization](https://developers.google.com/search/docs/crawling-indexing/canonicalization), [spam policies](https://developers.google.com/search/docs/essentials/spam-policies), [helpful content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content), and [publisher content value](https://support.google.com/publisherpolicies/answer/11112688).
+
+## AdSense “low value content” remediation — 31 August 2026
+
+The production export contained 174 HTML pages. As a diagnostic—not a Google word-count requirement—83 rendered with fewer than 300 visible words, including 53 of 61 legacy `/tools/*` pages. The live `/tools` directory also combined the legacy and canonical catalogs, showing 133 entries and repeating several finance, developer, and PDF utilities under different URLs.
+
+Changes made before the next review:
+
+1. The public homepage, navigation, `/tools` directory, collection structured data, and sitemap now use one 51-tool reviewed catalog instead of merging the duplicate catalogs.
+2. All 61 legacy `/tools/*` pages remain usable by direct URL but render `noindex, follow`, are absent from the directory, and are absent from the sitemap.
+3. The 22 newly templated PDF/developer workbench pages render `noindex, follow` and remain outside the promoted catalog until each page has distinct documentation and review.
+4. The generated sitemap now contains 89 curated URLs and no legacy `/tools/*` URL.
+5. About, Privacy, footer, homepage FAQ, and machine-readable site copy no longer claim “no tracking,” universal zero-network processing, “bank-grade” accuracy, or unverified social profiles.
+6. A visible Editorial & Review Policy now documents selection, source, formula-test, software-assistance, update, and correction standards. Article templates show and link the responsible Toolioz Editorial Team byline.
+7. The former uppercase placeholder `Ads.txt` with a fake publisher ID was removed. `/ads.txt` is now generated at the correct lowercase route and outputs an authorized-seller line only when a valid `NEXT_PUBLIC_ADSENSE_PUBLISHER_ID=ca-pub-...` is configured.
+8. The same publisher environment variable emits Google’s supported `google-adsense-account` ownership meta tag. Legacy low-value tool pages do not render manual ad units.
+
+Validation completed: `npm run build` passed, the targeted changed-file ESLint check passed, generated index/noindex metadata was inspected, and the built `/ads.txt` and `/sitemap.xml` outputs were verified.
+
+Required operational steps remain: deploy the build, configure the real publisher ID, confirm the live meta tag and `ads.txt`, submit the new sitemap in Search Console, request recrawls for the homepage and key hubs, check Manual Actions and Page Indexing reports, and only then request a new AdSense review. These changes reduce the observed policy risks but cannot guarantee approval.

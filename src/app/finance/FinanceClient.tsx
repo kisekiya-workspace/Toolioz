@@ -3,8 +3,7 @@
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/Button';
-import { Search, Landmark, ShieldCheck, Zap, BookOpen, ArrowRight, X } from 'lucide-react';
+import { Search, BookOpen, ArrowRight, X } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import Link from 'next/link';
 import { TOOLS } from '@/lib/tools';
@@ -36,7 +35,7 @@ export default function FinanceClient() {
           </h1>
           
           <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-            Bank-grade compound interest, SIP projections, tax slab calculators, and amortization schedules.
+            Documented compound interest, SIP projections, tax estimates, and amortization schedules for planning.
           </p>
 
           {/* Search Box */}

@@ -1,3 +1,0 @@
-# Google AdSense Publisher Verification File for Toolioz
-# Replace pub-XXXXXXXXXXXXXXXX with your approved AdSense Publisher ID
-google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
