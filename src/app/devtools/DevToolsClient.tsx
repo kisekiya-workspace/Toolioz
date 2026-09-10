@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { ArrowRight, BookOpen, Search, ShieldCheck, Terminal, Zap, X } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import Link from 'next/link';
-import { TOOLS } from '@/lib/tools';
+import { PUBLISHER_READY_TOOLS as TOOLS } from '@/lib/tools';
 
 export default function DevToolsClient() {
   const [search, setSearch] = useState('');
@@ -195,6 +195,27 @@ export default function DevToolsClient() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="border-t border-zinc-200 bg-white py-12 dark:border-zinc-800 dark:bg-zinc-950">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+          <h2 className="text-xl font-bold text-zinc-950 dark:text-zinc-50">What these developer tools do</h2>
+          <p className="mt-3">
+            The listed utilities format JSON, decode JWTs, test regular expressions, encode Base64, hash
+            strings, and convert timestamps. They are editors and inspectors, not hosted APIs. When a page
+            is labelled local processing, the payload stays in the browser tab. JWT decoding still requires
+            care: a decoded token is not a verified token, and secrets should not be pasted into any web
+            page. The{' '}
+            <Link href="/how-to/format-json-and-fix-errors" className="text-amber-700 underline-offset-2 hover:underline dark:text-amber-400">
+              JSON parse guide
+            </Link>{' '}
+            and{' '}
+            <Link href="/how-to/decode-jwt-token" className="text-amber-700 underline-offset-2 hover:underline dark:text-amber-400">
+              JWT inspection guide
+            </Link>{' '}
+            explain the common failure cases.
+          </p>
         </div>
       </section>
 

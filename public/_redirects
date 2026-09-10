@@ -1,0 +1,32 @@
+# Duplicate legacy /tools URLs → canonical publisher pages (301)
+/tools/sip-calculator /finance/sip-calculator 301
+/tools/gst-calculator /finance/gst-calculator 301
+/tools/income-tax-calculator /finance/income-tax 301
+/tools/compound-interest-calculator /finance/compound-interest 301
+/tools/percentage-calculator /finance/percentage-calculator 301
+/tools/emi-calculator /finance/mortgage-calculator 301
+/tools/json-formatter /devtools/json-formatter 301
+/tools/uuid-generator /devtools/uuid-generator 301
+/tools/hash-generator /devtools/hash-generator 301
+/tools/jwt-decoder /devtools/jwt-decoder 301
+/tools/timestamp-converter /devtools/timestamp-converter 301
+/tools/regex-tester /devtools/regex-tester 301
+/tools/lorem-ipsum /devtools/lorem-ipsum 301
+/tools/base64-converter /devtools/base64-converter 301
+/tools/cron-job-generator /devtools/cron-generator 301
+/tools/color-converter /devtools/color-converter 301
+/tools/unit-converter /devtools/unit-converter 301
+/tools/url-converter /devtools/url-encoder 301
+/tools/pdf-splitter /pdftools/split-pdf 301
+/tools/pdf-merger /pdftools/merge-pdf 301
+/tools/image-to-pdf /pdftools/image-to-pdf 301
+/tools/pdf-to-image /pdftools/pdf-to-image 301
+/tools/image-compressor /pdftools/image-compressor 301
+
+# Broken how-to shortcuts from older internal links
+/how-to-calculate-sip-returns /how-to/calculate-sip-returns 301
+/how-to-format-json-and-fix-errors /how-to/format-json-and-fix-errors 301
+/how-to-decode-jwt-token /how-to/decode-jwt-token 301
+/how-to-compress-pdf-under-2mb /how-to/compress-pdf-under-2mb 301
+/how-to-create-marriage-biodata-pdf /how-to/create-marriage-biodata-pdf 301
+/how-to-reduce-home-loan-interest /how-to/reduce-home-loan-interest 301

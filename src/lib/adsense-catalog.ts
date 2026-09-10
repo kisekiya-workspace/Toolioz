@@ -1,0 +1,37 @@
+export const ADSENSE_INDEX_TOOL_IDS = new Set([
+  'sip-calculator',
+  'lumpsum-calculator',
+  'compound-interest',
+  'income-tax',
+  'gst-calculator',
+  'fd-calculator',
+  'mortgage-calculator',
+  'loan-prepayment',
+  'car-loan',
+  'inflation-calculator',
+  'retirement-corpus',
+  'percentage-calculator',
+  'percentage-change-calculator',
+  'json-formatter',
+  'jwt-decoder',
+  'regex-tester',
+  'timestamp-converter',
+  'uuid-generator',
+  'hash-generator',
+  'merge-pdf',
+  'split-pdf',
+  'image-to-pdf',
+  'pdf-to-image',
+  'resume-generator',
+  'x-hidden-image',
+  'split-image-in-3',
+  'biodata-generator',
+]);
+
+/** Standalone research posts that read as scaled generic essays and overclaim privacy. */
+export const ADSENSE_NOINDEX_BLOG_SLUGS = new Set([
+  'the-evolution-of-web-tool-directories-and-browser-based-utility-suites',
+  'the-architecture-of-zero-knowledge-browser-utilities-and-data-sovereignty',
+  'the-engineering-of-client-side-web-utilities-and-privacy',
+  'behavioral-economics-and-capital-allocation-frameworks',
+]);

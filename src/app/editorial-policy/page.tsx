@@ -83,7 +83,7 @@ export default function EditorialPolicyPage() {
               The <Link href="/terms">Terms of Service</Link> explain the limits of educational estimates.
             </p>
 
-            <p className={styles.lastUpdated}>Last reviewed: 31 August 2026</p>
+            <p className={styles.lastUpdated}>Last reviewed: 10 September 2026</p>
           </Card>
         </div>
       </section>

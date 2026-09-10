@@ -31,7 +31,7 @@ const homeFaqJsonLd = {
       name: 'Are Toolioz tools really free?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. Toolioz provides 100% free online finance calculators, developer utilities, PDF tools, and marriage biodata makers without signups, paywalls, or feature lockouts.',
+        text: 'Yes. Listed calculators and utilities can be used without an account or paywall. Advertising, when approved, does not change calculator outputs.',
       },
     },
     {

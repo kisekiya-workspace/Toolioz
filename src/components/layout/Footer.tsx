@@ -4,12 +4,15 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowUpRight, ShieldCheck, Mail, Sparkles, Terminal, FileText, Calculator } from 'lucide-react';
+import { ToolPublisherArticle } from '@/components/content/ToolPublisherArticle';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto bg-[#fafafa] py-10 text-[#171717] dark:bg-[#0a0a0a] dark:text-[#ededed] sm:py-16" style={{ boxShadow: 'var(--header-border-bottom)' }}>
+    <>
+      <ToolPublisherArticle />
+      <footer className="mt-auto bg-[#fafafa] py-10 text-[#171717] dark:bg-[#0a0a0a] dark:text-[#ededed] sm:py-16" style={{ boxShadow: 'var(--header-border-bottom)' }}>
       <div className="mx-auto max-w-[1200px] px-6">
         
         <div className="mb-10 flex flex-col gap-4 pb-8 sm:flex-row sm:items-center sm:justify-between">
@@ -201,11 +204,11 @@ export function Footer() {
 
         {/* Modern Bottom Bar */}
         <div className="flex flex-col items-center justify-between gap-4 pt-6 text-xs text-[#8f8f8f] sm:flex-row">
-          <p>© {currentYear} Toolioz. Built for speed, privacy, and precision.</p>
+          <p>© {currentYear} Toolioz. Documented calculators and browser utilities.</p>
           <div className="flex items-center gap-4 text-zinc-400">
             <span className="flex items-center gap-1">
               <ShieldCheck size={13} className="text-[#45A557]" />
-              <span>Local Tool Processing</span>
+              <span>Local processing where labelled</span>
             </span>
             <span>•</span>
             <Link href="/privacy-policy" className="hover:text-zinc-700 dark:hover:text-zinc-200">Privacy details</Link>
@@ -214,5 +217,6 @@ export function Footer() {
 
       </div>
     </footer>
+    </>
   );
 }

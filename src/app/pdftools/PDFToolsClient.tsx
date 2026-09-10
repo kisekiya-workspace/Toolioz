@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { Search, ShieldCheck, Zap, Lock, ArrowRight, BookOpen, X } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import Link from 'next/link';
-import { TOOLS } from '@/lib/tools';
+import { PUBLISHER_READY_TOOLS as TOOLS } from '@/lib/tools';
 
 export default function PDFToolsClient() {
   const [search, setSearch] = useState('');
@@ -179,6 +179,22 @@ export default function PDFToolsClient() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="border-t border-zinc-200 bg-white py-12 dark:border-zinc-800 dark:bg-zinc-950">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+          <h2 className="text-xl font-bold text-zinc-950 dark:text-zinc-50">How the PDF tools handle files</h2>
+          <p className="mt-3">
+            Merge, split, image conversion, and compression run in the browser on pages labelled local
+            processing. A typical email or job-portal cap is 2&nbsp;MB; scanned pages at 300 DPI are usually
+            the reason a file misses that cap, not the text layer. The{' '}
+            <Link href="/how-to/compress-pdf-under-2mb" className="text-red-700 underline-offset-2 hover:underline dark:text-red-400">
+              PDF compression guide
+            </Link>{' '}
+            covers downsampling versus keeping vector text. Toolioz still loads page assets and analytics
+            over the network; only the document bytes stay local when that label is present.
+          </p>
         </div>
       </section>
 

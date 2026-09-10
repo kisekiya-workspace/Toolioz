@@ -1,5 +1,9 @@
+'use client';
+
 import React from 'react';
+import { usePathname } from 'next/navigation';
 import { CheckCircle2, ArrowRightCircle, Calculator } from 'lucide-react';
+import { getPublisherArticle } from '@/lib/publisher-articles';
 
 interface SEOSectionProps {
   title: string;
@@ -16,6 +20,10 @@ export const SEOSection: React.FC<SEOSectionProps> = ({
   formula,
   benefits,
 }) => {
+  const pathname = usePathname() ?? '';
+  if (getPublisherArticle(pathname)) {
+    return null;
+  }
   return (
     <section className="border-t border-zinc-200 bg-zinc-50/50 py-14 sm:py-16 my-10 dark:border-zinc-800 dark:bg-zinc-950/50">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">

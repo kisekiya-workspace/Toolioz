@@ -41,6 +41,7 @@ import {
   type LucideIcon
 } from 'lucide-react';
 import { NEW_DEV_TOOLS, NEW_PDF_TOOLS } from '@/lib/new-tool-catalog';
+import { ADSENSE_INDEX_TOOL_IDS } from '@/lib/adsense-catalog';
 
 export type Category = 'finance' | 'devtools' | 'design' | 'pdftools' | 'biodata';
 
@@ -571,14 +572,41 @@ const NEW_TOOL_PATHS = new Set(
 );
 
 /**
+ * Near-duplicate keyword pages that do not belong in the finance catalog.
+ * They remain reachable by URL but are withheld from navigation, sitemap,
+ * ads, and the search index so they cannot dilute publisher-quality signals.
+ */
+export const WITHHELD_TOOL_IDS = new Set([
+  'grade-percentage-calculator',
+  'win-percentage-calculator',
+  'weight-loss-percentage-calculator',
+  'body-fat-percentage-calculator',
+  'average-percentage-calculator',
+]);
+
+const WITHHELD_TOOL_PATHS = new Set(
+  TOOLS.filter((tool) => WITHHELD_TOOL_IDS.has(tool.id)).map((tool) => tool.href)
+);
+
+/**
  * Tools that have a complete, independently useful page and are ready to be
  * promoted in the primary navigation and search index. New workbench tools
  * remain available by URL while their documentation and editorial review are
  * completed, but they are intentionally not presented as finished content.
  */
-export const PUBLISHER_READY_TOOLS = TOOLS.filter(
-  (tool) => !NEW_TOOL_PATHS.has(tool.href)
-);
+export const PUBLISHER_READY_TOOLS = TOOLS.filter((tool) => ADSENSE_INDEX_TOOL_IDS.has(tool.id));
+
+const INDEXABLE_TOOL_PATHS = new Set(PUBLISHER_READY_TOOLS.map((tool) => tool.href));
+
+export function isLowValuePublisherPath(pathname: string): boolean {
+  const path = pathname.replace(/\/$/, '') || '/';
+  if (path === '/tools') return false;
+  if (path.startsWith('/tools/')) return true;
+  if (NEW_TOOL_PATHS.has(path) || WITHHELD_TOOL_PATHS.has(path)) return true;
+  const looksLikeToolPage =
+    /^\/(finance|devtools|design|pdftools|biodata)\/.+/.test(path) && !path.includes('/blog/');
+  return looksLikeToolPage && !INDEXABLE_TOOL_PATHS.has(path);
+}
 
 export const CATEGORIES = [
   {

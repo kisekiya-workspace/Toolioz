@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { isLowValuePublisherPath } from "@/lib/tools";
 
 declare global {
     interface Window {
@@ -19,20 +20,20 @@ interface AdContainerProps {
 export function AdContainer({ slot, format = "auto", responsive = "true", className = "" }: AdContainerProps) {
     const publisherId = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
     const pathname = usePathname();
-    const isLegacyToolPage = pathname.startsWith("/tools/");
+    const hideAds = isLowValuePublisherPath(pathname);
 
     useEffect(() => {
-        if (!publisherId || isLegacyToolPage) return;
+        if (!publisherId || hideAds) return;
         try {
             window.adsbygoogle = window.adsbygoogle || [];
             window.adsbygoogle.push({});
         } catch (err) {
             console.error("AdSense push error:", err);
         }
-    }, [isLegacyToolPage, publisherId, slot]);
+    }, [hideAds, publisherId, slot]);
 
-    // If AdSense publisher ID is not configured, do not render placeholder to prevent AdSense "Site Under Construction" rejections
-    if (!publisherId || isLegacyToolPage) {
+    // Do not render ads on thin, duplicate, or withheld pages.
+    if (!publisherId || hideAds) {
         return null;
     }
 

@@ -153,12 +153,14 @@ export function buildPageMetadata(options: {
   path: string;
   keywords?: string | string[];
   type?: 'website' | 'article';
+  robots?: Metadata['robots'];
 }): Metadata {
   const canonical = absoluteUrl(options.path);
   return {
     title: options.title,
     description: options.description,
     keywords: options.keywords,
+    robots: options.robots,
     alternates: { canonical },
     openGraph: {
       title: options.title,

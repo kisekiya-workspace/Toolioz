@@ -6,8 +6,9 @@ import { Badge } from '@/components/ui/badge';
 import { Search, BookOpen, ArrowRight, X } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import Link from 'next/link';
-import { TOOLS } from '@/lib/tools';
+import { PUBLISHER_READY_TOOLS as TOOLS } from '@/lib/tools';
 import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
+import { FinancePublisherExplainer } from '@/components/content/PublisherExplainer';
 
 export default function FinanceClient() {
   const [search, setSearch] = useState('');
@@ -35,7 +36,7 @@ export default function FinanceClient() {
           </h1>
           
           <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-            Documented compound interest, SIP projections, tax estimates, and amortization schedules for planning.
+            Documented SIP, tax, EMI, FD, and percentage calculators for planning. Results are estimates tied to the formula and inputs on each page.
           </p>
 
           {/* Search Box */}
@@ -71,7 +72,7 @@ export default function FinanceClient() {
                 {search ? `Search Results (${filteredTools.length})` : 'All Financial Calculators'}
               </h2>
               <p className="text-xs text-zinc-500 mt-0.5 dark:text-zinc-400">
-                Calculators engineered for investment planning, loans, and tax optimization.
+                Investment, loan, tax, and money-math calculators with formulas and limitations.
               </p>
             </div>
             <Badge variant="mono" size="sm">
@@ -115,6 +116,8 @@ export default function FinanceClient() {
           </div>
         </div>
       </section>
+
+      <FinancePublisherExplainer />
 
       {/* Finance Guides Section */}
       <section className="border-t border-zinc-200 bg-zinc-50/50 py-14 sm:py-16 dark:border-zinc-800 dark:bg-zinc-950/50">

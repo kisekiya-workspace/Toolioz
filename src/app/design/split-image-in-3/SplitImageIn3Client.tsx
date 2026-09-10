@@ -92,11 +92,21 @@ function downloadBlob(blob: Blob, name: string) {
   URL.revokeObjectURL(a.href);
 }
 
-function downloadPng(canvas: HTMLCanvasElement, name: string) {
-  canvas.toBlob((blob) => {
-    if (!blob) return;
-    downloadBlob(blob, name);
-  }, 'image/png');
+function downloadPng(canvas: HTMLCanvasElement, name: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    canvas.toBlob((blob) => {
+      if (!blob) {
+        reject(new Error('Could not encode PNG'));
+        return;
+      }
+      downloadBlob(blob, name);
+      resolve();
+    }, 'image/png');
+  });
+}
+
+function wait(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function crc32(data: Uint8Array): number {
@@ -207,7 +217,7 @@ export default function SplitImageIn3Client({
     downloadPng(canvas, `${base}-part-${index + 1}.png`);
   };
 
-  const downloadAll = async () => {
+  const downloadAllZip = async () => {
     const slices = slicesRef.current;
     if (slices.length !== 3) return;
     const base = fileName?.replace(/\.[^.]+$/, '') ?? 'split';
@@ -218,6 +228,16 @@ export default function SplitImageIn3Client({
       })),
     );
     downloadBlob(zipFiles(files), `${base}-split-3.zip`);
+  };
+
+  const downloadAllPngs = async () => {
+    const slices = slicesRef.current;
+    if (slices.length !== 3) return;
+    const base = fileName?.replace(/\.[^.]+$/, '') ?? 'split';
+    for (let i = 0; i < slices.length; i++) {
+      await downloadPng(slices[i], `${base}-part-${i + 1}.png`);
+      if (i < slices.length - 1) await wait(350);
+    }
   };
 
   return (
@@ -269,13 +289,18 @@ export default function SplitImageIn3Client({
 
         {previewUrls.length === 3 && (
           <>
-            <div className="mb-4 flex items-center justify-between gap-3">
+            <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <h2 className="flex items-center gap-2 text-sm font-extrabold uppercase tracking-wide text-[var(--text-tertiary)]">
                 <Scissors size={16} /> Split result
               </h2>
-              <Button type="button" onClick={() => void downloadAll()}>
-                <Download size={16} /> Download all (ZIP)
-              </Button>
+              <div className="flex flex-wrap gap-2">
+                <Button type="button" variant="outline" onClick={() => void downloadAllPngs()}>
+                  <Download size={16} /> Download all PNGs
+                </Button>
+                <Button type="button" onClick={() => void downloadAllZip()}>
+                  <Download size={16} /> Download ZIP
+                </Button>
+              </div>
             </div>
             <div className="grid gap-4 sm:grid-cols-3">
               {previewUrls.map((url, i) => (
@@ -308,7 +333,7 @@ export default function SplitImageIn3Client({
         howToUse={[
           'Upload a JPEG, PNG, or WebP.',
           'The tool crops to 16:9 from the center, then cuts three equal vertical parts.',
-          'Download each PNG, or download all three.',
+          'Download each PNG, all three PNGs, or a single ZIP.',
         ]}
         benefits={[
           'Fixed 16:9 → 1×3 layout — no extra settings.',

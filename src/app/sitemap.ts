@@ -3,6 +3,7 @@ import { PUBLISHER_READY_TOOLS } from '@/lib/tools';
 import { top5Articles } from '@/lib/top5-content';
 import { standaloneBlogs } from '@/../blogs';
 import { howToPosts } from '@/lib/howto-content';
+import { ADSENSE_NOINDEX_BLOG_SLUGS } from '@/lib/adsense-catalog';
 import { SITE_URL } from '@/lib/seo';
 
 export const dynamic = 'force-static';
@@ -44,7 +45,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority,
   }));
 
-  const blogRoutes = standaloneBlogs.map((post) => ({
+  const blogRoutes = standaloneBlogs
+    .filter((post) => !ADSENSE_NOINDEX_BLOG_SLUGS.has(post.slug))
+    .map((post) => ({
     url: `${SITE_URL}/blog/${post.slug}`,
     lastModified: post.updatedIso ? new Date(post.updatedIso) : lastModified,
     changeFrequency: 'monthly' as const,

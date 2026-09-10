@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { TOOLS } from '@/lib/tools';
+import { PUBLISHER_READY_TOOLS as TOOLS } from '@/lib/tools';
 import { ChevronRight } from 'lucide-react';
 
 interface RelatedToolsProps {

@@ -7,6 +7,7 @@ import { ReadingProgressBar } from '@/components/ui/ReadingProgressBar';
 import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/Button';
 import { standaloneBlogs, getStandaloneBlog } from '@/../blogs';
+import { ADSENSE_NOINDEX_BLOG_SLUGS } from '@/lib/adsense-catalog';
 import { buildArticleMetadata, buildBreadcrumbJsonLd } from '@/lib/seo';
 
 type BlogPageProps = {
@@ -25,13 +26,16 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
     return {};
   }
 
-  return buildArticleMetadata({
+  return {
+    ...buildArticleMetadata({
     title: `${post.title} | Toolioz Research`,
     description: post.description,
     path: `/blog/${post.slug}`,
     keywords: post.keywords,
     modifiedTime: post.updatedIso,
-  });
+    }),
+    robots: ADSENSE_NOINDEX_BLOG_SLUGS.has(post.slug) ? { index: false, follow: true } : undefined,
+  };
 }
 
 export default async function StandaloneBlogPostPage({ params }: BlogPageProps) {

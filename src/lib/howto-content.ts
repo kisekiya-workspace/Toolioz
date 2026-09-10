@@ -209,7 +209,22 @@ export const howToPosts: HowToPost[] = [
         heading: 'Taxation Considerations: Post-Tax Net Return Calculation',
         body: [
           'When planning long-term wealth goals, always factor in capital gains taxation rules applicable to equity and debt mutual funds.',
-          'In India, Long-Term Capital Gains (LTCG) on equity funds held over 1 year are taxed at 12.5% on profits exceeding ₹1.25 Lakhs per financial year. Short-Term Capital Gains (STCG) on equity funds held under 1 year are taxed at 20%. Subtracting expected tax obligations ensures your retirement projections remain realistic.',
+          'In India, Long-Term Capital Gains (LTCG) on equity funds held over 1 year are taxed at 12.5% on profits exceeding ₹1.25 Lakhs per financial year. Short-Term Capital Gains (STCG) on equity funds held under 1 year are taxed at 20%. Subtracting expected tax obligations ensures your retirement projections remain realistic. Confirm both rates and the exemption threshold on the Income Tax Department website before you treat a spreadsheet as post-tax income.',
+        ],
+      },
+      {
+        heading: 'Mistakes this calculator will not catch for you',
+        body: [
+          'Entering a 12% expected return because “equity always does 12%” is a hope, not a dataset. Rolling ten-year Nifty or category returns have spent long stretches below that line. Run 8% and 10% as working cases.',
+          'Ignoring expense ratio is the same as typing too high a rate. A 1% extra annual cost on a 20-year SIP is a large rupee gap in the same annuity formula.',
+          'Comparing a ₹5,000 SIP for 20 years to a ₹5,000 lumpsum for 20 years as if they invested the same money is invalid: the SIP only finishes depositing in month 240.',
+          'Using the Toolioz figure as a mutual-fund “guaranteed maturity” would be a misreading of both SEBI product rules and this page. Mutual funds are mark-to-market.',
+        ],
+      },
+      {
+        heading: 'How Toolioz checks the SIP function',
+        body: [
+          'The implementation lives in calculateSIP in the site’s formula module. For a zero rate it returns monthly amount times months. For a positive rate it uses the annuity-due closed form. A spot check used on 10 September 2026: ₹5,000 a month, 12% a year, 10 years → invested ₹6,00,000, projected value about ₹11.62 lakh. If a future code change disagrees with that closed form, treat it as a bug and email support@toolioz.com with the inputs.',
         ],
       },
     ],

@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { ArrowRight, Search, ShieldCheck, Sparkles, Zap, X } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import Link from 'next/link';
-import { TOOLS } from '@/lib/tools';
+import { PUBLISHER_READY_TOOLS as TOOLS } from '@/lib/tools';
 import { DirectAnswerBlock } from '@/components/ui/DirectAnswerBlock';
 import { BreadcrumbJsonLd } from '@/components/ui/BreadcrumbJsonLd';
 
@@ -144,10 +144,10 @@ export default function DesignClient() {
               title="What is the Toolioz Design & Creative Studio?"
               answer="Toolioz Design & Creative Studio is a suite of client-side web tools for digital artists, designers, and developers. It includes Drawesome vector drawing, ditherit ASCII and dot art, a GLSL shader editor, wallpaper generator, tap-to-reveal PNG creator, 16:9 split-into-3 image tool, and color converters."
               keyTakeaways={[
-                "100% Client-Side Privacy — Images, videos & SVG drawings never leave your device.",
-                "Vector & Raster Export — Download scalable SVG files, 4K PNGs, and WebM video recordings.",
-                "Free & Open Source Compliant — Built with MIT-licensed vector and dithering algorithms.",
-                "Real-time Shader Engine — Experiment with GLSL fragment shaders and interactive physics."
+                "Local image processing where the tool page says so — files are not uploaded to Toolioz for those tools.",
+                "Export SVG, PNG, or WebM depending on the tool.",
+                "Algorithms and limitations are described on each tool page.",
+                "The shader editor runs GLSL in the browser; results depend on the device GPU.",
               ]}
               categoryName="Design Studio"
             />

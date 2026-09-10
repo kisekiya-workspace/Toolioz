@@ -15,6 +15,7 @@ import {
   Filter,
 } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
+import { HomePublisherExplainer } from '@/components/content/PublisherExplainer';
 import { PUBLISHER_READY_TOOLS as TOOLS, CATEGORIES, type Tool } from '@/lib/tools';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/Button';
@@ -44,16 +45,16 @@ const QUICK_TAGS = [
 ];
 
 const BLOG_HUBS = [
-  { title: 'Research Masterclasses', href: '/blog', desc: 'Quantitative finance, WebAssembly performance & zero-knowledge security' },
-  { title: 'Step-by-Step Tutorials', href: '/how-to', desc: 'Actionable guides for PDF optimization, calculations & debugging' },
-  { title: 'Top 5 Tool Benchmarks', href: '/top5', desc: 'Comprehensive comparative reviews, matrices & mathematical proofs' },
-  { title: 'ATS Resume Builder', href: '/resume-builder', desc: 'Vector PDF generator optimized for applicant tracking scanners' },
+  { title: 'Articles', href: '/blog', desc: 'Longer notes on compounding math, browser processing, and file formats' },
+  { title: 'Step-by-step guides', href: '/how-to', desc: 'Worked SIP, JSON, PDF, and biodata walkthroughs' },
+  { title: 'Calculator comparisons', href: '/top5', desc: 'Side-by-side notes on which Toolioz calculator fits a task' },
+  { title: 'ATS Resume Builder', href: '/resume-builder', desc: 'Build a resume PDF in the browser and export locally' },
 ];
 
 const FAQS = [
   {
-    q: 'Are Toolioz tools 100% free with no limits?',
-    a: 'Yes. Every calculator and utility on Toolioz is 100% free with no signups, paywalls, or hidden usage limits. You get immediate access to the full feature set without registration.',
+    q: 'Are Toolioz tools free to use?',
+    a: 'Yes. Listed calculators and utilities can be used without an account or paywall. Advertising, when approved, does not change calculator outputs.',
   },
   {
     q: 'How does client-side zero-server privacy work?',
@@ -514,11 +515,11 @@ export default function PortalClient() {
               <div className="flex items-center gap-2.5">
                 <span className="size-2.5 rounded-full bg-[#45A557]" />
                 <span className="font-medium text-[#171717] dark:text-[#ededed]">
-                  Verified Local Execution
+                  Local processing where the tool page says so
                 </span>
               </div>
               <span className="font-mono text-[11px] font-medium text-[#4d4d4d] dark:text-[#a1a1a1]">
-                0 Bytes Sent
+                See privacy policy
               </span>
             </div>
           </div>
@@ -561,6 +562,8 @@ export default function PortalClient() {
           </div>
         </div>
       </section>
+
+      <HomePublisherExplainer />
 
       {/* Frequently Asked Questions (Shadcn Accordion) */}
       <section className="bg-[#fafafa] py-14 sm:py-16 dark:bg-[#0a0a0a]">
