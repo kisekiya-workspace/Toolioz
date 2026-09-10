@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Toolioz | Free Finance, Dev & PDF Tools',
     description:
-      'SIP & tax calculators, developer utilities, PDF tools, biodata & resume makers — free in the browser.',
+      'SIP and tax calculators, developer utilities, PDF tools, biodata and resume makers, free in the browser.',
     images: [DEFAULT_OG_IMAGE.url],
   },
   robots: {

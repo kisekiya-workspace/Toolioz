@@ -109,7 +109,7 @@ export function FinancePublisherExplainer() {
           5,000, a 12% annual rate, and n = 120, invested capital is 6,00,000 and the projected value is
           about 11.61 lakh before tax. Changing the rate to 10% drops the same plan to about 10.33 lakh.
           That sensitivity is why every result on Toolioz is tied to the inputs on the page, not to a
-          generic “expected return.”
+          generic "expected return."
         </p>
         <p className="mt-4 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
           Primary references for Indian users include the{' '}

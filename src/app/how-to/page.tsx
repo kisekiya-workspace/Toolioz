@@ -48,7 +48,7 @@ export default function HowToIndexPage() {
             </h1>
 
             <p className="mx-auto max-w-2xl text-base leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-400">
-              Actionable tutorials tied to a working Toolioz calculator or file tool—SIP projections, JSON parse errors, JWT claims, biodata PDFs, and loan prepayment.
+              Step-by-step pages tied to a working Toolioz calculator or file tool: SIP projections, JSON parse errors, JWT claims, biodata PDFs, and loan prepayment.
             </p>
           </div>
         </section>

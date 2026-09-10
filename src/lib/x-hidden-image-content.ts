@@ -27,7 +27,7 @@ export const xRevealFaqs = [
   {
     question: 'What is the X tap-to-reveal or tap-and-hold image trend?',
     answer:
-      'Creators post a single PNG that looks washed out or partially hidden in the X timeline, then shows the full artwork when someone opens the post or uses tap-and-hold on mobile. The effect comes from how X composites transparency in the feed versus the full-screen viewer — not from a special X setting.',
+      'Creators post a single PNG that looks washed out or partially hidden in the X timeline, then shows the full artwork when someone opens the post or uses tap-and-hold on mobile. The effect comes from how X composites transparency in the feed versus the full-screen viewer. It is not a special X setting.',
   },
   {
     question: 'How do I make a hidden image PNG for X (Twitter)?',
@@ -37,7 +37,7 @@ export const xRevealFaqs = [
   {
     question: 'Why does my picture look dull in the feed but normal when opened?',
     answer:
-      'X blends alternating transparent pixels in timeline previews. Encoders like this tool write those regions so the feed shows a muted version while the opened view uses the full-color pixels — the same idea behind many viral hidden-image posts.',
+      'X blends alternating transparent pixels in timeline previews. This encoder writes those regions so the feed shows a muted version while the opened view uses the full-color pixels.',
   },
   {
     question: 'Should I export PNG8 or RGBA for X?',
@@ -47,12 +47,12 @@ export const xRevealFaqs = [
   {
     question: 'Are my images uploaded to Toolioz?',
     answer:
-      'No. Encoding, masking, and export run entirely in your browser. Files never leave your device unless you download or upload them to X yourself.',
+      'No. Encoding, masking, and export run in this tab. Image bytes are not uploaded to Toolioz. The website still loads scripts and analytics. You upload to X yourself if you post.',
   },
   {
-    question: 'Is this the same as four-tile “tap each corner” split posts?',
+    question: 'Is this the same as four-tile "tap each corner" split posts?',
     answer:
-      'No. Split-tile posts use multiple images in one tweet. Tap-to-reveal uses one PNG with a transparency trick for feed vs opened — this tool builds that single-file format.',
+      'No. Split-tile posts use multiple images in one tweet. Tap-to-reveal uses one PNG with a transparency pattern for feed versus opened. This tool builds that single file.',
   },
   {
     question: 'Why post from desktop X instead of the mobile app?',
@@ -67,7 +67,7 @@ export const xRevealFaqs = [
   {
     question: 'Can brands use tap-to-reveal PNGs for marketing on X?',
     answer:
-      'Yes — teasers, before/after reveals, and puzzle-style art perform well because the timeline hides detail until viewers tap. Use the brush mask to show a logo or headline in-feed while hiding the full creative until open.',
+      'Yes. Teasers, before and after reveals, and puzzle-style art hide detail in the timeline until viewers tap. Use the brush mask to show a logo or headline in-feed while hiding the rest until open.',
   },
 ];
 
@@ -93,19 +93,19 @@ export const xRevealHowToSteps = [
 export const xRevealSeoSection = {
   title: 'the X Tap-to-Reveal PNG Maker',
   description:
-    'The X (Twitter) tap-to-reveal and tap-and-hold trend uses one PNG file that looks muted or partially hidden in the timeline, then pops to full color when viewers open the post or long-press on mobile. Toolioz encodes that feed-versus-opened transparency pattern in your browser — brush masks, live feed previews, and PNG8 export tuned for x.com uploads.',
+    'The X and Twitter tap-to-reveal trend uses one PNG that looks muted in the timeline, then shows full color when viewers open the post or long-press on mobile. This page encodes that feed-versus-opened transparency pattern in the browser, with brush masks, live feed previews, and PNG8 export for x.com uploads.',
   howToUse: [
     'Upload art and choose a canvas preset (square or 4:5 work well for timeline crops).',
     'Paint blue on areas that should stay visible in the feed; leave the rest hidden until tap or open.',
     'Use optional line art on the feed preview and brightness boost after open for stronger reveals.',
     'Check light and dark timeline mocks, then download PNG8 (recommended for X).',
-    'Post the PNG from desktop x.com — not the mobile app — so JPEG re-encoding does not break the effect.',
+    'Post the PNG from desktop x.com, not the mobile app, so JPEG re-encoding does not break the effect.',
   ],
   benefits: [
-    'Ride the viral tap-to-reveal / hidden-image trend without Photoshop or command-line encoders.',
+    'Build a tap-to-reveal PNG without Photoshop or command-line encoders.',
     'Live in-feed and opened previews so you see the reveal before posting.',
-    'Brush-based timeline masks plus undo — no guessing with checkerboard pixels by hand.',
-    '100% client-side: your art never uploads to Toolioz servers.',
+    'Brush-based timeline masks with undo. You do not have to paint checkerboard pixels by hand.',
+    'Encoding runs in this tab. Art is not uploaded to Toolioz. Page scripts and analytics still load.',
     'PNG8 export sized for X posts, with RGBA available for editing masters.',
   ],
 };

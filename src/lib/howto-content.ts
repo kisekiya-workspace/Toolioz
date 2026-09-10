@@ -93,7 +93,7 @@ export const howToPosts: HowToPost[] = [
       {
         heading: 'Why Client-Side In-Browser Compression is Essential for Privacy',
         body: [
-          'Many popular free PDF compression websites upload your files to remote third-party cloud servers where they are processed and stored temporarily on external disks. When handling confidential documents—such as bank statements, tax documents, passport scans, or medical records—remote server processing poses significant privacy and compliance risks.',
+          'Many PDF compression websites upload files to their servers. Bank statements, tax documents, passport scans, and medical records should not go there if you need them to stay on the device. Toolioz does not publish a compressor. Use software you already trust for size caps.',
           'Toolioz utilizes a WebAssembly (WASM) PDF engine that runs entirely inside your web browser memory sandbox. Your document is processed locally on your CPU; no bytes are ever uploaded over the network. This guarantees total data privacy, eliminates file transfer latency, and ensures compliance with strict data protection regulations.',
         ],
       },
@@ -204,7 +204,7 @@ export const howToPosts: HowToPost[] = [
         heading: 'The Power of Step-Up SIP: Expanding Corpus with Salary Raises',
         body: [
           'A flat SIP keeps your monthly contribution constant for 15 or 20 years. However, as your annual salary rises with career progression, your investment capability increases.',
-          'A Step-Up SIP (or Top-Up SIP) increases your monthly contribution by a set percentage (e.g., 10%) once every year. Increasing a ₹10,000 monthly SIP by 10% annually over 15 years at 12% return expands your final corpus from ₹50.4 Lakhs to over ₹88.2 Lakhs—nearly doubling your final accumulated wealth with minimal lifestyle disruption.',
+          'A Step-Up SIP increases your monthly contribution by a set percentage, for example 10%, once every year. Increasing a ₹10,000 monthly SIP by 10% annually over 15 years at 12% return expands the projected corpus from about ₹50.4 lakh to over ₹88.2 lakh. The extra ending value comes mostly from extra contributions after each raise.',
         ],
       },
       {
@@ -429,7 +429,7 @@ export const howToPosts: HowToPost[] = [
       {
         question: 'Why does `JSON.parse()` throw an "Unexpected token" error?',
         answer:
-          'This error occurs when the parser encounters a character that violates JSON grammar rules—such as a single quote, a missing comma between properties, or HTML response text returned instead of JSON.',
+          'This error occurs when the parser hits a character that violates JSON grammar. Common cases are a single quote, a missing comma between properties, or HTML returned instead of JSON.',
       },
       {
         question: 'Does formatting JSON alter key-value data contents?',
@@ -591,7 +591,7 @@ export const howToPosts: HowToPost[] = [
         heading: 'Prepayment Penalties & Tax Deduction Realities',
         body: [
           'Under RBI guidelines in India, banks are prohibited from charging prepayment penalties on floating-rate home loans issued to individual borrowers.',
-          'Additionally, consider mortgage interest tax deductions (Section 24b). If your post-tax effective interest rate is 6.5% while low-risk equity investments yield 12%, a balanced approach allocates surplus funds between partial loan prepayments and equity SIP investments.',
+          'Also consider mortgage interest tax deductions under Section 24b. If your post-tax effective interest rate is 6.5% while you expect 12% from equity, you may split surplus cash between partial prepayments and equity SIPs. That split is a personal choice, not a Toolioz recommendation.',
         ],
       },
     ],

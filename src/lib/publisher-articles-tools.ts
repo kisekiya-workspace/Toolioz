@@ -12,7 +12,7 @@ export const publisherArticlesTools: PublisherArticle[] = [
         heading: 'Parse errors you will actually see',
         paragraphs: [
           'JSON requires double-quoted keys, no trailing commas, and no comments. A trailing comma after the last property is valid in JavaScript objects and invalid in JSON. Single quotes around strings fail. `undefined` is not a JSON value. The engine stops at the first violation and shows a position; fix that before looking for a second error.',
-          'Huge minified files can freeze a tab because parsing is synchronous on the main thread. Split the file or use a desktop tool if the browser complains. Formatting does not prove the payload matches an API contract — that is JSON Schema, a different page.',
+          'Huge minified files can freeze a tab because parsing is synchronous on the main thread. Split the file or use a desktop tool if the browser complains. Formatting does not prove the payload matches an API contract. That check is JSON Schema, on a different page.',
         ],
       },
       {
@@ -47,7 +47,7 @@ export const publisherArticlesTools: PublisherArticle[] = [
         heading: 'How to use the output safely',
         paragraphs: [
           'Read `alg`, `iss`, `aud`, `exp`, and `sub` as claims, not as proof, unless an HS256 check with the correct secret succeeds. If `alg` is `none`, the token has no signature. If `exp` is in the past, resource servers should reject it. Toolioz does not contact the issuer. Never paste a live access token from a production user into a public blog screenshot.',
-          'HS256 needs a shared secret you should not type into a random website if your policy forbids it. RS256 needs the issuer’s public key; this page does not fetch JWKS. Use your auth library in a trusted environment for production verification.',
+          'HS256 needs a shared secret you should not type into a random website if your policy forbids it. RS256 needs the issuer's public key; this page does not fetch JWKS. Use your auth library in a trusted environment for production verification.',
         ],
       },
     ],
@@ -61,21 +61,21 @@ export const publisherArticlesTools: PublisherArticle[] = [
       'No JWKS fetch, no audience check, no encrypted JWE support as a full decryptor unless the page explicitly says so.',
     ],
     sources: [
-      { label: 'RFC 7519 — JSON Web Token', href: 'https://www.rfc-editor.org/rfc/rfc7519' },
+      { label: 'RFC 7519, JSON Web Token', href: 'https://www.rfc-editor.org/rfc/rfc7519' },
     ],
   },
   {
     path: '/devtools/regex-tester',
-    title: 'JavaScript regular expressions are not “all regex”',
+    title: 'JavaScript regular expressions are not "all regex"',
     lead:
-      'This tester runs the pattern in the browser’s JavaScript regular-expression engine. A pattern that works in PCRE, Python, or grep may fail here, and the reverse is also true.',
+      'This tester runs the pattern in the browser's JavaScript regular-expression engine. A pattern that works in PCRE, Python, or grep may fail here, and the reverse is also true.',
     reviewed: '10 September 2026',
     sections: [
       {
         heading: 'Flags and catastrophic backtracking',
         paragraphs: [
-          'Flags such as `i`, `g`, `m`, `s`, and `u` change matching. `g` finds every match; without it you see the first. Nested quantifiers on ambiguous input can lock the tab — that is catastrophic backtracking, not a freeze in Toolioz’s UI layer. Simplify the pattern or test a shorter string.',
-          'Anchors `^` and `$` mean start and end of string, or of lines when `m` is set. If a pattern “works on regex101 in PCRE” and fails here, switch regex101’s flavor to ECMAScript before assuming the tester is broken.',
+          'Flags such as `i`, `g`, `m`, `s`, and `u` change matching. `g` finds every match. Without it you see the first. Nested quantifiers on ambiguous input can lock the tab. That is catastrophic backtracking, not a freeze in Toolioz UI. Simplify the pattern or test a shorter string.',
+          'Anchors `^` and `$` mean start and end of string, or of lines when `m` is set. If a pattern "works on regex101 in PCRE" and fails here, switch regex101's flavor to ECMAScript before assuming the tester is broken.',
         ],
       },
     ],
@@ -104,7 +104,7 @@ export const publisherArticlesTools: PublisherArticle[] = [
         heading: 'How to tell which unit you have',
         paragraphs: [
           'A 10-digit integer near 1.7e9 is seconds in the 2020s. A 13-digit integer near 1.7e12 is milliseconds. If a converted date lands in 1970 or 56000 AD, you picked the wrong unit. The tool should expose both; if you pasted a float, check whether the API used seconds with a fractional part.',
-          'Local timezone display uses the browser’s zone. Two reviewers in IST and UTC will see different clock times for the same instant. Store UTC in APIs; display local only at the edge.',
+          'Local timezone display uses the browser's zone. Two reviewers in IST and UTC will see different clock times for the same instant. Store UTC in APIs; display local only at the edge.',
         ],
       },
     ],
@@ -119,7 +119,7 @@ export const publisherArticlesTools: PublisherArticle[] = [
       'Historical timezone rule changes depend on the browser ICU data.',
     ],
     sources: [
-      { label: 'IETF — date and time on the internet (RFC 3339)', href: 'https://www.rfc-editor.org/rfc/rfc3339' },
+      { label: 'IETF, date and time on the internet (RFC 3339)', href: 'https://www.rfc-editor.org/rfc/rfc3339' },
     ],
   },
   {
@@ -147,7 +147,7 @@ export const publisherArticlesTools: PublisherArticle[] = [
       'Not a ULID/KSUID converter unless a separate mode exists on the page.',
     ],
     sources: [
-      { label: 'RFC 9562 — UUIDs', href: 'https://www.rfc-editor.org/rfc/rfc9562' },
+      { label: 'RFC 9562, UUIDs', href: 'https://www.rfc-editor.org/rfc/rfc9562' },
     ],
   },
   {
@@ -160,7 +160,7 @@ export const publisherArticlesTools: PublisherArticle[] = [
       {
         heading: 'Use and misuse',
         paragraphs: [
-          'Hash a file to check it survived a download. Hash a string to compare equality without storing the string, understanding that rainbow tables exist for common passwords — use a password hashing scheme (Argon2, bcrypt) for credentials, not raw SHA-256.',
+          'Hash a file to check it survived a download. Hash a string to compare equality without storing the string. Rainbow tables exist for common passwords, so use Argon2 or bcrypt for credentials, not raw SHA-256.',
           'HMAC needs a key. If this page only exposes unkeyed hashes, do not treat the output as an HMAC. Encoding (Base64, hex) is not hashing.',
         ],
       },
@@ -176,7 +176,7 @@ export const publisherArticlesTools: PublisherArticle[] = [
       'MD5/SHA-1 remain available in some tools only for legacy checksums; they are not collision-resistant for security.',
     ],
     sources: [
-      { label: 'NIST FIPS 180-4 — Secure Hash Standard', href: 'https://csrc.nist.gov/publications/detail/fips/180/4/final' },
+      { label: 'NIST FIPS 180-4, Secure Hash Standard', href: 'https://csrc.nist.gov/publications/detail/fips/180/4/final' },
     ],
   },
   {
@@ -189,7 +189,7 @@ export const publisherArticlesTools: PublisherArticle[] = [
       {
         heading: 'Order, size, and privacy',
         paragraphs: [
-          'Drop files in the sequence you want the output to read. A 200-page merge of scanned images will be large. If a portal cap is 2 MB, compress the result in a dedicated PDF compressor—Toolioz does not publish one. When the page is labelled local processing, file bytes are not uploaded to Toolioz. Analytics requests for the website still occur.',
+          'Drop files in the sequence you want the output to read. A 200-page merge of scanned images will be large. If a portal cap is 2 MB, compress the result in a dedicated PDF compressor. Toolioz does not publish one. When the page is labelled local processing, file bytes are not uploaded to Toolioz. Analytics requests for the website still occur.',
           'Need only some pages of a statement? Merge is the wrong job; extract a range in a desktop reader first. Form fields and some annotations can behave oddly after merge. Digital signatures on source files generally become invalid after any rewrite.',
         ],
       },
@@ -205,7 +205,7 @@ export const publisherArticlesTools: PublisherArticle[] = [
       'Does not OCR scanned pages.',
     ],
     sources: [
-      { label: 'ISO 32000 family — PDF', href: 'https://www.iso.org/standard/63534.html' },
+      { label: 'ISO 32000 PDF specification', href: 'https://www.iso.org/standard/63534.html' },
     ],
   },
   {
@@ -218,7 +218,7 @@ export const publisherArticlesTools: PublisherArticle[] = [
       {
         heading: 'Ranges',
         paragraphs: [
-          'If you need pages 3–5 of a 40-page bank statement, export that range only. Sharing the full statement when a landlord asked for three pages is a data-minimisation failure, not a PDF feature. Check the output page count before sending.',
+          'If you need pages 3 to 5 of a 40-page bank statement, export that range only. Sharing the full statement when a landlord asked for three pages is a data-minimisation failure, not a PDF feature. Check the output page count before sending.',
         ],
       },
     ],
@@ -232,7 +232,7 @@ export const publisherArticlesTools: PublisherArticle[] = [
       'Bookmarks may not map cleanly to split files.',
     ],
     sources: [
-      { label: 'ISO 32000 family — PDF', href: 'https://www.iso.org/standard/63534.html' },
+      { label: 'ISO 32000 PDF specification', href: 'https://www.iso.org/standard/63534.html' },
     ],
   },
   {
@@ -259,7 +259,7 @@ export const publisherArticlesTools: PublisherArticle[] = [
       'No automatic deskew or shadow removal.',
     ],
     sources: [
-      { label: 'ISO 32000 family — PDF', href: 'https://www.iso.org/standard/63534.html' },
+      { label: 'ISO 32000 PDF specification', href: 'https://www.iso.org/standard/63534.html' },
     ],
   },
   {
@@ -297,10 +297,10 @@ export const publisherArticlesTools: PublisherArticle[] = [
     reviewed: '10 September 2026',
     sections: [
       {
-        heading: 'What we optimise for',
+        heading: 'What this builder does',
         paragraphs: [
-          'Standard headings, no tables for the main chronology, and real Unicode text. Some ATS products still fail on multi-column designs and icons. This builder stays narrow on purpose. It cannot guarantee a score on a vendor’s “ATS score” widget; those products are not standardised.',
-          'Dates, employer names, and measurable outcomes help more than a skills cloud. Keep the file under typical 2 MB portal caps; this generator’s vector text is usually small.',
+          'Standard headings, no tables for the main chronology, and real Unicode text. Some ATS products still fail on multi-column designs and icons. This builder stays narrow on purpose. It cannot guarantee a score on a vendor's "ATS score" widget; those products are not standardised.',
+          'Dates, employer names, and measurable outcomes help more than a skills cloud. Keep the file under typical 2 MB portal caps; this generator's vector text is usually small.',
         ],
       },
     ],
@@ -320,15 +320,15 @@ export const publisherArticlesTools: PublisherArticle[] = [
   },
   {
     path: '/devtools/x-hidden-image',
-    title: 'Tap-to-reveal images follow X’s image rules, not a hack',
+    title: 'Tap-to-reveal images follow X's image rules, not a hack',
     lead:
-      'This tool composites a cover frame and a hidden frame into a PNG that X (Twitter) can show as a spoiler-style image depending on current client behaviour. Platform rules change. If a post is rejected, the cause is the network’s media policy, not a Toolioz “ban.”',
+      'This tool composites a cover frame and a hidden frame into a PNG that X (Twitter) can show as a spoiler-style image depending on current client behaviour. Platform rules change. If a post is rejected, the cause is the network's media policy, not a Toolioz "ban."',
     reviewed: '10 September 2026',
     sections: [
       {
         heading: 'What to expect',
         paragraphs: [
-          'Keep both layers within the size and aspect ratio the composer shows. Illegal, sexual, or violent content is still against X’s rules whether or not it is “hidden.” Do not use the tool to evade safety filters. Preview on a throwaway draft before a wide post.',
+          'Keep both layers within the size and aspect ratio the composer shows. Illegal, sexual, or violent content is still against X's rules whether or not it is "hidden." Do not use the tool to evade safety filters. Preview on a throwaway draft before a wide post.',
           'Processing is local when labelled. The PNG you download is just a file; we do not post it to X for you.',
         ],
       },
@@ -343,7 +343,7 @@ export const publisherArticlesTools: PublisherArticle[] = [
       'Client apps on iOS, Android, and web can render spoilers differently after an X update.',
     ],
     sources: [
-      { label: 'X Help Center — media and sensitive content', href: 'https://help.x.com/en/rules-and-policies' },
+      { label: 'X Help Center, media and sensitive content', href: 'https://help.x.com/en/rules-and-policies' },
     ],
   },
   {
@@ -391,7 +391,7 @@ export const publisherArticlesTools: PublisherArticle[] = [
     examples: [
       {
         title: 'Field completeness',
-        body: 'Empty height or education lines look like omissions to a reader. Either fill them or delete the label in a template that allows it — do not leave “Height:” hanging.',
+        body: 'Empty height or education lines look like omissions to a reader. Fill them, or delete the label in a template that allows it. Do not leave a bare Height field.',
       },
     ],
     limitations: [

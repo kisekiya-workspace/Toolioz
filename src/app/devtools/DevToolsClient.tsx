@@ -87,7 +87,7 @@ export default function DevToolsClient() {
                 {search ? `Search Results (${filteredTools.length})` : 'All Developer Tools'}
               </h2>
               <p className="text-xs text-zinc-500 mt-0.5 dark:text-zinc-400">
-                Formatters and testers with documented limits—not a full encoding or crypto suite.
+                Formatters and testers with documented limits. This is not a full encoding or crypto suite.
               </p>
             </div>
             <Badge variant="mono" size="sm">

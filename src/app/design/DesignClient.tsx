@@ -144,7 +144,7 @@ export default function DesignClient() {
               title="What design tools does Toolioz publish?"
               answer="The public design catalog currently lists the X tap-to-reveal PNG maker. Drawing, dither, shader, and split-image workbenches exist as unpublished URLs and are not part of this directory."
               keyTakeaways={[
-                "Local image processing where the tool page says so — those files are not uploaded to Toolioz.",
+                "Local image processing where the tool page says so. Those files are not uploaded to Toolioz.",
                 "The website still loads ordinary page assets and analytics.",
                 "Unpublished studio URLs are not advertised here as finished products.",
               ]}

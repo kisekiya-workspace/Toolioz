@@ -39,7 +39,7 @@ export const publisherArticles: PublisherArticle[] = [
         heading: 'Tax and cost that the projection omits',
         paragraphs: [
           'Equity mutual fund units sold in India are currently taxed as short-term or long-term capital gains depending on holding period, with a stated annual LTCG exemption threshold that must be read from the Income Tax Department, not from this page. The calculator shows pre-tax corpus. Expense ratios also reduce the rate you actually earn: a 1% extra annual cost is closer to using 11% than 12% in the box above.',
-          'Direct plans omit distributor commission that regular plans embed in the expense ratio. Over 15–20 years that gap is visible in the same formula. None of this is personalised tax advice.',
+          'Direct plans omit distributor commission that regular plans embed in the expense ratio. Over 15 to 20 years that gap is visible in the same formula. None of this is personalised tax advice.',
         ],
       },
     ],
@@ -50,20 +50,20 @@ export const publisherArticles: PublisherArticle[] = [
       },
     ],
     limitations: [
-      'The rate is an assumption, not a fund’s trailing return or a guaranteed yield.',
+      'The rate is an assumption, not a fund's trailing return or a guaranteed yield.',
       'Cash flows are assumed on a fixed monthly grid with no missed SIPs.',
       'Inflation, tax, load, and expense ratio are not subtracted unless you lower the rate yourself.',
     ],
     sources: [
       { label: 'Income Tax Department, India', href: 'https://www.incometax.gov.in/' },
-      { label: 'AMFI — mutual fund industry data', href: 'https://www.amfiindia.com/' },
+      { label: 'AMFI, mutual fund industry data', href: 'https://www.amfiindia.com/' },
     ],
   }),
   article({
     path: '/finance/lumpsum-calculator',
     title: 'Lumpsum growth versus a monthly SIP',
     lead:
-      'A lumpsum calculator compounds one opening amount. It answers “if this money stays invested at rate r for t years, what is the ending value?” It does not average rupee-cost or model later top-ups unless you run those as separate scenarios.',
+      'A lumpsum calculator compounds one opening amount. It answers "if this money stays invested at rate r for t years, what is the ending value?" It does not average rupee-cost or model later top-ups unless you run those as separate scenarios.',
     reviewed: '10 September 2026',
     sections: [
       {
@@ -111,7 +111,7 @@ export const publisherArticles: PublisherArticle[] = [
       {
         heading: 'Compound interest is not SIP math',
         paragraphs: [
-          'This page compounds one principal. Monthly additions belong on the SIP calculator. Mixing the two formulas is a common error in informal “how much will I have” threads.',
+          'This page compounds one principal. Monthly additions belong on the SIP calculator. Mixing the two formulas is a common error in informal "how much will I have" threads.',
         ],
       },
     ],
@@ -126,7 +126,7 @@ export const publisherArticles: PublisherArticle[] = [
       'Fees, TDS, and premature-withdrawal penalties are issuer-specific.',
     ],
     sources: [
-      { label: 'RBI — consumer education on interest', href: 'https://www.rbi.org.in/' },
+      { label: 'RBI, consumer education on interest', href: 'https://www.rbi.org.in/' },
     ],
   }),
   article({
@@ -139,8 +139,8 @@ export const publisherArticles: PublisherArticle[] = [
       {
         heading: 'What you must still verify',
         paragraphs: [
-          'Slab rates, the standard deduction, rebate under section 87A, and surcharge thresholds are set by statute and the Finance Act for a year. Toolioz copies those into code after a review pass. If Parliament or the CBDT later changes a figure, the official portal wins. Compare the result with the department’s own calculator or a CA before filing.',
-          'Old versus new regime is not a slogan. Deductions such as 80C, 80D, and HRA exemptions exist in the old regime and are largely unavailable in the new regime except for a short listed set. The tool’s comparison is only as good as the deduction amounts you enter. Leaving 80C at zero while claiming “old regime is worse” is a data-entry error, not tax law.',
+          'Slab rates, the standard deduction, rebate under section 87A, and surcharge thresholds are set by statute and the Finance Act for a year. Toolioz copies those into code after a review pass. If Parliament or the CBDT later changes a figure, the official portal wins. Compare the result with the department's own calculator or a CA before filing.',
+          'Old versus new regime is not a slogan. Deductions such as 80C, 80D, and HRA exemptions exist in the old regime and are largely unavailable in the new regime except for a short listed set. The tool's comparison is only as good as the deduction amounts you enter. Leaving 80C at zero while claiming "old regime is worse" is a data-entry error, not tax law.',
         ],
       },
       {
@@ -213,7 +213,7 @@ export const publisherArticles: PublisherArticle[] = [
     examples: [
       {
         title: 'TDS intuition',
-        body: 'Interest above a statutory threshold in a financial year can attract TDS. The calculator’s maturity is gross unless you lower the rate. Check the current threshold on the Income Tax Department site.',
+        body: 'Interest above a statutory threshold in a financial year can attract TDS. The calculator's maturity is gross unless you lower the rate. Check the current threshold on the Income Tax Department site.',
       },
     ],
     limitations: [
@@ -221,8 +221,8 @@ export const publisherArticles: PublisherArticle[] = [
       'Deposit insurance coverage is a separate DICGC question, not a formula output.',
     ],
     sources: [
-      { label: 'RBI — banking for the public', href: 'https://www.rbi.org.in/' },
-      { label: 'Income Tax Department — TDS', href: 'https://www.incometax.gov.in/' },
+      { label: 'RBI, banking for the public', href: 'https://www.rbi.org.in/' },
+      { label: 'Income Tax Department, TDS', href: 'https://www.incometax.gov.in/' },
     ],
   }),
   article({
@@ -236,7 +236,7 @@ export const publisherArticles: PublisherArticle[] = [
         heading: 'Reading the payment',
         paragraphs: [
           'Early EMIs are mostly interest; later EMIs are mostly principal. A ₹50 lakh loan at 8.5% for 20 years has i = 0.085/12 and n = 240. The EMI is about ₹43,391. Total payment is EMI × 240, and interest is that total minus ₹50 lakh. Changing tenure from 20 to 25 years lowers EMI and raises lifetime interest. That trade-off is the point of the table, not a recommendation to stretch every loan.',
-          'A car loan uses the same formula with a shorter n and a different rate. Put on-road price minus down payment in P. Toolioz does not publish a second EMI page for vehicles. Floating-rate loans reprice when the lender’s benchmark moves; this page treats the typed rate as fixed for the full n. Extra payments belong on the loan-prepayment tool.',
+          'A car loan uses the same formula with a shorter n and a different rate. Put on-road price minus down payment in P. Toolioz does not publish a second EMI page for vehicles. Floating-rate loans reprice when the lender's benchmark moves; this page treats the typed rate as fixed for the full n. Extra payments belong on the loan-prepayment tool.',
         ],
       },
     ],
@@ -251,7 +251,7 @@ export const publisherArticles: PublisherArticle[] = [
       'Part-prepayment and offset accounts are not in this EMI.',
     ],
     sources: [
-      { label: 'RBI — housing finance directions (overview)', href: 'https://www.rbi.org.in/' },
+      { label: 'RBI, housing finance directions (overview)', href: 'https://www.rbi.org.in/' },
     ],
   }),
   article({
@@ -265,14 +265,14 @@ export const publisherArticles: PublisherArticle[] = [
         heading: 'Why ₹1 extra is not linear',
         paragraphs: [
           'Interest is charged on outstanding principal. Paying ₹1 lakh in year two of a 20-year loan saves more remaining interest than the same ₹1 lakh in year eighteen, because more periods of interest were still ahead. Run both dates if you are deciding when to deploy a bonus.',
-          'Some lenders levy a prepayment charge on floating or fixed products. Subtract that fee from “interest saved” before calling the prepayment a win. RBI has restricted foreclosure charges on some floating-rate individual loans; the current circular beats a blog post.',
+          'Some lenders levy a prepayment charge on floating or fixed products. Subtract that fee from "interest saved" before calling the prepayment a win. RBI has restricted foreclosure charges on some floating-rate individual loans; the current circular beats a blog post.',
         ],
       },
     ],
     examples: [
       {
         title: 'EMI unchanged, tenure cut',
-        body: 'After a lump-sum prepayment, keeping EMI constant typically drops n. The calculator’s remaining-interest figure should fall. If it does not, check that outstanding principal and remaining months were entered as of the prepayment date, not origination.',
+        body: 'After a lump-sum prepayment, keeping EMI constant typically drops n. The calculator's remaining-interest figure should fall. If it does not, check that outstanding principal and remaining months were entered as of the prepayment date, not origination.',
       },
     ],
     limitations: [
@@ -280,7 +280,7 @@ export const publisherArticles: PublisherArticle[] = [
       'Does not model moratoriums or skipped EMIs.',
     ],
     sources: [
-      { label: 'RBI — loan foreclosure and related FAQs', href: 'https://www.rbi.org.in/' },
+      { label: 'RBI, loan foreclosure and related FAQs', href: 'https://www.rbi.org.in/' },
     ],
   }),
   article({
@@ -293,8 +293,8 @@ export const publisherArticles: PublisherArticle[] = [
       {
         heading: 'Principal and extras',
         paragraphs: [
-          'Insurance, extended warranty, and accessories added to the loan inflate P and therefore EMI. A 7-year tenure lowers EMI and can mean you still owe money after the car’s useful life. Compare total interest at 3, 5, and 7 years with the same P and rate before signing.',
-          'Manufacturer subvention rates are marketing: the true cost may be a higher list price. Use the contracted IRR or the rate on the agreement, not the banner “0% EMI” without reading the fine print.',
+          'Insurance, extended warranty, and accessories added to the loan inflate P and therefore EMI. A 7-year tenure lowers EMI and can mean you still owe money after the car's useful life. Compare total interest at 3, 5, and 7 years with the same P and rate before signing.',
+          'Manufacturer subvention rates are marketing. The true cost may be a higher list price. Use the contracted IRR or the rate on the agreement, not a banner 0% EMI without reading the contract.',
         ],
       },
     ],
@@ -309,20 +309,20 @@ export const publisherArticles: PublisherArticle[] = [
       'Hypothecation and foreclosure charges are contractual.',
     ],
     sources: [
-      { label: 'RBI — retail lending information', href: 'https://www.rbi.org.in/' },
+      { label: 'RBI, retail lending information', href: 'https://www.rbi.org.in/' },
     ],
   }),
   article({
     path: '/finance/inflation-calculator',
-    title: 'Inflation erodes a future rupee, it does not change today’s cash',
+    title: 'Inflation erodes a future rupee, it does not change today's cash',
     lead:
-      'This page applies FV = PV × (1 + π)^t. π is an assumed annual inflation rate, not next year’s CPI print. Use it to see purchasing power, not to forecast RBI policy.',
+      'This page applies FV = PV × (1 + π)^t. π is an assumed annual inflation rate, not next year's CPI print. Use it to see purchasing power, not to forecast RBI policy.',
     reviewed: '10 September 2026',
     sections: [
       {
         heading: 'Reading the output',
         paragraphs: [
-          '₹1,00,000 today at 6% inflation for 10 years needs about ₹1,79,085 in then-rupees to buy the same basket. Equivalently, ₹1,00,000 received in 10 years is worth about ₹55,840 in today’s rupees at 6%. Those two views are inverses.',
+          '₹1,00,000 today at 6% inflation for 10 years needs about ₹1,79,085 in then-rupees to buy the same basket. Equivalently, ₹1,00,000 received in 10 years is worth about ₹55,840 in today's rupees at 6%. Those two views are inverses.',
           'Indian CPI series are published by MOSPI. Food and housing inflate at different speeds; a single π is a blunt instrument. For retirement, pair this page with the retirement-corpus calculator rather than inflating salary forever at 6% without a career path.',
         ],
       },
@@ -330,7 +330,7 @@ export const publisherArticles: PublisherArticle[] = [
     examples: [
       {
         title: 'Education cost sketch',
-        body: 'A ₹15 lakh present cost at 8% education inflation for 12 years is 1500000 × (1.08)^12 ≈ ₹37.8 lakh. That is a planning sketch, not a college’s fee circular.',
+        body: 'A ₹15 lakh present cost at 8% education inflation for 12 years is 1500000 × (1.08)^12 ≈ ₹37.8 lakh. That is a planning sketch, not a college's fee circular.',
       },
     ],
     limitations: [
@@ -338,8 +338,8 @@ export const publisherArticles: PublisherArticle[] = [
       'Deflation and negative π are mathematically allowed but rare as a 10-year plan.',
     ],
     sources: [
-      { label: 'MOSPI — CPI products', href: 'https://www.mospi.gov.in/' },
-      { label: 'RBI — inflation data and publications', href: 'https://www.rbi.org.in/' },
+      { label: 'MOSPI, CPI products', href: 'https://www.mospi.gov.in/' },
+      { label: 'RBI, inflation data and publications', href: 'https://www.rbi.org.in/' },
     ],
   }),
   article({
@@ -359,7 +359,7 @@ export const publisherArticles: PublisherArticle[] = [
     ],
     examples: [
       {
-        title: 'Inflating today’s spend',
+        title: 'Inflating today's spend',
         body: '₹80,000 monthly spend at 6% for 20 years until retirement is 80000 × (1.06)^20 ≈ ₹2.57 lakh monthly in then-rupees, before you even size the corpus.',
       },
     ],
@@ -381,7 +381,7 @@ export const publisherArticles: PublisherArticle[] = [
       {
         heading: 'Why the order of X and Y matters',
         paragraphs: [
-          '“36 is what percent of 240?” is (36/240)×100 = 15%. “240 is what percent of 36?” is a different question and a number over 100%. Finance uses the first form for “what share of salary is rent.” Using the sale price as the base when you meant the original price is the usual discount mistake; that belongs on the percentage-change page.',
+          '"36 is what percent of 240?" is (36/240)×100 = 15%. "240 is what percent of 36?" is a different question and a number over 100%. Finance uses the first form for "what share of salary is rent." Using the sale price as the base when you meant the original price is the usual discount mistake; that belongs on the percentage-change page.',
         ],
       },
     ],
@@ -395,7 +395,7 @@ export const publisherArticles: PublisherArticle[] = [
       'A percentage of a percentage (interest on GST) needs two steps, not one box.',
     ],
     sources: [
-      { label: 'ONS — percentages versus percentage points', href: 'https://service-manual.ons.gov.uk/content/numbers/percentages' },
+      { label: 'ONS, percentages versus percentage points', href: 'https://service-manual.ons.gov.uk/content/numbers/percentages' },
     ],
   }),
   article({
@@ -422,7 +422,7 @@ export const publisherArticles: PublisherArticle[] = [
       'Not a chained index or seasonally adjusted series.',
     ],
     sources: [
-      { label: 'U.S. BLS — calculating percent changes', href: 'https://www.bls.gov/cpi/factsheets/calculating-percent-changes.htm' },
+      { label: 'U.S. BLS, calculating percent changes', href: 'https://www.bls.gov/cpi/factsheets/calculating-percent-changes.htm' },
     ],
   }),
 ];

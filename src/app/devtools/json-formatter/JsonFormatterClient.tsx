@@ -207,15 +207,15 @@ export default function JsonFormatterClient() {
         ]}
       />
       <DirectAnswerBlock
-        title="How to format, validate, and convert JSON to TypeScript or YAML online free?"
+        title="Format, validate, and convert JSON to TypeScript or YAML"
         answer={
           'This page pretty-prints and minifies JSON that parses, reports the first syntax error when it does not, and can emit YAML or inferred TypeScript interfaces from valid JSON. Processing is local to the tab when labelled. Do not paste production secrets if your policy forbids it.'
         }
         keyTakeaways={[
           "Pasted JSON stays in the tab when the page is labelled local processing. Analytics for the website still load.",
-          "TypeScript Interface Generator — Automatically infers nested types, array interfaces, and optional fields.",
-          "YAML Converter — Transform API responses or config JSON directly into valid YAML syntax.",
-          "Line-Specific Validation — Pinpoints exact bracket, comma, or quotes parse errors in real-time."
+          "The TypeScript generator infers nested types, array interfaces, and optional fields.",
+          "The YAML converter turns parsed JSON into YAML syntax.",
+          "Validation reports the first bracket, comma, or quote parse error.",
         ]}
         categoryName="Developer Utilities"
       />

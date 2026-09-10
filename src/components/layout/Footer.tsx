@@ -32,7 +32,7 @@ export function Footer() {
             </Link>
             <span className="hidden sm:inline-block text-zinc-300 dark:text-zinc-700">•</span>
             <p className="text-xs text-zinc-500 dark:text-zinc-400 max-w-lg leading-relaxed">
-              Practical calculators and utilities with working tools, documented assumptions, and browser-local processing where stated.
+              Calculators and file tools with documented formulas. Inputs stay in the browser when a page says so.
             </p>
           </div>
 
