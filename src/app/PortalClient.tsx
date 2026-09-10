@@ -45,10 +45,10 @@ const QUICK_TAGS = [
 ];
 
 const BLOG_HUBS = [
-  { title: 'Articles', href: '/blog', desc: 'Longer notes on compounding math, browser processing, and file formats' },
   { title: 'Step-by-step guides', href: '/how-to', desc: 'Worked SIP, JSON, PDF, and biodata walkthroughs' },
-  { title: 'Calculator comparisons', href: '/top5', desc: 'Side-by-side notes on which Toolioz calculator fits a task' },
+  { title: 'Amortization notes', href: '/blog/debt-amortization-mathematics-and-mortgage-acceleration-blueprints', desc: 'How EMI and prepayment change remaining interest' },
   { title: 'ATS Resume Builder', href: '/resume-builder', desc: 'Build a resume PDF in the browser and export locally' },
+  { title: 'Editorial policy', href: '/editorial-policy', desc: 'What Toolioz indexes, tests, and will not publish' },
 ];
 
 const FAQS = [
@@ -57,7 +57,7 @@ const FAQS = [
     a: 'Yes. Listed calculators and utilities can be used without an account or paywall. Advertising, when approved, does not change calculator outputs.',
   },
   {
-    q: 'How does client-side zero-server privacy work?',
+    q: 'How does local processing work?',
     a: 'When a page is labelled local processing, its tool inputs and files are handled in your browser rather than uploaded to Toolioz. The website still loads normal page assets and analytics services; see the privacy policy for those separate network requests.',
   },
   {
@@ -65,8 +65,8 @@ const FAQS = [
     a: 'Each published calculator documents its formula, assumptions, and limitations. Results are planning estimates rather than financial or tax advice, and time-sensitive rules should be verified with an official source.',
   },
   {
-    q: 'Can I export, print, or download my results?',
-    a: 'Yes. All tools provide one-click actions to copy outputs to your clipboard, export data as JSON/CSV, or download vector-quality PDFs and processed images.',
+    q: 'Can I export or download results?',
+    a: 'Published tools that produce a file or copyable output include a download or copy control on that page. Not every calculator exports a PDF.',
   },
 ];
 
@@ -155,7 +155,7 @@ export default function PortalClient() {
               <input
                 ref={searchInputRef}
                 type="search"
-                placeholder={`Search across ${TOOLS.length}+ tools (e.g. SIP, JSON, Merge PDF, Drawesome)...`}
+                placeholder={`Search published tools (SIP, JSON, Merge PDF)...`}
                 className="w-full border-none bg-transparent px-3.5 py-2 text-base font-medium text-zinc-950 outline-none placeholder:text-zinc-400 dark:text-zinc-50"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}

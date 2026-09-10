@@ -51,7 +51,7 @@ export default function DevToolsClient() {
           </h1>
           
           <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-            Accelerate debugging, encoding, formatting, parsing, and graphic dithering workflows. 100% browser sandbox.
+            JSON formatting, JWT claim inspection, and JavaScript regular-expression testing. Pages labelled local processing keep pasted text in the tab.
           </p>
 
           {/* Search Box */}
@@ -60,7 +60,7 @@ export default function DevToolsClient() {
               <Search size={18} className="ml-3 shrink-0 text-zinc-400" />
               <input
                 type="search"
-                placeholder="Search dev tools (e.g. JSON, JWT, Regex, cURL, Hash, Dither)..."
+                placeholder="Search (JSON, JWT, Regex)..."
                 className="w-full border-none bg-transparent px-3 py-1 text-sm font-medium text-zinc-950 outline-none placeholder:text-zinc-400 dark:text-zinc-50"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -87,7 +87,7 @@ export default function DevToolsClient() {
                 {search ? `Search Results (${filteredTools.length})` : 'All Developer Tools'}
               </h2>
               <p className="text-xs text-zinc-500 mt-0.5 dark:text-zinc-400">
-                Formatters, parsers, cryptography engines, and interactive generators.
+                Formatters and testers with documented limits—not a full encoding or crypto suite.
               </p>
             </div>
             <Badge variant="mono" size="sm">
@@ -146,7 +146,7 @@ export default function DevToolsClient() {
               </h2>
             </div>
             <Link
-              href="/blog"
+              href="/how-to"
               className="text-xs font-semibold text-amber-600 dark:text-amber-400 hover:underline"
             >
               Browse all technical guides →
@@ -156,22 +156,22 @@ export default function DevToolsClient() {
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
-                title: 'Engineering Client-Side Web Utilities & RAM Privacy',
-                description: 'Deep architectural dive into zero-knowledge local storage, Web Workers, and browser sandbox execution.',
-                href: '/blog/the-engineering-of-client-side-web-utilities-and-privacy',
-                readTime: '11 min read',
+                title: 'How to format JSON and fix parse errors',
+                description: 'Trailing commas, quotes, and the first error position the formatter reports.',
+                href: '/how-to/format-json-and-fix-errors',
+                readTime: '8 min read',
               },
               {
                 title: 'How to Decode & Inspect JWT Tokens Safely',
-                description: 'Step-by-step developer guide on inspecting Base64URL header/payload streams and cryptographic signatures.',
+                description: 'Decoding is not verification. Read claims, then verify in a trusted environment.',
                 href: '/how-to/decode-jwt-token',
                 readTime: '7 min read',
               },
               {
-                title: 'Essential Web Developer Utilities Benchmark',
-                description: 'Comprehensive evaluation of top formatters, regex testers, converters, and payload decoders.',
-                href: '/top5/essential-web-developer-tools',
-                readTime: '9 min read',
+                title: 'Regex tester notes',
+                description: 'JavaScript regex is not PCRE. Flags and backtracking are documented on the tool page.',
+                href: '/devtools/regex-tester',
+                readTime: 'Tool',
               },
             ].map((post) => (
               <Link key={post.href} href={post.href} className="group block">

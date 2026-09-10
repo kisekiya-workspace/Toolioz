@@ -282,7 +282,7 @@ export default function JwtDecoderClient() {
                     benefits={[
                         "Cryptographic Verification: Utilize Web Crypto API to ensure your token signatures haven't been tampered.",
                         "Timestamp Expansion: No more opening secondary timestamp converters; expiration states are visually flagged.",
-                        "Absolute Privacy: Handled 100% Client-Side. Your tokens or secrets are never dispatched to our networks."
+                        "Optional HS256 check: if you type the shared secret, the page can verify that signature. It does not fetch JWKS or prove RS256. Analytics for the website still load.",
                     ]}
                 />
 

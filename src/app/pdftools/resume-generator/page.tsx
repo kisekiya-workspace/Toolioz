@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     'overleaf resume builder',
   ],
   alternates: {
-    canonical: 'https://toolioz.com/pdftools/resume-generator',
+    canonical: 'https://toolioz.com/resume-builder',
   },
   openGraph: {
     title: 'ATS Resume Generator | Toolioz',

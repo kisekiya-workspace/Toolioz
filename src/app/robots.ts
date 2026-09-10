@@ -11,6 +11,8 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/api/',
           '/tools/',
+          '/top5/',
+          '/how-to/compress-pdf-under-2mb',
           '/finance/grade-percentage-calculator',
           '/finance/win-percentage-calculator',
           '/finance/weight-loss-percentage-calculator',
@@ -24,6 +26,8 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/api/',
           '/tools/',
+          '/top5/',
+          '/how-to/compress-pdf-under-2mb',
           '/finance/grade-percentage-calculator',
           '/finance/win-percentage-calculator',
           '/finance/weight-loss-percentage-calculator',

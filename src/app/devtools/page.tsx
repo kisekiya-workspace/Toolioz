@@ -4,20 +4,15 @@ import DevToolsClient from './DevToolsClient';
 import { buildCollectionPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata = buildPageMetadata({
-  title: 'Developer Tools Online | JSON, JWT, Regex, X Tap-to-Reveal PNG | Toolioz',
+  title: 'Developer Tools | JSON, JWT, Regex | Toolioz',
   description:
-    'Free JSON formatter, JWT decoder, regex tester, Base64 encoder, X tap-to-reveal hidden PNG maker, and timestamp converter. Runs in your browser—private by default.',
+    'JSON formatter, JWT decoder, and JavaScript regex tester that run in the browser. Each page documents what it does and what it does not verify.',
   path: '/devtools',
   keywords: [
-    'x tap to reveal png',
-    'twitter hidden image maker',
-    'free developer tools online',
     'json formatter pretty print',
     'jwt decoder online',
-    'regex tester tool',
-    'base64 encode decode',
-    'timestamp converter',
-    'uuid generator',
+    'regex tester javascript',
+    'free developer tools online',
   ],
 });
 
@@ -27,7 +22,7 @@ export default function DevToolsLandingPage() {
       <JSONLD
         data={buildCollectionPageJsonLd({
           name: 'Developer tools',
-          description: 'JSON, security, encoding, and debugging utilities for developers.',
+          description: 'JSON formatter, JWT decoder, and JavaScript regex tester.',
           path: '/devtools',
         })}
       />

@@ -23,7 +23,7 @@ export default function TermsClient() {
             <h2>1. Acceptance of Terms</h2>
             <p>
               By accessing and using Toolioz, you agree to be bound by these terms and all applicable laws and regulations.
-              The tools are provided for your convenience, and use indicates acceptance of our privacy-first, zero-server architecture.
+              The tools are provided for your convenience. Use of the site includes loading ordinary page assets and, where present, advertising and analytics, as described in the privacy policy.
             </p>
 
             <h2>2. No Guarantees or Promises</h2>

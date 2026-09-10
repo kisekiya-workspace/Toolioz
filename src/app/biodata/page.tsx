@@ -310,15 +310,15 @@ export default function BiodataPage() {
               {[
                 {
                   title: 'How to Create a Marriage Biodata PDF: Step-by-Step Guide',
-                  description: 'Complete tutorial on photo placement, family tree formatting, horoscope fields, and mobile vector PDF export.',
+                  description: 'Photo placement, family details, and what not to put in a matrimonial PDF.',
                   href: '/how-to/create-marriage-biodata-pdf',
                   readTime: '6 min read',
                 },
                 {
-                  title: 'Top 5 Marriage Biodata Makers & Template Comparison',
-                  description: 'Detailed comparative review of Hindu, Muslim, Sikh, and Modern minimalist matrimony profile generators.',
-                  href: '/top5/best-marriage-biodata-makers',
-                  readTime: '8 min read',
+                  title: 'ATS resume builder',
+                  description: 'A separate Toolioz page for job-application PDFs, not matrimonial biodata.',
+                  href: '/resume-builder',
+                  readTime: 'Tool',
                 },
               ].map((post) => (
                 <Link key={post.href} href={post.href} className="group block">

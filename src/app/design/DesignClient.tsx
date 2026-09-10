@@ -51,16 +51,16 @@ export default function DesignClient() {
         <div className="mx-auto max-w-[1200px] px-6">
           <div className="mb-3 inline-flex items-center gap-2">
             <Badge variant="outline" dot pulse size="sm" className="font-mono text-xs">
-              Creative & Graphic Studio
+              Published design tools
             </Badge>
           </div>
           
           <h1 className="text-[32px] font-semibold leading-none tracking-[-1.28px] text-[#171717] sm:text-5xl sm:tracking-[-2.28px] dark:text-[#ededed]">
-            Design & <span className="text-cyan-500">Creative</span> Studio
+            Design <span className="text-cyan-500">utilities</span>
           </h1>
           
           <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-            Interactive vector drawing, retro dithering, GLSL shaders, ASCII art generators, and high-resolution image toolkits.
+            One published image tool: tap-to-reveal PNGs for X. Extra drawing and shader workbenches stay off this catalog until they have the same review as the finance and PDF pages.
           </p>
 
           {/* Search Box */}
@@ -69,7 +69,7 @@ export default function DesignClient() {
               <Search size={18} className="ml-3 shrink-0 text-zinc-400" />
               <input
                 type="search"
-                placeholder="Search creative tools (e.g. Split Image, Drawesome, Dither, Shader)..."
+                placeholder="Search published design tools..."
                 className="w-full border-none bg-transparent px-3 py-1 text-sm font-medium text-zinc-950 outline-none placeholder:text-zinc-400 dark:text-zinc-50"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -93,10 +93,10 @@ export default function DesignClient() {
           <div className="mb-6 flex items-center justify-between border-b border-zinc-100 pb-3 dark:border-zinc-800">
             <div>
               <h2 className="text-xl font-extrabold tracking-tight text-zinc-950 sm:text-2xl dark:text-zinc-50">
-                {search ? `Search Results (${filteredTools.length})` : 'All Creative Studios'}
+                {search ? `Search Results (${filteredTools.length})` : 'Published design tools'}
               </h2>
               <p className="text-xs text-zinc-500 mt-0.5 dark:text-zinc-400">
-                Pixel-precision canvas applications, visual generators, and image shaders.
+                Pixel tools that shipped with a documented article. Other studio URLs are not listed here.
               </p>
             </div>
             <Badge variant="mono" size="sm">
@@ -131,7 +131,7 @@ export default function DesignClient() {
                   </div>
 
                   <div className="mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800 flex items-center gap-1 text-xs font-semibold text-cyan-600 dark:text-cyan-400">
-                    <span>Open Studio</span>
+                    <span>Open tool</span>
                     <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
                   </div>
                 </Card>
@@ -141,15 +141,14 @@ export default function DesignClient() {
 
           <div className="mt-14">
             <DirectAnswerBlock
-              title="What is the Toolioz Design & Creative Studio?"
-              answer="Toolioz Design & Creative Studio is a suite of client-side web tools for digital artists, designers, and developers. It includes Drawesome vector drawing, ditherit ASCII and dot art, a GLSL shader editor, wallpaper generator, tap-to-reveal PNG creator, 16:9 split-into-3 image tool, and color converters."
+              title="What design tools does Toolioz publish?"
+              answer="The public design catalog currently lists the X tap-to-reveal PNG maker. Drawing, dither, shader, and split-image workbenches exist as unpublished URLs and are not part of this directory."
               keyTakeaways={[
-                "Local image processing where the tool page says so — files are not uploaded to Toolioz for those tools.",
-                "Export SVG, PNG, or WebM depending on the tool.",
-                "Algorithms and limitations are described on each tool page.",
-                "The shader editor runs GLSL in the browser; results depend on the device GPU.",
+                "Local image processing where the tool page says so — those files are not uploaded to Toolioz.",
+                "The website still loads ordinary page assets and analytics.",
+                "Unpublished studio URLs are not advertised here as finished products.",
               ]}
-              categoryName="Design Studio"
+              categoryName="Design"
             />
           </div>
         </div>

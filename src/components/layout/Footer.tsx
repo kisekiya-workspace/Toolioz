@@ -65,14 +65,14 @@ export function Footer() {
             <Link href="/finance/compound-interest" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               Compound Interest
             </Link>
-            <Link href="/finance/car-loan" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
-              Car Loan EMI
+            <Link href="/finance/mortgage-calculator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              Home / vehicle EMI
             </Link>
-            <Link href="/finance/fd-calculator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
-              Fixed Deposit (FD)
+            <Link href="/finance/loan-prepayment" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              Loan prepayment
             </Link>
-            <Link href="/finance/retirement-corpus" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
-              Retirement Corpus
+            <Link href="/finance/inflation-calculator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              Inflation
             </Link>
             <Link href="/finance/gst-calculator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               GST Calculator
@@ -97,15 +97,6 @@ export function Footer() {
             <Link href="/devtools/regex-tester" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               Regex Tester & Debugger
             </Link>
-            <Link href="/devtools/base64-converter" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
-              Base64 Encoder/Decoder
-            </Link>
-            <Link href="/devtools/timestamp-converter" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
-              Timestamp Converter
-            </Link>
-            <Link href="/devtools/uuid-generator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
-              UUID Generator
-            </Link>
             <Link href="/devtools/x-hidden-image" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               X Tap-to-Reveal PNG
             </Link>
@@ -120,20 +111,11 @@ export function Footer() {
             <Link href="/pdftools" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               PDF Utilities Hub
             </Link>
-            <Link href="/pdftools/image-compressor" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
-              Compress PDF & Images
-            </Link>
             <Link href="/pdftools/merge-pdf" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               Merge Multiple PDFs
             </Link>
-            <Link href="/pdftools/split-pdf" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
-              Split PDF Pages
-            </Link>
             <Link href="/pdftools/image-to-pdf" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               Images to PDF
-            </Link>
-            <Link href="/pdftools/pdf-to-image" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
-              PDF to Image Converter
             </Link>
             <Link href="/biodata" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               Marriage Biodata Studio
@@ -150,25 +132,22 @@ export function Footer() {
               Editorial Guides
             </h4>
             <Link href="/blog" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
-              Research Masterclasses
+              Guides
             </Link>
             <Link href="/how-to" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               Step-by-Step How-To
             </Link>
-            <Link href="/top5" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
-              Top 5 Benchmark Lists
-            </Link>
-            <Link href="/tools" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
-              Full Tools Directory (60+)
-            </Link>
-            <Link href="/how-to/compress-pdf-under-2mb" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors truncate">
-              Compress PDF Under 2MB
+            <Link href="/editorial-policy" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              Editorial policy
             </Link>
             <Link href="/how-to/calculate-sip-returns" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors truncate">
               Calculate SIP Returns
             </Link>
-            <Link href="/top5/best-finance-calculators-india" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors truncate">
-              Top Finance Calculators
+            <Link href="/how-to/format-json-and-fix-errors" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors truncate">
+              Format JSON
+            </Link>
+            <Link href="/how-to/reduce-home-loan-interest" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors truncate">
+              Reduce home-loan interest
             </Link>
           </div>
 

@@ -40,21 +40,21 @@ export const publisherArticlesTools: PublisherArticle[] = [
     path: '/devtools/jwt-decoder',
     title: 'Decoding a JWT is not verifying it',
     lead:
-      'A JSON Web Token is three Base64URL segments: header, payload, signature. This page decodes the first two so you can read claims. It does not check the signature against a secret or JWKS, so a forged token will still “decode.”',
+      'A JSON Web Token is three Base64URL segments: header, payload, signature. This page always decodes the first two so you can read claims. A forged token will still decode. Optional HS256 verification runs only if you type the shared secret; there is no JWKS lookup and no RS256 check.',
     reviewed: '10 September 2026',
     sections: [
       {
         heading: 'How to use the output safely',
         paragraphs: [
-          'Read `alg`, `iss`, `aud`, `exp`, and `sub` as claims, not as proof. If `alg` is `none`, the token has no signature. If `exp` is in the past, resource servers should reject it. Toolioz does not contact the issuer. Never paste a live access token from a production user into a public blog screenshot.',
-          'Verification needs the correct key and algorithm. HS256 needs a shared secret you should not type into a random website. RS256 needs the issuer’s public key. Use your auth library in a trusted environment for that step.',
+          'Read `alg`, `iss`, `aud`, `exp`, and `sub` as claims, not as proof, unless an HS256 check with the correct secret succeeds. If `alg` is `none`, the token has no signature. If `exp` is in the past, resource servers should reject it. Toolioz does not contact the issuer. Never paste a live access token from a production user into a public blog screenshot.',
+          'HS256 needs a shared secret you should not type into a random website if your policy forbids it. RS256 needs the issuer’s public key; this page does not fetch JWKS. Use your auth library in a trusted environment for production verification.',
         ],
       },
     ],
     examples: [
       {
         title: 'Expiry check',
-        body: 'An `exp` of 1735689600 is a Unix second timestamp. Convert it on the timestamp tool. If it is in the past, treat the token as expired regardless of a pretty-printed payload.',
+        body: 'An `exp` of 1735689600 is a Unix second timestamp. Convert it with any Unix-time converter. If it is in the past, treat the token as expired regardless of a pretty-printed payload.',
       },
     ],
     limitations: [
@@ -189,15 +189,15 @@ export const publisherArticlesTools: PublisherArticle[] = [
       {
         heading: 'Order, size, and privacy',
         paragraphs: [
-          'Drop files in the sequence you want the output to read. A 200-page merge of scanned images will be large; compress afterwards if a portal cap is 2 MB. When the page is labelled local processing, file bytes are not uploaded to Toolioz. Analytics requests for the website still occur.',
-          'Form fields and some annotations can behave oddly after merge depending on pdf-lib’s handling. Open the result before you file it. Digital signatures on source files generally become invalid after any rewrite.',
+          'Drop files in the sequence you want the output to read. A 200-page merge of scanned images will be large. If a portal cap is 2 MB, compress the result in a dedicated PDF compressor—Toolioz does not publish one. When the page is labelled local processing, file bytes are not uploaded to Toolioz. Analytics requests for the website still occur.',
+          'Need only some pages of a statement? Merge is the wrong job; extract a range in a desktop reader first. Form fields and some annotations can behave oddly after merge. Digital signatures on source files generally become invalid after any rewrite.',
         ],
       },
     ],
     examples: [
       {
         title: 'Job portal pack',
-        body: 'Merge resume, ID, and certificates in that order, then compress. If the portal wants one PDF under 2 MB, compression is the second step, not a different merge.',
+        body: 'Merge resume, ID, and certificates in that order. If the portal wants one PDF under 2 MB, compression is a second step in another program, not a different merge.',
       },
     ],
     limitations: [

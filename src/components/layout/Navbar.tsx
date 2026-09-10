@@ -9,7 +9,6 @@ import {
   Menu,
   X,
   ChevronRight,
-  LayoutGrid,
   BookOpen,
   FileText,
   Briefcase,
@@ -30,7 +29,6 @@ const PRIMARY_NAV = [
 const MORE_NAV = [
   { name: 'Guides', href: '/blog', icon: BookOpen },
   { name: 'How-To', href: '/how-to', icon: FileText },
-  { name: 'Top 5', href: '/top5', icon: LayoutGrid },
   { name: 'Resume Builder', href: '/resume-builder', icon: Briefcase },
 ];
 

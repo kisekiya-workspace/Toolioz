@@ -4,19 +4,14 @@ import DesignClient from './DesignClient';
 import { buildCollectionPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata = buildPageMetadata({
-  title: 'Design & Creative Studio Online | Drawesome, ditherit, Shader Studio | Toolioz',
+  title: 'Design Tools | Tap-to-Reveal PNG | Toolioz',
   description:
-    'Free online vector drawing studio, ditherit dot & ASCII art, GLSL shader editor, background generator, and tap-to-reveal PNG tools. 100% browser-based.',
+    'Published design utilities for Toolioz, currently the X tap-to-reveal PNG maker. Drawing, dither, and shader workbenches are not in the public catalog.',
   path: '/design',
   keywords: [
-    'vector drawing studio',
-    'ditherit ascii studio',
-    'dither studio online',
-    'glsl shader studio',
-    'shader background generator',
     'x tap to reveal png',
-    'drawesome online',
-    'free design tools',
+    'twitter hidden image maker',
+    'browser png tools',
   ],
 });
 
@@ -26,7 +21,7 @@ export default function DesignLandingPage() {
       <JSONLD
         data={buildCollectionPageJsonLd({
           name: 'Design & Creative Studio',
-          description: 'Vector drawing, shader backgrounds, dithering, ASCII art, and image generator tools.',
+          description: 'Published image utilities, including tap-to-reveal PNGs.',
           path: '/design',
         })}
       />

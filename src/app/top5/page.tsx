@@ -19,6 +19,10 @@ export const metadata: Metadata = {
     'top online pdf utilities',
     'best security tools developer'
   ],
+  robots: {
+    index: false,
+    follow: true,
+  },
   alternates: {
     canonical: `${SITE_URL}/top5`,
   },

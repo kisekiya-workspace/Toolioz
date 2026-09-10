@@ -35,7 +35,7 @@ export default function PDFToolsClient() {
           </h1>
           
           <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-            Client-side PDF merging, page splitting, rasterization, and vector optimization. 100% confidential in browser memory.
+            Merge PDFs and turn images into a PDF in the browser. Split lives on the merge page; Toolioz does not publish a separate compressor.
           </p>
 
           {/* Search Box */}
@@ -44,7 +44,7 @@ export default function PDFToolsClient() {
               <Search size={18} className="ml-3 shrink-0 text-zinc-400" />
               <input
                 type="search"
-                placeholder="Search PDF tools (e.g. Merge, Split, Compress, Image to PDF)..."
+                placeholder="Search PDF tools (Merge, Images to PDF)..."
                 className="w-full border-none bg-transparent px-3 py-1 text-sm font-medium text-zinc-950 outline-none placeholder:text-zinc-400 dark:text-zinc-50"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -71,7 +71,7 @@ export default function PDFToolsClient() {
                 {search ? `Search Results (${filteredTools.length})` : 'All PDF Utilities'}
               </h2>
               <p className="text-xs text-zinc-500 mt-0.5 dark:text-zinc-400">
-                Client-side document handlers for vector compression, conversion, and organization.
+                Merge files in order, or wrap photos as PDF pages. Size caps for job portals usually need a separate compressor.
               </p>
             </div>
             <Badge variant="mono" size="sm">
@@ -126,11 +126,11 @@ export default function PDFToolsClient() {
                 Document Workflows
               </div>
               <h2 className="text-2xl font-extrabold tracking-tight text-zinc-950 sm:text-3xl dark:text-zinc-50">
-                PDF Engineering & Optimization Guides
+                PDF workflows
               </h2>
             </div>
             <Link
-              href="/blog"
+              href="/how-to"
               className="text-xs font-semibold text-red-600 dark:text-red-400 hover:underline"
             >
               Browse all technical guides →
@@ -140,22 +140,22 @@ export default function PDFToolsClient() {
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
-                title: 'Zero-Knowledge Document Processing in Browser RAM',
-                description: 'How client-side WebAssembly processes PDF compression, splitting, and merging without cloud data uploads.',
-                href: '/blog/the-architecture-of-zero-knowledge-browser-utilities-and-data-sovereignty',
-                readTime: '10 min read',
+                title: 'ATS resume PDF',
+                description: 'Fill a resume in the browser and export a PDF. Separate from merging existing files.',
+                href: '/resume-builder',
+                readTime: 'Tool',
               },
               {
-                title: 'How to Compress a PDF File Under 2MB Free',
-                description: 'Step-by-step tutorial on optimizing vector text, downsampling images, and stripping XML bloat.',
-                href: '/how-to/compress-pdf-under-2mb',
-                readTime: '8 min read',
+                title: 'Merge PDFs in the browser',
+                description: 'Page order, signatures becoming invalid, and when not to merge a full statement.',
+                href: '/pdftools/merge-pdf',
+                readTime: 'Tool',
               },
               {
-                title: 'Top 5 PDF Document Creator & Manipulation Tools',
-                description: 'Comparative benchmarks of client-side PDF processors, page reorganizers, and merge utilities.',
-                href: '/top5/best-pdf-document-creators',
-                readTime: '9 min read',
+                title: 'Images to PDF',
+                description: 'Photos become pages, not searchable text. Size versus portal upload caps.',
+                href: '/pdftools/image-to-pdf',
+                readTime: 'Tool',
               },
             ].map((post) => (
               <Link key={post.href} href={post.href} className="group block">
@@ -186,14 +186,11 @@ export default function PDFToolsClient() {
         <div className="mx-auto max-w-3xl px-4 sm:px-6 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
           <h2 className="text-xl font-bold text-zinc-950 dark:text-zinc-50">How the PDF tools handle files</h2>
           <p className="mt-3">
-            Merge, split, image conversion, and compression run in the browser on pages labelled local
-            processing. A typical email or job-portal cap is 2&nbsp;MB; scanned pages at 300 DPI are usually
-            the reason a file misses that cap, not the text layer. The{' '}
-            <Link href="/how-to/compress-pdf-under-2mb" className="text-red-700 underline-offset-2 hover:underline dark:text-red-400">
-              PDF compression guide
-            </Link>{' '}
-            covers downsampling versus keeping vector text. Toolioz still loads page assets and analytics
-            over the network; only the document bytes stay local when that label is present.
+            Merge and image-to-PDF run in the browser on pages labelled local processing. A typical
+            email or job-portal cap is 2&nbsp;MB; scanned pages at 300 DPI are usually the reason a file
+            misses that cap. Toolioz does not publish a PDF compressor: use a dedicated compressor after
+            merge if you need a size cap. Toolioz still loads page assets and analytics over the network;
+            only the document bytes stay local when that label is present.
           </p>
         </div>
       </section>

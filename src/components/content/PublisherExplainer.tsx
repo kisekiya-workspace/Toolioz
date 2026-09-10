@@ -97,17 +97,10 @@ export function FinancePublisherExplainer() {
           How to choose a finance calculator
         </h2>
         <p className="mt-4 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-          The finance workspace is limited to investment, tax, loan, and everyday money-math tools that
-          have a documented formula. SIP, lumpsum, and retirement pages project future value from a
-          stated rate. FD pages use a deposit rate and tenure. EMI and prepayment pages amortize a
-          principal. GST and income-tax pages apply a published rate or slab for a labelled year. They
-          are not substitutes for a bank statement, an AMFI scheme document, or a return prepared by a
-          tax professional.
+          The finance workspace lists one public page per distinct job. SIP is the monthly annuity. Compound interest covers a single opening amount, including a lumpsum or an FD if you set quarterly compounding. The EMI page is the reducing-balance formula for a home or vehicle loan. Prepayment is a separate page because extra principal changes remaining interest. GST and income tax are different statutes. Inflation converts rupees across years. They are planning estimates, not a bank statement, AMFI scheme sheet, or a filed return.
         </p>
         <p className="mt-4 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-          Percentage increase, reverse percentage, and after-tax discount sit here because they answer
-          price, salary, and invoice questions. Sports records, school grades, and body-composition
-          estimates are not part of this catalog.
+          Percentage of a number is the money-math page. Separate keyword pages for sports records, school grades, and body-fat estimates are not in this catalog.
         </p>
         <h3 className="mt-8 text-lg font-bold text-zinc-950 dark:text-zinc-50">Worked SIP check</h3>
         <p className="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">

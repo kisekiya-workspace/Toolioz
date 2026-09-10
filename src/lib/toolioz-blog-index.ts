@@ -1,6 +1,6 @@
+import { ADSENSE_NOINDEX_BLOG_SLUGS } from '@/lib/adsense-catalog';
 import { standaloneBlogs } from '@/../blogs';
-import { howToPosts } from './howto-content';
-import { top5Articles } from './top5-content';
+import { indexedHowToPosts } from './howto-content';
 
 export type TooliozBlogIndexItem = {
   slug: string;
@@ -16,19 +16,21 @@ export type TooliozBlogIndexItem = {
 };
 
 export const allTooliozBlogPosts: TooliozBlogIndexItem[] = [
-  ...standaloneBlogs.map((post) => ({
-    slug: post.slug,
-    title: post.title,
-    description: post.description,
-    keywords: post.keywords,
-    updated: post.updated,
-    updatedIso: post.updatedIso,
-    readTime: post.readTime,
-    href: `/blog/${post.slug}`,
-    toolHref: post.toolHref,
-    category: 'Engineering & Research',
-  })),
-  ...howToPosts.map((post) => ({
+  ...standaloneBlogs
+    .filter((post) => !ADSENSE_NOINDEX_BLOG_SLUGS.has(post.slug))
+    .map((post) => ({
+      slug: post.slug,
+      title: post.title,
+      description: post.description,
+      keywords: post.keywords,
+      updated: post.updated,
+      updatedIso: post.updatedIso,
+      readTime: post.readTime,
+      href: `/blog/${post.slug}`,
+      toolHref: post.toolHref,
+      category: 'Guides',
+    })),
+  ...indexedHowToPosts.map((post) => ({
     slug: post.slug,
     title: post.title,
     description: post.description,
@@ -39,17 +41,6 @@ export const allTooliozBlogPosts: TooliozBlogIndexItem[] = [
     href: post.directUrl,
     toolHref: post.toolHref,
     category: 'How-To Guides',
-  })),
-  ...top5Articles.map((post) => ({
-    slug: post.slug,
-    title: post.title,
-    description: post.description,
-    keywords: post.keywords,
-    updated: post.updated,
-    updatedIso: post.updatedIso,
-    readTime: post.readTime,
-    href: `/top5/${post.slug}`,
-    category: 'Top 5 Benchmarks',
   })),
 ];
 

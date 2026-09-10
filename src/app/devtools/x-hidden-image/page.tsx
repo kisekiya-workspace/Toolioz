@@ -11,8 +11,8 @@ import {
 
 export const metadata = buildPageMetadata({
   title: 'Free X Tap to Reveal PNG Maker | Twitter Hidden Image Trend 2026 | Toolioz',
-  description:
-    'Free online X (Twitter) tap-to-reveal & tap-and-hold hidden PNG maker — muted timeline preview, full color when opened. Brush masks, feed mockups, PNG8 export. No upload, 100% browser.',
+    description:
+      'Browser encoder for X tap-to-reveal PNGs: muted timeline preview versus opened color, optional brush masks, PNG export. Image bytes stay in the tab when the page is labelled local processing.',
   path: '/devtools/x-hidden-image',
   keywords: xHiddenImageKeywords,
 });

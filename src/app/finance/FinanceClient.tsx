@@ -36,7 +36,7 @@ export default function FinanceClient() {
           </h1>
           
           <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-            Documented SIP, tax, EMI, FD, and percentage calculators for planning. Results are estimates tied to the formula and inputs on each page.
+            Documented SIP, tax, EMI, inflation, and percentage calculators. Results are estimates tied to the formula and inputs on each page.
           </p>
 
           {/* Search Box */}
@@ -45,7 +45,7 @@ export default function FinanceClient() {
               <Search size={18} className="ml-3 shrink-0 text-zinc-400" />
               <input
                 type="search"
-                placeholder="Search calculators (e.g. SIP, Tax, ROI, Loan)..."
+                placeholder="Search calculators (e.g. SIP, Tax, GST, EMI)..."
                 className="w-full border-none bg-transparent px-3 py-1 text-sm font-medium text-zinc-950 outline-none placeholder:text-zinc-400 dark:text-zinc-50"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -133,32 +133,32 @@ export default function FinanceClient() {
               </h2>
             </div>
             <Link
-              href="/blog"
+              href="/how-to"
               className="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline"
             >
-              Browse all research articles →
+              Browse step-by-step guides →
             </Link>
           </div>
 
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
-                title: 'Browser-Based Financial Engineering & Compounding Math',
-                description: 'The mathematical frameworks of compounding frequency, annual percentage yields, and cash flow modeling.',
-                href: '/blog/the-complete-guide-to-browser-based-financial-engineering',
-                readTime: '12 min read',
+                title: 'How to Calculate SIP Mutual Fund Returns & XIRR',
+                description: 'Monthly annuity formula, step-up SIP, and why XIRR is not the same as the rate typed in the box.',
+                href: '/how-to/calculate-sip-returns',
+                readTime: '9 min read',
               },
               {
-                title: 'How to Calculate SIP Mutual Fund Returns & XIRR',
-                description: 'A complete step-by-step tutorial on calculating mutual fund SIP growth, XIRR returns, and annual step-up multipliers.',
-                href: '/how-to/calculate-sip-returns',
+                title: 'How extra EMIs cut home-loan interest',
+                description: 'Worked prepayment cases using the same amortization math as the EMI calculator.',
+                href: '/how-to/reduce-home-loan-interest',
                 readTime: '8 min read',
               },
               {
-                title: 'Top 5 Free Finance Calculators for Indian Investors',
-                description: 'Comparative review and mathematical breakdown of the best SIP, tax, FD, and inflation calculators.',
-                href: '/top5/best-finance-calculators-india',
-                readTime: '10 min read',
+                title: 'Debt amortization mathematics',
+                description: 'Principal, interest split, and why tenure and rate dominate lifetime cost.',
+                href: '/blog/debt-amortization-mathematics-and-mortgage-acceleration-blueprints',
+                readTime: '12 min read',
               },
             ].map((post) => (
               <Link key={post.href} href={post.href} className="group block">

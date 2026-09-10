@@ -1,3 +1,5 @@
+import { ADSENSE_NOINDEX_HOWTO_SLUGS } from '@/lib/adsense-catalog';
+
 export interface HowToStep {
   name: string;
   text: string;
@@ -55,8 +57,8 @@ export const howToPosts: HowToPost[] = [
     totalTime: 'PT3M',
     steps: [
       {
-        name: 'Launch the Client-Side Toolioz PDF Compressor',
-        text: 'Open the Toolioz PDF Compressor tool in your desktop or mobile browser. Because the compression engine relies on WebAssembly compiled directly into JavaScript, no server upload or account registration is required.',
+        name: 'Start from a merged or exported PDF',
+        text: 'Toolioz does not publish a PDF compressor. After you merge files or export images to PDF, open a dedicated compressor you trust if a portal requires a size cap such as 2 MB.',
       },
       {
         name: 'Select or Drag-and-Drop Your Oversized PDF File',
@@ -112,7 +114,7 @@ export const howToPosts: HowToPost[] = [
       {
         question: 'How do I compress a PDF under 2MB on mobile devices (iPhone / Android)?',
         answer:
-          'Open Toolioz PDF Compressor in mobile Safari or Chrome, select your PDF file from your Files app or Google Drive, pick Standard Compression, and save the compressed PDF directly to your device.',
+          'Use a dedicated PDF compressor on your phone or computer after the file exists. Toolioz merge and image-to-PDF pages do not shrink file size to a 2 MB cap.',
       },
       {
         question: 'Can password-protected PDFs be compressed?',
@@ -613,6 +615,8 @@ export const howToPosts: HowToPost[] = [
     ],
   },
 ];
+
+export const indexedHowToPosts = howToPosts.filter((post) => !ADSENSE_NOINDEX_HOWTO_SLUGS.has(post.slug));
 
 export function getHowToPost(slug: string) {
   return howToPosts.find((post) => post.slug === slug || post.directUrl === `/${slug}` || post.directUrl === slug);

@@ -3,13 +3,11 @@ import { DEFAULT_OG_IMAGE } from '@/lib/seo';
 
 export const metadata: Metadata = {
   description:
-    'PDF utilities to merge, compress, convert, and optimize documents quickly with browser-safe workflows.',
+    'Merge PDFs and convert images to PDF in the browser. Resume export is a separate page.',
   keywords: [
     'pdf tools',
     'merge pdf',
-    'compress pdf',
-    'pdf to image',
-    'image compressor',
+    'image to pdf',
     'online pdf utility',
   ],
   openGraph: {

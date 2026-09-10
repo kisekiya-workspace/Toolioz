@@ -17,7 +17,7 @@ import { RelatedTools } from '@/components/ui/RelatedTools';
 const JSON_FAQS = [
   {
     question: "Is my JSON data safe when using this online formatter?",
-    answer: "Yes, 100%. Toolioz processes all JSON formatting, validation, and TypeScript conversion entirely client-side inside your browser. No data is ever uploaded to any external server."
+    answer: "Formatting and conversion run in this tab when the page is labelled local processing. The JSON is not uploaded to Toolioz. The website still loads scripts and analytics."
   },
   {
     question: "How do I convert JSON to TypeScript interface or YAML?",
@@ -200,7 +200,7 @@ export default function JsonFormatterClient() {
           "Watch for instant syntax errors in the outcome window to trace missing commas or brackets before pushing your code to production."
         ]}
         benefits={[
-          "100% Client-Side Privacy: Your payloads are analyzed deeply via local computation power. Nothing is ever saved or routed externally.",
+          "Pasted JSON stays in the tab when the page is labelled local processing. Analytics for the website still load.",
           "Cross-Structural Compiling: Automatically traverse and generate 1:1 mapped TypeScript Types and configurations from unpredictable JSON logic.",
           "Blazing Speed: Render and format several megabytes of complex JSON structures securely inside the browser environment.",
           "Error Tracing: Highlights exactly where the JSON payload failed execution constraints, improving developer QA speeds."
@@ -208,9 +208,11 @@ export default function JsonFormatterClient() {
       />
       <DirectAnswerBlock
         title="How to format, validate, and convert JSON to TypeScript or YAML online free?"
-        answer="Toolioz JSON Formatter is a 100% browser-local tool that prettifies (2 or 4 spaces), minifies, and validates raw JSON text with line-number error reporting. It also instantly converts valid JSON payloads into strongly typed TypeScript interface definitions (`json-to-ts`) or YAML configuration files without uploading data to remote servers."
+        answer={
+          'This page pretty-prints and minifies JSON that parses, reports the first syntax error when it does not, and can emit YAML or inferred TypeScript interfaces from valid JSON. Processing is local to the tab when labelled. Do not paste production secrets if your policy forbids it.'
+        }
         keyTakeaways={[
-          "100% Client-Side Processing — Zero API calls or server logs; sensitive API payloads stay private.",
+          "Pasted JSON stays in the tab when the page is labelled local processing. Analytics for the website still load.",
           "TypeScript Interface Generator — Automatically infers nested types, array interfaces, and optional fields.",
           "YAML Converter — Transform API responses or config JSON directly into valid YAML syntax.",
           "Line-Specific Validation — Pinpoints exact bracket, comma, or quotes parse errors in real-time."

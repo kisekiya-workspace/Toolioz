@@ -6,7 +6,8 @@ import { JSONLD } from '@/components/ui/JSONLD';
 import { ReadingProgressBar } from '@/components/ui/ReadingProgressBar';
 import { Footer } from '@/components/layout/Footer';
 import { Button } from '@/components/ui/Button';
-import { howToPosts, getHowToPost } from '@/lib/howto-content';
+import { howToPosts, getHowToPost, indexedHowToPosts } from '@/lib/howto-content';
+import { ADSENSE_NOINDEX_HOWTO_SLUGS } from '@/lib/adsense-catalog';
 import { buildArticleMetadata, SITE_URL } from '@/lib/seo';
 
 type HowToPageProps = {
@@ -25,13 +26,19 @@ export async function generateMetadata({ params }: HowToPageProps): Promise<Meta
     return {};
   }
 
-  return buildArticleMetadata({
+  const meta = buildArticleMetadata({
     title: `${post.title} | Toolioz`,
     description: post.description,
     path: `/how-to/${post.slug}`,
     keywords: post.keywords,
     modifiedTime: post.updatedIso,
   });
+
+  if (ADSENSE_NOINDEX_HOWTO_SLUGS.has(post.slug)) {
+    return { ...meta, robots: { index: false, follow: true } };
+  }
+
+  return meta;
 }
 
 export default async function HowToDetailPage({ params }: HowToPageProps) {
@@ -42,7 +49,7 @@ export default async function HowToDetailPage({ params }: HowToPageProps) {
     notFound();
   }
 
-  const otherPosts = howToPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
+  const otherPosts = indexedHowToPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
 
   // HowTo Schema Markup for SERP Rich Snippets
   const howToSchema = {
@@ -112,7 +119,10 @@ export default async function HowToDetailPage({ params }: HowToPageProps) {
     ],
   };
 
-  const schemas = [howToSchema, articleSchema, faqSchema, breadcrumbSchema].filter(Boolean);
+  const withheld = ADSENSE_NOINDEX_HOWTO_SLUGS.has(post.slug);
+  const schemas = withheld
+    ? [breadcrumbSchema]
+    : [howToSchema, articleSchema, faqSchema, breadcrumbSchema].filter(Boolean);
 
   return (
     <div className="min-h-screen bg-white text-zinc-900 antialiased selection:bg-emerald-600 selection:text-white dark:bg-zinc-950 dark:text-zinc-100">

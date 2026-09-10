@@ -6,22 +6,22 @@
 /tools/percentage-calculator /finance/percentage-calculator 301
 /tools/emi-calculator /finance/mortgage-calculator 301
 /tools/json-formatter /devtools/json-formatter 301
-/tools/uuid-generator /devtools/uuid-generator 301
-/tools/hash-generator /devtools/hash-generator 301
 /tools/jwt-decoder /devtools/jwt-decoder 301
-/tools/timestamp-converter /devtools/timestamp-converter 301
 /tools/regex-tester /devtools/regex-tester 301
-/tools/lorem-ipsum /devtools/lorem-ipsum 301
-/tools/base64-converter /devtools/base64-converter 301
-/tools/cron-job-generator /devtools/cron-generator 301
-/tools/color-converter /devtools/color-converter 301
-/tools/unit-converter /devtools/unit-converter 301
-/tools/url-converter /devtools/url-encoder 301
-/tools/pdf-splitter /pdftools/split-pdf 301
+/tools/pdf-splitter /pdftools/merge-pdf 301
 /tools/pdf-merger /pdftools/merge-pdf 301
 /tools/image-to-pdf /pdftools/image-to-pdf 301
-/tools/pdf-to-image /pdftools/pdf-to-image 301
-/tools/image-compressor /pdftools/image-compressor 301
+/tools/pdf-to-image /pdftools/image-to-pdf 301
+
+# Near-duplicate public tools → one canonical page
+/finance/lumpsum-calculator /finance/compound-interest 301
+/finance/fd-calculator /finance/compound-interest 301
+/finance/car-loan /finance/mortgage-calculator 301
+/finance/percentage-change-calculator /finance/percentage-calculator 301
+/finance/retirement-corpus /finance/sip-calculator 301
+/pdftools/split-pdf /pdftools/merge-pdf 301
+/pdftools/pdf-to-image /pdftools/image-to-pdf 301
+/pdftools/resume-generator /resume-builder 301
 
 # Broken how-to shortcuts from older internal links
 /how-to-calculate-sip-returns /how-to/calculate-sip-returns 301

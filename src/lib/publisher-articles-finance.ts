@@ -105,7 +105,7 @@ export const publisherArticles: PublisherArticle[] = [
         heading: 'The equation and a numeric check',
         paragraphs: [
           'A = P (1 + r/n)^(n t). P is opening principal, r is the nominal annual rate as a decimal, n is compounds per year, t is years. ₹1,00,000 at 8% for 5 years compounded annually is 100000 × (1.08)^5 ≈ ₹1,46,933. Compounded monthly, n = 12, the same inputs finish near ₹1,48,984. The extra ₹2,051 is frequency, not a second product.',
-          'Banks often quote effective annual yield alongside the nominal rate. If a product states only “8% p.a. compounded quarterly,” n = 4 in this tool. Do not treat the output as a regulated deposit rate; those come from the issuer’s circular.',
+          'A one-time mutual-fund lumpsum and a bank FD use this same family of math. An FD that compounds quarterly is n = 4. Toolioz does not keep a second public page for those keywords: type the deposit rate and tenure here. Monthly additions still belong on the SIP calculator.',
         ],
       },
       {
@@ -236,7 +236,7 @@ export const publisherArticles: PublisherArticle[] = [
         heading: 'Reading the payment',
         paragraphs: [
           'Early EMIs are mostly interest; later EMIs are mostly principal. A ₹50 lakh loan at 8.5% for 20 years has i = 0.085/12 and n = 240. The EMI is about ₹43,391. Total payment is EMI × 240, and interest is that total minus ₹50 lakh. Changing tenure from 20 to 25 years lowers EMI and raises lifetime interest. That trade-off is the point of the table, not a recommendation to stretch every loan.',
-          'Floating-rate loans reprice when the lender’s benchmark moves. This page uses the rate you enter as if it were fixed for the full n. Prepayment belongs on the loan-prepayment tool.',
+          'A car loan uses the same formula with a shorter n and a different rate. Put on-road price minus down payment in P. Toolioz does not publish a second EMI page for vehicles. Floating-rate loans reprice when the lender’s benchmark moves; this page treats the typed rate as fixed for the full n. Extra payments belong on the loan-prepayment tool.',
         ],
       },
     ],

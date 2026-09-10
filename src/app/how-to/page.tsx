@@ -5,21 +5,21 @@ import { Footer } from '@/components/layout/Footer';
 import { JSONLD } from '@/components/ui/JSONLD';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/Card';
-import { howToPosts } from '@/lib/howto-content';
+import { indexedHowToPosts } from '@/lib/howto-content';
 import { buildCollectionPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'How-To Guides & Step-by-Step Tutorials | Toolioz',
   description:
-    'Clear, actionable step-by-step guides on PDF compression, mutual fund SIP calculations, JWT token decoding, JSON formatting, and marriage biodata generation.',
+    'Step-by-step guides that match a published Toolioz page: SIP math, JWT inspection, JSON parse errors, biodata PDFs, and home-loan prepayment.',
   path: '/how-to',
   keywords: [
     'how to guides',
     'step by step tutorials',
-    'how to compress pdf',
     'how to calculate sip',
     'how to decode jwt',
     'how to format json',
+    'how to create marriage biodata',
   ],
 });
 
@@ -48,7 +48,7 @@ export default function HowToIndexPage() {
             </h1>
 
             <p className="mx-auto max-w-2xl text-base leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-400">
-              Actionable tutorials for everyday tasks—from compressing large PDFs under 2MB to calculating investment compound growth and parsing API data.
+              Actionable tutorials tied to a working Toolioz calculator or file tool—SIP projections, JSON parse errors, JWT claims, biodata PDFs, and loan prepayment.
             </p>
           </div>
         </section>
@@ -56,7 +56,7 @@ export default function HowToIndexPage() {
         {/* Guides Grid */}
         <main className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {howToPosts.map((post) => (
+            {indexedHowToPosts.map((post) => (
               <Link
                 key={post.slug}
                 href={post.directUrl}

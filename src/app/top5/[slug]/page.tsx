@@ -26,13 +26,16 @@ export async function generateMetadata({ params }: Top5PageProps): Promise<Metad
     return {};
   }
 
-  return buildArticleMetadata({
+  return {
+    ...buildArticleMetadata({
     title: `${post.title} | Toolioz`,
     description: post.description,
     path: `/top5/${post.slug}`,
     keywords: post.keywords,
     modifiedTime: post.updatedIso,
-  });
+    }),
+    robots: { index: false, follow: true },
+  };
 }
 
 export default async function Top5BlogPostPage({ params }: Top5PageProps) {

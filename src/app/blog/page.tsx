@@ -1,32 +1,33 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, BookOpen, Clock, Layers, ShieldCheck, Sparkles, TrendingUp, Zap } from 'lucide-react';
+import { ArrowRight, BookOpen, Clock, Layers, ShieldCheck, TrendingUp } from 'lucide-react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import { Footer } from '@/components/layout/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import { ADSENSE_NOINDEX_BLOG_SLUGS } from '@/lib/adsense-catalog';
 import { standaloneBlogs } from '@/../blogs';
 import { allTooliozBlogPosts } from '@/lib/toolioz-blog-index';
 
 export const metadata: Metadata = {
-  title: 'Research Blog & Technical Guides | Toolioz Knowledge Portal',
+  title: 'Guides | SIP, EMI, JSON, PDF | Toolioz',
   description:
-    'Masterclass articles on quantitative financial engineering, privacy-first client-side web architecture, retro dithering algorithms, and high-performance WebAssembly.',
+    'Step-by-step Toolioz guides for SIP returns, home-loan EMI, JSON parse errors, JWT inspection, PDF files, and marriage biodata.',
   alternates: {
     canonical: 'https://toolioz.com/blog',
   },
   openGraph: {
-    title: 'Toolioz Masterclass Blog & Research Portal',
+    title: 'Toolioz guides',
     description:
-      'Deep, research-backed guides on financial math, browser security, retro graphics, and web utility engineering.',
+      'Articles that explain the formulas and limits of the published calculators and file tools.',
     url: 'https://toolioz.com/blog',
     type: 'website',
   },
 };
 
 export default function BlogIndexPage() {
-  const featuredPost = standaloneBlogs[0];
+  const featuredPost = standaloneBlogs.find((post) => !ADSENSE_NOINDEX_BLOG_SLUGS.has(post.slug));
 
   const itemListJsonLd = {
     '@context': 'https://schema.org',
@@ -54,21 +55,18 @@ export default function BlogIndexPage() {
             </div>
 
             <h1 className="text-3xl font-extrabold tracking-tight text-zinc-950 sm:text-4xl dark:text-zinc-50">
-              Quantitative Engineering, <br className="hidden sm:block" />
-              <span className="text-blue-600">Retro Graphics & Privacy</span>
+              Guides for the calculators and file tools
             </h1>
 
             <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-              Long-form masterclass essays on financial mathematics, browser security sandboxing,
-              zero-latency WebAssembly, and interactive calculation engines.
+              Step-by-step articles that match a working Toolioz page: SIP math, EMI, JSON, JWT, PDF, and biodata.
             </p>
 
             <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
               {[
-                { label: 'Quantitative Finance', icon: TrendingUp },
-                { label: 'Client-Side Privacy', icon: ShieldCheck },
-                { label: 'Retro Graphics', icon: Layers },
-                { label: 'Web Performance', icon: Zap },
+                { label: 'Personal finance', icon: TrendingUp },
+                { label: 'Developer payloads', icon: ShieldCheck },
+                { label: 'PDF & biodata', icon: Layers },
               ].map(({ label, icon: Icon }) => (
                 <Badge key={label} variant="secondary" size="default" className="gap-1.5 py-1 px-3">
                   <Icon size={13} className="text-blue-600" />
@@ -88,7 +86,7 @@ export default function BlogIndexPage() {
                   <div>
                     <div className="mb-3 flex items-center gap-2">
                       <Badge variant="info" size="sm">
-                        Featured Masterclass
+                        Featured guide
                       </Badge>
                       <span className="flex items-center gap-1 text-xs font-mono text-zinc-400">
                         <Clock size={13} /> {featuredPost.readTime}
@@ -108,7 +106,7 @@ export default function BlogIndexPage() {
                     <div className="flex flex-wrap items-center gap-3">
                       <Button asChild size="default" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold">
                         <Link href={`/blog/${featuredPost.slug}`}>
-                          Read Masterclass <ArrowRight size={14} className="ml-1" />
+                          Read guide <ArrowRight size={14} className="ml-1" />
                         </Link>
                       </Button>
                       <Button asChild variant="outline" size="default" className="font-semibold text-zinc-800 dark:text-zinc-200 border-zinc-300 hover:bg-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-800">
@@ -150,10 +148,10 @@ export default function BlogIndexPage() {
             <div className="mb-8 flex items-center justify-between border-b border-zinc-100 pb-3 dark:border-zinc-800">
               <div>
                 <h2 className="text-xl font-extrabold tracking-tight text-zinc-950 sm:text-2xl dark:text-zinc-50">
-                  All Masterclass Essays & Guides
+                  All guides
                 </h2>
                 <p className="text-xs text-zinc-500 mt-0.5 dark:text-zinc-400">
-                  Deep-dive research on algorithms, math, and browser tools.
+                  Articles that match a published calculator or file tool.
                 </p>
               </div>
               <Badge variant="mono" size="sm">

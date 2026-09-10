@@ -41,7 +41,7 @@ import {
   type LucideIcon
 } from 'lucide-react';
 import { NEW_DEV_TOOLS, NEW_PDF_TOOLS } from '@/lib/new-tool-catalog';
-import { ADSENSE_INDEX_TOOL_IDS } from '@/lib/adsense-catalog';
+import { ADSENSE_INDEX_TOOL_IDS, ADSENSE_NOINDEX_HOWTO_SLUGS } from '@/lib/adsense-catalog';
 
 export type Category = 'finance' | 'devtools' | 'design' | 'pdftools' | 'biodata';
 
@@ -450,7 +450,6 @@ export const TOOLS: Tool[] = [
     href: '/devtools/x-hidden-image',
     color: '#0f172a',
     category: 'design',
-    isTrending: true
   },
   {
     id: 'split-image-in-3',
@@ -600,8 +599,12 @@ const INDEXABLE_TOOL_PATHS = new Set(PUBLISHER_READY_TOOLS.map((tool) => tool.hr
 
 export function isLowValuePublisherPath(pathname: string): boolean {
   const path = pathname.replace(/\/$/, '') || '/';
-  if (path === '/tools') return false;
-  if (path.startsWith('/tools/')) return true;
+  if (path === '/tools' || path.startsWith('/tools/')) return true;
+  if (path === '/top5' || path.startsWith('/top5/')) return true;
+  if (path.startsWith('/how-to/')) {
+    const slug = path.slice('/how-to/'.length);
+    if (ADSENSE_NOINDEX_HOWTO_SLUGS.has(slug)) return true;
+  }
   if (NEW_TOOL_PATHS.has(path) || WITHHELD_TOOL_PATHS.has(path)) return true;
   const looksLikeToolPage =
     /^\/(finance|devtools|design|pdftools|biodata)\/.+/.test(path) && !path.includes('/blog/');
@@ -626,14 +629,14 @@ export const CATEGORIES = [
   {
     id: 'design',
     title: 'Design & Creative Studio',
-    desc: 'Vector drawing, shader backgrounds, dithering, ASCII art, and visual image generators.',
+    desc: 'Published image utilities that run in the browser, starting with tap-to-reveal PNGs.',
     color: '#06b6d4',
     icon: Palette
   },
   {
     id: 'pdftools',
     title: 'PDF Utilities',
-    desc: 'Simple tools to merge, split, compress PDF files, and create ATS resumes.',
+    desc: 'Merge PDFs and turn images into a PDF in the browser. Resume export is a separate page.',
     color: '#ef4444',
     icon: FileText
   },
