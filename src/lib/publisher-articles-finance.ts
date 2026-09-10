@@ -50,7 +50,7 @@ export const publisherArticles: PublisherArticle[] = [
       },
     ],
     limitations: [
-      'The rate is an assumption, not a fund's trailing return or a guaranteed yield.',
+      'The rate is an assumption, not a fund trailing return or a guaranteed yield.',
       'Cash flows are assumed on a fixed monthly grid with no missed SIPs.',
       'Inflation, tax, load, and expense ratio are not subtracted unless you lower the rate yourself.',
     ],
@@ -139,8 +139,8 @@ export const publisherArticles: PublisherArticle[] = [
       {
         heading: 'What you must still verify',
         paragraphs: [
-          'Slab rates, the standard deduction, rebate under section 87A, and surcharge thresholds are set by statute and the Finance Act for a year. Toolioz copies those into code after a review pass. If Parliament or the CBDT later changes a figure, the official portal wins. Compare the result with the department's own calculator or a CA before filing.',
-          'Old versus new regime is not a slogan. Deductions such as 80C, 80D, and HRA exemptions exist in the old regime and are largely unavailable in the new regime except for a short listed set. The tool's comparison is only as good as the deduction amounts you enter. Leaving 80C at zero while claiming "old regime is worse" is a data-entry error, not tax law.',
+          'Slab rates, the standard deduction, rebate under section 87A, and surcharge thresholds are set by statute and the Finance Act for a year. Toolioz copies those into code after a review pass. If Parliament or the CBDT later changes a figure, the official portal wins. Compare the result with the department calculator or a CA before filing.',
+          'Old versus new regime is not a slogan. Deductions such as 80C, 80D, and HRA exemptions exist in the old regime and are largely unavailable in the new regime except for a short listed set. The comparison is only as good as the deduction amounts you enter. Leaving 80C at zero while claiming "old regime is worse" is a data-entry error, not tax law.',
         ],
       },
       {
@@ -213,7 +213,7 @@ export const publisherArticles: PublisherArticle[] = [
     examples: [
       {
         title: 'TDS intuition',
-        body: 'Interest above a statutory threshold in a financial year can attract TDS. The calculator's maturity is gross unless you lower the rate. Check the current threshold on the Income Tax Department site.',
+        body: 'Interest above a statutory threshold in a financial year can attract TDS. The maturity figure is gross unless you lower the rate. Check the current threshold on the Income Tax Department site.',
       },
     ],
     limitations: [
@@ -236,7 +236,7 @@ export const publisherArticles: PublisherArticle[] = [
         heading: 'Reading the payment',
         paragraphs: [
           'Early EMIs are mostly interest; later EMIs are mostly principal. A ₹50 lakh loan at 8.5% for 20 years has i = 0.085/12 and n = 240. The EMI is about ₹43,391. Total payment is EMI × 240, and interest is that total minus ₹50 lakh. Changing tenure from 20 to 25 years lowers EMI and raises lifetime interest. That trade-off is the point of the table, not a recommendation to stretch every loan.',
-          'A car loan uses the same formula with a shorter n and a different rate. Put on-road price minus down payment in P. Toolioz does not publish a second EMI page for vehicles. Floating-rate loans reprice when the lender's benchmark moves; this page treats the typed rate as fixed for the full n. Extra payments belong on the loan-prepayment tool.',
+          'A car loan uses the same formula with a shorter n and a different rate. Put on-road price minus down payment in P. Toolioz does not publish a second EMI page for vehicles. Floating-rate loans reprice when the lender benchmark moves; this page treats the typed rate as fixed for the full n. Extra payments belong on the loan-prepayment tool.',
         ],
       },
     ],
@@ -272,7 +272,7 @@ export const publisherArticles: PublisherArticle[] = [
     examples: [
       {
         title: 'EMI unchanged, tenure cut',
-        body: 'After a lump-sum prepayment, keeping EMI constant typically drops n. The calculator's remaining-interest figure should fall. If it does not, check that outstanding principal and remaining months were entered as of the prepayment date, not origination.',
+        body: 'After a lump-sum prepayment, keeping EMI constant typically drops n. The remaining-interest figure should fall. If it does not, check that outstanding principal and remaining months were entered as of the prepayment date, not origination.',
       },
     ],
     limitations: [
@@ -293,7 +293,7 @@ export const publisherArticles: PublisherArticle[] = [
       {
         heading: 'Principal and extras',
         paragraphs: [
-          'Insurance, extended warranty, and accessories added to the loan inflate P and therefore EMI. A 7-year tenure lowers EMI and can mean you still owe money after the car's useful life. Compare total interest at 3, 5, and 7 years with the same P and rate before signing.',
+          'Insurance, extended warranty, and accessories added to the loan inflate P and therefore EMI. A 7-year tenure lowers EMI and can mean you still owe money after the useful life of the car. Compare total interest at 3, 5, and 7 years with the same P and rate before signing.',
           'Manufacturer subvention rates are marketing. The true cost may be a higher list price. Use the contracted IRR or the rate on the agreement, not a banner 0% EMI without reading the contract.',
         ],
       },
@@ -314,15 +314,15 @@ export const publisherArticles: PublisherArticle[] = [
   }),
   article({
     path: '/finance/inflation-calculator',
-    title: 'Inflation erodes a future rupee, it does not change today's cash',
+    title: 'Inflation erodes a future rupee, it does not change cash today',
     lead:
-      'This page applies FV = PV × (1 + π)^t. π is an assumed annual inflation rate, not next year's CPI print. Use it to see purchasing power, not to forecast RBI policy.',
+      'This page applies FV = PV × (1 + π)^t. π is an assumed annual inflation rate, not the next CPI print. Use it to see purchasing power, not to forecast RBI policy.',
     reviewed: '10 September 2026',
     sections: [
       {
         heading: 'Reading the output',
         paragraphs: [
-          '₹1,00,000 today at 6% inflation for 10 years needs about ₹1,79,085 in then-rupees to buy the same basket. Equivalently, ₹1,00,000 received in 10 years is worth about ₹55,840 in today's rupees at 6%. Those two views are inverses.',
+          '₹1,00,000 today at 6% inflation for 10 years needs about ₹1,79,085 in then-rupees to buy the same basket. Equivalently, ₹1,00,000 received in 10 years is worth about ₹55,840 in rupees today at 6%. Those two views are inverses.',
           'Indian CPI series are published by MOSPI. Food and housing inflate at different speeds; a single π is a blunt instrument. For retirement, pair this page with the retirement-corpus calculator rather than inflating salary forever at 6% without a career path.',
         ],
       },
@@ -330,7 +330,7 @@ export const publisherArticles: PublisherArticle[] = [
     examples: [
       {
         title: 'Education cost sketch',
-        body: 'A ₹15 lakh present cost at 8% education inflation for 12 years is 1500000 × (1.08)^12 ≈ ₹37.8 lakh. That is a planning sketch, not a college's fee circular.',
+        body: 'A ₹15 lakh present cost at 8% education inflation for 12 years is 1500000 × (1.08)^12 ≈ ₹37.8 lakh. That is a planning sketch, not a college fee circular.',
       },
     ],
     limitations: [
@@ -359,7 +359,7 @@ export const publisherArticles: PublisherArticle[] = [
     ],
     examples: [
       {
-        title: 'Inflating today's spend',
+        title: 'Inflating current spend',
         body: '₹80,000 monthly spend at 6% for 20 years until retirement is 80000 × (1.06)^20 ≈ ₹2.57 lakh monthly in then-rupees, before you even size the corpus.',
       },
     ],

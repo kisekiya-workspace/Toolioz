@@ -47,7 +47,7 @@ export const publisherArticlesTools: PublisherArticle[] = [
         heading: 'How to use the output safely',
         paragraphs: [
           'Read `alg`, `iss`, `aud`, `exp`, and `sub` as claims, not as proof, unless an HS256 check with the correct secret succeeds. If `alg` is `none`, the token has no signature. If `exp` is in the past, resource servers should reject it. Toolioz does not contact the issuer. Never paste a live access token from a production user into a public blog screenshot.',
-          'HS256 needs a shared secret you should not type into a random website if your policy forbids it. RS256 needs the issuer's public key; this page does not fetch JWKS. Use your auth library in a trusted environment for production verification.',
+          'HS256 needs a shared secret you should not type into a random website if your policy forbids it. RS256 needs the issuer public key; this page does not fetch JWKS. Use your auth library in a trusted environment for production verification.',
         ],
       },
     ],
@@ -68,14 +68,14 @@ export const publisherArticlesTools: PublisherArticle[] = [
     path: '/devtools/regex-tester',
     title: 'JavaScript regular expressions are not "all regex"',
     lead:
-      'This tester runs the pattern in the browser's JavaScript regular-expression engine. A pattern that works in PCRE, Python, or grep may fail here, and the reverse is also true.',
+      'This tester runs the pattern in the browser JavaScript regular-expression engine. A pattern that works in PCRE, Python, or grep may fail here, and the reverse is also true.',
     reviewed: '10 September 2026',
     sections: [
       {
         heading: 'Flags and catastrophic backtracking',
         paragraphs: [
           'Flags such as `i`, `g`, `m`, `s`, and `u` change matching. `g` finds every match. Without it you see the first. Nested quantifiers on ambiguous input can lock the tab. That is catastrophic backtracking, not a freeze in Toolioz UI. Simplify the pattern or test a shorter string.',
-          'Anchors `^` and `$` mean start and end of string, or of lines when `m` is set. If a pattern "works on regex101 in PCRE" and fails here, switch regex101's flavor to ECMAScript before assuming the tester is broken.',
+          'Anchors `^` and `$` mean start and end of string, or of lines when `m` is set. If a pattern "works on regex101 in PCRE" and fails here, switch regex101 flavor to ECMAScript before assuming the tester is broken.',
         ],
       },
     ],
@@ -104,7 +104,7 @@ export const publisherArticlesTools: PublisherArticle[] = [
         heading: 'How to tell which unit you have',
         paragraphs: [
           'A 10-digit integer near 1.7e9 is seconds in the 2020s. A 13-digit integer near 1.7e12 is milliseconds. If a converted date lands in 1970 or 56000 AD, you picked the wrong unit. The tool should expose both; if you pasted a float, check whether the API used seconds with a fractional part.',
-          'Local timezone display uses the browser's zone. Two reviewers in IST and UTC will see different clock times for the same instant. Store UTC in APIs; display local only at the edge.',
+          'Local timezone display uses the browser zone. Two reviewers in IST and UTC will see different clock times for the same instant. Store UTC in APIs; display local only at the edge.',
         ],
       },
     ],
@@ -299,8 +299,8 @@ export const publisherArticlesTools: PublisherArticle[] = [
       {
         heading: 'What this builder does',
         paragraphs: [
-          'Standard headings, no tables for the main chronology, and real Unicode text. Some ATS products still fail on multi-column designs and icons. This builder stays narrow on purpose. It cannot guarantee a score on a vendor's "ATS score" widget; those products are not standardised.',
-          'Dates, employer names, and measurable outcomes help more than a skills cloud. Keep the file under typical 2 MB portal caps; this generator's vector text is usually small.',
+          'Standard headings, no tables for the main chronology, and real Unicode text. Some ATS products still fail on multi-column designs and icons. This builder stays narrow on purpose. It cannot guarantee a score on a vendor ATS score widget. Those products are not standardised.',
+          'Dates, employer names, and measurable outcomes help more than a skills cloud. Keep the file under typical 2 MB portal caps; vector text from this generator is usually small.',
         ],
       },
     ],
@@ -320,15 +320,15 @@ export const publisherArticlesTools: PublisherArticle[] = [
   },
   {
     path: '/devtools/x-hidden-image',
-    title: 'Tap-to-reveal images follow X's image rules, not a hack',
+    title: 'Tap-to-reveal images follow X image rules, not a hack',
     lead:
-      'This tool composites a cover frame and a hidden frame into a PNG that X (Twitter) can show as a spoiler-style image depending on current client behaviour. Platform rules change. If a post is rejected, the cause is the network's media policy, not a Toolioz "ban."',
+      'This tool composites a cover frame and a hidden frame into a PNG that X (Twitter) can show as a spoiler-style image depending on current client behaviour. Platform rules change. If a post is rejected, the cause is the network media policy, not a Toolioz "ban."',
     reviewed: '10 September 2026',
     sections: [
       {
         heading: 'What to expect',
         paragraphs: [
-          'Keep both layers within the size and aspect ratio the composer shows. Illegal, sexual, or violent content is still against X's rules whether or not it is "hidden." Do not use the tool to evade safety filters. Preview on a throwaway draft before a wide post.',
+          'Keep both layers within the size and aspect ratio the composer shows. Illegal, sexual, or violent content is still against X rules whether or not it is "hidden." Do not use the tool to evade safety filters. Preview on a throwaway draft before a wide post.',
           'Processing is local when labelled. The PNG you download is just a file; we do not post it to X for you.',
         ],
       },
