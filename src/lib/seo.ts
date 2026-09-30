@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { PUBLISHER_READY_TOOLS } from '@/lib/tools';
+import { INDEXABLE_TOOLS } from '@/lib/tools';
 
 export const SITE_URL = 'https://toolioz.com';
 export const SITE_NAME = 'Toolioz';
@@ -104,7 +104,7 @@ export function buildCollectionPageJsonLd(options: {
   description: string;
   path: string;
 }) {
-  const categoryTools = PUBLISHER_READY_TOOLS.filter((t) => t.href.startsWith(options.path));
+  const categoryTools = INDEXABLE_TOOLS.filter((t) => t.href.startsWith(options.path));
   return {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -215,7 +215,7 @@ export function buildHowToJsonLd(options: {
 }
 
 export const allToolItems = [
-  ...PUBLISHER_READY_TOOLS.map((t) => ({
+  ...INDEXABLE_TOOLS.map((t) => ({
     name: t.title,
     url: t.href,
     description: t.desc,

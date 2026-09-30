@@ -40,8 +40,9 @@ export default function EditorialPolicyPage() {
             <p>
               A listed tool must perform a distinct user task, work in a supported modern browser, explain the inputs and
               output, and state material limitations. We do not treat a new keyword variation as a reason to publish a
-              separate page. Experimental tools and pages that duplicate an established utility may remain available for
-              testing, but they are withheld from the primary directory and search index until their value is independently clear.
+              separate page. Duplicate percentage variants and the old <code>/tools/</code> copies stay out of the
+              directory and search index. Unique tools without publisher notes remain reachable by URL for testing, but
+              they are not linked from hubs or the sitemap until those notes exist.
             </p>
 
             <h2>Calculator Review</h2>

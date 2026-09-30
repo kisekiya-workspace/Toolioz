@@ -51,7 +51,7 @@ export default function DevToolsClient() {
           </h1>
           
           <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-            JSON formatting, JWT claim inspection, and JavaScript regular-expression testing. Pages labelled local processing keep pasted text in the tab.
+            JSON formatting, JWT inspection, regex testing, UUID, hash, and timestamp conversion. Pages labelled local processing keep pasted text in the tab.
           </p>
 
           {/* Search Box */}
@@ -60,7 +60,7 @@ export default function DevToolsClient() {
               <Search size={18} className="ml-3 shrink-0 text-zinc-400" />
               <input
                 type="search"
-                placeholder="Search (JSON, JWT, Regex)..."
+                placeholder="Search (JSON, JWT, Regex, UUID)..."
                 className="w-full border-none bg-transparent px-3 py-1 text-sm font-medium text-zinc-950 outline-none placeholder:text-zinc-400 dark:text-zinc-50"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -87,7 +87,7 @@ export default function DevToolsClient() {
                 {search ? `Search Results (${filteredTools.length})` : 'All Developer Tools'}
               </h2>
               <p className="text-xs text-zinc-500 mt-0.5 dark:text-zinc-400">
-                Formatters and testers with documented limits. This is not a full encoding or crypto suite.
+                Formatters and testers with documented limits. JWT decoding is not verification.
               </p>
             </div>
             <Badge variant="mono" size="sm">
@@ -202,8 +202,8 @@ export default function DevToolsClient() {
         <div className="mx-auto max-w-3xl px-4 sm:px-6 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
           <h2 className="text-xl font-bold text-zinc-950 dark:text-zinc-50">What these developer tools do</h2>
           <p className="mt-3">
-            The listed utilities format JSON, decode JWTs, test regular expressions, encode Base64, hash
-            strings, and convert timestamps. They are editors and inspectors, not hosted APIs. When a page
+            The listed utilities format JSON, decode JWTs, test regular expressions, hash
+            strings, generate UUIDs, and convert timestamps. They are editors and inspectors, not hosted APIs. When a page
             is labelled local processing, the payload stays in the browser tab. JWT decoding still requires
             care: a decoded token is not a verified token, and secrets should not be pasted into any web
             page. The{' '}

@@ -60,7 +60,7 @@ export default function DesignClient() {
           </h1>
           
           <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-            One published image tool: tap-to-reveal PNGs for X. Extra drawing and shader workbenches stay off this catalog until they have the same review as the finance and PDF pages.
+            Tap-to-reveal PNGs for X and a three-panel image split. Pages labelled local processing keep uploads in the tab.
           </p>
 
           {/* Search Box */}
@@ -142,11 +142,11 @@ export default function DesignClient() {
           <div className="mt-14">
             <DirectAnswerBlock
               title="What design tools does Toolioz publish?"
-              answer="The public design catalog currently lists the X tap-to-reveal PNG maker. Drawing, dither, shader, and split-image workbenches exist as unpublished URLs and are not part of this directory."
+              answer="The public design catalog lists the X tap-to-reveal PNG maker and the split-image-in-3 tool. Both have publisher notes. Drawing, dither, and shader workbenches stay off this directory until they have the same review."
               keyTakeaways={[
                 "Local image processing where the tool page says so. Those files are not uploaded to Toolioz.",
                 "The website still loads ordinary page assets and analytics.",
-                "Unpublished studio URLs are not advertised here as finished products.",
+                "Ads only appear on design pages that include original publisher notes.",
               ]}
               categoryName="Design"
             />

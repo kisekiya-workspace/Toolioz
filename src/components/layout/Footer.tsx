@@ -59,11 +59,14 @@ export function Footer() {
             <Link href="/finance/sip-calculator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               SIP Calculator
             </Link>
+            <Link href="/finance/lumpsum-calculator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              Lumpsum Calculator
+            </Link>
             <Link href="/finance/income-tax" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               Income Tax Calculator
             </Link>
-            <Link href="/finance/compound-interest" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
-              Compound Interest
+            <Link href="/finance/fd-calculator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              Fixed Deposit
             </Link>
             <Link href="/finance/mortgage-calculator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               Home / vehicle EMI
@@ -71,8 +74,8 @@ export function Footer() {
             <Link href="/finance/loan-prepayment" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               Loan prepayment
             </Link>
-            <Link href="/finance/inflation-calculator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
-              Inflation
+            <Link href="/finance/retirement-corpus" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              Retirement corpus
             </Link>
             <Link href="/finance/gst-calculator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               GST Calculator
@@ -97,6 +100,12 @@ export function Footer() {
             <Link href="/devtools/regex-tester" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               Regex Tester & Debugger
             </Link>
+            <Link href="/devtools/uuid-generator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              UUID Generator
+            </Link>
+            <Link href="/devtools/hash-generator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              Hash Generator
+            </Link>
             <Link href="/devtools/x-hidden-image" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               X Tap-to-Reveal PNG
             </Link>
@@ -114,8 +123,14 @@ export function Footer() {
             <Link href="/pdftools/merge-pdf" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               Merge Multiple PDFs
             </Link>
+            <Link href="/pdftools/split-pdf" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              Split PDF
+            </Link>
             <Link href="/pdftools/image-to-pdf" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               Images to PDF
+            </Link>
+            <Link href="/pdftools/pdf-to-image" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              PDF to Images
             </Link>
             <Link href="/biodata" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               Marriage Biodata Studio

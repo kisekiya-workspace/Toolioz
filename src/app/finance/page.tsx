@@ -6,7 +6,7 @@ import { buildCollectionPageJsonLd, buildPageMetadata } from '@/lib/seo';
 export const metadata = buildPageMetadata({
   title: 'Finance Calculators | SIP, Tax, EMI, Inflation | Toolioz',
   description:
-    'SIP, income tax, GST, home-loan EMI, compound interest, inflation, percentage, and prepayment calculators with documented formulas and limits.',
+    'SIP, lumpsum, FD, income tax, GST, EMI, compound interest, inflation, retirement, and percentage calculators with documented formulas and limits.',
   path: '/finance',
   keywords: [
     'free finance calculators',

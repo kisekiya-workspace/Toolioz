@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { isLowValuePublisherPath } from "@/lib/tools";
+import { isAdSenseEligiblePath } from "@/lib/tools";
 
 declare global {
     interface Window {
@@ -20,7 +20,7 @@ interface AdContainerProps {
 export function AdContainer({ slot, format = "auto", responsive = "true", className = "" }: AdContainerProps) {
     const publisherId = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
     const pathname = usePathname();
-    const hideAds = isLowValuePublisherPath(pathname);
+    const hideAds = !isAdSenseEligiblePath(pathname);
 
     useEffect(() => {
         if (!publisherId || hideAds) return;

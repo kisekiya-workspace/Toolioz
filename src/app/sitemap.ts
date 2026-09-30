@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { PUBLISHER_READY_TOOLS } from '@/lib/tools';
+import { INDEXABLE_TOOLS } from '@/lib/tools';
 import { standaloneBlogs } from '@/../blogs';
 import { indexedHowToPosts } from '@/lib/howto-content';
 import { ADSENSE_NOINDEX_BLOG_SLUGS } from '@/lib/adsense-catalog';
@@ -9,9 +9,9 @@ export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
-  const trendingIds = new Set(PUBLISHER_READY_TOOLS.filter((t) => t.isTrending).map((t) => t.id));
+  const trendingIds = new Set(INDEXABLE_TOOLS.filter((t) => t.isTrending).map((t) => t.id));
 
-  const toolRoutes = PUBLISHER_READY_TOOLS.map((tool) => ({
+  const toolRoutes = INDEXABLE_TOOLS.map((tool) => ({
     url: `${SITE_URL}${tool.href}`,
     lastModified,
     changeFrequency: 'weekly' as const,

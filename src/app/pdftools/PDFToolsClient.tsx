@@ -35,7 +35,7 @@ export default function PDFToolsClient() {
           </h1>
           
           <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-            Merge PDFs and turn images into a PDF in the browser. Split lives on the merge page; Toolioz does not publish a separate compressor.
+            Merge, split, and convert PDFs and images in the browser. Pages labelled local processing keep the file in the tab.
           </p>
 
           {/* Search Box */}
@@ -186,11 +186,12 @@ export default function PDFToolsClient() {
         <div className="mx-auto max-w-3xl px-4 sm:px-6 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
           <h2 className="text-xl font-bold text-zinc-950 dark:text-zinc-50">How the PDF tools handle files</h2>
           <p className="mt-3">
-            Merge and image-to-PDF run in the browser on pages labelled local processing. A typical
-            email or job-portal cap is 2&nbsp;MB; scanned pages at 300 DPI are usually the reason a file
-            misses that cap. Toolioz does not publish a PDF compressor: use a dedicated compressor after
-            merge if you need a size cap. Toolioz still loads page assets and analytics over the network;
-            only the document bytes stay local when that label is present.
+            Merge, split, image-to-PDF, and PDF-to-image run in the browser on pages labelled local
+            processing. A typical email or job-portal cap is 2&nbsp;MB; scanned pages at 300 DPI are
+            usually the reason a file misses that cap. Toolioz does not list a public PDF compressor:
+            use a dedicated compressor after merge if you need a size cap. Toolioz still loads page
+            assets and analytics over the network; only the document bytes stay local when that label
+            is present.
           </p>
         </div>
       </section>

@@ -4,9 +4,9 @@ import PDFToolsClient from './PDFToolsClient';
 import { buildCollectionPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata = buildPageMetadata({
-  title: 'PDF Tools | Merge and Image to PDF | Toolioz',
+  title: 'PDF Tools | Merge, Split, Convert | Toolioz',
   description:
-    'Merge PDF files and convert images to PDF in the browser. Split and compress are not separate public tools; large files still need an external compressor for portal size caps.',
+    'Merge, split, and convert PDF files and images in the browser. Large files may still need an external compressor for portal size caps.',
   path: '/pdftools',
   keywords: [
     'merge pdf online free',
@@ -21,7 +21,7 @@ export default function PDFToolsLandingPage() {
       <JSONLD
         data={buildCollectionPageJsonLd({
           name: 'PDF tools',
-          description: 'Browser-native PDF merge and image-to-PDF conversion.',
+          description: 'Browser-native PDF merge, split, and image conversion.',
           path: '/pdftools',
         })}
       />

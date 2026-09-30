@@ -588,17 +588,33 @@ const WITHHELD_TOOL_PATHS = new Set(
 );
 
 /**
- * Tools that have a complete, independently useful page and are ready to be
- * promoted in the primary navigation and search index. New workbench tools
- * remain available by URL while their documentation and editorial review are
- * completed, but they are intentionally not presented as finished content.
+ * Public directory for hubs, nav, related tools, sitemap, and search.
+ * Only unique tools with original publisher notes. Duplicate keyword
+ * variants and unfinished workbench pages stay off this list so an
+ * AdSense review does not land on thin URLs from the homepage.
  */
 export const PUBLISHER_READY_TOOLS = TOOLS.filter((tool) => ADSENSE_INDEX_TOOL_IDS.has(tool.id));
 
-const INDEXABLE_TOOL_PATHS = new Set(PUBLISHER_READY_TOOLS.map((tool) => tool.href));
+export const INDEXABLE_TOOLS = PUBLISHER_READY_TOOLS;
 
+const INDEXABLE_TOOL_PATHS = new Set(INDEXABLE_TOOLS.map((tool) => tool.href));
+
+const ADSENSE_AD_PATHS = new Set(
+  TOOLS.filter((tool) => ADSENSE_INDEX_TOOL_IDS.has(tool.id)).map((tool) => tool.href),
+);
+ADSENSE_AD_PATHS.add('/resume-builder');
+
+function normalizePath(pathname: string): string {
+  return pathname.replace(/\/$/, '') || '/';
+}
+
+function isToolPagePath(path: string): boolean {
+  return /^\/(finance|devtools|design|pdftools|biodata)\/.+/.test(path) && !path.includes('/blog/');
+}
+
+/** Duplicate, experimental, or thin URLs that must not be treated as publisher pages. */
 export function isLowValuePublisherPath(pathname: string): boolean {
-  const path = pathname.replace(/\/$/, '') || '/';
+  const path = normalizePath(pathname);
   if (path === '/tools' || path.startsWith('/tools/')) return true;
   if (path === '/top5' || path.startsWith('/top5/')) return true;
   if (path.startsWith('/how-to/')) {
@@ -606,9 +622,17 @@ export function isLowValuePublisherPath(pathname: string): boolean {
     if (ADSENSE_NOINDEX_HOWTO_SLUGS.has(slug)) return true;
   }
   if (NEW_TOOL_PATHS.has(path) || WITHHELD_TOOL_PATHS.has(path)) return true;
-  const looksLikeToolPage =
-    /^\/(finance|devtools|design|pdftools|biodata)\/.+/.test(path) && !path.includes('/blog/');
-  return looksLikeToolPage && !INDEXABLE_TOOL_PATHS.has(path);
+  return isToolPagePath(path) && !INDEXABLE_TOOL_PATHS.has(path);
+}
+
+/** Ads only on original article URLs and non-tool publisher pages. Never on duplicates or unfinished workbench tools. */
+export function isAdSenseEligiblePath(pathname: string): boolean {
+  const path = normalizePath(pathname);
+  if (isLowValuePublisherPath(path)) return false;
+  if (isToolPagePath(path) || path === '/resume-builder') {
+    return ADSENSE_AD_PATHS.has(path);
+  }
+  return true;
 }
 
 export const CATEGORIES = [
@@ -629,14 +653,14 @@ export const CATEGORIES = [
   {
     id: 'design',
     title: 'Design & Creative Studio',
-    desc: 'Published image utilities that run in the browser, starting with tap-to-reveal PNGs.',
+    desc: 'Published image utilities that run in the browser, including tap-to-reveal PNGs.',
     color: '#06b6d4',
     icon: Palette
   },
   {
     id: 'pdftools',
     title: 'PDF Utilities',
-    desc: 'Merge PDFs and turn images into a PDF in the browser. Resume export is a separate page.',
+    desc: 'Merge, split, and convert PDFs in the browser. Resume export is a separate page.',
     color: '#ef4444',
     icon: FileText
   },
