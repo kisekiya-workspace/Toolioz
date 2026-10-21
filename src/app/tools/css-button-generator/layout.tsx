@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "CSS Button Generator | Toolioz Tools",
-    description: "Design custom CSS buttons and get the HTML/CSS code instantly.",
-    keywords: ["css button","button generator","css maker"],
-    alternates: {
-        canonical: "/tools/css-button-generator",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('css-button-generator');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

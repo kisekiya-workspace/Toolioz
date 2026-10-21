@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "GST Calculator | Toolioz Tools",
-    description: "Calculate GST (Goods and Services Tax) inclusive and exclusive amounts.",
-    keywords: ["gst calculator","tax calculator","india tax"],
-    alternates: {
-        canonical: "/tools/gst-calculator",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('gst-calculator');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

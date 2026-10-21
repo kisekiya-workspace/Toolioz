@@ -10,10 +10,7 @@ export function generateStaticParams() { return NEW_PDF_TOOLS.map(({ slug }) => 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const tool = getNewTool((await params).slug, 'pdf');
   if (!tool) return {};
-  return {
-    ...buildPageMetadata({ title: `${tool.title} | Toolioz`, description: tool.description, path: tool.path, keywords: tool.keywords }),
-    robots: { index: false, follow: true },
-  };
+  return buildPageMetadata({ title: tool.title, description: tool.description, path: tool.path, keywords: tool.keywords });
 }
 
 export default async function NewPdfToolPage({ params }: { params: Promise<{ slug: string }> }) {

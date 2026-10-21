@@ -8,12 +8,10 @@ import { SITE_URL } from '@/lib/seo';
 export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
   const trendingIds = new Set(INDEXABLE_TOOLS.filter((t) => t.isTrending).map((t) => t.id));
 
   const toolRoutes = INDEXABLE_TOOLS.map((tool) => ({
     url: `${SITE_URL}${tool.href}`,
-    lastModified,
     changeFrequency: 'weekly' as const,
     priority:
       tool.id === 'x-hidden-image' ? 0.7 : trendingIds.has(tool.id) ? 0.92 : 0.85,
@@ -27,9 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { route: '/design', priority: 0.95, freq: 'weekly' as const },
     { route: '/devtools', priority: 0.95, freq: 'weekly' as const },
     { route: '/pdftools', priority: 0.95, freq: 'weekly' as const },
-    { route: '/biodata', priority: 0.95, freq: 'weekly' as const },
-    { route: '/biodata/biodata-generator', priority: 0.93, freq: 'weekly' as const },
-    { route: '/resume-builder', priority: 0.92, freq: 'weekly' as const },
+    { route: '/tools', priority: 0.95, freq: 'weekly' as const },
     { route: '/about', priority: 0.5, freq: 'monthly' as const },
     { route: '/contact', priority: 0.5, freq: 'monthly' as const },
     { route: '/editorial-policy', priority: 0.5, freq: 'monthly' as const },
@@ -37,7 +33,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { route: '/terms', priority: 0.3, freq: 'yearly' as const },
   ].map(({ route, priority, freq }) => ({
     url: `${SITE_URL}${route}`,
-    lastModified,
     changeFrequency: freq,
     priority,
   }));
@@ -46,22 +41,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .filter((post) => !ADSENSE_NOINDEX_BLOG_SLUGS.has(post.slug))
     .map((post) => ({
     url: `${SITE_URL}/blog/${post.slug}`,
-    lastModified: post.updatedIso ? new Date(post.updatedIso) : lastModified,
+    lastModified: post.updatedIso ? new Date(post.updatedIso) : undefined,
     changeFrequency: 'monthly' as const,
     priority: 0.88,
   }));
 
   const howToRoutes = indexedHowToPosts.map((post) => ({
     url: `${SITE_URL}${post.directUrl}`,
-    lastModified: post.updatedIso ? new Date(post.updatedIso) : lastModified,
+    lastModified: post.updatedIso ? new Date(post.updatedIso) : undefined,
     changeFrequency: 'weekly' as const,
     priority: 0.95,
   }));
 
-  return [
+  return Array.from(new Map([
     ...hubRoutes,
     ...toolRoutes,
     ...blogRoutes,
     ...howToRoutes,
-  ];
+  ].map(entry => [entry.url, entry])).values());
 }

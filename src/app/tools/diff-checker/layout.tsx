@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Diff Checker | Toolioz Tools",
-    description: "Compare two text files and highlight the differences.",
-    keywords: ["diff checker","text compare","code diff"],
-    alternates: {
-        canonical: "/tools/diff-checker",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('diff-checker');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

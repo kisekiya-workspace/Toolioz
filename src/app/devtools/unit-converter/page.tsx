@@ -4,7 +4,7 @@ import UnitConverterClient from './UnitConverterClient';
 import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
-  title: 'Scientific Unit Converter & Global Measure Tool | Toolioz',
+  title: "Scientific Unit Converter & Global Measure Tool",
   description: 'Fast, precise unit conversion for Length, Mass, Temperature, Volume, and Data. Scientific precision measurements for educational and engineering needs.',
   keywords: 'Unit converter online, scientific measurement tool, convert length weight volume, precise metric converter, temperature conversion tool',
   alternates: {

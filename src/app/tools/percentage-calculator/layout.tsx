@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Percentage Calculator | Toolioz Tools",
-    description: "Calculate percentages, percentage change, and more.",
-    keywords: ["percentage calculator","math tools","percent"],
-    alternates: {
-        canonical: "/tools/percentage-calculator",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('percentage-calculator');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

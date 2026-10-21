@@ -24,6 +24,10 @@ export default function DitheritClient() {
       />
 
       {/* Main Full Ditherit Studio Pro Editor Workspace */}
+      <header className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6">
+        <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">ditherit — Interactive ASCII &amp; Dot Art</h1>
+        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">Create interactive image, GIF, and video artwork with physics effects and code export.</p>
+      </header>
       <div className="flex-1 mb-10">
         <DitherStudio />
       </div>

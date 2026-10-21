@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Compound Interest Calculator | Toolioz Tools",
-    description: "Calculate the future value of your investments with compound interest.",
-    keywords: ["compound interest","investment calculator","interest calculator"],
-    alternates: {
-        canonical: "/tools/compound-interest-calculator",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('compound-interest-calculator');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

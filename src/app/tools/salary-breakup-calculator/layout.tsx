@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Salary Breakup Calculator | Toolioz Tools",
-    description: "Calculate your in-hand salary and tax deductions.",
-    keywords: ["salary calculator","ctc calculator","salary breakdown"],
-    alternates: {
-        canonical: "/tools/salary-breakup-calculator",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('salary-breakup-calculator');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

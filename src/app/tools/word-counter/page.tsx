@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/sociials-ui/card";
 import { Textarea } from "@/components/sociials-ui/textarea";
-import { AlignLeft } from "lucide-react";
+import { ToolHeader } from '@/components/sociials-tools/ToolHeader';
 
 export default function WordCounterPage() {
     const [text, setText] = useState("");
@@ -28,15 +28,7 @@ export default function WordCounterPage() {
         <div className="container px-6 py-12 max-w-4xl mx-auto">
             <div className="space-y-8">
                 {/* Header */}
-                <div className="flex items-center gap-4">
-                    <div className="p-3 rounded-xl bg-muted">
-                        <AlignLeft className="h-8 w-8" />
-                    </div>
-                    <div>
-                        <h1 className="text-3xl font-bold">Word Counter</h1>
-                        <p className="text-muted-foreground">Count words, characters, sentences, and more</p>
-                    </div>
-                </div>
+                <ToolHeader title="Word Counter" description="Count words, characters, sentences, and paragraphs as you type, with an estimated reading time." />
 
                 {/* Stats Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -64,6 +56,7 @@ export default function WordCounterPage() {
                     </CardHeader>
                     <CardContent>
                         <Textarea
+                            aria-label="Text to count"
                             value={text}
                             onChange={(e) => setText(e.target.value)}
                             placeholder="Paste or type your text here..."
@@ -71,6 +64,11 @@ export default function WordCounterPage() {
                         />
                     </CardContent>
                 </Card>
+                <section className="rounded-xl border border-border p-6 text-sm leading-6">
+                    <h2 className="text-lg font-semibold">How the counts work</h2>
+                    <p className="mt-3 text-muted-foreground">Paste or type your text to update every count automatically. For example, “Hello world!” counts as two words and one sentence. Words are separated by whitespace; paragraphs are separated by blank lines. Reading time assumes 200 words per minute.</p>
+                    <p className="mt-3 text-muted-foreground">These are practical estimates, not language-aware analysis: abbreviations and punctuation can affect sentence counts, and languages without spaces need a different word-segmentation method.</p>
+                </section>
             </div>
         </div>
     );

@@ -146,6 +146,10 @@ function MainSections({
       <FieldRow label="Mother's Occupation" value={data.motherOccupation} textColor={theme.text} mutedColor={theme.muted} />
       <FieldRow label="Siblings" value={data.siblings} textColor={theme.text} mutedColor={theme.muted} />
       <FieldRow label="Native Place" value={data.nativePlace} textColor={theme.text} mutedColor={theme.muted} />
+      <FieldRow label="Kuldevi" value={data.kuldevi} textColor={theme.text} mutedColor={theme.muted} />
+      <FieldRow label="Mosal" value={data.mosal} textColor={theme.text} mutedColor={theme.muted} />
+      <FieldRow label="Mama" value={data.mamaName} textColor={theme.text} mutedColor={theme.muted} />
+      <FieldRow label="Sampraday" value={data.sampraday} textColor={theme.text} mutedColor={theme.muted} />
       <FieldRow label="Family Type" value={data.familyType} textColor={theme.text} mutedColor={theme.muted} />
       <FieldRow label="Family Status" value={data.familyStatus} textColor={theme.text} mutedColor={theme.muted} />
 
@@ -550,6 +554,144 @@ export function BiodataFlatDocument({ data, theme }: { data: BiodataForm; theme:
         <main style={{ position: 'relative', zIndex: 1 }}>
           <MainSections data={data} theme={theme} centered />
         </main>
+      </TemplateWrapper>
+    );
+  }
+
+  if (theme.layout === 'gujarat_bandhani') {
+    const dots =
+      'radial-gradient(circle at 4px 4px, #c41e3a 1.15px, transparent 1.25px), radial-gradient(circle at 12px 12px, #d4a017 1px, transparent 1.15px)';
+    return (
+      <TemplateWrapper style={{ background: theme.bg, fontFamily: font, padding: '28px', boxSizing: 'border-box' }}>
+        <div style={{ position: 'absolute', inset: 14, border: `3px solid ${theme.primary}` }} />
+        <div style={{ position: 'absolute', inset: 20, border: `1.5px solid ${theme.accent}` }} />
+        <div style={{ position: 'absolute', inset: 26, backgroundImage: dots, backgroundSize: '16px 16px', opacity: 0.22, pointerEvents: 'none' }} />
+        <header style={{ textAlign: 'center', marginBottom: '20px', position: 'relative', zIndex: 1, paddingTop: '12px' }}>
+          {theme.motif ? <ReligiousMotif motif={theme.motif} color={theme.primary} /> : null}
+          <p style={{ fontSize: '15px', fontWeight: 700, color: theme.primary, margin: '0 0 4px', letterSpacing: '0.04em' }}>{theme.subtitle}</p>
+          <p style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.18em', color: theme.accent, margin: '0 0 12px' }}>GUJARAT LAGNA BIODATA</p>
+          {data.photo ? (
+            <img
+              src={data.photo}
+              alt=""
+              crossOrigin="anonymous"
+              style={{
+                width: '102px',
+                height: '102px',
+                objectFit: 'cover',
+                borderRadius: '50%',
+                border: `3px solid ${theme.accent}`,
+                outline: `2px solid ${theme.primary}`,
+                outlineOffset: '4px',
+                margin: '0 auto 12px',
+                display: 'block',
+              }}
+            />
+          ) : null}
+          <h1 style={{ fontSize: '26px', fontWeight: 800, color: theme.primary, margin: '0 0 6px' }}>{name}</h1>
+          {data.occupation ? <p style={{ fontSize: '10px', fontStyle: 'italic', color: theme.muted, margin: 0 }}>{data.occupation}</p> : null}
+        </header>
+        <main style={{ position: 'relative', zIndex: 1, padding: '0 22px 12px' }}>
+          <MainSections data={data} theme={theme} centered />
+        </main>
+      </TemplateWrapper>
+    );
+  }
+
+  if (theme.layout === 'gujarat_patola') {
+    return (
+      <TemplateWrapper style={{ background: theme.bg, fontFamily: font, padding: '32px 36px', boxSizing: 'border-box' }}>
+        <div style={{ position: 'absolute', inset: 12, background: `repeating-linear-gradient(90deg, ${theme.primary} 0 10px, ${theme.accent} 10px 20px, #1f6b4a 20px 30px, ${theme.bg} 30px 40px)`, opacity: 0.95 }} />
+        <div style={{ position: 'absolute', inset: 22, background: theme.bg }} />
+        <div style={{ position: 'absolute', inset: 28, border: `1px solid ${theme.primary}`, opacity: 0.35 }} />
+        <header style={{ textAlign: 'center', marginBottom: '18px', position: 'relative', zIndex: 1, paddingTop: '10px' }}>
+          <p style={{ fontSize: '9px', fontWeight: 800, letterSpacing: '0.22em', color: theme.accent, margin: '0 0 6px' }}>PATAN PATOLA · GUJARAT</p>
+          <p style={{ fontSize: '12px', fontWeight: 700, color: theme.primary, margin: '0 0 10px' }}>{theme.subtitle}</p>
+          {data.photo ? (
+            <img
+              src={data.photo}
+              alt=""
+              crossOrigin="anonymous"
+              style={{
+                width: '96px',
+                height: '118px',
+                objectFit: 'cover',
+                border: `4px solid ${theme.primary}`,
+                boxShadow: `6px 6px 0 ${theme.accent}`,
+                margin: '0 auto 12px',
+                display: 'block',
+              }}
+            />
+          ) : null}
+          <h1 style={{ fontSize: '24px', fontWeight: 800, color: theme.primary, margin: 0 }}>{name}</h1>
+        </header>
+        <main style={{ position: 'relative', zIndex: 1 }}>
+          <MainSections data={data} theme={theme} centered />
+        </main>
+      </TemplateWrapper>
+    );
+  }
+
+  if (theme.layout === 'gujarat_kutch') {
+    return (
+      <TemplateWrapper style={{ background: theme.bg, fontFamily: font, padding: '34px 40px', boxSizing: 'border-box' }}>
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '18px', background: `repeating-linear-gradient(90deg, ${theme.primary} 0 14px, ${theme.accent} 14px 22px, #f2d6a0 22px 28px)` }} />
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '18px', background: `repeating-linear-gradient(90deg, ${theme.accent} 0 14px, ${theme.primary} 14px 22px, #f2d6a0 22px 28px)` }} />
+        <div style={{ position: 'absolute', top: 18, bottom: 18, left: 0, width: '10px', background: theme.primary }} />
+        <div style={{ position: 'absolute', top: 18, bottom: 18, right: 0, width: '10px', background: theme.accent }} />
+        <header style={{ textAlign: 'center', marginBottom: '20px', position: 'relative', zIndex: 1 }}>
+          <p style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '0.2em', color: theme.accent, margin: '0 0 8px' }}>{theme.subtitle}</p>
+          {data.photo ? (
+            <img
+              src={data.photo}
+              alt=""
+              crossOrigin="anonymous"
+              style={{
+                width: '100px',
+                height: '100px',
+                objectFit: 'cover',
+                border: `3px solid ${theme.primary}`,
+                margin: '0 auto 12px',
+                display: 'block',
+              }}
+            />
+          ) : null}
+          <h1 style={{ fontSize: '24px', fontWeight: 800, color: theme.primary, margin: '0 0 6px' }}>{name}</h1>
+          <SectionDivider color={theme.accent} />
+        </header>
+        <main style={{ position: 'relative', zIndex: 1 }}>
+          <MainSections data={data} theme={theme} centered />
+        </main>
+      </TemplateWrapper>
+    );
+  }
+
+  if (theme.layout === 'gujarat_jain') {
+    return (
+      <TemplateWrapper style={{ background: theme.bg, fontFamily: font, padding: '40px 48px', boxSizing: 'border-box' }}>
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '8px', background: theme.accent }} />
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '8px', background: theme.accent }} />
+        <header style={{ textAlign: 'center', marginBottom: '22px' }}>
+          <p style={{ fontSize: '13px', fontWeight: 700, color: theme.primary, margin: '0 0 4px' }}>{theme.subtitle}</p>
+          <p style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.2em', color: theme.muted, margin: '0 0 14px' }}>GUJARAT JAIN BIODATA</p>
+          {data.photo ? (
+            <img
+              src={data.photo}
+              alt=""
+              crossOrigin="anonymous"
+              style={{
+                width: '92px',
+                height: '112px',
+                objectFit: 'cover',
+                border: `1px solid ${theme.primary}`,
+                margin: '0 auto 12px',
+                display: 'block',
+              }}
+            />
+          ) : null}
+          <h1 style={{ fontSize: '26px', fontWeight: 500, color: theme.text, margin: 0, fontFamily: 'Georgia, serif' }}>{name}</h1>
+        </header>
+        <MainSections data={data} theme={theme} centered />
       </TemplateWrapper>
     );
   }

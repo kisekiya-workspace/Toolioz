@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Color Palette Generator | Toolioz Tools",
-    description: "Generate beautiful color palettes for your designs and projects.",
-    keywords: ["color palette","color scheme","design tools"],
-    alternates: {
-        canonical: "/tools/color-palette",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('color-palette');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

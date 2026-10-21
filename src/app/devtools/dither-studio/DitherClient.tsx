@@ -43,7 +43,7 @@ type MediaType = 'image' | 'video';
 type DashboardMode = 'ditherit' | 'classic';
 
 export default function DitherClient() {
-  const [dashboardMode, setDashboardMode] = useState<DashboardMode>('ditherit');
+  const [dashboardMode, setDashboardMode] = useState<DashboardMode>('classic');
   const [mediaType, setMediaType] = useState<MediaType>('image');
   const [mediaSrc, setMediaSrc] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string>('sample-media');

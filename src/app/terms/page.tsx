@@ -3,7 +3,7 @@ import TermsClient from './TermsClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Legal Framework | Toolioz",
+  title: "Terms of Service | Legal Framework",
   description: "Read the terms and conditions for using Toolioz. Understand your rights and responsibilities when using our free utility tools.",
   keywords: 'Terms of service, legal usage agreement, tool usage terms',
   alternates: {

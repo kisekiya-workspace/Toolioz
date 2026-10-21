@@ -5,7 +5,7 @@ import RetirementCorpusClient from './RetirementCorpusClient';
 import { buildCalculatorJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Retirement Corpus Calculator 2026 | Inflation Planning | Toolioz',
+  title: "Retirement Corpus Calculator 2026 | Inflation Planning",
   description:
     'Estimate how much you need for retirement after inflation, future spending growth, and existing savings are considered.',
   keywords:

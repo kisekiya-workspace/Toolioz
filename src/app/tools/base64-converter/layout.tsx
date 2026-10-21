@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Base64 Converter | Toolioz Tools",
-    description: "Encode and decode text or files to Base64 format instantly.",
-    keywords: ["base64 encode","base64 decode","base64 converter"],
-    alternates: {
-        canonical: "/tools/base64-converter",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('base64-converter');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

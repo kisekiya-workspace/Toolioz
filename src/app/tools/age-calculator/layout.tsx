@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Age Calculator | Toolioz Tools",
-    description: "Calculate your exact age in years, months, and days. Find out the difference between dates.",
-    keywords: ["age calculator","date difference","birthday calculator"],
-    alternates: {
-        canonical: "/tools/age-calculator",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('age-calculator');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

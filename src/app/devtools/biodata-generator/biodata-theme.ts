@@ -1,7 +1,20 @@
 import type { TemplateId } from './types';
 import type { BiodataMotifId } from './biodata-motifs';
 
-export type BiodataLayoutKind = 'split' | 'centered' | 'minimal' | 'floral' | 'banner' | 'ornate_ivory' | 'maroon_gold' | 'rose_gold' | 'navy_gold';
+export type BiodataLayoutKind =
+  | 'split'
+  | 'centered'
+  | 'minimal'
+  | 'floral'
+  | 'banner'
+  | 'ornate_ivory'
+  | 'maroon_gold'
+  | 'rose_gold'
+  | 'navy_gold'
+  | 'gujarat_bandhani'
+  | 'gujarat_patola'
+  | 'gujarat_kutch'
+  | 'gujarat_jain';
 
 /** Shared theme tokens — used by HTML preview and PDF export. */
 export type BiodataThemeConfig = {
@@ -141,6 +154,47 @@ export const BIODATA_THEMES: Record<TemplateId, BiodataThemeConfig> = {
     text: '#2f2d2a',
     muted: '#5f5b55',
     bg: '#f4f1ef',
+  },
+  gujarat_bandhani: {
+    id: 'gujarat_bandhani',
+    layout: 'gujarat_bandhani',
+    primary: '#9b1c2c',
+    accent: '#d4a017',
+    text: '#3b1518',
+    muted: '#6b3a32',
+    bg: '#fff6e8',
+    subtitle: '॥ શુભ વિવાહ ॥',
+    motif: 'om',
+  },
+  gujarat_patola: {
+    id: 'gujarat_patola',
+    layout: 'gujarat_patola',
+    primary: '#6b1d2a',
+    accent: '#c45c26',
+    text: '#2c1216',
+    muted: '#5c3a32',
+    bg: '#fbf4e6',
+    subtitle: 'Lagna Patrika · Gujarat',
+  },
+  gujarat_kutch: {
+    id: 'gujarat_kutch',
+    layout: 'gujarat_kutch',
+    primary: '#1e3a5f',
+    accent: '#c45c26',
+    text: '#1a2433',
+    muted: '#4a5563',
+    bg: '#f7f1e4',
+    subtitle: 'Kutch · Gujarat',
+  },
+  gujarat_jain: {
+    id: 'gujarat_jain',
+    layout: 'gujarat_jain',
+    primary: '#9a3412',
+    accent: '#c2410c',
+    text: '#292524',
+    muted: '#57534e',
+    bg: '#fffdf8',
+    subtitle: 'Jai Jinendra',
   },
 };
 

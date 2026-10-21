@@ -5,7 +5,7 @@ import LoanPrepaymentClient from './LoanPrepaymentClient';
 import { buildCalculatorJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Loan Prepayment Calculator 2026 | Extra EMI Savings | Toolioz',
+  title: "Loan Prepayment Calculator 2026 | Extra EMI Savings",
   description:
     'See how extra EMI payments reduce total interest and shorten your loan term for car, home, or personal loans.',
   keywords:

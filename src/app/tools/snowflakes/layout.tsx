@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Snowflake Generator | Toolioz Tools",
-    description: "Generate unique snowflake IDs (like Twitter/Discord).",
-    keywords: ["snowflake generator","id generator","unique id"],
-    alternates: {
-        canonical: "/tools/snowflakes",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('snowflakes');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "PDF Merger | Toolioz Tools",
-    description: "Combine multiple PDF files into one.",
-    keywords: ["pdf merger","combine pdf","merge pdf"],
-    alternates: {
-        canonical: "/tools/pdf-merger",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('pdf-merger');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

@@ -4,7 +4,10 @@ import { useMemo, useState } from 'react';
 import { CheckCircle2, Copy, Download, Plus, Search, Trash2, WandSparkles } from 'lucide-react';
 import yaml from 'js-yaml';
 import type { NewToolDefinition } from '@/lib/new-tool-catalog';
+import ExtraWorkbenchClient from './ExtraWorkbenchClient';
 import { ToolWorkbench, areaClass, downloadBlob, fieldClass, primaryButtonClass, secondaryButtonClass } from './ToolWorkbench';
+
+const EXTRA_MODES = new Set(['html-entities', 'slug', 'chmod', 'contrast', 'csv-json']);
 
 type Pair = { first: string; second: string };
 type SchemaKind = 'FAQPage' | 'HowTo' | 'Product';
@@ -41,6 +44,7 @@ function schemaScript(value: object) {
 
 export default function DeveloperUtilityClient({ tool }: { tool: NewToolDefinition }) {
   const mode = tool.mode;
+  if (EXTRA_MODES.has(mode)) return <ExtraWorkbenchClient tool={tool} />;
   const [input, setInput] = useState(mode === 'yaml-json' ? 'name: Toolioz\nprivate: true\ntags:\n  - converter\n  - browser' : mode === 'xml' ? '<catalog><tool id="1">Formatter</tool></catalog>' : '{\n  "name": "Toolioz",\n  "active": true\n}');
   const [secondInput, setSecondInput] = useState('{\n  "$schema": "https://json-schema.org/draft/2020-12/schema",\n  "type": "object",\n  "required": ["name"],\n  "properties": { "name": { "type": "string" }, "active": { "type": "boolean" } }\n}');
   const [output, setOutput] = useState('');

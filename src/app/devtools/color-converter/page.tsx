@@ -4,9 +4,10 @@ import { TOOLS } from '@/lib/tools';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { JSONLD } from '@/components/ui/JSONLD';
+import { Footer } from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
-  title: 'Advanced CSS Mesh Gradient & Color Palette Generator | Toolioz',
+  title: "Advanced CSS Mesh Gradient & Color Palette Generator",
   description: 'Pro developer tools for WCAG contrast checking, web UI theme generation (Primary, Accent, Surface), and creating interactive pure CSS mesh gradients.',
   keywords: 'CSS mesh gradient generator online, WCAG visual contrast checker, Triadic color palette math, UI theme variable generator, HEX to HSL tool free, developer color suite',
   alternates: {
@@ -44,6 +45,7 @@ export default function ColorConverterPage() {
     <>
       <JSONLD data={jsonLd} />
       <ColorClient title={tool.title} color={tool.color} />
+      <Footer />
     </>
   );
 }

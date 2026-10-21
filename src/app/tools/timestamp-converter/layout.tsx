@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Timestamp Converter | Toolioz Tools",
-    description: "Convert Unix timestamps to human-readable dates and vice versa.",
-    keywords: ["timestamp converter","unix time","epoch time"],
-    alternates: {
-        canonical: "/tools/timestamp-converter",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('timestamp-converter');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

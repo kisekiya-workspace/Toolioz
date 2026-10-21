@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "CSS Minifier | Toolioz Tools",
-    description: "Minify and compress your CSS code to improve website load speed.",
-    keywords: ["css minifier","css compressor","code optimization"],
-    alternates: {
-        canonical: "/tools/css-minifier",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('css-minifier');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

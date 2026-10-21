@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "SIP Calculator | Toolioz Tools",
-    description: "Calculate returns on your Systematic Investment Plan.",
-    keywords: ["sip calculator","mutual funds","investment returns"],
-    alternates: {
-        canonical: "/tools/sip-calculator",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('sip-calculator');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

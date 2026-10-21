@@ -468,7 +468,7 @@ export const howToPosts: HowToPost[] = [
     updatedIso: '2026-07-25',
     readTime: '8 min read',
     toolLabel: 'Open Biodata Generator',
-    toolHref: '/biodata/biodata-generator',
+    toolHref: '/biodata',
     totalTime: 'PT4M',
     steps: [
       {

@@ -4,9 +4,9 @@ import DesignClient from './DesignClient';
 import { buildCollectionPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata = buildPageMetadata({
-  title: 'Design Tools | Tap-to-Reveal PNG | Toolioz',
+  title: 'Design Tools — Drawing, Dithering & Image Utilities',
   description:
-    'Published design utilities for Toolioz: the X tap-to-reveal PNG maker and a three-panel image splitter. Both run in the browser.',
+    'Explore drawing, dithering, ASCII art, shaders, CSS generators, and image utilities. Create previews and export designs with Toolioz.',
   path: '/design',
   keywords: [
     'x tap to reveal png',
@@ -21,7 +21,7 @@ export default function DesignLandingPage() {
       <JSONLD
         data={buildCollectionPageJsonLd({
           name: 'Design & Creative Studio',
-          description: 'Published image utilities, including tap-to-reveal PNGs and a three-panel splitter.',
+          description: 'Drawing studios, dithering, shaders, colors, CSS generators, and image utilities.',
           path: '/design',
         })}
       />

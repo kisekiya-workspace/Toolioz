@@ -1,7 +1,8 @@
 'use client';
 
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useMemo, useRef, useState, type ChangeEvent } from 'react';
+import Link from 'next/link';
+import React, { useCallback, useEffect, useRef, useState, type ChangeEvent } from 'react';
 import {
   ChevronLeft,
   ChevronRight,
@@ -10,14 +11,14 @@ import {
   FileImage,
   HeartHandshake,
   Image as ImageIcon,
-  LayoutTemplate,
+  Pencil,
   Plus,
   RotateCcw,
   ShieldCheck,
   Trash2,
-  Upload,
   UserRound,
   UsersRound,
+  X,
 } from 'lucide-react';
 import type { BiodataForm, TemplateId } from './types';
 import { BIODATA_TEMPLATES, DEFAULT_BIODATA_TEMPLATE, normalizeTemplateId } from './biodata-templates';
@@ -62,6 +63,10 @@ const EMPTY_FORM: BiodataForm = {
   nativePlace: '',
   familyType: '',
   familyStatus: '',
+  kuldevi: '',
+  mosal: '',
+  mamaName: '',
+  sampraday: '',
   customFields: [],
 };
 
@@ -70,13 +75,13 @@ const SAMPLE_FORM: BiodataForm = {
   fullName: 'Aarav Mehta',
   dateOfBirth: '15 August 1997',
   birthTime: '6:30 PM',
-  birthPlace: 'Jaipur, Rajasthan',
+  birthPlace: 'Rajkot, Gujarat',
   height: '5 ft 9 in',
   religion: 'Hindu',
   caste: 'Brahmin',
   gotra: 'Bharadwaj',
   manglik: 'Non-Manglik',
-  motherTongue: 'Hindi',
+  motherTongue: 'Gujarati',
   diet: 'Vegetarian',
   education: 'M.Tech, Computer Science',
   college: 'Delhi Technological University',
@@ -86,28 +91,43 @@ const SAMPLE_FORM: BiodataForm = {
   annualIncome: '₹24 LPA',
   about: 'Thoughtful, curious and family-oriented. I value honest communication, meaningful work and a balanced life.',
   hobbies: 'Photography, long walks, cooking and Indian classical music',
-  languages: 'English, Hindi',
+  languages: 'Gujarati, Hindi, English',
   partnerPreferences: 'Seeking a kind, independent partner who values mutual respect, family and personal growth.',
   fatherName: 'Rajesh Mehta',
   fatherOccupation: 'Retired bank manager',
   motherName: 'Suman Mehta',
   motherOccupation: 'Teacher',
   siblings: 'One younger sister, software engineer',
-  nativePlace: 'Jaipur, Rajasthan',
-  familyType: 'Nuclear family',
+  nativePlace: 'Rajkot, Gujarat',
+  kuldevi: 'Khodiyar Maa',
+  mosal: 'Junagadh',
+  mamaName: 'Harshadbhai Patel',
+  sampraday: 'Vaishnav',
+  familyType: 'Joint family',
   familyStatus: 'Upper-middle-class',
   phone: '+91 98765 43210',
   email: 'aarav@example.com',
-  address: 'Bengaluru, Karnataka, India',
+  address: 'Ahmedabad, Gujarat, India',
 };
 
 const STEPS = [
-  { id: 'design', label: 'Design', short: '1', icon: LayoutTemplate },
-  { id: 'profile', label: 'Profile', short: '2', icon: UserRound },
-  { id: 'background', label: 'Background', short: '3', icon: HeartHandshake },
-  { id: 'family', label: 'Family & story', short: '4', icon: UsersRound },
-  { id: 'preview', label: 'Preview', short: '5', icon: Eye },
+  { id: 'profile', label: 'You', icon: UserRound },
+  { id: 'background', label: 'Life', icon: HeartHandshake },
+  { id: 'family', label: 'Family', icon: UsersRound },
 ] as const;
+
+const ESSENTIALS: Array<{ field: keyof BiodataForm; label: string; step: number }> = [
+  { field: 'fullName', label: 'Name', step: 0 },
+  { field: 'dateOfBirth', label: 'Date of birth', step: 0 },
+  { field: 'height', label: 'Height', step: 0 },
+  { field: 'phone', label: 'Phone', step: 0 },
+  { field: 'education', label: 'Education', step: 1 },
+  { field: 'occupation', label: 'Work', step: 1 },
+  { field: 'fatherName', label: 'Father', step: 2 },
+  { field: 'motherName', label: 'Mother', step: 2 },
+];
+
+const HEIGHT_PRESETS = ['5 ft 2 in', '5 ft 4 in', '5 ft 6 in', '5 ft 8 in', '5 ft 10 in', '6 ft'];
 
 type StudioFieldProps = {
   label: string;
@@ -118,64 +138,105 @@ type StudioFieldProps = {
   help?: string;
   multiline?: boolean;
   options?: string[];
+  required?: boolean;
 };
 
-function StudioField({ label, field, form, update, placeholder, help, multiline, options }: StudioFieldProps) {
+function filled(form: BiodataForm, field: keyof BiodataForm) {
+  return String(form[field] ?? '').trim().length > 0;
+}
+
+const fieldControl =
+  'w-full rounded-md border-0 bg-zinc-100 px-3 py-2.5 text-sm text-zinc-900 outline-none transition placeholder:text-zinc-400 focus:bg-white focus:ring-2 focus:ring-zinc-900/10';
+
+function StudioField({ label, field, form, update, placeholder, help, multiline, options, required }: StudioFieldProps) {
   const value = typeof form[field] === 'string' ? String(form[field] ?? '') : '';
-  const base = 'w-full rounded-xl border border-stone-300 bg-white px-3.5 py-3 text-sm text-stone-950 outline-none focus:border-[#8b2635] focus:ring-2 focus:ring-[#8b2635]/10';
   return (
-    <label className="block">
-      <span className="mb-1.5 block text-[0.68rem] font-black uppercase tracking-[0.13em] text-stone-500">{label}</span>
+    <label className="block" htmlFor={String(field)}>
+      <span className="mb-1.5 block text-sm text-zinc-500">
+        {label}
+        {required ? <span className="text-zinc-400"> · required</span> : null}
+      </span>
       {options ? (
-        <select className={base} value={value} onChange={(event) => update(field, event.target.value)}>
+        <select id={String(field)} name={String(field)} className={fieldControl} value={value} onChange={(event) => update(field, event.target.value)}>
           <option value="">Not specified</option>
-          {options.map((option) => <option key={option} value={option}>{option}</option>)}
+          {options.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
         </select>
       ) : multiline ? (
-        <textarea className={`${base} min-h-24 resize-y leading-6`} value={value} placeholder={placeholder} onChange={(event) => update(field, event.target.value)} />
+        <textarea
+          id={String(field)}
+          name={String(field)}
+          className={`${fieldControl} min-h-24 resize-y leading-6`}
+          value={value}
+          placeholder={placeholder}
+          onChange={(event) => update(field, event.target.value)}
+        />
       ) : (
-        <input className={base} value={value} placeholder={placeholder} onChange={(event) => update(field, event.target.value)} />
+        <input
+          id={String(field)}
+          name={String(field)}
+          className={fieldControl}
+          value={value}
+          placeholder={placeholder}
+          onChange={(event) => update(field, event.target.value)}
+        />
       )}
-      {help && <span className="mt-1.5 block text-xs leading-5 text-stone-500">{help}</span>}
+      {help ? <span className="mt-1.5 block text-xs leading-5 text-zinc-400">{help}</span> : null}
     </label>
   );
 }
 
-function SectionIntro({ eyebrow, title, text }: { eyebrow: string; title: string; text: string }) {
+function FieldGroup({ title, hint, children }: { title: string; hint?: string; children: React.ReactNode }) {
   return (
-    <div className="mb-7">
-      <p className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-[#a14b39]">{eyebrow}</p>
-      <h2 className="mt-2 font-serif text-3xl font-bold tracking-tight text-stone-950">{title}</h2>
-      <p className="mt-2 max-w-xl text-sm leading-6 text-stone-600">{text}</p>
-    </div>
-  );
-}
-
-function FieldGroup({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <section className="rounded-2xl border border-stone-200 bg-[#fffdf9] p-5 sm:p-6">
-      <h3 className="mb-5 text-sm font-black tracking-tight text-stone-900">{title}</h3>
-      <div className="grid gap-5 sm:grid-cols-2">{children}</div>
+    <section className="space-y-4">
+      <div>
+        <h3 className="text-sm font-medium text-zinc-900">{title}</h3>
+        {hint ? <p className="mt-1 text-xs text-zinc-400">{hint}</p> : null}
+      </div>
+      <div className="grid gap-x-5 gap-y-5 sm:grid-cols-2">{children}</div>
     </section>
   );
 }
 
 export default function BiodataStudioClient() {
   const [step, setStep] = useState(0);
+  const [previewOpen, setPreviewOpen] = useState(false);
   const [templateId, setTemplateId] = useState<TemplateId>(DEFAULT_BIODATA_TEMPLATE);
   const [form, setForm] = useState<BiodataForm>(EMPTY_FORM);
-  const [filter, setFilter] = useState('All');
   const [zoom, setZoom] = useState(0.62);
+  const [autoFit, setAutoFit] = useState(true);
   const [loaded, setLoaded] = useState(false);
   const [exporting, setExporting] = useState<'pdf' | 'png' | null>(null);
+  const [toast, setToast] = useState<string | null>(null);
+  const [confirmClear, setConfirmClear] = useState(false);
+  const [showHoroscope, setShowHoroscope] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
+
+  const showToast = useCallback((message: string) => {
+    setToast(message);
+    window.setTimeout(() => setToast(null), 2800);
+  }, []);
+
+  useEffect(() => {
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, []);
 
   useEffect(() => {
     const saved = localStorage.getItem('biodata_form');
     if (saved) {
       try {
-        setForm({ ...EMPTY_FORM, ...JSON.parse(saved) });
+        const parsed = { ...EMPTY_FORM, ...JSON.parse(saved) } as BiodataForm;
+        setForm(parsed);
+        const hasKundli = Boolean(parsed.birthTime || parsed.gotra || parsed.rashi || parsed.nakshatra || parsed.manglik);
+        setShowHoroscope(hasKundli);
       } catch {
         localStorage.removeItem('biodata_form');
       }
@@ -192,30 +253,26 @@ export default function BiodataStudioClient() {
 
   useEffect(() => {
     const node = previewRef.current;
-    if (!node) return;
-    const fit = () => setZoom(Math.min(0.82, Math.max(0.3, (node.clientWidth - 48) / 794)));
+    if (!node || !autoFit) return;
+    const fit = () => setZoom(Math.min(0.88, Math.max(0.28, (node.clientWidth - 56) / 794)));
     fit();
     const observer = new ResizeObserver(fit);
     observer.observe(node);
     return () => observer.disconnect();
-  }, [step]);
+  }, [autoFit, previewOpen, step]);
 
   const update = (field: keyof BiodataForm, value: string) => setForm((current) => ({ ...current, [field]: value }));
-  const requiredFields: Array<keyof BiodataForm> = ['fullName', 'dateOfBirth', 'height', 'education', 'occupation', 'fatherName', 'motherName', 'phone'];
-  const completed = requiredFields.filter((field) => String(form[field] ?? '').trim()).length;
-  const progress = Math.round((completed / requiredFields.length) * 100);
-
-  const filteredTemplates = useMemo(
-    () => BIODATA_TEMPLATES.filter((template) => filter === 'All' || template.community === filter || template.style === filter),
-    [filter]
-  );
+  const completed = ESSENTIALS.filter((item) => filled(form, item.field)).length;
+  const progress = Math.round((completed / ESSENTIALS.length) * 100);
   const currentTemplate = BIODATA_TEMPLATES.find((template) => template.id === templateId) ?? BIODATA_TEMPLATES[0];
 
-  const handlePhoto = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
+  const applyPhotoFile = (file: File) => {
+    if (!file.type.startsWith('image/')) {
+      showToast('Please choose a JPG, PNG, or WebP photo.');
+      return;
+    }
     if (file.size > 8 * 1024 * 1024) {
-      window.alert('Please choose an image smaller than 8 MB.');
+      showToast('Please choose an image smaller than 8 MB.');
       return;
     }
     const reader = new FileReader();
@@ -223,22 +280,31 @@ export default function BiodataStudioClient() {
     reader.readAsDataURL(file);
   };
 
+  const handlePhoto = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) applyPhotoFile(file);
+    event.target.value = '';
+  };
+
   const waitForPaint = () => new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
   const getDocument = async () => {
-    if (window.innerWidth < 1024 && step !== 4) {
-      setStep(4);
+    if (window.innerWidth < 1024 && !previewOpen) {
+      setPreviewOpen(true);
       await waitForPaint();
     }
     return document.getElementById('biodata-document');
   };
+
   const saveBlob = (blob: Blob, extension: string) => {
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = `${form.fullName.trim().replace(/\s+/g, '_') || 'Marriage_Biodata'}.${extension}`;
+    const name = `${form.fullName.trim().replace(/\s+/g, '_') || 'Marriage_Biodata'}.${extension}`;
+    link.download = name;
     document.body.appendChild(link);
     link.click();
     link.remove();
     window.setTimeout(() => URL.revokeObjectURL(link.href), 1500);
+    showToast(`Saved ${name}`);
   };
 
   const exportPng = async () => {
@@ -252,7 +318,7 @@ export default function BiodataStudioClient() {
       saveBlob(blob, 'png');
     } catch (error) {
       console.error(error);
-      window.alert('PNG export failed. Please open Preview and try again.');
+      showToast('PNG export failed. Open Preview and try again.');
     } finally {
       setExporting(null);
     }
@@ -267,8 +333,8 @@ export default function BiodataStudioClient() {
       const dataUrl = await toPng(element, { cacheBust: true, pixelRatio: 3, backgroundColor: '#ffffff' });
       const { PDFDocument } = await import('pdf-lib');
       const pdf = await PDFDocument.create();
-      pdf.setTitle(`${form.fullName.trim() || 'Marriage Biodata'} - Marriage Biodata`);
-      pdf.setProducer('Toolioz Biodata Studio');
+      pdf.setTitle(`${form.fullName.trim() || 'Marriage Biodata'} — Marriage Biodata`);
+      pdf.setProducer('Biodata Maker');
       const page = pdf.addPage([595.28, 841.89]);
       const bytes = Uint8Array.from(atob(dataUrl.split(',')[1]), (character) => character.charCodeAt(0));
       const image = await pdf.embedPng(bytes);
@@ -276,124 +342,409 @@ export default function BiodataStudioClient() {
       saveBlob(new Blob([await pdf.save() as BlobPart], { type: 'application/pdf' }), 'pdf');
     } catch (error) {
       console.error(error);
-      window.alert('PDF export failed. Please open Preview and try again.');
+      showToast('PDF export failed. Open Preview and try again.');
     } finally {
       setExporting(null);
     }
   };
 
-  const addCustomField = () => setForm((current) => ({
-    ...current,
-    customFields: [...(current.customFields ?? []), { id: crypto.randomUUID(), label: '', value: '' }],
-  }));
-  const updateCustomField = (id: string, key: 'label' | 'value', value: string) => setForm((current) => ({
-    ...current,
-    customFields: (current.customFields ?? []).map((field) => field.id === id ? { ...field, [key]: value } : field),
-  }));
-  const removeCustomField = (id: string) => setForm((current) => ({
-    ...current,
-    customFields: (current.customFields ?? []).filter((field) => field.id !== id),
-  }));
+  const exportPdfRef = useRef(exportPdf);
+  exportPdfRef.current = exportPdf;
 
-  if (!loaded) return <div className="h-[640px] bg-[#f5f0e8]" />;
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (!(event.metaKey || event.ctrlKey) || event.key !== 'Enter') return;
+      if (event.target instanceof HTMLTextAreaElement) return;
+      event.preventDefault();
+      void exportPdfRef.current();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
+  const addCustomField = () =>
+    setForm((current) => ({
+      ...current,
+      customFields: [...(current.customFields ?? []), { id: crypto.randomUUID(), label: '', value: '' }],
+    }));
+  const updateCustomField = (id: string, key: 'label' | 'value', value: string) =>
+    setForm((current) => ({
+      ...current,
+      customFields: (current.customFields ?? []).map((field) => (field.id === id ? { ...field, [key]: value } : field)),
+    }));
+  const removeCustomField = (id: string) =>
+    setForm((current) => ({
+      ...current,
+      customFields: (current.customFields ?? []).filter((field) => field.id !== id),
+    }));
+
+  const goStep = (index: number) => {
+    setPreviewOpen(false);
+    setStep(index);
+  };
+
   const Template = currentTemplate.component;
-  const isPreview = step === 4;
+  const isPreview = previewOpen;
 
   return (
-    <div className="flex h-[calc(100dvh-120px)] min-h-[560px] flex-col overflow-hidden border-y border-stone-200 bg-[#f5f0e8] text-stone-950">
-      <header className="flex min-h-20 shrink-0 items-center justify-between gap-4 border-b border-stone-200 bg-[#fffdf9] px-4 sm:px-6">
-        <div className="min-w-0">
-          <div className="flex items-center gap-3">
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#7a2433] font-serif text-xl font-bold text-white">B</span>
-            <div className="min-w-0">
-              <p className="truncate font-serif text-lg font-bold sm:text-xl">Biodata Atelier</p>
-              <p className="hidden text-xs text-stone-500 sm:block">A considered introduction, ready to share</p>
-            </div>
+    <div className="flex h-dvh min-h-0 flex-col overflow-hidden bg-zinc-50 font-sans text-zinc-900">
+      <header className="flex h-14 shrink-0 items-center justify-between gap-3 border-b border-zinc-200 bg-white px-3 sm:px-5">
+        <div className="flex min-w-0 items-center gap-3">
+          <Link href="/" className="text-xs text-zinc-400 hover:text-zinc-900">
+            Toolioz
+          </Link>
+          <span className="h-3.5 w-px bg-zinc-200" />
+          <div className="min-w-0">
+            <p className="truncate text-[15px] font-medium">Biodata</p>
+            <p className="hidden truncate text-xs text-zinc-400 sm:block">{form.fullName.trim() || 'Untitled profile'}</p>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="hidden items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs font-bold text-emerald-800 md:flex"><ShieldCheck size={15} />Saved only on this device</div>
-          <button type="button" onClick={() => setForm(SAMPLE_FORM)} className="rounded-full px-3 py-2 text-xs font-bold text-stone-600 hover:bg-stone-100">Use sample</button>
-          <button type="button" onClick={() => window.confirm('Clear every biodata field?') && setForm(EMPTY_FORM)} className="rounded-full p-2 text-stone-500 hover:bg-stone-100" aria-label="Clear form"><RotateCcw size={17} /></button>
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <span className="hidden items-center gap-1.5 text-xs text-zinc-400 md:inline-flex">
+            <ShieldCheck size={13} />
+            Private
+          </span>
+          <button type="button" onClick={() => setForm(SAMPLE_FORM)} className="rounded-md px-2.5 py-1.5 text-xs text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900">
+            Sample
+          </button>
+          <button type="button" onClick={() => setConfirmClear(true)} className="rounded-md p-1.5 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900" aria-label="Clear form">
+            <RotateCcw size={16} />
+          </button>
+          <button
+            type="button"
+            onClick={() => setPreviewOpen((open) => !open)}
+            className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs text-zinc-600 hover:bg-zinc-100 lg:hidden"
+          >
+            {isPreview ? <Pencil size={14} /> : <Eye size={14} />}
+            {isPreview ? 'Edit' : 'Preview'}
+          </button>
+          <button
+            type="button"
+            onClick={exportPng}
+            disabled={exporting !== null}
+            className="hidden items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs text-zinc-600 hover:bg-zinc-100 disabled:opacity-50 sm:inline-flex"
+          >
+            <FileImage size={14} />
+            {exporting === 'png' ? '…' : 'PNG'}
+          </button>
+          <button
+            type="button"
+            onClick={exportPdf}
+            disabled={exporting !== null}
+            className="inline-flex items-center gap-1.5 rounded-md bg-zinc-900 px-3 py-1.5 text-xs font-medium text-white disabled:opacity-50"
+          >
+            <Download size={14} />
+            {exporting === 'pdf' ? 'Preparing…' : 'Download PDF'}
+          </button>
         </div>
       </header>
 
-      <div className="grid min-h-0 flex-1 grid-cols-[minmax(0,1fr)] lg:grid-cols-[440px_minmax(0,1fr)] xl:grid-cols-[480px_minmax(0,1fr)]">
-        <aside className={`${isPreview ? 'hidden lg:flex' : 'flex'} min-h-0 flex-col border-r border-stone-200 bg-[#fffdf9]`}>
-          <div className="border-b border-stone-200 px-4 py-4 sm:px-6">
-            <div className="mb-3 flex items-center justify-between text-xs font-bold text-stone-600"><span>{progress}% profile complete</span><span>{completed}/{requiredFields.length} essentials</span></div>
-            <div className="h-1.5 overflow-hidden rounded-full bg-stone-200"><div className="h-full bg-[#a14b39]" style={{ width: `${progress}%` }} /></div>
-            <nav className="mt-4 grid grid-cols-5 gap-1" aria-label="Biodata creation steps">
+      <div className="grid min-h-0 flex-1 grid-cols-[minmax(0,1fr)] lg:grid-cols-[minmax(340px,28rem)_minmax(0,1fr)]">
+        <aside className={`${isPreview ? 'hidden lg:flex' : 'flex'} min-h-0 flex-col border-r border-zinc-200 bg-white`}>
+          <div className="border-b border-zinc-100 px-5 py-4">
+            <label className="block">
+              <span className="mb-1.5 block text-sm text-zinc-500">Design</span>
+              <select
+                value={templateId}
+                onChange={(event) => setTemplateId(event.target.value as TemplateId)}
+                className={fieldControl}
+              >
+                {BIODATA_TEMPLATES.map((template) => (
+                  <option key={template.id} value={template.id}>
+                    {template.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <div className="mt-4 flex items-center justify-between text-xs text-zinc-400">
+              <span>{progress}% ready</span>
+              <span>
+                {completed}/{ESSENTIALS.length}
+              </span>
+            </div>
+            <div className="mt-2 h-1 overflow-hidden rounded-full bg-zinc-100">
+              <div className="h-full rounded-full bg-zinc-900 transition-[width] duration-300" style={{ width: `${progress}%` }} />
+            </div>
+            <nav className="mt-4 hidden grid-cols-3 gap-1 lg:grid" aria-label="Editor sections">
               {STEPS.map((item, index) => {
                 const Icon = item.icon;
-                return <button key={item.id} type="button" onClick={() => setStep(index)} className={`rounded-lg px-1 py-2 text-center ${step === index ? 'bg-[#7a2433] text-white' : index < step ? 'bg-[#efe3d6] text-[#7a2433]' : 'text-stone-500 hover:bg-stone-100'}`}><Icon className="mx-auto" size={16} /><span className="mt-1 hidden text-[0.65rem] font-bold sm:block">{item.label}</span></button>;
+                const active = !isPreview && step === index;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => goStep(index)}
+                    className={`rounded-md px-1 py-2 text-center text-xs ${active ? 'bg-zinc-900 text-white' : 'text-zinc-400 hover:bg-zinc-50 hover:text-zinc-700'}`}
+                  >
+                    <Icon className="mx-auto" size={15} />
+                    <span className="mt-1 block">{item.label}</span>
+                  </button>
+                );
               })}
             </nav>
           </div>
 
-          <div className="min-h-0 flex-1 overflow-y-auto px-4 py-6 sm:px-6">
-            {step === 0 && <>
-              <SectionIntro eyebrow="Step one" title="Choose a template" text="Pick the visual direction that fits the family and occasion. Each option below describes the real A4 design you will edit and export." />
-              <div className="mb-5 flex flex-wrap gap-2">{['All', 'Traditional', 'Royal', 'Modern', 'Minimal', 'Hindu', 'Muslim', 'Sikh'].map((item) => <button key={item} type="button" onClick={() => setFilter(item)} className={`rounded-full border px-3 py-1.5 text-xs font-bold ${filter === item ? 'border-[#7a2433] bg-[#7a2433] text-white' : 'border-stone-300 bg-white text-stone-600 hover:border-stone-500'}`}>{item}</button>)}</div>
-              <div className="divide-y divide-stone-200 border-y border-stone-200">{filteredTemplates.map((template) => {
-                const selected = template.id === templateId;
-                return <button key={template.id} type="button" onClick={() => setTemplateId(template.id)} aria-pressed={selected} className={`group flex w-full items-center gap-3 py-4 text-left transition-colors ${selected ? 'bg-[#f7eee8]' : 'hover:bg-[#fbf7f1]'}`}>
-                  <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-full border font-serif text-sm font-bold ${selected ? 'border-[#7a2433] bg-[#7a2433] text-white' : 'border-stone-300 bg-white text-stone-500'}`}>{template.style.slice(0, 1)}</span>
-                  <span className="min-w-0 flex-1"><strong className="block text-sm text-stone-900">{template.name}</strong><span className="mt-0.5 block text-[0.68rem] font-bold uppercase tracking-[0.08em] text-[#a14b39]">{template.community} · {template.style}</span><span className="mt-1 block max-w-[34rem] text-xs leading-5 text-stone-500">{template.description}</span></span>
-                  <span className={`shrink-0 text-[0.65rem] font-black uppercase tracking-[0.1em] ${selected ? 'text-[#7a2433]' : 'text-transparent group-hover:text-stone-400'}`}>{selected ? 'Selected' : 'Choose'}</span>
-                </button>;
-              })}</div>
-            </>}
-
-            {step === 1 && <div className="space-y-6">
-              <SectionIntro eyebrow="Step two" title="The essentials" text="Lead with the details families scan first. Only completed fields appear in the final document." />
-              <section className="rounded-2xl border border-stone-200 bg-[#fffdf9] p-5 sm:p-6">
-                <h3 className="mb-4 text-sm font-black text-stone-900">Portrait</h3>
-                <div className="flex items-center gap-4">
-                  {form.photo ? <img src={form.photo} alt="Uploaded profile" className="h-24 w-20 rounded-xl border border-stone-200 object-cover" /> : <div className="grid h-24 w-20 place-items-center rounded-xl border border-dashed border-stone-300 bg-stone-50 text-stone-400"><ImageIcon size={25} /></div>}
-                  <div><input ref={fileRef} type="file" accept="image/jpeg,image/png,image/webp" className="hidden" onChange={handlePhoto} /><button type="button" onClick={() => fileRef.current?.click()} className="inline-flex items-center gap-2 rounded-xl bg-[#7a2433] px-4 py-2.5 text-sm font-bold text-white"><Upload size={16} />{form.photo ? 'Replace photo' : 'Upload photo'}</button>{form.photo && <button type="button" onClick={() => setForm((current) => ({ ...current, photo: null }))} className="ml-2 rounded-xl px-3 py-2.5 text-sm font-bold text-stone-500 hover:bg-stone-100">Remove</button>}<p className="mt-2 text-xs leading-5 text-stone-500">Use a recent, well-lit portrait. JPG, PNG or WebP up to 8 MB.</p></div>
+          <div className="min-h-0 flex-1 overflow-y-auto px-5 py-6">
+            {step === 0 && (
+              <div className="space-y-8">
+                <div>
+                  <h2 className="text-xl font-medium tracking-tight">You</h2>
+                  <p className="mt-1 text-sm text-zinc-400">Empty fields stay off the page.</p>
                 </div>
-              </section>
-              <FieldGroup title="Identity"><StudioField label="Full name" field="fullName" form={form} update={update} placeholder="Name as it should appear" /><StudioField label="Gender" field="gender" form={form} update={update} options={['Woman', 'Man', 'Non-binary', 'Prefer not to say']} /><StudioField label="Date of birth" field="dateOfBirth" form={form} update={update} placeholder="15 August 1997" /><StudioField label="Marital status" field="maritalStatus" form={form} update={update} options={['Never married', 'Divorced', 'Widowed', 'Annulled']} /><StudioField label="Height" field="height" form={form} update={update} placeholder="5 ft 9 in" /><StudioField label="Mother tongue" field="motherTongue" form={form} update={update} placeholder="Hindi" /></FieldGroup>
-              <FieldGroup title="Contact"><StudioField label="Phone" field="phone" form={form} update={update} placeholder="+91" /><StudioField label="Email" field="email" form={form} update={update} placeholder="name@example.com" /><div className="sm:col-span-2"><StudioField label="Current address" field="address" form={form} update={update} placeholder="City, State, Country" multiline /></div></FieldGroup>
-            </div>}
+                <div className="relative w-24">
+                  <input ref={fileRef} type="file" accept="image/jpeg,image/png,image/webp" className="hidden" onChange={handlePhoto} />
+                  <button
+                    type="button"
+                    onClick={() => fileRef.current?.click()}
+                    className="block overflow-hidden rounded-lg bg-zinc-100"
+                    aria-label={form.photo ? 'Change photo' : 'Add photo'}
+                  >
+                    {form.photo ? (
+                      <img src={form.photo} alt="" className="h-28 w-24 object-cover" />
+                    ) : (
+                      <span className="grid h-28 w-24 place-items-center text-stone-400">
+                        <ImageIcon size={22} />
+                      </span>
+                    )}
+                  </button>
+                  {form.photo ? (
+                    <button
+                      type="button"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        setForm((current) => ({ ...current, photo: null }));
+                      }}
+                      className="absolute -right-1.5 -top-1.5 grid h-6 w-6 place-items-center rounded-full bg-zinc-900 text-white"
+                      aria-label="Remove photo"
+                    >
+                      <X size={13} strokeWidth={2.5} />
+                    </button>
+                  ) : null}
+                </div>
+                <FieldGroup title="Identity">
+                  <StudioField label="Full name" field="fullName" form={form} update={update} placeholder="Name as it should appear" required />
+                  <StudioField label="Gender" field="gender" form={form} update={update} options={['Woman', 'Man', 'Non-binary', 'Prefer not to say']} />
+                  <StudioField label="Date of birth" field="dateOfBirth" form={form} update={update} placeholder="15 August 1997" required />
+                  <StudioField label="Marital status" field="maritalStatus" form={form} update={update} options={['Never married', 'Divorced', 'Widowed', 'Annulled']} />
+                  <div>
+                    <StudioField label="Height" field="height" form={form} update={update} placeholder="5 ft 9 in" required />
+                    <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
+                      {HEIGHT_PRESETS.map((preset) => (
+                        <button
+                          key={preset}
+                          type="button"
+                          onClick={() => update('height', preset)}
+                          className={`text-xs ${form.height === preset ? 'text-zinc-900' : 'text-zinc-400 hover:text-zinc-700'}`}
+                        >
+                          {preset}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <StudioField label="Mother tongue" field="motherTongue" form={form} update={update} placeholder="Hindi" />
+                </FieldGroup>
+                <FieldGroup title="Contact">
+                  <StudioField label="Phone" field="phone" form={form} update={update} placeholder="+91" required />
+                  <StudioField label="Email" field="email" form={form} update={update} placeholder="name@example.com" />
+                  <div className="sm:col-span-2">
+                    <StudioField label="Current address" field="address" form={form} update={update} placeholder="City, State, Country" multiline />
+                  </div>
+                </FieldGroup>
+              </div>
+            )}
 
-            {step === 2 && <div className="space-y-6">
-              <SectionIntro eyebrow="Step three" title="Life & background" text="Add education, work and community details. Horoscope fields are optional and can remain blank." />
-              <FieldGroup title="Education & work"><StudioField label="Highest education" field="education" form={form} update={update} placeholder="M.Tech, Computer Science" /><StudioField label="College / university" field="college" form={form} update={update} /><StudioField label="Occupation" field="occupation" form={form} update={update} /><StudioField label="Company" field="company" form={form} update={update} /><StudioField label="Annual income" field="annualIncome" form={form} update={update} placeholder="₹24 LPA" /><StudioField label="Work location" field="workLocation" form={form} update={update} /></FieldGroup>
-              <FieldGroup title="Personal & lifestyle"><StudioField label="Religion" field="religion" form={form} update={update} /><StudioField label="Caste / community" field="caste" form={form} update={update} /><StudioField label="Diet" field="diet" form={form} update={update} options={['Vegetarian', 'Eggetarian', 'Non-vegetarian', 'Vegan', 'Jain']} /><StudioField label="Languages" field="languages" form={form} update={update} /><StudioField label="Weight" field="weight" form={form} update={update} placeholder="Optional" /><StudioField label="Blood group" field="bloodGroup" form={form} update={update} placeholder="Optional" /></FieldGroup>
-              <FieldGroup title="Horoscope — optional"><StudioField label="Birth time" field="birthTime" form={form} update={update} /><StudioField label="Birth place" field="birthPlace" form={form} update={update} /><StudioField label="Gotra" field="gotra" form={form} update={update} /><StudioField label="Manglik" field="manglik" form={form} update={update} options={['Manglik', 'Non-Manglik', 'Anshik Manglik', 'Not known']} /><StudioField label="Rashi" field="rashi" form={form} update={update} /><StudioField label="Nakshatra" field="nakshatra" form={form} update={update} /></FieldGroup>
-            </div>}
+            {step === 1 && (
+              <div className="space-y-8">
+                <div>
+                  <h2 className="text-xl font-medium tracking-tight">Life & work</h2>
+                  <p className="mt-1 text-sm text-zinc-400">Horoscope stays hidden until you open it.</p>
+                </div>
+                <FieldGroup title="Education & work">
+                  <StudioField label="Highest education" field="education" form={form} update={update} placeholder="M.Tech, Computer Science" required />
+                  <StudioField label="College / university" field="college" form={form} update={update} />
+                  <StudioField label="Occupation" field="occupation" form={form} update={update} required />
+                  <StudioField label="Company" field="company" form={form} update={update} />
+                  <StudioField label="Annual income" field="annualIncome" form={form} update={update} placeholder="₹24 LPA" />
+                  <StudioField label="Work location" field="workLocation" form={form} update={update} />
+                </FieldGroup>
+                <FieldGroup title="Personal & lifestyle">
+                  <StudioField label="Religion" field="religion" form={form} update={update} />
+                  <StudioField label="Caste / community" field="caste" form={form} update={update} />
+                  <StudioField label="Diet" field="diet" form={form} update={update} options={['Vegetarian', 'Eggetarian', 'Non-vegetarian', 'Vegan', 'Jain']} />
+                  <StudioField label="Languages" field="languages" form={form} update={update} />
+                  <StudioField label="Weight" field="weight" form={form} update={update} placeholder="Optional" />
+                  <StudioField label="Blood group" field="bloodGroup" form={form} update={update} placeholder="Optional" />
+                </FieldGroup>
+                <div>
+                  <button type="button" onClick={() => setShowHoroscope((value) => !value)} className="flex w-full items-center justify-between text-left">
+                    <span>
+                      <span className="block text-sm font-medium text-zinc-900">Horoscope</span>
+                      <span className="text-xs text-zinc-400">Optional — skip if it should not print.</span>
+                    </span>
+                    <span className="text-xs text-zinc-500">{showHoroscope ? 'Hide' : 'Add'}</span>
+                  </button>
+                  {showHoroscope ? (
+                    <div className="mt-4 grid gap-x-5 gap-y-5 sm:grid-cols-2">
+                      <StudioField label="Birth time" field="birthTime" form={form} update={update} />
+                      <StudioField label="Birth place" field="birthPlace" form={form} update={update} />
+                      <StudioField label="Gotra" field="gotra" form={form} update={update} />
+                      <StudioField label="Manglik" field="manglik" form={form} update={update} options={['Manglik', 'Non-Manglik', 'Anshik Manglik', 'Not known']} />
+                      <StudioField label="Rashi" field="rashi" form={form} update={update} />
+                      <StudioField label="Nakshatra" field="nakshatra" form={form} update={update} />
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+            )}
 
-            {step === 3 && <div className="space-y-6">
-              <SectionIntro eyebrow="Step four" title="Family & your story" text="Give useful family context, then write a short introduction in your own voice rather than using generic phrases." />
-              <FieldGroup title="Family"><StudioField label="Father's name" field="fatherName" form={form} update={update} /><StudioField label="Father's occupation" field="fatherOccupation" form={form} update={update} /><StudioField label="Mother's name" field="motherName" form={form} update={update} /><StudioField label="Mother's occupation" field="motherOccupation" form={form} update={update} /><StudioField label="Native place" field="nativePlace" form={form} update={update} /><StudioField label="Family type" field="familyType" form={form} update={update} options={['Nuclear family', 'Joint family']} /><StudioField label="Family status" field="familyStatus" form={form} update={update} /><div className="sm:col-span-2"><StudioField label="Siblings" field="siblings" form={form} update={update} multiline placeholder="One younger sister, architect" /></div></FieldGroup>
-              <FieldGroup title="In your own words"><div className="sm:col-span-2"><StudioField label="About me" field="about" form={form} update={update} multiline help="Two or three specific sentences work better than generic claims." /></div><div className="sm:col-span-2"><StudioField label="Hobbies & interests" field="hobbies" form={form} update={update} multiline /></div><div className="sm:col-span-2"><StudioField label="Partner preferences" field="partnerPreferences" form={form} update={update} multiline help="Keep expectations respectful, practical and concise." /></div></FieldGroup>
-              <section className="rounded-2xl border border-stone-200 bg-[#fffdf9] p-5 sm:p-6"><div className="flex items-center justify-between"><div><h3 className="text-sm font-black text-stone-900">Additional details</h3><p className="mt-1 text-xs text-stone-500">Add a field only when it matters to the family.</p></div><button type="button" onClick={addCustomField} className="inline-flex items-center gap-1 rounded-lg border border-stone-300 px-3 py-2 text-xs font-bold text-stone-700"><Plus size={14} />Add field</button></div><div className="mt-5 space-y-3">{(form.customFields ?? []).map((field) => <div key={field.id} className="grid grid-cols-[1fr_1fr_auto] gap-2"><input className="min-w-0 rounded-lg border border-stone-300 px-3 py-2 text-sm" value={field.label} placeholder="Label" onChange={(event) => updateCustomField(field.id, 'label', event.target.value)} /><input className="min-w-0 rounded-lg border border-stone-300 px-3 py-2 text-sm" value={field.value} placeholder="Value" onChange={(event) => updateCustomField(field.id, 'value', event.target.value)} /><button type="button" onClick={() => removeCustomField(field.id)} className="rounded-lg p-2 text-stone-400 hover:bg-red-50 hover:text-red-600" aria-label="Remove field"><Trash2 size={16} /></button></div>)}</div></section>
-            </div>}
+            {step === 2 && (
+              <div className="space-y-8">
+                <div>
+                  <h2 className="text-xl font-medium tracking-tight">Family & story</h2>
+                  <p className="mt-1 text-sm text-zinc-400">A short, specific introduction reads better than a generic paragraph.</p>
+                </div>
+                <FieldGroup title="Family">
+                  <StudioField label="Father's name" field="fatherName" form={form} update={update} required />
+                  <StudioField label="Father's occupation" field="fatherOccupation" form={form} update={update} />
+                  <StudioField label="Mother's name" field="motherName" form={form} update={update} required />
+                  <StudioField label="Mother's occupation" field="motherOccupation" form={form} update={update} />
+                  <StudioField label="Native place / gam" field="nativePlace" form={form} update={update} placeholder="Rajkot, Gujarat" />
+                  <StudioField label="Kuldevi" field="kuldevi" form={form} update={update} placeholder="Khodiyar Maa" />
+                  <StudioField label="Mosal" field="mosal" form={form} update={update} placeholder="Maternal hometown" />
+                  <StudioField label="Mama's name" field="mamaName" form={form} update={update} />
+                  <StudioField label="Sampraday" field="sampraday" form={form} update={update} options={['Vaishnav', 'Swaminarayan', 'Jain', 'Shaiv', 'Other']} />
+                  <StudioField label="Family type" field="familyType" form={form} update={update} options={['Nuclear family', 'Joint family']} />
+                  <StudioField label="Family status" field="familyStatus" form={form} update={update} />
+                  <div className="sm:col-span-2">
+                    <StudioField label="Siblings" field="siblings" form={form} update={update} multiline placeholder="One younger sister, architect" />
+                  </div>
+                </FieldGroup>
+                <FieldGroup title="In your own words" hint="Two or three specific sentences work better than generic claims.">
+                  <div className="sm:col-span-2">
+                    <StudioField label="About me" field="about" form={form} update={update} multiline />
+                  </div>
+                  <div className="sm:col-span-2">
+                    <StudioField label="Hobbies & interests" field="hobbies" form={form} update={update} multiline />
+                  </div>
+                  <div className="sm:col-span-2">
+                    <StudioField label="Partner preferences" field="partnerPreferences" form={form} update={update} multiline />
+                  </div>
+                </FieldGroup>
+                <section className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-sm font-medium text-zinc-900">Additional details</h3>
+                    <button type="button" onClick={addCustomField} className="inline-flex items-center gap-1 text-xs text-zinc-500 hover:text-zinc-900">
+                      <Plus size={14} />
+                      Add field
+                    </button>
+                  </div>
+                  <div className="space-y-3">
+                    {(form.customFields ?? []).map((field) => (
+                      <div key={field.id} className="grid grid-cols-[1fr_1fr_auto] gap-2">
+                        <input className={fieldControl} value={field.label} placeholder="Label" onChange={(event) => updateCustomField(field.id, 'label', event.target.value)} />
+                        <input className={fieldControl} value={field.value} placeholder="Value" onChange={(event) => updateCustomField(field.id, 'value', event.target.value)} />
+                        <button type="button" onClick={() => removeCustomField(field.id)} className="rounded-md p-2 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900" aria-label="Remove field">
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              </div>
+            )}
           </div>
 
-          <div className="flex shrink-0 items-center justify-between border-t border-stone-200 bg-[#fffdf9] px-4 py-3 sm:px-6">
-            <button type="button" disabled={step === 0} onClick={() => setStep((value) => Math.max(0, value - 1))} className="inline-flex items-center gap-1 rounded-xl px-3 py-2 text-sm font-bold text-stone-600 disabled:opacity-30"><ChevronLeft size={17} />Back</button>
-            <button type="button" onClick={() => setStep((value) => Math.min(4, value + 1))} className="inline-flex items-center gap-2 rounded-xl bg-[#7a2433] px-5 py-2.5 text-sm font-bold text-white">{step === 3 ? 'Review biodata' : step === 4 ? 'Preview' : 'Continue'}<ChevronRight size={17} /></button>
+          <div className="flex shrink-0 items-center justify-between border-t border-zinc-100 bg-white px-5 py-3">
+            <button type="button" disabled={step === 0} onClick={() => goStep(Math.max(0, step - 1))} className="inline-flex items-center gap-1 px-2 py-2 text-sm text-zinc-500 disabled:opacity-30">
+              <ChevronLeft size={17} />
+              Back
+            </button>
+            {step < 2 ? (
+              <button type="button" onClick={() => goStep(Math.min(2, step + 1))} className="inline-flex items-center gap-2 rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white">
+                Continue
+                <ChevronRight size={17} />
+              </button>
+            ) : (
+              <button type="button" onClick={exportPdf} disabled={exporting !== null} className="inline-flex items-center gap-2 rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-50">
+                <Download size={16} />
+                {exporting === 'pdf' ? 'Preparing…' : 'Download PDF'}
+              </button>
+            )}
           </div>
         </aside>
 
-        <main className={`${isPreview ? 'flex' : 'hidden lg:flex'} min-h-0 min-w-0 w-full flex-col bg-[#e9e2d8]`}>
-          <div className="flex min-h-14 shrink-0 items-center justify-between gap-3 border-b border-stone-300 bg-[#f8f4ed] px-4 sm:px-6">
-            <div className="min-w-0"><p className="text-xs font-black uppercase tracking-[0.13em] text-stone-500">A4 live preview</p><p className="hidden truncate text-xs text-stone-500 md:block">{currentTemplate.name}</p></div>
-            <div className="flex shrink-0 items-center gap-2"><button type="button" aria-label="Download PNG" onClick={exportPng} disabled={exporting !== null} className="inline-flex items-center gap-2 rounded-xl border border-stone-300 bg-white px-3 py-2 text-xs font-bold text-stone-700 disabled:opacity-50"><FileImage size={15} /><span className="hidden md:inline">{exporting === 'png' ? 'Preparing…' : 'PNG'}</span></button><button type="button" aria-label="Download PDF" onClick={exportPdf} disabled={exporting !== null} className="inline-flex items-center gap-2 rounded-xl bg-[#7a2433] px-3 py-2 text-xs font-bold text-white disabled:opacity-50 md:px-4"><Download size={15} /><span className="hidden md:inline">{exporting === 'pdf' ? 'Preparing…' : 'Download PDF'}</span></button></div>
-          </div>
-          <div ref={previewRef} className="min-h-0 flex-1 overflow-auto p-6 sm:p-10">
-            <div className="mx-auto" style={{ width: `${794 * zoom}px`, height: `${1123 * zoom}px` }}>
-              <div className="origin-top-left bg-white" style={{ width: 794, height: 1123, transform: `scale(${zoom})` }}><Template data={form} /></div>
+        <main className={`${isPreview ? 'flex' : 'hidden lg:flex'} min-h-0 min-w-0 w-full flex-col bg-zinc-200`}>
+          <div className="flex h-11 shrink-0 items-center justify-between gap-3 border-b border-zinc-300/70 px-4 text-zinc-600">
+            <div className="min-w-0">
+              <p className="truncate text-xs">{currentTemplate.name}</p>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <button type="button" onClick={() => { setAutoFit(false); setZoom((value) => Math.max(0.25, value - 0.05)); }} className="grid h-7 w-7 place-items-center rounded-md text-sm text-zinc-500 hover:bg-white">
+                −
+              </button>
+              <span className="w-10 text-center text-xs text-zinc-500">{Math.round(zoom * 100)}%</span>
+              <button type="button" onClick={() => { setAutoFit(false); setZoom((value) => Math.min(1.1, value + 0.05)); }} className="grid h-7 w-7 place-items-center rounded-md text-sm text-zinc-500 hover:bg-white">
+                +
+              </button>
+              <button type="button" onClick={() => setAutoFit(true)} className="rounded-md px-2 py-1 text-xs text-zinc-500 hover:bg-white">
+                Fit
+              </button>
             </div>
           </div>
-          <div className="flex shrink-0 items-center justify-between border-t border-stone-300 bg-[#f8f4ed] px-4 py-3"><p className="hidden items-center gap-2 text-xs font-bold text-stone-600 sm:flex"><ShieldCheck size={15} className="text-emerald-700" />No upload. No watermark.</p><div className="ml-auto flex items-center gap-2"><button type="button" onClick={() => setZoom((value) => Math.max(0.25, value - 0.05))} className="grid h-8 w-8 place-items-center rounded-full border border-stone-300 bg-white text-sm font-bold">−</button><span className="w-12 text-center text-xs font-bold text-stone-600">{Math.round(zoom * 100)}%</span><button type="button" onClick={() => setZoom((value) => Math.min(1, value + 0.05))} className="grid h-8 w-8 place-items-center rounded-full border border-stone-300 bg-white text-sm font-bold">+</button></div></div>
+          <div ref={previewRef} className="relative min-h-0 flex-1 overflow-auto p-6 sm:p-10">
+            <div className="relative mx-auto" style={{ width: `${794 * zoom}px`, height: `${1123 * zoom}px` }}>
+              <div className="origin-top-left bg-white shadow-[0_16px_48px_-24px_rgba(0,0,0,0.35)]" style={{ width: 794, height: 1123, transform: `scale(${zoom})` }}>
+                <Template data={form} />
+              </div>
+            </div>
+          </div>
         </main>
       </div>
 
-      <nav className="grid shrink-0 grid-cols-5 border-t border-stone-200 bg-[#fffdf9] lg:hidden" aria-label="Biodata steps">{STEPS.map((item, index) => { const Icon = item.icon; return <button key={item.id} type="button" onClick={() => setStep(index)} className={`flex flex-col items-center gap-1 py-2 text-[0.65rem] font-bold ${step === index ? 'text-[#7a2433]' : 'text-stone-500'}`}><Icon size={17} />{item.label}</button>; })}</nav>
+      <nav className="grid shrink-0 grid-cols-3 border-t border-zinc-200 bg-white lg:hidden" aria-label="Biodata sections">
+        {STEPS.map((item, index) => {
+          const Icon = item.icon;
+          return (
+            <button key={item.id} type="button" onClick={() => goStep(index)} className={`flex flex-col items-center gap-0.5 py-2 text-xs ${!isPreview && step === index ? 'text-zinc-900' : 'text-zinc-400'}`}>
+              <Icon size={16} />
+              {item.label}
+            </button>
+          );
+        })}
+      </nav>
+
+      {toast ? (
+        <div role="status" aria-live="polite" className="pointer-events-none fixed bottom-20 left-1/2 z-50 -translate-x-1/2 rounded-full bg-[#2a1618] px-4 py-2 text-xs font-semibold text-white shadow-lg lg:bottom-6">
+          {toast}
+        </div>
+      ) : null}
+
+      {confirmClear ? (
+        <div className="fixed inset-0 z-50 grid place-items-center bg-[#2a1618]/40 p-4" role="dialog" aria-modal="true" aria-labelledby="clear-title">
+          <div className="w-full max-w-sm rounded-xl bg-white p-5 shadow-2xl">
+            <h2 id="clear-title" className="text-lg font-medium">
+              Clear this biodata?
+            </h2>
+            <p className="mt-2 text-sm text-zinc-500">Every field and the photo will be removed from this device.</p>
+            <div className="mt-5 flex justify-end gap-2">
+              <button type="button" onClick={() => setConfirmClear(false)} className="rounded-md px-4 py-2 text-sm text-zinc-500">
+                Keep editing
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setForm(EMPTY_FORM);
+                  setConfirmClear(false);
+                  showToast('Form cleared');
+                }}
+                className="rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

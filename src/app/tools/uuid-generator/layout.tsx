@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "UUID Generator | Toolioz Tools",
-    description: "Generate random UUIDs (v1, v4) for your applications.",
-    keywords: ["uuid generator","guid generator","random id"],
-    alternates: {
-        canonical: "/tools/uuid-generator",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('uuid-generator');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

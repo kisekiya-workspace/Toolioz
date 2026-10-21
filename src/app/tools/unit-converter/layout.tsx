@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Unit Converter | Toolioz Tools",
-    description: "Convert length, weight, temperature, and more.",
-    keywords: ["unit converter","measurement converter","metric convert"],
-    alternates: {
-        canonical: "/tools/unit-converter",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('unit-converter');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { JSONLD } from '@/components/ui/JSONLD';
 import { buildCalculatorJsonLd, buildPageMetadata } from '@/lib/seo';
 import ResumeGeneratorClient from '@/app/pdftools/resume-generator/ResumeGeneratorClient';
+import { Footer } from '@/components/layout/Footer';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Free ATS-Friendly Resume Builder | Vector PDF | Toolioz',
@@ -30,6 +31,7 @@ export default function ResumeBuilderPage() {
         })}
       />
       <ResumeGeneratorClient />
+      <Footer />
     </>
   );
 }

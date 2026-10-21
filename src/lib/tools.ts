@@ -42,8 +42,10 @@ import {
 } from 'lucide-react';
 import { NEW_DEV_TOOLS, NEW_PDF_TOOLS } from '@/lib/new-tool-catalog';
 import { ADSENSE_INDEX_TOOL_IDS, ADSENSE_NOINDEX_HOWTO_SLUGS } from '@/lib/adsense-catalog';
+import { TOOLS as LEGACY_TOOLS } from '@/data/sociials-tools';
+import { canonicalToolPath, PAUSED_TOOL_PATHS, TOOL_ALIASES, WITHHELD_TOOL_PATHS } from '@/lib/tool-routes';
 
-export type Category = 'finance' | 'devtools' | 'design' | 'pdftools' | 'biodata';
+export type Category = 'finance' | 'devtools' | 'design' | 'pdftools' | 'biodata' | 'utility';
 
 export interface Tool {
   id: string;
@@ -57,7 +59,19 @@ export interface Tool {
 }
 
 export const TOOLS: Tool[] = [
+  {
+    id: 'background-remover',
+    title: 'Background Remover',
+    desc: 'Remove simple backgrounds locally, refine with brushes, and export a transparent PNG.',
+    icon: Scissors,
+    href: '/design/background-remover',
+    color: '#047857',
+    category: 'design',
+  },
   // ═══ FINANCE TOOLS ═══
+  { id: 'unit-converter', title: 'Unit Converter', desc: 'Convert length, mass, temperature, and binary data units.', icon: Scale, href: '/devtools/unit-converter', color: '#0f766e', category: 'utility' },
+  { id: 'lorem-ipsum', title: 'Lorem Ipsum Generator', desc: 'Generate placeholder paragraphs, words, or HTML for design mockups.', icon: FileText, href: '/devtools/lorem-ipsum', color: '#0369a1', category: 'utility' },
+  { id: 'image-compressor', title: 'Image Compressor', desc: 'Reduce image size with adjustable quality and target-size controls.', icon: ImagePlus, href: '/pdftools/image-compressor', color: '#0891b2', category: 'design' },
   {
     id: 'compound-interest',
     title: 'Compound Interest',
@@ -473,8 +487,8 @@ export const TOOLS: Tool[] = [
   },
   {
     id: 'layout-generator',
-    title: 'CSS Layout Generator',
-    desc: 'Visually build and test CSS Flexbox and Grid layouts with code export.',
+    title: 'CSS Grid Builder',
+    desc: 'Visually build CSS Grid layouts with rows, columns, gaps, and code export.',
     icon: LayoutDashboard,
     href: '/devtools/layout-generator',
     color: '#0ea5e9',
@@ -559,48 +573,45 @@ export const TOOLS: Tool[] = [
     title: 'Biodata Generator',
     desc: 'Create marriage biodata PDFs with religion-based and modern templates.',
     icon: UserRound,
-    href: '/biodata/biodata-generator',
+    href: '/biodata',
     color: '#db2777',
     category: 'biodata',
     isTrending: true
   }
 ];
 
-const NEW_TOOL_PATHS = new Set(
-  [...NEW_PDF_TOOLS, ...NEW_DEV_TOOLS].map((tool) => tool.path)
-);
+const legacyCategories: Record<string, Category> = {
+  Finance: 'finance', PDF: 'pdftools', Developer: 'devtools', Security: 'devtools',
+  Design: 'design', Media: 'design', Social: 'design', Writing: 'utility',
+};
+const existingPaths = new Set(TOOLS.map(tool => canonicalToolPath(tool.href)));
+const restoredLegacyTools: Tool[] = LEGACY_TOOLS
+  .filter(tool => !existingPaths.has(canonicalToolPath(tool.href)) && !TOOL_ALIASES[tool.href])
+  .map(tool => ({
+    id: tool.href.split('/').pop()!, title: tool.title, desc: tool.description,
+    href: tool.href, icon: tool.icon, category: legacyCategories[tool.category] ?? 'utility',
+    color: '#0369a1', isTrending: tool.popular,
+  }));
 
-/**
- * Near-duplicate keyword pages that do not belong in the finance catalog.
- * They remain reachable by URL but are withheld from navigation, sitemap,
- * ads, and the search index so they cannot dilute publisher-quality signals.
- */
-export const WITHHELD_TOOL_IDS = new Set([
-  'grade-percentage-calculator',
-  'win-percentage-calculator',
-  'weight-loss-percentage-calculator',
-  'body-fat-percentage-calculator',
-  'average-percentage-calculator',
-]);
+/** One discoverable entry per task. Visibility is independent of advertising approval. */
+export const PUBLIC_TOOLS: Tool[] = Array.from(new Map([...TOOLS, ...restoredLegacyTools]
+  .filter(tool => !TOOL_ALIASES[tool.href] && !PAUSED_TOOL_PATHS.has(tool.href) && !WITHHELD_TOOL_PATHS.has(tool.href))
+  .map(tool => {
+    const canonical = canonicalToolPath(tool.href);
+    return [canonical, { ...tool, href: canonical }] as const;
+  })).values());
+// Resume lives at its preferred public URL; retain its ID for related links and ad eligibility.
+const resume = TOOLS.find(tool => tool.id === 'resume-generator');
+if (resume) PUBLIC_TOOLS.push({ ...resume, href: '/resume-builder' });
 
-const WITHHELD_TOOL_PATHS = new Set(
-  TOOLS.filter((tool) => WITHHELD_TOOL_IDS.has(tool.id)).map((tool) => tool.href)
-);
-
-/**
- * Public directory for hubs, nav, related tools, sitemap, and search.
- * Only unique tools with original publisher notes. Duplicate keyword
- * variants and unfinished workbench pages stay off this list so an
- * AdSense review does not land on thin URLs from the homepage.
- */
-export const PUBLISHER_READY_TOOLS = TOOLS.filter((tool) => ADSENSE_INDEX_TOOL_IDS.has(tool.id));
-
-export const INDEXABLE_TOOLS = PUBLISHER_READY_TOOLS;
+/** Kept for existing consumers; this is a catalog, not an AdSense approval claim. */
+export const PUBLISHER_READY_TOOLS = PUBLIC_TOOLS;
+export const INDEXABLE_TOOLS = PUBLIC_TOOLS;
 
 const INDEXABLE_TOOL_PATHS = new Set(INDEXABLE_TOOLS.map((tool) => tool.href));
 
 const ADSENSE_AD_PATHS = new Set(
-  TOOLS.filter((tool) => ADSENSE_INDEX_TOOL_IDS.has(tool.id)).map((tool) => tool.href),
+  PUBLIC_TOOLS.filter((tool) => ADSENSE_INDEX_TOOL_IDS.has(tool.id)).map((tool) => tool.href),
 );
 ADSENSE_AD_PATHS.add('/resume-builder');
 
@@ -609,10 +620,11 @@ function normalizePath(pathname: string): string {
 }
 
 function isToolPagePath(path: string): boolean {
+  if (path === '/biodata' || path === '/resume-builder') return true;
   return /^\/(finance|devtools|design|pdftools|biodata)\/.+/.test(path) && !path.includes('/blog/');
 }
 
-/** Duplicate, experimental, or thin URLs that must not be treated as publisher pages. */
+/** Compatibility helper for ad components; catalog restoration does not enable ads. */
 export function isLowValuePublisherPath(pathname: string): boolean {
   const path = normalizePath(pathname);
   if (path === '/tools' || path.startsWith('/tools/')) return true;
@@ -621,7 +633,7 @@ export function isLowValuePublisherPath(pathname: string): boolean {
     const slug = path.slice('/how-to/'.length);
     if (ADSENSE_NOINDEX_HOWTO_SLUGS.has(slug)) return true;
   }
-  if (NEW_TOOL_PATHS.has(path) || WITHHELD_TOOL_PATHS.has(path)) return true;
+  if (TOOL_ALIASES[path] || PAUSED_TOOL_PATHS.has(path) || WITHHELD_TOOL_PATHS.has(path)) return true;
   return isToolPagePath(path) && !INDEXABLE_TOOL_PATHS.has(path);
 }
 
@@ -629,7 +641,7 @@ export function isLowValuePublisherPath(pathname: string): boolean {
 export function isAdSenseEligiblePath(pathname: string): boolean {
   const path = normalizePath(pathname);
   if (isLowValuePublisherPath(path)) return false;
-  if (isToolPagePath(path) || path === '/resume-builder') {
+  if (isToolPagePath(path)) {
     return ADSENSE_AD_PATHS.has(path);
   }
   return true;
@@ -653,7 +665,7 @@ export const CATEGORIES = [
   {
     id: 'design',
     title: 'Design & Creative Studio',
-    desc: 'Published image utilities that run in the browser, including tap-to-reveal PNGs.',
+    desc: 'Drawing, dithering, shaders, colors, images, and creative export tools.',
     color: '#06b6d4',
     icon: Palette
   },
@@ -663,6 +675,13 @@ export const CATEGORIES = [
     desc: 'Merge, split, and convert PDFs in the browser. Resume export is a separate page.',
     color: '#ef4444',
     icon: FileText
+  },
+  {
+    id: 'utility',
+    title: 'Everyday Utilities',
+    desc: 'Text, time, measurement, and everyday calculation tools.',
+    color: '#0f766e',
+    icon: Clock,
   },
   {
     id: 'biodata',

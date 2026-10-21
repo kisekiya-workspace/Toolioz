@@ -4,7 +4,7 @@ import { JSONLD } from '@/components/ui/JSONLD';
 import ImageToPdfClient from './ImageToPdfClient';
 
 export const metadata: Metadata = {
-  title: 'Image to PDF Converter | Convert JPG/PNG to PDF Online | Toolioz',
+  title: "Image to PDF Converter | Convert JPG/PNG to PDF Online",
   description:
     'Convert JPG, PNG, and WebP images into a single PDF document free in your browser. 100% client-side processing with zero server uploads.',
   keywords: [

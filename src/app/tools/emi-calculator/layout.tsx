@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "EMI Calculator | Toolioz Tools",
-    description: "Calculate your monthly EMI for home, car, and personal loans.",
-    keywords: ["emi calculator","loan calculator","mortgage calculator"],
-    alternates: {
-        canonical: "/tools/emi-calculator",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('emi-calculator');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

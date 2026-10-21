@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
-  title: 'Hash Generator Online | SHA-256, SHA-512, SHA-1 | Toolioz',
+  title: "Hash Generator Online | SHA-256, SHA-512, SHA-1",
   description:
     'Generate SHA-1, SHA-256, SHA-384, SHA-512 hashes from text or files instantly. 100% private — uses browser Web Crypto API. No data uploads.',
   keywords:

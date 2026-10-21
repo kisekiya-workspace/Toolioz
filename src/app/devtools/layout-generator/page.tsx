@@ -6,7 +6,7 @@ import { Metadata } from 'next';
 import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
-  title: 'CSS Grid Generator Pro | Advanced Track & Visual Builder | Toolioz',
+  title: "CSS Grid Generator Pro | Advanced Track & Visual Builder",
   description: 'Pro-grade CSS Grid visual builder with dynamic track sizing (minmax, fr, auto). Build responsive layouts with automatic semantic HTML and state-persistent grid tracks.',
   keywords: 'CSS Grid minmax generator, advanced css grid tracks, visual grid builder pro, responsive layout architecture, grid-template-areas generator, css layout tool developers',
   alternates: {

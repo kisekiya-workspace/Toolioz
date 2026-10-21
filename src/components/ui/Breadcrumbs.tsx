@@ -4,13 +4,15 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronRight, Home } from 'lucide-react';
-import { CATEGORIES, TOOLS } from '@/lib/tools';
+import { CATEGORIES, PUBLIC_TOOLS as TOOLS } from '@/lib/tools';
 
 export const Breadcrumbs = () => {
   const pathname = usePathname();
   if (
     pathname === '/' ||
     pathname === '/resume-builder' ||
+    pathname === '/biodata' ||
+    pathname.startsWith('/biodata/') ||
     pathname.startsWith('/blog/') ||
     pathname.startsWith('/how-to/') ||
     pathname.startsWith('/top5/')

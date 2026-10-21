@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import { buildCalculatorJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: "Inflation Calculator 2026 | Future Cost & Purchasing Power Loss | Toolioz",
+  title: "Inflation Calculator 2026 | Future Cost & Purchasing Power Loss",
   description: "Calculate how inflation erodes purchasing power. Know future cost of education, healthcare, and retirement. Includes real return calculator and rule of 72 explained.",
   keywords: 'inflation calculator india 2026, purchasing power calculator, future cost of education calculator, healthcare inflation india, real return after inflation calculator, rule of 72 inflation, how to beat inflation india, inflation adjusted retirement calculator, cost of living increase calculator',
   alternates: {

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { INDEXABLE_TOOLS } from '@/lib/tools';
+import { canonicalToolPath, PAUSED_TOOL_PATHS, TOOL_ALIASES, WITHHELD_TOOL_PATHS } from '@/lib/tool-routes';
 
 export const SITE_URL = 'https://toolioz.com';
 export const SITE_NAME = 'Toolioz';
@@ -41,7 +42,7 @@ export function buildCalculatorJsonLd(options: {
     '@type': 'WebApplication',
     name: options.name,
     description: options.description,
-    url: absoluteUrl(options.path),
+    url: absoluteUrl(canonicalToolPath(options.path)),
     applicationCategory: options.applicationCategory ?? 'FinanceApplication',
     operatingSystem: 'Any',
     browserRequirements: 'Requires JavaScript',
@@ -155,15 +156,22 @@ export function buildPageMetadata(options: {
   type?: 'website' | 'article';
   robots?: Metadata['robots'];
 }): Metadata {
-  const canonical = absoluteUrl(options.path);
+  const canonical = absoluteUrl(canonicalToolPath(options.path));
+  const plainTitle = options.title.replace(/(?:\s*[|—–-]\s*Toolioz(?:\s+(?:Tools|DevTools|Research))?)$/i, '').trim();
+  const title = `${plainTitle} | ${SITE_NAME}`;
   return {
-    title: options.title,
+    title: { absolute: title },
     description: options.description,
     keywords: options.keywords,
-    robots: options.robots,
+    robots:
+      PAUSED_TOOL_PATHS.has(options.path) ||
+      WITHHELD_TOOL_PATHS.has(options.path) ||
+      Boolean(TOOL_ALIASES[options.path])
+        ? { index: false, follow: true }
+        : options.robots,
     alternates: { canonical },
     openGraph: {
-      title: options.title,
+      title,
       description: options.description,
       url: canonical,
       siteName: SITE_NAME,
@@ -173,7 +181,7 @@ export function buildPageMetadata(options: {
     },
     twitter: {
       card: 'summary_large_image',
-      title: options.title,
+      title,
       description: options.description,
       images: [DEFAULT_OG_IMAGE.url],
     },
@@ -188,7 +196,7 @@ export function buildBreadcrumbJsonLd(items: Array<{ name: string; url: string }
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: absoluteUrl(item.url),
+      item: absoluteUrl(canonicalToolPath(item.url)),
     })),
   };
 }

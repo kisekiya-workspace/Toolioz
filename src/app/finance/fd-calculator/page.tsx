@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import { buildCalculatorJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: "FD Calculator 2026 | Maturity Value & TDS on Fixed Deposit | Toolioz",
+  title: "FD Calculator 2026 | Maturity Value & TDS on Fixed Deposit",
   description: "Calculate FD maturity with quarterly/monthly compounding. Know about TDS on FD interest, FD laddering strategy, and best small finance bank rates for 2026.",
   keywords: 'fd calculator online india 2026, fixed deposit maturity calculator, tds on fd interest above 40000, fd laddering strategy, fd vs debt mutual fund comparison, best fd rates small finance banks 2026, senior citizen fd rates, tax saver fd section 80c, fd interest calculator quarterly compounding',
   alternates: {

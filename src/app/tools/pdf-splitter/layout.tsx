@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "PDF Splitter | Toolioz Tools",
-    description: "Split a PDF file into individual pages or ranges.",
-    keywords: ["pdf splitter","split pdf","extract pdf pages"],
-    alternates: {
-        canonical: "/tools/pdf-splitter",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('pdf-splitter');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

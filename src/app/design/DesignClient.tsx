@@ -51,7 +51,7 @@ export default function DesignClient() {
         <div className="mx-auto max-w-[1200px] px-6">
           <div className="mb-3 inline-flex items-center gap-2">
             <Badge variant="outline" dot pulse size="sm" className="font-mono text-xs">
-              Published design tools
+                Design & creative studio
             </Badge>
           </div>
           
@@ -60,7 +60,7 @@ export default function DesignClient() {
           </h1>
           
           <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-            Tap-to-reveal PNGs for X and a three-panel image split. Pages labelled local processing keep uploads in the tab.
+            Drawing, dithering, shaders, colors, and image utilities. Find the right studio, create a preview, and export your work.
           </p>
 
           {/* Search Box */}
@@ -93,10 +93,10 @@ export default function DesignClient() {
           <div className="mb-6 flex items-center justify-between border-b border-zinc-100 pb-3 dark:border-zinc-800">
             <div>
               <h2 className="text-xl font-extrabold tracking-tight text-zinc-950 sm:text-2xl dark:text-zinc-50">
-                {search ? `Search Results (${filteredTools.length})` : 'Published design tools'}
+                {search ? `Search Results (${filteredTools.length})` : 'All design tools'}
               </h2>
               <p className="text-xs text-zinc-500 mt-0.5 dark:text-zinc-400">
-                Pixel tools that shipped with a documented article. Other studio URLs are not listed here.
+                Creative studios and practical image tools, with one listing per utility.
               </p>
             </div>
             <Badge variant="mono" size="sm">
@@ -142,7 +142,7 @@ export default function DesignClient() {
           <div className="mt-14">
             <DirectAnswerBlock
               title="What design tools does Toolioz publish?"
-              answer="The public design catalog lists the X tap-to-reveal PNG maker and the split-image-in-3 tool. Both have publisher notes. Drawing, dither, and shader workbenches stay off this directory until they have the same review."
+              answer="Toolioz includes a local background cutout studio, drawing and vector export, image and video dithering, ASCII art, shader editing, CSS generators, color utilities, image conversion, and social-image tools. Each studio has its own controls and export options."
               keyTakeaways={[
                 "Local image processing where the tool page says so. Those files are not uploaded to Toolioz.",
                 "The website still loads ordinary page assets and analytics.",

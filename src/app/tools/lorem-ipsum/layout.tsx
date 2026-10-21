@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Lorem Ipsum Generator | Toolioz Tools",
-    description: "Generate placeholder text for designs and mockups.",
-    keywords: ["lorem ipsum","dummy text","placeholder text"],
-    alternates: {
-        canonical: "/tools/lorem-ipsum",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('lorem-ipsum');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

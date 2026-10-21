@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Word Counter | Toolioz Tools",
-    description: "Count words, characters, and sentences in your text.",
-    keywords: ["word counter","character count","text stats"],
-    alternates: {
-        canonical: "/tools/word-counter",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('word-counter');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

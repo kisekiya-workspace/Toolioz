@@ -1,7 +1,7 @@
 /**
  * Unique tools that have original publisher notes (formula, example, limits).
- * This set is the public catalog, sitemap, and AdSense ad allowlist.
- * Other unique URLs stay reachable but are not featured during review.
+ * This set controls advertising eligibility only, not catalog visibility or indexing.
+ * PUBLIC_TOOLS in tools.ts is the deduplicated discoverable catalog.
  */
 export const ADSENSE_INDEX_TOOL_IDS = new Set([
   'sip-calculator',
@@ -31,6 +31,7 @@ export const ADSENSE_INDEX_TOOL_IDS = new Set([
   'biodata-generator',
   'x-hidden-image',
   'split-image-in-3',
+  'background-remover',
 ]);
 
 /** How-tos that describe a tool Toolioz does not currently publish as a reviewed page. */

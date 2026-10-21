@@ -4,7 +4,7 @@ import RegexTesterClient from './RegexTesterClient';
 import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
-    title: 'Regular Expression (Regex) Tester & Debugger | Toolioz DevTools',
+    title: 'Regular Expression (Regex) Tester & Debugger',
     description: 'Free browser-native Regex tester. Test, debug, and understand your Regular Expressions with live syntax highlighting and real-time JavaScript matching.',
     keywords: 'Regex tester online, Regular expression debugger free, JS regex matcher online, Live syntax highlighting regex, Test regular expressions safely',
     alternates: {

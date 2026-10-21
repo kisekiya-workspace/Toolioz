@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import { buildCalculatorJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: "Compound Interest Calculator 2026 | Rule of 72 & Wealth Planner | Toolioz",
+  title: "Compound Interest Calculator 2026 | Rule of 72 & Wealth Planner",
   description: "Calculate compound interest with monthly/daily compounding. Learn the Rule of 72, wealth building secrets, and how to beat inflation with the power of compounding in 2026.",
   keywords: 'compound interest calculator with monthly contributions, rule of 72 calculator india, daily compounding interest tool, wealth building secrets 2026, power of compounding examples, compound interest vs simple interest, effective annual rate calculator, monthly investment growth estimator, financial freedom calculator',
   alternates: {

@@ -9,7 +9,7 @@ import { top5Articles } from '@/lib/top5-content';
 import { SITE_URL } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Top Tools Guides | Best Financial & Web Developer Utilities | Toolioz',
+  title: "Top Tools Guides | Best Financial & Web Developer Utilities",
   description:
     'Read our curated Top 5 reviews for personal finance calculators, web developer utilities, PDF document tools, and encryption helpers to streamline your digital workflows.',
   keywords: [

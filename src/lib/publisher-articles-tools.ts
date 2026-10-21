@@ -2,6 +2,50 @@ import type { PublisherArticle } from '@/lib/publisher-articles-finance';
 
 export const publisherArticlesTools: PublisherArticle[] = [
   {
+    path: '/design/background-remover',
+    title: 'How to get a useful cutout without uploading your image',
+    lead: 'Toolioz’s background remover is an independently written, classical image-processing engine. It separates simple backgrounds using border colors and connected paths, then lets you erase or restore pixels yourself. It is not a trained portrait model and does not promise automatic hair extraction from arbitrary scenes.',
+    reviewed: '1 October 2026',
+    sections: [
+      {
+        heading: 'Start with the right image',
+        paragraphs: [
+          'Choose a JPEG, PNG, or WebP with a clearly contrasting subject and a background visible along the outer image edges. Leave some space around the subject. A plant against a plain wall or a dark bottle on a pale tabletop is easier than a person in a crowded room. The limit is 25 MB and 16 million pixels, with no side over 8192 pixels.',
+          'Upload or drop the image into the preview. The initial pass runs automatically. Increase Background separation if too much backdrop remains; lower it if the subject begins disappearing, then press Recalculate. Brush edits survive recalculation. Clear edits if you want to judge a fresh automatic result.',
+        ],
+      },
+      {
+        heading: 'What the engine actually computes',
+        paragraphs: [
+          'The analysis image is reduced to at most 720 pixels on its longest side. Up to eight representative colors are fitted to opaque boundary samples. Each pixel receives a weighted RGB distance to that palette. A minimum-bottleneck search finds the path from the boundary whose largest color difference is smallest. Pixels reachable without crossing a high-contrast barrier are background candidates. Unlike replacing every pale pixel, this can preserve pale details enclosed inside a dark subject.',
+          'Separation controls the threshold applied to those path costs. A smooth transition produces the initial alpha mask. For export, nearby analysis pixels are weighted by both their spatial distance and similarity to the source color. This reconstructs the mask at the original dimensions; it cannot recreate tiny features lost during analysis. Keep and Remove strokes act directly on the alpha mask, with joined circular brush segments. Original RGB values remain unchanged, and the new mask multiplies existing transparency rather than making transparent pixels opaque.',
+        ],
+      },
+      {
+        heading: 'Clean up, inspect, and export',
+        paragraphs: [
+          'Paint with Remove to clear missed background, including holes inside the subject. Paint with Keep to restore accidentally removed areas. Switch to Original if you cannot locate a missing feature, use preview zoom for closer inspection, and Undo to remove the most recent stroke. A stroke applies when you release the pointer. There is a 100-stroke limit; choose a larger brush for broad areas. Keep cannot restore transparency that was already absent in the source file.',
+          'Check edges on white and dark preview backdrops. Edge softness adjusts reconstruction, not semantic recognition or blur of the source photo. The backdrop colors are inspection aids only. Download PNG always exports a transparent image at the original pixel dimensions, without a watermark. Pixels stay in this browser tab; the site still loads ordinary assets and analytics. Closing or reloading the page discards the working image and edits.',
+        ],
+      },
+    ],
+    examples: [
+      { title: 'Dark bottle with a pale label on a pale background', body: 'The border palette describes the backdrop. The bottle outline blocks low-cost paths into the label, so the label can remain opaque even though its color resembles the background. A background gap inside a handle may stay opaque and should be painted with Remove.' },
+      { title: 'Subject cropped against the edge', body: 'The engine assumes the boundary describes background. A sleeve or leaf that touches that boundary can be removed or influence the palette. Use Keep on the missing area, or start from a photo with more surrounding space. Do not expect the separation slider to solve a wrong boundary assumption.' },
+      { title: 'Image with an already transparent border', body: 'If there are no opaque boundary samples, the engine preserves the existing alpha instead of inventing a background palette. Use Remove for residual backdrop and Keep for mistakenly removed pixels that still exist in the source.' },
+    ],
+    limitations: [
+      'Cluttered backgrounds, foreground/background color overlap, fine hair, glass, smoke, and shadows are not reliably solved automatically. This tool is not quality-equivalent to a learned segmentation service.',
+      'The border assumption can fail for full-frame portraits or edge-touching subjects. Small features can disappear in reduced-resolution analysis. Manual cleanup is a core part of the workflow.',
+      'Edge color contamination is not decontaminated: RGB is preserved, so a fringe from the original backdrop can remain. High-resolution work requires browser memory and may be slow on phones.',
+      'Original-size PNG refers to pixel dimensions, not preservation of EXIF, ICC profiles, camera metadata, or the original compressed file. Animated images and SVG are not supported.',
+    ],
+    sources: [
+      { label: 'Bai and Sapiro: A Geodesic Framework for Fast Interactive Image and Video Segmentation and Matting (research)', href: 'https://conservancy.umn.edu/bitstreams/25484eba-06c3-471d-ac9f-b6a3d3c0d2dd/download' },
+      { label: 'He, Sun, and Tang: Guided Image Filtering — edge-aware refinement research', href: 'https://people.csail.mit.edu/kaiming/eccv10/index.html' },
+    ],
+  },
+  {
     path: '/devtools/json-formatter',
     title: 'What this JSON formatter does with invalid input',
     lead:
@@ -374,7 +418,7 @@ export const publisherArticlesTools: PublisherArticle[] = [
     ],
   },
   {
-    path: '/biodata/biodata-generator',
+    path: '/biodata',
     title: 'A marriage biodata PDF is a document you still have to check',
     lead:
       'The generator fills a template from the fields you type and prints an A4 PDF. It does not verify education, income, or family details. False statements in a matrimonial document are your responsibility.',

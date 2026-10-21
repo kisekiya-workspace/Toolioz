@@ -4,7 +4,7 @@ import UrlEncoderClient from './UrlEncoderClient';
 import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
-    title: 'URL Encoder & Decoder Online | Clean URI Formatter | Toolioz',
+    title: "URL Encoder & Decoder Online | Clean URI Formatter",
     description: 'Quickly encode and decode URIs and URLs for safe transmission. Clean percent-encoding for special characters in web development.',
     keywords: 'URL encoder online, Decode URI string, Percent encoding tool, URL escape characters, safe web transmission formatter',
     alternates: {

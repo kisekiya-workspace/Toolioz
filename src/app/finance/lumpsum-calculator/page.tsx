@@ -5,7 +5,7 @@ import LumpsumClient from './LumpsumClient';
 import { buildCalculatorJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Lumpsum Calculator 2026 | Future Value Projection | Toolioz',
+  title: "Lumpsum Calculator 2026 | Future Value Projection",
   description:
     'Project how a one-time investment can grow with compounding. Estimate future value, gains, and long-term wealth growth with the Toolioz lumpsum calculator.',
   keywords:

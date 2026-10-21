@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "PDF to Image | Toolioz Tools",
-    description: "Convert PDF pages to JPG or PNG images.",
-    keywords: ["pdf to image","pdf to jpg","pdf converter"],
-    alternates: {
-        canonical: "/tools/pdf-to-image",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('pdf-to-image');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

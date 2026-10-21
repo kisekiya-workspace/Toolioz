@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Meta Tag Generator | Toolioz Tools",
-    description: "Generate SEO meta tags for your website.",
-    keywords: ["meta tag generator","seo tools","meta tags"],
-    alternates: {
-        canonical: "/tools/meta-tag-generator",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('meta-tag-generator');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

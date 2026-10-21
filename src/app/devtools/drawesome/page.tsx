@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import DrawesomeClient from "./DrawesomeClient";
 
 export const metadata: Metadata = {
+  alternates: { canonical: 'https://toolioz.com/devtools/drawesome' },
   title: "Drawesome Vector Drawing Toolbar & Canvas Studio | Free Online Tool",
   description:
     "Free online vector drawing canvas with 7 realistic pens (pencil, pen, fineliner, marker, highlighter, brush, fountain pen), area eraser, and SVG / PNG export. Created by Benji Taylor under MIT License.",
@@ -49,6 +50,7 @@ export default function DrawesomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <DrawesomeClient />
+      <section className="mx-auto max-w-7xl px-6 py-8"><h1 className="text-2xl font-semibold">Drawesome Vector Drawing Studio</h1><p className="mt-2 text-sm text-muted-foreground">Draw with realistic pens, erase areas, and export your artwork as SVG or PNG.</p></section>
     </>
   );
 }

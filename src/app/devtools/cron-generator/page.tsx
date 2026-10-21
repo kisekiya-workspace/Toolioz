@@ -4,7 +4,7 @@ import CronGeneratorClient from './CronGeneratorClient';
 import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
-    title: 'Cron Expression Generator & Schedule Descriptor | Toolioz DevTools',
+    title: 'Cron Expression Generator & Schedule Descriptor',
     description: 'Generate cron schedules easily and understand what they mean with our interactive syntax generator. Human-readable cron schedule descriptions.',
     keywords: 'Cron expression generator online, Crontab syntax builder, Cron schedule descriptor, Linux cron job helper, Quartz cron generator',
     alternates: {

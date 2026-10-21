@@ -4,9 +4,9 @@ import type { Metadata } from 'next';
 import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
-  title: 'PDF to Image Converter | Export PDF to PNG/JPG | Toolioz',
+  title: "PDF to Image Converter | Export PDF to PNG/JPG",
   description:
-    'Convert PDF pages into high-resolution PNG or JPG images with server-side rendering. Choose format, resolution scale, and download crisp images for presentations or social media.',
+    'Convert PDF pages to PNG or JPG images locally in the browser. Choose a resolution scale, preview pages, and download the results without uploading your PDF.',
   keywords:
     'PDF to image converter, export pdf to png online, convert pdf to jpg high quality, extract images from pdf, free pdf to image tool',
   alternates: {
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'PDF to Image Converter | Toolioz',
     description:
-      'Server-side PDF to PNG/JPEG conversion with adjustable resolution scale.',
+      'Browser-local PDF to PNG/JPEG conversion with adjustable resolution scale.',
     images: ['/tooliozLogo.png'],
   },
 };
@@ -42,7 +42,7 @@ export default function PDFToImagePage() {
     '@type': 'SoftwareApplication',
     name: 'Toolioz PDF to Image Converter',
     description:
-      'Server-side PDF to image conversion tool supporting PNG and JPEG output with adjustable resolution scale.',
+      'Browser-local PDF to image conversion tool supporting PNG and JPEG output with adjustable resolution scale.',
     applicationCategory: 'DesignApplication',
     operatingSystem: 'All',
     isAccessibleForFree: true,

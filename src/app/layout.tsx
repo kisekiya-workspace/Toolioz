@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
-import { Geist, Geist_Mono, Outfit } from 'next/font/google';
+import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/layout/Navbar';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
@@ -16,12 +16,6 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
-  subsets: ['latin'],
-  display: 'swap',
-});
-
-const outfit = Outfit({
-  variable: '--font-outfit',
   subsets: ['latin'],
   display: 'swap',
 });
@@ -131,7 +125,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
@@ -140,6 +134,7 @@ export default function RootLayout({
         ) : null}
       </head>
       <body className="min-h-screen bg-background font-sans text-foreground selection:bg-[#0072F5] selection:text-white">
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:text-zinc-900 focus:shadow-lg">Skip to tool content</a>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-VM8TJM1RER"
           strategy="afterInteractive"
@@ -157,7 +152,7 @@ export default function RootLayout({
         <ThemeProvider>
           <Navbar />
           <Breadcrumbs />
-          <div id="main-content">{children}</div>
+          <div id="main-content" tabIndex={-1}>{children}</div>
         </ThemeProvider>
       </body>
     </html>

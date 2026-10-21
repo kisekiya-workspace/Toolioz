@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import { buildCalculatorJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: "Mortgage Calculator 2026 | Monthly Payment & Hidden Costs Guide | Toolioz",
+  title: "Mortgage Calculator 2026 | Monthly Payment & Hidden Costs Guide",
   description: "Calculate monthly mortgage payments for 15 or 30 year terms. Learn about PMI, closing costs, the 28/36 rule, and hidden expenses before buying your first home.",
   keywords: 'mortgage calculator 2026, how much house can i afford calculator, 15 year vs 30 year mortgage comparison, first time home buyer calculator, mortgage payment with pmi, closing costs calculator, 28 36 rule mortgage, home loan emi calculator usa, monthly house payment estimator',
   alternates: {

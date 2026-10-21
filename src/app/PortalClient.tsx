@@ -33,6 +33,7 @@ const HUB_HREF: Record<string, string> = {
   design: '/design',
   pdftools: '/pdftools',
   biodata: '/biodata',
+  utility: '/tools',
 };
 
 const QUICK_TAGS = [
@@ -42,6 +43,7 @@ const QUICK_TAGS = [
   { id: 'design', label: 'Design' },
   { id: 'pdftools', label: 'PDF' },
   { id: 'biodata', label: 'Biodata' },
+  { id: 'utility', label: 'Everyday' },
 ];
 
 const BLOG_HUBS = [
@@ -141,7 +143,7 @@ export default function PortalClient() {
           <div className="mb-3 inline-flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-[#f2f2f2] px-3 py-0.5 text-xs font-normal text-[#4d4d4d] dark:bg-[#171717] dark:text-[#a1a1a1]">
               <span className="size-2.5 rounded-full bg-[#0072F5]" />
-              {TOOLS.length} reviewed browser-native utilities
+              {TOOLS.length} tools, one place to find them
             </span>
           </div>
 
@@ -627,6 +629,28 @@ export default function PortalClient() {
               </Button>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="listed-on-heading" className="bg-[#fafafa] px-6 pb-12 dark:bg-[#0a0a0a]">
+        <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-4">
+          <h2 id="listed-on-heading" className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+            Listed on
+          </h2>
+          <a
+            href="https://nukkadly.com"
+            className="inline-flex rounded-md bg-white p-2 ring-1 ring-zinc-200 transition-colors hover:ring-zinc-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0072F5] dark:ring-zinc-700"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element -- Display the directory's supplied badge directly. */}
+            <img
+              src="https://nukkadly.com/live_on_nukkadly_white.png"
+              alt="Live on Nukkadly"
+              height={48}
+              loading="lazy"
+              decoding="async"
+              className="h-12 w-auto max-w-full"
+            />
+          </a>
         </div>
       </section>
 

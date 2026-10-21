@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Income Tax Calculator | Toolioz Tools",
-    description: "Estimate your income tax liability based on current tax slabs.",
-    keywords: ["tax calculator","income tax","tax estimators"],
-    alternates: {
-        canonical: "/tools/income-tax-calculator",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('income-tax-calculator');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

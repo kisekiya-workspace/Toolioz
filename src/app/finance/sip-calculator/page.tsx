@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import { buildCalculatorJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: "SIP Calculator 2026 | Step-Up SIP | ₹5000 Monthly Returns | Toolioz",
+  title: "SIP Calculator 2026 | Step-Up SIP | ₹5000 Monthly Returns",
   description: "Calculate SIP returns with step-up option. See how ₹5000/month grows to 1 crore. Includes year-by-year breakdown, XIRR, and direct vs regular plan comparison tips.",
   keywords: 'sip calculator for 1 crore target, step up sip calculator india, sip 5000 per month for 10 years, mutual fund sip return calculator 2026, best sip date to invest, direct vs regular mutual fund, sip vs lumpsum which is better, how to choose mutual fund for sip, sip calculator with inflation',
   alternates: {

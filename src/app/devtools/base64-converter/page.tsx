@@ -4,7 +4,7 @@ import Base64Client from './Base64Client';
 import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
-  title: 'Base64 Encoder & Decoder Online | Toolioz DevTools',
+  title: 'Base64 Encoder & Decoder Online',
   description: 'Instantly convert text or files to Base64 and decode Base64 strings to raw data natively in your browser. Secure, fast, and 100% client-side.',
   keywords: 'Base64 encoder online, Decode Base64 string to text, Base64 file converter safely, Free developer base64 tool, Cryptography encoding',
   alternates: {

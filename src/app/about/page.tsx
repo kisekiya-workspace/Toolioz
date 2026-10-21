@@ -3,7 +3,7 @@ import AboutClient from './AboutClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "About Us | Toolioz | Our Vision for Precision Tools",
+  title: "About Us | Our Vision for Precision Tools",
   description: "Learn about Toolioz's mission to provide professional-grade, browser-native utility tools. We prioritize privacy, speed, and accuracy for global users.",
   keywords: 'About Toolioz, mission statement, privacy-first tools, high precision calculators, developer utility vision',
   alternates: {

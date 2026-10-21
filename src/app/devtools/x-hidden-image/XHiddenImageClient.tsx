@@ -485,7 +485,7 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
             <p className="mt-3 text-sm text-[var(--text-tertiary)]">
               New to the trend?{' '}
               <Link
-                href="/devtools/blog/x-tap-to-reveal-hidden-png-twitter-guide"
+                href="/devtools/x-hidden-image#how-it-works"
                 className="font-semibold text-[var(--primary)] underline-offset-2 hover:underline"
               >
                 Read the tap-to-reveal guide
@@ -780,7 +780,7 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
           </div>
 
           {/* Right — quick help */}
-          <Card className="!p-5 xl:sticky xl:top-6 xl:self-start">
+          <Card id="how-it-works" className="!p-5 xl:sticky xl:top-6 xl:self-start">
             <h3 className="mb-4 flex items-center gap-2 text-sm font-extrabold uppercase tracking-wide text-[var(--text-tertiary)]">
               <Settings2 size={16} /> How masking works
             </h3>

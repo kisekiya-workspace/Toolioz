@@ -29,7 +29,7 @@
   --radius-xl: 12px;
   --radius-2xl: 12px;
 
-  --font-sans: var(--font-geist-sans), var(--font-outfit), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, "Roboto Mono", Menlo, Monaco, Consolas, monospace;
 }
 
@@ -48,7 +48,7 @@
   --secondary: #f2f2f2;
   --secondary-foreground: #171717;
   --muted: #f2f2f2;
-  --muted-foreground: #8f8f8f;
+  --muted-foreground: #6b7280;
   --accent: #ebebeb;
   --accent-foreground: #171717;
   --destructive: #e5484d;
@@ -378,4 +378,26 @@ button:focus-visible {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--muted-foreground);
+}
+
+/* Shared workbench tokens: contrast-safe controls in both site themes. */
+.tool-workbench {
+  --tool-accent: #0369a1;
+  --tool-accent-dark: #075985;
+  --tool-soft: #f4f7f8;
+  --tool-wash: #e8f0f3;
+  --tool-border: #d7e3e8;
+}
+.dark .tool-workbench {
+  --tool-accent: #0369a1;
+  --tool-accent-dark: #bae6fd;
+  --tool-soft: #111923;
+  --tool-wash: #182330;
+  --tool-border: #334155;
+}
+
+#main-content:focus { outline: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  .animate-pulse, .animate-bounce { animation: none !important; }
 }

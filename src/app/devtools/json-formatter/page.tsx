@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
-  title: 'JSON Formatter & Validator Online | Toolioz DevTools',
+  title: 'JSON Formatter & Validator Online',
   description: 'Free browser-native JSON formatter, validator, and minifier. Prettify messy or nested JSON payloads instantly, strictly client-side to ensure maximum privacy.',
   keywords: 'JSON formatter online, Prettify JSON, Minify JSON payload fast, Browser JSON validator free, Private JSON formatter secure',
   alternates: {

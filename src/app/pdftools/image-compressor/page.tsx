@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
-  title: 'Image Compressor | Reduce Image Size Online | Toolioz',
+  title: "Image Compressor | Reduce Image Size Online",
   description:
     'Compress JPEG, PNG, and WebP images with 100% privacy. Use target file size logic and quality controls — all processing happens locally in your browser.',
   keywords:

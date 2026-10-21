@@ -8,7 +8,6 @@ import { PUBLISHER_READY_TOOLS } from '@/lib/tools';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
-import { Footer } from '@/components/layout/Footer';
 
 type LibraryTool = {
   title: string;
@@ -24,7 +23,8 @@ const categoryNames = {
   devtools: 'Developer',
   design: 'Design',
   pdftools: 'PDF',
-  biodata: 'Utility',
+  biodata: 'Biodata',
+  utility: 'Everyday',
 } as const;
 
 const TOOLS: LibraryTool[] = [
@@ -109,7 +109,7 @@ export default function ToolsLibraryClient() {
             </h1>
             
             <p className="mx-auto mt-2 max-w-xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-              Browse reviewed finance calculators, developer helpers, PDF converters, and design tools. Each listed page includes a working browser-based utility.
+              Find calculators, developer helpers, PDF converters, design studios, and everyday utilities. One listing per tool, with no duplicate copies.
             </p>
 
             {/* Search Box */}
@@ -121,6 +121,7 @@ export default function ToolsLibraryClient() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   type="search"
+                  aria-label="Search all tools"
                   placeholder="Search JSON, SIP, PDF, hash, unit converter…"
                   className="w-full border-none bg-transparent px-3 py-1 text-sm font-medium text-zinc-950 outline-none placeholder:text-zinc-400 dark:text-zinc-50"
                 />
@@ -150,6 +151,7 @@ export default function ToolsLibraryClient() {
                     key={name}
                     type="button"
                     onClick={() => setCategory(name)}
+                    aria-pressed={active}
                     className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold transition-all ${
                       active
                         ? 'border border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900'
@@ -242,7 +244,6 @@ export default function ToolsLibraryClient() {
         </main>
       </div>
 
-      <Footer />
     </div>
   );
 }

@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "URL Encoder/Decoder | Toolioz Tools",
-    description: "Encode or decode URLs for safe usage.",
-    keywords: ["url encoder","url decoder","url tools"],
-    alternates: {
-        canonical: "/tools/url-converter",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('url-converter');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

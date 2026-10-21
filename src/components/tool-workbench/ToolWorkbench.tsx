@@ -7,6 +7,8 @@ import type { NewToolDefinition } from '@/lib/new-tool-catalog';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/badge';
 import { Footer } from '@/components/layout/Footer';
+import { WORKBENCH_GUIDES } from '@/lib/tool-workbench-guides';
+import { PUBLIC_TOOLS } from '@/lib/tools';
 
 export const fieldClass =
   'w-full rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3.5 py-2.5 text-xs sm:text-sm font-medium text-zinc-900 dark:text-zinc-50 outline-none transition focus:border-blue-600 dark:focus:border-blue-500';
@@ -23,7 +25,9 @@ export function ToolWorkbench({
   tool: NewToolDefinition;
   children: ReactNode;
 }) {
-  const home = tool.group === 'pdf' ? '/pdftools' : '/devtools';
+  const home = tool.group === 'pdf' ? '/pdftools' : tool.group === 'image' ? '/design' : '/devtools';
+  const guide = WORKBENCH_GUIDES[tool.mode];
+  const related = PUBLIC_TOOLS.filter(item => item.href !== tool.path && item.category === (tool.group === 'pdf' ? 'pdftools' : tool.group === 'image' ? 'design' : 'devtools')).slice(0, 3);
   const groupLabel =
     tool.group === 'pdf'
       ? 'PDF Utilities'
@@ -34,7 +38,7 @@ export function ToolWorkbench({
       : 'Developer Utilities';
 
   return (
-    <div className="min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50 flex flex-col justify-between">
+    <div className="tool-workbench min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50 flex flex-col justify-between">
       <div>
         {/* Standard Clean Hero Header */}
         <header className="bg-white pt-8 pb-6 text-center dark:bg-zinc-950">
@@ -58,23 +62,24 @@ export function ToolWorkbench({
           <Card className="p-6 sm:p-8 space-y-6">
             {children}
           </Card>
+          {guide && <section className="mt-8 rounded-2xl border border-zinc-200 p-5 sm:p-6 dark:border-zinc-800" aria-label="Tool instructions"><h2 className="text-lg font-semibold">How to use {tool.shortTitle}</h2><ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-6 text-zinc-600 dark:text-zinc-400">{guide.steps.map(step => <li key={step}>{step}</li>)}</ol><h3 className="mt-5 text-sm font-semibold">A practical example</h3><p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">{guide.example}</p><h3 className="mt-5 text-sm font-semibold">What to check before using the result</h3><p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">{guide.limitation}</p></section>}
 
           {/* Guarantee Badges */}
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             {[
               {
                 icon: LockKeyhole,
-                title: '100% Client-Side Privacy',
-                desc: 'All file parsing and transformations run in your local browser memory.',
+                title: 'Local processing',
+                desc: 'Inputs are processed in this tab. The site and some engines still load network assets.',
               },
               {
                 icon: CheckCircle2,
-                title: 'Instant Document Output',
-                desc: 'Download clean, zero-bloat documents with zero cloud storage.',
+                title: 'Inspect before sharing',
+                desc: 'Review the output and retain your original. Large files may take longer to process.',
               },
               {
                 icon: Sparkles,
-                title: 'Free & Unlimited',
+                title: 'No account needed',
                 desc: 'No account, API keys, or watermarks required.',
               },
             ].map(({ icon: Icon, title, desc }) => (
@@ -93,6 +98,7 @@ export function ToolWorkbench({
               </Card>
             ))}
           </div>
+          <nav aria-label="Related tools" className="mt-8 flex flex-wrap gap-3 text-sm"><Link href={home} className="font-medium text-blue-700 underline-offset-4 hover:underline dark:text-blue-400">Browse {groupLabel.toLowerCase()}</Link>{related.map(item => <Link key={item.id} href={item.href} className="text-zinc-600 underline-offset-4 hover:underline dark:text-zinc-400">{item.title}</Link>)}</nav>
         </section>
       </div>
 

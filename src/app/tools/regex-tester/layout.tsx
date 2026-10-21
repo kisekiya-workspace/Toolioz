@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Regex Tester | Toolioz Tools",
-    description: "Test and debug Regular Expressions in real-time.",
-    keywords: ["regex tester","regular expression","regex tool"],
-    alternates: {
-        canonical: "/tools/regex-tester",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('regex-tester');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

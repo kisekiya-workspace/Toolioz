@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'ATS Resume Generator | Toolioz',
     description: 'Build a recruiter-friendly resume, edit the LaTeX, and export a real PDF.',
-    url: 'https://toolioz.com/pdftools/resume-generator',
+    url: 'https://toolioz.com/resume-builder',
     siteName: 'Toolioz PDF Tools',
     type: 'website',
     images: [
@@ -51,7 +51,7 @@ export default function ResumeGeneratorPage() {
       'Browser-based resume builder with structured editing, LaTeX source output, and PDF export.',
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'All',
-    url: 'https://toolioz.com/pdftools/resume-generator',
+    url: 'https://toolioz.com/resume-builder',
   };
 
   const howToJsonLd = {

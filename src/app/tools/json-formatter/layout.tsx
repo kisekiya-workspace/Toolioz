@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "JSON Formatter | Toolioz Tools",
-    description: "Format, validate, and beautify your JSON data.",
-    keywords: ["json formatter","json validator","json view"],
-    alternates: {
-        canonical: "/tools/json-formatter",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('json-formatter');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

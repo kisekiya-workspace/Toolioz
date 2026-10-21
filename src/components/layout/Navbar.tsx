@@ -24,6 +24,7 @@ const PRIMARY_NAV = [
   { name: 'DevTools', href: '/devtools' },
   { name: 'Design', href: '/design' },
   { name: 'PDF', href: '/pdftools' },
+  { name: 'Biodata', href: '/biodata' },
 ];
 
 const MORE_NAV = [
@@ -47,6 +48,7 @@ export const Navbar = () => {
   const [closeTimeout, setCloseTimeout] = useState<NodeJS.Timeout | null>(null);
 
   const pathname = usePathname();
+  const hideChrome = pathname === '/biodata' || pathname.startsWith('/biodata/');
 
   const currentCategoryId = TOOL_CATEGORIES.find(
     (category) => pathname === `/${category.id}` || pathname.startsWith(`/${category.id}/`),
@@ -79,11 +81,14 @@ export const Navbar = () => {
   }, [pathname]);
 
   useEffect(() => {
+    if (hideChrome) return;
     document.body.style.overflow = isOpen ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
-  }, [isOpen]);
+  }, [hideChrome, isOpen]);
+
+  if (hideChrome) return null;
 
   return (
     <header
@@ -146,7 +151,7 @@ export const Navbar = () => {
                   {TOOL_CATEGORIES.map((category) => (
                     <Link
                       key={category.id}
-                      href={`/${category.id}`}
+                      href={category.id === 'utility' ? '/tools' : `/${category.id}`}
                       className={[
                         'flex items-start gap-3 rounded-[8px] p-3 hover:bg-[#fafafa] dark:hover:bg-[#171717]',
                         currentCategoryId === category.id ? 'bg-[#f2f2f2] dark:bg-[#171717]' : '',
@@ -266,7 +271,7 @@ export const Navbar = () => {
                 {TOOL_CATEGORIES.map((category) => (
                   <Link
                     key={category.id}
-                    href={`/${category.id}`}
+                    href={category.id === 'utility' ? '/tools' : `/${category.id}`}
                     className="flex items-center gap-3 rounded-[8px] bg-white p-3 ds-surface dark:bg-[#111]"
                     onClick={() => setIsOpen(false)}
                   >

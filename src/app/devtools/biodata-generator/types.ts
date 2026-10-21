@@ -10,7 +10,11 @@ export type TemplateId =
   | 'floral'
   | 'minimalist'
   | 'modern'
-  | 'slate';
+  | 'slate'
+  | 'gujarat_bandhani'
+  | 'gujarat_patola'
+  | 'gujarat_kutch'
+  | 'gujarat_jain';
 
 export type BiodataForm = {
   photo: string | null;
@@ -52,5 +56,9 @@ export type BiodataForm = {
   nativePlace?: string;
   familyType?: string;
   familyStatus?: string;
+  kuldevi?: string;
+  mosal?: string;
+  mamaName?: string;
+  sampraday?: string;
   customFields?: Array<{ id: string; label: string; value: string }>;
 };

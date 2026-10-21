@@ -40,9 +40,9 @@ export default function EditorialPolicyPage() {
             <p>
               A listed tool must perform a distinct user task, work in a supported modern browser, explain the inputs and
               output, and state material limitations. We do not treat a new keyword variation as a reason to publish a
-              separate page. Duplicate percentage variants and the old <code>/tools/</code> copies stay out of the
-              directory and search index. Unique tools without publisher notes remain reachable by URL for testing, but
-              they are not linked from hubs or the sitemap until those notes exist.
+              separate page. Equivalent copies redirect to one preferred URL and appear only once in the directory and
+              sitemap. Distinct utilities are discoverable independently of advertising eligibility; returning a tool to
+              the catalog does not imply AdSense approval. Paused experiments remain outside the public catalog.
             </p>
 
             <h2>Calculator Review</h2>
@@ -84,7 +84,7 @@ export default function EditorialPolicyPage() {
               The <Link href="/terms">Terms of Service</Link> explain the limits of educational estimates.
             </p>
 
-            <p className={styles.lastUpdated}>Last reviewed: 10 September 2026</p>
+            <p className={styles.lastUpdated}>Last reviewed: 1 October 2026</p>
           </Card>
         </div>
       </section>

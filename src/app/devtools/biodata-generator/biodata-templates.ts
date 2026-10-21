@@ -12,6 +12,10 @@ import { FloralEditorialTemplate } from './templates/FloralEditorialTemplate';
 import { MinimalistTemplate } from './templates/MinimalistTemplate';
 import { ModernSplitTemplate } from './templates/ModernSplitTemplate';
 import { SlateBannerTemplate } from './templates/SlateBannerTemplate';
+import { GujaratBandhaniTemplate } from './templates/GujaratBandhaniTemplate';
+import { GujaratPatolaTemplate } from './templates/GujaratPatolaTemplate';
+import { GujaratKutchTemplate } from './templates/GujaratKutchTemplate';
+import { GujaratJainTemplate } from './templates/GujaratJainTemplate';
 
 export type BiodataTemplateMeta = {
   id: TemplateId;
@@ -19,7 +23,7 @@ export type BiodataTemplateMeta = {
   description: string;
   accentClass: string;
   component: ComponentType<{ data: BiodataForm }>;
-  community: 'Hindu' | 'Muslim' | 'Sikh' | 'Universal';
+  community: 'Hindu' | 'Muslim' | 'Sikh' | 'Gujarati' | 'Universal';
   style: 'Traditional' | 'Royal' | 'Modern' | 'Minimal';
 };
 
@@ -131,6 +135,42 @@ export const BIODATA_TEMPLATES: BiodataTemplateMeta[] = [
     component: SlateBannerTemplate,
     community: 'Universal',
     style: 'Modern',
+  },
+  {
+    id: 'gujarat_bandhani',
+    name: 'Gujarat Bandhani',
+    description: 'Sindoor red and mustard bandhani dots with a Shubh Vivah header for Gujarati lagna biodata.',
+    accentClass: 'bg-red-100 text-red-900',
+    component: GujaratBandhaniTemplate,
+    community: 'Gujarati',
+    style: 'Traditional',
+  },
+  {
+    id: 'gujarat_patola',
+    name: 'Patan Patola',
+    description: 'Patola-inspired geometric border in maroon, saffron, and green — a classic Gujarat wedding card look.',
+    accentClass: 'bg-orange-100 text-orange-900',
+    component: GujaratPatolaTemplate,
+    community: 'Gujarati',
+    style: 'Royal',
+  },
+  {
+    id: 'gujarat_kutch',
+    name: 'Kutch Heritage',
+    description: 'Indigo and terracotta folk borders inspired by Kutch embroidery and Ajrakh stripes.',
+    accentClass: 'bg-blue-100 text-blue-900',
+    component: GujaratKutchTemplate,
+    community: 'Gujarati',
+    style: 'Traditional',
+  },
+  {
+    id: 'gujarat_jain',
+    name: 'Gujarat Jain',
+    description: 'Quiet saffron-on-ivory page with a Jai Jinendra greeting for Gujarati Jain families.',
+    accentClass: 'bg-orange-50 text-orange-900',
+    component: GujaratJainTemplate,
+    community: 'Gujarati',
+    style: 'Minimal',
   },
 ];
 

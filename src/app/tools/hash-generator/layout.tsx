@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Hash Generator | Toolioz Tools",
-    description: "Generate MD5, SHA-1, SHA-256 hashes for any text input.",
-    keywords: ["hash generator","md5 generator","sha256 generator"],
-    alternates: {
-        canonical: "/tools/hash-generator",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('hash-generator');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

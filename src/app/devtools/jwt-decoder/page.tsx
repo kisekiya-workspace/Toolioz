@@ -4,7 +4,7 @@ import JwtDecoderClient from './JwtDecoderClient';
 import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
-    title: 'JWT Decoder & Inspector Online | Toolioz DevTools',
+    title: 'JWT Decoder & Inspector Online',
     description:
       'Decode JSON Web Tokens in the browser. Optional HS256 check if you type the shared secret. Decoding alone is not verification.',
     keywords: 'JWT decoder, JSON Web Token parser, inspect JWT claims, HS256 browser verify',

@@ -4,7 +4,7 @@ import BcryptGeneratorClient from './BcryptGeneratorClient';
 import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
-    title: 'Bcrypt Password Hash Generator & Verifier | Toolioz DevTools',
+    title: 'Bcrypt Password Hash Generator & Verifier',
     description: 'Instantly generate cryptographically secure Bcrypt hashes and verify passwords entirely inside your browser. No data leaves your machine.',
     keywords: 'Bcrypt generator online free, Browser hash password checker, Secure bcrypt verification tool, 2y hash generator, cryptographically secure password',
     alternates: {

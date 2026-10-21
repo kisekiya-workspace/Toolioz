@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Image Compressor | Toolioz Tools",
-    description: "Compress images (PNG, JPG, WebP) without losing quality.",
-    keywords: ["image compressor","reduce image size","compress photos"],
-    alternates: {
-        canonical: "/tools/image-compressor",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('image-compressor');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

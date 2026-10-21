@@ -3,7 +3,12 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/sociials-ui/card";
 import { Textarea } from "@/components/sociials-ui/textarea";
-import { FileText, Copy, Check } from "lucide-react";
+import { Copy, Check } from "lucide-react";
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { ToolHeader } from '@/components/sociials-tools/ToolHeader';
+import { toast } from 'sonner';
 import { Button } from "@/components/sociials-ui/button";
 
 export default function MarkdownEditorPage() {
@@ -28,41 +33,23 @@ console.log(greeting);
 `);
     const [copied, setCopied] = useState(false);
 
-    const parseMarkdown = (text: string): string => {
-        return text
-            .replace(/^### (.*$)/gim, '<h3 class="text-lg font-semibold mt-4 mb-2">$1</h3>')
-            .replace(/^## (.*$)/gim, '<h2 class="text-xl font-bold mt-6 mb-3">$1</h2>')
-            .replace(/^# (.*$)/gim, '<h1 class="text-2xl font-bold mt-6 mb-4">$1</h1>')
-            .replace(/\*\*\*(.*?)\*\*\*/gim, '<strong><em>$1</em></strong>')
-            .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
-            .replace(/\*(.*?)\*/gim, '<em>$1</em>')
-            .replace(/```(\w+)?\n([\s\S]*?)```/gim, '<pre class="bg-muted p-4 rounded my-4 overflow-x-auto"><code>$2</code></pre>')
-            .replace(/`(.*?)`/gim, '<code class="bg-muted px-1.5 py-0.5 rounded text-sm">$1</code>')
-            .replace(/^> (.*$)/gim, '<blockquote class="border-l-4 pl-4 italic text-muted-foreground my-4">$1</blockquote>')
-            .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" class="text-primary hover:underline" target="_blank">$1</a>')
-            .replace(/^- (.*$)/gim, '<li class="ml-4">$1</li>')
-            .replace(/\n/gim, '<br />');
-    };
-
-    const copyHTML = () => {
-        navigator.clipboard.writeText(parseMarkdown(markdown));
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
+    const copyHTML = async () => {
+        try {
+            const html = renderToStaticMarkup(<ReactMarkdown remarkPlugins={[remarkGfm]}>{markdown}</ReactMarkdown>);
+            await navigator.clipboard.writeText(html);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+            toast.success('HTML copied');
+        } catch {
+            toast.error('Clipboard access was blocked. You can still select and copy the preview text.');
+        }
     };
 
     return (
         <div className="container px-6 py-12 max-w-6xl mx-auto">
             <div className="space-y-8">
                 {/* Header */}
-                <div className="flex items-center gap-4">
-                    <div className="p-3 rounded-xl bg-muted">
-                        <FileText className="h-8 w-8" />
-                    </div>
-                    <div>
-                        <h1 className="text-3xl font-bold">Markdown Editor</h1>
-                        <p className="text-muted-foreground">Write and preview Markdown in real-time</p>
-                    </div>
-                </div>
+                <ToolHeader title="Markdown Editor" description="Write Markdown with a live, safe preview and copy its rendered HTML." />
 
                 {/* Editor Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -73,6 +60,7 @@ console.log(greeting);
                         </CardHeader>
                         <CardContent>
                             <Textarea
+                                aria-label="Markdown source"
                                 value={markdown}
                                 onChange={(e) => setMarkdown(e.target.value)}
                                 className="min-h-[500px] font-mono text-sm resize-none leading-relaxed"
@@ -93,11 +81,17 @@ console.log(greeting);
                         <CardContent>
                             <div
                                 className="prose prose-sm dark:prose-invert max-w-none min-h-[500px] p-6 border rounded-lg bg-muted/30"
-                                dangerouslySetInnerHTML={{ __html: parseMarkdown(markdown) }}
-                            />
+                            >
+                                <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ h1: ({ children }) => <h2 className="text-2xl font-bold">{children}</h2> }}>{markdown}</ReactMarkdown>
+                            </div>
                         </CardContent>
                     </Card>
                 </div>
+                <section className="rounded-xl border border-border p-6 text-sm leading-6">
+                    <h2 className="text-lg font-semibold">Write, preview, then export</h2>
+                    <p className="mt-3 text-muted-foreground">Try # Heading, **bold**, a bullet list, or a fenced code block. The preview supports GitHub-style tables, task lists, and strikethrough. Copy HTML exports the rendered content, not this editor interface.</p>
+                    <p className="mt-3 text-muted-foreground">Raw HTML is displayed as text, not executed. Unsafe link protocols are filtered. This is a Markdown renderer, not a script or HTML playground.</p>
+                </section>
             </div>
         </div>
     );

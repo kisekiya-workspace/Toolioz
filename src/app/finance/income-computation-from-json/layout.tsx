@@ -1,6 +1,6 @@
-﻿import { noIndexFollow } from '@/lib/noindex-metadata';
+﻿import type { Metadata } from 'next';
 
-export const metadata = noIndexFollow;
+export const metadata: Metadata = { robots: { index: true, follow: true } };
 
 export default function NoIndexLayout({ children }: { children: React.ReactNode }) {
   return children;

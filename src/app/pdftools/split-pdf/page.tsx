@@ -4,7 +4,7 @@ import { JSONLD } from '@/components/ui/JSONLD';
 import SplitPdfClient from './SplitPdfClient';
 
 export const metadata: Metadata = {
-  title: 'Split PDF Online | Extract Pages from PDF | Toolioz',
+  title: "Split PDF Online | Extract Pages from PDF",
   description:
     'Split PDF files or extract specific pages into separate PDF documents free in your browser. 100% client-side execution with zero server uploads.',
   keywords: [

@@ -9,11 +9,11 @@ interface ToggleProps {
 
 export default function Toggle({ label, value, onChange }: ToggleProps) {
   return (
-    <div
+    <button type="button" role="switch" aria-checked={value}
       onClick={() => onChange(!value)}
-      className="flex items-center justify-between bg-white dark:bg-zinc-800/90 hover:bg-zinc-50 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/80 rounded-xl h-9 px-3 mb-1.5 cursor-pointer select-none transition-colors"
+      className="flex w-full items-center justify-between gap-3 py-2 text-left cursor-pointer select-none"
     >
-      <span className="text-[11px] font-semibold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
+      <span className="text-xs text-zinc-700 dark:text-zinc-300">
         {label}
       </span>
 
@@ -28,6 +28,7 @@ export default function Toggle({ label, value, onChange }: ToggleProps) {
           }`}
         />
       </div>
-    </div>
+    </button>
   );
 }
+

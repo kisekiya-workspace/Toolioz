@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Image Converter | Toolioz Tools",
-    description: "Convert images between JPG, PNG, WebP, and other formats.",
-    keywords: ["image converter","png to jpg","webp converter"],
-    alternates: {
-        canonical: "/tools/image-converter",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('image-converter');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

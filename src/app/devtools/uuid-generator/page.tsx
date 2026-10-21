@@ -6,7 +6,7 @@ import { Metadata } from 'next';
 import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
-  title: 'Bulk v4 UUID Generator | Professional GUID Creation Suite | Toolioz',
+  title: "Bulk v4 UUID Generator | Professional GUID Creation Suite",
   description: 'Generate 10,000+ cryptographically secure v4 UUIDs effortlessly. Customize formatting with hyphens, casing, and bulk export. 100% client-side for data security.',
   keywords: 'Bulk v4 UUID generator, GUID creation online, online guid maker, uuid generator without hyphens, mass uuid generation pro, secure browser identifiers',
   alternates: {

@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import { buildCalculatorJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: "GST Calculator 2026 | CGST SGST IGST Split & ITC Guide | Toolioz",
+  title: "GST Calculator 2026 | CGST SGST IGST Split & ITC Guide",
   description: "Calculate GST with CGST/SGST and IGST split. Includes GST filing deadlines, ITC rules, composition scheme guide, and HSN code lookup tips for Indian businesses.",
   keywords: 'gst calculator with cgst sgst split, igst calculator inter state, gst inclusive exclusive calculator india, gst filing deadline gstr-1 gstr-3b, input tax credit itc rules 2026, gst composition scheme limit, gst for freelancers india, hsn code gst rate finder, reverse charge mechanism calculator',
   alternates: {

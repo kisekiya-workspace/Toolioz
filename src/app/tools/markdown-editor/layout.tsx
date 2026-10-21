@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Markdown Editor | Toolioz Tools",
-    description: "Write and preview Markdown with a split-screen editor.",
-    keywords: ["markdown editor","online markdown","md preview"],
-    alternates: {
-        canonical: "/tools/markdown-editor",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('markdown-editor');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

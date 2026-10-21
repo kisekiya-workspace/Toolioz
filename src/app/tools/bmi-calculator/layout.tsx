@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "BMI Calculator | Toolioz Tools",
-    description: "Calculate your Body Mass Index (BMI) and check your health category.",
-    keywords: ["bmi calculator","body mass index","health calculator"],
-    alternates: {
-        canonical: "/tools/bmi-calculator",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('bmi-calculator');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

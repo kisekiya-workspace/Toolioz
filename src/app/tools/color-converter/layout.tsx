@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Color Converter | Toolioz Tools",
-    description: "Convert colors between HEX, RGB, HSL, and CMYK formats.",
-    keywords: ["color converter","hex to rgb","rgb to hex"],
-    alternates: {
-        canonical: "/tools/color-converter",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('color-converter');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

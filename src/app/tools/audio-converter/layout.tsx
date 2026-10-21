@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "Audio Converter | Toolioz Tools",
-    description: "Convert audio files between different formats (MP3, WAV, OGG) directly in your browser.",
-    keywords: ["audio converter","mp3 converter","wav to mp3"],
-    alternates: {
-        canonical: "/tools/audio-converter",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('audio-converter');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

@@ -106,6 +106,9 @@ export function Footer() {
             <Link href="/devtools/hash-generator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               Hash Generator
             </Link>
+            <Link href="/devtools/chmod-calculator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              chmod Calculator
+            </Link>
             <Link href="/devtools/x-hidden-image" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               X Tap-to-Reveal PNG
             </Link>
@@ -131,6 +134,9 @@ export function Footer() {
             </Link>
             <Link href="/pdftools/pdf-to-image" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               PDF to Images
+            </Link>
+            <Link href="/design/background-remover" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              Background remover
             </Link>
             <Link href="/biodata" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               Marriage Biodata Studio

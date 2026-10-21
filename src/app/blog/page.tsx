@@ -11,7 +11,7 @@ import { standaloneBlogs } from '@/../blogs';
 import { allTooliozBlogPosts } from '@/lib/toolioz-blog-index';
 
 export const metadata: Metadata = {
-  title: 'Guides | SIP, EMI, JSON, PDF | Toolioz',
+  title: "Guides | SIP, EMI, JSON, PDF",
   description:
     'Step-by-step Toolioz guides for SIP returns, home-loan EMI, JSON parse errors, JWT inspection, PDF files, and marriage biodata.',
   alternates: {

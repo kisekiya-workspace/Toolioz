@@ -1,5 +1,7 @@
 import { redirect } from 'next/navigation';
 
-export default function BiodataGeneratorPage() {
-  redirect('/biodata/biodata-generator');
+export { metadata } from '@/app/biodata/page';
+
+export default function DevtoolsBiodataAliasPage() {
+  redirect('/biodata');
 }

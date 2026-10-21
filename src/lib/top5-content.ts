@@ -418,7 +418,7 @@ export const top5Articles: Top5Article[] = [
         description: 'A cultural and traditional biodata creator with beautiful religious designs, photo frames, and modern aesthetic themes.',
         whyItMatters: 'Creating a marriage biodata in Word is tedious. This generator provides polished templates (Hindu, Muslim, Sikh, Christian, and Modern) so you can arrange family details and download a clean PDF.',
         bestFor: 'Matrimonial proposals, family details formatting, and clean PDF prints.',
-        href: '/biodata/biodata-generator',
+        href: '/biodata',
         color: '#db2777'
       },
       {

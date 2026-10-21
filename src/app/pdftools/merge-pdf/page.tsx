@@ -4,7 +4,7 @@ import { JSONLD } from '@/components/ui/JSONLD';
 import MergePdfClient from './MergePdfClient';
 
 export const metadata: Metadata = {
-  title: 'Merge PDF Online | Combine PDF Files | Toolioz',
+  title: "Merge PDF Online | Combine PDF Files",
   description:
     'Merge multiple PDF files into one document in your browser. Validated uploads, preserved page order, no server processing.',
   alternates: {

@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import { buildCalculatorJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: "Savings Goal Calculator 2026 | Monthly Target & 50/30/20 Budget | Toolioz",
+  title: "Savings Goal Calculator 2026 | Monthly Target & 50/30/20 Budget",
   description: "Calculate how much to save monthly for a house, car, or emergency fund. Includes 50/30/20 budgeting rule, goal-based investing strategies, and sinking fund tips.",
   keywords: 'savings goal calculator, how much to save per month for house, emergency fund calculator india, 50 30 20 rule calculator, down payment savings calculator, child education fund calculator, monthly savings target tool, financial goal planner, sinking fund calculator',
   alternates: {

@@ -1,14 +1,8 @@
+import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = {
-    title: "JSON to CSV | Toolioz Tools",
-    description: "Convert JSON data to CSV format for spreadsheets.",
-    keywords: ["json to csv","json converter","csv tools"],
-    alternates: {
-        canonical: "/tools/json-to-csv",
-    },
-};
+export const metadata: Metadata = metadataForImportedTool('json-to-csv');
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {
