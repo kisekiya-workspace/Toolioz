@@ -31,11 +31,9 @@ type PdfMode =
   | 'remove-blank-pages'
   | 'letter-to-a4'
   | 'split-bookmarks'
-  | 'grayscale'
   | 'reverse-pages'
   | 'add-blank-pages'
   | '2-pages-per-sheet'
-  | 'invert-colors'
   | 'flatten';
 type Position =
   | 'top-left'
@@ -378,51 +376,6 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
         return;
       }
 
-      if (mode === 'grayscale') {
-        const { PDFDocument, decodePDFRawStream, PDFArray, PDFRef } = await import('pdf-lib');
-        const srcDoc = await PDFDocument.load(await file.arrayBuffer(), { updateMetadata: false });
-        const total = srcDoc.getPageCount();
-
-        for (let i = 0; i < total; i++) {
-          const page = srcDoc.getPage(i);
-          const contentsObj = page.node.Contents();
-          if (!contentsObj) continue;
-          const streamRefs: any[] = contentsObj instanceof PDFArray ? (contentsObj as any).asArray() : [contentsObj];
-          for (const ref of streamRefs) {
-            if (!(ref instanceof PDFRef)) continue;
-            const rawStream = srcDoc.context.lookup(ref) as any;
-            if (!rawStream || !rawStream.contents) continue;
-            try {
-              const decoded = decodePDFRawStream(rawStream).decode();
-              const text = new TextDecoder('latin1').decode(decoded);
-              // Convert RGB non-stroking & stroking: 'r g b rg/RG' -> 'gray g/G'
-              let converted = text.replace(
-                /(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+(rg|RG)/g,
-                (_, r, g, b, op) => {
-                  const gray = 0.299 * Number(r) + 0.587 * Number(g) + 0.114 * Number(b);
-                  return `${gray.toFixed(3)} ${op === 'rg' ? 'g' : 'G'}`;
-                }
-              );
-              // Convert CMYK non-stroking & stroking: 'c m y k k/K' -> 'gray g/G'
-              converted = converted.replace(
-                /(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+(k|K)/g,
-                (_, c, m, y, k, op) => {
-                  const gray = Math.max(0, 1 - Math.min(1, 0.3 * Number(c) + 0.59 * Number(m) + 0.11 * Number(y) + Number(k)));
-                  return `${gray.toFixed(3)} ${op === 'k' ? 'g' : 'G'}`;
-                }
-              );
-              const newStream = srcDoc.context.flateStream(new TextEncoder().encode(converted));
-              srcDoc.context.assign(ref, newStream);
-            } catch {}
-          }
-        }
-
-        const bytes = await srcDoc.save();
-        downloadBlob(bytes, cleanName(file.name, 'grayscale'), 'application/pdf');
-        setResult(`Converted ${total} pages to grayscale. Vector text remains 100% selectable.`);
-        return;
-      }
-
       if (mode === 'reverse-pages') {
         const { PDFDocument } = await import('pdf-lib');
         const srcDoc = await PDFDocument.load(await file.arrayBuffer());
@@ -494,71 +447,6 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
         const bytes = await outDoc.save();
         downloadBlob(bytes, cleanName(file.name, '2-up-booklet'), 'application/pdf');
         setResult(`Formatted ${total} pages onto ${Math.ceil(total / 2)} landscape sheets (2-up booklet layout).`);
-        return;
-      }
-
-      if (mode === 'invert-colors') {
-        const { PDFDocument, decodePDFRawStream, PDFArray, PDFRef } = await import('pdf-lib');
-        const srcDoc = await PDFDocument.load(await file.arrayBuffer(), { updateMetadata: false });
-        const total = srcDoc.getPageCount();
-
-        for (let i = 0; i < total; i++) {
-          const page = srcDoc.getPage(i);
-          const { width, height } = page.getSize();
-
-          // 1. Invert content stream color operators so text turns white and colored elements invert
-          const contentsObj = page.node.Contents();
-          if (contentsObj) {
-            const streamRefs: any[] = contentsObj instanceof PDFArray ? (contentsObj as any).asArray() : [contentsObj];
-            for (const ref of streamRefs) {
-              if (!(ref instanceof PDFRef)) continue;
-              const rawStream = srcDoc.context.lookup(ref) as any;
-              if (!rawStream || !rawStream.contents) continue;
-              try {
-                const decoded = decodePDFRawStream(rawStream).decode();
-                const text = new TextDecoder('latin1').decode(decoded);
-                // Invert RGB
-                let converted = text.replace(
-                  /(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+(rg|RG)/g,
-                  (_, r, g, b, op) => {
-                    const invR = (1 - Number(r)).toFixed(3);
-                    const invG = (1 - Number(g)).toFixed(3);
-                    const invB = (1 - Number(b)).toFixed(3);
-                    return `${invR} ${invG} ${invB} ${op}`;
-                  }
-                );
-                // Invert Gray
-                converted = converted.replace(
-                  /(\d+(?:\.\d+)?)\s+(g|G)/g,
-                  (_, gray, op) => {
-                    const invGray = (1 - Number(gray)).toFixed(3);
-                    return `${invGray} ${op}`;
-                  }
-                );
-                const newStream = srcDoc.context.flateStream(new TextEncoder().encode(converted));
-                srcDoc.context.assign(ref, newStream);
-              } catch {}
-            }
-          }
-
-          // 2. Prepend a dark background rectangle underneath page contents
-          const darkBg = `q\n0.07 0.07 0.07 rg\n0 0 ${width.toFixed(2)} ${height.toFixed(2)} re\nf\nQ\n`;
-          const bgStream = srcDoc.context.flateStream(new TextEncoder().encode(darkBg));
-          const bgRef = srcDoc.context.register(bgStream);
-          const currentContents = page.node.Contents();
-          if (!currentContents) {
-            page.node.set(srcDoc.context.obj('Contents'), bgRef);
-          } else if (currentContents instanceof PDFArray) {
-            (currentContents as any).insert(0, bgRef);
-          } else {
-            const arr = srcDoc.context.obj([bgRef, currentContents]);
-            page.node.set(srcDoc.context.obj('Contents'), arr);
-          }
-        }
-
-        const bytes = await srcDoc.save();
-        downloadBlob(bytes, cleanName(file.name, 'dark-mode'), 'application/pdf');
-        setResult(`Inverted colors across ${total} pages with dark background. Text remains 100% vector selectable.`);
         return;
       }
 
@@ -1095,14 +983,6 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
             </div>
           )}
 
-          {mode === 'grayscale' && (
-            <div className="rounded-xl border border-zinc-200 bg-zinc-50/50 p-4 dark:border-zinc-800 dark:bg-zinc-900/40">
-              <p className="text-xs text-zinc-600 dark:text-zinc-400">
-                Transforms color fills, lines, and shapes to black & white grayscale. All underlying vector text remains <strong>100% selectable and searchable</strong> with zero pixel rasterization.
-              </p>
-            </div>
-          )}
-
           {mode === 'reverse-pages' && (
             <div className="rounded-xl border border-zinc-200 bg-zinc-50/50 p-4 dark:border-zinc-800 dark:bg-zinc-900/40">
               <p className="text-xs text-zinc-600 dark:text-zinc-400">
@@ -1123,14 +1003,6 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
             <div className="rounded-xl border border-zinc-200 bg-zinc-50/50 p-4 dark:border-zinc-800 dark:bg-zinc-900/40">
               <p className="text-xs text-zinc-600 dark:text-zinc-400">
                 Combines two pages side-by-side onto one landscape A4 sheet. Your {pages.length} pages will be formatted onto {Math.ceil(pages.length / 2)} sheets.
-              </p>
-            </div>
-          )}
-
-          {mode === 'invert-colors' && (
-            <div className="rounded-xl border border-zinc-200 bg-zinc-50/50 p-4 dark:border-zinc-800 dark:bg-zinc-900/40">
-              <p className="text-xs text-zinc-600 dark:text-zinc-400">
-                Inverts the document colors to create a high-contrast dark mode reading experience. Text remains crisp and selectable.
               </p>
             </div>
           )}
@@ -1178,16 +1050,12 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
               ? `Convert to ${resizeDirection === 'letter-to-a4' ? 'ISO A4' : 'US Letter'}`
               : mode === 'split-bookmarks'
               ? 'Split PDF by bookmarks'
-              : mode === 'grayscale'
-              ? 'Convert to grayscale'
               : mode === 'reverse-pages'
               ? 'Reverse page order & download'
               : mode === 'add-blank-pages'
               ? 'Insert blank pages & download'
               : mode === '2-pages-per-sheet'
               ? 'Format 2 pages per sheet'
-              : mode === 'invert-colors'
-              ? 'Invert colors (dark mode)'
               : mode === 'flatten'
               ? 'Flatten form & download'
               : 'Process and download PDF'}

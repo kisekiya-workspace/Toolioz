@@ -506,15 +506,6 @@
 
 ---
 
-### PDF to Grayscale
-- **Canonical URL**: https://toolioz.com/pdftools/pdf-to-grayscale
-- **Markdown Endpoint**: https://toolioz.com/pdftools/pdf-to-grayscale.md
-- **Category**: pdftools
-- **Description**: Converts color PDFs to black & white grayscale while preserving selectable vector text and document quality.
-- **Processing Mode**: 100% Client-Side In-Browser
-
----
-
 ### Reverse PDF Pages
 - **Canonical URL**: https://toolioz.com/pdftools/reverse-pdf-pages
 - **Markdown Endpoint**: https://toolioz.com/pdftools/reverse-pdf-pages.md
@@ -548,15 +539,6 @@
 **Practical Example**: Print a 30-page slide deck on 15 sheets of paper to cut paper consumption in half.
 
 **Constraints / Limitations**: Pages are scaled down proportionally to fit side-by-side. Very small footnotes may be harder to read.
-
----
-
-### Invert PDF Colors
-- **Canonical URL**: https://toolioz.com/pdftools/invert-pdf-colors
-- **Markdown Endpoint**: https://toolioz.com/pdftools/invert-pdf-colors.md
-- **Category**: pdftools
-- **Description**: Inverts colors of your PDF for high-contrast dark mode reading without sending files to any server.
-- **Processing Mode**: 100% Client-Side In-Browser
 
 ---
 

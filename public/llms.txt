@@ -19,11 +19,9 @@ Local PDF manipulation using pdf-lib and pdfjs-dist. All processing occurs in th
 - [Remove Blank Pages](https://toolioz.com/pdftools/remove-blank-pages): Detects and removes empty or blank pages from a PDF with an adjustable sensitivity slider. Processed 100% in your browser.
 - [Letter ↔ A4](https://toolioz.com/pdftools/letter-to-a4): Resize PDF pages between US Letter and ISO A4 dimensions with proportional scaling. The file is not uploaded.
 - [Split by Bookmarks](https://toolioz.com/pdftools/split-pdf-by-bookmarks): Splits a PDF into separate chapter files using document outline bookmarks. Processing stays in your browser.
-- [PDF to Grayscale](https://toolioz.com/pdftools/pdf-to-grayscale): Converts color PDFs to black & white grayscale while preserving selectable vector text and document quality.
 - [Reverse PDF Pages](https://toolioz.com/pdftools/reverse-pdf-pages): Reverses the sequence of pages in a PDF document in one click. 100% private in-browser processing.
 - [Add Blank Pages](https://toolioz.com/pdftools/add-blank-page-after-page): Interleaves an empty blank page after every page of your PDF for double-sided printing or note taking.
 - [2 Pages Per Sheet](https://toolioz.com/pdftools/2-pages-per-sheet): Combines two PDF pages side-by-side onto a single sheet for compact reading and booklet printing.
-- [Invert PDF Colors](https://toolioz.com/pdftools/invert-pdf-colors): Inverts colors of your PDF for high-contrast dark mode reading without sending files to any server.
 - [Flatten PDF](https://toolioz.com/pdftools/flatten-pdf): Flattens interactive form fields and removes annotations to prevent accidental edits or disclosure.
 - [ATS Resume Generator](https://toolioz.com/resume-builder): Create polished resumes with a live LaTeX editor and text-based PDF export.
 
