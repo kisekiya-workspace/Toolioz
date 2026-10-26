@@ -89,7 +89,7 @@ export default function UUIDClient({ title, color }: { title?: string, color?: s
         <header className="mb-12 text-center">
           <h1 className="mb-4 text-[1.8rem] font-extrabold text-[var(--text-primary)] sm:text-[2.5rem]">{title || 'Bulk UUID Generator'}</h1>
           <p className="text-[1.1rem] leading-relaxed text-[var(--text-secondary)]">
-            Generate unlimited cryptographically secure version-4 unique identifiers instantly in your browser. Configure hyphenation and casing, and copy bulk batches for your database logic.
+            A version 4 UUID is 122 random bits. This page uses crypto.randomUUID, or Math.random when that function is missing. Quantity is capped at 1000. Hyphens and letter case can change.
           </p>
         </header>
 
@@ -127,7 +127,7 @@ export default function UUIDClient({ title, color }: { title?: string, color?: s
           </div>
 
           <button className="cursor-pointer rounded-[var(--radius-sm)] border-none bg-[var(--primary)] px-[30px] py-[12px] text-[1rem] font-semibold text-white transition-all hover:-translate-y-[2px] hover:bg-[var(--primary-hover)]" onClick={handleGenerate}>
-            <RefreshCw size={16} style={{ display: 'inline', marginRight: '8px', verticalAlign: 'text-bottom' }} />
+            <RefreshCw size={16} className="mr-2 inline align-text-bottom" />
             Generate New Batch
           </button>
         </section>
@@ -160,28 +160,24 @@ export default function UUIDClient({ title, color }: { title?: string, color?: s
 
       </main>
 
-      <div className="container" style={{ paddingBottom: '4rem' }}>
+      <div className="container pb-16">
         <RelatedTools currentToolId="uuid-generator" categoryId="devtools" />
       </div>
 
       <SEOSection 
-        title="Professional Bulk UUID Generator v4: Secure GUID Generation Online"
-        description={`The Universally Unique Identifier (UUID), specifically the version 4 variant, is a cornerstone of modern distributed systems and database architecture. Unlike sequential IDs, which can expose business metrics or be predictable, v4 UUIDs are generated using cryptographically secure random numbers, providing a collision-resistant method to identify resources across disparate systems without a central coordinator. Our browser-native tool allows developers to generate these identifiers at scale—up to 10,000 at a time—directly on their device.
-
-Data privacy is paramount in modern software development. Many online ID generators send your requirements to a server which then returns the IDs; however, Toolioz performs 100% of the computation locally using the Web Crypto API (crypto.randomUUID). This ensures that your generated IDs never leave your machine during the creation process, making it the ideal choice for secure production environments. Whether you need GUIDs for primary keys, session tokens, or transaction tracking, our high-performance suite provides the flexibility of bulk generation with customizable formatting (casing and hyphenation) to match your specific coding standards.`}
+        title="Bulk v4 UUID Generator"
+        description="A version 4 UUID is 122 random bits. This page uses crypto.randomUUID, or Math.random when that function is missing. Quantity is capped at 1000."
         howToUse={[
-          "Select the 'Quantity' of UUIDs you need to generate (support for up to 10,000 per batch).",
-          "Toggle 'Include Hyphens' depending on your database or API requirements (Standard vs Compact format).",
-          "Choose 'Uppercase' if your system requires traditional GUID formatting for legacy logging or integration.",
-          "Click 'Generate New Batch' to immediately refresh the list with unique identifiers.",
-          "Use the 'Copy All' button to move the entire batch to your clipboard for use in scripts or database seeds."
+          "Choose a quantity from 1 to 1000.",
+          "Turn hyphens on for the standard form, or off for the compact form.",
+          "Choose uppercase when a legacy GUID format is required.",
+          "Generate a new batch, then copy the list.",
         ]}
         benefits={[
-          "Cryptographically Secure: Uses browser-native entropy for randomized, collision-resistant IDs.",
-          "Enterprise Scalability: Generate mass batches of IDs for large-scale data imports and testing.",
-          "Offline-First Security: No data transmission—all generation happens locally in your browser memory.",
-          "Customizable Styling: Support for hyphenless (compact) and uppercase (legacy) formats.",
-          "High Performance: Optimized for large batch generation without main-thread blocking."
+          "Uses crypto.randomUUID, or Math.random when that function is missing.",
+          "Creates at most 1000 identifiers in one batch.",
+          "The identifiers are not uploaded. The page still loads site assets.",
+          "Hyphens can be removed and the letters can be uppercase.",
         ]}
       />
 

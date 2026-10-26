@@ -11,20 +11,20 @@ import { RelatedTools } from '@/components/ui/RelatedTools';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
 import { FAQSchema } from '@/components/ui/FAQSchema';
 import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
-import { BookOpen, Info, Lightbulb, ShieldCheck, TrendingDown, Download } from 'lucide-react';
+import { BookOpen, Info, Lightbulb, ShieldCheck, TrendingDown, Printer } from 'lucide-react';
 
 const PREPAYMENT_FAQS = [
   {
-    question: "Does loan prepayment reduce tenure or EMI?",
-    answer: "Most banks automatically apply loan prepayments toward reducing the remaining loan tenure, keeping the monthly EMI the same. However, you can request your bank to keep the tenure same and reduce your monthly EMI instead."
+    question: "Does this calculator shorten the tenure or lower the EMI?",
+    answer: "It keeps the EMI and adds the extra amount every month. The loan closes in fewer months. A version that keeps the tenure and lowers the EMI is not calculated."
   },
   {
-    question: "Are there prepayment penalty charges on home loans in India?",
-    answer: "As per RBI guidelines, banks and housing finance companies (HFCs) cannot charge prepayment penalties on floating-rate home loans granted to individual borrowers."
+    question: "Does the result include a prepayment penalty?",
+    answer: "No. A penalty is not subtracted. A one-time lump-sum prepayment is not an input."
   },
   {
-    question: "Is it better to prepay a home loan or invest in mutual funds?",
-    answer: "If your loan interest rate (e.g. 8.5%) is lower than expected long-term mutual fund returns (e.g. 12%), investing may yield higher net returns. However, prepayments guarantee a risk-free return equal to your loan interest rate."
+    question: "Does this page compare prepayment with a mutual fund?",
+    answer: "No. The result is interest saved and months removed on this loan. An investment return is not calculated."
   }
 ];
 
@@ -55,11 +55,10 @@ export default function LoanPrepaymentClient() {
             </div>
             <h1 className={styles.title}>Loan Prepayment Calculator 2026</h1>
             <p className={styles.subtitle}>
-              See how extra EMI payments reduce total interest and shorten your loan term.
+              The EMI stays the same. An extra amount is added every month, interest is charged on the remaining balance, and the loan closes in fewer months. A one-time lump sum is not an input.
             </p>
             <div className="mx-auto mt-6 max-w-[760px] rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-left text-[0.8rem] leading-[1.6] text-amber-900">
-              <strong>Disclaimer:</strong> Some loans charge prepayment penalties or apply extra
-              payments in specific ways. Always check your contract before making a lump sum payment.
+              <strong>Disclaimer:</strong> The 10.5% rate is an illustrative default. A prepayment penalty is not subtracted. Amounts are in rupees.
             </div>
           </div>
         </header>
@@ -114,13 +113,13 @@ export default function LoanPrepaymentClient() {
                   </div>
                 </div>
                 <Button fullWidth className={styles.btn} onClick={() => window.print()}>
-                  <Download className="mr-2 size-4" />
-                  Download Prepayment Plan
+                  <Printer className="mr-2 size-4" />
+                  Print this calculation
                 </Button>
               </Card>
 
               <div className={styles.infoBox}>
-                <div className={styles.infoIcon} style={{ color: '#dc2626' }}>
+                <div className={`${styles.infoIcon} text-red-600`}>
                   <Info size={20} />
                 </div>
                 <p className={styles.infoText}>
@@ -156,7 +155,7 @@ export default function LoanPrepaymentClient() {
                     {formatCurrency(monthlyPaymentWithExtra)}
                   </div>
                   <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
-                    What you would pay each month if you add the extra amount.
+                    EMI plus the extra monthly amount. The EMI itself does not change.
                   </p>
                 </div>
                 <div className="rounded-2xl bg-white p-5">
@@ -183,10 +182,10 @@ export default function LoanPrepaymentClient() {
             <div className="mb-10 text-center">
               <h2 className="text-[1.8rem] font-black text-[var(--text-primary)]">
                 <TrendingDown className="mr-2 inline-block text-red-600" size={22} />
-                Debt Reduction Tips
+                Default prepayment
               </h2>
               <p className="mt-3 text-[1rem] text-[var(--text-secondary)]">
-                Prepayment works best when the payment is applied directly to principal.
+                The extra amount is paid every month from the first month. The EMI is not reduced.
               </p>
             </div>
 
@@ -196,16 +195,16 @@ export default function LoanPrepaymentClient() {
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600">
                     <BookOpen size={20} />
                   </div>
-                  <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Why early payment matters</h3>
+                  <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Starting example</h3>
                 </div>
                 <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
                   <li className="flex gap-2">
                     <span className="mt-1 shrink-0 text-red-500">-</span>
-                    <span>Interest is charged on the remaining balance, so a smaller balance means less interest.</span>
+                    <span>₹15,00,000 at 10.5% for 5 years has an EMI of about ₹32,241.</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="mt-1 shrink-0 text-red-500">-</span>
-                    <span>Extra payments made early usually save more than the same amount paid later.</span>
+                    <span>Interest without the extra payment is about ₹4,34,451 over 60 months.</span>
                   </li>
                 </ul>
               </div>
@@ -215,16 +214,16 @@ export default function LoanPrepaymentClient() {
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50 text-orange-600">
                     <Info size={20} />
                   </div>
-                  <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">What to check first</h3>
+                  <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">With ₹5,000 extra</h3>
                 </div>
                 <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
                   <li className="flex gap-2">
                     <span className="mt-1 shrink-0 text-orange-500">-</span>
-                    <span>Confirm whether the lender charges a prepayment penalty.</span>
+                    <span>Interest falls to about ₹3,57,528. About ₹76,923 of interest is saved.</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="mt-1 shrink-0 text-orange-500">-</span>
-                    <span>Check whether extra money reduces principal immediately or is simply held as an advance payment.</span>
+                    <span>The loan closes in 50 months, which is 10 months sooner.</span>
                   </li>
                 </ul>
               </div>
@@ -234,27 +233,27 @@ export default function LoanPrepaymentClient() {
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-50 text-cyan-600">
                     <Lightbulb size={20} />
                   </div>
-                  <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Good use cases</h3>
+                  <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Not simulated</h3>
                 </div>
                 <div className="grid gap-4 md:grid-cols-2">
                   <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
                     <li className="flex gap-2">
                       <span className="mt-1 shrink-0 text-cyan-500">-</span>
-                      <span>Use a small extra EMI amount if you want to prepay without hurting cash flow.</span>
+                      <span>A one-time lump sum is not an input.</span>
                     </li>
                     <li className="flex gap-2">
                       <span className="mt-1 shrink-0 text-cyan-500">-</span>
-                      <span>Use a larger lump sum if you have a bonus or other one-time windfall.</span>
+                      <span>A penalty is not subtracted from the interest saved.</span>
                     </li>
                   </ul>
                   <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
                     <li className="flex gap-2">
                       <span className="mt-1 shrink-0 text-cyan-500">-</span>
-                      <span>Compare the savings with any investment alternative before deciding.</span>
+                      <span>An investment return is not compared with the interest saved.</span>
                     </li>
                     <li className="flex gap-2">
                       <span className="mt-1 shrink-0 text-cyan-500">-</span>
-                      <span>Make sure you keep enough cash for emergencies after any prepayment.</span>
+                      <span>Amounts are formatted in rupees.</span>
                     </li>
                   </ul>
                 </div>
@@ -265,20 +264,23 @@ export default function LoanPrepaymentClient() {
           <RelatedTools currentToolId="loan-prepayment" categoryId="finance" />
 
           <SEOSection
-            title="Loan Prepayment Calculator for Faster Debt Payoff"
-            description="A loan prepayment calculator shows how extra payments can reduce total interest and shorten your loan term. It is especially useful for loans with a large balance at the beginning, because more of each early payment goes toward interest."
+            title="Extra monthly payment on a loan"
+            description={`The EMI stays the same. An extra amount is added every month, interest is charged on the remaining balance, and the loan closes in fewer months.
+
+₹15,00,000 at 10.5% for 5 years has an EMI of about ₹32,241 and about ₹4,34,451 of interest over 60 months. Adding ₹5,000 every month cuts interest to about ₹3,57,528, a saving of about ₹76,923, and closes the loan in 50 months. A one-time lump sum and a prepayment penalty are not applied. The EMI is not reduced.`}
             howToUse={[
-              'Enter the loan principal, rate, and remaining tenure.',
-              'Add the extra amount you can pay each month.',
-              'Compare the baseline EMI with the prepayment scenario.',
-              'Review how much interest and time you may save.',
-              'Check your loan contract for any prepayment penalty.',
+              'Enter the outstanding principal. The default is ₹15,00,000.',
+              'Enter the annual rate. The default is 10.5%.',
+              'Enter the remaining tenure in years. The default is 5, which is 60 months.',
+              'Enter the extra amount paid every month. The default is ₹5,000.',
+              'Read interest saved, the months until the balance reaches zero, and the months removed.',
             ]}
             benefits={[
-              'Shows the value of paying down principal sooner.',
-              'Helps you compare debt payoff with other uses for extra cash.',
-              'Useful for car loans, home loans, and personal loans.',
-              'Makes the effect of an extra EMI easy to see before you commit.',
+              'The EMI is calculated once and then held constant.',
+              'The ₹76,923 example uses the defaults above.',
+              'The loan in that example closes 10 months sooner.',
+              'A lower EMI with the same tenure is not calculated.',
+              'Amounts are formatted in rupees.',
             ]}
             formula="EMI = P * r * (1+r)^n / ((1+r)^n - 1)"
           />

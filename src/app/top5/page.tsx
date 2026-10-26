@@ -9,9 +9,9 @@ import { top5Articles } from '@/lib/top5-content';
 import { SITE_URL } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: "Top Tools Guides | Best Financial & Web Developer Utilities",
+  title: "Finance and Developer Tool Guides",
   description:
-    'Read our curated Top 5 reviews for personal finance calculators, web developer utilities, PDF document tools, and encryption helpers to streamline your digital workflows.',
+    'Reviews of finance calculators, developer utilities, PDF tools, and encryption helpers on Toolioz.',
   keywords: [
     'best tools list',
     'top 5 finance calculators',
@@ -64,7 +64,7 @@ export default function Top5IndexPage() {
 
       <div>
         {/* Hero Section */}
-        <section className="relative border-b border-zinc-200 bg-white vercel-grid py-16 sm:py-20 md:py-28 text-center dark:border-zinc-800 dark:bg-zinc-950">
+        <section className="relative border-b border-zinc-200 bg-white py-16 sm:py-20 md:py-28 text-center dark:border-zinc-800 dark:bg-zinc-950">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <Badge variant="outline" dot pulse size="sm" className="mb-4 font-mono text-[11px]">
               <Sparkles size={12} className="mr-1 text-amber-500" />
@@ -72,11 +72,11 @@ export default function Top5IndexPage() {
             </Badge>
 
             <h1 className="mb-5 text-4xl font-extrabold tracking-tight text-zinc-950 sm:text-6xl dark:text-zinc-50">
-              Streamline Your Workflow with the Best Browser Tools
+              Comparisons of finance, developer, and PDF tools
             </h1>
 
             <p className="mx-auto max-w-2xl text-base leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-400">
-              Expert comparisons evaluating free developer utilities, finance engines, PDF systems, and cryptography helpers.
+              Each article names a small set of Toolioz tools and the job each one does, including the formula or the file operation.
             </p>
           </div>
         </section>

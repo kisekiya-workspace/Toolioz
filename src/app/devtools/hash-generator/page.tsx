@@ -6,7 +6,7 @@ import { JSONLD } from '@/components/ui/JSONLD';
 export const metadata: Metadata = {
   title: "Hash Generator Online | SHA-256, SHA-512, SHA-1",
   description:
-    'Generate SHA-1, SHA-256, SHA-384, SHA-512 hashes from text or files instantly. 100% private — uses browser Web Crypto API. No data uploads.',
+    'Computes SHA-1, SHA-256, SHA-384, and SHA-512 from text or a file with the Web Crypto API. The input is not uploaded.',
   keywords:
     'SHA-256 hash generator, SHA-512 online, file checksum tool, hash text online, crypto hash generator free',
   alternates: {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Hash Generator | Toolioz DevTools',
     description:
-      'Compute cryptographic hashes from text or files using browser-native Web Crypto API.',
+      'Computes SHA-1, SHA-256, SHA-384, and SHA-512 with the Web Crypto API. The input is not uploaded.',
     url: 'https://toolioz.com/devtools/hash-generator',
     type: 'website',
     images: [{ url: '/tooliozLogo.png', width: 512, height: 512, alt: 'Toolioz Hash Generator' }],
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Hash Generator | Toolioz',
-    description: 'SHA-256, SHA-512 hash generator — 100% client-side.',
+    description: 'Computes SHA-1, SHA-256, SHA-384, and SHA-512 with the Web Crypto API. The input is not uploaded.',
     images: ['/tooliozLogo.png'],
   },
 };

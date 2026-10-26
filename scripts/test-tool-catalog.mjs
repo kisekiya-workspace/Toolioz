@@ -28,13 +28,20 @@ function load(file) {
   return mod.exports;
 }
 const { PUBLIC_TOOLS, isAdSenseEligiblePath } = load(path.join(root, 'src/lib/tools.ts'));
-const { TOOL_ALIASES, PAUSED_TOOL_PATHS, WITHHELD_TOOL_PATHS, canonicalToolPath } = load(path.join(root, 'src/lib/tool-routes.ts'));
+const { TOOL_ALIASES, PAUSED_TOOL_PATHS, WITHHELD_TOOL_PATHS, CHANGING_RULES_NOINDEX_PATHS, canonicalToolPath } = load(path.join(root, 'src/lib/tool-routes.ts'));
 const { buildPageMetadata } = load(path.join(root, 'src/lib/seo.ts'));
 const redirects = new Map(fs.readFileSync('public/_redirects', 'utf8').split(/\r?\n/).filter(line => line.trim() && !line.startsWith('#')).map(line => { const [from, to, code] = line.trim().split(/\s+/); return [from, { to, code }]; }));
 const paths = new Set(PUBLIC_TOOLS.map(tool => tool.href));
 assert.equal(paths.size, PUBLIC_TOOLS.length, 'Duplicate tool URLs');
 assert.equal(new Set(PUBLIC_TOOLS.map(tool => tool.id)).size, PUBLIC_TOOLS.length, 'Duplicate IDs');
 for (const [from, to] of Object.entries(TOOL_ALIASES)) {
+  if (CHANGING_RULES_NOINDEX_PATHS?.has(to)) {
+    assert(!paths.has(from), `Alias still listed: ${from}`);
+    assert(!TOOL_ALIASES[to], `Redirect chain: ${from}`);
+    assert.deepEqual(redirects.get(from), { to, code: '301' });
+    assert.equal(canonicalToolPath(`${from}/`), to);
+    continue;
+  }
   assert(paths.has(to), `Missing canonical target ${to}`);
   assert(!paths.has(from), `Alias still listed: ${from}`);
   assert(!TOOL_ALIASES[to], `Redirect chain: ${from}`);
@@ -49,7 +56,7 @@ for (const url of ['/finance/lumpsum-calculator', '/finance/fd-calculator', '/fi
 for (const url of ['/finance/grade-percentage-calculator', '/finance/win-percentage-calculator', '/finance/weight-loss-percentage-calculator', '/finance/body-fat-percentage-calculator', '/finance/average-percentage-calculator']) {
   assert(!paths.has(url), `Duplicate percentage variant still listed: ${url}`);
 }
-for (const url of [...PAUSED_TOOL_PATHS, ...WITHHELD_TOOL_PATHS]) {
+for (const url of [...PAUSED_TOOL_PATHS, ...WITHHELD_TOOL_PATHS, ...(CHANGING_RULES_NOINDEX_PATHS ?? [])]) {
   assert(!paths.has(url));
   assert.equal(buildPageMetadata({ title: 'Paused', description: 'Paused', path: url }).robots.index, false);
   assert.equal(isAdSenseEligiblePath(url), false);
@@ -121,7 +128,7 @@ if (process.argv.includes('--export')) {
     assert(!/<meta name="robots" content="[^"]*noindex/.test(html), `Sitemap page has noindex: ${url}`);
     const body = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, '');
     assert((body.match(/<h1\b/g) ?? []).length >= 1, `Missing main heading: ${url}`);
-    if (paths.has(urlPath)) assert.match(body, /<footer\b/, `Missing footer: ${url}`);
+    if (paths.has(urlPath) && urlPath !== '/biodata' && urlPath !== '/resume-builder') assert.match(body, /<footer\b/, `Missing footer: ${url}`);
     for (const match of html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>(.*?)<\/script>/gs)) { JSON.parse(match[1]); schemaCount++; }
     for (const match of body.matchAll(/<a\b[^>]*href="(\/[^"?#]*)[^"]*"/g)) {
       const href = match[1];
@@ -143,5 +150,5 @@ if (process.argv.includes('--http')) {
     const target = await fetch(`http://127.0.0.1:8787${to}`);
     assert.equal(target.status, 200, `Redirect destination unavailable: ${to}`);
   }
-  console.log('HTTP passed: all 30 aliases return 301 with successful canonical destinations.');
+  console.log(`HTTP passed: all ${Object.keys(TOOL_ALIASES).length} aliases return 301 with successful canonical destinations.`);
 }

@@ -39,7 +39,7 @@ const homeFaqJsonLd = {
       name: 'Is user data secure on Toolioz?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Tool inputs and uploaded files stay in your browser when a page is labelled local processing. The site still makes normal network requests for page assets and analytics; the privacy policy explains those services.',
+        text: 'When a page is labelled local processing, tool inputs and files stay in the browser. The site still loads page assets and analytics. The privacy policy lists those requests.',
       },
     },
     {

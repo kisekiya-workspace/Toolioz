@@ -799,7 +799,7 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
               Background <span className="text-purple-600">Generator</span>
             </h1>
             <p className="mt-1 max-w-2xl text-sm text-slate-500">
-              Design high-res shader wallpapers, lockscreens &amp; backdrops. Add text, logos, and download 4K PNGs.
+              A shader wallpaper is a still image painted from color and pattern controls. This page exports that image as a PNG, with optional text or a logo.
             </p>
           </div>
           <div className="flex items-center gap-2 shrink-0">
@@ -1220,33 +1220,33 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
         <section className="mt-16 border-t border-slate-200 pt-12">
           <DirectAnswerBlock
             title="How to generate high-resolution shader wallpaper backgrounds online?"
-            answer="Free Shader Background Generator creates high-resolution animated and static shader wallpapers, mobile lockscreens, and website hero backgrounds using WebGL fragment shaders. You can select shader engines (Mesh Gradient, Warp, Neuro Noise, Swirl, Voronoi, Metaballs), adjust color palettes, add customizable Google Fonts text & transparent logos, and download 4K PNGs with zero watermarks."
+            answer="This page paints a PNG from one of six WebGL shaders: Mesh Gradient, Warp, Neuro Noise, Swirl, Voronoi, or Metaballs. The largest preset is 1920×1080. Text can use one of 12 Google Fonts. The PNG has no watermark."
             keyTakeaways={[
-              "6 WebGL Shader Engines — Flowing mesh gradients, domain warping, neural noise, liquid swirl & metaballs.",
-              "Google Fonts Overlay — Add heading text with 12 free Google Fonts, shadows, outlines, and rotation.",
-              "Logo Upload Support — Overlay your brand logo or image with rounded corners, scaling, and opacity.",
-              "4K PNG Download — Export crisp, anti-aliased background wallpapers for any screen ratio."
+              "Six shaders: Mesh Gradient, Warp, Neuro Noise, Swirl, Voronoi, and Metaballs.",
+              "Text can use Inter, Roboto, Playfair Display, Outfit, Montserrat, Oswald, Lora, Pacifico, Fira Code, Poppins, Merriweather, or Space Grotesk.",
+              "A logo can be drawn on the canvas with scale and opacity.",
+              "PNG presets are 1080×1920, 1080×1440, 1080×1350, 1080×1080, 1440×1080, 1920×1080, and 1500×500."
             ]}
             categoryName="Wallpaper Generator"
           />
 
           <SEOSection
             title="Free Paper Shader Background & Wallpaper Generator"
-            description="Design high-resolution static wallpapers, mobile lockscreens, social banners, and website backdrops. Drag the variation slider to morph patterns in a circular arc, customize colors, add text with Google Fonts & logos, and download crisp 4K PNGs."
+            description="A shader wallpaper is a still image painted from color and pattern controls. This page exports that image as a PNG or a CSS snippet."
             howToUse={[
               "Select a shader type (Mesh Gradient, Warp, Neuro Noise, Swirl, Voronoi, Metaballs).",
               "Drag the Variation slider (0% to 100%) to smoothly morph color blobs in a circular orbit while keeping your colors intact.",
               "Choose your target aspect ratio (Vertical 9:16, Tall 3:4, Portrait 4:5, Square 1:1, Classic 4:3, Wide 16:9, Banner 3:1).",
               "Click '+ Add Text' or '+ Add Logo' right below the preview box to edit and position text directly on the canvas.",
               "Choose from 12 free Google Fonts (Inter, Roboto, Playfair Display, Outfit, Montserrat, Oswald, Lora, Pacifico, Fira Code, Poppins, Merriweather, Space Grotesk).",
-              "Click Download PNG to save high-res wallpapers instantly."
+              "Download PNG saves the selected preset. The largest is 1920×1080."
             ]}
             benefits={[
-              "100% Free & Unlimited HD PNG Downloads.",
-              "Anti-Banding Shader Dithering: Smooth, silky gradients without visible stripes.",
-              "Google Fonts Integration: Pick from 12 free Google Fonts for text overlays.",
-              "Pointer Dragging: Smoothly drag text or logos anywhere on the canvas.",
-              "100% Client-Side Privacy: All rendering happens locally in your browser."
+              "The largest PNG preset is 1920×1080.",
+              "The fragment shader adds a hash dither of about 1/255 to the color.",
+              "Text can use one of 12 Google Fonts.",
+              "Dragging the preview moves text or a logo.",
+              "Rendering happens in the page. The image is not uploaded."
             ]}
           />
 
@@ -1258,15 +1258,15 @@ export default function BackgroundGeneratorClient({ title, color }: BackgroundGe
               faqs={[
                 {
                   question: "How do I move text or logos on the canvas?",
-                  answer: "Simply drag anywhere on the canvas preview with your mouse or finger to move text or logos smoothly."
+                  answer: "Dragging on the preview moves the text or logo. A mouse or a finger both work."
                 },
                 {
                   question: "Which Google Fonts are included?",
-                  answer: "We include 12 free Google Fonts: Inter, Roboto, Playfair Display, Outfit, Montserrat, Oswald, Lora, Pacifico, Fira Code, Poppins, Merriweather, and Space Grotesk."
+                  answer: "The list is Inter, Roboto, Playfair Display, Outfit, Montserrat, Oswald, Lora, Pacifico, Fira Code, Poppins, Merriweather, and Space Grotesk."
                 },
                 {
                   question: "Why are all overlay controls placed below the preview box?",
-                  answer: "Placing '+ Add Text', '+ Add Logo', Google Fonts dropdown, and Font Size right below the preview box ensures you never need to scroll up and down while customizing your background."
+                  answer: "Text, logo, font, and size controls sit under the preview, so the canvas and the controls stay on the same screen."
                 }
               ]}
             />

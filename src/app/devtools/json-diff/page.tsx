@@ -4,7 +4,7 @@ import { JSONLD } from '@/components/ui/JSONLD';
 import JsonDiffClient from './JsonDiffClient';
 
 export const metadata: Metadata = {
-  title: 'JSON Diff Checker | Compare JSON Objects and API Payloads',
+  title: 'JSON Diff Checker',
   description:
     'Compare two JSON payloads and inspect additions, removals, value edits, and type changes.',
   alternates: {

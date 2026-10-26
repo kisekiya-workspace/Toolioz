@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "Word Counter",
-        "description": "Count words, characters, and sentences in your text.",
+        "description": "Counts words, characters, sentences, paragraphs, and reading time. This address is an alias of the text tools.",
         "applicationCategory": "Utility",
         "operatingSystem": "Any",
         "offers": {

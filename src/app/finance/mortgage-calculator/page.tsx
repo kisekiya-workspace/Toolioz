@@ -2,27 +2,19 @@ import React from 'react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import MortgageClient from './MortgageClient';
 import type { Metadata } from 'next';
-import { buildCalculatorJsonLd } from '@/lib/seo';
+import { buildCalculatorJsonLd, buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: "Mortgage Calculator 2026 | Monthly Payment & Hidden Costs Guide",
-  description: "Calculate monthly mortgage payments for 15 or 30 year terms. Learn about PMI, closing costs, the 28/36 rule, and hidden expenses before buying your first home.",
-  keywords: 'mortgage calculator 2026, how much house can i afford calculator, 15 year vs 30 year mortgage comparison, first time home buyer calculator, mortgage payment with pmi, closing costs calculator, 28 36 rule mortgage, home loan emi calculator usa, monthly house payment estimator',
-  alternates: {
-    canonical: 'https://toolioz.com/finance/mortgage-calculator',
-  },
-  openGraph: {
-    title: 'Mortgage Calculator 2026 — What Banks Don\'t Tell You | Toolioz',
-    description: 'Calculate EMI, compare 15 vs 30 year terms, and learn about PMI, closing costs, and the real cost of homeownership.',
-    url: 'https://toolioz.com/finance/mortgage-calculator',
-    type: 'website',
-  }
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Mortgage Calculator',
+  description: 'Estimates the monthly mortgage payment, total interest, and payoff amount for a loan balance, rate, and term.',
+  path: '/finance/mortgage-calculator',
+  keywords: 'mortgage calculator, monthly mortgage payment, home loan emi, amortization',
+});
 
 export default function MortgageCalculatorPage() {
   const jsonLd = buildCalculatorJsonLd({
     name: "Mortgage Calculator",
-    description: "Calculate monthly mortgage payments, total interest, and amortization schedule.",
+    description: "Monthly principal-and-interest payment from M = P [ i(1 + i)^n ] / [ (1 + i)^n − 1 ]. Tax, insurance, and PMI are not included.",
     path: "/finance/mortgage-calculator",
     applicationCategory: "FinanceApplication",
   });

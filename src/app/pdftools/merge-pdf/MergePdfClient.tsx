@@ -124,7 +124,7 @@ export default function MergePdfClient() {
             Merge <span className="text-[#ef4444]">PDF</span> Files
           </h1>
           <p className="mx-auto max-w-[700px] text-sm leading-6 text-[var(--text-secondary)] sm:text-base">
-            Combine multiple PDF documents into one file in your browser — nothing is uploaded to our servers.
+            PDF files are combined in the selected order into one PDF. The files are not uploaded.
           </p>
         </div>
       </header>
@@ -138,7 +138,7 @@ export default function MergePdfClient() {
               accept=".pdf,application/pdf"
               onChange={handleFileSelect}
               ref={fileInputRef}
-              style={{ display: 'none' }}
+              className="hidden"
             />
             {files.length === 0 ? (
               <div className="flex flex-1 flex-col items-center justify-center text-center">
@@ -244,7 +244,7 @@ export default function MergePdfClient() {
         </div>
       </main>
 
-      <section className="container section">
+      <section className="container">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-12">
           <div>
             <div className="mb-6 text-[#ef4444]">
@@ -270,14 +270,14 @@ export default function MergePdfClient() {
               <ArrowDownWideNarrow size={32} />
             </div>
             <h4 className="mb-4 text-[1.25rem] font-bold">Exact Ordering</h4>
-            <p className="leading-[1.6] text-[var(--text-secondary)]">The output PDF follows your selected sequence exactly, page-for-page.</p>
+            <p className="leading-[1.6] text-[var(--text-secondary)]">The output PDF follows the selected file order, page for page.</p>
           </div>
         </div>
       </section>
 
       <SEOSection
         title="PDF Merge Tool"
-        description="Merge multiple PDF files in your browser. Upload your documents, preserve ordering, and download one unified PDF — no server upload."
+          description="Combines PDF files in the chosen order and downloads one PDF. The files stay in the browser."
         howToUse={[
           'Add two or more PDF files to the queue.',
           'Review the file order in the selected list.',
@@ -285,7 +285,7 @@ export default function MergePdfClient() {
           'Download the merged PDF once processing completes.',
         ]}
         benefits={[
-          'Private client-side merging — files never leave your device.',
+          'The PDFs are combined in the browser. The files are not uploaded.',
           'PDF validation and clear error messages.',
           'Exact page order preservation across input files.',
           'Quick output for sharing and archival workflows.',

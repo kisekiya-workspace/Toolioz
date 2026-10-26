@@ -378,7 +378,7 @@ export default function CurlConverterClient() {
               cURL Converter
             </h1>
             <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-              Convert terminal-ready cURL commands into production snippets for Fetch, Axios, and Python requests.
+              A cURL command is parsed into method, URL, headers, and body, then written as fetch, Axios, or Python requests.
             </p>
           </div>
         </header>
@@ -473,7 +473,7 @@ export default function CurlConverterClient() {
 
         <SEOSection
           title="cURL Converter"
-          description="Convert cURL commands into framework-ready snippets for JavaScript and Python without manual translation mistakes."
+          description="A cURL command is parsed into method, URL, headers, and body, then written as fetch, Axios, or Python requests code."
           howToUse={[
             'Paste a complete curl command including headers and data flags.',
             'Click Convert to parse method, URL, headers, and payload.',
@@ -483,12 +483,12 @@ export default function CurlConverterClient() {
           benefits={[
             'Reduces copy/paste errors when moving from terminal to app code.',
             'Supports JSON payloads and regular request bodies.',
-            'Keeps all processing local in your browser.',
+            'The command is parsed in the browser. The original cURL text is not uploaded.',
             'Speeds up API integration and debugging loops.',
           ]}
         />
 
-        <section className="container section" style={{ paddingTop: 0 }}>
+        <section className="container pt-0">
           <RelatedTools currentToolId="curl-converter" categoryId="devtools" />
         </section>
       </div>

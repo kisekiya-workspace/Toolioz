@@ -10,9 +10,9 @@ import {
 } from '@/lib/x-hidden-image-content';
 
 export const metadata = buildPageMetadata({
-  title: 'Free X Tap to Reveal PNG Maker | Twitter Hidden Image Trend 2026 | Toolioz',
+  title: 'X Tap-to-Reveal PNG Maker',
     description:
-      'Browser encoder for X tap-to-reveal PNGs: muted timeline preview versus opened color, optional brush masks, PNG export. Image bytes stay in the tab when the page is labelled local processing.',
+      'Encodes a PNG with a muted timeline preview and a color image revealed on tap, with processing kept in the tab.',
   path: '/devtools/x-hidden-image',
   keywords: xHiddenImageKeywords,
 });
@@ -24,7 +24,7 @@ export default function XHiddenImagePage() {
   const jsonLd = buildCalculatorJsonLd({
     name: 'X Tap-to-Reveal PNG Maker',
     description:
-      'Free browser encoder for X (Twitter) tap-to-reveal and tap-and-hold hidden images: timeline-safe PNG8, brush masks, feed vs opened previews, and viral hidden-image trend exports.',
+      'Encodes an X tap-to-reveal PNG with a muted feed preview, an opened color image, and optional brush masks.',
     path: '/devtools/x-hidden-image',
     applicationCategory: 'MultimediaApplication',
   });

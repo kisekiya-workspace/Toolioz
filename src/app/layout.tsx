@@ -23,7 +23,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://toolioz.com'),
   title: {
-    default: 'Toolioz | Free Finance Calculators, Dev & PDF Utilities',
+    default: 'Free finance, developer, and PDF tools | Toolioz',
     template: '%s | Toolioz',
   },
   description:
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   manifest: '/manifest.webmanifest',
   openGraph: {
-    title: 'Toolioz | Free Finance Calculators, Dev & PDF Utilities',
+    title: 'Free finance, developer, and PDF tools | Toolioz',
     description:
       'Free SIP & tax calculators, JSON formatter, PDF merge, marriage biodata maker, and ATS resume builder. Private, client-side tools.',
     url: 'https://toolioz.com',
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Toolioz | Free Finance, Dev & PDF Tools',
+    title: 'Free finance, developer, and PDF tools | Toolioz',
     description:
       'SIP and tax calculators, developer utilities, PDF tools, biodata and resume makers, free in the browser.',
     images: [DEFAULT_OG_IMAGE.url],

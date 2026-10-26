@@ -64,9 +64,9 @@ export default function CalculatorPage() {
     ];
 
     const faq = [
-        { q: "Is this calculator free to use?", a: "Yes, our scientific calculator is 100% free and runs entirely in your browser." },
+        { q: "Is this calculator free to use?", a: "The scientific calculator runs in the browser and does not require an account." },
         { q: "Does it support scientific functions?", a: "Yes, it supports trigonometric functions (sin, cos, tan), logarithms, square roots, and constants like PI and E." },
-        { q: "Is my data stored?", a: "No. All calculations are performed on your device. We do not store any of your inputs or results." }
+        { q: "Are inputs stored?", a: "No. Each calculation stays on the device. Inputs and results are not stored on a server." }
     ];
 
 
@@ -75,7 +75,7 @@ export default function CalculatorPage() {
         <div className="container px-6 py-12 m-auto">
             <ToolHeader
                 title="Scientific Calculator"
-                description="A powerful, easy-to-use online calculator for basic and advanced mathematical operations."
+                description="A calculator for arithmetic, percentages, powers, and roots."
             />
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
@@ -168,7 +168,7 @@ export default function CalculatorPage() {
                     <p>
                         While every smartphone has a basic calculator, complex engineering, physics, and advanced mathematics require specialized functions.
                         Our tool provides a zero-install, privacy-first alternative that works on any device with a browser.
-                        Whether you are a student solving algebra or a developer calculating dimensions, ToolBox provides the precision you need.
+                        The calculator evaluates arithmetic, percentages, powers, and roots in the page.
                     </p>
                 </ToolContentSection>
 

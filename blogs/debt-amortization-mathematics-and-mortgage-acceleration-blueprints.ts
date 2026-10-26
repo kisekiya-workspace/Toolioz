@@ -1,8 +1,8 @@
 export const blog = {
   slug: 'debt-amortization-mathematics-and-mortgage-acceleration-blueprints',
-  title: 'The Mathematics of Mortgage Amortization: Principal Decoupling, Interest Drag & Early Payoff Acceleration',
+  title: 'Mortgage amortization and prepayment',
   description:
-    'A 2,500+ word masterclass on mortgage amortization mathematics: EMI derivation formula, interest drag mechanics, non-linear payment decoupling, early principal prepayment acceleration models, and tenure vs EMI reduction comparison.',
+    'Derives the EMI formula and shows how an extra principal payment cuts later interest.',
   keywords: [
     'mortgage amortization schedule mathematical formula',
     'home loan interest drag calculation model',

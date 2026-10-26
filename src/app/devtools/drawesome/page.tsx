@@ -3,9 +3,9 @@ import DrawesomeClient from "./DrawesomeClient";
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://toolioz.com/devtools/drawesome' },
-  title: "Drawesome Vector Drawing Toolbar & Canvas Studio | Free Online Tool",
+  title: "Drawesome Vector Drawing Studio",
   description:
-    "Free online vector drawing canvas with 7 realistic pens (pencil, pen, fineliner, marker, highlighter, brush, fountain pen), area eraser, and SVG / PNG export. Created by Benji Taylor under MIT License.",
+    "Freehand vector canvas with pencil, pen, marker, brush, and fountain-pen tools, plus SVG and PNG export.",
   keywords: [
     "drawesome",
     "vector drawing tool",
@@ -34,7 +34,7 @@ export default function DrawesomePage() {
     applicationCategory: "DeveloperApplication",
     operatingSystem: "Any",
     description:
-      "Free online vector drawing studio with 7 realistic pens (pencil, pen, fineliner, marker, highlighter, brush, fountain pen), area eraser, and SVG/PNG export.",
+      "Freehand vector canvas with pencil, pen, marker, and brush tools, plus SVG and PNG export.",
     author: {
       "@type": "Person",
       name: "Benji Taylor",

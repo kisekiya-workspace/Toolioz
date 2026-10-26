@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "About Us | Our Vision for Precision Tools",
-  description: "Learn about Toolioz's mission to provide professional-grade, browser-native utility tools. We prioritize privacy, speed, and accuracy for global users.",
+  description: "Describes Toolioz, a browser-based suite of finance calculators, developer utilities, PDF tools, and biodata makers.",
   keywords: 'About Toolioz, mission statement, privacy-first tools, high precision calculators, developer utility vision',
   alternates: {
     canonical: 'https://toolioz.com/about',

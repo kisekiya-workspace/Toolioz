@@ -60,9 +60,9 @@ export default function QrCodePage() {
 
     const faq = [
         { q: "Do these QR codes expire?", a: "No. The QR codes generated here are static, meaning they encode the data directly. They will work forever." },
-        { q: "Can I use them for commercial purposes?", a: "Yes, you are free to use these QR codes on business cards, flyers, websites, or anywhere else." },
-        { q: "Is my data tracked?", a: "No. Unlike dynamic QR code services, we do not act as a middleman. Your users go directly to the URL you provide." },
-        { q: "What is 'Excavate' in image settings?", a: "Excavate removes the QR blocks behind your logo to make it more readable. If disabled, the logo sits on top of the blocks." }
+        { q: "Can the QR codes be used commercially?", a: "Yes. A generated code can be printed or placed on a site. It encodes the text that was entered." },
+        { q: "Is the destination tracked?", a: "No. The code points straight at the encoded URL. This page does not sit between the scan and that URL." },
+        { q: "What does Excavate do?", a: "Excavate clears the modules behind a center logo so the logo is easier to see. Without it, the logo is drawn on top of the modules." },
     ];
 
     const jsonLd = {
@@ -108,7 +108,7 @@ export default function QrCodePage() {
             <JsonLd data={jsonLd} />
             <ToolHeader
                 title="QR Code Generator"
-                description="Create instant, customizable QR codes for URLs, text, Wi-Fi, and more. Add your own logo for branding."
+                description="Builds a QR code for a URL, text, Wi-Fi network, or other payload, with an optional center logo."
             />
 
             <AdContainer slot="qr-top" />

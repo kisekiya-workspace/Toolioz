@@ -316,7 +316,7 @@ export default function DitherClient() {
                   Image & Video <span className="text-blue-600 dark:text-blue-400">Dither Studio</span>
                 </h1>
                 <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1">
-                  Apply retro 1-bit, Floyd-Steinberg, Bayer matrix, GameBoy, and ASCII dithering live in your browser.
+                  Apply Floyd-Steinberg, Bayer, Atkinson, Game Boy, and ASCII dithering to an image or video in the browser.
                 </p>
               </div>
 
@@ -700,7 +700,7 @@ export default function DitherClient() {
                 <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex items-center gap-3">
                   <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
                   <p className="text-xs text-emerald-900 leading-relaxed font-medium">
-                    <strong>100% Client-Side Privacy Guarantee:</strong> All dithering calculations run locally in your web browser memory. Your images and videos are never sent to any external server.
+                    <strong>In this tab:</strong> Dithering runs in the browser. Images and videos are not uploaded.
                   </p>
                 </div>
               </div>
@@ -762,11 +762,11 @@ export default function DitherClient() {
                   {[
                     {
                       q: 'Is this dither studio completely free to use?',
-                      a: 'Yes, 100% free with unlimited image and video dithering export options with zero watermarks.',
+                      a: 'The page does not ask for payment or add a watermark. Export size still depends on the browser.',
                     },
                     {
                       q: 'Are my uploaded files stored on your server?',
-                      a: 'No. HTML5 Canvas processing and video frame dithering execute 100% locally on your computer.',
+                      a: 'No. Canvas drawing and video-frame dithering run in the browser. The file is not uploaded.',
                     },
                     {
                       q: 'How do I copy ASCII text output?',

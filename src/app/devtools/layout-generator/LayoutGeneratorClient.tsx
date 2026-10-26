@@ -307,7 +307,7 @@ export default function LayoutGeneratorClient({
             {title}
           </h1>
           <p className="text-[1rem] md:text-[1.1rem] leading-relaxed text-[var(--text-secondary)]" id="layout-generator-desc">
-            Construct semantic, pixel-perfect CSS Grid layouts with overlapping hierarchy control. Drag tracks visually and export robust, responsive HTML5 templates in seconds.
+            Each column starts as 1fr and each row starts as minmax(60px, auto). The preview draws fr tracks as 100px. Export writes a section of article elements with grid-column, grid-row, and a z-index of 10 plus the item index. Below 768px the layout becomes a column flex.
           </p>
         </header>
 

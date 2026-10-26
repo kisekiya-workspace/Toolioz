@@ -2,7 +2,10 @@ import { metadataForImportedTool } from '@/lib/sociials-tool-metadata';
 import { Metadata } from "next";
 import { JsonLd } from "@/components/sociials-seo/JsonLd";
 
-export const metadata: Metadata = metadataForImportedTool('salary-breakup-calculator');
+export const metadata: Metadata = {
+  ...metadataForImportedTool('salary-breakup-calculator'),
+  robots: { index: false, follow: true },
+};
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {

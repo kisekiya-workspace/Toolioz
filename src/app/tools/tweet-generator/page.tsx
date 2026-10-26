@@ -53,7 +53,7 @@ export default function TweetGeneratorPage() {
         <div className="container px-6 py-12 m-auto max-w-6xl">
             <ToolHeader
                 title="Tweet Generator"
-                description="Create realistic fake tweet screenshots for memes and presentations."
+                description="Draws a tweet-style card from a name, handle, and text."
             />
 
             <div className="grid lg:grid-cols-2 gap-12 mb-16">

@@ -4,9 +4,9 @@ import { JSONLD } from '@/components/ui/JSONLD';
 import { SITE_URL, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'ditherit ✦ Interactive Dither & ASCII Converter (by Prasanjit Dey)',
+  title: 'ditherit Dither and ASCII Converter',
   description:
-    'Convert images, videos, and GIFs into dithered dot art or ASCII with interactive physics repulsion, WebM export, and React/JS code export. Original tool by Prasanjit Dey (@prasanjit-dey-ux).',
+    'Converts images, video, and GIFs to dithered dots or ASCII, with physics motion, WebM export, and code export.',
   path: '/devtools/ditherit',
   keywords: [
     'ditherit online',
@@ -38,7 +38,7 @@ export default function DitheritPage() {
       priceCurrency: 'USD',
     },
     description:
-      'Browser-based tool to convert images, videos, and GIFs into dithered dot art or ASCII with physics-based mouse repulsion, WebM video export, and instant React code export.',
+      'Converts images, video, and GIFs into dithered dots or ASCII, including physics motion and code export.',
     url: `${SITE_URL}/devtools/ditherit`,
   };
 

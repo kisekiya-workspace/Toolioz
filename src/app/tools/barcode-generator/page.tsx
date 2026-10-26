@@ -44,7 +44,7 @@ export default function BarcodeGeneratorPage() {
         <div className="container px-6 py-12 m-auto">
             <ToolHeader
                 title="Barcode Generator"
-                description="Generate standard barcodes for products, inventory, and logicstics."
+                description="Draws a barcode from a number or text in a chosen symbology."
             />
 
             <div className="max-w-4xl mx-auto mb-16 space-y-8">

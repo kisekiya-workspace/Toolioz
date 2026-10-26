@@ -478,9 +478,7 @@ export default function XHiddenImageClient({ title, color }: { title?: string; c
               {title ?? 'X Tap-to-Reveal PNG Maker'}
             </h1>
             <p className="mt-3 text-[var(--text-secondary)] md:text-lg">
-              Free hidden-image PNG maker for the viral X tap-to-reveal and Twitter tap-and-hold
-              trend: muted timeline preview, full color when opened. Brush masks, feed mockups,
-              PNG8 export — all processing stays in your browser.
+              One PNG holds a muted preview and a color image. The muted pixels show in a timeline, and the color pixels show when the image is opened. The file is built in the browser.
             </p>
             <p className="mt-3 text-sm text-[var(--text-tertiary)]">
               New to the trend?{' '}

@@ -693,7 +693,7 @@ export default function DrawesomeStudio() {
               </div>
               <h3 className="text-lg font-extrabold text-white">Start Drawing on Canvas</h3>
               <p className="text-xs text-slate-400 max-w-sm">
-                Use your mouse, touch screen, or digital tablet stylus. Includes pressure-sensitive brush physics, calligraphy fountain nibs, and vector SVG exports.
+                A mouse, touch screen, or stylus can draw. Pressure uses the device value, or 0.5 when the device reports none. Export writes an SVG or a PNG at twice the board size.
               </p>
             </div>
           )}

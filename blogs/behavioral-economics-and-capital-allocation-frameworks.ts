@@ -1,8 +1,8 @@
 export const blog = {
   slug: 'behavioral-economics-and-capital-allocation-frameworks',
-  title: 'Behavioral Economics & Systematic Capital Allocation: Overcoming Heuristics to Build Lasting Wealth',
+  title: 'Behavioral economics and saving',
   description:
-    'A 2,500+ word masterclass on behavioral economics, Prospect Theory, loss aversion curves, anchoring bias, mental accounting, herding psychology, and systematic automated capital execution systems.',
+    'Explains loss aversion, anchoring, and mental accounting, and how a fixed savings schedule responds to them.',
   keywords: [
     'behavioral economics capital allocation',
     'prospect theory loss aversion curve',

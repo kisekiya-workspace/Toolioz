@@ -36,7 +36,7 @@ export default function HowToIndexPage() {
 
       <div>
         {/* Hero Header */}
-        <section className="relative border-b border-zinc-200 bg-white vercel-grid py-16 sm:py-20 md:py-28 text-center dark:border-zinc-800 dark:bg-zinc-950">
+        <section className="relative border-b border-zinc-200 bg-white py-16 sm:py-20 md:py-28 text-center dark:border-zinc-800 dark:bg-zinc-950">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <Badge variant="outline" dot pulse size="sm" className="mb-4 font-mono text-[11px]">
               <HelpCircle size={12} className="mr-1 text-cyan-600" />

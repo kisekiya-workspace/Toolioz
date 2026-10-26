@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "Audio Converter",
-        "description": "Convert audio files between different formats (MP3, WAV, OGG) directly in your browser.",
+        "description": "Loads FFmpeg from unpkg and converts audio in the page. The audio file is not uploaded. MP3 and AAC depend on that FFmpeg build.",
         "applicationCategory": "MultimediaApplication",
         "operatingSystem": "Any",
         "offers": {

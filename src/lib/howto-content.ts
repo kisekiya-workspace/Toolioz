@@ -38,9 +38,9 @@ export const howToPosts: HowToPost[] = [
   {
     slug: 'compress-pdf-under-2mb',
     directUrl: '/how-to/compress-pdf-under-2mb',
-    title: 'How to Compress a PDF File Under 2MB Online Free (Without Quality Loss)',
+    title: 'Compress a PDF under 2 MB',
     description:
-      'A comprehensive, step-by-step technical guide on shrinking heavy PDF documents under 2MB for email attachments, university admissions, and government job portal submissions while preserving vector text and font legibility.',
+      'Explains why a PDF stays large and which pages on Toolioz do not compress files to a 2 MB cap.',
     keywords: [
       'how to compress pdf under 2mb',
       'how to shrink pdf file size free',
@@ -52,7 +52,7 @@ export const howToPosts: HowToPost[] = [
     updated: 'July 2026',
     updatedIso: '2026-07-25',
     readTime: '8 min read',
-    toolLabel: 'Open PDF Compressor',
+    toolLabel: 'Open PDF tools',
     toolHref: '/pdftools',
     totalTime: 'PT3M',
     steps: [
@@ -61,16 +61,16 @@ export const howToPosts: HowToPost[] = [
         text: 'Toolioz does not publish a PDF compressor. After you merge files or export images to PDF, open a dedicated compressor you trust if a portal requires a size cap such as 2 MB.',
       },
       {
-        name: 'Select or Drag-and-Drop Your Oversized PDF File',
-        text: 'Click the upload target area or drag your target PDF document directly from your file explorer into the browser viewport. Large multi-page PDF files up to 100MB are supported.',
+        name: 'There is no compress-PDF control',
+        text: 'Toolioz does not have a Standard or Maximum compression profile, a 150 DPI setting, or a button that guarantees a file under 2 MB.',
       },
       {
-        name: 'Configure Image Downsampling & Quality Presets',
-        text: 'Select your preferred compression profile: "Standard Compression" (balances 150 DPI image downsampling with 100% sharp text vectors) or "Maximum Compression" (ideal for 300+ DPI scanned documents needing to fit under 2MB).',
+        name: 'Image compressor output is JPEG',
+        text: 'The image compressor accepts JPEG, PNG, or WebP and saves a JPEG. It does not rewrite a PDF.',
       },
       {
-        name: 'Process & Download Your Optimized PDF',
-        text: 'Click "Compress PDF". The browser engine removes duplicate metadata streams, optimizes embedded font descriptors, and downsamples heavy raster graphics, outputting an optimized file under 2MB ready for instant download.',
+        name: 'Merge does not shrink the file to a cap',
+        text: 'PDF merge copies pages with pdf-lib. It does not downsample images to a 2 MB limit.',
       },
     ],
     sections: [
@@ -86,15 +86,15 @@ export const howToPosts: HowToPost[] = [
         heading: 'Understanding Image Downsampling vs. Vector Text Preservation',
         body: [
           'The key to compressing a PDF file under 2MB without making text blurry lies in distinguishing between raster images and vector text paths.',
-          'Text and vector paths in native digital PDFs consist of mathematical curves rather than pixels. They consume a microscopic fraction of file memory and should never be rasterized or blurred during compression. Compression algorithms isolate image objects (`/XObject` with `/Subtype /Image`) and resample their resolution from 300 DPI to a web-optimized 150 DPI or 96 DPI.',
-          'Furthermore, color spaces are converted from 32-bit CMYK (print standard) to 24-bit RGB (display standard), cutting uncompressed pixel data size by 25% before lossy Flate compression is applied.',
+          'Toolioz does not resample PDF images to 150 DPI or 96 DPI. The image compressor saves a JPEG from a JPEG, PNG, or WebP. PDF merge copies pages and does not apply a 2 MB cap.',
+          'Toolioz does not convert PDF color spaces from CMYK to RGB, and it does not apply Flate compression to reach a size cap.',
         ],
       },
       {
         heading: 'Why Client-Side In-Browser Compression is Essential for Privacy',
         body: [
           'Many PDF compression websites upload files to their servers. Bank statements, tax documents, passport scans, and medical records should not go there if you need them to stay on the device. Toolioz does not publish a compressor. Use software you already trust for size caps.',
-          'Toolioz utilizes a WebAssembly (WASM) PDF engine that runs entirely inside your web browser memory sandbox. Your document is processed locally on your CPU; no bytes are ever uploaded over the network. This guarantees total data privacy, eliminates file transfer latency, and ensures compliance with strict data protection regulations.',
+          'Toolioz does not ship a WebAssembly PDF compressor. Merge, split, and image-to-PDF run in the browser with pdf-lib, and those files are not uploaded by those tools. None of them guarantee a file under 2 MB.',
         ],
       },
       {
@@ -107,9 +107,9 @@ export const howToPosts: HowToPost[] = [
     ],
     faqs: [
       {
-        question: 'Will compressing a PDF make the text blurry or unreadable?',
+        question: 'Does Toolioz compress a PDF without blurring the text?',
         answer:
-          'No. Standard compression preserves vector text layers and font definitions. Only embedded raster photos or scanned image layers are downsampled to fit web guidelines.',
+          'No. There is no PDF compression control. Text sharpness after compression is not something this site measures.',
       },
       {
         question: 'How do I compress a PDF under 2MB on mobile devices (iPhone / Android)?',
@@ -117,19 +117,19 @@ export const howToPosts: HowToPost[] = [
           'Use a dedicated PDF compressor on your phone or computer after the file exists. Toolioz merge and image-to-PDF pages do not shrink file size to a 2 MB cap.',
       },
       {
-        question: 'Can password-protected PDFs be compressed?',
+        question: 'Can a password-protected PDF be compressed here?',
         answer:
-          'You must first unlock or enter the password for an encrypted PDF before the compression engine can parse and compress the underlying data streams.',
+          'No. Toolioz does not compress PDFs, locked or unlocked.',
       },
       {
-        question: 'What is the difference between lossy and lossless PDF compression?',
+        question: 'Does this site offer lossy and lossless PDF compression?',
         answer:
-          'Lossless compression removes redundant metadata and applies Flate/DEFLATE stream compression without altering pixel values. Lossy compression downsamples image resolutions and adjusts JPEG quality factors to achieve maximum size reduction.',
+          'No. Those modes are not on Toolioz. The image compressor writes a JPEG. PDF merge copies pages.',
       },
       {
-        question: 'Why did my PDF file size barely decrease after compression?',
+        question: 'Why is there no smaller PDF after using Toolioz?',
         answer:
-          'If a PDF is already optimized or contains only clean vector text without images, further compression will produce minimal size reductions because no heavy raster images exist to downsample.',
+          'Merge and image-to-PDF do not target a smaller file. A size cap has to be handled in other software.',
       },
     ],
     sources: [
@@ -143,9 +143,9 @@ export const howToPosts: HowToPost[] = [
   {
     slug: 'calculate-sip-returns',
     directUrl: '/how-to/calculate-sip-returns',
-    title: 'How to Calculate SIP Mutual Fund Returns: Complete Step-by-Step Guide & Compound Interest Formula',
+    title: 'Calculate SIP returns step by step',
     description:
-      'Master systematic investment plan (SIP) return calculations. Learn the mathematical compound interest formula, compare XIRR vs CAGR, and learn how annual step-up contributions dramatically expand long-term wealth.',
+      'Shows the monthly SIP future-value formula, a step-up example, and the difference between SIP and a lumpsum.',
     keywords: [
       'how to calculate sip returns',
       'sip calculation formula step by step',
@@ -232,24 +232,24 @@ export const howToPosts: HowToPost[] = [
     ],
     faqs: [
       {
-        question: 'Is SIP better than investing a lump sum all at once?',
+        question: 'Does the SIP page decide between a SIP and a lumpsum?',
         answer:
-          'SIP enforces financial discipline and mitigates market timing risk through rupee-cost averaging. Lump sum investments outperform during sharp bull markets, but SIP provides smoother risk-adjusted returns during volatile market cycles.',
+          'No. The SIP page compounds a monthly amount. The lumpsum page compounds one deposit monthly. Neither page models a bull market or rupee-cost averaging.',
       },
       {
-        question: 'What happens if I miss or skip a monthly SIP payment?',
+        question: 'What if a month is skipped?',
         answer:
-          'Mutual fund houses do not penalize investors for skipping an occasional SIP installment due to insufficient bank funds. Your existing accumulated units remain invested and continue compounding.',
+          'The calculator assumes every month in the term is paid. A skipped installment is not modeled.',
       },
       {
-        question: 'What is rupee-cost averaging in SIP?',
+        question: 'Does this SIP calculator use rupee-cost averaging?',
         answer:
-          'Rupee-cost averaging means buying more fund units when market prices drop and fewer units when prices rise. Over long periods, this lowers your average cost per unit without needing to time market tops and bottoms.',
+          'No. Every installment compounds at the same monthly rate. Unit prices are not simulated.',
       },
       {
-        question: 'Can I stop or pause my SIP anytime?',
+        question: 'Does the SIP calculator pause a mutual-fund debit?',
         answer:
-          'Yes. Equity mutual funds are open-ended, meaning you can pause or cancel your monthly auto-debit instruction anytime without penalty.',
+          'No. It compounds the monthly amount that is typed in. It does not talk to a fund house or cancel a debit.',
       },
     ],
     sources: [
@@ -263,9 +263,9 @@ export const howToPosts: HowToPost[] = [
   {
     slug: 'decode-jwt-token',
     directUrl: '/how-to/decode-jwt-token',
-    title: 'How to Decode, Inspect, and Debug JSON Web Tokens (JWT) Safely',
+    title: 'Decode and inspect a JWT',
     description:
-      'Learn how JSON Web Tokens (JWT) work under the hood. Step-by-step guide to decoding Base64URL string headers and payloads, validating signature algorithms, and preventing critical security vulnerabilities.',
+      'Explains the three JWT parts, what decoding shows, and why an HS256 check needs the shared secret.',
     keywords: [
       'how to decode jwt token',
       'how to check jwt expiration online',
@@ -282,20 +282,20 @@ export const howToPosts: HowToPost[] = [
     totalTime: 'PT3M',
     steps: [
       {
-        name: 'Copy Your Raw JSON Web Token String',
-        text: 'Copy the encoded JWT string (header.payload.signature) from your web application HTTP headers (`Authorization: Bearer <token>`), browser storage, or OAuth2 callback URL.',
+        name: 'Copy the JWT string',
+        text: 'A JWT is three base64url parts separated by dots. Copy that string from the Authorization header, storage, or the callback URL.',
       },
       {
-        name: 'Paste into the Client-Side JWT Decoder',
-        text: 'Paste the string into the input box of the Toolioz JWT Decoder. The token is parsed instantly in your browser memory without being sent to external servers.',
+        name: 'Paste it into the decoder',
+        text: 'The header and payload are decoded in the page. The token is not uploaded. The site still loads ordinary assets.',
       },
       {
-        name: 'Inspect Decoded Header Parameters & Payload Claims',
-        text: 'Examine the JSON Header for signing algorithms (`alg`: HS256, RS256) and inspect Payload claims including subject (`sub`), issuer (`iss`), expiration (`exp`), and custom user roles.',
+        name: 'Read the header and claims',
+        text: 'The header shows alg. The payload shows claims such as sub, iss, and exp. The payload is encoded, not encrypted.',
       },
       {
-        name: 'Validate Expiration Timestamps & Signature Integrity',
-        text: 'Check whether the token expiration timestamp is currently valid or expired, and optionally enter your secret key to verify cryptographic signature validity.',
+        name: 'Check exp and, for HS256, a secret',
+        text: 'exp is compared with the current time and labelled Expired or Valid. A typed secret can check an HS256 signature. RS256 is not checked.',
       },
     ],
     sections: [
@@ -335,7 +335,7 @@ export const howToPosts: HowToPost[] = [
       {
         question: 'Can I decode a JWT token if I do not know the secret key?',
         answer:
-          'Yes. The Header and Payload sections are only Base64URL encoded and can be decoded by anyone. However, you cannot verify or tamper with the signature without knowing the secret key.',
+          'Yes. The header and payload are only Base64URL text. Checking or changing the signature requires the key.',
       },
       {
         question: 'What is the `exp` claim in a JWT payload?',
@@ -350,7 +350,7 @@ export const howToPosts: HowToPost[] = [
       {
         question: 'Is my secret key transmitted over the internet when using Toolioz JWT Decoder?',
         answer:
-          'No. Toolioz parses and verifies tokens entirely inside client-side browser JavaScript. Your secret key is never sent over any network socket.',
+          'No. Parsing and an HS256 check run in the browser. The secret is not sent on the network.',
       },
     ],
     sources: [
@@ -364,9 +364,9 @@ export const howToPosts: HowToPost[] = [
   {
     slug: 'format-json-and-fix-errors',
     directUrl: '/how-to/format-json-and-fix-errors',
-    title: 'How to Format, Validate, and Fix JSON Parse Errors: The Ultimate Developer Guide',
+    title: 'Format JSON and fix parse errors',
     description:
-      'A complete developer guide to formatting, prettifying, and validating JSON syntax. Learn how to diagnose JSON.parse crashes, fix trailing commas, single quotes, unescaped characters, and export clean JSON structures.',
+      'Explains JSON.parse failures such as trailing commas and single quotes, and what formatting does not change.',
     keywords: [
       'how to format json online',
       'how to fix json parse error',
@@ -439,7 +439,7 @@ export const howToPosts: HowToPost[] = [
       {
         question: 'How do I handle large 50MB JSON files without crashing the browser?',
         answer:
-          'Toolioz processes formatting operations asynchronously in Web Workers to prevent UI thread freezing when handling multi-megabyte JSON logs.',
+          'Formatting runs on the page thread in the browser. A multi-megabyte file can make the tab pause until parsing finishes. Splitting the file is the practical limit.',
       },
     ],
     sources: [
@@ -453,9 +453,9 @@ export const howToPosts: HowToPost[] = [
   {
     slug: 'create-marriage-biodata-pdf',
     directUrl: '/how-to/create-marriage-biodata-pdf',
-    title: 'How to Create a Marriage Biodata PDF: Templates, Layout Tips & Mobile Guide',
+    title: 'Create a marriage biodata PDF',
     description:
-      'A complete guide to designing an impressive marriage biodata PDF profile. Learn essential sections, photo placement tips, horoscope details, and how to export print-ready A4 PDFs for free without login.',
+      'Lists the usual biodata sections and how the Toolioz form saves locally and downloads an A4 PDF.',
     keywords: [
       'how to create marriage biodata pdf',
       'marriage biodata maker mobile phone',
@@ -519,17 +519,17 @@ export const howToPosts: HowToPost[] = [
       {
         question: 'Should I include a photograph on my marriage biodata?',
         answer:
-          'Including a professional portrait photograph is highly recommended. Use a well-lit, recent headshot with a clean background.',
+          'A recent, well-lit headshot on a plain background is the usual portrait. A photo is optional.',
       },
       {
         question: 'Can I generate a marriage biodata PDF on mobile without creating an account?',
         answer:
-          'Yes! Toolioz requires no sign-up or registration. You can fill in the form, preview in mobile view, and download your PDF instantly.',
+          'Yes. The form, preview, and PDF download do not require an account.',
       },
       {
         question: 'Is my personal information saved on external servers?',
         answer:
-          'No. All data entered into the Toolioz Biodata Generator stays inside your browser local storage. Your details and photos are never uploaded to cloud servers.',
+          'The form is saved in the browser’s local storage on that device. It is not uploaded, and the PDF is built in the browser.',
       },
     ],
   },
@@ -537,9 +537,9 @@ export const howToPosts: HowToPost[] = [
   {
     slug: 'reduce-home-loan-interest',
     directUrl: '/how-to/reduce-home-loan-interest',
-    title: 'How to Reduce Home Loan Interest with Partial Prepayments: A Complete Financial Guide',
+    title: 'Reduce home-loan interest with prepayment',
     description:
-      'Learn how making annual partial prepayments on your mortgage or home loan can cut interest costs by lakhs and shorten repayment tenures by years. Includes tenure vs EMI reduction calculations and tax considerations.',
+      'Explains how an extra principal payment cuts later interest and shortens a home-loan term.',
     keywords: [
       'how to reduce home loan interest',
       'home loan prepayment calculator guide',
@@ -590,21 +590,21 @@ export const howToPosts: HowToPost[] = [
       {
         heading: 'Prepayment Penalties & Tax Deduction Realities',
         body: [
-          'Under RBI guidelines in India, banks are prohibited from charging prepayment penalties on floating-rate home loans issued to individual borrowers.',
-          'Also consider mortgage interest tax deductions under Section 24b. If your post-tax effective interest rate is 6.5% while you expect 12% from equity, you may split surplus cash between partial prepayments and equity SIPs. That split is a personal choice, not a Toolioz recommendation.',
+          'The prepayment calculator does not subtract a lender penalty and does not apply Section 24(b). Whether a bank charges a fee is not checked on the page.',
+          'The income-tax page and the prepayment page do not share inputs. A split between a loan payment and an investment is not calculated.',
         ],
       },
     ],
     faqs: [
       {
-        question: 'When is the best time during loan tenure to make prepayments?',
+        question: 'Does the prepayment calculator choose an early lump sum?',
         answer:
-          'Making prepayments as early as possible during the initial 5 years yields the maximum interest savings because the principal balance is highest.',
+          'No. It adds the same extra amount every month from the first month and keeps the EMI. A later lump sum is not compared.',
       },
       {
-        question: 'Does prepaying a home loan lower my credit score?',
+        question: 'Does the prepayment calculator report a credit score?',
         answer:
-          'No. Making prepayments and closing loans early improves your credit utilization ratio and demonstrates strong repayment discipline.',
+          'No. It reports interest saved and months removed. A credit-score change is not calculated.',
       },
     ],
     sources: [

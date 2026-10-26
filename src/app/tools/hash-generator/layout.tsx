@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "Hash Generator",
-        "description": "Generate MD5, SHA-1, SHA-256 hashes for any text input.",
+        "description": "Computes SHA-1, SHA-256, SHA-384, and SHA-512. MD5 is not included. This address is an alias.",
         "applicationCategory": "SecurityApplication",
         "operatingSystem": "Any",
         "offers": {

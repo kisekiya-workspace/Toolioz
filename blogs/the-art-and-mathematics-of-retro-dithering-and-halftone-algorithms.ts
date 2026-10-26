@@ -1,8 +1,8 @@
 export const blog = {
   slug: 'the-art-and-mathematics-of-retro-dithering-and-halftone-algorithms',
-  title: 'The Art & Mathematics of Retro Dithering: Floyd-Steinberg, Bayer Matrices, Halftone Dots & ASCII Conversion',
+  title: 'Dithering and halftone math',
   description:
-    'A 2,500+ word deep-dive into image quantization computer science: spatial error diffusion, Floyd-Steinberg coefficients, Bayer threshold matrix expansion, halftone dot modulation, ASCII density mapping, and HTML5 Canvas performance.',
+    'Explains Floyd-Steinberg error diffusion, Bayer matrices, halftone dots, and ASCII density mapping.',
   keywords: [
     'floyd steinberg dither mathematical algorithm',
     'ordered bayer matrix dithering code',

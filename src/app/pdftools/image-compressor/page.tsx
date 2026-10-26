@@ -4,18 +4,18 @@ import type { Metadata } from 'next';
 import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
-  title: "Image Compressor | Reduce Image Size Online",
+  title: "Image Compressor",
   description:
-    'Compress JPEG, PNG, and WebP images with 100% privacy. Use target file size logic and quality controls — all processing happens locally in your browser.',
+    'Reads a JPEG, PNG, or WebP and saves a JPEG. A target size in KB can still be missed.',
   keywords:
-    'image compressor online, jpeg compression, png optimizer, image size reducer, offline image compression tool, webp converter',
+    'image compressor online, jpeg compression, png optimizer, image size reducer, webp input, jpeg output',
   alternates: {
     canonical: 'https://toolioz.com/pdftools/image-compressor',
   },
   openGraph: {
     title: 'Image Compressor | Toolioz',
     description:
-      'Compress images for web performance instantly and securely without uploading to any server.',
+      'Reads a JPEG, PNG, or WebP and saves a JPEG. A target size in KB can still be missed.',
     url: 'https://toolioz.com/pdftools/image-compressor',
     type: 'website',
     images: [
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Image Compressor | Toolioz',
     description:
-      'Browser-native image compression with target size control and zero data leaks.',
+      'Reads a JPEG, PNG, or WebP and saves a JPEG. A target size in KB can still be missed.',
     images: ['/tooliozLogo.png'],
   },
 };

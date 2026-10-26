@@ -20,12 +20,12 @@ const JSON_FAQS = [
     answer: "Formatting and conversion run in this tab when the page is labelled local processing. The JSON is not uploaded to Toolioz. The website still loads scripts and analytics."
   },
   {
-    question: "How do I convert JSON to TypeScript interface or YAML?",
-    answer: "Paste your JSON data into the input box and click the 'JSON to TS' or 'JSON to YAML' toggle buttons to automatically generate ready-to-use TypeScript interfaces and YAML config files."
+    question: "How is JSON converted to TypeScript or YAML?",
+    answer: "YAML uses js-yaml with an indent of 2. TypeScript uses the json-to-ts package on the parsed value. Both run after JSON.parse succeeds. The text is not uploaded."
   },
   {
-    question: "Why is my JSON invalid?",
-    answer: "Common JSON syntax errors include missing trailing commas, unquoted property keys, single quotes instead of double quotes, and unmatched brackets. Our tool highlights the exact line and error message."
+    question: "Why is a JSON value rejected?",
+    answer: "JSON.parse rejects trailing commas, single quotes, and unquoted keys. The page shows that parser message. It does not draw a line highlight. The text is not uploaded."
   }
 ];
 
@@ -106,10 +106,10 @@ export default function JsonFormatterClient() {
                 </span>
               </div>
               <h1 className="text-3xl font-extrabold tracking-tight text-zinc-950 sm:text-4xl md:text-5xl dark:text-zinc-50">
-                Advanced JSON Transformer
+                JSON Formatter
               </h1>
               <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-                Format, validate, and convert JSON payloads to YAML and TS Interfaces in real-time.
+                JSON is formatted with 2 or 4 spaces, minified, or written as YAML or TypeScript. Parsing stays in the browser.
               </p>
             </div>
           </header>
@@ -139,16 +139,16 @@ export default function JsonFormatterClient() {
 
               <div className="rounded-md border border-[rgba(255,255,255,0.05)] bg-[#0f172a] p-6">
                 <span className="mb-3 block text-[0.8rem] font-extrabold uppercase text-[var(--text-secondary)]">Formatting</span>
-                <div className="grid grid-cols-2 gap-3" style={{ marginBottom: '1rem' }}>
-                  <button className="cursor-pointer rounded-md border border-[var(--border)] bg-[#1e293b] p-3 text-sm font-semibold text-white transition-all hover:not(:disabled):border-[#3b82f6] hover:not(:disabled):bg-[#3b82f6] disabled:cursor-not-allowed disabled:opacity-50" onClick={() => formatJson(2)} disabled={!input}>Format (2 Tabs)</button>
-                  <button className="cursor-pointer rounded-md border border-[var(--border)] bg-[#1e293b] p-3 text-sm font-semibold text-white transition-all hover:not(:disabled):border-[#3b82f6] hover:not(:disabled):bg-[#3b82f6] disabled:cursor-not-allowed disabled:opacity-50" onClick={() => formatJson(4)} disabled={!input}>Format (4 Tabs)</button>
+                <div className="mb-4 grid grid-cols-2 gap-3">
+                  <button className="cursor-pointer rounded-md border border-[var(--border)] bg-[#1e293b] p-3 text-sm font-semibold text-white transition-all hover:not(:disabled):border-[#3b82f6] hover:not(:disabled):bg-[#3b82f6] disabled:cursor-not-allowed disabled:opacity-50" onClick={() => formatJson(2)} disabled={!input}>Format (2 spaces)</button>
+                  <button className="cursor-pointer rounded-md border border-[var(--border)] bg-[#1e293b] p-3 text-sm font-semibold text-white transition-all hover:not(:disabled):border-[#3b82f6] hover:not(:disabled):bg-[#3b82f6] disabled:cursor-not-allowed disabled:opacity-50" onClick={() => formatJson(4)} disabled={!input}>Format (4 spaces)</button>
                   <button className="cursor-pointer rounded-md border border-[var(--border)] bg-[#1e293b] p-3 text-sm font-semibold text-white transition-all hover:not(:disabled):border-[#3b82f6] hover:not(:disabled):bg-[#3b82f6] disabled:cursor-not-allowed disabled:opacity-50 col-span-2" onClick={minifyJson} disabled={!input}>Minify payload</button>
                 </div>
 
                 <span className="mb-3 block text-[0.8rem] font-extrabold uppercase text-[var(--text-secondary)]">Advanced Generics</span>
                 <div className="grid grid-cols-2 gap-3">
-                  <button className="cursor-pointer rounded-md border border-[var(--border)] bg-[#1e293b] p-3 text-sm font-semibold text-white transition-all hover:not(:disabled):border-[#3b82f6] hover:not(:disabled):bg-[#3b82f6] disabled:cursor-not-allowed disabled:opacity-50" onClick={toYaml} disabled={!input} style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#60a5fa' }}>Convert to YAML</button>
-                  <button className="cursor-pointer rounded-md border border-[var(--border)] bg-[#1e293b] p-3 text-sm font-semibold text-white transition-all hover:not(:disabled):border-[#3b82f6] hover:not(:disabled):bg-[#3b82f6] disabled:cursor-not-allowed disabled:opacity-50" onClick={toTypeScript} disabled={!input} style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#60a5fa' }}>Generate TS Types</button>
+                  <button className="cursor-pointer rounded-md border border-border bg-blue-500/10 p-3 text-sm font-semibold text-sky-400 transition-all disabled:cursor-not-allowed disabled:opacity-50" onClick={toYaml} disabled={!input}>Convert to YAML</button>
+                  <button className="cursor-pointer rounded-md border border-border bg-blue-500/10 p-3 text-sm font-semibold text-sky-400 transition-all disabled:cursor-not-allowed disabled:opacity-50" onClick={toTypeScript} disabled={!input}>Generate TS Types</button>
                 </div>
               </div>
             </Card>
@@ -159,7 +159,7 @@ export default function JsonFormatterClient() {
               <div className="mb-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <AlignLeft size={20} className="text-[#3b82f6]" />
-                  <h3 className="text-lg font-extrabold uppercase tracking-widest" style={{ color: error ? '#ef4444' : 'inherit' }}>{activeTab}</h3>
+                  <h3 className={`text-lg font-extrabold uppercase tracking-widest ${error ? 'text-red-500' : 'text-inherit'}`}>{activeTab}</h3>
                 </div>
                 <div className="flex gap-2">
                   {output && (
@@ -181,7 +181,7 @@ export default function JsonFormatterClient() {
                   </div>
                 ) : (
                   <pre className="m-0 min-h-[480px] flex-1 overflow-x-auto whitespace-pre-wrap rounded-md bg-[#1e293b] p-6 font-mono text-[0.9375rem] leading-relaxed text-[#e2e8f0]">
-                    {output || '(Output will appear here after you paste and format)'}
+                    {output || '(Output appears here after the text is formatted)'}
                   </pre>
                 )}
               </div>
@@ -191,31 +191,31 @@ export default function JsonFormatterClient() {
       </main>
 
       <SEOSection
-        title="Live JSON Formatter, YAML Converter & TS Generics"
-        description="A blazing fast, private utility tool to format, beautify, validate, and minify massive JSON files. Automatically convert your endpoints to structural YAML or generate strict Typescript interfaces instantly."
+        title="JSON formatter, YAML, and TypeScript"
+        description="JSON.stringify pretty-prints with 2 or 4 spaces, or minifies with no indent. YAML uses js-yaml. TypeScript uses json-to-ts. A parse error shows the parser message."
         howToUse={[
-          "Paste your raw, messy JSON string directly into the left input window.",
-          "Use formatting tools to immediately beautify the JSON with specific 2 or 4 indentations, or squish it utilizing the Minify button.",
-          "Use the Advanced Generics panel to effortlessly translate the JSON structure into perfectly nested YAML or explicit TypeScript Interfaces.",
-          "Watch for instant syntax errors in the outcome window to trace missing commas or brackets before pushing your code to production."
+          "Paste JSON into the input.",
+          "Format with 2 spaces or 4 spaces, or minify. Those buttons pass a number to JSON.stringify, so the indent is spaces.",
+          "YAML and TypeScript run only after JSON.parse succeeds.",
+          "A rejected value shows the parser message. The page does not highlight a source line."
         ]}
         benefits={[
-          "Pasted JSON stays in the tab when the page is labelled local processing. Analytics for the website still load.",
-          "Cross-Structural Compiling: Automatically traverse and generate 1:1 mapped TypeScript Types and configurations from unpredictable JSON logic.",
-          "Blazing Speed: Render and format several megabytes of complex JSON structures securely inside the browser environment.",
-          "Error Tracing: Highlights exactly where the JSON payload failed execution constraints, improving developer QA speeds."
+          "The text is not uploaded. The site still loads scripts and analytics.",
+          "Pretty-print uses 2 or 4 spaces. Minify uses JSON.stringify with no indent.",
+          "TypeScript interfaces come from the json-to-ts package and the parsed sample.",
+          "The error text is the exception message from JSON.parse."
         ]}
       />
       <DirectAnswerBlock
         title="Format, validate, and convert JSON to TypeScript or YAML"
         answer={
-          'This page pretty-prints and minifies JSON that parses, reports the first syntax error when it does not, and can emit YAML or inferred TypeScript interfaces from valid JSON. Processing is local to the tab when labelled. Do not paste production secrets if your policy forbids it.'
+          'This page pretty-prints JSON with 2 or 4 spaces, minifies it, and can emit YAML or TypeScript from a value that parses. The text is not uploaded. The site still loads scripts and analytics.'
         }
         keyTakeaways={[
           "Pasted JSON stays in the tab when the page is labelled local processing. Analytics for the website still load.",
-          "The TypeScript generator infers nested types, array interfaces, and optional fields.",
+          "TypeScript interfaces come from json-to-ts and the parsed sample.",
           "The YAML converter turns parsed JSON into YAML syntax.",
-          "Validation reports the first bracket, comma, or quote parse error.",
+          "A parse error shows the JSON.parse message. The page does not highlight a line.",
         ]}
         categoryName="Developer Utilities"
       />

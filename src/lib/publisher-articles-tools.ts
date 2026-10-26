@@ -84,7 +84,7 @@ export const publisherArticlesTools: PublisherArticle[] = [
     path: '/devtools/jwt-decoder',
     title: 'Decoding a JWT is not verifying it',
     lead:
-      'A JSON Web Token is three Base64URL segments: header, payload, signature. This page always decodes the first two so you can read claims. A forged token will still decode. Optional HS256 verification runs only if you type the shared secret; there is no JWKS lookup and no RS256 check.',
+      'A JSON Web Token is three Base64URL parts. This page decodes the header and payload with atob. crypto.subtle.verify checks an HS256 signature only when a secret is typed and alg is HS256. (Not expired) means exp is not earlier than now. nbf is shown in local time and is not compared. There is no JWKS fetch and no RS256 check.',
     reviewed: '10 September 2026',
     sections: [
       {

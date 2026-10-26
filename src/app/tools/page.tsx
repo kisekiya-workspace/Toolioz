@@ -4,9 +4,9 @@ import { allToolItems, buildItemListJsonLd, buildPageMetadata } from '@/lib/seo'
 import ToolsLibraryClient from './ToolsLibraryClient';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Free Online Tools | Calculators, Converters & Developer Utilities',
+  title: 'Calculators and Developer Utilities',
   description:
-    'Use Toolioz free online calculators, converters, generators, PDF utilities, design tools, and developer utilities. Private browser-based tools with no sign-up.',
+    'Lists Toolioz calculators, converters, generators, PDF utilities, design tools, and developer utilities.',
   path: '/tools',
   keywords: [
     'free online tools',

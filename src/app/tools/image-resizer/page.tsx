@@ -77,7 +77,7 @@ export default function ImageResizerPage() {
         <div className="container px-6 py-12 m-auto">
             <ToolHeader
                 title="Image Resizer"
-                description="Resize images to specific dimensions instantly in your browser."
+                description="Resizes an image to a chosen pixel width and height in the browser."
             />
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">

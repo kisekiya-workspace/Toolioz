@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { calculateCompoundInterest } from '@/lib/formulas';
-import { Info, Banknote, ShieldCheck, AlertTriangle, BookOpen, TrendingUp, Lightbulb, Download } from 'lucide-react';
+import { Info, Banknote, ShieldCheck, AlertTriangle, BookOpen, TrendingUp, Lightbulb, Printer } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
@@ -16,16 +16,16 @@ import { FAQSchema } from '@/components/ui/FAQSchema';
 
 const FD_FAQS = [
   {
-    question: "What is TDS on Fixed Deposit interest in India?",
-    answer: "Tax Deducted at Source (TDS) at 10% is deducted by banks if annual FD interest exceeds ₹40,000 (₹50,000 for senior citizens). Submitting Form 15G / 15H prevents TDS if your total taxable income is below the exemption limit."
+    question: "Does this calculator deduct TDS?",
+    answer: "No. Maturity is principal plus compound interest at the selected frequency. A note appears only when total interest divided by the number of years is above ₹40,000. That note does not reduce the maturity figure, and a senior-citizen threshold is not applied."
   },
   {
-    question: "What is FD Laddering?",
-    answer: "FD Laddering is a strategy of breaking your total investment into multiple FDs maturing across different years (e.g. 1, 2, 3, 4, 5 years). This ensures liquidity every year and optimizes interest rate cycles."
+    question: "Does this page build an FD ladder?",
+    answer: "No. The result is one deposit. Splitting a sum across several maturity dates is not calculated."
   },
   {
-    question: "Are Fixed Deposits insured?",
-    answer: "In India, bank deposits up to ₹5 Lakh per depositor per bank (principal + interest) are insured by the DICGC (a wholly-owned subsidiary of RBI)."
+    question: "Is the maturity figure capped by deposit insurance?",
+    answer: "No. The formula does not apply an insurance limit, a premature-withdrawal penalty, or a senior-citizen rate."
   }
 ];
 
@@ -56,9 +56,9 @@ export default function FDClient() {
         <header className={styles.header}>
           <div className="container">
             <h1 className={styles.title}>Fixed Deposit (FD) Calculator 2026</h1>
-            <p className={styles.subtitle}>Calculate maturity value with selectable compounding frequency. Updated for 2026 bank rates.</p>
+            <p className={styles.subtitle}>A fixed deposit pays a stated annual rate for a fixed tenure. Maturity is principal plus compound interest at the selected frequency. Tax is not deducted.</p>
             <div className="mx-auto mt-6 max-w-[700px] rounded-lg border border-[#fbbf24] bg-[#fffbeb] px-4 py-3 text-left text-[0.8rem] leading-[1.6] text-[#92400e]">
-              <strong>⚠️ Disclaimer:</strong> Interest rates shown are <strong>illustrative defaults</strong> and may not match your bank&apos;s current rates. Actual maturity values depend on your bank, tenure, and deposit amount. This calculator is for <strong>assumption &amp; planning purposes only</strong>. Verify with your bank before investing.
+              <strong>⚠️ Disclaimer:</strong> The 7.1% rate is an illustrative default. Maturity depends on the rate, tenure, and frequency entered. The result is before tax.
             </div>
           </div>
         </header>
@@ -97,7 +97,7 @@ export default function FDClient() {
                   >
                     <option value={1}>Annually</option>
                     <option value={2}>Half-Yearly (Semi-Annual)</option>
-                    <option value={4}>Quarterly (Most Common)</option>
+                    <option value={4}>Quarterly</option>
                     <option value={12}>Monthly</option>
                   </select>
                 </div>
@@ -123,15 +123,15 @@ export default function FDClient() {
                   className={styles.btn}
                   onClick={() => window.print()}
                 >
-                  <Download className="mr-2 size-4" />
-                  Download FD Summary
+                  <Printer className="mr-2 size-4" />
+                  Print this calculation
                 </Button>
               </Card>
 
               <div className={styles.infoBox}>
-                <div className={styles.infoIcon} style={{ color: '#0369a1' }}><Info size={20} /></div>
+                <div className={`${styles.infoIcon} text-sky-700`}><Info size={20} /></div>
                 <p className={styles.infoText}>
-                  A Fixed Deposit (FD) is a financial instrument provided by banks or NBFCs which provides investors a higher rate of interest than a regular savings account. Interest is typically compounded quarterly in India.
+                  Maturity uses A = P(1 + r/n)^(nt). The starting frequency is quarterly, n = 4. Annual, half-yearly, and monthly are also available.
                 </p>
               </div>
 
@@ -140,7 +140,7 @@ export default function FDClient() {
                 <div className="mt-4 flex items-start gap-3 rounded-lg border border-[#fbbf24] bg-[#fffbeb] p-4">
                   <AlertTriangle size={18} className="mt-0.5 shrink-0 text-[#d97706]" />
                   <p className="m-0 text-[0.8rem] leading-[1.6] text-[#92400e]">
-                    <strong>TDS Note:</strong> Your estimated annual interest of {formatCurrency(annualInterest)} exceeds ₹40,000. TDS at 10% may be deducted by the bank (threshold is ₹50,000 for senior citizens). Submit Form 15G/15H to avoid TDS if your total income is below the taxable limit.
+                    <strong>Interest flag:</strong> Total interest divided by years is {formatCurrency(annualInterest)}, which is above ₹40,000. The maturity figure above is not reduced.
                   </p>
                 </div>
               )}
@@ -156,23 +156,23 @@ export default function FDClient() {
         <div className="mx-auto mt-12 max-w-[900px]">
           <Card className="!p-8 bg-[#f0f9ff]">
             <h2 className="mb-6 text-[1.4rem] font-bold text-[#0369a1] flex items-center gap-2">
-              <ShieldCheck className="text-[#0284c7]" /> 💸 Tax & TDS on Fixed Deposits (2026-27)
+              <ShieldCheck className="text-[#0284c7]" /> What is left out of the maturity figure
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
-                <h3 className="mb-3 text-[1.05rem] font-bold text-[#0369a1]">TDS (Tax Deducted at Source)</h3>
+                <h3 className="mb-3 text-[1.05rem] font-bold text-[#0369a1]">Tax is not subtracted</h3>
                 <ul className="flex flex-col gap-3 text-[0.875rem] leading-[1.6] text-[#0369a1]/80">
-                  <li><strong>Limit:</strong> If interest exceeds <strong>₹40,000</strong> (₹50,000 for seniors), bank deducts <strong>10% TDS</strong>.</li>
-                  <li><strong>Without PAN:</strong> If you don&apos;t provide PAN, bank will deduct <strong>20% TDS</strong>.</li>
-                  <li><strong>Form 15G/15H:</strong> Submit these if your total annual income is below the taxable limit to avoid TDS.</li>
+                  <li><strong>Flag only:</strong> A note appears when total interest ÷ years is above ₹40,000.</li>
+                  <li><strong>No rate applied:</strong> 10% or 20% is not taken off the maturity amount.</li>
+                  <li><strong>No senior threshold:</strong> The comparison stays at ₹40,000.</li>
                 </ul>
               </div>
               <div>
-                <h3 className="mb-3 text-[1.05rem] font-bold text-[#0369a1]">Final Income Tax</h3>
+                <h3 className="mb-3 text-[1.05rem] font-bold text-[#0369a1]">One deposit</h3>
                 <ul className="flex flex-col gap-3 text-[0.875rem] leading-[1.6] text-[#0369a1]/80">
-                  <li><strong>Slab Rate:</strong> Interest earned is added to your total income and taxed at your <strong>Income Tax Slab</strong> (10%, 20%, 30%).</li>
-                  <li><strong>Tax-Saving FD:</strong> 5-year FDs qualify for deduction under Section 80C (up to ₹1.5L) in the old regime.</li>
-                  <li><strong>Post-Tax Yield:</strong> Always calculate your post-tax return. A 7% FD in the 30% slab yields only 4.9%.</li>
+                  <li><strong>No ladder:</strong> Several maturity dates are not calculated.</li>
+                  <li><strong>No Section 80C:</strong> A tax-saver lock-in is not an input.</li>
+                  <li><strong>No post-tax yield:</strong> A 30% slab is not applied to the 7.1% default.</li>
                 </ul>
               </div>
             </div>
@@ -182,8 +182,8 @@ export default function FDClient() {
         {/* Real-World Tips Section */}
         <section className="mx-auto max-w-[900px] px-6 py-16">
           <div className="mb-10 text-center">
-            <h2 className="text-[1.8rem] font-black text-[var(--text-primary)]">🏦 Fixed Deposit Tips</h2>
-            <p className="mt-3 text-[1rem] text-[var(--text-secondary)]">What banks won&apos;t tell you about maximizing your FD returns.</p>
+            <h2 className="text-[1.8rem] font-black text-[var(--text-primary)]">How this FD maturity is built</h2>
+            <p className="mt-3 text-[1rem] text-[var(--text-secondary)]">The same compound-interest formula as the result above, with n chosen in the frequency list.</p>
           </div>
           
           <div className="grid gap-6 md:grid-cols-2">
@@ -192,13 +192,13 @@ export default function FDClient() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-sky-50 text-sky-600">
                   <BookOpen size={20} />
                 </div>
-                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Important FD Terms</h3>
+                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Default example</h3>
               </div>
               <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-sky-500">•</span><span><strong>TDS:</strong> 10% TDS if interest &gt; ₹40k/year. Submit Form 15G/15H to avoid it.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-sky-500">•</span><span><strong>Penalty:</strong> 0.5–1% rate reduction on premature withdrawal.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-sky-500">•</span><span><strong>Cumulative:</strong> Reinvests interest. <strong>Non-cumulative:</strong> Pays out periodically.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-sky-500">•</span><span><strong>DICGC Insurance:</strong> Deposits up to ₹5 lakh per bank are insured.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-sky-500">•</span><span><strong>Inputs:</strong> ₹1,00,000, 7.1% a year, 5 years, quarterly.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-sky-500">•</span><span><strong>Maturity:</strong> Near ₹1,42,175. Interest is about ₹42,175.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-sky-500">•</span><span><strong>Formula:</strong> A = P(1 + r/n)^(nt), with n = 4 and t = 5.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-sky-500">•</span><span><strong>Flag:</strong> ₹42,175 ÷ 5 is about ₹8,435, under ₹40,000, so the note stays hidden.</span></li>
               </ul>
             </div>
 
@@ -207,13 +207,13 @@ export default function FDClient() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
                   <TrendingUp size={20} />
                 </div>
-                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Smart Strategies</h3>
+                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Frequency values</h3>
               </div>
               <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-indigo-500">•</span><span><strong>FD Laddering:</strong> Instead of one ₹10L FD, make 5 × ₹2L FDs with 1–5 year tenures.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-indigo-500">•</span><span><strong>Tax-Saver FD:</strong> 5-year lock-in gives Section 80C deduction, but interest is taxable.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-indigo-500">•</span><span><strong>Small Finance Banks:</strong> Offer 0.5–1.5% higher rates, still DICGC insured.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-indigo-500">•</span><span><strong>Senior Citizens:</strong> 0.25–0.5% extra rate. Super seniors (80+) get even more.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-indigo-500">•</span><span><strong>Annual:</strong> n = 1.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-indigo-500">•</span><span><strong>Half-yearly:</strong> n = 2.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-indigo-500">•</span><span><strong>Quarterly:</strong> n = 4. This is the starting selection.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-indigo-500">•</span><span><strong>Monthly:</strong> n = 12.</span></li>
               </ul>
             </div>
 
@@ -222,16 +222,16 @@ export default function FDClient() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
                   <Lightbulb size={20} />
                 </div>
-                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Pro Tips</h3>
+                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Not calculated</h3>
               </div>
               <div className="grid gap-4 md:grid-cols-2">
                 <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-teal-500">✅</span><span><strong>Calculate Post-Tax:</strong> A 7% FD in the 30% slab yields only ~4.9%.</span></li>
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-teal-500">✅</span><span><strong>Don&apos;t Break FDs:</strong> Take a loan against FD instead (costs ~1–2% above FD rate).</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-teal-500">✅</span><span><strong>Payout:</strong> Interest is added back. A periodic payout FD is not a separate mode.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-teal-500">✅</span><span><strong>Penalty:</strong> Breaking the deposit early is not modeled.</span></li>
                 </ul>
                 <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-teal-500">✅</span><span><strong>Timing:</strong> Lock in high rates for longer tenures before RBI cuts rates.</span></li>
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-teal-500">✅</span><span><strong>Auto-sweep:</strong> Keeps money liquid but auto-converts to FD for better returns.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-teal-500">✅</span><span><strong>Insurance:</strong> No cap is applied to the maturity amount.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-teal-500">✅</span><span><strong>Rate source:</strong> 7.1% is a default, not a quoted bank rate.</span></li>
                 </ul>
               </div>
             </div>
@@ -239,26 +239,24 @@ export default function FDClient() {
         </section>
 
         <SEOSection 
-          title="Fixed Deposits (FD): The Bedrock of a Secure Savings Strategy"
-          description={`A Fixed Deposit (FD) has long been considered one of the safest and most reliable investment instruments, particularly for those who prioritize capital preservation over high-risk growth. When you open an FD, you agree to leave a specific amount of money with a bank or non-banking financial company (NBFC) for a set tenure at a fixed interest rate. Unlike market-linked investments like stocks or mutual funds, the returns on an FD are guaranteed and unaffected by market volatility.
+          title="Fixed deposit maturity"
+          description={`A fixed deposit pays a stated annual rate for a fixed tenure. Maturity is principal plus compound interest at the selected frequency, before tax.
 
-The efficiency of a fixed deposit depends largely on its compounding frequency. Most banks in India and other regions compound interest on a quarterly basis, which means your interest earns interest four times a year. This leads to a slightly higher 'effective' yield compared to the nominal interest rate. Our FD calculator simplifies this complex math, allowing you to see the exact maturity value of your deposit based on the principal, tenure, and current bank rates.
-
-For many, FDs serve as an emergency fund or a way to save for specific future milestones, such as a down payment on a home or post-graduation expenses. Some FDs also offer tax-saving benefits under Section 80C (in India), though these typically come with a mandatory 5-year lock-in period. By comparing the maturity amounts across different interest rates and tenures using our tool, you can make an informed decision on where to park your hard-earned money for the best guaranteed returns.`}
+The formula is A = P(1 + r/n)^(nt). The page starts at quarterly compounding, n = 4. ₹1,00,000 at 7.1% for 5 years finishes near ₹1,42,175, so interest is about ₹42,175. Annual, half-yearly, and monthly use n = 1, 2, and 12. A note appears when total interest divided by years is above ₹40,000. That note does not change the maturity amount.`}
           howToUse={[
-            "Enter the Principal Deposit Amount you wish to invest in the bank.",
-            "Input the Annual Interest Rate offered by the financial institution (Bank/NBFC).",
-            "Select the Tenure or duration of the deposit in years.",
-            "Choose the Compounding Frequency (quarterly is the most common in India).",
-            "Instantly view the Final Maturity Amount you will receive at the end of the term.",
-            "Check the Total Interest Earned—this is the profit your money has generated over the period."
+            "Enter the principal.",
+            "Enter the annual rate as a percent. The default is 7.1.",
+            "Enter the tenure in years. The default is 5.",
+            "Select annual, half-yearly, quarterly, or monthly compounding.",
+            "Read maturity and interest. Interest is maturity minus principal.",
+            "If total interest divided by years is above ₹40,000, a note appears and the maturity figure stays the same."
           ]}
           benefits={[
-            "Capital Security: Your principal amount is safe and guaranteed by the institution.",
-            "Predictable Income: Know exactly how much you will receive on the day of maturity.",
-            "Wealth Protection: Provides a steady hedge against short-term market fluctuations.",
-            "Flexible Tenures: Choose a term that perfectly matches your future financial needs.",
-            "Tax Planning: Utilize tax-saving FD schemes to reduce your annual tax liability."
+            "Quarterly compounding is the starting frequency.",
+            "The ₹1,42,175 example uses ₹1,00,000, 7.1%, 5 years, and n = 4.",
+            "Tax is not subtracted from maturity.",
+            "One deposit is calculated. A ladder of several deposits is not.",
+            "The 7.1% rate is an illustrative default."
           ]}
           formula="A = P(1 + r/n)^(nt)"
         />

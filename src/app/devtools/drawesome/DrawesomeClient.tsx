@@ -34,12 +34,12 @@ export default function DrawesomeClient() {
         {/* GEO / AEO Direct Answer Block */}
         <DirectAnswerBlock
           title="How to create vector drawings and export transparent SVGs free online?"
-          answer="Drawesome Vector Studio is a free, browser-based vector drawing tool powered by pressure-sensitive stroke smoothing algorithms. You can sketch with 7 realistic pens (pencil, ballpoint, technical fineliner, felt marker, highlighter, paint brush, and 45° fountain pen), erase precise stroke sub-regions using area subtraction, and export crisp, resolution-independent SVG vector graphics or 2x PNGs without sign-up or watermarks."
+          answer="Drawesome is a browser vector canvas with seven pens: pencil, ballpoint, fineliner, marker, highlighter, brush, and fountain pen. An area eraser subtracts part of a stroke. Export is SVG or a 2x PNG, with no account and no watermark."
           keyTakeaways={[
             "Resolution-Independent Vector SVG — Export scalable SVG code for web apps, icons, and illustrations.",
             "Area Subtraction Eraser — Subtract stroke geometry with real masking instead of deleting entire paths.",
             "7 Realistic Nib Presets — Pressure and velocity smoothing with fountain pen nib angle physics.",
-            "100% Client-Side Privacy — Drawings stay local in your browser session with JSON save/load capability."
+            "Drawings stay in the browser session. JSON save and load restores the strokes."
           ]}
           categoryName="Design & Vector Studio"
         />
@@ -71,7 +71,7 @@ export default function DrawesomeClient() {
             </div>
             <h3 className="font-bold text-zinc-950 dark:text-zinc-50 text-base">Crisp SVG & JSON Export</h3>
             <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-              Download clean vector SVG markup formatted for web illustrations, export high-res transparent PNGs, or save project JSON to edit later.
+              Download an SVG, a PNG at twice the board size, or a project JSON file.
             </p>
           </Card>
         </section>
@@ -79,19 +79,19 @@ export default function DrawesomeClient() {
         {/* SEO Structured Content */}
         <SEOSection
           title="Drawesome Free Online Vector Drawing Studio"
-          description="A professional, open-source web whiteboard and vector canvas for creating sketches, diagrams, wireframes, and handwritten calligraphy with zero lag."
+          description="Drawesome is a freehand vector canvas with pencil, pen, marker, brush, and fountain-pen tools, plus SVG and PNG export."
           howToUse={[
-            "Select your preferred pen tool (Pencil, Fineliner, Marker, Calligraphy Pen, or Brush).",
-            "Adjust line thickness, opacity, smoothing tension, and color from the palette.",
-            "Draw naturally with mouse, trackpad, or stylus — pressure and speed are calculated in real-time.",
-            "Use the subtraction eraser to carve out fine details or slice paths.",
-            "Click Export to download your artwork as an SVG vector, 2x PNG, or project backup file."
+            "Select a pen: pencil, fineliner, marker, calligraphy pen, or brush.",
+            "Line thickness, opacity, smoothing, and color come from the controls.",
+            "A pointer event records position. Pressure uses the device value, or 0.5 when the device reports none.",
+            "The eraser stores a stroke and hides drawing under it with an SVG mask.",
+            "Export downloads an SVG, a PNG at twice the board size, or a project JSON file."
           ]}
           benefits={[
-            "100% Free & No Sign-up — Immediate access to full drawing capabilities with no registration or watermarks.",
-            "True Vector Output — Scalable SVG curves that look pin-sharp on 4K retina displays and large format prints.",
-            "Stylus & Pressure Simulation — Realistic stroke taper and velocity thinning curves mimicking natural ink flow.",
-            "Completely Private — All vector geometry and raster buffers are processed strictly in browser memory."
+            "The page does not ask for an account, and the SVG or PNG has no watermark.",
+            "PNG export uses scale 2. The default board is 1600×1000, so that PNG is 3200×2000.",
+            "Pointer events pass pressure to the stroke. A mouse that reports no pressure uses 0.5.",
+            "Strokes are drawn in the page. The page still loads site assets."
           ]}
         />
 
@@ -100,19 +100,19 @@ export default function DrawesomeClient() {
           faqs={[
             {
               question: "Is Drawesome completely free with no watermarks?",
-              answer: "Yes, Drawesome is 100% free with no account creation, limits, or watermark stamps. All exported SVG and PNG files belong to you."
+              answer: "Drawesome does not require an account, and the SVG or PNG export has no watermark. The exported file is the visitor's to use."
             },
             {
               question: "Can I use Drawesome graphics in commercial web projects?",
-              answer: "Yes, SVG vectors exported from Drawesome can be used freely in personal and commercial web designs, apps, logos, and print products without attribution."
+              answer: "The page does not add a watermark or ask for an account. It does not grant a separate license for the drawing."
             },
             {
               question: "How does the Area Subtraction Eraser work?",
-              answer: "Unlike standard whiteboards that delete entire connected strokes when touched by an eraser, Drawesome uses geometric path boolean subtraction to carve holes and split lines exactly where the eraser passes."
+              answer: "The eraser stores a stroke and paints it black inside an SVG mask, which hides the drawing underneath. It does not split a path into new curves."
             },
             {
               question: "Can I save my drawing to finish editing later?",
-              answer: "Yes. Click 'Export JSON' to download your project file. Later, click 'Open Project' to restore your exact stroke vectors, layers, and pen configurations."
+              answer: "Export JSON downloads the strokes, layers, and pen settings. Open Project reads that file back onto the canvas."
             }
           ]}
         />

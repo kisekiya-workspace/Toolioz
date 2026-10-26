@@ -22,7 +22,7 @@ export const calculatorPageStyles = {
   btn: '!w-full !rounded-xl !bg-white !py-3 !font-bold !text-zinc-950 !border-0 hover:!bg-zinc-100 transition-all flex items-center justify-center gap-2 cursor-pointer',
   infoBox:
     'flex gap-3.5 rounded-2xl border border-zinc-200 bg-zinc-50/70 p-5 dark:border-zinc-800 dark:bg-zinc-900',
-  infoIcon: 'text-blue-600 shrink-0 mt-0.5',
+  infoIcon: 'shrink-0 mt-0.5',
   infoText: 'text-xs sm:text-sm leading-relaxed text-zinc-600 dark:text-zinc-400',
   mobileResultBar:
     'fixed bottom-0 left-0 z-50 hidden w-full items-center justify-between border-t border-zinc-200 bg-white px-6 py-4 dark:border-zinc-800 dark:bg-zinc-900 max-[900px]:flex',

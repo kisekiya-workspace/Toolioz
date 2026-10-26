@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "Regex Tester",
-        "description": "Test and debug Regular Expressions in real-time.",
+        "description": "Tests a JavaScript regular expression and lists matches. This address is an alias.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
         "offers": {

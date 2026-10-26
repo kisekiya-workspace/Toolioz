@@ -12,7 +12,7 @@ export function Footer() {
   return (
     <>
       <ToolPublisherArticle />
-      <footer className="mt-auto bg-[#fafafa] py-10 text-[#171717] dark:bg-[#0a0a0a] dark:text-[#ededed] sm:py-16" style={{ boxShadow: 'var(--header-border-bottom)' }}>
+      <footer className="mt-auto bg-[#fafafa] py-10 text-[#171717] shadow-[var(--header-border-bottom)] dark:bg-[#0a0a0a] dark:text-[#ededed] sm:py-16">
       <div className="mx-auto max-w-[1200px] px-6">
         
         <div className="mb-10 flex flex-col gap-4 pb-8 sm:flex-row sm:items-center sm:justify-between">

@@ -2119,7 +2119,7 @@ const material = new THREE.ShaderMaterial({
     } else if (activeExportTab === 'css') {
       // Generate CSS-only static fallback based on current colors
       return `/* CSS-Only Static Fallback Background
-   Approximates your shader's color palette as a CSS gradient.
+   Approximates the shader palette as a CSS gradient.
    Use as a fallback for non-WebGL browsers or static pages. */
 
 .shader-background {
@@ -2257,14 +2257,14 @@ customElements.define('shader-bg', ShaderBg);
             WebGL GLSL <span className="text-purple-600">Shader Studio</span> &amp; Playground
           </h1>
           <p className="mt-3 max-w-3xl text-base text-[var(--text-secondary)] sm:text-lg">
-            Create stunning animated backgrounds, hero sections, and visual effects for your website. Designer-friendly color pickers, 18 ready-to-use presets, and one-click export to HTML, React, Three.js, CSS, and Web Components.
+            A WebGL shader background is a fragment program that paints each frame from color and motion controls. This page previews presets and exports HTML, React, CSS, or Three.js.
           </p>
 
           {/* Privacy Guarantee Badge */}
           <div className="mt-4 inline-flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50/80 p-3 text-left">
             <ShieldCheck className="h-5 w-5 shrink-0 text-emerald-600" />
             <p className="text-xs text-emerald-900">
-              <strong>100% Client-Side Memory Execution:</strong> Shaders compile directly on your graphics card (GPU) locally in your browser. Zero code or canvas frames are uploaded anywhere.
+              <strong>In-browser execution:</strong> The shader compiles in this tab. The source and canvas frames are not uploaded.
             </p>
           </div>
         </div>
@@ -2763,20 +2763,20 @@ customElements.define('shader-bg', ShaderBg);
         <section className="mt-16 border-t border-slate-200 pt-12">
           <SEOSection
             title="WebGL Shader Studio — Animated Backgrounds for Web Designers"
-            description="Create, customize, and export stunning animated WebGL backgrounds for your website. Designer-friendly color pickers, 18 production-ready presets (aurora gradients, particle constellations, wave layers, mesh gradients, geometric patterns, dark mode orbs), and instant export to HTML, React, Three.js, CSS fallbacks, and Web Components."
+            description="A WebGL shader background is a fragment program that paints each frame from a few color and motion controls. This page previews presets and exports HTML, React, CSS, or Three.js."
             howToUse={[
-              "Browse the preset gallery — filter by category (Hero Backgrounds, Gradients & Blobs, Geometric Patterns, Ambient & Texture, Dark Mode FX) or view all 18 presets.",
-              "Customize colors instantly using the 3 color pickers (uColor1, uColor2, uColor3) — every designer preset responds to your palette.",
-              "Fine-tune the animation with Speed, Zoom, and Intensity sliders for the perfect look.",
-              "Edit GLSL code directly in the live editor with instant compilation and inline error reporting.",
-              "Export your shader to Standalone HTML, React TSX, Three.js ShaderMaterial, CSS-only fallback gradient, self-contained Web Component, or download a PNG snapshot."
+              "The gallery lists 30 presets. Categories include Hero Backgrounds, Gradients & Blobs, Geometric Patterns, Ambient & Texture, Dark Mode FX, Glass & Chrome, and others.",
+              "uColor1, uColor2, and uColor3 are uniforms. A preset uses them only when its source reads those names.",
+              "Speed, zoom, and intensity set uSpeed, uZoom, and uIntensity.",
+              "The editor compiles the fragment shader and shows the GLSL error log, with the line adjusted for the preamble.",
+              "Export tabs are Vanilla HTML, React TSX, Three.js, CSS Fallback, Web Component, and raw GLSL. PNG snapshot saves the current canvas."
             ]}
             benefits={[
-              "Designer-Friendly: 3 color pickers + intensity slider let you match your brand palette without touching code.",
-              "18 Production-Ready Presets: Aurora gradients, particle constellations, wave layers, liquid blobs, mesh gradients, grid pulses, hex tessellations, noise grain, spotlight glow, gradient orbs, and classic developer shaders.",
-              "6 Export Formats: Vanilla HTML, React TSX, Three.js ShaderMaterial, CSS-only fallback, Web Component (<shader-bg>), and raw GLSL.",
-              "Hardware Accelerated: Compiles directly on your GPU for smooth 60+ FPS rendering.",
-              "100% Client-Side Privacy: All shader execution stays local in browser memory with zero network uploads."
+              "Three color uniforms are declared on every compile.",
+              "The gallery has 30 presets. Seven GLSL snippets are separate from that list.",
+              "Export tabs are Vanilla HTML, React TSX, Three.js ShaderMaterial, a CSS gradient, a web component, and raw GLSL.",
+              "The page does not measure a frame rate.",
+              "The shader runs in the page. The source is not uploaded."
             ]}
           />
 
@@ -2793,27 +2793,27 @@ customElements.define('shader-bg', ShaderBg);
                 },
                 {
                   question: "Can I match the shader colors to my brand palette?",
-                  answer: "Yes! The Designer Controls panel includes 3 color pickers (uColor1, uColor2, uColor3) that all designer presets respond to. Enter your brand hex colors directly, and the shader updates in real-time. The export code will include your chosen colors."
+                  answer: "Three color uniforms are declared. A preset uses them only when its source reads uColor1, uColor2, or uColor3. The exported snippet includes the chosen hex values."
                 },
                 {
                   question: "Is this WebGL GLSL Shader tool compatible with Shadertoy code?",
-                  answer: "Yes! The tool natively supports standard Shadertoy syntax including void mainImage(out vec4 fragColor, in vec2 fragCoord) and built-in uniforms like iTime, iResolution, iMouse, iTimeDelta, iFrame, and iChannel0."
+                  answer: "The preview prepends iResolution, iTime, iTimeDelta, iFrame, iMouse, and iDate. iDate is a vec3 of year, month, and day, not Shadertoy's vec4. iChannel0 is a generated texture. iChannel1 is declared and not bound. A mainImage function gets a main() wrapper. Multipass buffers and iChannelResolution are not provided."
                 },
                 {
-                  question: "Can I export shaders to my React or Three.js application?",
-                  answer: "Absolutely. Click the Export Code tab to get copy-paste snippets for vanilla WebGL HTML files, React TSX components, Three.js ShaderMaterial definitions, CSS-only fallback gradients, self-contained Web Components, or raw GLSL code."
+                  question: "Which export formats are available?",
+                  answer: "The export tab copies Vanilla HTML, React TSX, a Three.js ShaderMaterial, a CSS gradient, a web component, or raw GLSL. A separate button saves the current canvas as a PNG."
                 },
                 {
                   question: "What is the CSS Fallback export?",
-                  answer: "The CSS Fallback generates a pure CSS background gradient that approximates your shader's color palette. Use it as a fallback for browsers that don't support WebGL, or for static pages where you want a matching gradient without JavaScript."
+                  answer: "The CSS fallback is a gradient that uses the shader palette. It can stand in for browsers without WebGL, or for a page that should not run JavaScript."
                 },
                 {
                   question: "Are my custom shaders saved locally?",
-                  answer: "Yes, you can save custom shader presets directly to your browser's LocalStorage or copy a shareable link containing your encoded shader code."
+                  answer: "A custom preset can be stored in the browser's local storage, or copied as a link that contains the encoded shader."
                 },
                 {
                   question: "Does rendering shaders locally compromise privacy?",
-                  answer: "Not at all. Everything executes 100% client-side inside your browser's WebGL graphics memory. No graphics data or code is ever uploaded to any external server."
+                  answer: "The shader runs in the browser's WebGL context. The graphics and code are not uploaded."
                 }
               ]}
             />

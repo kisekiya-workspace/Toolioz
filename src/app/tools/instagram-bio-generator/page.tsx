@@ -66,7 +66,7 @@ export default function BioGeneratorPage() {
         <div className="container px-6 py-12 m-auto max-w-5xl">
             <ToolHeader
                 title="Instagram Bio Generator"
-                description="Make your social media profiles stand out with custom stylish fonts."
+                description="Builds styled Instagram bio text from a plain phrase and a chosen font style."
             />
 
             <div className="grid lg:grid-cols-2 gap-8 mb-16">

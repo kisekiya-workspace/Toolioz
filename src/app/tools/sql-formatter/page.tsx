@@ -40,7 +40,7 @@ export default function SqlFormatterPage() {
         <div className="container px-6 py-12 m-auto max-w-6xl">
             <ToolHeader
                 title="SQL Formatter"
-                description="Beautify and format your SQL queries for better readability."
+                description="Formats a SQL statement with line breaks and indentation so the clauses are easier to read."
             />
 
             <div className="grid lg:grid-cols-2 gap-8 mb-16">

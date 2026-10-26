@@ -14,16 +14,16 @@ const FAQS = [
   {
     question: 'How does the 16:9 to 3-part split work?',
     answer:
-      'Your photo is center-cropped to 16:9, then cut into three equal vertical strips (1×3). Each slice is a PNG you can post as a triptych on X, Instagram, or a carousel.',
+      'The photo is center-cropped to 16:9, then cut into three equal vertical strips. Each slice is a PNG. The image is not uploaded.',
   },
   {
     question: 'Does this upload my image?',
-    answer: 'No. Cropping and export run in your browser. Files stay on your device.',
+    answer: 'No. Cropping and export run in the browser. The file is not uploaded.',
   },
   {
     question: 'What if my photo is not 16:9?',
     answer:
-      'The tool crops from the center to 16:9 so the three panels line up as a widescreen triptych. Edges outside that frame are discarded.',
+      'The tool crops from the center to 16:9 so the three panels line up. Edges outside that frame are discarded.',
   },
 ];
 
@@ -254,8 +254,7 @@ export default function SplitImageIn3Client({
             {title ?? 'Split Image in 3'}
           </h1>
           <p className="mt-3 text-[var(--text-secondary)] md:text-lg">
-            Crop to 16:9, then split into three equal vertical parts. Download PNG
-            slices for X, Instagram, or print — processed in your browser.
+            A 16:9 photo is cropped, then cut into three equal vertical PNGs. The image is not uploaded.
           </p>
         </div>
       </header>
@@ -337,7 +336,7 @@ export default function SplitImageIn3Client({
         ]}
         benefits={[
           'Fixed 16:9 → 1×3 layout — no extra settings.',
-          'Runs locally; nothing is uploaded to Toolioz.',
+          'The image is not uploaded to Toolioz.',
           'PNG export ready for X, Instagram carousels, and canvas prints.',
         ]}
       />

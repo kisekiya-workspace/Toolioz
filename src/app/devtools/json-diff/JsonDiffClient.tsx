@@ -187,7 +187,7 @@ export default function JsonDiffClient() {
               JSON Diff Checker
             </h1>
             <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-              Compare two JSON payloads and inspect field-level changes before merging API or config updates.
+              A JSON diff lists keys that were added, removed, or changed, including the path of each change.
             </p>
           </div>
         </header>
@@ -271,7 +271,7 @@ export default function JsonDiffClient() {
 
         <SEOSection
           title="JSON Diff Checker"
-          description="Run fast JSON comparisons with exact path-level changes for safer API migrations and config reviews."
+          description="A JSON diff lists keys that were added, removed, or changed between two JSON values, including the path of each change."
           howToUse={[
             'Paste old JSON in the first panel and the updated JSON in the second panel.',
             'Click Compare JSON to compute path-level differences.',
@@ -286,7 +286,7 @@ export default function JsonDiffClient() {
           ]}
         />
 
-        <section className="container section" style={{ paddingTop: 0 }}>
+        <section className="container pt-0">
           <RelatedTools currentToolId="json-diff" categoryId="devtools" />
         </section>
       </div>

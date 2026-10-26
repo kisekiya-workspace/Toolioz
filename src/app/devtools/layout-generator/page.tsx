@@ -6,22 +6,22 @@ import { Metadata } from 'next';
 import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
-  title: "CSS Grid Generator Pro | Advanced Track & Visual Builder",
-  description: 'Pro-grade CSS Grid visual builder with dynamic track sizing (minmax, fr, auto). Build responsive layouts with automatic semantic HTML and state-persistent grid tracks.',
+  title: "CSS Grid Layout Generator",
+  description: 'Builds CSS Grid tracks visually, including minmax and fr units, and exports semantic HTML for the layout.',
   keywords: 'CSS Grid minmax generator, advanced css grid tracks, visual grid builder pro, responsive layout architecture, grid-template-areas generator, css layout tool developers',
   alternates: {
     canonical: 'https://toolioz.com/devtools/layout-generator',
   },
   openGraph: {
-    title: 'Professional CSS Grid Visual Orchestrator | Toolioz',
-    description: 'Dynamic grid track management (fr, px, minmax) and visual layout building. Export pixel-perfect CSS Grid code instantly.',
+    title: 'CSS Grid Layout Generator | Toolioz',
+    description: 'Builds a CSS grid. Columns start as 1fr and rows start as minmax(60px, auto). Export writes grid-column, grid-row, and a z-index.',
     url: 'https://toolioz.com/devtools/layout-generator',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Advanced CSS Grid Layout Visualizer',
-    description: 'Build complex, production-ready CSS Grid layouts visually with pro track management.',
+    title: 'CSS Grid Layout Generator',
+    description: 'Builds a CSS grid. Columns start as 1fr and rows start as minmax(60px, auto).',
   }
 };
 
@@ -32,8 +32,8 @@ export default function LayoutGeneratorPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "CSS Grid Builder Visual Studio",
-    "description": "Interactive layout creation utility capable of generating absolute CSS grid coordinates, z-indices, and semantic html tags.",
+    "name": "CSS Grid Layout Generator",
+    "description": "Builds a CSS grid. Columns start as 1fr and rows start as minmax(60px, auto). Export writes grid-column, grid-row, and a z-index.",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "All",
     "url": "https://toolioz.com/devtools/layout-generator",

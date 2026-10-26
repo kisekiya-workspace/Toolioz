@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { calculateIncomeTax, Country, FilingStatus } from '@/lib/formulas';
-import { Wallet, Info, AlertTriangle, ShieldCheck, PieChart, Download, BookOpen, Scale, Lightbulb } from 'lucide-react';
+import { Wallet, Info, AlertTriangle, ShieldCheck, PieChart, Printer, BookOpen, Scale, Lightbulb } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { RelatedTools } from '@/components/ui/RelatedTools';
@@ -13,20 +13,20 @@ import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
 
 const INCOME_TAX_FAQS = [
   {
-    question: "What is the difference between New Tax Regime and Old Tax Regime in FY 2026-27?",
-    answer: "The New Tax Regime features lower tax slab rates but removes most exemptions (80C, 80D, HRA). The Old Tax Regime allows all traditional tax-saving deductions under Section 80C up to ₹1.5 Lakh, 80D medical insurance, and HRA."
+    question: "What is the difference between the new and old regimes in this calculator?",
+    answer: "The new regime uses the slab table for the selected year and a rebate. The old regime uses a ₹2,50,000 exemption, or ₹3,00,000 when the senior status is selected, then 5%, 20%, and 30% bands, and sets tax to zero at or below ₹5,00,000. Section 80C, 80D, and HRA are not calculated; any of those amounts has to be typed into the deduction field."
   },
   {
-    question: "What is the Standard Deduction for salaried employees in FY 2025-26 and 2026-27?",
-    answer: "The Standard Deduction under the New Tax Regime is ₹75,000 for salaried employees and pensioners. Under the Old Tax Regime, it remains ₹50,000."
+    question: "What standard deduction does the calculator apply?",
+    answer: "The deduction field is entered manually. For India it starts at ₹75,000 for every regime and year. Selecting the old regime does not change that number to ₹50,000."
   },
   {
-    question: "Is income up to ₹7 Lakh or ₹12 Lakh tax-free under Section 87A?",
-    answer: "Under Section 87A of the New Tax Regime, full tax rebate is available for taxable income up to ₹7 Lakhs (making effective tax zero up to ₹7.75 Lakhs including standard deduction). In proposed budget provisions for 2026-27, rebate limits for low/middle income brackets extend up to ₹12 Lakhs effective tax relief."
+    question: "When does this calculator set Indian new-regime tax to zero?",
+    answer: "Taxable income at or below ₹7,00,000 is set to zero tax for 2024 and 2025. Taxable income at or below ₹12,00,000 is set to zero tax for 2026. A 4% cess is added only when tax remains. Taxable income is income minus the entered deduction."
   },
   {
-    question: "Can I switch between New and Old Tax Regime every year?",
-    answer: "Salaried individuals without business/professional income can switch between New and Old tax regimes every financial year at the time of filing their ITR."
+    question: "Does the calculator decide which regime a filer may use?",
+    answer: "No. The same income can be shown under either regime. Whether a return may change regime depends on the income type and the year, and that rule is not checked here."
   }
 ];
 
@@ -54,8 +54,6 @@ export default function IncomeTaxClient() {
     takeHome: 0,
     effectiveRate: 0,
   });
-
-  const [isDownloading, setIsDownloading] = useState(false);
 
   // Persistence
   useEffect(() => {
@@ -102,14 +100,6 @@ export default function IncomeTaxClient() {
     }).format(displayVal(val));
   };
 
-  const handleDownload = () => {
-    setIsDownloading(true);
-    setTimeout(() => {
-      window.print();
-      setIsDownloading(false);
-    }, 800);
-  };
-
   const taxPercent = (results.tax + results.social) / (income || 1) * 100;
 
   return (
@@ -126,7 +116,7 @@ export default function IncomeTaxClient() {
               Income Tax Calculator 2026-27
             </h1>
             <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-              Estimate your income tax under the New Regime (default from FY 2023-24). Supports India, USA & UK.
+              Indian income tax for a financial year is the slab tax on taxable income after the standard deduction and other allowed deductions. The new regime uses lower slabs and fewer deductions than the old regime.
             </p>
           </div>
         </header>
@@ -204,16 +194,16 @@ export default function IncomeTaxClient() {
                 <h3 className="mb-5 text-[1.1rem] font-bold text-[var(--text-primary)]">Visual Breakdown</h3>
                 <div className="mt-4">
                   <div className="relative mb-4 flex h-6 w-full overflow-hidden rounded-full bg-[#f1f5f9]">
-                    <div className="h-full bg-[#10b981] transition-all duration-500 ease-out" style={{ width: `${100 - taxPercent}%` }} title="Take Home" />
-                    <div className="h-full bg-[#ef4444] transition-all duration-500 ease-out" style={{ width: `${taxPercent}%` }} title="Total Tax" />
+                    <div className="h-full bg-emerald-500 transition-all duration-500 ease-out" style={{ width: `${100 - taxPercent}%` }} title="Take Home" />
+                    <div className="h-full bg-red-500 transition-all duration-500 ease-out" style={{ width: `${taxPercent}%` }} title="Total Tax" />
                   </div>
                   <div className="flex flex-wrap justify-center gap-4 text-[0.85rem] font-medium text-[var(--text-secondary)]">
                     <div className="flex items-center gap-2">
-                      <span className="h-3 w-3 rounded-full" style={{ background: '#10b981' }} />
+                      <span className="h-3 w-3 rounded-full bg-emerald-500" />
                       Take Home: {(100 - taxPercent).toFixed(1)}%
                     </div>
                     <div className="flex items-center gap-2">
-                      <span className="h-3 w-3 rounded-full" style={{ background: '#ef4444' }} />
+                      <span className="h-3 w-3 rounded-full bg-red-500" />
                       Total Taxes: {taxPercent.toFixed(1)}%
                     </div>
                   </div>
@@ -232,9 +222,9 @@ export default function IncomeTaxClient() {
                 </div>
 
                 <div className="mb-6 grid grid-cols-1 gap-3">
-                  <div className="flex flex-col justify-between rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-secondary)] p-4" style={{ gridColumn: '1 / -1' }}>
+                  <div className="col-span-full flex flex-col justify-between rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-secondary)] p-4">
                     <span className="mb-1 text-[0.85rem] font-semibold text-[var(--text-secondary)]">Total Tax Liability</span>
-                    <span className="font-bold text-[var(--text-primary)]" style={{ color: '#ef4444', fontSize: '2rem' }}>{formatCurrency(results.tax + results.social)}</span>
+                    <span className="text-4xl font-bold text-red-500">{formatCurrency(results.tax + results.social)}</span>
                   </div>
                 </div>
 
@@ -249,7 +239,7 @@ export default function IncomeTaxClient() {
                        <span className="font-bold text-[var(--text-primary)]">{formatCurrency(results.social)}</span>
                      </div>
                    )}
-                   <div className="flex justify-between text-[var(--text-secondary)]" style={{ borderTop: '1px solid var(--border)', paddingTop: '0.75rem', marginTop: '0.5rem' }}>
+                   <div className="mt-2 flex justify-between border-t border-[var(--border)] pt-3 text-[var(--text-secondary)]">
                      <strong className="text-[var(--text-primary)]">Effective Tax Rate</strong>
                      <strong className="text-[var(--text-primary)]">{results.effectiveRate.toFixed(2)}%</strong>
                    </div>
@@ -258,16 +248,15 @@ export default function IncomeTaxClient() {
                 <Button 
                   fullWidth 
                   className="h-12 text-[0.95rem] font-bold" 
-                  onClick={handleDownload}
-                  disabled={isDownloading}
+                  onClick={() => window.print()}
                 >
-                  {isDownloading ? 'Generating PDF...' : 'Download Full Tax Report'} 
-                  {!isDownloading && <Download size={18} style={{ marginLeft: '8px' }} />}
+                  Print this calculation
+                  <Printer size={18} className="ml-2" />
                 </Button>
 
-                <div className="mt-4 flex items-start gap-3 rounded-[var(--radius-md)] border p-3" style={{ marginTop: '1.5rem', background: '#fff7ed', borderColor: '#ffedd5' }}>
-                  <AlertTriangle size={18} style={{ color: '#ea580c' }} className="shrink-0" />
-                  <p style={{ fontSize: '0.75rem', color: '#9a3412', margin: 0 }}>
+                <div className="mt-6 flex items-start gap-3 rounded-[var(--radius-md)] border border-orange-100 bg-orange-50 p-3">
+                  <AlertTriangle size={18} className="shrink-0 text-orange-600" />
+                  <p className="m-0 text-xs text-orange-900">
                     <strong>Disclaimer:</strong> These are <strong>approximate estimates</strong> for FY {year}-{(year + 1).toString().slice(2)} based on publicly available tax rules. Actual tax liability may differ due to surcharges, rebates, employer-specific deductions, state/local taxes, and other factors. This tool is for <strong>assumption &amp; planning purposes only</strong> — not a substitute for professional tax advice.
                   </p>
                 </div>
@@ -295,17 +284,17 @@ export default function IncomeTaxClient() {
               <div>
                 <h3 className="mb-3 text-[1.05rem] font-bold text-[#4c1d95]">The Breakeven Rule</h3>
                 <ul className="flex flex-col gap-3 text-[0.875rem] leading-[1.6] text-[#4c1d95]/80">
-                  <li><strong>New Regime:</strong> Best if your total deductions (80C, 80D, HRA, Home Loan Interest) are <strong>below ₹3.75 - 4.25 Lakh</strong>.</li>
-                  <li><strong>Standard Deduction:</strong> A flat ₹75,000 deduction is available in the New Regime for salaried employees.</li>
-                  <li><strong>Tax Free Limit:</strong> Effectively zero tax for income up to ₹12.75 Lakh in 2026 (including SD).</li>
+                  <li><strong>New regime:</strong> Uses the year&apos;s slab table. For 2026, tax is set to zero when taxable income is at or below ₹12,00,000.</li>
+                  <li><strong>Deduction field:</strong> Starts at ₹75,000 for India and stays at that number until it is edited.</li>
+                  <li><strong>2026 example:</strong> Gross income of ₹12,75,000 minus the default ₹75,000 deduction is ₹12,00,000 taxable, which this calculator treats as zero tax before cess.</li>
                 </ul>
               </div>
               <div>
                 <h3 className="mb-3 text-[1.05rem] font-bold text-[#4c1d95]">When to Choose Old?</h3>
                 <ul className="flex flex-col gap-3 text-[0.875rem] leading-[1.6] text-[#4c1d95]/80">
-                  <li><strong>Home Loan:</strong> If you pay high interest (₹2L+) and principal (₹1.5L), the Old Regime is often superior.</li>
-                  <li><strong>HRA:</strong> If you live in a Tier-1 city and pay high rent, the HRA exemption can significantly lower your taxable income.</li>
-                  <li><strong>Maximize 80C:</strong> If you already have ₹1.5L in PPF/Insurance, you are halfway to the breakeven point.</li>
+                  <li><strong>Old regime:</strong> The exemption is ₹2,50,000, or ₹3,00,000 for the senior status. Tax is set to zero at or below ₹5,00,000.</li>
+                  <li><strong>Extra deductions:</strong> Home-loan interest, HRA, and Section 80C are included only when those amounts are typed into the deduction field.</li>
+                  <li><strong>Comparison:</strong> Run the same income twice, once in each regime, and compare the tax lines. The page does not pick a regime.</li>
                 </ul>
               </div>
             </div>
@@ -331,7 +320,7 @@ export default function IncomeTaxClient() {
                 <li className="flex gap-2"><span className="mt-1 shrink-0 text-purple-500">•</span><span><strong>Section 80C (₹1.5L):</strong> PPF, ELSS, NPS, life insurance, home loan principal.</span></li>
                 <li className="flex gap-2"><span className="mt-1 shrink-0 text-purple-500">•</span><span><strong>Section 80D:</strong> Medical Insurance — ₹25k for self/family + ₹50k for senior parents.</span></li>
                 <li className="flex gap-2"><span className="mt-1 shrink-0 text-purple-500">•</span><span><strong>HRA Exemption:</strong> Claim exemption on rent paid based on specific calculations.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-purple-500">•</span><span><strong>Section 87A:</strong> New regime income up to ₹12 lakh is effectively tax-free for FY 2025-26.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-purple-500">•</span><span><strong>Section 87A in this calculator:</strong> New-regime tax is zero up to ₹7 lakh of taxable income for 2024 and 2025, and up to ₹12 lakh for 2026.</span></li>
               </ul>
             </div>
 
@@ -376,25 +365,25 @@ export default function IncomeTaxClient() {
         
         <SEOSection 
           title="Income Tax Calculator 2026-27 | New vs Old Regime Analysis"
-          description={`Taxation is one of the most complex yet essential aspects of modern citizenship. Whether you are living in India, the United Kingdom, or the United States, understanding your income tax liability is critical for effective financial planning and legal compliance. As we approach fiscal years like 2025 and 2026, many governments are introducing significant changes to tax slabs, rebates, and deduction rules. An income tax calculator is no longer just a simple math tool; it's a strategic guide to navigating these shifts.
+          description={`Income tax for a year is the slab tax on taxable income after the standard deduction and other allowed deductions. The new Indian regime uses lower slabs and fewer deductions than the old regime.
 
-For instance, in the Indian context, the introduction of the 'New Tax Regime' as the default option has fundamentally changed how salaried individuals approach their savings. With higher standard deductions (₹75,000 for FY 24-25) and tax-free income up to ₹12 lakh in the proposed 2026 budget (thanks to rebate u/s 87A), many taxpayers are finding that the New Regime offers significant savings without the need for traditional 80C investments. However, for those with existing home loans or high insurance premiums, the 'Old Regime' might still be the superior choice.
+The calculator subtracts the entered deduction from income, then applies the selected country formula. For India, new-regime tax is set to zero at or below ₹7,00,000 of taxable income in 2024 and 2025, and at or below ₹12,00,000 in 2026. A 4% cess is added when tax remains. The India deduction field starts at ₹75,000 and does not change when the regime changes.
 
-In the United States, tax brackets are adjusted annually for inflation to prevent "bracket creep," where taxpayers move into higher brackets despite no real increase in purchasing power. Our tool factors in these 2026 inflation-adjusted thresholds for various filing statuses, including Single and Married Filing Jointly. Similarly, UK residents must navigate the complexities of Personal Allowances, National Insurance contributions, and the tapering of allowances for high earners. Our global tax engine provides the depth and accuracy needed to simulate these scenarios, help you understand your 'Take-Home Pay', and plan your yearly investments for maximum tax efficiency.`}
+The United States path uses one bracket table for a single filer and doubles those thresholds for married filing, then adds 6.2% Social Security up to a wage base and 1.45% Medicare. The United Kingdom path uses a £12,570 personal allowance, 20%, 40%, and 45% bands, a simplified allowance taper, and 8% National Insurance above £12,570. These are planning estimates from the formulas on this page, not a filing calculation.`}
           howToUse={[
-            "Begin by selecting your Country (India, USA, or UK) and the relevant Tax Year (2024-2026).",
-            "Choose your Filing Status—this is critical as it determines your baseline exemptions and slab thresholds.",
-            "Enter your Total Estimated Gross Income for the period (you can toggle between Monthly and Yearly views).",
-            "Input any legally applicable Deductions or Exemptions (e.g., 80C in India, 401k in US, or Pensions in UK).",
-            "Review the 'Net Take-Home Pay' to understand exactly what hits your bank account after all taxes and social contributions.",
-            "Use the 'Visual Breakdown' chart to see the percentage of your income that goes toward taxes vs. what you keep."
+            "Select India, the United States, or the United Kingdom, and a year from 2024 through 2026.",
+            "Select a filing status. India uses it for the old-regime exemption. The United States uses it to choose the bracket table.",
+            "Enter gross income. The same amount can be shown as a monthly or yearly figure.",
+            "Enter deductions. The India field starts at ₹75,000.",
+            "Read the tax line, cess or payroll tax, and take-home pay after those amounts.",
+            "The chart splits the entered income between tax and the remainder."
           ]}
           benefits={[
-            "Global Versatility: Accurately estimate taxes for multiple major jurisdictions in one unified tool.",
-            "Regime Comparison: Instantly see the difference between various tax models (e.g., Old vs. New) to choose the best path.",
-            "Future-Proofing: Stay ahead of the curve with pre-configured 2026 budget rules and inflation-adjusted slabs.",
-            "Detailed Breakdown: Understand exactly where your money goes, from basic income tax to social security and cess.",
-            "Interactive Planning: Use the monthly toggle to align your tax liability with your monthly household budget."
+            "One form runs the India, United States, and United Kingdom formulas in this page.",
+            "The same Indian income can be shown under the old regime and the new regime.",
+            "The 2026 India new-regime rebate in this calculator is ₹12,00,000 of taxable income.",
+            "The result separates income tax from cess, FICA, or National Insurance.",
+            "The monthly view divides the yearly figures by 12."
           ]}
         />
         <FAQSchema faqs={INCOME_TAX_FAQS} />

@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { calculateTax } from '@/lib/formulas';
-import { CreditCard, Info, AlertTriangle, CheckCircle2, ShieldCheck, BookOpen, Clock, Lightbulb } from 'lucide-react';
+import { CreditCard, Info, AlertTriangle, CheckCircle2, ShieldCheck, BookOpen, Clock, Lightbulb, Printer } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
@@ -54,7 +54,7 @@ export default function GSTClient() {
         <header className="px-6 pb-4 pt-6 text-center md:pb-6 md:pt-8">
           <div className="container">
             <h1 className="mb-2 text-2xl font-extrabold tracking-tight text-[var(--text-primary)] sm:text-3xl">GST Calculator Online India 2026</h1>
-            <p className="mx-auto max-w-[600px] text-[0.95rem] leading-[1.5] text-[var(--text-secondary)] sm:text-[1.1rem]">Calculate GST with CGST/SGST &amp; IGST split for accurate invoicing.</p>
+            <p className="mx-auto max-w-[600px] text-[0.95rem] leading-[1.5] text-[var(--text-secondary)] sm:text-[1.1rem]">GST is a percentage of taxable value. An exclusive price adds tax on top, while an inclusive price already contains tax. The split shows CGST and SGST for intra-state supply, or IGST for inter-state supply.</p>
             <div className="mx-auto mt-3 max-w-[700px] rounded-lg border border-[#fbbf24] bg-[#fffbeb] px-4 py-2 text-left text-[0.75rem] leading-5 text-[#92400e]">
               <strong>⚠️ Disclaimer:</strong> This calculator provides <strong>approximate GST computations</strong> for general reference. Actual GST rates vary by product/service (HSN/SAC code). This tool is for <strong>assumption &amp; planning purposes only</strong>. Always verify with the official GST portal or a CA before filing.
             </div>
@@ -113,7 +113,7 @@ export default function GSTClient() {
                       type="checkbox"
                       checked={isInterState}
                       onChange={(e) => setIsInterState(e.target.checked)}
-                      style={{ width: '18px', height: '18px', accentColor: 'var(--primary)' }}
+                      className="size-[18px] accent-primary"
                     />
                     <span>Inter-State Supply (IGST instead of CGST+SGST)</span>
                   </label>
@@ -167,23 +167,24 @@ export default function GSTClient() {
                   {formatCurrency(isInclusive ? result.taxAmount : result.totalAmount)}
                 </div>
                 <div className="mb-8 mt-4 flex w-full flex-col gap-3 text-left">
-                  <div className="flex items-center gap-2 text-[0.9rem] font-medium text-[var(--text-secondary)]"><CheckCircle2 size={16} className="text-[#10b981]" /> Instant precise computation</div>
-                  <div className="flex items-center gap-2 text-[0.9rem] font-medium text-[var(--text-secondary)]"><CheckCircle2 size={16} className="text-[#10b981]" /> Dual-mode computation</div>
-                  <div className="flex items-center gap-2 text-[0.9rem] font-medium text-[var(--text-secondary)]"><CheckCircle2 size={16} className="text-[#10b981]" /> Error-free formula</div>
+                  <div className="flex items-center gap-2 text-[0.9rem] font-medium text-[var(--text-secondary)]"><CheckCircle2 size={16} className="text-[#10b981]" /> Exclusive or inclusive mode</div>
+                  <div className="flex items-center gap-2 text-[0.9rem] font-medium text-[var(--text-secondary)]"><CheckCircle2 size={16} className="text-[#10b981]" /> CGST, SGST, or IGST split</div>
+                  <div className="flex items-center gap-2 text-[0.9rem] font-medium text-[var(--text-secondary)]"><CheckCircle2 size={16} className="text-[#10b981]" /> Invoice arithmetic only</div>
                 </div>
                 <Button 
                   fullWidth 
                   className="h-14 text-[1.05rem] font-bold"
                   onClick={() => window.print()}
                 >
-                  Download Tax Invoice
+                  <Printer className="mr-2 size-4" />
+                  Print this calculation
                 </Button>
               </Card>
 
               <div className="flex items-start gap-4 rounded-[var(--radius-md)] bg-white p-5">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#f1f5f9]" style={{ color: '#1e293b' }}><Info size={20} /></div>
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-800"><Info size={20} /></div>
                 <p className="m-0 text-[0.85rem] leading-[1.6] text-[var(--text-secondary)]">
-                  Accurate tax calculation is critical for business compliance. Our engine uses standard accounting rounding to ensure your numbers stay consistent with professional software.
+                  GST on an invoice is the rate times the taxable value. An inter-state supply uses IGST. An intra-state supply splits the same rate into equal CGST and SGST amounts.
                 </p>
               </div>
             </div>
@@ -198,23 +199,23 @@ export default function GSTClient() {
         <div className="mx-auto mt-12 max-w-[900px]">
           <Card className="!p-8 bg-[#fff7ed]">
             <h2 className="mb-6 text-[1.4rem] font-bold text-[#9a3412] flex items-center gap-2">
-              <ShieldCheck className="text-[#ea580c]" /> 💸 GST Registration & Filing (2026-27)
+              <ShieldCheck className="text-[#ea580c]" /> What this GST page calculates
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
-                <h3 className="mb-3 text-[1.05rem] font-bold text-[#9a3412]">Who Needs to Register?</h3>
+                <h3 className="mb-3 text-[1.05rem] font-bold text-[#9a3412]">Two invoice modes</h3>
                 <ul className="flex flex-col gap-3 text-[0.875rem] leading-[1.6] text-[#9a3412]/80">
-                  <li><strong>Turnover Limit:</strong> ₹40 Lakh for goods (₹20 Lakh for services). Special states have a ₹10 Lakh limit.</li>
-                  <li><strong>Inter-state Sales:</strong> Compulsory registration if you sell across state lines, regardless of turnover.</li>
-                  <li><strong>E-commerce:</strong> Selling on Amazon/Flipkart requires GST registration from Day 1.</li>
+                  <li><strong>Exclusive:</strong> Tax is amount × rate / 100. ₹1,000 at 18% is ₹180 of tax and a ₹1,180 total.</li>
+                  <li><strong>Inclusive:</strong> Base is total / (1 + rate / 100). Tax is total minus that base.</li>
+                  <li><strong>Intra-state split:</strong> The same ₹180 is shown as ₹90 CGST and ₹90 SGST.</li>
                 </ul>
               </div>
               <div>
-                <h3 className="mb-3 text-[1.05rem] font-bold text-[#9a3412]">Composition Scheme</h3>
+                <h3 className="mb-3 text-[1.05rem] font-bold text-[#9a3412]">Not a filing tool</h3>
                 <ul className="flex flex-col gap-3 text-[0.875rem] leading-[1.6] text-[#9a3412]/80">
-                  <li><strong>Eligibility:</strong> Businesses with turnover below <strong>₹1.5 Crore</strong> can opt for this to avoid complex filing.</li>
-                  <li><strong>Tax Rates:</strong> Pay flat 1% (Manufacturers/Traders) or 6% (Service Providers).</li>
-                  <li><strong>Limitation:</strong> You cannot collect GST from customers and cannot claim Input Tax Credit (ITC).</li>
+                  <li><strong>No registration test:</strong> The page does not apply a turnover threshold or an e-commerce rule.</li>
+                  <li><strong>No composition scheme:</strong> It does not switch to a flat 1% or 6% rate.</li>
+                  <li><strong>No ITC or reverse charge:</strong> The result is the invoice arithmetic only.</li>
                 </ul>
               </div>
             </div>
@@ -224,8 +225,8 @@ export default function GSTClient() {
         {/* Real-World Tips Section */}
         <section className="mx-auto max-w-[900px] px-6 py-16">
           <div className="mb-10 text-center">
-            <h2 className="text-[1.8rem] font-black text-[var(--text-primary)]">🧾 GST Guide for Business Owners</h2>
-            <p className="mt-3 text-[1rem] text-[var(--text-secondary)]">Master the terms, rules, and tips to ensure 100% compliance.</p>
+            <h2 className="text-[1.8rem] font-black text-[var(--text-primary)]">How the two GST modes differ</h2>
+            <p className="mt-3 text-[1rem] text-[var(--text-secondary)]">Exclusive adds the rate on top of the amount. Inclusive extracts tax already included in the total.</p>
           </div>
           
           <div className="grid gap-6 md:grid-cols-2">
@@ -239,8 +240,8 @@ export default function GSTClient() {
               <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
                 <li className="flex gap-2"><span className="mt-1 shrink-0 text-orange-500">•</span><span><strong>CGST + SGST:</strong> Intra-state supply. Rate is split equally (e.g., 18% = 9% CGST + 9% SGST).</span></li>
                 <li className="flex gap-2"><span className="mt-1 shrink-0 text-orange-500">•</span><span><strong>IGST:</strong> Inter-state supply. Full rate is charged as IGST.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-orange-500">•</span><span><strong>HSN/SAC Code:</strong> Determines the exact GST rate. Wrong code means penalties.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-orange-500">•</span><span><strong>Input Tax Credit (ITC):</strong> Claim credit for GST paid, assuming your supplier files returns.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-orange-500">•</span><span><strong>HSN/SAC:</strong> This page does not look up a code or a penalty.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-orange-500">•</span><span><strong>Input tax credit:</strong> The result is not reduced by credit from another invoice.</span></li>
               </ul>
             </div>
 
@@ -249,13 +250,13 @@ export default function GSTClient() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600">
                   <Clock size={20} />
                 </div>
-                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Deadlines & Penalties</h3>
+                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">What is not calculated</h3>
               </div>
               <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>GSTR-1 (Sales):</strong> Due by 11th of next month. Late fee: ₹50/day.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>GSTR-3B:</strong> Due by 20th of next month. Interest at 18% p.a. on unpaid tax.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Annual Return (GSTR-9):</strong> Due by Dec 31. Audit needed if turnover &gt; ₹5 crore.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>E-Invoice:</strong> Mandatory for turnover above ₹5 crore via IRP portal.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Return dates:</strong> GSTR-1, GSTR-3B, and GSTR-9 due dates are not shown.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Late fees:</strong> The page does not add a daily fee or 18% interest.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Turnover tests:</strong> A ₹5 crore audit or e-invoice rule is not applied.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Print:</strong> The button calls window.print(). It does not file a return.</span></li>
               </ul>
             </div>
 
@@ -264,17 +265,17 @@ export default function GSTClient() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
                   <Lightbulb size={20} />
                 </div>
-                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Pro Compliance Tips</h3>
+                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Limits of the result</h3>
               </div>
               <div className="grid gap-4 md:grid-cols-2">
                 <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-amber-500">✅</span><span><strong>Composition Scheme:</strong> If turnover &lt; ₹1.5Cr, pay flat 1–6% tax with simpler filing (no ITC).</span></li>
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-amber-500">✅</span><span><strong>Reconcile 2A/2B:</strong> Mismatches are the #1 reason for ITC rejection. Always reconcile.</span></li>
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-amber-500">✅</span><span><strong>Keep Invoices:</strong> Maintain all records for 6 years (GST audit limit).</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-amber-500">•</span><span><strong>One rate:</strong> The selected percent applies to the whole amount.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-amber-500">•</span><span><strong>Equal split:</strong> Intra-state CGST and SGST are each half of the tax.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-amber-500">•</span><span><strong>No cess:</strong> A compensation cess is not added.</span></li>
                 </ul>
                 <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-amber-500">✅</span><span><strong>Freelancers:</strong> Registration needed only if turnover &gt; ₹20L (or ₹10L for NE states).</span></li>
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-amber-500">✅</span><span><strong>Compliant Software:</strong> Use standard software to reduce manual error risk.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-amber-500">•</span><span><strong>Checkbox only:</strong> The inter-state box chooses IGST or an equal CGST and SGST split. It does not look up a place of supply.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-amber-500">•</span><span><strong>Planning figure:</strong> The numbers are not a GST return.</span></li>
                 </ul>
               </div>
             </div>
@@ -284,26 +285,26 @@ export default function GSTClient() {
         <RelatedTools currentToolId="gst-calculator" categoryId="finance" />
 
         <SEOSection 
-          title="GST Online: Reverse Charge Mechanism & Tax Computation 2026"
-          description={`The Goods and Services Tax (GST) is a comprehensive, destination-based tax. Our GST online calculator for India 2026 helps businesses and accountants calculate GST on services India seamlessly, supporting the Reverse Charge Mechanism (RCM) for accurate tax filing and invoice generation.
+          title="GST inclusive and exclusive calculation"
+          description={`GST is a percentage of taxable value. An exclusive price adds the tax on top. An inclusive price already contains the tax. An inter-state supply uses IGST. An intra-state supply splits the same rate into CGST and SGST.
 
-One of the most common challenges in GST is distinguishing between GST-inclusive and GST-exclusive prices. An inclusive price means the tax is already part of the total amount shown to the consumer, while an exclusive price means the tax will be added on top of the base cost. Our advanced calculator handles both scenarios seamlessly. Whether you are a retailer trying to extract the tax component from your daily sales or a service provider calculating the total billable amount for a client, this tool provides the precision you need.
+Exclusive tax is amount × rate ÷ 100. Inclusive tax removes the tax already inside the total: base = total ÷ (1 + rate ÷ 100), and tax = total − base. A ₹1,000 amount at 18% exclusive is ₹180 of tax and a ₹1,180 total. The same ₹1,180 marked inclusive is a ₹1,000 base and ₹180 of tax. Intra-state supply splits that ₹180 into ₹90 CGST and ₹90 SGST. Inter-state supply shows the ₹180 as IGST.
 
-Beyond just basic calculation, our tool serves as an educational resource to understand the different tax slabs (typically 5%, 12%, 18%, and 28%). Different products and services fall into different categories, and knowing how these rates impact your profit margins is essential for competitive pricing. By using our unified tax engine, you can ensure your business accounting stays robust, minimize the risk of manual errors, and better manage your cash flow for quarterly tax payments.`}
+The rate buttons are 5%, 12%, 18%, and 28%. Any other rate can be typed. The page does not apply reverse charge, input tax credit, or a state-specific cess.`}
           howToUse={[
-            "Select the appropriate mode: 'Tax Exclusive' to add tax to a base price, or 'Tax Inclusive' to find the base price from a total.",
-            "Enter the Principal Amount in your local currency.",
-            "Choose a standard tax slab (5%, 12%, 18%, 28%) or input a custom percentage rate.",
-            "Review the detailed breakdown, including the Net Amount, the GST Amount, and the Final Total.",
-            "Verify the calculation against your invoice or purchase receipt for total accuracy.",
-            "Use the 'Download Tax Invoice' button to generate a quick summary for your records."
+            "Choose Tax Exclusive to add tax to a base amount, or Tax Inclusive to remove tax from a total.",
+            "Enter the amount in rupees.",
+            "Choose 5%, 12%, 18%, or 28%, or type another rate.",
+            "Leave the inter-state box unchecked for an equal CGST and SGST split. Check it to show the whole tax as IGST.",
+            "Read the base, the tax, and the total.",
+            "Print this calculation opens the browser print dialog for the figures on the page."
           ]}
           benefits={[
-            "Compliance Accuracy: Ensure your tax calculations align with government standards.",
-            "Seamless Invoicing: Quickly calculate the tax component for both B2B and B2C transactions.",
-            "Error Elimination: Avoid costly manual mistakes in GST filings and accounting books.",
-            "Transparency: Clearly understand the tax burden being passed on to the consumer.",
-            "Versatility: Suitable for freelancers, small business owners, and large corporations alike."
+            "Exclusive and inclusive amounts use the two formulas above.",
+            "CGST and SGST are each half of the tax. IGST is the full tax.",
+            "A custom rate is accepted in addition to the four preset buttons.",
+            "Print this calculation opens the browser print dialog.",
+            "Reverse charge and input tax credit are not calculated."
           ]}
         />
         <FAQSchema faqs={GST_FAQS} />

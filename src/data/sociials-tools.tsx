@@ -26,7 +26,7 @@ export const TOOLS: Tool[] = [
     },
     {
         title: "Instagram Bio Generator",
-        description: "Create stylish text for your Instagram bio.",
+        description: "Creates styled text for an Instagram bio.",
         href: "/tools/instagram-bio-generator",
         icon: Instagram,
         category: "Social",
@@ -44,7 +44,7 @@ export const TOOLS: Tool[] = [
     // Finance
     {
         title: "SIP Calculator",
-        description: "Visualize mutual fund returns with compound interest.",
+        description: "Compounds a monthly amount. ₹5,000 for 10 years at 12% finishes near ₹11.6 lakh.",
         href: "/tools/sip-calculator",
         icon: TrendingUp,
         category: "Finance",
@@ -52,14 +52,14 @@ export const TOOLS: Tool[] = [
     },
     {
         title: "EMI Calculator",
-        description: "Plan loan repayments with detailed precision.",
+        description: "Monthly principal-and-interest payment. Tax and insurance are not included.",
         href: "/tools/emi-calculator",
         icon: DollarSign,
         category: "Finance"
     },
     {
         title: "GST Calculator",
-        description: "Inclusive/Exclusive GST calculations.",
+        description: "Exclusive and inclusive GST. ₹1,000 at 18% exclusive is ₹1,180.",
         href: "/tools/gst-calculator",
         icon: DollarSign,
         category: "Finance",
@@ -67,7 +67,7 @@ export const TOOLS: Tool[] = [
     },
     {
         title: "Income Tax Calculator",
-        description: "New Regime Tax Estimator (FY 24-25).",
+        description: "Compares Indian old and new regimes. The 2026 new-regime rebate is ₹12,00,000.",
         href: "/tools/income-tax-calculator",
         icon: IndianRupee,
         category: "Finance"
@@ -88,7 +88,7 @@ export const TOOLS: Tool[] = [
     },
     {
         title: "Compound Interest",
-        description: "Calculate SIP and Lumpsum returns.",
+        description: "Compounds one principal daily, monthly, quarterly, or yearly. No recurring deposits.",
         href: "/tools/compound-interest-calculator",
         icon: TrendingUp,
         category: "Finance"
@@ -107,7 +107,7 @@ export const TOOLS: Tool[] = [
     // Media
     {
         title: "Image Compressor",
-        description: "Compress PNG/JPG/WebP images locally.",
+        description: "Reads a JPEG, PNG, or WebP and saves a JPEG.",
         href: "/tools/image-compressor",
         icon: ImageIcon,
         category: "Media",
@@ -115,14 +115,14 @@ export const TOOLS: Tool[] = [
     },
     {
         title: "Audio Converter",
-        description: "Convert MP3, WAV, AAC, OGG in-browser.",
+        description: "Loads FFmpeg from unpkg, then converts the selected audio format in the page. The file is not uploaded.",
         href: "/tools/audio-converter",
         icon: Music,
         category: "Media"
     },
     {
         title: "Image Converter",
-        description: "Convert images to PNG, JPG, or WebP locally.",
+        description: "Draws an image on a canvas and saves PNG, JPEG, or WebP. The file is not uploaded.",
         href: "/tools/image-converter",
         icon: ImageIcon,
         category: "Media"
@@ -139,7 +139,7 @@ export const TOOLS: Tool[] = [
     // PDF
     {
         title: "Image to PDF",
-        description: "Combine multiple images into a PDF.",
+        description: "Places images into a PDF with pdf-lib in the browser.",
         href: "/tools/image-to-pdf",
         icon: FileText,
         category: "PDF",
@@ -147,21 +147,21 @@ export const TOOLS: Tool[] = [
     },
     {
         title: "PDF Merger",
-        description: "Combine multiple PDF files.",
+        description: "Combines PDFs with pdf-lib in the browser.",
         href: "/tools/pdf-merger",
         icon: FileText,
         category: "PDF"
     },
     {
         title: "PDF Splitter",
-        description: "Extract pages from a PDF.",
+        description: "Copies selected PDF pages with pdf-lib in the browser.",
         href: "/tools/pdf-splitter",
         icon: FileText,
         category: "PDF"
     },
     {
         title: "PDF to Image",
-        description: "Convert PDF pages to PNG.",
+        description: "Renders up to 30 PDF pages as PNG or JPEG.",
         href: "/tools/pdf-to-image",
         icon: ImageIcon,
         category: "PDF"
@@ -177,14 +177,14 @@ export const TOOLS: Tool[] = [
     },
     {
         title: "Percentage Calculator",
-        description: "X% of Y, Percentage change, etc.",
+        description: "Finds P% of a number, or what percent one number is of another.",
         href: "/tools/percentage-calculator",
         icon: Percent,
         category: "Math"
     },
     {
         title: "Age Calculator",
-        description: "Exact age in years, months, days.",
+        description: "Age in years, months, and days from a date of birth and today's local date.",
         href: "/tools/age-calculator",
         icon: Calendar,
         category: "Utility",
@@ -206,7 +206,7 @@ export const TOOLS: Tool[] = [
     },
     {
         title: "Unit Converter",
-        description: "Convert length, weight, temperature, and more.",
+        description: "Converts length, mass, temperature, or data within one category.",
         href: "/tools/unit-converter",
         icon: ArrowRightLeft,
         category: "Utility",
@@ -224,7 +224,7 @@ export const TOOLS: Tool[] = [
     // Developer
     {
         title: "JSON Formatter",
-        description: "Validate, beautify, and minify JSON.",
+        description: "Pretty-prints JSON with 2 or 4 spaces, minifies it, and can emit YAML or TypeScript.",
         href: "/tools/json-formatter",
         icon: FileText,
         category: "Developer",
@@ -232,28 +232,28 @@ export const TOOLS: Tool[] = [
     },
     {
         title: "UUID Generator",
-        description: "Generate random v4 UUIDs.",
+        description: "Creates version 4 UUIDs with crypto.randomUUID.",
         href: "/tools/uuid-generator",
         icon: FileCode,
         category: "Developer"
     },
     {
         title: "Base64 Converter",
-        description: "Encode and decode Base64 strings.",
+        description: "Encodes and decodes Base64. It is not encryption.",
         href: "/tools/base64-converter",
         icon: ArrowRightLeft,
         category: "Developer"
     },
     {
         title: "URL Encoder",
-        description: "URL Encode/Decode strings.",
+        description: "Encodes and decodes with encodeURIComponent.",
         href: "/tools/url-converter",
         icon: Link,
         category: "Developer"
     },
     {
         title: "Snowflake Parser",
-        description: "Extract Discord ID creation dates.",
+        description: "Shifts a Discord snowflake 22 bits and adds the 2015 Discord epoch. The id is not sent to Discord.",
         href: "/tools/snowflakes",
         icon: Cat,
         category: "Developer"
@@ -281,7 +281,7 @@ export const TOOLS: Tool[] = [
     },
     {
         title: "Regex Tester",
-        description: "Test regular expressions instantly.",
+        description: "Tests a JavaScript regular expression and lists matches.",
         href: "/tools/regex-tester",
         icon: Search,
         category: "Developer"
@@ -352,7 +352,7 @@ export const TOOLS: Tool[] = [
     },
     {
         title: "JWT Decoder",
-        description: "Decode and inspect JSON Web Tokens.",
+        description: "Decodes a JWT header and payload. HS256 can be checked with a secret.",
         href: "/tools/jwt-decoder",
         icon: FileCode,
         category: "Security",
@@ -368,14 +368,14 @@ export const TOOLS: Tool[] = [
     // Image Resizer moved to Media
     {
         title: "Color Converter",
-        description: "Translate HEX, RGB, and HSL colors.",
+        description: "Converts among hex, RGB, and HSL.",
         href: "/tools/color-converter",
         icon: Palette,
         category: "Design"
     },
     {
         title: "Lorem Ipsum",
-        description: "Generate placeholder text for designs.",
+        description: "Writes a chosen number of lorem ipsum words, sentences, or paragraphs.",
         href: "/tools/lorem-ipsum",
         icon: AlignLeft,
         category: "Writing"
@@ -389,7 +389,7 @@ export const TOOLS: Tool[] = [
     },
     {
         title: "Password Generator",
-        description: "Create secure, random passwords instantly.",
+        description: "Builds a password with Math.random from the selected sets. The default length is 16.",
         href: "/tools/password-generator",
         icon: Hash,
         category: "Security",
@@ -405,7 +405,7 @@ export const TOOLS: Tool[] = [
     },
     {
         title: "Word Counter",
-        description: "Count words, characters, sentences, and paragraphs.",
+        description: "Counts words, characters, sentences, paragraphs, and reading time.",
         href: "/tools/word-counter",
         icon: AlignLeft,
         category: "Writing",
@@ -413,7 +413,7 @@ export const TOOLS: Tool[] = [
     },
     {
         title: "Hash Generator",
-        description: "Generate MD5, SHA-1, SHA-256 hashes instantly.",
+        description: "Computes SHA-1, SHA-256, SHA-384, and SHA-512. MD5 is not included.",
         href: "/tools/hash-generator",
         icon: Hash,
         category: "Security"
@@ -427,21 +427,21 @@ export const TOOLS: Tool[] = [
     },
     {
         title: "Meta Tag Generator",
-        description: "Create SEO meta tags for your website.",
+        description: "Creates title, description, and social meta tags for a page.",
         href: "/tools/meta-tag-generator",
         icon: FileCode,
         category: "Developer"
     },
     {
         title: "Timestamp Converter",
-        description: "Convert Unix timestamps to human-readable dates.",
+        description: "Converts Unix seconds or milliseconds to a date, and a date back to Unix time.",
         href: "/tools/timestamp-converter",
         icon: Clock,
         category: "Developer"
     },
     {
         title: "Cron Job Generator",
-        description: "Visualize and check cron schedules.",
+        description: "Builds a five-field cron expression and lists the next five runs.",
         href: "/tools/cron-job-generator",
         icon: Clock,
         category: "Developer",
@@ -464,7 +464,7 @@ export const TOOLS: Tool[] = [
     },
     {
         title: "JSON to CSV",
-        description: "Convert JSON data to CSV format.",
+        description: "Converts a headered CSV to JSON, or an array of objects to CSV.",
         href: "/tools/json-to-csv",
         icon: Table,
         category: "Developer"

@@ -4,14 +4,14 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "Terms of Service | Legal Framework",
-  description: "Read the terms and conditions for using Toolioz. Understand your rights and responsibilities when using our free utility tools.",
+  description: "States the terms for using Toolioz finance, developer, PDF, and biodata utilities, including liability limits.",
   keywords: 'Terms of service, legal usage agreement, tool usage terms',
   alternates: {
     canonical: 'https://toolioz.com/terms',
   },
   openGraph: {
     title: 'Terms & Conditions of Usage | Toolioz',
-    description: 'Standard legal terms for accessing our free professional utility suite.',
+    description: 'States the terms for using Toolioz finance, developer, PDF, and biodata utilities, including liability limits.',
     url: 'https://toolioz.com/terms',
     type: 'website',
   }

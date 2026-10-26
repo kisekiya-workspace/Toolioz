@@ -2,27 +2,19 @@ import React from 'react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import CompoundInterestClient from './CompoundInterestClient';
 import type { Metadata } from 'next';
-import { buildCalculatorJsonLd } from '@/lib/seo';
+import { buildCalculatorJsonLd, buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: "Compound Interest Calculator 2026 | Rule of 72 & Wealth Planner",
-  description: "Calculate compound interest with monthly/daily compounding. Learn the Rule of 72, wealth building secrets, and how to beat inflation with the power of compounding in 2026.",
-  keywords: 'compound interest calculator with monthly contributions, rule of 72 calculator india, daily compounding interest tool, wealth building secrets 2026, power of compounding examples, compound interest vs simple interest, effective annual rate calculator, monthly investment growth estimator, financial freedom calculator',
-  alternates: {
-    canonical: 'https://toolioz.com/finance/compound-interest',
-  },
-  openGraph: {
-    title: 'Compound Interest Calculator 2026 — The 8th Wonder of the World | Toolioz',
-    description: 'Master the power of compounding. Calculate future wealth, learn the rule of 72, and get pro tips on frequency and consistency.',
-    url: 'https://toolioz.com/finance/compound-interest',
-    type: 'website',
-  }
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Compound Interest Calculator',
+  description: 'Calculates future value with annual, quarterly, monthly, or daily compounding from A = P(1 + r/n)^(nt).',
+  path: '/finance/compound-interest',
+  keywords: 'compound interest calculator, rule of 72, daily compounding, monthly compounding, future value',
+});
 
 export default function CompoundInterestPage() {
   const jsonLd = buildCalculatorJsonLd({
     name: "Compound Interest Calculator",
-    description: "Calculate compound interest with daily, monthly, and annual compounding frequencies.",
+    description: "Future value is A = P(1 + r/n)^(nt) for annual, quarterly, monthly, or daily compounding.",
     path: "/finance/compound-interest",
     applicationCategory: "FinanceApplication",
   });

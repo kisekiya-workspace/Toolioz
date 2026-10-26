@@ -83,7 +83,7 @@ export default function MetaTagGeneratorPage() {
         <div className="container px-6 py-12 m-auto max-w-[1400px]">
             <ToolHeader
                 title="Meta Tag Generator"
-                description="Generate SEO-friendly meta tags with live Google and Social Media previews."
+                description="Writes title, description, and Open Graph meta tags and shows a search and social preview."
             />
 
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-16">

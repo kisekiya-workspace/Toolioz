@@ -43,7 +43,7 @@ import {
 import { NEW_DEV_TOOLS, NEW_PDF_TOOLS } from '@/lib/new-tool-catalog';
 import { ADSENSE_INDEX_TOOL_IDS, ADSENSE_NOINDEX_HOWTO_SLUGS } from '@/lib/adsense-catalog';
 import { TOOLS as LEGACY_TOOLS } from '@/data/sociials-tools';
-import { canonicalToolPath, PAUSED_TOOL_PATHS, TOOL_ALIASES, WITHHELD_TOOL_PATHS } from '@/lib/tool-routes';
+import { canonicalToolPath, CHANGING_RULES_NOINDEX_PATHS, PAUSED_TOOL_PATHS, TOOL_ALIASES, WITHHELD_TOOL_PATHS } from '@/lib/tool-routes';
 
 export type Category = 'finance' | 'devtools' | 'design' | 'pdftools' | 'biodata' | 'utility';
 
@@ -75,7 +75,7 @@ export const TOOLS: Tool[] = [
   {
     id: 'compound-interest',
     title: 'Compound Interest',
-    desc: 'Calculate how your money grows over time with interest compounding.',
+    desc: 'Future value with daily, monthly, quarterly, or annual compounding.',
     icon: TrendingUp,
     href: '/finance/compound-interest',
     color: '#3b82f6',
@@ -85,7 +85,7 @@ export const TOOLS: Tool[] = [
   {
     id: 'mortgage-calculator',
     title: 'Mortgage Calc',
-    desc: 'Estimate your monthly mortgage payments and total interest.',
+    desc: 'Monthly mortgage payment, total interest, and payoff for a balance, rate, and term.',
     icon: HomeIcon,
     href: '/finance/mortgage-calculator',
     color: '#0ea5e9',
@@ -141,7 +141,7 @@ export const TOOLS: Tool[] = [
   {
     id: 'savings-goal',
     title: 'Savings Goal',
-    desc: 'Find out how much you need to save each month to hit your target.',
+    desc: 'Monthly deposit that grows a balance to a target by a deadline.',
     icon: PiggyBank,
     href: '/finance/savings-goal',
     color: '#f59e0b',
@@ -150,7 +150,7 @@ export const TOOLS: Tool[] = [
   {
     id: 'retirement-corpus',
     title: 'Retirement Corpus',
-    desc: 'Estimate the corpus you need to retire comfortably after inflation.',
+    desc: 'Corpus that can fund inflation-adjusted spending for a chosen number of years.',
     icon: Target,
     href: '/finance/retirement-corpus',
     color: '#d97706',
@@ -160,7 +160,7 @@ export const TOOLS: Tool[] = [
   {
     id: 'inflation-calculator',
     title: 'Inflation Calc',
-    desc: 'See how inflation affects the purchasing power of your money.',
+    desc: 'Future price and purchasing-power change after a chosen inflation rate and number of years.',
     icon: Landmark,
     href: '/finance/inflation-calculator',
     color: '#ef4444',
@@ -169,7 +169,7 @@ export const TOOLS: Tool[] = [
   {
     id: 'loan-prepayment',
     title: 'Loan Prepayment',
-    desc: 'See how extra EMI payments shorten your loan and save interest.',
+    desc: 'Interest saved and months removed when an extra EMI or principal payment is applied.',
     icon: TrendingDown,
     href: '/finance/loan-prepayment',
     color: '#dc2626',
@@ -179,7 +179,7 @@ export const TOOLS: Tool[] = [
   {
     id: 'car-loan',
     title: 'Car Loan EMI',
-    desc: 'Calculate monthly installments for your dream vehicle.',
+    desc: 'Reducing-balance car-loan EMI, total interest, and total amount payable.',
     icon: Car,
     href: '/finance/car-loan',
     color: '#06b6d4',
@@ -208,7 +208,7 @@ export const TOOLS: Tool[] = [
   {
     id: 'itr-json-to-computation-pdf',
     title: 'ITR JSON to Computation PDF',
-    desc: 'Turn an ITR JSON export into a printable income-tax computation PDF without uploading data.',
+    desc: 'Reads ITR-1 through ITR-4 summary fields from JSON and builds a computation PDF. The JSON is not uploaded.',
     icon: FileText,
     href: '/finance/itr-json-to-computation-pdf',
     color: '#b45309',
@@ -292,7 +292,7 @@ export const TOOLS: Tool[] = [
   {
     id: 'json-formatter',
     title: 'JSON Formatter',
-    desc: 'Prettify, validate, and minify your JSON data instantly.',
+    desc: 'Formats, validates, and minifies JSON, and can emit YAML or TypeScript.',
     icon: Code,
     href: '/devtools/json-formatter',
     color: '#f59e0b',
@@ -500,7 +500,7 @@ export const TOOLS: Tool[] = [
   {
     id: 'merge-pdf',
     title: 'PDF Merge Tool',
-    desc: 'Combine multiple PDF files into one document in your browser with zero server uploads.',
+    desc: 'Combines PDF files in the chosen order. The files stay in the browser.',
     icon: FileText,
     href: '/pdftools/merge-pdf',
     color: '#ef4444',
@@ -510,7 +510,7 @@ export const TOOLS: Tool[] = [
   {
     id: 'pdf-to-image',
     title: 'PDF to Image Converter',
-    desc: 'Convert PDF pages into high-resolution PNG or JPG images directly in your browser.',
+    desc: 'Renders each PDF page as a PNG or JPEG in the browser.',
     icon: FileSearch,
     href: '/pdftools/pdf-to-image',
     color: '#f97316',
@@ -520,7 +520,7 @@ export const TOOLS: Tool[] = [
   {
     id: 'image-to-pdf',
     title: 'Image to PDF Converter',
-    desc: 'Convert JPG, PNG, and WebP images into a single PDF document in your browser.',
+    desc: 'Combines JPG, PNG, and WebP images into one PDF in the browser.',
     icon: ImagePlus,
     href: '/pdftools/image-to-pdf',
     color: '#10b981',
@@ -530,7 +530,7 @@ export const TOOLS: Tool[] = [
   {
     id: 'split-pdf',
     title: 'Split PDF & Extract Pages',
-    desc: 'Extract specific pages or page ranges from PDF files with zero server uploads.',
+    desc: 'Extracts selected pages or ranges with pdf-lib. The PDF is not uploaded.',
     icon: Scissors,
     href: '/pdftools/split-pdf',
     color: '#8b5cf6',
@@ -595,7 +595,7 @@ const restoredLegacyTools: Tool[] = LEGACY_TOOLS
 
 /** One discoverable entry per task. Visibility is independent of advertising approval. */
 export const PUBLIC_TOOLS: Tool[] = Array.from(new Map([...TOOLS, ...restoredLegacyTools]
-  .filter(tool => !TOOL_ALIASES[tool.href] && !PAUSED_TOOL_PATHS.has(tool.href) && !WITHHELD_TOOL_PATHS.has(tool.href))
+  .filter(tool => !TOOL_ALIASES[tool.href] && !PAUSED_TOOL_PATHS.has(tool.href) && !WITHHELD_TOOL_PATHS.has(tool.href) && !CHANGING_RULES_NOINDEX_PATHS.has(tool.href))
   .map(tool => {
     const canonical = canonicalToolPath(tool.href);
     return [canonical, { ...tool, href: canonical }] as const;
@@ -633,7 +633,7 @@ export function isLowValuePublisherPath(pathname: string): boolean {
     const slug = path.slice('/how-to/'.length);
     if (ADSENSE_NOINDEX_HOWTO_SLUGS.has(slug)) return true;
   }
-  if (TOOL_ALIASES[path] || PAUSED_TOOL_PATHS.has(path) || WITHHELD_TOOL_PATHS.has(path)) return true;
+  if (TOOL_ALIASES[path] || PAUSED_TOOL_PATHS.has(path) || WITHHELD_TOOL_PATHS.has(path) || CHANGING_RULES_NOINDEX_PATHS.has(path)) return true;
   return isToolPagePath(path) && !INDEXABLE_TOOL_PATHS.has(path);
 }
 

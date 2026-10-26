@@ -122,7 +122,7 @@ export default function CSSButtonGeneratorPage() {
                     </div>
                     <div>
                         <h1 className="text-3xl font-bold">CSS Button Generator</h1>
-                        <p className="text-muted-foreground">18 trending button styles with live hover preview</p>
+                        <p className="text-muted-foreground">A button style is padding, color, radius, and shadow. This page previews a style and copies the CSS.</p>
                     </div>
                 </div>
 

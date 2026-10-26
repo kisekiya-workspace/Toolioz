@@ -9,6 +9,18 @@ import {
   chmodFromBits,
   contrastRatio,
   csvToJson,
+  csvToKml,
+  csvToMarkdownTable,
+  geoJsonToKml,
+  gpxToKml,
+  jsonToTypeScript,
+  kmlToGpx,
+  ndjsonToCsv,
+  shiftSubtitleTime,
+  srtToVtt,
+  subtitleToPlainText,
+  vttToSrt,
+  xmlToCsv,
   decodeHtmlEntities,
   encodeHtmlEntities,
   jsonToCsv,
@@ -99,6 +111,9 @@ export default function ExtraWorkbenchClient({ tool }: { tool: NewToolDefinition
   const [error, setError] = useState('');
   const [htmlDirection, setHtmlDirection] = useState<'encode' | 'decode'>('encode');
   const [csvDirection, setCsvDirection] = useState<'csv-json' | 'json-csv'>('csv-json');
+  const [subDirection, setSubDirection] = useState<'srt-vtt' | 'vtt-srt'>('srt-vtt');
+  const [gpxDirection, setGpxDirection] = useState<'gpx-kml' | 'kml-gpx'>('gpx-kml');
+  const [shiftMs, setShiftMs] = useState(1000);
   const [bits, setBits] = useState<PermissionBits>(DEFAULT_CHMOD_BITS);
   const [octalDraft, setOctalDraft] = useState('755');
   const [foreground, setForeground] = useState('#111111');
@@ -146,6 +161,26 @@ export default function ExtraWorkbenchClient({ tool }: { tool: NewToolDefinition
         setOutput(slugify(input));
       } else if (mode === 'csv-json') {
         setOutput(csvDirection === 'csv-json' ? csvToJson(input) : jsonToCsv(input));
+      } else if (mode === 'csv-markdown') {
+        setOutput(csvToMarkdownTable(input));
+      } else if (mode === 'ndjson-csv') {
+        setOutput(ndjsonToCsv(input));
+      } else if (mode === 'xml-csv') {
+        setOutput(xmlToCsv(input));
+      } else if (mode === 'json-ts') {
+        setOutput(jsonToTypeScript(input));
+      } else if (mode === 'srt-vtt') {
+        setOutput(subDirection === 'srt-vtt' ? srtToVtt(input) : vttToSrt(input));
+      } else if (mode === 'subtitle-text') {
+        setOutput(subtitleToPlainText(input));
+      } else if (mode === 'subtitle-shift') {
+        setOutput(shiftSubtitleTime(input, shiftMs));
+      } else if (mode === 'gpx-kml') {
+        setOutput(gpxDirection === 'gpx-kml' ? gpxToKml(input) : kmlToGpx(input));
+      } else if (mode === 'geojson-kml') {
+        setOutput(geoJsonToKml(input));
+      } else if (mode === 'csv-kml') {
+        setOutput(csvToKml(input));
       }
     } catch (cause) {
       setOutput('');
@@ -255,6 +290,30 @@ export default function ExtraWorkbenchClient({ tool }: { tool: NewToolDefinition
             <button className={csvDirection === 'json-csv' ? primaryButtonClass : secondaryButtonClass} type="button" onClick={() => setCsvDirection('json-csv')}>JSON → CSV</button>
           </div>
         )}
+        {mode === 'srt-vtt' && (
+          <div className="flex flex-wrap gap-2">
+            <button className={subDirection === 'srt-vtt' ? primaryButtonClass : secondaryButtonClass} type="button" onClick={() => setSubDirection('srt-vtt')}>SRT → WebVTT</button>
+            <button className={subDirection === 'vtt-srt' ? primaryButtonClass : secondaryButtonClass} type="button" onClick={() => setSubDirection('vtt-srt')}>WebVTT → SRT</button>
+          </div>
+        )}
+        {mode === 'gpx-kml' && (
+          <div className="flex flex-wrap gap-2">
+            <button className={gpxDirection === 'gpx-kml' ? primaryButtonClass : secondaryButtonClass} type="button" onClick={() => setGpxDirection('gpx-kml')}>GPX → KML</button>
+            <button className={gpxDirection === 'kml-gpx' ? primaryButtonClass : secondaryButtonClass} type="button" onClick={() => setGpxDirection('kml-gpx')}>KML → GPX</button>
+          </div>
+        )}
+        {mode === 'subtitle-shift' && (
+          <label className="block text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+            Timing Offset (Milliseconds) — positive delays, negative advances
+            <input
+              type="number"
+              step="100"
+              className={`${fieldClass} mt-1`}
+              value={shiftMs}
+              onChange={(e) => setShiftMs(Number(e.target.value) || 0)}
+            />
+          </label>
+        )}
         <label className="block text-sm font-bold">
           Input
           <textarea className={`${areaClass} mt-2`} value={input} onChange={(event) => setInput(event.target.value)} />
@@ -263,7 +322,32 @@ export default function ExtraWorkbenchClient({ tool }: { tool: NewToolDefinition
         <button className={primaryButtonClass} type="button" onClick={run}>
           <WandSparkles size={18} />Generate result
         </button>
-        <ResultBox value={output} filename={`${tool.slug}.txt`} />
+        <ResultBox
+          value={output}
+          filename={
+            mode === 'json-ts'
+              ? 'types.d.ts'
+              : mode === 'csv-markdown'
+              ? 'table.md'
+              : mode === 'ndjson-csv' || mode === 'xml-csv'
+              ? 'data.csv'
+              : mode === 'srt-vtt'
+              ? subDirection === 'srt-vtt'
+                ? 'subtitles.vtt'
+                : 'subtitles.srt'
+              : mode === 'subtitle-text'
+              ? 'transcript.txt'
+              : mode === 'subtitle-shift'
+              ? 'shifted-subtitles.srt'
+              : mode === 'gpx-kml'
+              ? gpxDirection === 'gpx-kml'
+                ? 'track.kml'
+                : 'track.gpx'
+              : mode === 'geojson-kml' || mode === 'csv-kml'
+              ? 'map.kml'
+              : `${tool.slug}.txt`
+          }
+        />
       </div>
     </ToolWorkbench>
   );

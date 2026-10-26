@@ -267,7 +267,7 @@ export default async function HowToDetailPage({ params }: HowToPageProps) {
                 {post.toolLabel}
               </h3>
               <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
-                Run this guide directly in your browser with 100% private processing.
+                Run this guide with the linked tool. Pages labelled local processing keep the file or text in the browser.
               </p>
             </div>
 

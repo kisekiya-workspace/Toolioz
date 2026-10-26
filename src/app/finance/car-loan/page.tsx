@@ -2,22 +2,14 @@ import React from 'react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import CarLoanClient from './CarLoanClient';
 import type { Metadata } from 'next';
-import { buildCalculatorJsonLd } from '@/lib/seo';
+import { buildCalculatorJsonLd, buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: "Car Loan EMI Calculator 2026 | Flat vs Reducing Rate | Total Cost",
-  description: "Calculate car loan EMI with real reducing balance rates. Know total interest cost, check 3-year vs 5-year tenure comparison, and get smart borrowing tips before buying.",
-  keywords: 'car loan emi calculator india 2026, flat rate vs reducing balance car loan, car loan interest rate comparison, car loan tips before buying, used car loan calculator, how much car loan can i afford, total cost of car loan calculator, car loan prepayment calculator, best car loan tenure 3 years vs 5 years',
-  alternates: {
-    canonical: 'https://toolioz.com/finance/car-loan',
-  },
-  openGraph: {
-    title: 'Car Loan EMI Calculator 2026 — Know Before You Borrow | Toolioz',
-    description: 'Calculate EMI, total interest, and get real tips on flat vs reducing rate, dealer traps, and CIBIL score impact.',
-    url: 'https://toolioz.com/finance/car-loan',
-    type: 'website',
-  }
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Car Loan EMI Calculator',
+  description: 'Calculates a reducing-balance car-loan EMI, total interest, and total payable from loan amount, rate, and tenure.',
+  path: '/finance/car-loan',
+  keywords: 'car loan emi calculator, reducing balance car loan, car loan interest calculator',
+});
 
 export default function CarLoanCalculatorPage() {
   const jsonLd = buildCalculatorJsonLd({

@@ -5,7 +5,7 @@ import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
   title: "Scientific Unit Converter & Global Measure Tool",
-  description: 'Fast, precise unit conversion for Length, Mass, Temperature, Volume, and Data. Scientific precision measurements for educational and engineering needs.',
+  description: 'Converts length, mass, temperature, volume, and data units with a stated formula for each conversion.',
   keywords: 'Unit converter online, scientific measurement tool, convert length weight volume, precise metric converter, temperature conversion tool',
   alternates: {
     canonical: 'https://toolioz.com/devtools/unit-converter',

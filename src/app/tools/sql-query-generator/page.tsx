@@ -352,14 +352,14 @@ export default function SqlQueryGeneratorPage() {
         <div className="container px-6 py-12 m-auto max-w-[1400px]">
             <ToolHeader
                 title="Interactive SQL Simulator"
-                description="Simulate real SQL queries with JOINS and DDL commands on a live mock database."
+                description="Builds a SELECT, JOIN, or DDL statement against a small sample database and shows the rows that statement returns."
             />
 
             <Alert className="mb-8 border-blue-200 bg-blue-50 dark:bg-blue-900/20">
                 <Info className="h-4 w-4 text-blue-600" />
                 <AlertTitle className="text-blue-800 dark:text-blue-300">Browser-Based Simulation</AlertTitle>
                 <AlertDescription className="text-blue-700 dark:text-blue-400 text-sm mt-1">
-                    This environment simulates a SQL database entirely in your browser using JavaScript.
+                    This page runs a small sample database in JavaScript. The statements are not sent to a server.
                     Data is strictly local, temporary, and resets on page reload.
                     It validates basic types (INT, DECIMAL) and simple constraints to help you learn SQL safely.
                 </AlertDescription>

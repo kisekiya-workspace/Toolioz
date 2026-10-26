@@ -42,8 +42,8 @@ export default function SnowflakeParserPage() {
     };
 
     const faq = [
-        { q: "What is a Snowflake ID?", a: "Discord uses unique 64-bit integers called 'Snowflakes' for all users, messages, channels, and guilds. These IDs contain the exact timestamp of when the object was created." },
-        { q: "Is this legal?", a: "Yes. This information is public metadata encoded directly into the ID. It does not access private account details." },
+        { q: "What is a Snowflake ID?", a: "This page treats the id as a Discord snowflake. The time is (id >> 22) + 1420070400000, then shown with toLocaleString(). Worker, process, and increment bits are not displayed." },
+        { q: "Does the page contact Discord?", a: "No. The page only does that arithmetic in the browser. It does not call Discord or read an account." },
         { q: "How do I find an ID?", a: "Turn on 'Developer Mode' in Discord Settings > Advanced, then right-click any user or message and select 'Copy ID'." }
     ];
 
@@ -51,7 +51,7 @@ export default function SnowflakeParserPage() {
         <div className="container px-6 py-12 m-auto">
             <ToolHeader
                 title="Discord Snowflake Parser"
-                description="Reveal the exact account creation date of any Discord user, server, or message instantly."
+                description="Reads a Discord snowflake and shows the time encoded in that id."
             />
 
             <div className="max-w-2xl mx-auto mb-16 space-y-8">
@@ -98,11 +98,10 @@ export default function SnowflakeParserPage() {
             </div>
 
             <div className="max-w-4xl mx-auto space-y-8">
-                <ToolContentSection title="Digital Forensics Made Easy">
+                <ToolContentSection title="What the parser reads">
                     <p>
                         Ever wondered when a Discord server was created or how old a user account is?
-                        Because Discord generates IDs chronologically, you can mathematically prove the exact millisecond an account was made.
-                        This is useful for verifying account age ("veteran status") or checking for suspicious new accounts.
+                        Because Discord stores a timestamp in a snowflake, this page can read that time. It shifts the id 22 bits and adds 1420070400000, then shows the result in the browser's local timezone. It does not call Discord.
                     </p>
                 </ToolContentSection>
 
@@ -121,9 +120,7 @@ export default function SnowflakeParserPage() {
 
                 <ToolContentSection title="Why Twitter & Discord use Snowflakes">
                     <p>
-                        Distributed systems like Discord need to generate unique IDs across thousands of servers simultaneously without coordinating with a central database
-                        (which would be too slow). By using the current time as the primary component of the ID, servers can generate IDs independently that are
-                        guaranteed to be unique and roughly sorted by creation time. This technique was originally pioneered by Twitter.
+                        Discord documents snowflakes as 64-bit ids that include a timestamp. This page only decodes that timestamp. It does not check that an id is unique, and it does not generate one.
                     </p>
                 </ToolContentSection>
 

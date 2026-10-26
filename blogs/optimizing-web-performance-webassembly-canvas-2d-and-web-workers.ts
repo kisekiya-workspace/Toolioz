@@ -1,8 +1,8 @@
 export const blog = {
   slug: 'optimizing-web-performance-webassembly-canvas-2d-and-web-workers',
-  title: 'High-Performance Web Engineering: WebAssembly, Canvas 2D Acceleration & Multi-Threaded Web Workers',
+  title: 'WebAssembly, canvas, and workers',
   description:
-    'A 2,500+ word masterclass on modern web performance engineering: WebAssembly vs JavaScript V8 JIT compilation, multi-threaded Web Workers, zero-copy Transferable Objects, Canvas 2D TypedArrays, and OffscreenCanvas GPU acceleration.',
+    'Explains WebAssembly, web workers, transferable objects, and canvas pixel buffers for in-browser image work.',
   keywords: [
     'webassembly canvas 2d image processing performance',
     'multi threaded web workers browser optimization',

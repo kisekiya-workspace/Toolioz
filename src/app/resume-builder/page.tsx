@@ -6,9 +6,9 @@ import ResumeGeneratorClient from '@/app/pdftools/resume-generator/ResumeGenerat
 import { Footer } from '@/components/layout/Footer';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Free ATS-Friendly Resume Builder | Vector PDF | Toolioz',
+  title: 'ATS Resume Builder',
   description:
-    'Create a professional, ATS-optimized vector PDF resume in minutes. Visual templates or LaTeX mode—free download, no signup.',
+    'Builds an ATS-oriented vector PDF resume from visual templates or LaTeX, with download and no account.',
   path: '/resume-builder',
   keywords: [
     'resume builder',

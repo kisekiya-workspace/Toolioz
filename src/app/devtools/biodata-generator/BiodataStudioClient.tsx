@@ -395,7 +395,7 @@ export default function BiodataStudioClient() {
           </Link>
           <span className="h-3.5 w-px bg-zinc-200" />
           <div className="min-w-0">
-            <p className="truncate text-[15px] font-medium">Biodata</p>
+            <p className="truncate text-[15px] font-medium" title="A marriage biodata is a one-page profile. This editor fills a template and downloads an A4 PDF. The form stays in this browser.">Marriage biodata</p>
             <p className="hidden truncate text-xs text-zinc-400 sm:block">{form.fullName.trim() || 'Untitled profile'}</p>
           </div>
         </div>

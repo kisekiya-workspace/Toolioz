@@ -405,7 +405,7 @@ export default function BiodataGeneratorClient() {
                 ))}
               </select>
               <p className="mt-2 text-xs leading-5 text-purple-800">
-                100% pixel-perfect match: preview and exported PDF render identically.
+                The preview is HTML. PNG export uses html-to-image at pixel ratio 3. PDF draws that PNG onto a 595.28 by 841.89 point page, so the PDF is not a separate vector render.
               </p>
             </div>
 

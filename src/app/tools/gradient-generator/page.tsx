@@ -252,7 +252,7 @@ export default function GradientGeneratorPage() {
             <JsonLd data={jsonLdData} />
             <ToolHeader
                 title="CSS Gradient Generator"
-                description="Design modern backgrounds. Switching from Classic Linear to trendy Mesh & Aurora gradients."
+                description="Builds a CSS linear, radial, or mesh gradient and copies the CSS."
             />
 
             <AdContainer slot="gradient-top" />
@@ -565,8 +565,8 @@ export default function GradientGeneratorPage() {
                     </p>
                 </ToolContentSection>
                 <ToolFAQ questions={[
-                    { q: "How do I implement this code?", a: "The generator copies a block of CSS including a container class and pseudo-elements (::before, ::after) to handle the blur and noise layers without affecting your content." },
-                    { q: "Why is the CSS so long?", a: "Valid Aurora effects require separating the color layer (which needs blurring) from the noise layer (which must be sharp). We use pseudo-elements to keep your HTML clean." }
+                    { q: "How is the generated CSS used?", a: "The copied CSS includes a container and ::before and ::after layers for the blur and the noise, so the page content is not blurred." },
+                    { q: "Why is the CSS long?", a: "The color layer is blurred and the noise layer stays sharp. Pseudo-elements keep those layers out of the page markup." }
                 ]} />
             </div>
 

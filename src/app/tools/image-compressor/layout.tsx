@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "Image Compressor",
-        "description": "Compress images (PNG, JPG, WebP) without losing quality.",
+        "description": "Reads a JPEG, PNG, or WebP and saves a JPEG. This address is an alias of the compressor.",
         "applicationCategory": "MultimediaApplication",
         "operatingSystem": "Any",
         "offers": {

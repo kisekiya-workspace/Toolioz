@@ -43,7 +43,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           id={inputId}
           type={type}
           className={cn(
-            "flex h-10 w-full rounded-[6px] bg-transparent px-3 py-1 text-sm font-normal ds-surface file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-[#8F8F8F] focus-visible:outline-[#005FCC] focus-visible:outline-1 disabled:cursor-not-allowed disabled:opacity-50",
+            "flex h-10 w-full rounded-[6px] bg-transparent px-3 py-1 text-sm font-normal shadow-[var(--ds-shadow-border)] file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-[#8F8F8F] focus-visible:outline-[#005FCC] focus-visible:outline-1 disabled:cursor-not-allowed disabled:opacity-50",
             leftAddon && "pl-9",
             suffix && "pr-9",
             mono && "font-mono text-xs",

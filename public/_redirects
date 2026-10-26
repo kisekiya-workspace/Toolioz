@@ -32,6 +32,8 @@
 /devtools/faq-schema-generator /devtools/schema-markup-generator 301
 /devtools/howto-schema-generator /devtools/schema-markup-generator 301
 /devtools/product-schema-generator /devtools/schema-markup-generator 301
+/tools/json-to-csv /devtools/csv-json-converter 301
+/tools/word-counter /tools/text-tools 301
 
 # Broken how-to shortcuts from older internal links
 /how-to-calculate-sip-returns /how-to/calculate-sip-returns 301

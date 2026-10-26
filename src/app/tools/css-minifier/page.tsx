@@ -36,15 +36,15 @@ export default function CSSMinifierPage() {
     };
 
     const faq = [
-        { q: "Why minify CSS?", a: "Minification removes unnecessary characters like spaces, comments, and newlines. This reduces the file size, making your website load faster." },
-        { q: "Is this safe?", a: "Yes, this tool strictly removes formatting bytes. It does not alter your actual styles or logic." },
+        { q: "Why minify CSS?", a: "Minification removes comments and extra whitespace so the stylesheet is smaller to download." },
+        { q: "Is this safe?", a: "The minifier removes formatting characters. It does not rewrite selectors or property values." },
     ];
 
     return (
         <div className="container px-6 py-12 m-auto">
             <ToolHeader
                 title="CSS Minifier"
-                description="Compress your CSS code to reduce file size and improve page load speed."
+                description="Removes CSS comments and extra whitespace and reports the smaller file size."
             />
 
             <div className="max-w-6xl mx-auto mb-16 grid grid-cols-1 lg:grid-cols-2 gap-8">

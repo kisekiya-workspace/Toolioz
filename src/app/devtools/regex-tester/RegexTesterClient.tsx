@@ -92,10 +92,10 @@ ${mode === 'replace' ? `\nconst subst = \`${replaceString}\`;\nconst result = st
                             </span>
                         </div>
                         <h1 className="text-3xl font-extrabold tracking-tight text-zinc-950 sm:text-4xl md:text-5xl dark:text-zinc-50">
-                            Advanced RegExp Engine
+                            Regular Expression Tester
                         </h1>
                         <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-                            Debug patterns, run complex replacements, and generate exportable code instantly.
+                            A JavaScript regular expression is tested against sample text. Parentheses become capture groups, and $1 and $2 insert those groups into a replacement.
                         </p>
                     </div>
                 </header>
@@ -134,7 +134,7 @@ ${mode === 'replace' ? `\nconst subst = \`${replaceString}\`;\nconst result = st
 
                                 {mode === 'replace' && (
                                     <div className="mt-4 flex flex-wrap items-center gap-2 rounded-md border border-white/10 bg-[#0f172a] px-4 py-2 focus-within:border-[#3b82f6]">
-                                        <span className="font-['Fira_Code',monospace] text-2xl font-semibold text-[#94a3b8]" style={{ fontSize: '1rem', marginRight: '1rem', color: '#64748b' }}>Replace with: </span>
+                                        <span className="mr-4 font-['Fira_Code',monospace] text-base font-semibold text-slate-500">Replace with: </span>
                                         <input
                                             type="text"
                                             className="flex-1 bg-transparent font-['Fira_Code',monospace] text-lg font-semibold text-[#3b82f6] outline-none"
@@ -196,7 +196,7 @@ ${mode === 'replace' ? `\nconst subst = \`${replaceString}\`;\nconst result = st
                                                 <h3 className="text-lg font-extrabold">Substitution Result</h3>
                                             </div>
                                             <div className="min-h-[200px] w-full whitespace-pre-wrap break-all rounded-md border border-[var(--border)] bg-[#1e293b] p-6 font-['Fira_Code',monospace] text-[0.9375rem] leading-relaxed text-[#e2e8f0]">
-                                                {replacedOutput || <span style={{ opacity: 0.5 }}>(Empty result)</span>}
+                                                {replacedOutput || <span className="opacity-50">(Empty result)</span>}
                                             </div>
                                         </div>
                                     )}
@@ -232,31 +232,31 @@ ${mode === 'replace' ? `\nconst subst = \`${replaceString}\`;\nconst result = st
                 </section>
 
                 <SEOSection
-                    title="Live RegExp Replace Engine & Capture Group Tester"
-                    description="Build, test, debug, and execute complex Regular Expressions with string substitution support online. Extract data into capture groups and natively generate implementation code snippets in Javascript."
+                    title="How the regular expression tester works"
+                    description="A JavaScript regular expression is tested against sample text in the page. Parentheses become capture groups, and a replacement string can insert those groups with $1 and $2."
                     howToUse={[
-                        "Enter your regex pattern between the forward slashes (e.g. '([A-Z])\\w+').",
-                        "Toggle to 'Replace Formatter' mode to test $1, $2 capture group substitutions dynamically.",
-                        "Switch to 'Code Generator' to instantly export the backend code needed to execute your exact regex scenario natively.",
-                        "Scroll down to cleanly review arrays of extracted matches and highly specific index tracking positions."
+                        "The pattern and the flags g, i, m, and s are passed to new RegExp.",
+                        "Replace mode calls String.replace. $1 and $2 insert capture groups.",
+                        "The code button copies a JavaScript snippet. It does not emit Python or another language.",
+                        "Each match lists the full match and the numbered groups."
                     ]}
                     benefits={[
-                        "Dynamic Replacements: Visualize what your Regex substitute string will yield before committing it to a database parser.",
-                        "Code Generation: Immediately maps out valid Javascript regex loops and execution states ready for copy-pasting.",
-                        "Capture Groups Analysis: Dissects `$1`, `$2` bindings in a highly scalable card array interface.",
-                        "Strict Security Privacy: Guaranteed zero-server payload evaluation using strictly ECMA browser evaluation engines."
+                        "Replacement uses the browser String.replace.",
+                        "The copied loop moves lastIndex when a match is empty.",
+                        "Groups are the strings from the match array.",
+                        "The test runs in the page. The page still loads site assets."
                     ]}
                 />
 
-                <section className="container section" style={{ padding: '2rem 0 6rem' }}>
-                    <Card style={{ padding: '3rem', background: 'var(--bg-secondary)', border: 'none' }}>
-                        <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1.5rem', color: 'var(--text-primary)' }}>Regex Replacement Syntax Explained</h2>
-                        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1.5rem', fontSize: '1.05rem' }}>
-                            A massive capability of our <strong>Regex Replacement Tester</strong> includes execution of native Javascript substitution strings. When your regex contains parentheses `( )`, it automatically captures that sub-string into memory. You can then toggle to <strong>Replace Formatter</strong> mode and use `$1`, `$2`, or `$3` in the substitution input to inject those specific captured words directly into a completely new formatted string.
+                <section className="container py-8 pb-24">
+                    <Card className="border-0 bg-secondary p-8 sm:p-12">
+                        <h2 className="mb-6 text-2xl font-extrabold text-foreground sm:text-3xl">How does a regex replacement use captured groups?</h2>
+                        <p className="mb-6 text-base leading-relaxed text-secondary-foreground/80">
+                            Parentheses store part of a match as $1, $2, and so on. The replacement string writes those groups into the result, which is how a pattern can rearrange text instead of only finding it.
                         </p>
-                        <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1.5rem', color: 'var(--text-primary)' }}>Why Export Generated Code?</h2>
-                        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1.5rem', fontSize: '1.05rem' }}>
-                            Writing comprehensive Regular Expressions is famously difficult, but implementing them cleanly inside web infrastructure can be worse. The native `RegExp.exec()` while loop in JavaScript is notoriously prone to infinite loops if flags are managed incorrectly (specifically the `global` incrementor). Our <strong>Code Generator toggle</strong> automatically provisions the exact, crash-proof while-loop sequence you need for deep production execution!
+                        <h2 className="mb-6 text-2xl font-extrabold text-foreground sm:text-3xl">Why does the exported loop advance lastIndex?</h2>
+                        <p className="mb-6 text-base leading-relaxed text-secondary-foreground/80">
+                            A global RegExp.exec loop must move lastIndex after every match. The generated snippet does that, which avoids the empty-match loop a hand-written exec loop can hit.
                         </p>
                     </Card>
                 </section>

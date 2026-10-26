@@ -68,7 +68,7 @@ export default function DiffCheckerPage() {
                     </div>
                     <div>
                         <h1 className="text-3xl font-bold">Diff Checker</h1>
-                        <p className="text-muted-foreground">Compare two texts and find differences</p>
+                        <p className="text-muted-foreground">A diff lists lines that were added or removed between two texts.</p>
                     </div>
                 </div>
 

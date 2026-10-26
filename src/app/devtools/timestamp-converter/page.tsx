@@ -3,7 +3,7 @@ import { JSONLD } from '@/components/ui/JSONLD';
 import TimestampConverterClient from './TimestampConverterClient';
 
 export const metadata: Metadata = {
-  title: 'Unix Timestamp Converter | Seconds, Milliseconds & Date Time',
+  title: 'Unix Timestamp Converter',
   description:
     'Convert Unix timestamps into readable dates or turn date strings back into epoch seconds and milliseconds.',
   keywords: [

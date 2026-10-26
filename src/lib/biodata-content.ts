@@ -40,21 +40,21 @@ export const biodataFaqs = [
   {
     question: 'Which biodata templates are available?',
     answer:
-      'Toolioz offers six curated templates: Modern Split, Classic Centered, Minimalist, Hindu Traditional, Islamic Elegant, and Sikh Heritage — each with a polished PDF export that matches the on-screen preview.',
+      'There are 16 named templates. The communities are Hindu, Muslim, Sikh, Gujarati, and universal. There is no separate Christian template.',
   },
   {
     question: 'Is user data safe and private?',
     answer:
-      'Data is processed directly in browser RAM and optional local storage. Personal details and photos are never uploaded to remote servers, ensuring 100% data confidentiality.',
+      'The form is saved in this browser under the keys biodata_form and biodata_template. The PDF is not uploaded by the maker. The page still loads ordinary assets.',
   },
   {
-    question: 'Can I add a profile photo to the marriage biodata?',
+    question: 'Can a profile photo be added?',
     answer:
-      'Yes. Users can upload a photo directly from their device. The generator includes cropping and framing tools designed for standard passport-style portrait placement.',
+      'Yes. A photo can be chosen from the device and cropped for the portrait. The maker does not upload that photo.',
   },
   {
-    question: 'Can I edit the biodata after downloading?',
+    question: 'Can the biodata be edited after a download?',
     answer:
-      'Yes. Because draft progress is preserved locally in the browser, users can return at any time to update contact details, horoscope fields, or career information.',
+      'The draft stays in this browser in localStorage, so the form can be changed and downloaded again. Editing the downloaded PDF is a separate step.',
   },
 ];

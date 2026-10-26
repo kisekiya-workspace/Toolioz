@@ -121,10 +121,10 @@ export default function UrlEncoderClient() {
                             </span>
                         </div>
                         <h1 className="text-3xl font-extrabold tracking-tight text-zinc-950 sm:text-4xl md:text-5xl dark:text-zinc-50">
-                            Visual URL Builder & Encoder
+                            URL Encoder
                         </h1>
                         <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-                            Parse, manipulate query strings visually, and encode components securely.
+                            Percent-encoding writes an unsafe character as % plus two hex digits. This page encodes text, decodes it, and splits a URL into its parts.
                         </p>
                     </div>
                 </header>
@@ -254,7 +254,7 @@ export default function UrlEncoderClient() {
 
                 <SEOSection
                     title="Visual URL Builder & Base64 Encoder Online"
-                    description="A powerful utility for web engineers. Visually build URLs with a dynamic query mapping table, instantly encode raw strings to safely pass through network payloads, or decode malformed URLs cleanly."
+                    description="Percent-encoding writes a character outside the URL-safe set as a percent sign plus two hex digits. This page encodes text, decodes it, and splits a URL into its parts."
                     howToUse={[
                         "Use the URL Builder mode to paste a full URL. It will automatically detect and parse out the query parameters (?key=value) into a manageable grid.",
                         "Add, edit or remove custom parameters; the tool handles URL Percent-Encoding for spaces and symbols natively.",
@@ -264,20 +264,20 @@ export default function UrlEncoderClient() {
                     benefits={[
                         "Forget manual '?&=' syntax errors when crafting API endpoints by hand.",
                         "Prevents percent-encoding bugs when injecting symbols (spaces, commas, plusses) in the browser.",
-                        "100% locally evaluated Javascript APIs (URL interface, encodeURIComponent). No logs sent to server.",
+                        "Encoding uses the URL and encodeURIComponent APIs in the page. The text is not uploaded.",
                         "Unified GUI for developers dealing with REST APIs, webhooks, and deep links."
                     ]}
                 />
 
-                <section className="container section" style={{ padding: '2rem 0 6rem' }}>
-                    <Card style={{ padding: '3rem', background: 'var(--bg-secondary)', border: 'none' }}>
-                        <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1.5rem', color: 'var(--text-primary)' }}>Why Use a Visual URL Parser?</h2>
-                        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1.5rem', fontSize: '1.05rem' }}>
-                            Modern API architectures demand precisely formatted deep links and network payloads. Instead of trying to parse out where `%20` starts and `%3D` ends, our <strong>Visual URL Parser</strong> decompiles the URL mathematically into readable rows, allowing developers to immediately analyze data, inject proper payloads, and avoid notorious errors related to unhandled spaces and symbols natively.
+                <section className="container py-8 pb-24">
+                    <Card className="border-0 bg-secondary p-8 sm:p-12">
+                        <h2 className="mb-6 text-2xl font-extrabold text-foreground sm:text-3xl">What does a visual URL parser show?</h2>
+                        <p className="mb-6 text-base leading-relaxed text-secondary-foreground/80">
+                            A visual parser splits a URL into protocol, host, path, and query parameters so percent-encoded characters can be read as text before the link is sent.
                         </p>
-                        <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '1.5rem', color: 'var(--text-primary)' }}>Understanding Percent-Encoding</h2>
-                        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1.5rem', fontSize: '1.05rem' }}>
-                            <strong>URL Encoding</strong> (often called Percent-Encoding) is a mechanism for safely encoding information in a Uniform Resource Identifier (URI). Because URLs can only be sent over the Internet using the US-ASCII character set, unsafe ASCII characters must be translated. Our decoder quickly flips string like `%40` back to `@` protecting your production systems from parser crashes.
+                        <h2 className="mb-6 text-2xl font-extrabold text-foreground sm:text-3xl">What is percent-encoding?</h2>
+                        <p className="mb-6 text-base leading-relaxed text-secondary-foreground/80">
+                            Percent-encoding writes a character outside the URL-safe set as a percent sign plus two hex digits. %40 is @ and %20 is a space.
                         </p>
                     </Card>
                 </section>

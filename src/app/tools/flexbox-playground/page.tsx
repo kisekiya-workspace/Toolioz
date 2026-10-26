@@ -111,8 +111,8 @@ ${items.map(item => `.item-${item.id} {
     return (
         <div className="container px-4 py-8 m-auto max-w-[1400px]">
             <ToolHeader
-                title="Advanced Flexbox Playground"
-                description="Master CSS Flexbox with this powerful interactive layout generator."
+                title="Flexbox Playground"
+                description="Interactive Flexbox layout: direction, wrap, alignment, gap, and per-item grow, shrink, and basis."
             />
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-16">
@@ -120,16 +120,14 @@ ${items.map(item => `.item-${item.id} {
                 <div className="lg:col-span-8 order-2 lg:order-1 flex flex-col gap-4">
                     <div className="bg-muted/30 rounded-xl border-dashed border-2 border-border p-4 relative h-[600px] overflow-auto">
                         <div
-                            className="bg-background border w-full min-h-full rounded-lg transition-all duration-300"
+                            className="flex w-full min-h-full rounded-lg border bg-background p-6 transition-all duration-300"
                             style={{
-                                display: 'flex',
                                 flexDirection: flexDirection as any,
-                                justifyContent: justifyContent,
-                                alignItems: alignItems,
-                                alignContent: alignContent,
+                                justifyContent,
+                                alignItems,
+                                alignContent,
                                 flexWrap: flexWrap as any,
                                 gap: `${gap[0]}px`,
-                                padding: '24px'
                             }}
                         >
                             {items.map((item) => (

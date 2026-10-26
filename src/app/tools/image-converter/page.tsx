@@ -53,16 +53,16 @@ export default function ImageConverterPage() {
     };
 
     const faq = [
-        { q: "Is it safe to upload my images?", a: "ABSOLUTELY. Your images never leave your computer. The conversion happens entirely in your browser using the Canvas API. No data is sent to any server." },
-        { q: "What formats can I convert to?", a: "Currently, we support converting to PNG, JPEG, and WebP formats. More formats like AVIF are processed if your browser supports them." },
-        { q: "Is there a limit on file size?", a: "Since it runs on your device, the limit depends on your browser's memory and performance. We recommend files under 20MB for the best experience." }
+        { q: "Does conversion upload the image?", a: "No. The canvas in the browser converts the image. The file is not sent to a server." },
+        { q: "Which formats can be produced?", a: "The menu is PNG, JPEG, and WebP. toDataURL is called with no quality argument, so JPEG and WebP use the browser default, usually 0.92." },
+        { q: "Is there a file-size limit?", a: "The page does not set a byte limit. The canvas uses the decoded image width and height, so the limit is the memory available to the tab." },
     ];
 
     return (
         <div className="container px-6 py-12 m-auto">
             <ToolHeader
                 title="Image Converter"
-                description="Fast, private, and high-quality image conversion. Convert your photos to PNG, JPG, or WebP without uploading them to any server."
+                description="Converts photos to PNG, JPG, or WebP in the browser, without uploading the file."
             />
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
@@ -94,8 +94,8 @@ export default function ImageConverterPage() {
                                         <Upload size={32} />
                                     </div>
                                     <div>
-                                        <p className="text-lg font-semibold italic">Click to upload or drag & drop</p>
-                                        <p className="text-sm text-muted-foreground">Supports PNG, JPG, WebP, SVG, AVIF</p>
+                                        <p className="text-lg font-semibold italic">Choose an image file</p>
+                                        <p className="text-sm text-muted-foreground">Input is any image the browser can decode. Output is PNG, JPEG, or WebP.</p>
                                     </div>
                                 </div>
                             )}
@@ -166,49 +166,38 @@ export default function ImageConverterPage() {
 
             {/* SEO CONTENT SECTION */}
             <div className="max-w-4xl mx-auto space-y-4">
-                <ToolContentSection title="How to convert images for free">
+                <ToolContentSection title="How the conversion runs">
                     <p>
-                        Our online image converter provides a professional-grade experience without the need for expensive software like Photoshop.
-                        Follow these simple steps:
+                        The page draws the image onto a canvas at the decoded pixel width and height, then calls canvas.toDataURL with the selected type and no quality argument.
                     </p>
                     <ol className="list-decimal pl-6 space-y-3 mt-4">
-                        <li><strong>Upload:</strong> Click the upload box or drag your image file directly onto the page.</li>
-                        <li><strong>Select Format:</strong> Choose your desired output format (PNG, JPG, or WebP) from the dropdown menu.</li>
-                        <li><strong>Convert:</strong> Hit the "Convert Now" button. The processing happens in milliseconds locally on your device.</li>
-                        <li><strong>Download:</strong> Once finished, click the download button to save your new file.</li>
+                        <li><strong>File:</strong> The file input accepts an image and keeps it in the page.</li>
+                        <li><strong>Format:</strong> The menu is PNG, JPEG, or WebP.</li>
+                        <li><strong>Convert:</strong> The canvas is painted and encoded in the browser. The page does not time that step.</li>
+                        <li><strong>Download:</strong> The download name is converted-image plus the chosen extension.</li>
                     </ol>
                 </ToolContentSection>
 
-                <ToolContentSection title="Privacy-First Image Processing: Why it matters">
+                <ToolContentSection title="Where the conversion runs">
                     <p>
-                        Most online converters require you to upload your files to their cloud servers. This poses significant risks:
-                    </p>
-                    <ul className="list-disc pl-6 space-y-2 mt-4 mb-4">
-                        <li>Your personal photos could be stored indefinitely.</li>
-                        <li>Unencrypted uploads can be intercepted.</li>
-                        <li>Large files take a long time to upload on slow connections.</li>
-                    </ul>
-                    <p>
-                        <strong>ToolBox is different.</strong> We use the WebAssembly and Canvas APIs to process images 100% locally.
-                        This means the data never leaves your device's memory. The conversion speed is limited only by your own processor, making it instant for most files.
+                        The image is drawn to a canvas in the browser and saved in the chosen format. The file is not uploaded. The page still loads site assets. Speed depends on the image size and the device.
                     </p>
                 </ToolContentSection>
 
-                <ToolContentSection title="Image Formats Explained">
-                    <h4 className="font-bold mt-4">JPEG (Joint Photographic Experts Group)</h4>
+                <ToolContentSection title="What each format does here">
+                    <h4 className="font-bold mt-4">JPEG</h4>
                     <p>
-                        Best for photographs and realistic images with smooth variations of tone and color. It uses lossy compression, which means it sacrifices some quality for smaller file sizes.
+                        canvas.toDataURL(&apos;image/jpeg&apos;) is called with no quality argument. The browser default is usually 0.92. The page does not compare the result with the original file.
                     </p>
 
-                    <h4 className="font-bold mt-4">PNG (Portable Network Graphics)</h4>
+                    <h4 className="font-bold mt-4">PNG</h4>
                     <p>
-                        Ideal for images that require transparency or text sharpness (like screenshots and logos). It uses lossless compression, preserving every pixel perfectly, but file sizes are generally larger.
+                        canvas.toDataURL(&apos;image/png&apos;) is lossless for the pixels drawn on the canvas. A color profile and EXIF are not copied.
                     </p>
 
-                    <h4 className="font-bold mt-4">WebP (Modern Web Format)</h4>
+                    <h4 className="font-bold mt-4">WebP</h4>
                     <p>
-                        Developed by Google, WebP provides superior lossless and lossy compression for images on the web.
-                        WebP lossless images are 26% smaller in size compared to PNGs. WebP lossy images are 25-34% smaller than comparable JPEG images.
+                        canvas.toDataURL(&apos;image/webp&apos;) is called with no quality argument. The page does not measure a percentage smaller than PNG or JPEG.
                     </p>
                 </ToolContentSection>
 

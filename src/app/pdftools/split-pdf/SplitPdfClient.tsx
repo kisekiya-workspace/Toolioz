@@ -29,7 +29,7 @@ const FAQS = [
   {
     question: 'Is my PDF uploaded to external servers?',
     answer:
-      'No. The page extraction and PDF splitting happen 100% locally in your web browser memory using pdf-lib. No bytes leave your device.',
+      'No. Pages are copied with pdf-lib in the browser. The PDF is not uploaded.',
   },
   {
     question: 'Can I split password-protected PDFs?',
@@ -146,13 +146,13 @@ export default function SplitPdfClient() {
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <header className="mb-5 text-center">
           <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-cyan-800">
-            <ShieldCheck className="w-3.5 h-3.5" /> 100% Client-Side In-Browser Extraction
+            <ShieldCheck className="w-3.5 h-3.5" /> Extraction stays in this tab
           </div>
           <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
             Split PDF & Extract Pages
           </h1>
           <p className="mx-auto mt-2 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
-            Extract specific pages or page ranges into a separate PDF file. Zero server uploads.
+            Selected pages or a page range are copied into a new PDF. The document is not uploaded.
           </p>
         </header>
 
@@ -263,7 +263,7 @@ export default function SplitPdfClient() {
 
         <SEOSection
           title="PDF Page Extraction & Splitting"
-          description="Splitting confidential documents like legal contracts, tax records, or bank statements should never require uploading files to external server pipelines. Toolioz extracts pages in your browser using JavaScript and pdf-lib. No external server transfers occur, keeping your data secure."
+          description="Copies selected PDF pages into a new PDF. The document stays in the browser."
           howToUse={[
             "Upload your target PDF document.",
             "Enter the page numbers or page ranges you wish to extract (e.g. 1-3, 5).",
@@ -271,7 +271,7 @@ export default function SplitPdfClient() {
             "Click 'Download Extracted PDF' to save your output file."
           ]}
           benefits={[
-            "100% private client-side extraction with zero cloud uploads.",
+            "Selected pages are copied in the browser. The PDF is not uploaded.",
             "Extract individual pages or custom page ranges effortlessly.",
             "Preserves vector fonts, layout structure, and document quality.",
             "Fast processing for PDF documents up to 200MB."

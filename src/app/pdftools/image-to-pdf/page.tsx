@@ -4,9 +4,9 @@ import { JSONLD } from '@/components/ui/JSONLD';
 import ImageToPdfClient from './ImageToPdfClient';
 
 export const metadata: Metadata = {
-  title: "Image to PDF Converter | Convert JPG/PNG to PDF Online",
+  title: "Image to PDF Converter",
   description:
-    'Convert JPG, PNG, and WebP images into a single PDF document free in your browser. 100% client-side processing with zero server uploads.',
+    'Combines JPG, PNG, and WebP images into one PDF, with conversion kept in the browser.',
   keywords: [
     'image to pdf converter',
     'convert jpg to pdf online free',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Image to PDF Converter | Toolioz',
-    description: 'Convert JPG/PNG photos into a clean PDF file locally in your browser.',
+    description: 'Combines JPG, PNG, and WebP images into one PDF in the browser.',
     url: 'https://toolioz.com/pdftools/image-to-pdf',
     type: 'website',
     images: ['/tooliozLogo.png'],
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Image to PDF Converter | Toolioz',
-    description: 'Convert images to PDF locally in your browser with zero server uploads.',
+    description: 'Converts images to a PDF in the browser without uploading the files.',
     images: ['/tooliozLogo.png'],
   },
 };

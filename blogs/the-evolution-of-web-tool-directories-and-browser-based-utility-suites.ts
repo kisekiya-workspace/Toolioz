@@ -1,8 +1,8 @@
 export const blog = {
   slug: 'the-evolution-of-web-tool-directories-and-browser-based-utility-suites',
-  title: 'The Evolution of Web Tool Directories: How All-in-One Browser Suites Are Replacing Native Software',
+  title: 'How browser tool directories work',
   description:
-    'A 2,500+ word masterclass on web utility software evolution: desktop software pain points vs zero-install client web suites, directory categorizations, UX design principles, modular architecture, and Progressive Web App productivity.',
+    'Explains how a browser tool directory groups calculators, developer utilities, and PDF tools without an install.',
   keywords: [
     'all in one browser tools directory 2026',
     'best free online utility tools suite no install',

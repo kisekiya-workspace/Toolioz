@@ -7,7 +7,7 @@ import { buildCalculatorJsonLd, buildPageMetadata } from '@/lib/seo';
 export const metadata = buildPageMetadata({
   title: 'Marriage Biodata Maker — Live Editor, PDF Download',
   description:
-    'Make a marriage biodata in the browser. Pick a template, fill your details, preview A4, and download a PDF. Nothing is uploaded.',
+    'Builds an A4 PDF by embedding a PNG of the preview at pixel ratio 3 on a 595.28×841.89 point page.',
   path: '/biodata',
   keywords: biodataKeywords,
 });
@@ -19,9 +19,9 @@ export default function BiodataPage() {
     name: 'How to create a marriage biodata PDF',
     description: 'Choose a template, fill the form, preview A4, and download a PDF.',
     step: [
-      { '@type': 'HowToStep', name: 'Choose a template', text: 'Pick a Hindu, Muslim, Sikh, classic, or modern A4 layout.' },
+      { '@type': 'HowToStep', name: 'Choose a template', text: 'There are 16 named templates. Communities are Hindu, Muslim, Sikh, Gujarati, and universal.' },
       { '@type': 'HowToStep', name: 'Fill details', text: 'Add photo, personal, family, and optional horoscope fields. Empty fields stay off the page.' },
-      { '@type': 'HowToStep', name: 'Download', text: 'Check the live preview, then save a PDF or PNG.' },
+      { '@type': 'HowToStep', name: 'Download', text: 'PNG uses html-to-image at pixel ratio 3. PDF places that PNG on a 595.28 by 841.89 point page.' },
     ],
   };
 
@@ -54,6 +54,7 @@ export default function BiodataPage() {
       <JSONLD data={howToJsonLd} />
       <JSONLD data={faqJsonLd} />
       <h1 className="sr-only">Marriage biodata maker</h1>
+      <p className="sr-only">A marriage biodata is a one-page profile. This editor fills a template and downloads an A4 PDF. The form stays in this browser.</p>
       <BiodataStudioClient />
     </>
   );

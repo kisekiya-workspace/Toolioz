@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "Image Converter",
-        "description": "Convert images between JPG, PNG, WebP, and other formats.",
+        "description": "Draws an image on a canvas and saves PNG, JPEG, or WebP. The file is not uploaded.",
         "applicationCategory": "MultimediaApplication",
         "operatingSystem": "Any",
         "offers": {

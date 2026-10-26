@@ -61,7 +61,7 @@ export default function TimeZoneConverterPage() {
         <div className="container px-6 py-12 m-auto">
             <ToolHeader
                 title="Time Zone Converter"
-                description="Convert date and time across different time zones instantly."
+                description="Converts a date and time from one time zone to another."
             />
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">

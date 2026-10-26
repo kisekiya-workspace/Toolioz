@@ -280,6 +280,7 @@ export default function ResumeGeneratorClient() {
             <h1 className="truncate text-base font-black tracking-[-0.03em] text-zinc-950 sm:text-lg dark:text-zinc-50">
               ATS Resume Editor
             </h1>
+            <p className="sr-only">An ATS resume is a text-based PDF. This editor fills a visual template or LaTeX and downloads the PDF in the browser. No account is required.</p>
             <div className="flex shrink-0 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-0.5">
               <button
                 type="button"

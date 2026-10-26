@@ -13,11 +13,16 @@ export default function TextToolsPage() {
     const [text, setText] = useState("");
     const [copied, setCopied] = useState(false);
 
+    const trimmed = text.trim();
+    const words = trimmed === "" ? 0 : trimmed.split(/\s+/).length;
     const stats = {
         chars: text.length,
-        words: text.trim() === "" ? 0 : text.trim().split(/\s+/).length,
-        sentences: text.trim() === "" ? 0 : text.split(/[.!?]+/).filter(Boolean).length,
-        lines: text.trim() === "" ? 0 : text.split(/\r\n|\r|\n/).length,
+        charsNoSpaces: text.replace(/\s/g, "").length,
+        words,
+        sentences: trimmed === "" ? 0 : trimmed.split(/[.!?]+/).filter(Boolean).length,
+        lines: trimmed === "" ? 0 : text.split(/\r\n|\r|\n/).length,
+        paragraphs: trimmed === "" ? 0 : trimmed.split(/\n\s*\n/).filter((part) => part.trim()).length,
+        readingMinutes: words === 0 ? 0 : Math.ceil(words / 200),
     };
 
     const transform = (type: string) => {
@@ -41,16 +46,16 @@ export default function TextToolsPage() {
     };
 
     const faq = [
-        { q: "Is there a limit to how much text I can process?", a: "No practical limit. Since the processing happens on your device, it can handle even very large documents (hundreds of pages) instantly." },
-        { q: "Can I use this for coding text?", a: "Yes, the 'Clean Spaces' function is especially useful for cleaning up messy code or formatting scraped text from the web." },
-        { q: "Is my text private?", a: "100%. Your text is never sent to our servers. It stays in your browser's memory until you close the tab." }
+        { q: "Is there a limit to how much text can be processed?", a: "There is no fixed limit. Processing runs on the device, including long documents." },
+        { q: "Can this clean code or scraped text?", a: "Clean Spaces collapses repeated whitespace in code or text copied from a web page." },
+        { q: "Is the text private?", a: "The text stays in the browser tab. It is not uploaded." }
     ];
 
     return (
         <div className="container px-6 py-12 m-auto">
             <ToolHeader
                 title="Text Transformer & Analyzer"
-                description="A versatile set of tools to clean, format, and analyze your text. Perfect for writers, developers, and students."
+                description="Changes case, cleans extra spaces, and counts words, characters, sentences, paragraphs, and reading time."
             />
 
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-16">
@@ -110,9 +115,12 @@ export default function TextToolsPage() {
                             <div className="space-y-4">
                                 {[
                                     { label: "Characters", val: stats.chars },
+                                    { label: "No spaces", val: stats.charsNoSpaces },
                                     { label: "Words", val: stats.words },
                                     { label: "Sentences", val: stats.sentences },
-                                    { label: "Lines", val: stats.lines }
+                                    { label: "Lines", val: stats.lines },
+                                    { label: "Paragraphs", val: stats.paragraphs },
+                                    { label: "Reading time", val: `${stats.readingMinutes} min` }
                                 ].map((s) => (
                                     <div key={s.label} className="flex justify-between items-center border-b pb-2 last:border-0">
                                         <span className="text-muted-foreground">{s.label}</span>
@@ -126,10 +134,9 @@ export default function TextToolsPage() {
                     </Card>
 
                     <div className="p-6 bg-gradient-to-br from-primary/10 to-transparent rounded-2xl border-2 border-primary/20">
-                        <h4 className="font-bold text-primary mb-2 italic underline underline-offset-4">Why use this?</h4>
+                        <h4 className="font-bold text-primary mb-2">What the counters include</h4>
                         <p className="text-sm text-muted-foreground leading-relaxed">
-                            Use this tool to prepare content for social media, clean up messy transcriptions,
-                            or analyze the length of your essays and articles instantly.
+                            The panel counts characters, characters without spaces, words, sentences, lines, paragraphs, and an estimated reading time at 200 words a minute.
                         </p>
                     </div>
                 </div>
@@ -137,36 +144,29 @@ export default function TextToolsPage() {
 
             {/* SEO CONTENT SECTION */}
             <div className="max-w-4xl mx-auto space-y-4">
-                <ToolContentSection title="Professional Text Transformation Tool">
+                <ToolContentSection title="Case changes and word counts">
                     <p>
-                        In the digital age, text formatting can be a tedious task. Our Text Transformer simplifies this by providing
-                        one-click solutions for common editing needs. Whether you need to convert all-caps headlines into readable
-                        lowercase letters or want to capitalize every word for a formal title, our tool handles it with precision.
+                        Uppercase, lowercase, and title case rewrite the letters. Clean Spaces collapses repeated whitespace. The counts ignore leading and trailing space when splitting words.
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
                         <div className="space-y-2">
-                            <h4 className="font-bold">Accurate Word Counting</h4>
+                            <h4 className="font-bold">Word count</h4>
                             <p className="text-sm">
-                                Perfect for students and freelance writers who need to meet strict word count requirements.
-                                Our algorithm filters out extra spaces to provide an exact count of words, characters, and sentences.
+                                A word is a run of characters separated by whitespace. Extra spaces between words are not counted as extra words.
                             </p>
                         </div>
                         <div className="space-y-2">
-                            <h4 className="font-bold">Text Sanitization</h4>
+                            <h4 className="font-bold">Clean Spaces</h4>
                             <p className="text-sm">
-                                The 'Clean Spaces' feature removes double spaces, leading/trailing whitespace, and tabs,
-                                leaving you with a perfectly formatted block of text ready for publication.
+                                Clean Spaces replaces repeated spaces, tabs, and line-edge whitespace with a single space.
                             </p>
                         </div>
                     </div>
                 </ToolContentSection>
 
-                <ToolContentSection title="Privacy Matters">
+                <ToolContentSection title="Where the text is processed">
                     <p>
-                        Unlike many online "case converters" that log your input for data training or analytics,
-                        <strong>ToolBox treats your data as sacred.</strong> All processing is done via your browser's local JavaScript engine.
-                        When you type in our editor, the text never leaves your device's memory. This is the ultimate tool for
-                        processing sensitive documents or personal notes with complete peace of mind.
+                        Case changes and counts run in the browser tab. The text is not uploaded to Toolioz.
                     </p>
                 </ToolContentSection>
 

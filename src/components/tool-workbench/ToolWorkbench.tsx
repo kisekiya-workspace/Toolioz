@@ -38,7 +38,7 @@ export function ToolWorkbench({
       : 'Developer Utilities';
 
   return (
-    <div className="tool-workbench min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50 flex flex-col justify-between [--tool-accent:#0369a1] [--tool-accent-dark:#075985] [--tool-soft:#f4f7f8] [--tool-wash:#e8f0f3] [--tool-border:#d7e3e8] dark:[--tool-accent-dark:#bae6fd] dark:[--tool-soft:#111923] dark:[--tool-wash:#182330] dark:[--tool-border:#334155]">
       <div>
         {/* Standard Clean Hero Header */}
         <header className="bg-white pt-8 pb-6 text-center dark:bg-zinc-950">
@@ -75,7 +75,7 @@ export function ToolWorkbench({
               {
                 icon: CheckCircle2,
                 title: 'Inspect before sharing',
-                desc: 'Review the output and retain your original. Large files may take longer to process.',
+                desc: 'Review the output and keep the original file. Large files may take longer to process.',
               },
               {
                 icon: Sparkles,

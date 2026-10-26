@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { calculateInflation } from '@/lib/formulas';
-import { Info, Landmark, TrendingDown, AlertTriangle, ShieldCheck, BookOpen, Lightbulb, TrendingUp, Download } from 'lucide-react';
+import { Info, Landmark, TrendingDown, AlertTriangle, ShieldCheck, BookOpen, Lightbulb, TrendingUp, Printer } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
@@ -17,15 +17,15 @@ import { FAQSchema } from '@/components/ui/FAQSchema';
 const INFLATION_FAQS = [
   {
     question: "What is the formula for calculating future inflation cost?",
-    answer: "Future Cost = Current Cost * (1 + Inflation Rate)^Years. For example, ₹1,00,000 at 6% inflation over 10 years becomes ₹1,79,084."
+    answer: "Future cost = present amount × (1 + rate)^years. ₹1,00,000 at 6% for 10 years is about ₹1,79,085. The page starts at 5%, which makes the same amount about ₹1,62,889."
   },
   {
-    question: "What is Real Rate of Return?",
-    answer: "Real Rate of Return is your nominal investment return minus the inflation rate and tax drag. If your FD yields 7% but inflation is 6% and tax is 30%, your real return is negative."
+    question: "Does this calculator subtract inflation from an investment return?",
+    answer: "No. It raises a present amount by (1 + rate)^years and also shows that amount divided by the same factor. A nominal return minus inflation is not calculated."
   },
   {
-    question: "Which asset classes beat inflation in India long term?",
-    answer: "Historically, Equity Mutual Funds (12-14% CAGR) and Real Estate (8-10% CAGR) beat retail CPI inflation (5-6% average) over 10+ year horizons."
+    question: "Does this page rank assets that beat inflation?",
+    answer: "No. Equity, real estate, gold, and savings-account returns are not inputs. The only rate used is the inflation percent entered on the page."
   }
 ];
 
@@ -54,9 +54,9 @@ export default function InflationClient() {
         <header className={styles.header}>
           <div className="container">
             <h1 className={styles.title}>Inflation Calculator 2026</h1>
-            <p className={styles.subtitle}>See how inflation erodes purchasing power and how much things will cost in the future.</p>
+            <p className={styles.subtitle}>Inflation raises a future price by multiplying the present amount by (1 + rate) for each year. The same formula shows how much purchasing power a present sum loses over that period.</p>
             <div className="mx-auto mt-6 max-w-[700px] rounded-lg border border-[#fbbf24] bg-[#fffbeb] px-4 py-3 text-left text-[0.8rem] leading-[1.6] text-[#92400e]">
-              <strong>⚠️ Disclaimer:</strong> Inflation rates are <strong>assumed averages</strong> and actual inflation varies year to year. This calculator is for <strong>assumption &amp; planning purposes only</strong>. India&apos;s CPI inflation has averaged ~5% over recent years; your actual experience may differ.
+              <strong>⚠️ Disclaimer:</strong> The 5% rate is an illustrative default. The same rate is applied every year. A measured CPI series is not loaded.
             </div>
           </div>
         </header>
@@ -108,8 +108,8 @@ export default function InflationClient() {
                   className={styles.btn}
                   onClick={() => window.print()}
                 >
-                  <Download className="mr-2 size-4" />
-                  Download Report
+                  <Printer className="mr-2 size-4" />
+                  Print this calculation
                 </Button>
               </Card>
 
@@ -126,9 +126,9 @@ export default function InflationClient() {
               </Card>
 
               <div className={styles.infoBox}>
-                <div className={styles.infoIcon} style={{ color: '#ef4444' }}><Info size={20} /></div>
+                <div className={`${styles.infoIcon} text-red-500`}><Info size={20} /></div>
                 <p className={styles.infoText}>
-                   Inflation is the rate at which the general level of prices for goods and services rises. India&apos;s CPI inflation has averaged around 5% over recent years, though it fluctuates. Your investments should aim to beat inflation for real wealth growth.
+                   ₹1,00,000 at 5% for 10 years becomes about ₹1,62,889. In today&apos;s prices, that ₹1,00,000 later buys about ₹61,391, a loss of about 38.6%.
                 </p>
               </div>
             </div>
@@ -143,23 +143,23 @@ export default function InflationClient() {
         <div className="mx-auto mt-12 max-w-[900px]">
           <Card className="!p-8 bg-[#fef2f2]">
             <h2 className="mb-6 text-[1.4rem] font-bold text-[#991b1b] flex items-center gap-2">
-              <ShieldCheck className="text-[#dc2626]" /> 💸 Inflation & Taxes (2026-27)
+              <ShieldCheck className="text-[#dc2626]" /> Two results from one rate
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
-                <h3 className="mb-3 text-[1.05rem] font-bold text-[#991b1b]">The Silent Wealth Tax</h3>
+                <h3 className="mb-3 text-[1.05rem] font-bold text-[#991b1b]">Future price</h3>
                 <ul className="flex flex-col gap-3 text-[0.875rem] leading-[1.6] text-[#991b1b]/80">
-                  <li><strong>Nominal vs Real:</strong> If you earn 10% interest but inflation is 6%, your real growth is 4%.</li>
-                  <li><strong>Double Taxation:</strong> You pay tax on the full 10%, even though 6% of it was just matching inflation. This effectively taxes your principal.</li>
-                  <li><strong>Indexation:</strong> Some assets (like real estate in certain regimes) allow "Indexation" to adjust your purchase price for inflation before calculating tax.</li>
+                  <li><strong>Formula:</strong> present amount × (1 + rate)^years.</li>
+                  <li><strong>Default:</strong> ₹1,00,000 at 5% for 10 years is about ₹1,62,889.</li>
+                  <li><strong>Increase:</strong> About ₹62,889.</li>
                 </ul>
               </div>
               <div>
-                <h3 className="mb-3 text-[1.05rem] font-bold text-[#991b1b]">Investment Strategies</h3>
+                <h3 className="mb-3 text-[1.05rem] font-bold text-[#991b1b]">Purchasing power</h3>
                 <ul className="flex flex-col gap-3 text-[0.875rem] leading-[1.6] text-[#991b1b]/80">
-                  <li><strong>Debt Funds:</strong> Since April 2023, indexation benefits are removed. Gains are taxed at slab rate, making inflation impact even harsher.</li>
-                  <li><strong>Equity (LTCG):</strong> The ₹1.25L tax-free threshold acts as a buffer against inflation-driven gains.</li>
-                  <li><strong>Net Real Return:</strong> Always calculate: <code>(Interest - Tax) - Inflation</code>. If this is negative, your wealth is shrinking.</li>
+                  <li><strong>Formula:</strong> present amount ÷ (1 + rate)^years.</li>
+                  <li><strong>Default:</strong> ₹1,00,000 later buys about ₹61,391 in today&apos;s prices.</li>
+                  <li><strong>Not calculated:</strong> Tax, indexation, and an investment return are not subtracted.</li>
                 </ul>
               </div>
             </div>
@@ -169,8 +169,8 @@ export default function InflationClient() {
         {/* Real-World Tips Section */}
         <section className="mx-auto max-w-[900px] px-6 py-16">
           <div className="mb-10 text-center">
-            <h2 className="text-[1.8rem] font-black text-[var(--text-primary)]">💰 Inflation Insights</h2>
-            <p className="mt-3 text-[1rem] text-[var(--text-secondary)]">What you need to know to protect your money.</p>
+            <h2 className="text-[1.8rem] font-black text-[var(--text-primary)]">How this inflation figure is built</h2>
+            <p className="mt-3 text-[1rem] text-[var(--text-secondary)]">One amount, one annual rate, and a number of years. The rate does not change from year to year.</p>
           </div>
           
           <div className="grid gap-6 md:grid-cols-2">
@@ -179,13 +179,13 @@ export default function InflationClient() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600">
                   <BookOpen size={20} />
                 </div>
-                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Key Terms</h3>
+                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Worked figures</h3>
               </div>
               <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>CPI (Consumer Price Index):</strong> The official measure of retail inflation.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Real Return:</strong> Your return minus inflation. If FD gives 7% and inflation is 5%, real return is 2%.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Core Inflation:</strong> Inflation excluding volatile food and fuel prices.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Rule of 72:</strong> Divide 72 by inflation rate to know when prices double (e.g., 6% = 12 years).</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>5% for 10 years:</strong> ₹1,00,000 becomes about ₹1,62,889.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Buying power:</strong> That ₹1,00,000 later buys about ₹61,391 of today&apos;s goods.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>6% check:</strong> ₹1,00,000 at 6% for 10 years is about ₹1,79,085.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Doubling:</strong> At 5%, prices double in about 14.2 years. 72 ÷ 5 is 14.4 years, which is the rough estimate, not the result printed above.</span></li>
               </ul>
             </div>
 
@@ -194,13 +194,13 @@ export default function InflationClient() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
                   <TrendingUp size={20} />
                 </div>
-                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Assets That Beat Inflation</h3>
+                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Not an asset ranking</h3>
               </div>
               <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-blue-500">•</span><span><strong>Equity/Stocks:</strong> Historically 12–15% returns. Best long-term inflation hedge.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-blue-500">•</span><span><strong>Real Estate:</strong> Property values generally track or beat inflation.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-blue-500">•</span><span><strong>Gold:</strong> Traditional inflation hedge averaging 8–10% over long periods.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-blue-500">❌</span><span><strong>Savings Account:</strong> Always loses to inflation. Use only for emergencies.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-blue-500">•</span><span><strong>One rate:</strong> Equity, property, gold, and savings-account returns are not looked up.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-blue-500">•</span><span><strong>Same rate each year:</strong> The entered percent is reused. A CPI history is not loaded.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-blue-500">•</span><span><strong>No tax:</strong> Indexation and capital-gains tax are not applied.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-blue-500">•</span><span><strong>10% example:</strong> ₹10,00,000 at 10% for 10 years is about ₹25,93,742.</span></li>
               </ul>
             </div>
 
@@ -209,16 +209,16 @@ export default function InflationClient() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
                   <Lightbulb size={20} />
                 </div>
-                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Pro Tips</h3>
+                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Another check</h3>
               </div>
               <div className="grid gap-4 md:grid-cols-2">
                 <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span><strong>Healthcare inflation is 10–14%/year</strong> — much higher than general inflation.</span></li>
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span><strong>Education inflation is 8–12%/year.</strong> A ₹10 lakh course will cost ₹26 lakh in 10 years at 10%.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span>₹50,000 at 5% for 14 years is about ₹98,997, just short of double.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span>₹10,00,000 at 10% for 10 years is about ₹25,93,742.</span></li>
                 </ul>
                 <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span>For retirement, assume <strong>6–7% inflation</strong> — not the RBI target of 4%.</span></li>
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span>Review your portfolio annually. If it&apos;s not beating inflation after tax, you&apos;re getting poorer.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span>A 6% or 7% retirement assumption is not built in. The rate box starts at 5%.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span>An investment return is not compared with this inflation rate.</span></li>
                 </ul>
               </div>
             </div>
@@ -226,28 +226,25 @@ export default function InflationClient() {
         </section>
 
         <SEOSection 
-          title="Inflation Calculator 2026: Protecting Your Purchasing Power"
-          description={`Inflation is the silent killer of wealth. Our inflation calculator 2026 helps you understand how the general level of prices for goods and services is rising and how much your future purchasing power is falling. Whether planning for retirement or long-term purchases, adjust your strategy to combat the cumulative effect of inflation.
+          title="Future price after inflation"
+          description={`Inflation raises a future price by multiplying the present amount by (1 + rate) once for each year. Purchasing power is the present amount divided by that same factor.
 
-Historically, average inflation rates hover around 2% to 6% depending on the region and economic climate. While this might seem small annually, the cumulative effect over 20 or 30 years is staggering. For example, at a 5% inflation rate, the cost of living doubles roughly every 14 years. This means if you need ₹50,000 today to maintain your lifestyle, you might need ₹1,00,000 in just 14 years to buy the same goods and services. Our inflation calculator helps you see this future reality clearly so you can adjust your investment strategies accordingly.
-
-The only way to effectively combat inflation is through "Real Returns"—returns that exceed the inflation rate. If your savings account offers 4% interest but inflation is 6%, you are actually losing 2% in purchasing power every year. By using this tool to project future costs, you can better understand the necessity of investing in growth assets like stocks or real estate, which historically offer higher returns than inflation. Use our precision tool to safeguard your future and ensure your long-term financial goals remain reachable.`}
+₹1,00,000 at 5% for 10 years becomes about ₹1,62,889. In today's prices, that ₹1,00,000 later buys about ₹61,391, a loss of about 38.6%. At 5%, prices double in about 14.2 years. The page does not subtract tax or compare an investment return.`}
           howToUse={[
-            "Enter a Current Amount or the price of an item you wish to track into the future.",
-            "Input the Average Annual Inflation Rate (India's recent CPI average is ~5%).",
-            "Select the Time Period in years you want to project.",
-            "View the Future Cost — how much that item will cost after inflation.",
-            "Check the Purchasing Power Impact — what today's money will be worth in real terms.",
-            "Use the results to plan savings that beat inflation."
+            "Enter the present amount. The default is ₹1,00,000.",
+            "Enter the annual inflation rate as a percent. The default is 5.",
+            "Enter the number of years. The default is 10.",
+            "Read the future price, which is present amount × (1 + rate)^years.",
+            "Read the purchasing-power figure, which is present amount ÷ (1 + rate)^years."
           ]}
           benefits={[
-            "Realistic Planning: Avoid the 'Money Illusion' by focusing on real future costs, not just nominal numbers.",
-            "Portfolio Optimization: Identify whether your current investments are actually growing your wealth or just losing to inflation.",
-            "Cost of Living Awareness: Understand how everyday expenses like healthcare and housing might escalate over time.",
-            "Retirement Safety: Ensure your future nest egg is large enough to sustain your desired lifestyle decades from now.",
-            "Business Strategy: Help entrepreneurs project future operational costs and adjust pricing models accordingly."
+            "The same rate is applied every year.",
+            "The ₹1,62,889 example uses ₹1,00,000, 5%, and 10 years.",
+            "Purchasing power for that example is about ₹61,391.",
+            "Tax and investment returns are not calculated.",
+            "Amounts are formatted in rupees."
           ]}
-          formula="Future Value = Current Value × (1 + inflationRate)^years"
+          formula="Future price = Present amount × (1 + rate)^years"
         />
         <FAQSchema faqs={INFLATION_FAQS} />
         <RelatedTools currentToolId="inflation-calculator" categoryId="finance" />

@@ -4,9 +4,9 @@ import { JSONLD } from '@/components/ui/JSONLD';
 import { SITE_URL, buildPageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Image & Video Dithering Studio Online (1-Bit, Floyd-Steinberg, GameBoy, Bayer)',
+  title: 'Image and Video Dither Studio',
   description:
-    'Free online Dither Studio for images and videos. Apply Floyd-Steinberg, Bayer matrix, Atkinson 1-bit dithering, Game Boy, CGA, and pixel art retro palettes with 100% browser-local processing.',
+    'Applies Floyd-Steinberg, Bayer, Atkinson, Game Boy, and CGA dithering to images and video in the browser.',
   path: '/devtools/dither-studio',
   keywords: [
     'image dither online',
@@ -34,7 +34,7 @@ export default function DitherStudioPage() {
       priceCurrency: 'USD',
     },
     description:
-      'Client-side retro image and video dithering tool supporting Floyd-Steinberg, Bayer ordered dithering, Game Boy palettes, pixel art downscaling, and instant export.',
+      'Applies ordered and error-diffusion dithering to images and video, then exports the result in the browser.',
     url: `${SITE_URL}/devtools/dither-studio`,
   };
 
@@ -55,7 +55,7 @@ export default function DitherStudioPage() {
         name: 'Are my uploaded images or videos sent to any server?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'No. All image processing, canvas manipulations, video decoding, and dither algorithms run 100% locally in your browser using HTML5 Canvas APIs. Your files never leave your device.',
+          text: 'No. Image processing, canvas drawing, video decoding, and dithering run in the browser with the canvas API. The files are not uploaded.',
         },
       },
       {

@@ -35,7 +35,7 @@ export default function HTMLMinifierPage() {
     };
 
     const faq = [
-        { q: "Does this affect SEO?", a: "Minified HTML loads faster, which is a positive ranking factor for SEO. It does not change the content or structure of your page." },
+        { q: "Does minifying HTML change rankings by itself?", a: "Minifying removes comments and extra space. It does not change the text or the heading structure." },
         { q: "Is strict XML content supported?", a: "This is primarily for standard HTML5. Use with caution for XML-strict documents like SVG if they rely on whitespace." },
     ];
 

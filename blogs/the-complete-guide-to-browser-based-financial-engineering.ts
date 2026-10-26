@@ -1,8 +1,8 @@
 export const blog = {
   slug: 'the-complete-guide-to-browser-based-financial-engineering',
-  title: 'The Architecture of Modern Financial Engineering: Time Value of Money, Amortization Mechanics, and Inflation Dynamics',
+  title: 'Time value of money and amortization',
   description:
-    'A 2,500+ word masterclass on financial engineering principles: Time Value of Money (TVM), effective annual rates (EAR), debt amortization schedules, Fisher real rate calculations, and risk-adjusted Sharpe/Sortino performance.',
+    'Explains time value of money, effective annual rate, loan amortization, and the Fisher real rate.',
   keywords: [
     'financial engineering principles',
     'time value of money mathematical foundations',

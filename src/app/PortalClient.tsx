@@ -60,15 +60,15 @@ const FAQS = [
   },
   {
     q: 'How does local processing work?',
-    a: 'When a page is labelled local processing, its tool inputs and files are handled in your browser rather than uploaded to Toolioz. The website still loads normal page assets and analytics services; see the privacy policy for those separate network requests.',
+    a: 'When a page is labelled local processing, the tool inputs and files are handled in the browser rather than uploaded to Toolioz. The website still loads page assets and analytics. The privacy policy lists those requests.',
   },
   {
     q: 'Do the financial formulas match banking and tax standards?',
     a: 'Each published calculator documents its formula, assumptions, and limitations. Results are planning estimates rather than financial or tax advice, and time-sensitive rules should be verified with an official source.',
   },
   {
-    q: 'Can I export or download results?',
-    a: 'Published tools that produce a file or copyable output include a download or copy control on that page. Not every calculator exports a PDF.',
+    q: 'Can results be exported?',
+    a: 'Tools that produce a file or copyable text include a download or copy control on that page. Not every calculator exports a PDF.',
   },
 ];
 
@@ -150,9 +150,12 @@ export default function PortalClient() {
           <h1 className="text-[32px] font-semibold leading-none tracking-[-1.28px] text-[#171717] sm:text-5xl sm:tracking-[-2.28px] dark:text-[#ededed]">
             Calculations, Code & <span className="text-[#0072F5]">Document Utilities</span>
           </h1>
+          <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-zinc-600 sm:text-base dark:text-zinc-400">
+            Toolioz is a directory of finance calculators, developer utilities, PDF tools, and a marriage biodata maker. Each listed tool runs in the browser, and the formula or limit is written on that tool&apos;s page.
+          </p>
 
           <div className="mx-auto mt-6 max-w-3xl">
-            <div className="relative flex items-center rounded-[12px] bg-white p-2 ds-surface focus-within:shadow-[0_0_0_2px_#fff,0_0_0_4px_#0072F5] dark:bg-[#111]">
+            <div className="relative flex items-center rounded-[12px] bg-white p-2 shadow-[var(--ds-shadow-border)] focus-within:shadow-[0_0_0_2px_#fff,0_0_0_4px_#0072F5] dark:bg-[#111]">
               <Search size={22} className="ml-3 shrink-0 text-zinc-400" />
               <input
                 ref={searchInputRef}
@@ -252,9 +255,9 @@ export default function PortalClient() {
             </div>
 
             {filteredTools.length === 0 ? (
-              <div className="rounded-[12px] bg-[#f2f2f2] p-12 text-center ds-surface dark:bg-[#111]">
+              <div className="rounded-[12px] bg-[#f2f2f2] p-12 text-center shadow-[var(--ds-shadow-border)] dark:bg-[#111]">
                 <p className="text-sm font-medium text-[#171717] dark:text-[#ededed]">
-                  No tools found matching your criteria.
+                  No tools match that search.
                 </p>
                 <p className="mt-1 text-xs text-zinc-500">
                   Try searching with generic terms like &quot;PDF&quot;, &quot;SIP&quot;, &quot;JSON&quot;, or &quot;Converter&quot;.
@@ -433,7 +436,7 @@ export default function PortalClient() {
               Clear Assumptions and Fast Results.
             </h2>
             <p className="mb-6 text-sm text-zinc-600 leading-relaxed dark:text-zinc-400">
-              Tool pages labelled local processing keep their inputs and files inside your browser. Calculators also show the
+              Tool pages labelled local processing keep their inputs and files in the browser. Calculators also show the
               assumptions and formulas needed to understand the result.
             </p>
 
@@ -447,7 +450,7 @@ export default function PortalClient() {
                 {
                   icon: Zap,
                   title: 'Instantaneous Feedback',
-                  desc: 'Immediate results with zero network round-trip latency as you drag sliders or type formulas.',
+                  desc: 'Results update as sliders move or numbers are typed, without a network round trip for the calculation.',
                 },
                 {
                   icon: ShieldCheck,
@@ -455,7 +458,7 @@ export default function PortalClient() {
                   desc: 'Published calculators explain their equations, assumptions, examples, and limitations.',
                 },
               ].map(({ icon: Icon, title, desc }) => (
-                <div key={title} className="flex items-start gap-3 rounded-[12px] bg-white p-3.5 ds-surface dark:bg-[#111]">
+                <div key={title} className="flex items-start gap-3 rounded-[12px] bg-white p-3.5 shadow-[var(--ds-shadow-border)] dark:bg-[#111]">
                   <div className="flex size-9 shrink-0 items-center justify-center rounded-[6px] bg-[#f2f2f2] text-[#0072F5] dark:bg-[#171717]">
                     <Icon size={18} />
                   </div>
@@ -469,7 +472,7 @@ export default function PortalClient() {
           </div>
 
           {/* Interactive Visual Card */}
-          <div className="relative rounded-[12px] bg-white p-6 ds-surface-elevated sm:p-8 dark:bg-[#111]">
+          <div className="relative rounded-[12px] bg-white p-6 shadow-[var(--ds-shadow-border-medium)] sm:p-8 dark:bg-[#111]">
             <div className="mb-5 flex items-center justify-between pb-3">
               <div className="flex items-center gap-2">
                 <span className="size-2.5 rounded-full bg-red-500/80" />
@@ -579,7 +582,7 @@ export default function PortalClient() {
             </p>
           </div>
 
-          <div className="rounded-[12px] bg-white p-6 ds-surface sm:p-8 dark:bg-[#111]">
+          <div className="rounded-[12px] bg-white p-6 shadow-[var(--ds-shadow-border)] sm:p-8 dark:bg-[#111]">
             <Accordion type="single" collapsible className="w-full">
               {FAQS.map((faq, idx) => (
                 <AccordionItem key={faq.q} value={`item-${idx}`}>
@@ -599,7 +602,7 @@ export default function PortalClient() {
       {/* CTA Section */}
       <section className="bg-[#fafafa] py-14 sm:py-16 dark:bg-[#0a0a0a]">
         <div className="mx-auto max-w-4xl px-6 text-center">
-          <div className="rounded-[12px] bg-white p-8 ds-surface sm:p-12 dark:bg-[#111]">
+          <div className="rounded-[12px] bg-white p-8 shadow-[var(--ds-shadow-border)] sm:p-12 dark:bg-[#111]">
             <h2 className="text-2xl font-semibold tracking-[-0.04em] text-[#171717] sm:text-3xl dark:text-[#ededed]">
               Ready to Calculate, Convert or Build?
             </h2>

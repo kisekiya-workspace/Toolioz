@@ -153,7 +153,7 @@ export default function TimestampConverterClient() {
               Unix Timestamp Converter
             </h1>
             <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-              Convert epoch seconds or milliseconds into readable dates, then turn a date string back into Unix time.
+              Unix time counts seconds or milliseconds from 1970-01-01T00:00:00Z. This page converts that number to a local date, UTC, and ISO, and converts a date back.
             </p>
           </div>
         </header>
@@ -258,7 +258,7 @@ export default function TimestampConverterClient() {
               />
 
               <p className="text-sm leading-6 text-[var(--text-secondary)]">
-                The input is interpreted in your browser&apos;s local time zone, which is useful
+                The input is interpreted in the browser&apos;s local time zone, which is useful
                 when matching log timestamps or schedule events.
               </p>
 
@@ -294,7 +294,7 @@ export default function TimestampConverterClient() {
 
         <SEOSection
           title="Unix Timestamp Converter"
-          description="A browser-native utility for converting Unix epoch seconds and milliseconds into readable dates, UTC strings, ISO timestamps, and back again."
+          description="Unix time counts seconds or milliseconds from 1970-01-01T00:00:00Z. This page converts that number to a local date, UTC, and an ISO string, and converts a date back to Unix time."
           howToUse={[
             'Enter a Unix timestamp in seconds or milliseconds.',
             'Switch units if your source system uses a different epoch format.',
@@ -311,7 +311,7 @@ export default function TimestampConverterClient() {
 
         <FAQSchema faqs={FAQS} />
 
-        <section className="container section" style={{ paddingTop: 0 }}>
+        <section className="container pt-0">
           <RelatedTools currentToolId="timestamp-converter" categoryId="devtools" />
         </section>
       </div>

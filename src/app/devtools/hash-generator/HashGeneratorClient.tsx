@@ -30,24 +30,24 @@ const ALGORITHMS: Algorithm[] = ['SHA-1', 'SHA-256', 'SHA-384', 'SHA-512'];
 
 const FAQS = [
   {
-    question: 'Does this tool upload my data to a server?',
+    question: 'Does this tool upload data to a server?',
     answer:
-      'No. All hashing is performed entirely in your browser using the Web Crypto API. Your data never leaves your device.',
+      'No. Hashing runs in the browser through the Web Crypto API. The text or file is not uploaded.',
   },
   {
     question: 'What hash algorithms are supported?',
     answer:
-      'SHA-1, SHA-256, SHA-384, and SHA-512 are supported. These are all part of the SHA-2 family (except SHA-1) and are provided natively by the Web Crypto API.',
+      'SHA-1, SHA-256, SHA-384, and SHA-512. SHA-256, SHA-384, and SHA-512 come from the SHA-2 family. The browser Web Crypto API computes them.',
   },
   {
-    question: 'Can I hash files as well as text?',
+    question: 'Can files be hashed as well as text?',
     answer:
-      'Yes! You can paste text directly or upload any file. The tool hashes the raw bytes of the file.',
+      'Yes. Text can be pasted, or any file the browser can read can be hashed from its raw bytes.',
   },
   {
     question: 'Is SHA-1 secure?',
     answer:
-      'SHA-1 is considered cryptographically weak and should not be used for security-critical applications like certificate signing. Use SHA-256 or SHA-512 instead.',
+      'SHA-1 is cryptographically weak and is not suitable for certificates or new security designs. SHA-256 or SHA-512 is the appropriate choice for those uses.',
   },
 ];
 
@@ -126,7 +126,7 @@ export default function HashGeneratorClient() {
               Hash Generator
             </h1>
             <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-              Generate SHA-1, SHA-256, SHA-384, and SHA-512 hashes from text or files — 100% client-side using the Web Crypto API.
+              A hash is a fixed fingerprint of text or file bytes. SHA-1, SHA-256, SHA-384, and SHA-512 are computed here with the Web Crypto API.
             </p>
           </div>
         </header>
@@ -137,13 +137,13 @@ export default function HashGeneratorClient() {
             <Card className="flex flex-col !p-6">
               <div className="mb-4 flex items-center justify-between">
                 <h3 className="text-base font-bold text-[var(--text-primary)]">Input</h3>
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <div className="flex gap-2">
                   <label className="flex cursor-pointer items-center gap-2 rounded-md border border-[var(--border)] bg-[var(--bg-secondary)] px-3 py-1.5 text-[0.8125rem] font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--primary)]">
                     <FileUp size={14} />
                     Upload File
                     <input
                       type="file"
-                      style={{ display: 'none' }}
+                      className="hidden"
                       onChange={handleFileUpload}
                     />
                   </label>
@@ -156,20 +156,15 @@ export default function HashGeneratorClient() {
 
               {mode === 'file' && fileName ? (
                 <div
-                  style={{
-                    background: 'var(--bg-secondary)',
-                    borderRadius: 'var(--radius-md)',
-                    padding: '2rem',
-                    textAlign: 'center',
-                  }}
+                  className="rounded-md bg-secondary p-8 text-center"
                 >
                   <FileUp
                     size={32}
-                    style={{ color: 'var(--primary)', marginBottom: '0.5rem', marginLeft: 'auto', marginRight: 'auto' }}
+                    className="mx-auto mb-2 text-primary"
                   />
-                  <p style={{ fontWeight: 700 }}>{fileName}</p>
-                  <p style={{ color: 'var(--text-tertiary)', fontSize: '0.85rem' }}>
-                    File loaded — ready to hash
+                  <p className="font-bold">{fileName}</p>
+                  <p className="text-sm text-muted-foreground">
+                    File loaded and ready to hash.
                   </p>
                 </div>
               ) : (
@@ -185,17 +180,8 @@ export default function HashGeneratorClient() {
                 />
               )}
 
-              <div style={{ marginTop: '1.5rem' }}>
-                <p
-                  style={{
-                    fontSize: '0.8rem',
-                    fontWeight: 700,
-                    color: 'var(--text-tertiary)',
-                    marginBottom: '0.75rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em',
-                  }}
-                >
+              <div className="mt-6">
+                <p className="mb-3 text-xs font-bold uppercase tracking-wide text-muted-foreground">
                   Algorithms
                 </p>
                 <div className="flex flex-wrap gap-3">
@@ -222,9 +208,9 @@ export default function HashGeneratorClient() {
                   (mode === 'text' && !input.trim()) ||
                   (mode === 'file' && !fileBytes)
                 }
-                style={{ marginTop: '1.5rem' }}
+                className="mt-6"
               >
-                <Hash size={20} style={{ marginRight: '8px' }} />
+                <Hash size={20} className="mr-2" />
                 Generate Hashes
               </Button>
             </Card>
@@ -268,27 +254,27 @@ export default function HashGeneratorClient() {
         </section>
 
         {/* Features */}
-        <section className="container section" style={{ paddingTop: 0 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
-            <Card style={{ padding: '1.5rem', textAlign: 'center' }}>
-              <Lock size={24} style={{ color: '#3b82f6', marginBottom: '0.75rem' }} />
-              <h4 style={{ marginBottom: '0.5rem' }}>100% Private</h4>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
-                Uses Web Crypto API — your data never leaves the browser.
+        <section className="container pt-0">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <Card className="p-6 text-center">
+              <Lock size={24} className="mx-auto mb-3 text-blue-500" />
+              <h4 className="mb-2 font-semibold">Private hashing</h4>
+              <p className="text-sm text-muted-foreground">
+                The digest is computed in the browser with the Web Crypto API. The text or file is not uploaded.
               </p>
             </Card>
-            <Card style={{ padding: '1.5rem', textAlign: 'center' }}>
-              <Zap size={24} style={{ color: '#f59e0b', marginBottom: '0.75rem' }} />
-              <h4 style={{ marginBottom: '0.5rem' }}>Instant Results</h4>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
-                Hardware-accelerated crypto for sub-millisecond hashing.
+            <Card className="p-6 text-center">
+              <Zap size={24} className="mx-auto mb-3 text-amber-500" />
+              <h4 className="mb-2 font-semibold">Immediate digest</h4>
+              <p className="text-sm text-muted-foreground">
+                Each selected algorithm returns a hex digest as soon as the input is hashed.
               </p>
             </Card>
-            <Card style={{ padding: '1.5rem', textAlign: 'center' }}>
-              <ShieldCheck size={24} style={{ color: '#10b981', marginBottom: '0.75rem' }} />
-              <h4 style={{ marginBottom: '0.5rem' }}>File Support</h4>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
-                Hash any file type — verify downloads, check integrity.
+            <Card className="p-6 text-center">
+              <ShieldCheck size={24} className="mx-auto mb-3 text-emerald-500" />
+              <h4 className="mb-2 font-semibold">File checksums</h4>
+              <p className="text-sm text-muted-foreground">
+                Any file the browser can read can be hashed and compared with a published checksum.
               </p>
             </Card>
           </div>
@@ -296,7 +282,7 @@ export default function HashGeneratorClient() {
 
         <SEOSection
           title="Hash Generator: SHA-256, SHA-512 & More"
-          description="Generate cryptographic hashes from text or files using browser-native Web Crypto API. Supports SHA-1, SHA-256, SHA-384, and SHA-512. Perfect for verifying file integrity, generating checksums, and security workflows."
+          description="A hash digest is a fixed-length fingerprint of text or file bytes. This page computes SHA-1, SHA-256, SHA-384, and SHA-512 in the browser with the Web Crypto API."
           howToUse={[
             'Enter text in the input box or upload a file.',
             'Select one or more hash algorithms.',
@@ -304,7 +290,7 @@ export default function HashGeneratorClient() {
             'Copy any hash value with one click.',
           ]}
           benefits={[
-            'All processing happens locally — your data is never uploaded.',
+            'The text or file is not uploaded.',
             'Uses the browser Web Crypto API for maximum performance.',
             'Supports hashing of arbitrary files for integrity verification.',
             'Multiple algorithms can be computed simultaneously.',
@@ -313,7 +299,7 @@ export default function HashGeneratorClient() {
 
         <FAQSchema faqs={FAQS} />
 
-        <section className="container section" style={{ paddingTop: 0 }}>
+        <section className="container pt-0">
           <RelatedTools currentToolId="hash-generator" categoryId="devtools" />
         </section>
       </div>

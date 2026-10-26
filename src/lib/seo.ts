@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { INDEXABLE_TOOLS } from '@/lib/tools';
-import { canonicalToolPath, PAUSED_TOOL_PATHS, TOOL_ALIASES, WITHHELD_TOOL_PATHS } from '@/lib/tool-routes';
+import { canonicalToolPath, CHANGING_RULES_NOINDEX_PATHS, PAUSED_TOOL_PATHS, TOOL_ALIASES, WITHHELD_TOOL_PATHS } from '@/lib/tool-routes';
 
 export const SITE_URL = 'https://toolioz.com';
 export const SITE_NAME = 'Toolioz';
@@ -166,6 +166,7 @@ export function buildPageMetadata(options: {
     robots:
       PAUSED_TOOL_PATHS.has(options.path) ||
       WITHHELD_TOOL_PATHS.has(options.path) ||
+      CHANGING_RULES_NOINDEX_PATHS.has(options.path) ||
       Boolean(TOOL_ALIASES[options.path])
         ? { index: false, follow: true }
         : options.robots,

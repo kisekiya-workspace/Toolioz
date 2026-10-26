@@ -60,12 +60,12 @@ export default function DesignClient() {
           </h1>
           
           <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-            Drawing, dithering, shaders, colors, and image utilities. Find the right studio, create a preview, and export your work.
+            Drawing, dithering, shaders, colors, and image utilities. A studio builds a preview and exports a file in the browser.
           </p>
 
           {/* Search Box */}
           <div className="mx-auto mt-5 max-w-xl">
-            <div className="relative flex items-center rounded-[12px] bg-white p-2 ds-surface dark:bg-[#111]">
+            <div className="relative flex items-center rounded-[12px] bg-white p-2 shadow-[var(--ds-shadow-border)] dark:bg-[#111]">
               <Search size={18} className="ml-3 shrink-0 text-zinc-400" />
               <input
                 type="search"

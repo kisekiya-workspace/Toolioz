@@ -76,7 +76,7 @@ export default function LoremIpsumClient() {
               Lorem Ipsum Generator
             </h1>
             <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-              Generate professional placeholder text for your mockups, experiments, and designs.
+              Lorem ipsum is placeholder Latin used to fill a layout. This page writes a chosen number of words, sentences, or paragraphs.
             </p>
           </div>
         </header>
@@ -130,7 +130,7 @@ export default function LoremIpsumClient() {
             <div className="flex-1 overflow-y-auto bg-[linear-gradient(rgba(37,99,235,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(37,99,235,0.02)_1px,transparent_1px)] bg-[size:30px_30px] p-8 text-lg leading-relaxed text-[var(--text-secondary)] md:p-12">
               <div className="max-w-[800px]">
                 {output.split('\n\n').map((p, i) => (
-                  <p key={i} style={{ marginBottom: i === output.split('\n\n').length - 1 ? 0 : '1.5rem' }}>{p}</p>
+                  <p key={i} className={i === output.split('\n\n').length - 1 ? 'mb-0' : 'mb-6'}>{p}</p>
                 ))}
               </div>
             </div>

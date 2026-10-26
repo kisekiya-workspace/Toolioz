@@ -94,7 +94,7 @@ export default function CodeToImagePage() {
         <div className="container px-4 py-8 m-auto max-w-[1400px]">
             <ToolHeader
                 title="Code to Image Converter"
-                description="Create beautiful, shareable code snippets for social media."
+                description="Renders source code as a styled image with a chosen theme and background."
             />
             <AdContainer slot="code-top" />
 

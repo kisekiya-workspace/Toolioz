@@ -40,8 +40,7 @@ export function AdContainer({ slot, format = "auto", responsive = "true", classN
     return (
         <div className={`my-8 overflow-hidden min-h-[100px] flex items-center justify-center rounded-xl transition-all ${className}`}>
             <ins
-                className="adsbygoogle"
-                style={{ display: "block", textAlign: "center" }}
+                className="adsbygoogle block text-center"
                 data-ad-client={publisherId}
                 data-ad-slot={slot}
                 data-ad-format={format}

@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "PDF Merger",
-        "description": "Combine multiple PDF files into one.",
+        "description": "Combines PDFs with pdf-lib in the browser. This address is an alias.",
         "applicationCategory": "Utility",
         "operatingSystem": "Any",
         "offers": {

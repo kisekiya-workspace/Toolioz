@@ -6,7 +6,7 @@ import SplitPdfClient from './SplitPdfClient';
 export const metadata: Metadata = {
   title: "Split PDF Online | Extract Pages from PDF",
   description:
-    'Split PDF files or extract specific pages into separate PDF documents free in your browser. 100% client-side execution with zero server uploads.',
+    'Splits a PDF into separate files or extracts selected pages, with the document kept in the browser.',
   keywords: [
     'split pdf online free',
     'extract pages from pdf',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Split PDF Online | Toolioz',
-    description: 'Extract specific pages or split PDF documents locally in your browser.',
+    description: 'Extracts selected PDF pages or splits a document, with the file kept in the browser.',
     url: 'https://toolioz.com/pdftools/split-pdf',
     type: 'website',
     images: ['/tooliozLogo.png'],
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Split PDF Online | Toolioz',
-    description: 'Split PDF files locally in your browser with zero server uploads.',
+    description: 'Splits PDF files in the browser without uploading the document.',
     images: ['/tooliozLogo.png'],
   },
 };

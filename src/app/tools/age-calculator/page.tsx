@@ -109,8 +109,8 @@ export default function AgeCalculatorPage() {
     };
 
     const faq = [
-        { q: "How is age calculated?", a: "We subtract your birth date from the current date, adjusting for leap years and different month lengths." },
-        { q: "Is this accurate?", a: "Yes, it calculates your exact age down to the day based on your browser's local time." },
+        { q: "How is age calculated?", a: "Age is the current date minus the birth date, with the day and month adjusted when the birthday has not occurred yet this year." },
+        { q: "Is this accurate?", a: "The result is exact to the day in the browser's local time zone." },
     ];
 
     const jsonLd = {
@@ -119,7 +119,7 @@ export default function AgeCalculatorPage() {
         "name": "Age Calculator",
         "operatingSystem": "All",
         "applicationCategory": "Utility",
-        "description": "Professional age calculator tool to find exact age in years, months, days, and even minutes.",
+        "description": "Age is the current local date minus the birth date, reported in years, months, and days.",
         "offers": {
             "@type": "Offer",
             "price": "0",
@@ -132,7 +132,7 @@ export default function AgeCalculatorPage() {
             title: "Why Use an Age Calculator?",
             content: (
                 <p>
-                    Understanding your exact age is important for various legal, medical, and personal reasons. While most of us know our age in years, calculating the exact number of months and days can be challenging, especially considering leap years and the varying number of days in each month. Our **professional age calculator** automates this process with 100% precision.
+                    Age is the current local date minus the birth date. When the birthday has not occurred yet this year, the year count drops by one and the month and day are borrowed from the previous month. The result is exact to the day in the browser time zone.
                 </p>
             )
         },
@@ -140,13 +140,12 @@ export default function AgeCalculatorPage() {
             title: "How to Calculate Age Manually",
             content: (
                 <div className="space-y-4">
-                    <p>To calculate age manually, follow these steps:</p>
+                    <p>A manual count uses the same three steps as the calculator:</p>
                     <ol className="list-decimal pl-6 space-y-2">
-                        <li>Identify the **Birth Date** and the **Current Date**.</li>
+                        <li>Take the birth date and the current local date.</li>
                         <li>Subtract the birth year from the current year.</li>
-                        <li>Adjust based on the month and day. If the current month is earlier than the birth month, or if it's the same month but the current day is earlier than the birth day, subtract one year.</li>
+                        <li>If the current month is earlier than the birth month, or the months match and the current day is earlier, subtract one year and borrow months and days.</li>
                     </ol>
-                    <p>Or, simply use our tool for an instant, error-free result!</p>
                 </div>
             )
         },
@@ -154,7 +153,7 @@ export default function AgeCalculatorPage() {
             title: "Privacy & Security",
             content: (
                 <p>
-                    At Toolioz, we take your privacy seriously. Unlike other online tools, our Age Calculator runs entirely on your local device using **Client-Side JavaScript**. Your date of birth is never sent to our servers, nor is it stored in any database. You can even use this tool offline once the page is loaded.
+                    The date of birth stays in this page and is not uploaded. The site still loads ordinary page assets, which are described in the privacy policy.
                 </p>
             )
         }
@@ -165,7 +164,7 @@ export default function AgeCalculatorPage() {
             <JsonLd data={jsonLd} />
             <ToolHeader
                 title="Age Calculator"
-                description="Calculate your exact age in years, months, and days. Find out exactly how old you are."
+                description="Age is the current local date minus the birth date. The result is years, months, and days, plus the next birthday. The date is not uploaded."
             />
 
             <AdContainer slot="1234567890" />
@@ -222,14 +221,14 @@ export default function AgeCalculatorPage() {
                                 <div className="text-muted-foreground opacity-50 space-y-6">
                                     <Cake size={80} className="mx-auto stroke-1" />
                                     <div className="space-y-2">
-                                        <h3 className="text-2xl font-medium">Waiting for your birthday...</h3>
-                                        <p>Enter your birth date to reveal detailed insights</p>
+                                        <h3 className="text-2xl font-medium">Enter a date of birth</h3>
+                                        <p>The result uses today&apos;s date in the browser time zone.</p>
                                     </div>
                                 </div>
                             ) : (
                                 <div className="space-y-10 animate-in zoom-in-95 fade-in duration-500">
                                     <div>
-                                        <p className="text-sm sm:text-base font-bold text-muted-foreground uppercase tracking-wider mb-4">You are currently</p>
+                                        <p className="text-sm sm:text-base font-bold text-muted-foreground uppercase tracking-wider mb-4">Current age</p>
                                         <div className="inline-flex items-baseline justify-center gap-x-3 gap-y-1 flex-wrap">
                                             <span className="text-6xl sm:text-7xl lg:text-8xl font-extrabold text-blue-600 dark:text-blue-400 tracking-tight">
                                                 {result.age.years}

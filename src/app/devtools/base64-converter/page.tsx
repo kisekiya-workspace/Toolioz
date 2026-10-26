@@ -5,14 +5,14 @@ import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
   title: 'Base64 Encoder & Decoder Online',
-  description: 'Instantly convert text or files to Base64 and decode Base64 strings to raw data natively in your browser. Secure, fast, and 100% client-side.',
-  keywords: 'Base64 encoder online, Decode Base64 string to text, Base64 file converter safely, Free developer base64 tool, Cryptography encoding',
+  description: 'Encodes text with btoa and files from a data URL. Decodes with atob. Characters outside Latin-1 fail. Base64 is not encryption.',
+  keywords: 'Base64 encoder, btoa, atob, Base64 file data URL',
   alternates: {
       canonical: 'https://toolioz.com/devtools/base64-converter',
   },
   openGraph: {
-      title: 'Browser-Native Base64 Encoder/Decoder | Toolioz',
-      description: 'Convert text, strings, and files directly to/from Base64 encoding without server processing.',
+      title: 'Base64 Encoder and Decoder | Toolioz',
+      description: 'Encodes text with btoa and files from a data URL. Decodes with atob. Base64 is not encryption.',
       url: 'https://toolioz.com/devtools/base64-converter',
       siteName: 'Toolioz DevTools',
       type: 'website',
@@ -23,8 +23,8 @@ export default function Base64Page() {
   const jsonLd = {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Base64 Encoder & Decoder Studio",
-      "description": "Secure local-first tool for encoding text strings into Base64 algorithms or decoding existing Base64 hashes.",
+      "name": "Base64 Encoder and Decoder",
+      "description": "Encodes text with btoa and files from a data URL. Decodes with atob. Characters outside Latin-1 fail. Base64 is not encryption.",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "All",
       "url": "https://toolioz.com/devtools/base64-converter",

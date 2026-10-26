@@ -1,8 +1,8 @@
 export const blog = {
   slug: 'the-architecture-of-zero-knowledge-browser-utilities-and-data-sovereignty',
-  title: 'The Architecture of Zero-Knowledge Web Utilities: Browser Sandboxing, Local Storage & Data Sovereignty',
+  title: 'Browser storage and local tools',
   description:
-    'A 2,500+ word masterclass on zero-knowledge web application engineering: browser process sandboxing, Zero Network Transmission (ZNT) isolation, localStorage & IndexedDB client-side persistence, cloud vs client economics, and multi-step privacy auditing.',
+    'Explains the browser sandbox, local storage, and which tool inputs stay on the device.',
   keywords: [
     'zero knowledge browser utility architecture',
     'client side data privacy web tools directory',

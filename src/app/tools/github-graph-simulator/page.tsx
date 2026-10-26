@@ -55,6 +55,7 @@ export default function GithubSimulatorPage() {
           <h1 className="font-bold text-slate-100 tracking-tight whitespace-nowrap overflow-hidden text-ellipsis">
             Git Simulator
           </h1>
+          <p className="sr-only">A git simulator draws commits, branches, merges, and rebases on a graph. The history stays in the page.</p>
           <span className="text-xs px-2 py-0.5 rounded-full bg-blue-900/50 text-blue-400 border border-blue-800 hidden sm:inline-block">
             v2.1
           </span>

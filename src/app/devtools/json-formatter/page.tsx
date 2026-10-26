@@ -5,14 +5,14 @@ import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
   title: 'JSON Formatter & Validator Online',
-  description: 'Free browser-native JSON formatter, validator, and minifier. Prettify messy or nested JSON payloads instantly, strictly client-side to ensure maximum privacy.',
+  description: 'Formats, validates, and minifies JSON in the browser and reports the first syntax error with its location.',
   keywords: 'JSON formatter online, Prettify JSON, Minify JSON payload fast, Browser JSON validator free, Private JSON formatter secure',
   alternates: {
     canonical: 'https://toolioz.com/devtools/json-formatter',
   },
   openGraph: {
     title: 'JSON Formatter & Minifier | Toolioz',
-    description: 'Format, validate, or minify JSON data instantly. 100% private processing in your browser.',
+    description: 'Formats, validates, or minifies JSON in the browser and reports the first syntax error.',
     url: 'https://toolioz.com/devtools/json-formatter',
     siteName: 'Toolioz DevTools',
     type: 'website',

@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "Age Calculator",
-        "description": "Calculate your exact age in years, months, and days. Find out the difference between dates.",
+        "description": "Age is the current local date minus the birth date, reported in years, months, and days.",
         "applicationCategory": "Utility",
         "operatingSystem": "Any",
         "offers": {

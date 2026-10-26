@@ -32,7 +32,7 @@ const FAQS = [
   {
     question: 'How does Image to PDF conversion work in Toolioz?',
     answer:
-      'All image processing happens directly inside your web browser memory using pdf-lib. Your images are never uploaded to any cloud server.',
+      'Images are placed into a PDF with pdf-lib in the browser. The images are not uploaded.',
   },
   {
     question: 'What image formats are supported?',
@@ -161,13 +161,13 @@ export default function ImageToPdfClient() {
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <header className="mb-5 text-center">
           <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-cyan-800">
-            <ShieldCheck className="w-3.5 h-3.5" /> 100% Client-Side In-Browser Conversion
+            <ShieldCheck className="w-3.5 h-3.5" /> Conversion stays in this tab
           </div>
           <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
             Image to PDF Converter
           </h1>
           <p className="mx-auto mt-2 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
-            Convert JPG, PNG, and WebP photos into a clean single PDF document. Zero server uploads.
+            JPG, PNG, and WebP images are placed in one PDF in the selected order. The files are not uploaded.
           </p>
         </header>
 
@@ -283,7 +283,7 @@ export default function ImageToPdfClient() {
         {/* SEO & Educational Content */}
         <SEOSection
           title="Image to PDF Conversion"
-          description="Converting JPG and PNG photos into a PDF is essential for submitting official application forms, university reports, and business documentation. Unlike traditional web converters that require uploading confidential photos to remote cloud servers, Toolioz processes all image embedding locally inside your browser memory using WebAssembly and JavaScript."
+          description="JPG and PNG images are placed into one PDF in the browser. The images are not uploaded."
           howToUse={[
             "Select your JPG, PNG, or WebP images using the file picker.",
             "Preview selected images and remove unwanted files.",
@@ -291,7 +291,7 @@ export default function ImageToPdfClient() {
             "Click 'Download PDF File' to save your new PDF locally."
           ]}
           benefits={[
-            "100% private in-browser image processing with zero server uploads.",
+            "Images are placed into the PDF in the browser. They are not uploaded.",
             "Supports multi-image conversion (JPG, PNG, WebP, GIF, BMP).",
             "Generates clean, full-resolution PDF pages matching image dimensions.",
             "Fast, free, and accessible on both desktop and mobile browsers."

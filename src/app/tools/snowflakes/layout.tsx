@@ -8,8 +8,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        "name": "Snowflake Generator",
-        "description": "Generate unique snowflake IDs (like Twitter/Discord).",
+        "name": "Discord Snowflake Parser",
+        "description": "Shifts a Discord snowflake 22 bits and adds the Discord epoch, 1420070400000. The result is shown in local time. The id is not sent to Discord.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
         "offers": {

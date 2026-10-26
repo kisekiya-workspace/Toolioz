@@ -4,7 +4,7 @@ import LoremIpsumClient from './LoremIpsumClient';
 import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
-  title: "Professional Lorem Ipsum Generator & Text Placeholder",
+  title: "Lorem Ipsum Generator",
   description: 'Generate customizable Lorem Ipsum placeholder text for designs. Specify paragraphs, words, and optional HTML tags for mockups.',
   keywords: 'Lorem ipsum generator professional, placeholder text maker, dummy text for web design, html lipsum generator, customizable placeholder text',
   alternates: {

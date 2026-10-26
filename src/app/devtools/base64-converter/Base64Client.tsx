@@ -15,7 +15,7 @@ const BASE64_FAQS = [
   },
   {
     question: "Is Base64 encoding secure encryption?",
-    answer: "No, Base64 is NOT encryption. It is an encoding method for safe data transport. Anyone can decode a Base64 string back to its original plain text instantly."
+    answer: "No. Text uses btoa and atob. Characters outside Latin-1 throw an error. A file encode keeps the part of a data URL after the comma. Base64 is not encryption."
   }
 ];
 
@@ -87,7 +87,7 @@ export default function Base64Client() {
               Base64 Converter
             </h1>
             <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-              Encode text or files to Base64, or decode them back to their original form. 100% private.
+              Text uses btoa and atob. Characters outside Latin-1 cannot be encoded. A file encode keeps the data-URL payload after the comma. Base64 is not encryption.
             </p>
           </div>
         </header>

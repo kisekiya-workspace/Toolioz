@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "PDF to Image",
-        "description": "Convert PDF pages to JPG or PNG images.",
+        "description": "Renders up to 30 PDF pages as PNG or JPEG. This address is an alias.",
         "applicationCategory": "MultimediaApplication",
         "operatingSystem": "Any",
         "offers": {

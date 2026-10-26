@@ -4,7 +4,7 @@ import DesignClient from './DesignClient';
 import { buildCollectionPageJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata = buildPageMetadata({
-  title: 'Design Tools — Drawing, Dithering & Image Utilities',
+  title: 'Design and Image Tools',
   description:
     'Explore drawing, dithering, ASCII art, shaders, CSS generators, and image utilities. Create previews and export designs with Toolioz.',
   path: '/design',

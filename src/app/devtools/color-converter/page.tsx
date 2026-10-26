@@ -7,15 +7,15 @@ import { JSONLD } from '@/components/ui/JSONLD';
 import { Footer } from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
-  title: "Advanced CSS Mesh Gradient & Color Palette Generator",
-  description: 'Pro developer tools for WCAG contrast checking, web UI theme generation (Primary, Accent, Surface), and creating interactive pure CSS mesh gradients.',
-  keywords: 'CSS mesh gradient generator online, WCAG visual contrast checker, Triadic color palette math, UI theme variable generator, HEX to HSL tool free, developer color suite',
+  title: "Color and Mesh Gradient Tool",
+  description: 'Converts hex, RGB, and HSL. Hue shifts make secondary, accent, and surface swatches. Mesh CSS uses radial gradients. Contrast uses a 0.03928 cutoff.',
+  keywords: 'hex to RGB, hex to HSL, CSS radial gradient mesh, color contrast ratio, hue shift palette',
   alternates: {
     canonical: 'https://toolioz.com/devtools/color-converter',
   },
   openGraph: {
     title: 'CSS Color Suite & Mesh Generator | Toolioz',
-    description: 'Create mathematical color palettes and export modern CSS mesh background gradients instantly.',
+    description: 'Converts hex, RGB, and HSL, copies radial-gradient mesh CSS, and reports contrast with a 0.03928 luminance cutoff.',
     url: 'https://toolioz.com/devtools/color-converter',
     siteName: 'Toolioz DevTools',
     type: 'website',
@@ -29,8 +29,8 @@ export default function ColorConverterPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "Advanced CSS Color Converter & Mesh Generator",
-    "description": "Professional browser-based utility for CSS mesh gradients, WCAG legibility checking, and mathematical web UI theme generation.",
+    "name": "Color Converter",
+    "description": "Converts hex, RGB, and HSL. Mesh CSS uses radial gradients. Contrast uses a 0.03928 luminance cutoff.",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "All",
     "url": "https://toolioz.com/devtools/color-converter",

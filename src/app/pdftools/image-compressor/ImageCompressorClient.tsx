@@ -13,22 +13,22 @@ const FAQS = [
   {
     question: 'Does this tool upload my images to a server?',
     answer:
-      'No. All processing happens entirely in your browser using canvas-based compression. Your images never leave your device.',
+      'No. Compression uses the canvas in the browser. The image is not uploaded.',
   },
   {
     question: 'What image formats are supported?',
     answer:
-      'You can compress JPEG, PNG, and WebP images. The output is always optimized JPEG for maximum size reduction.',
+      'JPEG, PNG, and WebP can be compressed. The saved file is a JPEG.',
   },
   {
-    question: 'What does the Target Size feature do?',
+    question: 'What does a target size do?',
     answer:
-      'When you set a target file size (e.g. 200KB), the engine automatically finds the best quality-and-scale combination to meet your goal.',
+      'A target in KB starts a search over scale and JPEG quality. The search can begin at 50% or 30% scale when the target is far below the original file. If nothing fits, the saved JPEG uses quality 0.05 and 10% scale, which can still be larger than the target.',
   },
   {
-    question: 'Will I lose image quality?',
+    question: 'Is the saved image lossless?',
     answer:
-      'The compressor uses intelligent resampling to preserve visual fidelity. You can see a side-by-side comparison before downloading.',
+      'No. The output is a JPEG from canvas.toDataURL. A preview is shown before the file is downloaded.',
   },
 ];
 
@@ -175,7 +175,7 @@ export default function ImageCompressorClient() {
         <header className="border-b border-[var(--border)] bg-red-50/50 px-4 py-5 text-center sm:py-7">
           <div className="container">
             <h1 className="mb-2 text-2xl font-black tracking-tight sm:text-3xl">Image Compressor</h1>
-            <p className="mx-auto max-w-[700px] text-sm leading-6 text-[var(--text-secondary)] sm:text-base">Reduce image file size instantly with professional-grade compression settings.</p>
+            <p className="mx-auto max-w-[700px] text-sm leading-6 text-[var(--text-secondary)] sm:text-base">A JPEG, PNG, or WebP is reduced by a quality setting or a target file size. The image is not uploaded.</p>
           </div>
         </header>
 
@@ -195,8 +195,8 @@ export default function ImageCompressorClient() {
                     </label>
                   </div>
                 ) : (
-                  <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                    <div className="relative flex items-center justify-between gap-4 rounded-[var(--radius-lg)] bg-[var(--bg-secondary)] p-4 sm:gap-6 sm:p-5" style={{ marginBottom: '2rem' }}>
+                  <div className="flex h-full flex-col">
+                    <div className="relative mb-8 flex items-center justify-between gap-4 rounded-[var(--radius-lg)] bg-[var(--bg-secondary)] p-4 sm:gap-6 sm:p-5">
                       <div className="flex flex-1 items-center gap-4">
                         <ImageIcon size={28} className="text-[#ef4444]" />
                         <div>
@@ -208,16 +208,16 @@ export default function ImageCompressorClient() {
                     </div>
 
                     <div className="rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>
+                      <div className="mb-6 flex items-center gap-2 text-foreground">
                         <Settings size={18} />
-                        <span style={{ fontWeight: 700 }}>Compression Settings</span>
+                        <span className="font-bold">Compression Settings</span>
                       </div>
 
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                      <div className="flex flex-col gap-6">
                         <div>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontSize: '0.9rem' }}>
-                            <span style={{ fontWeight: 600 }}>Visual Quality</span>
-                            <span style={{ color: 'var(--primary)', fontWeight: 700 }}>{Math.round(quality * 100)}%</span>
+                          <div className="mb-2 flex justify-between text-sm">
+                            <span className="font-semibold">Visual Quality</span>
+                            <span className="font-bold text-primary">{Math.round(quality * 100)}%</span>
                           </div>
                           <input 
                             type="range" 
@@ -226,29 +226,22 @@ export default function ImageCompressorClient() {
                             step="0.05" 
                             value={quality} 
                             onChange={(e) => setQuality(parseFloat(e.target.value))} 
-                            style={{ width: '100%', accentColor: 'var(--primary)' }}
+                            className="w-full accent-primary"
                             disabled={!!targetSize}
                           />
                         </div>
 
                         <div>
-                          <span style={{ fontSize: '0.9rem', fontWeight: 600, display: 'block', marginBottom: '8px' }}>Target Size (KB) - Optional</span>
+                          <span className="mb-2 block text-sm font-semibold">Target Size (KB) - Optional</span>
                           <input 
                             type="number" 
                             placeholder="e.g. 100" 
                             value={targetSize}
                             onChange={(e) => setTargetSize(e.target.value)}
-                            style={{ 
-                              width: '100%', 
-                              padding: '12px', 
-                              borderRadius: '10px', 
-                              border: '1px solid var(--border)',
-                              background: 'var(--bg-primary)',
-                              color: 'var(--text-primary)'
-                            }}
+                            className="w-full rounded-[10px] border border-border bg-background px-3 py-3 text-foreground"
                           />
-                          <p style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', marginTop: '6px' }}>
-                            Overrides quality to meet your size goal.
+                          <p className="mt-1.5 text-xs text-muted-foreground">
+                            A target size overrides the quality setting until the file is at or under that size.
                           </p>
                         </div>
                       </div>
@@ -260,7 +253,7 @@ export default function ImageCompressorClient() {
                       onClick={compressImage} 
                       disabled={isProcessing}
                     >
-                      {isProcessing ? <Loader2 className="animate-spin" style={{ marginRight: '8px' }} /> : 'Compress Image Now'}
+                      {isProcessing ? <Loader2 className="mr-2 animate-spin" /> : 'Compress Image Now'}
                     </Button>
                   </div>
                 )}
@@ -269,97 +262,50 @@ export default function ImageCompressorClient() {
 
             {file && (
               <div>
-                <Card style={{ padding: '1.5rem', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                <Card className="flex h-full flex-col p-6">
                   <div className="grid gap-6 sm:grid-cols-2">
-                    <div style={{ textAlign: 'center' }}>
-                      <p style={{ fontSize: '0.8rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text-tertiary)' }}>ORIGINAL</p>
-                      <div style={{ 
-                        height: '240px', 
-                        background: 'var(--bg-secondary)', 
-                        borderRadius: '12px', 
-                        overflow: 'hidden',
-                        border: '1px solid var(--border)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}>
-                        <img src={originalUrl} alt="Original" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+                    <div className="text-center">
+                      <p className="mb-2 text-xs font-bold text-muted-foreground">ORIGINAL</p>
+                      <div className="flex h-60 items-center justify-center overflow-hidden rounded-xl border border-border bg-secondary">
+                        <img src={originalUrl} alt="Original" className="max-h-full max-w-full object-contain" />
                       </div>
-                      <p style={{ marginTop: '0.5rem', fontWeight: 800 }}>{formatSize(file.size)}</p>
+                      <p className="mt-2 font-extrabold">{formatSize(file.size)}</p>
                     </div>
 
-                    <div style={{ textAlign: 'center' }}>
-                      <p style={{ fontSize: '0.8rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--primary)' }}>OPTIMIZED</p>
-                      <div style={{ 
-                        height: '240px', 
-                        background: 'var(--bg-secondary)', 
-                        borderRadius: '12px', 
-                        overflow: 'hidden',
-                        border: '1px solid var(--primary)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        position: 'relative'
-                      }}>
+                    <div className="text-center">
+                      <p className="mb-2 text-xs font-bold text-primary">OPTIMIZED</p>
+                      <div className="relative flex h-60 items-center justify-center overflow-hidden rounded-xl border border-primary bg-secondary">
                         {compressedUrl ? (
-                          <img src={compressedUrl} alt="Compressed" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+                          <img src={compressedUrl} alt="Compressed" className="max-h-full max-w-full object-contain" />
                         ) : (
-                          <div style={{ opacity: 0.3 }}><ImageIcon size={48} /></div>
+                          <div className="opacity-30"><ImageIcon size={48} /></div>
                         )}
                         {compressedSize > 0 && (
-                          <div style={{ 
-                            position: 'absolute', 
-                            bottom: '8px', 
-                            right: '8px', 
-                            background: 'var(--success)', 
-                            color: 'white', 
-                            fontSize: '0.7rem', 
-                            padding: '4px 8px', 
-                            borderRadius: '100px',
-                            fontWeight: 700
-                          }}>
+                          <div className="absolute bottom-2 right-2 rounded-full bg-emerald-600 px-2 py-1 text-[0.7rem] font-bold text-white">
                             SAVED {Math.round((1 - compressedSize / file.size) * 100)}%
                           </div>
                         )}
                         {appliedScale < 1 && (
-                          <div style={{ 
-                            position: 'absolute', 
-                            top: '8px', 
-                            left: '8px', 
-                            background: 'var(--primary)', 
-                            color: 'white', 
-                            fontSize: '0.65rem', 
-                            padding: '4px 8px', 
-                            borderRadius: '100px',
-                            fontWeight: 700
-                          }}>
+                          <div className="absolute left-2 top-2 rounded-full bg-primary px-2 py-1 text-[0.65rem] font-bold text-primary-foreground">
                             SCALED {Math.round(appliedScale * 100)}%
                           </div>
                         )}
                       </div>
-                      <p style={{ marginTop: '0.5rem', fontWeight: 800 }}>{compressedSize ? formatSize(compressedSize) : '-'}</p>
+                      <p className="mt-2 font-extrabold">{compressedSize ? formatSize(compressedSize) : '-'}</p>
                     </div>
                   </div>
 
                   {compressedUrl && (
-                    <div style={{ marginTop: '2rem' }}>
+                    <div className="mt-8">
                       <Button fullWidth variant="primary" size="lg" onClick={downloadImage}>
-                        <Download size={20} style={{ marginRight: '8px' }} />
+                        <Download size={20} className="mr-2" />
                         Download Optimized Image
                       </Button>
                       
                       {dimensions && (
-                        <div style={{ 
-                          marginTop: '1.5rem', 
-                          padding: '1rem', 
-                          background: 'rgba(59, 130, 246, 0.05)', 
-                          borderRadius: '12px',
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          fontSize: '0.85rem'
-                        }}>
-                          <span style={{ color: 'var(--text-secondary)' }}>Dimensions</span>
-                          <span style={{ fontWeight: 700 }}>{dimensions.width} x {dimensions.height} px</span>
+                        <div className="mt-6 flex justify-between rounded-xl bg-blue-500/5 p-4 text-sm">
+                          <span className="text-muted-foreground">Dimensions</span>
+                          <span className="font-bold">{dimensions.width} x {dimensions.height} px</span>
                         </div>
                       )}
                     </div>
@@ -371,45 +317,45 @@ export default function ImageCompressorClient() {
 
           <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
             <div className="flex items-start gap-4 rounded-[var(--radius-lg)] border border-[var(--border)] bg-white p-6 transition-transform duration-300 hover:-translate-y-1">
-              <ShieldCheck size={24} className="mt-1 flex-shrink-0" style={{ color: '#10b981' }} />
+              <ShieldCheck size={24} className="mt-1 shrink-0 text-emerald-500" />
               <div>
-                <h4 className="mb-2 text-[1.125rem] font-extrabold">Secure & Private</h4>
-                <p className="text-[0.9375rem] leading-[1.6] text-[var(--text-secondary)]">All processing happens locally in your browser. Your images never leave your device.</p>
+                <h4 className="mb-2 text-[1.125rem] font-extrabold">Local compression</h4>
+                <p className="text-[0.9375rem] leading-[1.6] text-[var(--text-secondary)]">Compression runs in the browser. The image is not uploaded.</p>
               </div>
             </div>
             <div className="flex items-start gap-4 rounded-[var(--radius-lg)] border border-[var(--border)] bg-white p-6 transition-transform duration-300 hover:-translate-y-1">
-              <Zap size={24} className="mt-1 flex-shrink-0" style={{ color: '#f59e0b' }} />
+              <Zap size={24} className="mt-1 shrink-0 text-amber-500" />
               <div>
-                <h4 className="mb-2 text-[1.125rem] font-extrabold">Instant Optimization</h4>
-                <p className="text-[0.9375rem] leading-[1.6] text-[var(--text-secondary)]">Our advanced engine compresses your images in milliseconds with pixel-perfect results.</p>
+                <h4 className="mb-2 text-[1.125rem] font-extrabold">Quality or target size</h4>
+                <p className="text-[0.9375rem] leading-[1.6] text-[var(--text-secondary)]">The result follows the quality slider, or a target file size when one is entered.</p>
               </div>
             </div>
             <div className="flex items-start gap-4 rounded-[var(--radius-lg)] border border-[var(--border)] bg-white p-6 transition-transform duration-300 hover:-translate-y-1">
-              <Info size={24} className="mt-1 flex-shrink-0" style={{ color: '#3b82f6' }} />
+              <Info size={24} className="mt-1 shrink-0 text-blue-500" />
               <div>
-                <h4 className="mb-2 text-[1.125rem] font-extrabold">No File Limits</h4>
-                <p className="text-[0.9375rem] leading-[1.6] text-[var(--text-secondary)]">Completely free to use with no hidden caps on file size or daily usage counts.</p>
+                <h4 className="mb-2 text-[1.125rem] font-extrabold">JPEG, PNG, and WebP</h4>
+                <p className="text-[0.9375rem] leading-[1.6] text-[var(--text-secondary)]">JPEG, PNG, and WebP can be read. The downloaded file is a JPEG.</p>
               </div>
             </div>
           </div>
         </section>
 
         <SEOSection 
-          title="Best Online Image Compressor: Reduce Size Without Losing Quality"
-          description="Compress images for fast web performance or email. Set a target file size and let our engine find the perfect balance between quality and compression. All processing is local — your photos never leave your device."
+          title="JPEG image compressor"
+          description="Reads a JPEG, PNG, or WebP and saves a JPEG. A quality slider is used at full size. A target size in KB searches scale and quality, and can still miss the target."
           howToUse={[
-            "Select or drop your image file into the dropzone.",
-            "Adjust the visual quality slider or enter a specific Target Size in KB.",
-            "Click Compress Image Now to run the local optimization engine.",
-            "Review the before vs after preview to ensure quality is preserved.",
-            "Download your optimized image instantly."
+            "Choose a JPEG, PNG, or WebP file.",
+            "Set the quality slider, or enter a target size in KB.",
+            "Click Compress Image Now.",
+            "Compare the preview with the original.",
+            "Download the JPEG. The filename starts with compressed_."
           ]}
           benefits={[
-            "Faster page loads improve search engine rankings.",
-            "100% private — all processing happens in your browser.",
-            "Target Size feature for meeting strict upload limits.",
-            "Intelligent resampling preserves fine details.",
-            "Supports JPEG, PNG, and WebP image formats."
+            "The image is drawn to a canvas in the browser and is not uploaded.",
+            "Without a target, scale stays at 1 and the slider sets JPEG quality.",
+            "A target can shrink the image to 10% scale and quality 0.05.",
+            "That fallback can still be larger than the target.",
+            "The saved type is image/jpeg."
           ]}
         />
 

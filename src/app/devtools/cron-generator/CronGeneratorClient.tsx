@@ -291,10 +291,10 @@ export default function CronGeneratorClient() {
                             </span>
                         </div>
                         <h1 className="text-3xl font-extrabold tracking-tight text-zinc-950 sm:text-4xl md:text-5xl dark:text-zinc-50">
-                            Advanced Cron Builder
+                            Cron Generator
                         </h1>
                         <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-                            Visually construct valid cron schedules, parse expressions into plain English, and preview execution timelines safely in your browser.
+                            A cron expression is five fields for minute, hour, day, month, and weekday. This page builds that expression and lists the next five times it would run.
                         </p>
                     </div>
                 </header>
@@ -412,20 +412,20 @@ export default function CronGeneratorClient() {
                 </section>
 
                 <SEOSection
-                    title="Online Cron Schedule Predictor & Advanced Parser"
-                    description="Visually build cron schedules, decipher complex cron expressions into human readable English, and generate a 5-iteration execution schedule natively in your browser to debug automated background jobs confidently."
+                    title="How the cron generator works"
+                    description="A cron expression here is five fields for minute, hour, day, month, and weekday. The page builds that expression and lists the next five local run times."
                     howToUse={[
-                        "Use the Visual Builder tabs to select the exact minute, hour, day, month, and weekday your job should run.",
-                        "Alternatively, paste your raw cron expression directly into the massive purple input header (e.g. '0 22 * * 1-5').",
-                        "Instantly see the plain English translation of exactly what the expression will do (e.g. 'At 10:00 PM, Monday through Friday').",
-                        "Review the 'Next 5 Executions' timeline to confirm timezones and logic don't disrupt your triggers.",
-                        "Copy the generated expression to paste into your server, CI/CD pipeline, or Kubernetes cronjob."
+                        "The minute, hour, day, month, and weekday tabs write *, a step, a range, or a list.",
+                        "Pasting a five-field expression such as 0 22 * * 1-5 updates those tabs. A six-field string is not rebuilt by the tabs.",
+                        "cronstrue writes an English sentence for the expression, such as the sentence for 0 22 * * 1-5.",
+                        "cron-parser lists the next five times in the browser's local timezone.",
+                        "The expression can be copied. The page does not install it on a server."
                     ]}
                     benefits={[
-                        "Visual Builder: Stop guessing syntax. Click buttons and let the generator write the asterisks and slashes for you.",
-                        "Timeline Validation: Avoid catastrophic duplicate executions by verifying the absolute runtime timeline ahead of deployment.",
-                        "Human Readable Translation: Instantly converts arbitrary stars and slashes into detailed English logic.",
-                        "Native Execution: Uses advanced math libraries entirely in the browser, safeguarding privacy via zero-server communication."
+                        "The builder writes five fields from the selected mode.",
+                        "The next five runs come from cron-parser in the local timezone.",
+                        "cronstrue turns the expression into an English sentence.",
+                        "The expression is calculated in the page. The page still loads site assets."
                     ]}
                 />
             </div>

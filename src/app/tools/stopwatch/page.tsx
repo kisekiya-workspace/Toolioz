@@ -126,16 +126,16 @@ export default function StopwatchPage() {
     };
 
     const faq = [
-        { q: "Does this work in the background?", a: "Yes! We use delta-timing which relies on your system clock. Even if the browser sleeps, the time will correct itself immediately when you return." },
-        { q: "Is it accurate?", a: "Yes, it uses the system clock for high precision down to the millisecond." },
-        { q: "Can I save my laps?", a: "Currently, laps are temporary and will be cleared if you refresh the page." }
+        { q: "Does the timer keep running in a background tab?", a: "The elapsed time is the difference between the start clock and the current clock, so a sleeping tab catches up when it is visible again." },
+        { q: "How precise is the time?", a: "The display uses the system clock, down to the millisecond." },
+        { q: "Are laps saved?", a: "No. Laps stay in the page and disappear on refresh." }
     ];
 
     return (
         <div className="container px-6 py-12 m-auto">
             <ToolHeader
                 title="Stopwatch & Timer"
-                description="A precise, browser-based chronograph for tracking time, setting alarms, and measuring laps."
+                description="A stopwatch that records laps from the system clock."
             />
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">

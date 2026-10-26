@@ -108,7 +108,7 @@ export default function UnitConverterClient() {
               Unit Converter
             </h1>
             <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-              Scientific grade conversion for length, mass, temperature, and digital data.
+              Length, mass, temperature, volume, and data units convert inside one category. A length cannot be converted into a mass.
             </p>
           </div>
         </header>

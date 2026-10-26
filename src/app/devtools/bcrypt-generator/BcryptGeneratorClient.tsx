@@ -73,7 +73,7 @@ export default function BcryptGeneratorClient() {
                             Bcrypt Generator & Verifier
                         </h1>
                         <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-                            Generate secure hashes and verify passwords safely directly in your browser.
+                            bcrypt stores a password as a salted hash with a cost factor. This page creates that hash and checks a password against an existing hash in the browser.
                         </p>
                     </div>
                 </header>
@@ -117,7 +117,7 @@ export default function BcryptGeneratorClient() {
                                     onChange={(e) => setRounds(parseInt(e.target.value))}
                                     className="w-full accent-blue-600"
                                 />
-                                <span className="text-[11px] text-zinc-500 dark:text-zinc-400">Higher rounds = more secure compute cost. 10 is standard.</span>
+                                <span className="text-[11px] text-zinc-500 dark:text-zinc-400">The slider runs from 4 to 14 and starts at 10. bcryptjs writes a $2b$ hash. A higher factor makes each hash slower.</span>
                             </div>
 
                             <Button
@@ -203,17 +203,17 @@ export default function BcryptGeneratorClient() {
 
                 <SEOSection
                     title="Bcrypt Password Hash Generator & Checker"
-                    description="A vital utility for backend developers to quickly generate and verify Bcrypt password hashes without setting up a server or compromising plaintext passwords. Select custom salt rounds securely online."
+                    description="bcrypt stores a password as a salted hash with a cost factor. This page creates that hash and checks a password against an existing hash in the browser."
                     howToUse={[
-                        "To generate: Enter your plaintext string and select the cost factor (salt rounds), then click Generate.",
-                        "To test: Paste a known Bcrypt hash (e.g. $2a$10$...) and type the suspected string. Verification is instant.",
-                        "The check automatically extracts the embedded salt and verifies if the inputted text matches the algorithmic output.",
-                        "Easily copy the generated hash output to seed your database or integration tests."
+                        "Generate reads the text and the cost factor, then calls bcryptjs hashSync. The slider runs from 4 to 14 and starts at 10. The hash starts with $2b$.",
+                        "Check pastes a hash and calls compareSync. The salt and prefix come from that hash, so a $2a$ hash can still be checked.",
+                        "A match means compareSync returned true. A higher cost factor makes that call slower.",
+                        "The hash can be copied. The page does not write it to a database."
                     ]}
                     benefits={[
-                        "100% Client-Side Processing keeps passwords safe from man-in-the-middle attacks.",
-                        "Visual verification lets you instantly know if a hash matches.",
-                        "Adjustable rounds (cost factors) let you simulate different security setups and compute times."
+                        "Hashing and checking run in the page with bcryptjs. The password is not uploaded.",
+                        "The result is the boolean from compareSync.",
+                        "bcryptjs writes a $2b$ prefix. compareSync can still check a pasted $2a$ hash."
                     ]}
                 />
             </div>

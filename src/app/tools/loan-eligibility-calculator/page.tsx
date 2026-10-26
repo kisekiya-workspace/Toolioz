@@ -90,7 +90,7 @@ export default function LoanEligibilityPage() {
             <JsonLd data={jsonLd} />
             <ToolHeader
                 title="Loan Eligibility Calculator"
-                description="Check how much loan you can borrow based on your monthly income and current interest rates."
+                description="Estimates a maximum loan amount from monthly income, existing obligations, interest rate, and tenure."
             />
 
             <AdContainer slot="9012345678" />

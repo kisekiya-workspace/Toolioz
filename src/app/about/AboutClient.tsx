@@ -11,7 +11,7 @@ export default function AboutClient() {
       <header className={styles.header}>
         <div className="mx-auto max-w-6xl px-6">
           <h1 className={styles.title}>
-            About <span style={{ color: 'var(--primary)' }}>Toolioz</span>
+            About <span className="text-primary">Toolioz</span>
           </h1>
           <p className={styles.subtitle}>
             An independent publisher of documented calculators and browser utilities, not a bank, CA firm, or ad network.

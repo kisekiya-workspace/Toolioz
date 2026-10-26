@@ -87,7 +87,7 @@ export default function SalaryBreakupPage() {
         <div className="container px-4 py-8 m-auto max-w-[1400px]">
             <ToolHeader
                 title="Salary Breakup Calculator"
-                description="Visualize your in-hand salary structure. breakdown CTC into Basic, HRA, and Allowances."
+                description="Splits a cost-to-company figure into basic pay, HRA, allowances, and estimated deductions."
             />
             <AdContainer slot="salary-top" />
 

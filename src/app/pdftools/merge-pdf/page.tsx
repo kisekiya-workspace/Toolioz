@@ -6,7 +6,7 @@ import MergePdfClient from './MergePdfClient';
 export const metadata: Metadata = {
   title: "Merge PDF Online | Combine PDF Files",
   description:
-    'Merge multiple PDF files into one document in your browser. Validated uploads, preserved page order, no server processing.',
+    'Merges PDF files into one document in the chosen page order, with the files kept in the browser.',
   alternates: {
     canonical: 'https://toolioz.com/pdftools/merge-pdf',
   },

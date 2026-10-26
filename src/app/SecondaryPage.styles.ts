@@ -1,7 +1,7 @@
 export const secondaryPageStyles = {
   wrapper: 'flex min-h-screen flex-col bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50',
   header:
-    'relative border-b border-zinc-200 bg-white vercel-grid py-16 sm:py-24 text-center dark:border-zinc-800 dark:bg-zinc-950',
+    'relative border-b border-zinc-200 bg-white py-16 sm:py-24 text-center dark:border-zinc-800 dark:bg-zinc-950',
   title:
     'mb-5 text-4xl font-extrabold tracking-tight text-zinc-950 sm:text-5xl md:text-6xl dark:text-zinc-50',
   subtitle: 'mx-auto max-w-2xl text-base leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-400',

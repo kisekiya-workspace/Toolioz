@@ -44,15 +44,15 @@ export default function JSMinifierPage() {
     };
 
     const faq = [
-        { q: "What engine does this use?", a: "Terser parses JavaScript locally in your browser. This tool removes formatting without mangling variable names or enabling compression transforms. License comments are retained." },
-        { q: "Should I test the result?", a: "Yes. Keep your original and run your normal tests. This tool does not transpile TypeScript or JSX, and it does not execute your input." },
+        { q: "What engine does this use?", a: "Terser parses the JavaScript in the browser. Formatting is removed. Names are not mangled, and compression transforms stay off. License comments are kept." },
+        { q: "Should the result be tested?", a: "Yes. Keep the original source and run the usual tests. This page does not transpile TypeScript or JSX, and it does not run the input." },
     ];
 
     return (
         <div className="container px-6 py-12 m-auto">
             <ToolHeader
                 title="JavaScript Minifier"
-                description="Compress, clean, and minify your custom JavaScript code instantly."
+                description="Minifies JavaScript by stripping comments and extra whitespace while keeping the program valid."
             />
 
             <div className="max-w-6xl mx-auto mb-16 grid grid-cols-1 lg:grid-cols-2 gap-8">

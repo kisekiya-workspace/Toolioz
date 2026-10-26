@@ -3,8 +3,8 @@ import PrivacyClient from './PrivacyClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Tool Inputs, Analytics & Advertising",
-  description: "Learn which Toolioz inputs stay in your browser and how analytics, advertising, CDNs, and support messages process information.",
+  title: "Privacy Policy",
+  description: "Explains which Toolioz inputs stay in the browser and how analytics, ads, CDNs, and support mail are handled.",
   keywords: 'Toolioz privacy policy, browser processing, Google Analytics, advertising privacy',
   alternates: {
     canonical: 'https://toolioz.com/privacy-policy',

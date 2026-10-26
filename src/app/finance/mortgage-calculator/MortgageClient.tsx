@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { calculateMonthlyPayment } from '@/lib/formulas';
-import { Info, HomeIcon, ShieldCheck, PieChart, BookOpen, AlertTriangle, Lightbulb, Download } from 'lucide-react';
+import { Info, HomeIcon, ShieldCheck, PieChart, BookOpen, AlertTriangle, Lightbulb, Printer } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
@@ -16,16 +16,16 @@ import { RelatedTools } from '@/components/ui/RelatedTools';
 
 const MORTGAGE_FAQS = [
   {
-    question: "What is the 28/36 rule for mortgage affordability?",
-    answer: "The 28/36 rule states that your housing expenses should not exceed 28% of your gross monthly income, and your total debt service (housing + credit cards + car loans) should not exceed 36%."
+    question: "Does this calculator apply the 28/36 affordability rule?",
+    answer: "No. The result is the principal-and-interest payment for the entered balance, rate, and term. Income and other debts are not inputs."
   },
   {
-    question: "What is Private Mortgage Insurance (PMI)?",
-    answer: "PMI is insurance required by conventional lenders when your down payment is less than 20% of the home purchase price. It protects the lender if you default."
+    question: "Does the payment include private mortgage insurance?",
+    answer: "No. Property tax, homeowners insurance, PMI, and HOA fees are not added."
   },
   {
-    question: "Is a 15-year or 30-year mortgage better?",
-    answer: "A 15-year mortgage has higher monthly payments but lower interest rates and saves huge amounts in overall interest. A 30-year mortgage has lower monthly payments, offering greater cash flow flexibility."
+    question: "How do 15 years and 30 years compare at the same rate?",
+    answer: "The rate does not change with the term. At 6.8% on $300,000, 30 years is about $1,956 a month and about $404,079 of interest. Fifteen years is about $2,663 a month and about $179,349 of interest."
   }
 ];
 
@@ -65,9 +65,9 @@ export default function MortgageClient() {
         <header className={styles.header}>
           <div className="container">
             <h1 className={styles.title}>Mortgage Calculator 2026</h1>
-            <p className={styles.subtitle}>Estimate monthly mortgage payments for home buying &amp; property planning.</p>
+            <p className={styles.subtitle}>A mortgage payment is the monthly amount that repays principal and interest over the loan term. The standard formula uses the loan balance, the annual rate divided by 12, and the number of months.</p>
             <div className="mx-auto mt-6 max-w-[700px] rounded-lg border border-[#fbbf24] bg-[#fffbeb] px-4 py-3 text-left text-[0.8rem] leading-[1.6] text-[#92400e]">
-              <strong>⚠️ Disclaimer:</strong> This calculator provides <strong>approximate estimates</strong> and does not include property taxes, insurance (PMI), or HOA fees. Actual payments depend on your lender, credit score, and loan type. For <strong>assumption &amp; planning purposes only</strong>.
+              <strong>⚠️ Disclaimer:</strong> The payment is principal and interest only. Property tax, insurance, PMI, and HOA fees are not included. The 6.8% rate is an illustrative default.
             </div>
           </div>
         </header>
@@ -119,15 +119,15 @@ export default function MortgageClient() {
                   className={styles.btn}
                   onClick={() => window.print()}
                 >
-                  <Download className="mr-2 size-4" />
-                  Download Amortization Schedule
+                  <Printer className="mr-2 size-4" />
+                  Print this calculation
                 </Button>
               </Card>
 
               <div className={styles.infoBox}>
-                <div className={styles.infoIcon} style={{ color: '#8b5cf6' }}><Info size={20} /></div>
+                <div className={`${styles.infoIcon} text-violet-500`}><Info size={20} /></div>
                 <p className={styles.infoText}>
-                  A mortgage calculator helps you determine how much your monthly payment will be, based on the loan amount, interest rate, and term.
+                  The payment is M = P [ i(1 + i)^n ] / [ (1 + i)^n − 1 ]. i is the annual rate divided by 12, and n is the term in months. There is no down-payment field.
                 </p>
               </div>
             </div>
@@ -188,23 +188,23 @@ export default function MortgageClient() {
         <div className="mx-auto mt-12 max-w-[900px]">
           <Card className="!p-8 bg-[#f5f3ff]">
             <h2 className="mb-6 text-[1.4rem] font-bold text-[#5b21b6] flex items-center gap-2">
-              <ShieldCheck className="text-[#8b5cf6]" /> 💸 Home Loan Tax Benefits (India 2026-27)
+              <ShieldCheck className="text-[#8b5cf6]" /> What the payment leaves out
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
-                <h3 className="mb-3 text-[1.05rem] font-bold text-[#5b21b6]">Interest Deductions</h3>
+                <h3 className="mb-3 text-[1.05rem] font-bold text-[#5b21b6]">Not in the formula</h3>
                 <ul className="flex flex-col gap-3 text-[0.875rem] leading-[1.6] text-[#5b21b6]/80">
-                  <li><strong>Section 24(b):</strong> Deduct up to <strong>₹2 Lakh</strong> per year on interest paid for a self-occupied property.</li>
-                  <li><strong>Let-out Property:</strong> Entire interest paid can be offset against rental income (capped at ₹2L loss per year).</li>
-                  <li><strong>Pre-construction Interest:</strong> Can be claimed in 5 equal installments after possession.</li>
+                  <li><strong>Taxes and insurance:</strong> Property tax, PMI, and HOA fees are not added.</li>
+                  <li><strong>No Section 24 or 80C:</strong> Indian interest and principal deductions are not calculated.</li>
+                  <li><strong>No extra payments:</strong> One extra payment a year is not modeled.</li>
                 </ul>
               </div>
               <div>
-                <h3 className="mb-3 text-[1.05rem] font-bold text-[#5b21b6]">Principal & Others</h3>
+                <h3 className="mb-3 text-[1.05rem] font-bold text-[#5b21b6]">Same rate, two terms</h3>
                 <ul className="flex flex-col gap-3 text-[0.875rem] leading-[1.6] text-[#5b21b6]/80">
-                  <li><strong>Section 80C:</strong> Principal repayment is eligible for deduction up to <strong>₹1.5 Lakh</strong> (Old Regime only).</li>
-                  <li><strong>Stamp Duty:</strong> Can also be claimed under Section 80C in the year of purchase.</li>
-                  <li><strong>Joint Loans:</strong> If you co-own with a spouse, both can claim separate ₹2L (Interest) and ₹1.5L (Principal) deductions!</li>
+                  <li><strong>30 years:</strong> $300,000 at 6.8% is about $1,956 a month.</li>
+                  <li><strong>Interest:</strong> About $404,079 over 360 payments.</li>
+                  <li><strong>15 years:</strong> The same balance and rate is about $2,663 a month and about $179,349 of interest.</li>
                 </ul>
               </div>
             </div>
@@ -214,8 +214,8 @@ export default function MortgageClient() {
         {/* Real-World Tips Section */}
         <section className="mx-auto max-w-[900px] px-6 py-16">
           <div className="mb-10 text-center">
-            <h2 className="text-[1.8rem] font-black text-[var(--text-primary)]">🏠 Before You Take a Home Loan</h2>
-            <p className="mt-3 text-[1rem] text-[var(--text-secondary)]">Must-know strategies to save money and avoid common pitfalls.</p>
+            <h2 className="text-[1.8rem] font-black text-[var(--text-primary)]">How this payment is built</h2>
+            <p className="mt-3 text-[1rem] text-[var(--text-secondary)]">One balance, one annual rate, and a term in years. The rate does not change when the term changes.</p>
           </div>
           
           <div className="grid gap-6 md:grid-cols-2">
@@ -224,13 +224,13 @@ export default function MortgageClient() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-50 text-purple-600">
                   <BookOpen size={20} />
                 </div>
-                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Important Terms</h3>
+                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Starting example</h3>
               </div>
               <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-purple-500">•</span><span><strong>PMI:</strong> Required when down payment is &lt;20%. Adds $50–$200/month. Request removal once you hit 20% equity.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-purple-500">•</span><span><strong>APR vs Rate:</strong> APR includes fees and closing costs — it&apos;s the true cost of the loan.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-purple-500">•</span><span><strong>Escrow:</strong> Lenders may require an account for property taxes and insurance, increasing monthly payment.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-purple-500">•</span><span><strong>Points:</strong> Pay upfront to lower your rate. 1 point = 1% of loan = ~0.25% rate drop. Good if staying 7+ years.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-purple-500">•</span><span><strong>Inputs:</strong> $300,000, 6.8% a year, 30 years.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-purple-500">•</span><span><strong>Payment:</strong> About $1,956 a month.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-purple-500">•</span><span><strong>Interest:</strong> About $404,079. Total paid is about $704,079.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-purple-500">•</span><span><strong>Schedule:</strong> A month-by-month table is not shown.</span></li>
               </ul>
             </div>
 
@@ -239,13 +239,13 @@ export default function MortgageClient() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600">
                   <AlertTriangle size={20} />
                 </div>
-                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Hidden Costs</h3>
+                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Not added</h3>
               </div>
               <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Closing costs:</strong> 2–5% of home price. Budget $6K–$15K on a $300K home.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Tax increases:</strong> Cities reassess property taxes. What&apos;s affordable today may not be tomorrow.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>HOA fees:</strong> Can range from $100 to $1,000+/month. Not in the mortgage but a real cost.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Maintenance rule:</strong> Budget 1% of home value annually ($3,000/yr on $300K home).</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>PMI, tax, insurance, HOA:</strong> None of these are in the payment.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Down payment:</strong> There is no purchase-price field. The amount entered is the balance.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Fees:</strong> Points and closing costs are not subtracted from the rate.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>FHA and VA:</strong> Those loan types are not separate formulas.</span></li>
               </ul>
             </div>
 
@@ -254,17 +254,17 @@ export default function MortgageClient() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
                   <Lightbulb size={20} />
                 </div>
-                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Pro Tips for Buyers</h3>
+                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">15 years at the same 6.8%</h3>
               </div>
               <div className="grid gap-4 md:grid-cols-2">
                 <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-amber-500">✅</span><span>Follow the <strong>28/36 rule</strong>: housing ≤28% of gross income, total debt ≤36%.</span></li>
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-amber-500">✅</span><span>Get pre-approved (not just pre-qualified) for serious negotiating power.</span></li>
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-amber-500">✅</span><span>A <strong>15-year mortgage</strong> saves 50%+ in interest vs 30-year, but payments are ~40% higher.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-amber-500">✅</span><span>Payment is about $2,663 a month, about 36% above the 30-year payment.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-amber-500">✅</span><span>Interest is about $179,349, versus about $404,079 over 30 years.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-amber-500">✅</span><span>The shorter term does not receive a lower rate in this calculator.</span></li>
                 </ul>
                 <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-amber-500">✅</span><span>One extra payment per year on a 30-year loan can cut it by <strong>4–5 years</strong>.</span></li>
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-amber-500">✅</span><span>Don&apos;t drain your emergency fund for the down payment — keep 3–6 months liquid.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-amber-500">✅</span><span>Extra payments are not applied.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-amber-500">✅</span><span>Currency formatting is US dollars.</span></li>
                 </ul>
               </div>
             </div>
@@ -272,26 +272,23 @@ export default function MortgageClient() {
         </section>
 
         <SEOSection 
-          title="Mortgage Affordability 2026: The Ultimate Guide to FHA & VA Loans"
-          description={`Purchasing a home is likely the largest financial commitment you will ever make. Navigating the world of home loans requires a deep understanding of how mortgage payments are structured, particularly the relationship between principal and interest. Our mortgage affordability calculator 2026 is a strategic partner in your home-buying journey, supporting FHA mortgage with PMI and VA loan payment estimates. It allows you to peel back the curtain on your monthly installments and see exactly where every dollar goes.
+          title="Monthly mortgage payment"
+          description={`A mortgage payment is the monthly amount that repays principal and interest over the term. The formula is M = P [ i(1 + i)^n ] / [ (1 + i)^n − 1 ], where i is the annual rate divided by 12 and n is the number of months.
 
-Most mortgages operate on an amortization schedule, a table that details each periodic payment on a loan. In the early years of your mortgage, a significant portion of your monthly payment is directed toward interest, while only a small fraction reduces the principal balance. As time goes on, this ratio shifts, and you begin to equity much faster. By using our advanced calculator, you can see how even a 0.5% difference in your interest rate can save (or cost) you tens of thousands of dollars over the life of a 30-year loan.
-
-Furthermore, our tool helps you evaluate different loan terms. While a 15-year mortgage typically comes with higher monthly payments, it drastically reduces the total interest paid compared to a traditional 30-year term. Beyond just principal and interest, remember that homeownership involves other costs like property taxes, homeowners insurance, and sometimes private mortgage insurance (PMI). While this calculator focuses on the loan mechanics, it provides the solid foundation you need to determine "How much house can I afford?" before you even speak to a lender.`}
+$300,000 at 6.8% for 30 years is about $1,956 a month and about $404,079 of interest. The same balance and rate for 15 years is about $2,663 a month and about $179,349 of interest. The rate does not drop when the term is shortened. Property tax, insurance, PMI, HOA fees, and a down payment are not inputs. A month-by-month schedule is not shown.`}
           howToUse={[
-            "Enter the Total Home Price or the amount you intend to borrow (Principal).",
-            "Adjust the Down Payment amount to see how it reduces your monthly commitment and interest costs.",
-            "Input the Annual Interest Rate provided by your bank or mortgage broker.",
-            "Select the Loan Term (typically 15, 20, or 30 years) to understand the impact on affordability.",
-            "Analyze the Monthly EMI (Equated Monthly Installment) and total interest payable.",
-            "View the total cost of ownership over the entire period, including the principal payback."
+            "Enter the loan balance. There is no separate purchase price or down payment.",
+            "Enter the annual rate as a percent. The default is 6.8.",
+            "Enter the term in years. The default is 30.",
+            "Read the monthly payment.",
+            "Interest is the monthly payment times the number of months, minus the balance."
           ]}
           benefits={[
-            "Strategic Home Buying: Know your budget limits before you start house hunting.",
-            "Interest Savings: Discover how making extra payments or choosing a shorter term can save you a fortune.",
-            "Transparency: Understand exactly how your monthly payment is calculated using standard amortization formulas.",
-            "Scenario Testing: Compare different lenders and interest rate offers side-by-side.",
-            "Financial Confidence: Approach real estate negotiations with a firm grasp of your numbers."
+            "The payment is principal and interest only.",
+            "The $1,956 example uses $300,000, 6.8%, and 30 years.",
+            "A 15-year term at that same rate is about $2,663 a month.",
+            "FHA, VA, and tax deductions are not separate formulas.",
+            "Amounts are formatted in US dollars."
           ]}
           formula="M = P [ i(1 + i)^n ] / [ (1 + i)^n – 1 ]"
         />

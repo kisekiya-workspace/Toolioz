@@ -187,7 +187,7 @@ export default function BoxShadowGeneratorPage() {
                     </div>
                     <div>
                         <h1 className="text-3xl font-black tracking-tight">Box Shadow Generator</h1>
-                        <p className="text-muted-foreground font-medium">Create complex, multi-layered CSS shadows.</p>
+                        <p className="text-muted-foreground font-medium">A CSS box-shadow is one or more layers of offset, blur, spread, and color. This page copies that declaration.</p>
                     </div>
                 </div>
                 <div className="flex items-center gap-3">

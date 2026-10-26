@@ -2,22 +2,14 @@ import React from 'react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import SIPClient from './SIPClient';
 import type { Metadata } from 'next';
-import { buildCalculatorJsonLd } from '@/lib/seo';
+import { buildCalculatorJsonLd, buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: "SIP Calculator 2026 | Step-Up SIP | ₹5000 Monthly Returns",
-  description: "Calculate SIP returns with step-up option. See how ₹5000/month grows to 1 crore. Includes year-by-year breakdown, XIRR, and direct vs regular plan comparison tips.",
-  keywords: 'sip calculator for 1 crore target, step up sip calculator india, sip 5000 per month for 10 years, mutual fund sip return calculator 2026, best sip date to invest, direct vs regular mutual fund, sip vs lumpsum which is better, how to choose mutual fund for sip, sip calculator with inflation',
-  alternates: {
-    canonical: 'https://toolioz.com/finance/sip-calculator',
-  },
-  openGraph: {
-    title: 'SIP Calculator 2026 — Step-Up SIP & Year-by-Year Growth | Toolioz',
-    description: 'Plan your wealth with step-up SIP. See year-by-year growth, get insider tips on NAV, expense ratio, and when to stop your SIP.',
-    url: 'https://toolioz.com/finance/sip-calculator',
-    type: 'website',
-  }
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: 'SIP Calculator',
+  description: 'Calculates SIP future value with an optional annual step-up, invested amount, estimated gain, and a year-by-year projection.',
+  path: '/finance/sip-calculator',
+  keywords: 'sip calculator, step up sip calculator, systematic investment plan, monthly investment growth',
+});
 
 export default function SIPCalculatorPage() {
   const jsonLd = buildCalculatorJsonLd({

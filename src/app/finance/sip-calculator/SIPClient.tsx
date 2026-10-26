@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { calculateSIP } from '@/lib/formulas';
-import { Info, TrendingUp, Sparkles, Target, AlertTriangle, ShieldCheck, BookOpen, Lightbulb, Download } from 'lucide-react';
+import { Info, TrendingUp, Sparkles, Target, AlertTriangle, ShieldCheck, BookOpen, Lightbulb, Printer } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { RelatedTools } from '@/components/ui/RelatedTools';
@@ -18,23 +18,23 @@ import { FAQSchema } from '@/components/ui/FAQSchema';
 const SIP_FAQS = [
   {
     question: "What is a Systematic Investment Plan (SIP)?",
-    answer: "A Systematic Investment Plan (SIP) allows you to invest a fixed sum regularly (monthly or quarterly) in mutual funds. It promotes financial discipline and leverages Rupee Cost Averaging and compound growth over time."
+    answer: "A systematic investment plan invests a fixed sum on a schedule, usually monthly. Each installment is compounded for the time it remains invested."
   },
   {
     question: "How much monthly SIP is required to build ₹1 Crore in 10 years?",
-    answer: "Assuming an average annual return of 12% in equity mutual funds, a monthly SIP of approximately ₹43,500 for 10 years is needed to accumulate ₹1 Crore. With a 10% annual Step-Up SIP, you can start with ~₹25,000/month."
+    answer: "At a constant 12% annual return, compounded monthly with each installment at the start of the month, about ₹43,040 a month for 10 years reaches ₹1 crore. A 10% yearly step-up reaches the same total from about ₹29,640 a month. A different return changes both amounts."
   },
   {
     question: "What is Step-Up SIP and how does it work?",
-    answer: "Step-Up SIP (or Top-Up SIP) allows you to automatically increase your monthly investment by a fixed percentage (e.g. 10%) every year in line with annual salary increments. This significantly accelerates reaching financial goals."
+    answer: "A step-up SIP increases the monthly amount by a fixed percentage each year. A 10% annual increase is a common illustration."
   },
   {
     question: "What is the difference between Direct and Regular Mutual Fund SIPs?",
-    answer: "Direct plans have lower expense ratios because no distributor commissions are paid. Over 20 years, investing via Direct SIPs can increase your total returns by 10% to 15% compared to Regular plans."
+    answer: "Direct plans omit distributor commissions, so the expense ratio is lower. Over long periods that difference compounds into a larger corpus than a regular plan with the same fund."
   },
   {
     question: "How are SIP returns taxed in India (FY 2025-26 / 2026-27)?",
-    answer: "For Equity Mutual Funds, Long-Term Capital Gains (LTCG) over ₹1.25 Lakh per financial year are taxed at 12.5%. Short-Term Capital Gains (units sold under 1 year) are taxed at 20%."
+    answer: "This calculator does not subtract tax or an expense ratio. Equity long-term capital gains rules should be checked against current Income Tax Department guidance before a filing decision."
   }
 ];
 
@@ -130,7 +130,7 @@ export default function SIPClient() {
         <header className={styles.header}>
           <div className="container">
             <h1 className={styles.title}>SIP Return Calculator 2026</h1>
-            <p className={styles.subtitle}>Plan your wealth creation with the best monthly SIP return calculator. Includes Step-Up SIP for annual increment planning.</p>
+            <p className={styles.subtitle}>A systematic investment plan adds a fixed amount on a schedule and compounds each contribution. This calculator projects future value, amount invested, and estimated gain, including an optional annual step-up.</p>
             <div className="mx-auto mt-6 max-w-[700px] rounded-lg border border-[#fbbf24] bg-[#fffbeb] px-4 py-3 text-left text-[0.8rem] leading-[1.6] text-[#92400e]">
               <strong>⚠️ Disclaimer:</strong> Returns shown are <strong>hypothetical projections</strong> based on assumed rates of return. Mutual fund investments are subject to market risks. Past performance does not guarantee future results. This tool is for <strong>assumption &amp; planning purposes only</strong>.
             </div>
@@ -170,7 +170,7 @@ export default function SIPClient() {
                   suffix="%"
                 />
                 <p className="mt-1 text-[0.75rem] text-[var(--text-tertiary)]">
-                  Step-Up SIP increases your monthly contribution by this % every year. Set to 0 for a regular SIP.
+                  Step-up raises the monthly amount by this percent each year. Zero keeps a regular SIP.
                 </p>
               </div>
             </Card>
@@ -194,13 +194,13 @@ export default function SIPClient() {
                   className={styles.btn}
                   onClick={() => window.print()}
                 >
-                  <Download className="mr-2 size-4" />
-                  Get Detailed Plan
+                  <Printer className="mr-2 size-4" />
+                  Print this calculation
                 </Button>
               </Card>
 
               <div className={styles.infoBox}>
-                <div className={styles.infoIcon} style={{ color: '#2563eb' }}><Info size={20} /></div>
+                <div className={`${styles.infoIcon} text-blue-600`}><Info size={20} /></div>
                 <p className={styles.infoText}>
                   A Systematic Investment Plan (SIP) is a disciplined way to invest in mutual funds. Equity SIPs have historically delivered 12–15% CAGR over 10+ years, while debt fund SIPs average 7–8%. Past performance is not indicative of future results.
                 </p>
@@ -229,7 +229,7 @@ export default function SIPClient() {
                           <td className="py-2.5 pr-4 font-medium">{row.year}</td>
                           <td className="py-2.5 pr-4 text-[var(--text-secondary)]">{formatCurrency(row.invested)}</td>
                           <td className="py-2.5 pr-4 font-semibold">{formatCurrency(row.value)}</td>
-                          <td className="py-2.5 font-semibold" style={{ color: row.value - row.invested > 0 ? '#16a34a' : '#ef4444' }}>
+                          <td className={`py-2.5 font-semibold ${row.value - row.invested > 0 ? 'text-emerald-600' : 'text-red-500'}`}>
                             {formatCurrency(row.value - row.invested)}
                           </td>
                         </tr>
@@ -274,8 +274,8 @@ export default function SIPClient() {
         {/* Real-World Tips Section */}
         <section className="mx-auto max-w-[900px] px-6 py-16">
           <div className="mb-10 text-center">
-            <h2 className="text-[1.8rem] font-black text-[var(--text-primary)]">📈 SIP Investing — Tips They Don&apos;t Teach You</h2>
-            <p className="mt-3 text-[1rem] text-[var(--text-secondary)]">Master the art of wealth creation with these pro strategies.</p>
+            <h2 className="text-[1.8rem] font-black text-[var(--text-primary)]">How this SIP projection is built</h2>
+            <p className="mt-3 text-[1rem] text-[var(--text-secondary)]">The figures below use the same monthly compounding formula as the calculator.</p>
           </div>
           
           <div className="grid gap-6 md:grid-cols-2">
@@ -287,10 +287,10 @@ export default function SIPClient() {
                 <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Key SIP Terms</h3>
               </div>
               <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-blue-500">•</span><span><strong>NAV (Net Asset Value):</strong> Price of one unit. You buy more units when market falls — this is Rupee Cost Averaging.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-blue-500">•</span><span><strong>Expense Ratio:</strong> The annual fee (0.5–2.5%). Over 20 years, a 1% difference costs you lakhs.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-blue-500">•</span><span><strong>Exit Load:</strong> A penalty (usually 1%) for redeeming within 1 year. Plan your withdrawals carefully.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-blue-500">•</span><span><strong>XIRR vs CAGR:</strong> For SIPs, XIRR is the true metric. It accounts for your monthly cash flows correctly.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-blue-500">•</span><span><strong>Monthly rate:</strong> The annual percent is divided by 12. A 12% input is 1% per month.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-blue-500">•</span><span><strong>Payment timing:</strong> The extra (1 + i) treats each installment as paid at the start of the month.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-blue-500">•</span><span><strong>Step-up:</strong> Each year&apos;s 12 installments are compounded, then grown for the months that remain.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-blue-500">•</span><span><strong>Not a fund return:</strong> NAV, expense ratio, exit load, and XIRR are not inputs.</span></li>
               </ul>
             </div>
 
@@ -299,13 +299,13 @@ export default function SIPClient() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600">
                   <AlertTriangle size={20} />
                 </div>
-                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Common Mistakes</h3>
+                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">What this projection leaves out</h3>
               </div>
               <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Stopping during crashes:</strong> Bear markets are when you accumulate the most units at a discount.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Chasing last year&apos;s winner:</strong> Past returns ≠ future returns. Look at 5–10 year consistency.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Over-diversifying:</strong> Having 10+ funds dilutes returns. 3–4 funds across categories is optimal.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Ignoring step-up:</strong> Increase your SIP by 10% yearly to beat inflation and accelerate wealth creation.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>One rate:</strong> The projection uses a single annual return. It does not model a market drop or a fund&apos;s past return.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>No unit prices:</strong> Rupee-cost averaging is not simulated. Every installment compounds at the same monthly rate.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Table limit:</strong> The year-by-year table stops at 30 years even when the term is longer.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Step-up:</strong> A value above zero raises the monthly amount once a year. Zero keeps it flat.</span></li>
               </ul>
             </div>
 
@@ -314,17 +314,17 @@ export default function SIPClient() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
                   <Lightbulb size={20} />
                 </div>
-                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Pro Strategies</h3>
+                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Worked examples at 12%</h3>
               </div>
               <div className="grid gap-4 md:grid-cols-2">
                 <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span><strong>Direct vs Regular:</strong> Use Direct plans to save 0.5–1% in distributor commissions.</span></li>
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span><strong>Time &gt; Amount:</strong> ₹500/mo for 30 years beats ₹5000/mo for 10 years due to compounding.</span></li>
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span><strong>Best Dates:</strong> The 1st or 5th of the month historically show slightly better long-term averages.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span><strong>Timing:</strong> Each installment is treated as paid at the start of the month. A calendar date is not an input.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span><strong>12% comparison:</strong> ₹500 a month for 30 years finishes near ₹17.6 lakh. ₹5,000 a month for 10 years finishes near ₹11.6 lakh.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span><strong>Not included:</strong> Expense ratio, tax, and a switch from equity to debt are not subtracted or modeled.</span></li>
                 </ul>
                 <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span><strong>The STP Exit:</strong> 3 years before your goal, systematically transfer funds from Equity to Debt.</span></li>
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span><strong>Tax Harvesting:</strong> Book up to ₹1.25L of LTCG annually (tax-free) and reinvest it.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span><strong>₹1 crore at 12%:</strong> About ₹43,040 a month for 10 years. With a 10% yearly step-up, about ₹29,640 a month.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span><strong>Default example:</strong> ₹5,000 a month for 10 years at 12% invests ₹6,00,000 and finishes near ₹11.6 lakh.</span></li>
                 </ul>
               </div>
             </div>
@@ -334,37 +334,37 @@ export default function SIPClient() {
         <RelatedTools currentToolId="sip-calculator" categoryId="finance" />
         
         <SEOSection 
-          title="The Power of SIP: Monthly SIP Return Calculator for 1 Crore Target"
-          description={`A Systematic Investment Plan (SIP) is more than just a way to invest in mutual funds; it's a financial philosophy that prioritizes consistency over market timing. In the volatile world of finance, trying to guess when the market will hit its lowest or highest point is often a losing game for retail investors. SIPs solve this by automating your investments, allowing you to buy more units when prices are low and fewer when prices are high. This process, known as Rupee Cost Averaging, significantly reduces the average cost of your investment over time.
+          title="Monthly SIP future value"
+          description={`A systematic investment plan adds a fixed amount on a schedule and compounds each contribution. Future value depends on the amount, the annual return, the number of years, and any annual step-up.
 
-The true magic of an SIP, however, lies in the power of compounding. By investing a small amount every month—be it ₹500 or ₹50,000—you are effectively putting your money to work 24/7. Use our tool to calculate how much to invest in SIP for 1 crore target or any other financial goal. Over a span of 10, 20, or 30 years, the interest earned on your contributions starts generating its own interest, leading to an exponential growth curve in the later years. This makes SIPs the ideal tool for long-term goals like buying a house, funding a child's higher education, or building a robust retirement corpus.
+The formula is M = P × [((1 + i)^n − 1) / i] × (1 + i). P is the monthly amount, i is the annual rate divided by 12, and n is the number of months. The final (1 + i) treats each installment as paid at the start of the month. ₹5,000 a month for 10 years at 12% invests ₹6,00,000 and finishes near ₹11.6 lakh. At the same rate, about ₹43,040 a month for 10 years reaches ₹1 crore.
 
-Our professional SIP calculator is designed to help you visualize this journey. By adjusting your monthly contribution, duration, and expected rate of return, you can see how even a small increase in your monthly savings can lead to a difference of lakhs or even crores in your final maturity amount. Financial freedom doesn't require a massive windfall; it requires a disciplined plan. Start your journey today by simulating your wealth creation path with our precision-engineered tool.`}
+A step-up raises that monthly amount once a year and compounds each year for the months that remain. At 12% for 10 years, a 10% step-up reaches ₹1 crore from about ₹29,640 a month. The year-by-year table shows at most 30 years. Tax and expense ratio are not subtracted.`}
           howToUse={[
-            "Enter the Fixed Amount you intend to invest every month (Monthly SIP contribution).",
-            "Input the Expected Annual Rate of Return based on the historical performance of your chosen fund.",
-            "Select the Investment Period in years to see the long-term impact of compounding.",
-            "Optionally set a Step-Up % to simulate increasing your SIP by a fixed percentage every year.",
-            "Instantly view the Total Maturity Value after the specified period.",
-            "Analyze the year-by-year breakdown table to track your wealth growth over time."
+            "Enter the monthly amount.",
+            "Enter the annual return as a percent. The formula divides it by 12.",
+            "Enter the term in years.",
+            "Enter a step-up percent, or leave it at zero for a flat SIP.",
+            "Read the maturity value, the amount invested, and the estimated gain.",
+            "The year-by-year table lists at most the first 30 years."
           ]}
           benefits={[
-            "Market Volatility Protection: Benefit from Rupee Cost Averaging and ignore market noise.",
-            "Wealth Snowball: Harness the compounding effect to grow even small amounts into a fortune.",
-            "Step-Up SIP: Model real-world salary increments for more accurate projections.",
-            "Goal-Based Planning: Align your monthly savings with specific future milestones.",
-            "Liquidity & Flexibility: Most SIPs allow you to stop, pause, or increase your investments at any time."
+            "A zero step-up uses the ordinary annuity-due formula.",
+            "A step-up above zero raises the monthly amount once each year.",
+            "The same rate is applied every month. Unit prices are not simulated.",
+            "The ₹1 crore figures above use a constant 12% annual return.",
+            "Tax and expense ratio are left out of the result."
           ]}
           formula="M = P * [ ((1 + i)^n - 1) / i ] * (1 + i)"
         />
         <DirectAnswerBlock
-          title="How to calculate SIP returns and target ₹1 Crore with Step-Up SIP?"
-          answer="A Systematic Investment Plan (SIP) compounds monthly contributions over time using Rupee Cost Averaging. To build a ₹1 Crore corpus in 10 years at a 12% CAGR, you need a monthly SIP of ~₹43,500. By enabling a 10% annual Step-Up (Top-Up) SIP aligned with salary increments, you can start with ~₹25,000/month and achieve the same ₹1 Crore goal."
+          title="How much monthly SIP reaches ₹1 crore in 10 years?"
+          answer="At a constant 12% annual return, compounded monthly with each installment at the start of the month, about ₹43,040 a month for 10 years reaches ₹1 crore. A 10% yearly step-up reaches the same total from about ₹29,640 a month."
           keyTakeaways={[
-            "SIP Formula — M = P × [((1 + i)^n - 1) / i] × (1 + i) where P is monthly deposit, i is monthly rate, and n is months.",
-            "Step-Up SIP Advantage — Increasing your SIP by 10% each year reduces initial required monthly outlay by 40%.",
-            "Direct Funds Save Commissions — Investing in Direct mutual fund plans adds 10%–15% more wealth over 20 years.",
-            "LTCG Tax Rule (India) — Equity mutual fund LTCG over ₹1.25 Lakh per financial year is taxed at 12.5%."
+            "SIP formula — M = P × [((1 + i)^n − 1) / i] × (1 + i), with i = annual rate / 12 and n = months.",
+            "10% step-up at 12% for 10 years lowers the starting monthly amount from about ₹43,040 to about ₹29,640, roughly 31%.",
+            "The calculator does not subtract an expense ratio or tax.",
+            "The year-by-year table stops at 30 years."
           ]}
           categoryName="Personal Finance"
         />

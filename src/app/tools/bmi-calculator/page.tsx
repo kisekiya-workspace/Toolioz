@@ -72,7 +72,7 @@ export default function BMICalculatorPage() {
             <JsonLd data={jsonLd} />
             <ToolHeader
                 title="BMI Calculator"
-                description="Check your Body Mass Index (BMI) to understand your health status. Supports both Metric (kg/cm) and Standard (lbs/ft) units."
+                description="Calculates body mass index from weight and height in metric or US units."
             />
 
             <AdContainer slot="bmi-top" />

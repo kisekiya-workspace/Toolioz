@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { calculateMonthlyPayment } from '@/lib/formulas';
-import { Info, Car, ShieldCheck, TrendingUp, BookOpen, AlertTriangle, Lightbulb, Download } from 'lucide-react';
+import { Info, Car, ShieldCheck, TrendingUp, BookOpen, AlertTriangle, Lightbulb, Printer } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { SEOSection } from '@/components/ui/SEOSection';
 import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
@@ -16,16 +16,16 @@ import { FAQSchema } from '@/components/ui/FAQSchema';
 
 const CAR_LOAN_FAQS = [
   {
-    question: "What is the difference between Flat Rate and Reducing Balance Interest Rate?",
-    answer: "A flat rate interest rate calculates interest on the original loan amount throughout the entire tenure. A reducing balance rate calculates interest only on the outstanding loan balance, which reduces monthly as you pay principal."
+    question: "Does this calculator use a flat rate?",
+    answer: "No. The EMI is a reducing-balance payment: M = P [ i(1 + i)^n ] / [ (1 + i)^n − 1 ]. A flat rate on the original principal is not calculated."
   },
   {
-    question: "Is 3-year or 5-year tenure better for a car loan?",
-    answer: "A 3-year car loan reduces total interest cost and ensures you don't end up in negative equity (owing more than the depreciated car value). A 5-year loan offers lower monthly EMIs."
+    question: "How do 3 years and 5 years compare at the same rate?",
+    answer: "The rate does not change with the tenure. ₹5,00,000 at 8.5% for 5 years is about ₹10,258 a month and about ₹1,15,496 of interest. Three years is about ₹15,784 a month and about ₹68,216 of interest."
   },
   {
-    question: "What is the recommended down payment for a car loan?",
-    answer: "Financial experts recommend putting down at least 20% as a down payment to avoid negative equity and secure lower interest rates from banks."
+    question: "Is a down payment subtracted from the loan amount?",
+    answer: "No. The amount entered is the balance that is amortized. There is no purchase-price or down-payment field."
   }
 ];
 
@@ -50,9 +50,9 @@ export default function CarLoanClient() {
         <header className={styles.header}>
           <div className="mx-auto max-w-6xl">
             <h1 className={styles.title}>Car Loan EMI Calculator 2026</h1>
-            <p className={styles.subtitle}>Calculate monthly installments with latest car loan interest rates.</p>
+            <p className={styles.subtitle}>A reducing-balance car-loan EMI is the fixed monthly payment that clears the principal and interest over the tenure. Total interest is the sum of EMIs minus the amount borrowed.</p>
             <div className="mx-auto mt-6 max-w-[700px] rounded-lg border border-[#fbbf24] bg-[#fffbeb] px-4 py-3 text-left text-[0.8rem] leading-[1.6] text-[#92400e]">
-              <strong>⚠️ Disclaimer:</strong> Interest rates shown are <strong>illustrative defaults</strong> and may not match actual bank offers. EMI depends on your credit score, loan tenure, and lender. For <strong>assumption &amp; planning purposes only</strong>.
+              <strong>⚠️ Disclaimer:</strong> The 8.5% rate is an illustrative default. The payment is principal and interest only. Insurance, fuel, and a down payment are not included.
             </div>
           </div>
         </header>
@@ -62,7 +62,7 @@ export default function CarLoanClient() {
             <Card className={styles.inputCard}>
               <div className={styles.inputGroup}>
                 <Input 
-                  label="Loan Amount / Price" 
+                  label="Loan amount" 
                   type="number" 
                   value={principal} 
                   onChange={(e) => setPrincipal(Number(e.target.value))}
@@ -108,13 +108,13 @@ export default function CarLoanClient() {
                   className={styles.btn}
                   onClick={() => window.print()}
                 >
-                  <Download className="mr-2 size-4" />
-                  Download EMI Schedule
+                  <Printer className="mr-2 size-4" />
+                  Print this calculation
                 </Button>
               </Card>
 
               <div className={styles.infoBox}>
-                <div className={styles.infoIcon} style={{ color: '#06b6d4' }}><Info size={20} /></div>
+                <div className={`${styles.infoIcon} text-cyan-500`}><Info size={20} /></div>
                 <p className={styles.infoText}>
                   An Equated Monthly Installment (EMI) is a fixed payment amount made by a borrower to a lender at a specified date each calendar month.
                 </p>
@@ -131,22 +131,23 @@ export default function CarLoanClient() {
         <div className="mx-auto mt-12 max-w-[900px]">
           <Card className="!p-8 bg-[#ecfeff]">
             <h2 className="mb-6 text-[1.4rem] font-bold text-[#0891b2] flex items-center gap-2">
-              <ShieldCheck className="text-[#06b6d4]" /> 💸 Tax & Car Loans (2026-27)
+              <ShieldCheck className="text-[#06b6d4]" /> Same rate, two tenures
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
-                <h3 className="mb-3 text-[1.05rem] font-bold text-[#0891b2]">Salaried Individuals</h3>
+                <h3 className="mb-3 text-[1.05rem] font-bold text-[#0891b2]">5 years</h3>
                 <ul className="flex flex-col gap-3 text-[0.875rem] leading-[1.6] text-[#0891b2]/80">
-                  <li><strong>No Direct Benefit:</strong> Unfortunately, there are <strong>no income tax deductions</strong> for car loan EMI or interest for salaried employees.</li>
-                  <li><strong>Electric Vehicles (EV):</strong> Section 80EEB (deduction up to ₹1.5L on interest) was available until March 2023. Check for any 2026 extensions in state-specific EV policies.</li>
+                  <li><strong>Inputs:</strong> ₹5,00,000 at 8.5% for 5 years.</li>
+                  <li><strong>EMI:</strong> About ₹10,258 a month.</li>
+                  <li><strong>Interest:</strong> About ₹1,15,496. Total paid is about ₹6,15,496.</li>
                 </ul>
               </div>
               <div>
-                <h3 className="mb-3 text-[1.05rem] font-bold text-[#0891b2]">Business / Professionals</h3>
+                <h3 className="mb-3 text-[1.05rem] font-bold text-[#0891b2]">3 years</h3>
                 <ul className="flex flex-col gap-3 text-[0.875rem] leading-[1.6] text-[#0891b2]/80">
-                  <li><strong>Interest Deduction:</strong> If the car is used for business, the **entire interest amount** can be claimed as a business expense.</li>
-                  <li><strong>Depreciation:</strong> You can claim <strong>15% depreciation</strong> (standard) or higher for EVs annually on the car&apos;s value to reduce taxable profit.</li>
-                  <li><strong>Fuel & Maintenance:</strong> Expenses like fuel and servicing can also be deducted proportionally for business use.</li>
+                  <li><strong>Same balance and rate:</strong> About ₹15,784 a month.</li>
+                  <li><strong>Interest:</strong> About ₹68,216.</li>
+                  <li><strong>Not applied:</strong> Tax, depreciation, insurance, and fuel are not added.</li>
                 </ul>
               </div>
             </div>
@@ -155,8 +156,8 @@ export default function CarLoanClient() {
 
         <section className="mx-auto max-w-[900px] px-6 py-16">
           <div className="mb-10 text-center">
-            <h2 className="text-[1.8rem] font-black text-[var(--text-primary)]">🚗 Car Loan Tips</h2>
-            <p className="mt-3 text-[1rem] text-[var(--text-secondary)]">Must-know advice before signing the dotted line.</p>
+            <h2 className="text-[1.8rem] font-black text-[var(--text-primary)]">How this EMI is built</h2>
+            <p className="mt-3 text-[1rem] text-[var(--text-secondary)]">One loan amount, one annual rate, and a tenure in years. The rate does not change when the tenure changes.</p>
           </div>
           
           <div className="grid gap-6 md:grid-cols-2">
@@ -165,13 +166,13 @@ export default function CarLoanClient() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-50 text-cyan-600">
                   <BookOpen size={20} />
                 </div>
-                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Important Terms</h3>
+                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Reducing balance only</h3>
               </div>
               <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-cyan-500">•</span><span><strong>Flat vs Reducing:</strong> Dealers quote "flat rate" (e.g., 5%), but it's really ~9-10% reducing.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-cyan-500">•</span><span><strong>Processing Fee:</strong> Usually 0.5–2% of the loan amount. Highly negotiable.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-cyan-500">•</span><span><strong>Foreclosure:</strong> Banks charge 2–5% if you repay early (except floating rate).</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-cyan-500">•</span><span><strong>Ex-showroom:</strong> Loans are on ex-showroom. Registration & insurance are out-of-pocket.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-cyan-500">•</span><span><strong>Formula:</strong> M = P [ i(1 + i)^n ] / [ (1 + i)^n − 1 ]. i is the annual rate divided by 12.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-cyan-500">•</span><span><strong>Flat rate:</strong> Interest on the original principal for the whole tenure is not calculated.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-cyan-500">•</span><span><strong>Fees:</strong> A processing fee and a foreclosure charge are not added.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-cyan-500">•</span><span><strong>Currency:</strong> Amounts are formatted in rupees.</span></li>
               </ul>
             </div>
 
@@ -180,13 +181,13 @@ export default function CarLoanClient() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600">
                   <AlertTriangle size={20} />
                 </div>
-                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Unwritten Rules</h3>
+                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Not in the payment</h3>
               </div>
               <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Dealer Financing:</strong> Usually more expensive. Get pre-approved at a bank first.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Zero Down Payment:</strong> A trap. 100% financing = maximum interest. Pay 20% down.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Insurance:</strong> You are free to buy insurance from any provider, not just the dealer.</span></li>
-                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Negotiation:</strong> Agree on the car price first, THEN discuss finance.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Down payment:</strong> The amount entered is the balance. A car price is not split.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Insurance and fuel:</strong> They are not added to the EMI.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Used-car premium:</strong> The rate is whatever is typed. It does not rise by 2–4%.</span></li>
+                <li className="flex gap-2"><span className="mt-1 shrink-0 text-red-500">•</span><span><strong>Income:</strong> A 15% of salary check is not performed.</span></li>
               </ul>
             </div>
 
@@ -195,17 +196,17 @@ export default function CarLoanClient() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
                   <Lightbulb size={20} />
                 </div>
-                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Pro Tips for Borrowers</h3>
+                <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">3 years at the same 8.5%</h3>
               </div>
               <div className="grid gap-4 md:grid-cols-2">
                 <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span><strong>15% Rule:</strong> Keep EMI below 15% of your monthly take-home salary.</span></li>
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span><strong>Tenure:</strong> 3 years is the sweet spot for balancing affordable EMIs and low interest.</span></li>
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span><strong>Credit Score:</strong> Wait 3 months to fix a bad score; it can save lakhs in interest.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span>EMI is about ₹15,784, higher than the 5-year payment of about ₹10,258.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span>Interest is about ₹68,216, versus about ₹1,15,496 over 5 years.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span>The shorter tenure does not receive a lower rate.</span></li>
                 </ul>
                 <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span><strong>Used Cars:</strong> Bank rates are 2–4% higher. Try certified pre-owned programs.</span></li>
-                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span><strong>TCO:</strong> Calculate Total Cost of Ownership (EMI + Insurance + Fuel), not just EMI.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span>This is the same reducing-balance formula as the mortgage calculator.</span></li>
+                  <li className="flex gap-2"><span className="mt-1 shrink-0 text-emerald-500">✅</span><span>That mortgage page formats US dollars. This page formats rupees.</span></li>
                 </ul>
               </div>
             </div>
@@ -213,26 +214,23 @@ export default function CarLoanClient() {
         </section>
 
         <SEOSection 
-          title="Car Loan EMI Calculator 2026: Navigating Interest Rates & Tenures"
-          description={`Buying a new car is a significant financial decision. Our car loan EMI calculator with interest rates 2026 provides a clear breakdown of your monthly commitment. Plan your vehicle purchase with the latest auto financing rules and ensure your dream drive fits your budget.
+          title="Reducing-balance car loan EMI"
+          description={`A reducing-balance EMI is the fixed monthly payment that clears principal and interest. Total interest is the sum of the EMIs minus the amount borrowed. A flat rate is not used.
 
-When you take out a car loan, you are essentially borrowing the purchase price (minus your down payment) and agreeing to pay it back over a fixed tenure with interest. Unlike home loans, car loans typically have shorter tenures—ranging from 1 to 7 years—and higher interest rates. The shorter the tenure, the higher your monthly EMI will be, but the less interest you will pay in total. Conversely, a longer tenure makes the car more affordable on a month-to-month basis but significantly increases the total cost of ownership due to interest accumulation.
-
-Our car loan calculator helps you find the perfect balance. By experimenting with different down payment amounts and tenures, you can see how to minimize your interest burden while keeping your installments manageable. Beyond just the EMI, remember to factor in other ownership costs like insurance, maintenance, and fuel. By entering your numbers into our precision tool, you gain the power to negotiate better with lenders and choose a financing plan that fits seamlessly into your monthly household budget.`}
+₹5,00,000 at 8.5% for 5 years is about ₹10,258 a month and about ₹1,15,496 of interest. The same balance and rate for 3 years is about ₹15,784 a month and about ₹68,216 of interest. The rate does not drop when the tenure is shortened. There is no down-payment field. Insurance, fuel, and tax are not added. Amounts are in rupees.`}
           howToUse={[
-            "Enter the Full Purchase Price of the car or the loan amount you intend to borrow.",
-            "Input the Interest Rate offered by the bank or dealership's finance department.",
-            "Select the Loan Tenure (the number of years you have to pay back the loan).",
-            "Instantly view the Monthly EMI you will need to pay.",
-            "Analyze the Total Interest Cost—this shows the 'extra' you are paying for the convenience of financing.",
-            "Compare the 'Total Payback Amount' against the original car price to understand the full cost of the loan."
+            "Enter the loan amount. The default is ₹5,00,000. A car price is not split into a down payment.",
+            "Enter the annual rate as a percent. The default is 8.5.",
+            "Enter the tenure in years. The default is 5.",
+            "Read the monthly EMI.",
+            "Interest is the EMI times the number of months, minus the loan amount."
           ]}
           benefits={[
-            "Negotiation Power: Walk into the dealership with a firm understanding of what your monthly payment should be.",
-            "Affordability Check: Ensure the car you want fits within your actual monthly income limits.",
-            "Interest Minimization: Discover how a larger down payment or a shorter term can save you significant money.",
-            "Quick Comparison: Side-by-side comparison of different loan offers from various banks.",
-            "Budget Discipline: Plan your monthly expenses with absolute certainty about your auto loan commitment."
+            "The formula is reducing balance, the same payment formula as the mortgage calculator.",
+            "The ₹10,258 example uses ₹5,00,000, 8.5%, and 5 years.",
+            "A 3-year term at that same rate is about ₹15,784 a month.",
+            "A flat-rate interest quote is not converted.",
+            "Amounts are formatted in rupees."
           ]}
           formula="M = P [ i(1 + i)^n ] / [ (1 + i)^n – 1 ]"
         />

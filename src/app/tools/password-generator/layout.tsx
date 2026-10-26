@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "Password Generator",
-        "description": "Generate strong, secure passwords instantly.",
+        "description": "Builds a password with Math.random from the selected sets. The default length is 16. The password is not uploaded.",
         "applicationCategory": "SecurityApplication",
         "operatingSystem": "Any",
         "offers": {

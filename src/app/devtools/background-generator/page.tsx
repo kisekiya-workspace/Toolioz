@@ -6,15 +6,15 @@ import { Metadata } from 'next';
 import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
-  title: "Free Shader Background Generator | Wallpapers & Web Backdrops",
-  description: 'Design beautiful shader-based background images for desktop wallpapers, mobile lockscreens, social banners, and website hero sections. Customize colors, shapes, and effects, then download high-resolution PNGs or copy CSS code. Free and no sign-up.',
+  title: "Shader Background Generator",
+  description: 'Designs shader background images for wallpapers and hero sections, then exports a PNG or a CSS snippet.',
   keywords: 'free background generator, shader background generator, desktop wallpaper generator, phone wallpaper generator, mesh gradient generator, liquid background generator, CSS background generator, social media banner background, high resolution wallpaper generator',
   alternates: {
     canonical: 'https://toolioz.com/devtools/background-generator',
   },
   openGraph: {
     title: 'Free Shader Background Generator | Wallpapers & Web Backdrops | Toolioz',
-    description: 'Design and download high-resolution shader background wallpapers and web backdrops. 100% free, customizable color palettes, and instant PNG/CSS export.',
+    description: 'Designs shader wallpapers and web backdrops, then exports a PNG or a CSS snippet.',
     url: 'https://toolioz.com/devtools/background-generator',
     siteName: 'Toolioz DevTools',
     type: 'website',

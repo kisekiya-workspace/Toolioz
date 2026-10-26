@@ -4,7 +4,7 @@ import { buildCalculatorJsonLd, buildPageMetadata } from '@/lib/seo';
 
 export const metadata = buildPageMetadata({
   title: 'Free Background Remover — Local Cutout Studio',
-  description: 'Remove simple image backgrounds locally with our original engine. Keep/remove brushes, edge controls, and full-resolution transparent PNG export. No upload or watermark.',
+  description: 'Removes a simple image background in the browser, with keep and remove brushes and a transparent PNG export.',
   path: '/design/background-remover',
   keywords: ['background remover', 'transparent PNG', 'local background removal', 'product photo cutout'],
 });

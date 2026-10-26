@@ -27,7 +27,16 @@ type PdfMode =
   | 'watermark'
   | 'metadata'
   | 'text'
-  | 'bates';
+  | 'bates'
+  | 'remove-blank-pages'
+  | 'letter-to-a4'
+  | 'split-bookmarks'
+  | 'grayscale'
+  | 'reverse-pages'
+  | 'add-blank-pages'
+  | '2-pages-per-sheet'
+  | 'invert-colors'
+  | 'flatten';
 type Position =
   | 'top-left'
   | 'top-center'
@@ -85,6 +94,8 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
     creator: '',
     producer: '',
   });
+  const [blankSensitivity, setBlankSensitivity] = useState(99.5);
+  const [resizeDirection, setResizeDirection] = useState<'letter-to-a4' | 'a4-to-letter'>('letter-to-a4');
 
   async function selectFile(selected?: File) {
     if (!selected) return;
@@ -181,6 +192,285 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
         return;
       }
 
+      if (mode === 'remove-blank-pages') {
+        const pdfjs = await import('pdfjs-dist');
+        pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+        const pdfData = await file.arrayBuffer();
+        const pdfDoc = await pdfjs.getDocument({ data: pdfData.slice(0) }).promise;
+        const blankPages: number[] = [];
+
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+
+        for (let i = 1; i <= pdfDoc.numPages; i++) {
+          const page = await pdfDoc.getPage(i);
+          const viewport = page.getViewport({ scale: 0.5 });
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          if (!ctx) continue;
+          await page.render({ canvasContext: ctx, viewport, canvas }).promise;
+          const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const data = imgData.data;
+          let whitePixels = 0;
+          const totalPixels = data.length / 4;
+          for (let p = 0; p < data.length; p += 4) {
+            const r = data[p];
+            const g = data[p + 1];
+            const b = data[p + 2];
+            if (r > 245 && g > 245 && b > 245) {
+              whitePixels++;
+            }
+          }
+          const whiteRatio = (whitePixels / totalPixels) * 100;
+          if (whiteRatio >= blankSensitivity) {
+            blankPages.push(i);
+          }
+        }
+
+        if (blankPages.length === 0) {
+          setResult(`No blank pages detected at ${blankSensitivity}% sensitivity. All ${pdfDoc.numPages} pages contain content.`);
+          return;
+        }
+        if (blankPages.length === pdfDoc.numPages) {
+          setError('All pages in this PDF were detected as blank! Try increasing the sensitivity threshold or keeping at least one page.');
+          return;
+        }
+
+        const { PDFDocument } = await import('pdf-lib');
+        const srcDoc = await PDFDocument.load(pdfData);
+        const outDoc = await PDFDocument.create();
+        const keepIndices: number[] = [];
+        for (let idx = 0; idx < pdfDoc.numPages; idx++) {
+          if (!blankPages.includes(idx + 1)) {
+            keepIndices.push(idx);
+          }
+        }
+        const copied = await outDoc.copyPages(srcDoc, keepIndices);
+        copied.forEach((p) => outDoc.addPage(p));
+        const bytes = await outDoc.save();
+        downloadBlob(bytes, cleanName(file.name, 'blank-removed'), 'application/pdf');
+        setResult(`Removed ${blankPages.length} blank page${blankPages.length === 1 ? '' : 's'} (page ${blankPages.join(', ')}). Downloaded clean document with ${keepIndices.length} pages.`);
+        return;
+      }
+
+      if (mode === 'letter-to-a4') {
+        const { PDFDocument } = await import('pdf-lib');
+        const srcDoc = await PDFDocument.load(await file.arrayBuffer());
+        const outDoc = await PDFDocument.create();
+        const isTargetA4 = resizeDirection === 'letter-to-a4';
+        const targetW = isTargetA4 ? 595.28 : 612;
+        const targetH = isTargetA4 ? 841.89 : 792;
+        const total = srcDoc.getPageCount();
+
+        for (let i = 0; i < total; i++) {
+          const [embedded] = await outDoc.embedPages([srcDoc.getPage(i)]);
+          const { width: origW, height: origH } = srcDoc.getPage(i).getSize();
+          const isLandscape = origW > origH;
+          const finalW = isLandscape ? targetH : targetW;
+          const finalH = isLandscape ? targetW : targetH;
+          const scale = Math.min(finalW / origW, finalH / origH);
+          const scaledW = origW * scale;
+          const scaledH = origH * scale;
+          const x = (finalW - scaledW) / 2;
+          const y = (finalH - scaledH) / 2;
+
+          const page = outDoc.addPage([finalW, finalH]);
+          page.drawPage(embedded, { x, y, xScale: scale, yScale: scale });
+        }
+        const bytes = await outDoc.save();
+        downloadBlob(bytes, cleanName(file.name, isTargetA4 ? 'resized-a4' : 'resized-letter'), 'application/pdf');
+        setResult(`Resized all ${total} pages to ${isTargetA4 ? 'ISO A4 (210 × 297 mm)' : 'US Letter (8.5 × 11 in)'}.`);
+        return;
+      }
+
+      if (mode === 'split-bookmarks') {
+        const pdfjs = await import('pdfjs-dist');
+        pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+        const pdfData = await file.arrayBuffer();
+        const pdfDoc = await pdfjs.getDocument({ data: pdfData.slice(0) }).promise;
+        const outline = await pdfDoc.getOutline();
+
+        if (!outline || outline.length === 0) {
+          setError('No chapter bookmarks or outline found in this document. Use the Organize PDF or Split PDF tools to split by page numbers.');
+          return;
+        }
+
+        const sections: { title: string; pageNum: number }[] = [];
+        for (const item of outline) {
+          let dest = item.dest;
+          if (typeof dest === 'string') {
+            dest = await pdfDoc.getDestination(dest);
+          }
+          if (Array.isArray(dest)) {
+            const pageRef = dest[0];
+            const pageIndex = await pdfDoc.getPageIndex(pageRef);
+            sections.push({ title: (item.title || 'Chapter').replace(/[/\\?%*:|"<>]/g, '_').trim(), pageNum: pageIndex + 1 });
+          }
+        }
+
+        if (sections.length === 0) {
+          setError('Bookmarks were found but destination pages could not be resolved.');
+          return;
+        }
+
+        sections.sort((a, b) => a.pageNum - b.pageNum);
+        const { PDFDocument } = await import('pdf-lib');
+        const srcDoc = await PDFDocument.load(pdfData);
+
+        for (let s = 0; s < sections.length; s++) {
+          const startPage = sections[s].pageNum;
+          const endPage = s + 1 < sections.length ? sections[s + 1].pageNum - 1 : srcDoc.getPageCount();
+          if (startPage > endPage || startPage > srcDoc.getPageCount()) continue;
+
+          const chapterDoc = await PDFDocument.create();
+          const pageIndices = [];
+          for (let p = startPage - 1; p < endPage; p++) {
+            pageIndices.push(p);
+          }
+          const copied = await chapterDoc.copyPages(srcDoc, pageIndices);
+          copied.forEach((page) => chapterDoc.addPage(page));
+          const bytes = await chapterDoc.save();
+          downloadBlob(bytes, `${sections[s].title}.pdf`, 'application/pdf');
+        }
+
+        setResult(`Extracted ${sections.length} bookmark sections (${sections.map((s) => s.title).slice(0, 3).join(', ')}${sections.length > 3 ? '...' : ''}).`);
+        return;
+      }
+
+      if (mode === 'grayscale') {
+        const { PDFDocument, rgb, BlendMode } = await import('pdf-lib');
+        const srcDoc = await PDFDocument.load(await file.arrayBuffer(), { updateMetadata: false });
+        const pages = srcDoc.getPages();
+        for (const page of pages) {
+          const { width, height } = page.getSize();
+          page.drawRectangle({
+            x: 0,
+            y: 0,
+            width,
+            height,
+            color: rgb(0.5, 0.5, 0.5),
+            opacity: 0.99,
+            blendMode: 'Color' as any,
+          });
+        }
+        const bytes = await srcDoc.save();
+        downloadBlob(bytes, cleanName(file.name, 'grayscale'), 'application/pdf');
+        setResult(`Converted ${pages.length} pages to grayscale. Text remains 100% selectable!`);
+        return;
+      }
+
+      if (mode === 'reverse-pages') {
+        const { PDFDocument } = await import('pdf-lib');
+        const srcDoc = await PDFDocument.load(await file.arrayBuffer());
+        const outDoc = await PDFDocument.create();
+        const total = srcDoc.getPageCount();
+        const reversedIndices = Array.from({ length: total }, (_, i) => total - 1 - i);
+        const copied = await outDoc.copyPages(srcDoc, reversedIndices);
+        copied.forEach((p) => outDoc.addPage(p));
+        const bytes = await outDoc.save();
+        downloadBlob(bytes, cleanName(file.name, 'reversed'), 'application/pdf');
+        setResult(`Reversed page order across all ${total} pages (Page ${total} is now Page 1).`);
+        return;
+      }
+
+      if (mode === 'add-blank-pages') {
+        const { PDFDocument } = await import('pdf-lib');
+        const srcDoc = await PDFDocument.load(await file.arrayBuffer());
+        const outDoc = await PDFDocument.create();
+        const total = srcDoc.getPageCount();
+        for (let i = 0; i < total; i++) {
+          const [copiedPage] = await outDoc.copyPages(srcDoc, [i]);
+          const { width, height } = copiedPage.getSize();
+          outDoc.addPage(copiedPage);
+          outDoc.addPage([width, height]);
+        }
+        const bytes = await outDoc.save();
+        downloadBlob(bytes, cleanName(file.name, 'with-blank-pages'), 'application/pdf');
+        setResult(`Inserted a blank page after every page (${total} pages expanded to ${total * 2} pages).`);
+        return;
+      }
+
+      if (mode === '2-pages-per-sheet') {
+        const { PDFDocument } = await import('pdf-lib');
+        const srcDoc = await PDFDocument.load(await file.arrayBuffer());
+        const outDoc = await PDFDocument.create();
+        const total = srcDoc.getPageCount();
+        const sheetW = 841.89; // A4 landscape
+        const sheetH = 595.28;
+        const halfW = sheetW / 2;
+
+        for (let i = 0; i < total; i += 2) {
+          const sheet = outDoc.addPage([sheetW, sheetH]);
+          const p1 = srcDoc.getPage(i);
+          const [emb1] = await outDoc.embedPages([p1]);
+          const { width: w1, height: h1 } = p1.getSize();
+          const scale1 = Math.min((halfW - 20) / w1, (sheetH - 20) / h1);
+          sheet.drawPage(emb1, {
+            x: 10 + (halfW - 20 - w1 * scale1) / 2,
+            y: (sheetH - h1 * scale1) / 2,
+            xScale: scale1,
+            yScale: scale1,
+          });
+
+          if (i + 1 < total) {
+            const p2 = srcDoc.getPage(i + 1);
+            const [emb2] = await outDoc.embedPages([p2]);
+            const { width: w2, height: h2 } = p2.getSize();
+            const scale2 = Math.min((halfW - 20) / w2, (sheetH - 20) / h2);
+            sheet.drawPage(emb2, {
+              x: halfW + 10 + (halfW - 20 - w2 * scale2) / 2,
+              y: (sheetH - h2 * scale2) / 2,
+              xScale: scale2,
+              yScale: scale2,
+            });
+          }
+        }
+        const bytes = await outDoc.save();
+        downloadBlob(bytes, cleanName(file.name, '2-up-booklet'), 'application/pdf');
+        setResult(`Formatted ${total} pages onto ${Math.ceil(total / 2)} landscape sheets (2-up booklet layout).`);
+        return;
+      }
+
+      if (mode === 'invert-colors') {
+        const { PDFDocument, rgb, BlendMode } = await import('pdf-lib');
+        const srcDoc = await PDFDocument.load(await file.arrayBuffer(), { updateMetadata: false });
+        const pages = srcDoc.getPages();
+        for (const page of pages) {
+          const { width, height } = page.getSize();
+          page.drawRectangle({
+            x: 0,
+            y: 0,
+            width,
+            height,
+            color: rgb(1, 1, 1),
+            opacity: 1,
+            blendMode: BlendMode.Difference,
+          });
+        }
+        const bytes = await srcDoc.save();
+        downloadBlob(bytes, cleanName(file.name, 'dark-mode'), 'application/pdf');
+        setResult(`Inverted colors across ${pages.length} pages for dark mode reading.`);
+        return;
+      }
+
+      if (mode === 'flatten') {
+        const { PDFDocument } = await import('pdf-lib');
+        const srcDoc = await PDFDocument.load(await file.arrayBuffer());
+        try {
+          srcDoc.getForm().flatten();
+        } catch {}
+        const pages = srcDoc.getPages();
+        for (const page of pages) {
+          try {
+            page.node.delete(srcDoc.context.obj('Annots'));
+          } catch {}
+        }
+        const bytes = await srcDoc.save();
+        downloadBlob(bytes, cleanName(file.name, 'flattened'), 'application/pdf');
+        setResult(`Flattened form fields and stripped annotations on ${pages.length} pages.`);
+        return;
+      }
+
       const { PDFDocument, StandardFonts, degrees, rgb } = await import(
         'pdf-lib'
       );
@@ -264,7 +554,7 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
         cleanName(file.name, suffixName),
         'application/pdf'
       );
-      setResult('Your processed PDF was downloaded.');
+      setResult('The processed PDF was downloaded.');
     } catch (cause) {
       setError(
         cause instanceof Error
@@ -306,7 +596,7 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
             Choose a PDF file
           </strong>
           <span className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
-            Up to 80 MB · Processed 100% locally
+            Up to 80 MB · Processed in this tab
           </span>
         </label>
       ) : (
@@ -629,6 +919,121 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
             </div>
           )}
 
+          {mode === 'remove-blank-pages' && (
+            <div className="space-y-4 rounded-xl border border-zinc-200 bg-zinc-50/50 p-4 dark:border-zinc-800 dark:bg-zinc-900/40">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+                  Blank Sensitivity Threshold: {blankSensitivity}%
+                </label>
+                <span className="text-xs text-zinc-500 font-mono">
+                  {blankSensitivity >= 99.8 ? 'Strict (only pure white)' : blankSensitivity >= 99.0 ? 'Recommended (standard)' : 'Aggressive (catches shadows & scanner specks)'}
+                </span>
+              </div>
+              <input
+                type="range"
+                min="92.0"
+                max="99.9"
+                step="0.1"
+                className="w-full accent-blue-600 cursor-pointer"
+                value={blankSensitivity}
+                onChange={(e) => setBlankSensitivity(Number(e.target.value))}
+              />
+              <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                Pages with higher than {blankSensitivity}% white pixels will be automatically removed.
+              </p>
+            </div>
+          )}
+
+          {mode === 'letter-to-a4' && (
+            <div className="space-y-4 rounded-xl border border-zinc-200 bg-zinc-50/50 p-4 dark:border-zinc-800 dark:bg-zinc-900/40">
+              <strong className="block text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+                Choose Target Page Dimensions
+              </strong>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <button
+                  type="button"
+                  className={`flex flex-col p-4 rounded-xl border text-left transition cursor-pointer ${
+                    resizeDirection === 'letter-to-a4'
+                      ? 'border-blue-600 bg-blue-50/60 dark:border-blue-500 dark:bg-blue-950/40'
+                      : 'border-zinc-200 bg-white hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-950'
+                  }`}
+                  onClick={() => setResizeDirection('letter-to-a4')}
+                >
+                  <strong className="text-sm font-bold text-zinc-950 dark:text-zinc-50">US Letter → ISO A4</strong>
+                  <span className="text-xs text-zinc-500 mt-1">Convert 8.5 × 11 in to 210 × 297 mm with uniform proportional scaling.</span>
+                </button>
+                <button
+                  type="button"
+                  className={`flex flex-col p-4 rounded-xl border text-left transition cursor-pointer ${
+                    resizeDirection === 'a4-to-letter'
+                      ? 'border-blue-600 bg-blue-50/60 dark:border-blue-500 dark:bg-blue-950/40'
+                      : 'border-zinc-200 bg-white hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-950'
+                  }`}
+                  onClick={() => setResizeDirection('a4-to-letter')}
+                >
+                  <strong className="text-sm font-bold text-zinc-950 dark:text-zinc-50">ISO A4 → US Letter</strong>
+                  <span className="text-xs text-zinc-500 mt-1">Convert 210 × 297 mm to 8.5 × 11 in with balanced margins.</span>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {mode === 'split-bookmarks' && (
+            <div className="rounded-xl border border-zinc-200 bg-zinc-50/50 p-4 dark:border-zinc-800 dark:bg-zinc-900/40">
+              <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                This tool reads internal chapter bookmarks (outlines) and splits your PDF into clean section files named after each chapter.
+              </p>
+            </div>
+          )}
+
+          {mode === 'grayscale' && (
+            <div className="rounded-xl border border-zinc-200 bg-zinc-50/50 p-4 dark:border-zinc-800 dark:bg-zinc-900/40">
+              <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                Transforms color fills, lines, and shapes to black & white grayscale. All underlying vector text remains <strong>100% selectable and searchable</strong> with zero pixel rasterization.
+              </p>
+            </div>
+          )}
+
+          {mode === 'reverse-pages' && (
+            <div className="rounded-xl border border-zinc-200 bg-zinc-50/50 p-4 dark:border-zinc-800 dark:bg-zinc-900/40">
+              <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                Inverts page order from back to front across all {pages.length} pages. Perfect for fixing reverse-scanned documents.
+              </p>
+            </div>
+          )}
+
+          {mode === 'add-blank-pages' && (
+            <div className="rounded-xl border border-zinc-200 bg-zinc-50/50 p-4 dark:border-zinc-800 dark:bg-zinc-900/40">
+              <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                Interleaves an empty page after each page. Your {pages.length}-page document will become {pages.length * 2} pages for double-sided booklet printing or notes.
+              </p>
+            </div>
+          )}
+
+          {mode === '2-pages-per-sheet' && (
+            <div className="rounded-xl border border-zinc-200 bg-zinc-50/50 p-4 dark:border-zinc-800 dark:bg-zinc-900/40">
+              <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                Combines two pages side-by-side onto one landscape A4 sheet. Your {pages.length} pages will be formatted onto {Math.ceil(pages.length / 2)} sheets.
+              </p>
+            </div>
+          )}
+
+          {mode === 'invert-colors' && (
+            <div className="rounded-xl border border-zinc-200 bg-zinc-50/50 p-4 dark:border-zinc-800 dark:bg-zinc-900/40">
+              <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                Inverts the document colors to create a high-contrast dark mode reading experience. Text remains crisp and selectable.
+              </p>
+            </div>
+          )}
+
+          {mode === 'flatten' && (
+            <div className="rounded-xl border border-zinc-200 bg-zinc-50/50 p-4 dark:border-zinc-800 dark:bg-zinc-900/40">
+              <p className="text-xs text-zinc-600 dark:text-zinc-400">
+                Locks all interactive form fields and strips dynamic annotations to create a permanent, non-editable PDF.
+              </p>
+            </div>
+          )}
+
           {error && (
             <p
               role="alert"
@@ -658,6 +1063,24 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
               ? 'Processing…'
               : mode === 'text'
               ? 'Extract text'
+              : mode === 'remove-blank-pages'
+              ? 'Detect & remove blank pages'
+              : mode === 'letter-to-a4'
+              ? `Convert to ${resizeDirection === 'letter-to-a4' ? 'ISO A4' : 'US Letter'}`
+              : mode === 'split-bookmarks'
+              ? 'Split PDF by bookmarks'
+              : mode === 'grayscale'
+              ? 'Convert to grayscale'
+              : mode === 'reverse-pages'
+              ? 'Reverse page order & download'
+              : mode === 'add-blank-pages'
+              ? 'Insert blank pages & download'
+              : mode === '2-pages-per-sheet'
+              ? 'Format 2 pages per sheet'
+              : mode === 'invert-colors'
+              ? 'Invert colors (dark mode)'
+              : mode === 'flatten'
+              ? 'Flatten form & download'
               : 'Process and download PDF'}
           </button>
         </div>

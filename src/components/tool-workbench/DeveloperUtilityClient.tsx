@@ -7,7 +7,23 @@ import type { NewToolDefinition } from '@/lib/new-tool-catalog';
 import ExtraWorkbenchClient from './ExtraWorkbenchClient';
 import { ToolWorkbench, areaClass, downloadBlob, fieldClass, primaryButtonClass, secondaryButtonClass } from './ToolWorkbench';
 
-const EXTRA_MODES = new Set(['html-entities', 'slug', 'chmod', 'contrast', 'csv-json']);
+const EXTRA_MODES = new Set([
+  'html-entities',
+  'slug',
+  'chmod',
+  'contrast',
+  'csv-json',
+  'csv-markdown',
+  'ndjson-csv',
+  'xml-csv',
+  'json-ts',
+  'srt-vtt',
+  'subtitle-text',
+  'subtitle-shift',
+  'gpx-kml',
+  'geojson-kml',
+  'csv-kml',
+]);
 
 type Pair = { first: string; second: string };
 type SchemaKind = 'FAQPage' | 'HowTo' | 'Product';

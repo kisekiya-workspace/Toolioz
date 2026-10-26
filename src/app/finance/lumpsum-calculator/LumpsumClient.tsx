@@ -11,20 +11,20 @@ import { RelatedTools } from '@/components/ui/RelatedTools';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
 import { FAQSchema } from '@/components/ui/FAQSchema';
 import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
-import { BookOpen, Coins, Info, Lightbulb, ShieldCheck, TrendingUp, Download } from 'lucide-react';
+import { BookOpen, Coins, Info, Lightbulb, ShieldCheck, TrendingUp, Printer } from 'lucide-react';
 
 const LUMPSUM_FAQS = [
   {
-    question: "What is a Lumpsum Investment?",
-    answer: "A lumpsum investment is a one-time deposit of capital into an asset class (like equity mutual funds, fixed deposits, or stocks) rather than spreading payments over time via SIP."
+    question: "What does this lumpsum calculator project?",
+    answer: "One principal compounded monthly until the end of the term. No further deposits are added, and the annual rate stays constant."
   },
   {
-    question: "How is Lumpsum Future Value calculated?",
-    answer: "Lumpsum future value is calculated using compound interest formula: FV = P * (1 + r/n)^(n*t), where P is principal amount, r is annual return rate, n is compounding frequency, and t is number of years."
+    question: "Which compounding frequency is used?",
+    answer: "Monthly only. Future value is P × (1 + r/12)^(12 × years). It is not P × (1 + r)^years."
   },
   {
-    question: "Is Lumpsum better than SIP?",
-    answer: "Lumpsum investing generally outperforms SIP in rising (bull) markets because the entire capital benefits from compounding immediately. In volatile or falling markets, SIP reduces risk via Rupee Cost Averaging."
+    question: "Does this page decide whether a lumpsum beats a SIP?",
+    answer: "No. A monthly SIP is calculated on the SIP page. This result does not model market drops or rupee-cost averaging."
   }
 ];
 
@@ -51,7 +51,7 @@ export default function LumpsumClient() {
             </div>
             <h1 className={styles.title}>Lumpsum Calculator 2026</h1>
             <p className={styles.subtitle}>
-              Project how a one-time investment can grow with compounding over the years.
+              A lumpsum here is one deposit compounded monthly. Future value is P × (1 + r/12)^(12 × years). The rate stays constant, and no further deposits are added.
             </p>
             <div className="mx-auto mt-6 max-w-[760px] rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-left text-[0.8rem] leading-[1.6] text-amber-900">
               <strong>Disclaimer:</strong> This calculator shows a simplified projection based on
@@ -110,19 +110,17 @@ export default function LumpsumClient() {
                   </div>
                 </div>
                 <Button fullWidth className={styles.btn} onClick={() => window.print()}>
-                  <Download className="mr-2 size-4" />
-                  Download Projection
+                  <Printer className="mr-2 size-4" />
+                  Print this calculation
                 </Button>
               </Card>
 
               <div className={styles.infoBox}>
-                <div className={styles.infoIcon} style={{ color: '#0f766e' }}>
+                <div className={`${styles.infoIcon} text-teal-700`}>
                   <Info size={20} />
                 </div>
                 <p className={styles.infoText}>
-                  A lumpsum investment gives your money more time to compound. If the goal is long
-                  term, getting capital into the market sooner can matter more than waiting for the
-                  &quot;perfect&quot; entry date.
+                  ₹2,50,000 at 12% for 10 years finishes near ₹8,25,097. The gain is about ₹5,75,097, about 3.30 times the principal. The Rule of 72 line is 72 ÷ 12 = 6.0 years. Doubling at 1% a month is about 5.8 years.
                 </p>
               </div>
             </div>
@@ -131,33 +129,21 @@ export default function LumpsumClient() {
           <div className="mx-auto mt-12 max-w-[900px]">
             <Card className="!p-8 bg-[#ecfdf5]">
               <h2 className="mb-6 flex items-center gap-2 text-[1.4rem] font-bold text-[#047857]">
-                <ShieldCheck className="text-[#10b981]" /> Why lumpsum investing works
+                <ShieldCheck className="text-[#10b981]" /> Starting example at 12%
               </h2>
               <div className="grid gap-6 md:grid-cols-2">
                 <div>
-                  <h3 className="mb-3 text-[1.05rem] font-bold text-[#047857]">When it helps most</h3>
+                  <h3 className="mb-3 text-[1.05rem] font-bold text-[#047857]">Monthly compound</h3>
                   <ul className="flex flex-col gap-3 text-[0.875rem] leading-[1.6] text-[#047857]/80">
-                    <li>
-                      If you already have idle cash and a long time horizon, investing the money
-                      sooner can give compounding more years to work.
-                    </li>
-                    <li>
-                      It can be useful for long-term goals like retirement, education, or a future
-                      down payment that is several years away.
-                    </li>
+                    <li>₹2,50,000 at 12% for 10 years finishes near ₹8,25,097.</li>
+                    <li>The gain is about ₹5,75,097. The growth multiple is about 3.30.</li>
                   </ul>
                 </div>
                 <div>
-                  <h3 className="mb-3 text-[1.05rem] font-bold text-[#047857]">What the Rule of 72 suggests</h3>
+                  <h3 className="mb-3 text-[1.05rem] font-bold text-[#047857]">Rule of 72</h3>
                   <ul className="flex flex-col gap-3 text-[0.875rem] leading-[1.6] text-[#047857]/80">
-                    <li>
-                      Divide 72 by your expected return to estimate how many years it may take to
-                      double the money.
-                    </li>
-                    <li>
-                      A 12 percent return implies roughly 6 years to double, while a 9 percent
-                      return implies about 8 years.
-                    </li>
+                    <li>The on-screen estimate is 72 divided by the annual percent. At 12% that is 6.0 years.</li>
+                    <li>Doubling under the monthly formula, at 1% a month, takes about 5.8 years. The page does not print that second figure.</li>
                   </ul>
                 </div>
               </div>
@@ -172,10 +158,10 @@ export default function LumpsumClient() {
             <div className="mb-10 text-center">
               <h2 className="text-[1.8rem] font-black text-[var(--text-primary)]">
                 <TrendingUp className="mr-2 inline-block text-emerald-600" size={22} />
-                Long-Term Growth Tips
+                Long-term growth is one monthly compound path
               </h2>
               <p className="mt-3 text-[1rem] text-[var(--text-secondary)]">
-                Small choices in the beginning can create large differences later.
+                The frequency is fixed at 12. Tax and an expense ratio are not subtracted.
               </p>
             </div>
 
@@ -185,20 +171,16 @@ export default function LumpsumClient() {
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
                     <BookOpen size={20} />
                   </div>
-                  <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Use Case Fit</h3>
+                  <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">What is included</h3>
                 </div>
                 <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
                   <li className="flex gap-2">
                     <span className="mt-1 shrink-0 text-teal-500">-</span>
-                    <span>
-                      Best for long-duration goals where you want your capital working from day one.
-                    </span>
+                    <span>One principal, compounded every month.</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="mt-1 shrink-0 text-teal-500">-</span>
-                    <span>
-                      Useful when you are comfortable with market volatility and have a clear time horizon.
-                    </span>
+                    <span>No extra deposits during the term.</span>
                   </li>
                 </ul>
               </div>
@@ -208,20 +190,16 @@ export default function LumpsumClient() {
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
                     <Coins size={20} />
                   </div>
-                  <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Planning Reality Check</h3>
+                  <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">What is left out</h3>
                 </div>
                 <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
                   <li className="flex gap-2">
                     <span className="mt-1 shrink-0 text-amber-500">-</span>
-                    <span>
-                      If you need the money in 1 to 3 years, keep the return assumption conservative.
-                    </span>
+                    <span>A market drop is not modeled. The rate stays at the number entered.</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="mt-1 shrink-0 text-amber-500">-</span>
-                    <span>
-                      For short-term goals, a bank deposit or safer debt option may be more suitable.
-                    </span>
+                    <span>Tax and an expense ratio are not subtracted. A SIP comparison is not calculated.</span>
                   </li>
                 </ul>
               </div>
@@ -251,7 +229,7 @@ export default function LumpsumClient() {
                     </li>
                     <li className="flex gap-2">
                       <span className="mt-1 shrink-0 text-cyan-500">-</span>
-                      <span>Use the projection as a planning guide, then verify the assumptions with your advisor.</span>
+                      <span>The result is a constant-rate projection. It is not a fund recommendation.</span>
                     </li>
                   </ul>
                 </div>
@@ -262,22 +240,23 @@ export default function LumpsumClient() {
           <RelatedTools currentToolId="lumpsum-calculator" categoryId="finance" />
 
           <SEOSection
-            title="Lumpsum Calculator for Long-Term Investing"
-            description="A lumpsum calculator helps you estimate how a one-time investment may grow over time when compounding is allowed to work uninterrupted. It is especially useful for long-term goals where the money can stay invested for years rather than months."
+            title="Monthly lumpsum future value"
+            description="A lumpsum here is one deposit compounded monthly. Future value is P × (1 + r/12)^(12 × years). ₹2,50,000 at 12% for 10 years finishes near ₹8,25,097, a gain of about ₹5,75,097. The Rule of 72 line is 72 divided by the annual percent, which is 6.0 years at 12%. Tax and further deposits are not applied."
             howToUse={[
-              'Enter the amount you want to invest in one go.',
-              'Add your expected annual return assumption.',
-              'Choose the time horizon for the investment.',
-              'Review the projected future value and total gain.',
-              'Compare different return scenarios to stress test your plan.',
+              'Enter the one-time amount. The default is ₹2,50,000.',
+              'Enter the annual rate as a percent. The formula divides it by 12.',
+              'Enter the term in years. The default is 10.',
+              'Read the maturity value, the gain, and the growth multiple.',
+              'The Rule of 72 line is 72 divided by the annual percent. It is not the monthly formula’s doubling time.',
             ]}
             benefits={[
-              'Shows the power of starting early with capital already available.',
-              'Helps compare one-time investing with monthly SIP planning.',
-              'Makes long-term goal setting more realistic and measurable.',
-              'Useful for retirement, education, and other distant goals.',
+              'Compounding is monthly. Annual compounding is not used.',
+              'The ₹8,25,097 example uses ₹2,50,000, 12%, and 10 years.',
+              'No further deposits are added.',
+              'A SIP comparison is not calculated on this page.',
+              'Amounts are formatted in rupees.',
             ]}
-            formula="A = P(1 + r/n)^(nt)"
+            formula="A = P(1 + r/12)^(12t)"
           />
           <FAQSchema faqs={LUMPSUM_FAQS} />
           <Footer />

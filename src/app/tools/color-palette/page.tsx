@@ -176,7 +176,7 @@ export default function ColorPalettePage() {
                     </div>
                     <div>
                         <h1 className="text-3xl font-bold">UI Color Palette Generator</h1>
-                        <p className="text-muted-foreground">Generate developer-ready color systems for light & dark themes</p>
+                        <p className="text-muted-foreground">A palette is a set of tints and shades from one base color, with a light and a dark set.</p>
                     </div>
                 </div>
 

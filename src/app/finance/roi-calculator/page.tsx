@@ -2,22 +2,14 @@ import React from 'react';
 import { JSONLD } from '@/components/ui/JSONLD';
 import ROIClient from './ROIClient';
 import type { Metadata } from 'next';
-import { buildCalculatorJsonLd } from '@/lib/seo';
+import { buildCalculatorJsonLd, buildPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
-  title: "ROI & CAGR Calculator 2026 | Annualized Return Calculator",
-  description: "Calculate ROI and CAGR for stocks, real estate, and mutual funds. Learn the difference between ROI vs CAGR vs XIRR, common investment mistakes, and due diligence tips.",
-  keywords: 'roi calculator online, cagr calculator india, annualized return calculator, roi vs cagr vs xirr difference, stock return calculator, real estate roi calculator, mutual fund return calculator, investment profit calculator, how to calculate cagr in excel',
-  alternates: {
-    canonical: 'https://toolioz.com/finance/roi-calculator',
-  },
-  openGraph: {
-    title: 'ROI & CAGR Calculator 2026 — Annualized Returns & Investment Tips | Toolioz',
-    description: 'Calculate total ROI and CAGR for any investment. Learn ROI vs CAGR vs XIRR, avoid common mistakes, and make smarter decisions.',
-    url: 'https://toolioz.com/finance/roi-calculator',
-    type: 'website',
-  }
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: 'ROI and CAGR Calculator',
+  description: 'Calculates total return and compound annual growth rate from a starting value, ending value, and holding period.',
+  path: '/finance/roi-calculator',
+  keywords: 'roi calculator, cagr calculator, annualized return, investment profit calculator',
+});
 
 export default function ROICalculatorPage() {
   const jsonLd = buildCalculatorJsonLd({

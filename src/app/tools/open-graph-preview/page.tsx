@@ -26,7 +26,7 @@ export default function OpenGraphPreviewPage() {
         <div className="container px-6 py-12 m-auto max-w-6xl">
             <ToolHeader
                 title="Open Graph Preview"
-                description="See how your website link looks when shared on social media."
+                description="Shows the Open Graph title, description, and image a page would present in a social preview."
             />
 
             <div className="grid lg:grid-cols-2 gap-12 mb-16">

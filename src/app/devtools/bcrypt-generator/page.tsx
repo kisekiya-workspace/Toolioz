@@ -5,14 +5,14 @@ import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
     title: 'Bcrypt Password Hash Generator & Verifier',
-    description: 'Instantly generate cryptographically secure Bcrypt hashes and verify passwords entirely inside your browser. No data leaves your machine.',
-    keywords: 'Bcrypt generator online free, Browser hash password checker, Secure bcrypt verification tool, 2y hash generator, cryptographically secure password',
+    description: 'Generates bcrypt password hashes and checks a password against a hash, with the work kept in the browser.',
+    keywords: 'bcrypt hash generator, bcryptjs compare, $2b$ bcrypt hash',
     alternates: {
         canonical: 'https://toolioz.com/devtools/bcrypt-generator',
     },
     openGraph: {
         title: 'Bcrypt Generator & Verifier | Toolioz',
-        description: 'Generate hashes and verify passwords using the Bcrypt algorithm instantly in your browser.',
+        description: 'Generates bcrypt hashes and checks a password against a hash in the browser.',
         url: 'https://toolioz.com/devtools/bcrypt-generator',
         siteName: 'Toolioz DevTools',
         type: 'website',

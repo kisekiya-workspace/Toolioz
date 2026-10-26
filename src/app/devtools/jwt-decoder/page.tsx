@@ -6,14 +6,14 @@ import { JSONLD } from '@/components/ui/JSONLD';
 export const metadata: Metadata = {
     title: 'JWT Decoder & Inspector Online',
     description:
-      'Decode JSON Web Tokens in the browser. Optional HS256 check if you type the shared secret. Decoding alone is not verification.',
+      'Decodes a JSON Web Token header and payload and can check an HS256 signature when a secret is supplied.',
     keywords: 'JWT decoder, JSON Web Token parser, inspect JWT claims, HS256 browser verify',
     alternates: {
         canonical: 'https://toolioz.com/devtools/jwt-decoder',
     },
     openGraph: {
         title: 'JWT Token Decoder | Toolioz',
-        description: 'Decode JWT claims in the browser. Optional HS256 check if you type the shared secret. Decoding alone is not proof of authenticity.',
+        description: 'Decodes JWT header and payload claims and can check an HS256 signature when a secret is supplied.',
         url: 'https://toolioz.com/devtools/jwt-decoder',
         siteName: 'Toolioz DevTools',
         type: 'website',

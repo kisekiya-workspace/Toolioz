@@ -92,8 +92,7 @@ export const Navbar = () => {
 
   return (
     <header
-      className="sticky top-0 z-50 w-full bg-[#fafafa]/90 backdrop-blur-md dark:bg-[#0a0a0a]/90"
-      style={{ boxShadow: 'var(--header-border-bottom)' }}
+      className="sticky top-0 z-50 w-full bg-[#fafafa]/90 shadow-[var(--header-border-bottom)] backdrop-blur-md dark:bg-[#0a0a0a]/90"
     >
       <div className="mx-auto flex h-16 w-full max-w-[1200px] items-center gap-4 px-4 sm:px-6">
         <Link href="/" className="flex min-w-0 shrink-0 items-center gap-2">
@@ -135,7 +134,7 @@ export const Navbar = () => {
             </button>
 
             {activeDropdown === 'tools' && (
-              <div className="ds-menu absolute right-0 top-[calc(100%+8px)] z-50 w-[min(40rem,calc(100vw-1.5rem))] rounded-[12px] bg-white p-4 text-[#171717] dark:bg-[#111] dark:text-[#ededed]">
+              <div className="shadow-[var(--ds-shadow-menu)] absolute right-0 top-[calc(100%+8px)] z-50 w-[min(40rem,calc(100vw-1.5rem))] rounded-[12px] bg-white p-4 text-[#171717] dark:bg-[#111] dark:text-[#ededed]">
                 <div className="mb-3 flex items-center justify-between gap-3">
                   <div className="flex min-w-0 items-center gap-2">
                     <Boxes size={16} className="shrink-0 text-[#171717] dark:text-[#ededed]" />
@@ -204,7 +203,7 @@ export const Navbar = () => {
               <ChevronDown size={12} className={activeDropdown === 'more' ? 'rotate-180' : ''} />
             </button>
             {activeDropdown === 'more' && (
-              <div className="ds-menu absolute right-0 top-[calc(100%+8px)] z-50 w-52 rounded-[12px] bg-white p-2 dark:bg-[#111]">
+              <div className="shadow-[var(--ds-shadow-menu)] absolute right-0 top-[calc(100%+8px)] z-50 w-52 rounded-[12px] bg-white p-2 dark:bg-[#111]">
                 {MORE_NAV.map((item) => {
                   const Icon = item.icon;
                   const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
@@ -272,7 +271,7 @@ export const Navbar = () => {
                   <Link
                     key={category.id}
                     href={category.id === 'utility' ? '/tools' : `/${category.id}`}
-                    className="flex items-center gap-3 rounded-[8px] bg-white p-3 ds-surface dark:bg-[#111]"
+                    className="flex items-center gap-3 rounded-[8px] bg-white p-3 shadow-[var(--ds-shadow-border)] dark:bg-[#111]"
                     onClick={() => setIsOpen(false)}
                   >
                     <div
@@ -323,7 +322,7 @@ export const Navbar = () => {
                   <Link
                     key={href}
                     href={href}
-                    className="flex items-center gap-3 rounded-[8px] bg-white p-3 text-sm text-[#171717] ds-surface dark:bg-[#111] dark:text-[#ededed]"
+                    className="flex items-center gap-3 rounded-[8px] bg-white p-3 text-sm text-[#171717] shadow-[var(--ds-shadow-border)] dark:bg-[#111] dark:text-[#ededed]"
                     onClick={() => setIsOpen(false)}
                   >
                     <Icon size={16} className="shrink-0 text-[#4d4d4d] dark:text-[#a1a1a1]" />

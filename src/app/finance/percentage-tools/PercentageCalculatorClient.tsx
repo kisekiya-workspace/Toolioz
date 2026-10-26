@@ -353,7 +353,7 @@ export default function PercentageCalculatorClient({ kind }: { kind: PercentageT
               <div className="flex items-center gap-2.5">
                 <ShieldCheck size={16} className="text-emerald-600 dark:text-emerald-400" />
                 <span className="font-semibold text-emerald-950 dark:text-emerald-200">
-                  100% Client-Side Private
+                  Calculated in this tab
                 </span>
               </div>
             </div>

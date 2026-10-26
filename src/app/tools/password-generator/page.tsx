@@ -65,19 +65,19 @@ export default function PasswordGeneratorPage() {
     const strengthColor = strength === "Strong" ? "text-green-500" : strength === "Medium" ? "text-yellow-500" : "text-red-500";
 
     const faq = [
-        { q: "Is this generator secure?", a: "Yes. It uses your browser's local random number generation. The passwords are created instantly on your device and are never sent over the internet." },
-        { q: "Why use a random password?", a: "Humans are predictable. Using words or dates makes your password easy to crack. Complete randomness offers the highest security." },
-        { q: "How do I remember it?", a: "We strongly recommend using a Password Manager to store these secure passwords." },
-        { q: "What makes a password 'strong'?", a: "Length (16+ characters), variety (uppercase, lowercase, numbers, symbols), and randomness. Our tool maximizes all three." }
+        { q: "Is this generator secure?", a: "Each character uses Math.random, not crypto.getRandomValues. The password is not uploaded." },
+        { q: "Why use a random password?", a: "A password built from a word or a date is easier to guess. This page still uses Math.random, which is not a cryptographic generator." },
+        { q: "How is the password stored?", a: "The page does not save the password. A password manager can store the copied string." },
+        { q: "What does the Strong label mean?", a: "Strong means the length is over 12 and both numbers and symbols are checked. It is not a crack-time estimate." }
     ];
 
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        "name": "Secure Password Generator",
+        "name": "Password Generator",
         "operatingSystem": "All",
         "applicationCategory": "SecurityApplication",
-        "description": "Create unbreakable, random passwords instantly. Military-grade randomness powered by your browser.",
+        "description": "Builds a password with Math.random from the selected sets. The default length is 16. The password is not uploaded.",
         "offers": {
             "@type": "Offer",
             "price": "0",
@@ -90,7 +90,7 @@ export default function PasswordGeneratorPage() {
             <JsonLd data={jsonLd} />
             <ToolHeader
                 title="Secure Password Generator"
-                description="Create unbreakable, random passwords instantly. Protect your accounts with military-grade randomness."
+                description="Builds a password with Math.random from the selected sets. The default length is 16."
             />
 
             <AdContainer slot="password-top" />
@@ -166,10 +166,10 @@ export default function PasswordGeneratorPage() {
                             </div>
                             <p className="text-sm text-muted-foreground leading-relaxed">
                                 {strength === "Strong"
-                                    ? "Excellent! This password would take a supercomputer millions of years to crack."
+                                    ? "Strong means the length is over 12 and both numbers and symbols are on. It is not a crack-time estimate."
                                     : strength === "Medium"
-                                        ? "Decent, but adding symbols or more length would make it safer."
-                                        : "Too weak. Please add more character types and increase length."}
+                                        ? "Medium means the length is over 8 and the Strong rule is not met."
+                                        : "Weak means the length is 8 or less."}
                             </p>
                         </CardContent>
                     </Card>
@@ -177,21 +177,10 @@ export default function PasswordGeneratorPage() {
             </div>
 
             <div className="max-w-4xl mx-auto space-y-4">
-                <ToolContentSection title="The Importance of Strong Passwords">
+                <ToolContentSection title="How the password is built">
                     <p>
-                        In a world of constant data breaches, your password is the first line of defense. A strong password acts as a digital lock
-                        that keeps hackers out of your personal and financial life.
+                        Each character is charset.charAt(Math.floor(Math.random() * charset.length)). The sets are 26 uppercase letters, 26 lowercase letters, 10 digits, and 30 symbols. The default length is 16. The page does not call crypto.getRandomValues.
                     </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                        <div className="bg-muted/30 p-4 rounded-lg">
-                            <h4 className="font-bold mb-2">Don't Reuse Passwords</h4>
-                            <p className="text-sm">If one site gets hacked, attackers try that password everywhere. Use unique passwords for every account.</p>
-                        </div>
-                        <div className="bg-muted/30 p-4 rounded-lg">
-                            <h4 className="font-bold mb-2">Entropy is Key</h4>
-                            <p className="text-sm">Predictable patterns (like "Password123") are cracked in seconds. True randomness is the only safety.</p>
-                        </div>
-                    </div>
                 </ToolContentSection>
 
                 <ToolFAQ questions={faq} />

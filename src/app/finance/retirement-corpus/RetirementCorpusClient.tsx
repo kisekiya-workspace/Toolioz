@@ -11,20 +11,20 @@ import { RelatedTools } from '@/components/ui/RelatedTools';
 import { calculatorPageStyles as styles } from '@/app/finance/compound-interest/page.styles';
 import { FAQSchema } from '@/components/ui/FAQSchema';
 import { FinancialDisclaimer } from '@/components/ui/FinancialDisclaimer';
-import { BookOpen, Info, Lightbulb, ShieldCheck, Target, Wallet, Download } from 'lucide-react';
+import { BookOpen, Info, Lightbulb, ShieldCheck, Target, Wallet, Printer } from 'lucide-react';
 
 const RETIREMENT_FAQS = [
   {
-    question: "What is the 4% Rule in Retirement Planning?",
-    answer: "The 4% rule states that you can withdraw 4% of your total retirement savings in the first year of retirement, and adjust that amount for inflation each subsequent year, with a high probability that your money will last 30 years."
+    question: "Does this calculator use the 4% rule?",
+    answer: "No. The corpus is the present value of a constant annual expense for the retirement years, discounted at the post-retirement return. The default is 25 years at 5.5% a year."
   },
   {
-    question: "How does inflation affect retirement corpus calculations?",
-    answer: "Inflation reduces purchasing power over time. At a 6% annual inflation rate, monthly expenses of ₹50,000 today will grow to ₹1.6 Lakhs per month in 20 years, quadrupling the required retirement corpus."
+    question: "How does the 6% inflation input change today's expense?",
+    answer: "₹60,000 a month for 20 years at 6% becomes about ₹1,92,428 a month, about 3.21 times the starting expense. ₹50,000 on the same path becomes about ₹1,60,357. Spending is not inflated again during retirement."
   },
   {
-    question: "What is SWP (Systematic Withdrawal Plan)?",
-    answer: "A Systematic Withdrawal Plan (SWP) allows you to withdraw a fixed amount regularly from your mutual fund investments, generating regular monthly cash flow for retirement while keeping the remaining principal invested."
+    question: "Is the withdrawal a mutual-fund SWP?",
+    answer: "No. Retirement spending is one constant annual amount. Monthly fund units and a systematic withdrawal plan are not modeled."
   }
 ];
 
@@ -64,7 +64,7 @@ export default function RetirementCorpusClient() {
             </div>
             <h1 className={styles.title}>Retirement Corpus Calculator 2026</h1>
             <p className={styles.subtitle}>
-              Estimate the corpus you need to fund retirement spending after inflation and expected returns.
+              Today&apos;s monthly expense is inflated to the retirement date. That amount times 12 is then discounted as a constant annual payment for the retirement years. Current savings compound monthly until retirement, and the gap is turned into a flat monthly deposit.
             </p>
             <div className="mx-auto mt-6 max-w-[760px] rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-left text-[0.8rem] leading-[1.6] text-amber-900">
               <strong>Disclaimer:</strong> This is a planning estimate, not a promise. Lifestyle,
@@ -144,13 +144,13 @@ export default function RetirementCorpusClient() {
                   </div>
                 </div>
                 <Button fullWidth className={styles.btn} onClick={() => window.print()}>
-                  <Download className="mr-2 size-4" />
-                  Download Retirement Plan
+                  <Printer className="mr-2 size-4" />
+                  Print this calculation
                 </Button>
               </Card>
 
               <div className={styles.infoBox}>
-                <div className={styles.infoIcon} style={{ color: '#d97706' }}>
+                <div className={`${styles.infoIcon} text-amber-600`}>
                   <Info size={20} />
                 </div>
                 <p className={styles.infoText}>
@@ -169,25 +169,17 @@ export default function RetirementCorpusClient() {
               </h2>
               <div className="grid gap-6 md:grid-cols-2">
                 <div>
-                  <h3 className="mb-3 text-[1.05rem] font-bold text-[#9a3412]">Future spending</h3>
+                  <h3 className="mb-3 text-[1.05rem] font-bold text-[#9a3412]">Default at 6% inflation</h3>
                   <ul className="flex flex-col gap-3 text-[0.875rem] leading-[1.6] text-[#9a3412]/80">
-                    <li>
-                      Your current monthly expenses are inflated forward to the retirement date.
-                    </li>
-                    <li>
-                      That future monthly number is what retirement income has to support.
-                    </li>
+                    <li>₹60,000 a month for 20 years becomes about ₹1,92,428 a month.</li>
+                    <li>That is about ₹23,09,138 a year, and it stays at that level during retirement.</li>
                   </ul>
                 </div>
                 <div>
-                  <h3 className="mb-3 text-[1.05rem] font-bold text-[#9a3412]">Corpus support period</h3>
+                  <h3 className="mb-3 text-[1.05rem] font-bold text-[#9a3412]">Corpus and the gap</h3>
                   <ul className="flex flex-col gap-3 text-[0.875rem] leading-[1.6] text-[#9a3412]/80">
-                    <li>
-                      The tool assumes your corpus needs to last for the number of retirement years you enter.
-                    </li>
-                    <li>
-                      A longer retirement horizon means a larger corpus, even when the monthly expense is unchanged.
-                    </li>
+                    <li>25 years of that annual expense, discounted at 5.5%, is a corpus of about ₹3.10 crore.</li>
+                    <li>₹25,00,000 compounded monthly at 10.5% for 20 years is about ₹2.02 crore. The gap is about ₹1.07 crore, which needs about ₹13,142 a month.</li>
                   </ul>
                 </div>
               </div>
@@ -202,10 +194,10 @@ export default function RetirementCorpusClient() {
             <div className="mb-10 text-center">
               <h2 className="text-[1.8rem] font-black text-[var(--text-primary)]">
                 <Target className="mr-2 inline-block text-amber-600" size={22} />
-                Retirement Planning Tips
+                Retirement defaults
               </h2>
               <p className="mt-3 text-[1rem] text-[var(--text-secondary)]">
-                The best retirement plan is one you can maintain before and after retirement.
+                Pre-retirement growth is monthly. The retirement corpus is an annual annuity.
               </p>
             </div>
 
@@ -215,16 +207,16 @@ export default function RetirementCorpusClient() {
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50 text-orange-600">
                     <BookOpen size={20} />
                   </div>
-                  <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">What to include</h3>
+                  <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Before retirement</h3>
                 </div>
                 <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
                   <li className="flex gap-2">
                     <span className="mt-1 shrink-0 text-orange-500">-</span>
-                    <span>Housing, food, transport, healthcare, and basic lifestyle spending.</span>
+                    <span>Current savings use monthly compounding at the pre-retirement return. The default is 10.5%.</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="mt-1 shrink-0 text-orange-500">-</span>
-                    <span>Any loan payments or family obligations that will still exist later.</span>
+                    <span>The monthly deposit uses the same start-of-month formula as the savings-goal calculator.</span>
                   </li>
                 </ul>
               </div>
@@ -234,16 +226,16 @@ export default function RetirementCorpusClient() {
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-green-50 text-green-600">
                     <Wallet size={20} />
                   </div>
-                  <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">What to review</h3>
+                  <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">During retirement</h3>
                 </div>
                 <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
                   <li className="flex gap-2">
                     <span className="mt-1 shrink-0 text-green-500">-</span>
-                    <span>Revisit your assumptions every year because inflation and income can change.</span>
+                    <span>The annual expense stays flat. It is not inflated again each retirement year.</span>
                   </li>
                   <li className="flex gap-2">
                     <span className="mt-1 shrink-0 text-green-500">-</span>
-                    <span>Use current savings and future returns to see how much of the corpus is already funded.</span>
+                    <span>The discount rate is the post-retirement return, compounded once a year. The default is 5.5%.</span>
                   </li>
                 </ul>
               </div>
@@ -253,27 +245,27 @@ export default function RetirementCorpusClient() {
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-50 text-cyan-600">
                     <Lightbulb size={20} />
                   </div>
-                  <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Practical check</h3>
+                  <h3 className="text-[1.1rem] font-bold text-[var(--text-primary)]">Not applied</h3>
                 </div>
                 <div className="grid gap-4 md:grid-cols-2">
                   <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
                     <li className="flex gap-2">
                       <span className="mt-1 shrink-0 text-cyan-500">-</span>
-                      <span>Test a higher inflation rate to see how sensitive the corpus target is.</span>
+                      <span>A 4% withdrawal rule is not used.</span>
                     </li>
                     <li className="flex gap-2">
                       <span className="mt-1 shrink-0 text-cyan-500">-</span>
-                      <span>Lower the return assumption if you want a more conservative plan.</span>
+                      <span>Tax and healthcare costs are not added on top of the expense.</span>
                     </li>
                   </ul>
                   <ul className="flex flex-col gap-3 text-[0.9rem] leading-[1.6] text-[var(--text-secondary)]">
                     <li className="flex gap-2">
                       <span className="mt-1 shrink-0 text-cyan-500">-</span>
-                      <span>Include current retirement savings to estimate the remaining gap more accurately.</span>
+                      <span>A mutual-fund systematic withdrawal plan is not modeled.</span>
                     </li>
                     <li className="flex gap-2">
                       <span className="mt-1 shrink-0 text-cyan-500">-</span>
-                      <span>Keep the plan flexible. Retirement numbers are updated best when life changes.</span>
+                      <span>Amounts are formatted in rupees.</span>
                     </li>
                   </ul>
                 </div>
@@ -284,22 +276,25 @@ export default function RetirementCorpusClient() {
           <RelatedTools currentToolId="retirement-corpus" categoryId="finance" />
 
           <SEOSection
-            title="Retirement Corpus Calculator with Inflation Planning"
-            description="A retirement corpus calculator helps you estimate the amount of money you need so your retirement spending can continue after you stop working. The key is to start with your future monthly expense, not your current income, and then adjust that number for inflation and the time the money must last."
+            title="Retirement corpus from an annual annuity"
+            description={`Today's monthly expense is inflated to the retirement date and multiplied by 12. That annual amount is discounted for the retirement years at the post-retirement return. It stays flat during retirement. Current savings compound monthly, and the gap becomes a flat monthly deposit.
+
+₹60,000 a month, 20 years to retirement, 25 years in retirement, 6% inflation, 10.5% before retirement, and 5.5% after, with ₹25,00,000 already saved, produces a future expense of about ₹1,92,428 a month and a corpus of about ₹3.10 crore. The savings grow to about ₹2.02 crore, leaving a gap of about ₹1.07 crore, or about ₹13,142 a month. A 4% withdrawal rule is not used.`}
             howToUse={[
-              'Enter your current monthly spending.',
-              'Choose how many years remain until retirement.',
-              'Pick how long the money should last during retirement.',
-              'Set inflation and expected return assumptions.',
-              'Review the retirement corpus and the monthly savings gap.',
+              'Enter the current monthly expense. The default is ₹60,000.',
+              'Enter years to retirement and years in retirement. The defaults are 20 and 25.',
+              'Enter inflation, the pre-retirement return, and the post-retirement return. The defaults are 6%, 10.5%, and 5.5%.',
+              'Enter current savings. The default is ₹25,00,000. It compounds monthly.',
+              'Read the corpus, the future monthly expense, and the monthly deposit for the gap.',
             ]}
             benefits={[
-              'Turns a vague retirement goal into a number you can plan around.',
-              'Accounts for inflation, which is one of the biggest retirement risks.',
-              'Shows how current savings can reduce future monthly investment needs.',
-              'Useful for conservative, balanced, or more aggressive planning styles.',
+              'Inflation is applied only until the retirement date.',
+              'The corpus discounts a constant annual expense once a year.',
+              'The ₹3.10 crore example uses the defaults above.',
+              'The monthly deposit matches the savings-goal formula.',
+              'Tax and a systematic withdrawal plan are not applied.',
             ]}
-            formula="Corpus = Annual Expense x [1 - (1 + r)^-n] / r"
+            formula="Corpus = Annual expense × [1 − (1 + r)^−n] / r"
           />
           <FAQSchema faqs={RETIREMENT_FAQS} />
         </section>

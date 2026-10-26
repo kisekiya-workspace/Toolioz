@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Copy, Check, RefreshCw, Plus, X } from 'lucide-react';
-import styles from './page.module.css';
 
 import { FAQSchema } from '@/components/ui/FAQSchema';
 import { RelatedTools } from '@/components/ui/RelatedTools';
@@ -258,7 +257,7 @@ export default function ColorClient({ title, color }: { title?: string, color?: 
         <header className="mb-12 text-center">
           <h1 className="mb-4 text-[2.5rem] font-extrabold text-[var(--text-primary)]">{title || 'Color Format Suite'}</h1>
           <p className="text-[1.1rem] leading-[1.6] text-[var(--text-secondary)]">
-            Generate dynamic Web UI Themes, test Typographical Contrast legibility, and orchestrate Mesh Gradients seamlessly based on RGB, HEX or HSL input.
+            A color can be written as hex, RGB, or HSL. This page converts among those forms, checks contrast, and builds a mesh gradient from the same color.
           </p>
         </header>
 

@@ -8,7 +8,7 @@ import { buildCalculatorJsonLd, buildPageMetadata } from '@/lib/seo';
 export const metadata = buildPageMetadata({
   title: 'Split Image in 3 Parts — 16:9 Triptych PNG | Toolioz',
   description:
-    'Free 16:9 image splitter: crop your photo to widescreen and divide it into 3 equal vertical parts. Download PNG slices for X, Instagram, and carousels — 100% in your browser.',
+    'Crops a 16:9 photo and splits it into three equal vertical PNG slices for X, Instagram, and carousels.',
   path: '/design/split-image-in-3',
   keywords: [
     'split image in 3',

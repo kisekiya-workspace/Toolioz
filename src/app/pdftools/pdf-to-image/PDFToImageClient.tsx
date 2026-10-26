@@ -31,17 +31,17 @@ const FAQS = [
   {
     question: 'Does this tool upload my PDF to a server?',
     answer:
-      'No. All processing happens locally in your browser. Your PDF files never leave your device, ensuring complete privacy and security.',
+      'No. Rendering runs in the browser. The PDF is not uploaded.',
   },
   {
     question: 'What image formats are supported?',
     answer:
-      'You can export pages as high-resolution PNG (lossless) or JPEG (smaller file size) images.',
+      'Pages can be saved as PNG or JPEG. PNG keeps the pixels. JPEG is smaller.',
   },
   {
     question: 'Is there a page limit?',
     answer:
-      'The tool supports up to 30 pages per PDF to ensure fast and reliable processing within your browser.',
+      'A PDF is limited to 30 pages so the tab can render them.',
   },
   {
     question: 'Can I convert password-protected PDFs?',
@@ -165,7 +165,7 @@ export default function PDFToImageClient() {
           <div className="container">
             <h1 className="mb-2 text-2xl font-black tracking-tight sm:text-3xl">PDF to Image Converter</h1>
             <p className="mx-auto max-w-[700px] text-sm leading-6 text-[var(--text-secondary)] sm:text-base">
-              Convert PDF pages to high-resolution PNG or JPEG images safely and securely right in your browser.
+              Each PDF page is rendered as a PNG or JPEG at 1x, 2x, or 3x. The file is not uploaded.
             </p>
           </div>
         </header>
@@ -220,57 +220,24 @@ export default function PDFToImageClient() {
                     </div>
 
                     <div className="mt-4 rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] p-6">
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '8px',
-                          marginBottom: '1.5rem',
-                          color: 'var(--text-primary)',
-                        }}
-                      >
+                      <div className="mb-6 flex items-center gap-2 text-foreground">
                         <Settings size={18} />
-                        <span style={{ fontWeight: 700 }}>Output Settings</span>
+                        <span className="font-bold">Output Settings</span>
                       </div>
 
-                      {/* Format Selection */}
-                      <div style={{ marginBottom: '1.5rem' }}>
-                        <span
-                          style={{
-                            fontSize: '0.85rem',
-                            fontWeight: 600,
-                            color: 'var(--text-secondary)',
-                            display: 'block',
-                            marginBottom: '8px',
-                          }}
-                        >
+                      <div className="mb-6">
+                        <span className="mb-2 block text-sm font-semibold text-muted-foreground">
                           Image Format
                         </span>
-                        <div style={{ display: 'flex', gap: '12px' }}>
+                        <div className="flex gap-3">
                           {(['png', 'jpeg'] as const).map((f) => (
                             <button
                               key={f}
-                              style={{
-                                flex: 1,
-                                padding: '10px 6px',
-                                borderRadius: '8px',
-                                border: '2px solid',
-                                borderColor:
-                                  format === f ? 'var(--primary)' : 'var(--border)',
-                                background:
-                                  format === f
-                                    ? 'rgba(59, 130, 246, 0.1)'
-                                    : 'transparent',
-                                color:
-                                  format === f
-                                    ? 'var(--primary)'
-                                    : 'var(--text-secondary)',
-                                fontSize: '0.85rem',
-                                fontWeight: 700,
-                                textTransform: 'uppercase',
-                                cursor: 'pointer',
-                                transition: 'all 0.2s',
-                              }}
+                              className={`flex-1 cursor-pointer rounded-lg border-2 px-1.5 py-2.5 text-sm font-bold uppercase transition ${
+                                format === f
+                                  ? 'border-primary bg-blue-500/10 text-primary'
+                                  : 'border-border bg-transparent text-muted-foreground'
+                              }`}
                               onClick={() => setFormat(f)}
                             >
                               {f === 'png' ? 'PNG (Lossless)' : 'JPEG (Smaller)'}
@@ -279,43 +246,19 @@ export default function PDFToImageClient() {
                         </div>
                       </div>
 
-                      {/* Scale Selection */}
                       <div>
-                        <span
-                          style={{
-                            fontSize: '0.85rem',
-                            fontWeight: 600,
-                            color: 'var(--text-secondary)',
-                            display: 'block',
-                            marginBottom: '8px',
-                          }}
-                        >
+                        <span className="mb-2 block text-sm font-semibold text-muted-foreground">
                           Resolution Scale
                         </span>
-                        <div style={{ display: 'flex', gap: '12px' }}>
+                        <div className="flex gap-3">
                           {([1, 2, 3] as const).map((s) => (
                             <button
                               key={s}
-                              style={{
-                                flex: 1,
-                                padding: '10px 6px',
-                                borderRadius: '8px',
-                                border: '2px solid',
-                                borderColor:
-                                  scale === s ? 'var(--primary)' : 'var(--border)',
-                                background:
-                                  scale === s
-                                    ? 'rgba(59, 130, 246, 0.1)'
-                                    : 'transparent',
-                                color:
-                                  scale === s
-                                    ? 'var(--primary)'
-                                    : 'var(--text-secondary)',
-                                fontSize: '0.85rem',
-                                fontWeight: 700,
-                                cursor: 'pointer',
-                                transition: 'all 0.2s',
-                              }}
+                              className={`flex-1 cursor-pointer rounded-lg border-2 px-1.5 py-2.5 text-sm font-bold transition ${
+                                scale === s
+                                  ? 'border-primary bg-blue-500/10 text-primary'
+                                  : 'border-border bg-transparent text-muted-foreground'
+                              }`}
                               onClick={() => setScale(s)}
                             >
                               {s}x{' '}
@@ -327,26 +270,14 @@ export default function PDFToImageClient() {
                             </button>
                           ))}
                         </div>
-                        <p
-                          style={{
-                            color: 'var(--text-tertiary)',
-                            fontSize: '0.8rem',
-                            marginTop: '8px',
-                          }}
-                        >
-                          Higher scale = sharper images but larger file size.
+                        <p className="mt-2 text-sm text-muted-foreground">
+                          A higher scale produces a sharper image and a larger file.
                         </p>
                       </div>
                     </div>
 
                     {errorMessage && (
-                      <p
-                        style={{
-                          color: 'var(--error)',
-                          marginTop: '1rem',
-                          fontWeight: 600,
-                        }}
-                      >
+                      <p className="mt-4 font-semibold text-red-600">
                         {errorMessage}
                       </p>
                     )}
@@ -358,7 +289,7 @@ export default function PDFToImageClient() {
                         onClick={convertToImages}
                       >
                         Convert to Images
-                        <Server size={20} style={{ marginLeft: '10px' }} />
+                        <Server size={20} className="ml-2.5" />
                       </Button>
                     )}
 
@@ -369,9 +300,8 @@ export default function PDFToImageClient() {
                         disabled
                       >
                         <Loader2
-                          className="animate-spin"
+                          className="mr-2.5 animate-spin"
                           size={20}
-                          style={{ marginRight: '10px' }}
                         />
                         Converting Pages...
                       </Button>
@@ -382,37 +312,24 @@ export default function PDFToImageClient() {
 
               <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
                 <div className="rounded-[var(--radius-lg)] border border-[var(--border)] bg-white p-6 transition-transform duration-300 hover:-translate-y-1">
-                  <Server
-                    className="mb-6"
-                    size={24}
-                    style={{ color: '#0ea5e9' }}
-                  />
-                  <h4 className="mb-3 text-[1.125rem] font-extrabold">100% Local Processing</h4>
+                  <Server className="mb-6 text-sky-500" size={24} />
+                  <h4 className="mb-3 text-[1.125rem] font-extrabold">Local rendering</h4>
                   <p className="text-[0.9375rem] leading-[1.6] text-[var(--text-secondary)]">
-                    Pages are rendered directly on your device using a professional browser engine. Zero server uploads.
+                    Each page is rendered in the browser. The PDF is not uploaded.
                   </p>
                 </div>
                 <div className="rounded-[var(--radius-lg)] border border-[var(--border)] bg-white p-6 transition-transform duration-300 hover:-translate-y-1">
-                  <Zap
-                    className="mb-6"
-                    size={24}
-                    style={{ color: '#f59e0b' }}
-                  />
-                  <h4 className="mb-3 text-[1.125rem] font-extrabold">High Resolution</h4>
+                  <Zap className="mb-6 text-amber-500" size={24} />
+                  <h4 className="mb-3 text-[1.125rem] font-extrabold">Resolution scale</h4>
                   <p className="text-[0.9375rem] leading-[1.6] text-[var(--text-secondary)]">
-                    Up to 3x scale rendering ensures your images remain crisp and
-                    professional for any use case.
+                    The 1x, 2x, and 3x scales set how many pixels are drawn for each PDF point.
                   </p>
                 </div>
                 <div className="rounded-[var(--radius-lg)] border border-[var(--border)] bg-white p-6 transition-transform duration-300 hover:-translate-y-1">
-                  <ShieldCheck
-                    className="mb-6"
-                    size={24}
-                    style={{ color: '#10b981' }}
-                  />
-                  <h4 className="mb-3 text-[1.125rem] font-extrabold">Complete Privacy</h4>
+                  <ShieldCheck className="mb-6 text-emerald-500" size={24} />
+                  <h4 className="mb-3 text-[1.125rem] font-extrabold">No upload</h4>
                   <p className="text-[0.9375rem] leading-[1.6] text-[var(--text-secondary)]">
-                    Since the PDF is processed on your device, your confidential data is never transmitted over the internet.
+                    The PDF bytes stay in the tab while the pages are converted.
                   </p>
                 </div>
               </div>
@@ -420,52 +337,24 @@ export default function PDFToImageClient() {
 
             {images.length > 0 && (
               <div>
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-                    gap: '20px',
-                  }}
-                >
+                <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-5">
                   {images.map((img) => (
                     <Card
                       key={img.pageNumber}
-                      style={{
-                        padding: '8px',
-                        position: 'relative',
-                        overflow: 'hidden',
-                      }}
+                      className="relative overflow-hidden p-2"
                     >
                       <img
                         src={img.dataUrl}
                         alt={`Page ${img.pageNumber}`}
-                        style={{
-                          width: '100%',
-                          borderRadius: '4px',
-                          border: '1px solid var(--border)',
-                        }}
+                        className="w-full rounded border border-border"
                       />
-                      <div
-                        style={{
-                          marginTop: '8px',
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                          fontSize: '0.75rem',
-                          fontWeight: 600,
-                        }}
-                      >
+                      <div className="mt-2 flex items-center justify-between text-xs font-semibold">
                         <span>Page {img.pageNumber}</span>
                         <button
                           onClick={() =>
                             downloadImage(img.dataUrl, img.pageNumber - 1)
                           }
-                          style={{
-                            color: 'var(--primary)',
-                            background: 'none',
-                            border: 'none',
-                            cursor: 'pointer',
-                          }}
+                          className="cursor-pointer border-0 bg-transparent text-primary"
                         >
                           <Download size={14} />
                         </button>
@@ -479,9 +368,9 @@ export default function PDFToImageClient() {
                     fullWidth
                     size="lg"
                     onClick={downloadAllImages}
-                    style={{ marginTop: '2rem' }}
+                    className="mt-8"
                   >
-                    <Download size={20} style={{ marginRight: '8px' }} />
+                    <Download size={20} className="mr-2" />
                     Download All {images.length} Pages
                   </Button>
                 )}
@@ -492,7 +381,7 @@ export default function PDFToImageClient() {
 
         <SEOSection
           title="PDF to Image Converter"
-          description="Convert PDF documents into high-resolution PNG or JPEG images directly in your browser. 100% private and secure processing with zero server uploads."
+          description="Renders each PDF page as a PNG or JPEG in the browser. The file is not uploaded."
           howToUse={[
             'Upload your PDF document (up to 60MB, 30 pages max).',
             'Select the output format: PNG for lossless quality or JPEG for smaller files.',
@@ -501,10 +390,10 @@ export default function PDFToImageClient() {
             'Download individual pages or all pages at once.',
           ]}
           benefits={[
-            'Fast local processing directly in your browser.',
+            'Rendering runs in the browser. The PDF is not uploaded.',
             'Multiple format options to match your needs.',
             'Adjustable resolution scale up to 3x for print-ready images.',
-            'Complete privacy — your files are never uploaded to any server.',
+            'The PDF is not uploaded.',
             'Perfect for presentations, social media, or extracting visual content.',
           ]}
         />

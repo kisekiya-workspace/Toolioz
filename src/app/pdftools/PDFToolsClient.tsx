@@ -35,7 +35,7 @@ export default function PDFToolsClient() {
           </h1>
           
           <p className="mx-auto mt-2 max-w-2xl text-xs sm:text-sm text-zinc-500 leading-relaxed dark:text-zinc-400">
-            Merge, split, and convert PDFs and images in the browser. Pages labelled local processing keep the file in the tab.
+            Merge joins PDFs in the selected order. Split copies chosen pages. Image tools turn pages into pictures or pictures into one PDF. The file stays in the browser.
           </p>
 
           {/* Search Box */}

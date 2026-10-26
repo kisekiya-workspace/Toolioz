@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "JSON Formatter",
-        "description": "Format, validate, and beautify your JSON data.",
+        "description": "Pretty-prints JSON with 2 or 4 spaces, minifies it, and can emit YAML or TypeScript. This address is an alias.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Any",
         "offers": {

@@ -4,16 +4,16 @@ import { JSONLD } from '@/components/ui/JSONLD';
 import CurlConverterClient from './CurlConverterClient';
 
 export const metadata: Metadata = {
-  title: 'cURL Converter | Convert to Fetch, Axios & Python Requests',
+  title: 'cURL to Code Converter',
   description:
-    'Convert cURL commands into ready-to-use Fetch, Axios, and Python requests snippets in seconds.',
+    'Parses a cURL command into method, URL, headers, and body, then writes fetch, Axios, or Python requests code.',
   alternates: {
     canonical: 'https://toolioz.com/devtools/curl-converter',
   },
   openGraph: {
     title: 'cURL Converter | Toolioz DevTools',
     description:
-      'Parse cURL commands and generate JavaScript and Python request code instantly.',
+      'Parses a cURL command into method, URL, headers, and body, then writes fetch, Axios, or Python requests code.',
     url: 'https://toolioz.com/devtools/curl-converter',
     type: 'website',
   },

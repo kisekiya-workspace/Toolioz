@@ -82,16 +82,16 @@ export default function AudioConverterPage() {
     };
 
     const faq = [
-        { q: "Is this really private?", a: "Yes. We use WebAssembly (WASM) to run FFmpeg directly in your browser. Your audio files are processed locally on your device." },
-        { q: "Why is it downloading a file on load?", a: "The tool needs to download the core audio processing engine (ffmpeg-core.wasm, ~30MB) once to work offline." },
-        { q: "Can I convert large files?", a: "Yes, but performance depends on your device's RAM and CPU. For files over 100MB, it might take a while." }
+        { q: "Is the audio uploaded?", a: "The converter runs FFmpeg in the browser through WebAssembly. The file is not uploaded." },
+        { q: "Why is it downloading a file on load?", a: "The page downloads ffmpeg-core.js and ffmpeg-core.wasm from unpkg before the first conversion." },
+        { q: "Can I convert large files?", a: "Yes, within the memory and processor available to the tab. Files over 100 MB take longer." }
     ];
 
     return (
         <div className="container px-6 py-12 m-auto">
             <ToolHeader
                 title="Audio Converter"
-                description="Convert audio files between MP3, WAV, AAC, and OGG formats securely in your browser."
+                description="Converts audio with FFmpeg loaded from unpkg. The audio file is not uploaded. MP3 and AAC depend on that FFmpeg build."
             />
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
@@ -196,7 +196,7 @@ export default function AudioConverterPage() {
                 <ToolContentSection title="Universal Audio Transcoder">
                     <p>
                         Whether you need an MP3 for your car stereo, a WAV file for high-quality editing, or an OGG file for web development,
-                        ToolBox Audio Converter handles it all. We use the industry-standard FFmpeg library compiled to WebAssembly.
+                        Audio conversion uses FFmpeg compiled to WebAssembly in the browser.
                     </p>
                 </ToolContentSection>
                 <ToolFAQ questions={faq} />

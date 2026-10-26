@@ -1,8 +1,8 @@
 export const blog = {
   slug: 'free-online-financial-calculators-guide',
-  title: 'The Ultimate Directory of Free Online Financial Calculators (2026 Edition)',
+  title: 'Free finance calculators',
   description:
-    'A comprehensive directory guide for free web-based financial calculators, covering compound interest, SIP step-up, loan prepayments, and privacy-first client-side calculation suites.',
+    'Lists compound-interest, SIP, loan-prepayment, and tax calculators that run in the browser.',
   keywords: [
     'free online financial calculators directory',
     'no signup finance tools suite',

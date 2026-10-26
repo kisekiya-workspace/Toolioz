@@ -88,7 +88,7 @@ export default function FaviconGeneratorPage() {
                     </div>
                     <div>
                         <h1 className="text-3xl font-bold">Favicon Generator</h1>
-                        <p className="text-muted-foreground">Create favicons from emoji or text</p>
+                        <p className="text-muted-foreground">A favicon is a small icon for a browser tab. This page draws one from text or an emoji and downloads the image.</p>
                     </div>
                 </div>
 

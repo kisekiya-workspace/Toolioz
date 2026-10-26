@@ -31,6 +31,8 @@ export const TOOL_ALIASES: Readonly<Record<string, string>> = {
   '/devtools/faq-schema-generator': '/devtools/schema-markup-generator',
   '/devtools/howto-schema-generator': '/devtools/schema-markup-generator',
   '/devtools/product-schema-generator': '/devtools/schema-markup-generator',
+  '/tools/json-to-csv': '/devtools/csv-json-converter',
+  '/tools/word-counter': '/tools/text-tools',
 };
 
 /**
@@ -48,6 +50,20 @@ export const WITHHELD_TOOL_PATHS = new Set([
 /** Tools that do not reliably complete their stated job in production. */
 export const PAUSED_TOOL_PATHS = new Set([
   '/tools/audio-converter',
+]);
+
+/**
+ * Tools with regulatory, statutory tax, or financial rules that change with government budgets/circulars.
+ * Kept functional for direct visitors, but noindexed and excluded from sitemap to maintain an evergreen site profile.
+ */
+export const CHANGING_RULES_NOINDEX_PATHS = new Set([
+  '/finance/income-tax',
+  '/finance/gst-calculator',
+  '/finance/itr-json-to-computation-pdf',
+  '/finance/form-16-to-json',
+  '/finance/income-computation-from-json',
+  '/tools/salary-breakup-calculator',
+  '/tools/loan-eligibility-calculator',
 ]);
 
 export function canonicalToolPath(pathname: string): string {

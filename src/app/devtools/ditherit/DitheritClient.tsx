@@ -26,7 +26,7 @@ export default function DitheritClient() {
       {/* Main Full Ditherit Studio Pro Editor Workspace */}
       <header className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6">
         <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">ditherit — Interactive ASCII &amp; Dot Art</h1>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">Create interactive image, GIF, and video artwork with physics effects and code export.</p>
+        <p className="mt-2 max-w-3xl text-sm text-zinc-600 dark:text-zinc-400">ditherit turns an image, GIF, or video into dithered dots or ASCII and can move those dots with a spring force. Export includes a still, a WebM, or generated code.</p>
       </header>
       <div className="flex-1 mb-10">
         <DitherStudio />
@@ -38,12 +38,12 @@ export default function DitheritClient() {
         {/* GEO / AEO Direct Answer Block */}
         <DirectAnswerBlock
           title="How to convert images and videos into interactive ASCII & dithered dot art?"
-          answer="ditherit Interactive ASCII & Dot Art Studio is a browser-based graphic engine that processes images, GIFs, and video clips into dithered dot matrices and ASCII art. It features real-time spring physics mouse repulsion (repel, attract, wave, vortex, breathe), WebM recording, background flood-fill removal, Sobel edge glyph rendering, and lightweight React code export (ditherit-react)."
+          answer="ditherit turns an image, GIF, or video into dots or ASCII. Video sampling stops at 90 frames on a canvas whose long side is 600 pixels. Pointer effects are repel, attract, wave, noise, vortex, and breathe. PNG export defaults to 600×600. Background removal is a corner flood fill with tolerance 32. The React snippet imports ditherit-react and does not include the image."
           keyTakeaways={[
-            "Real-Time Physics Interactive Dots — Dots dynamically react to cursor movement with custom force fields.",
-            "Off-Thread Web Worker Dithering — Smooth Floyd-Steinberg, Atkinson, Bayer 8x8, and Sobel edge glyph rendering.",
-            "Video & GIF Frame Extractor — Import animated GIF or video files and record dithered WebM clips.",
-            "React & JS Code Export — Download self-contained React component code to embed interactive dot art on your website."
+            "Pointer effects are repel, attract, wave, noise, vortex, and breathe.",
+            "Image dithering runs in a web worker. Algorithms are Floyd-Steinberg, Atkinson, Bayer 8×8, and a hard threshold.",
+            "Video sampling stops at 90 frames. WebM recording uses the 600-pixel canvas.",
+            "React code export copies a snippet that imports ditherit-react. The asset path is a placeholder.",
           ]}
           categoryName="ASCII & Dot Art Studio"
         />
@@ -55,7 +55,7 @@ export default function DitheritClient() {
             </div>
             <h3 className="font-bold text-zinc-950 dark:text-zinc-50 text-base">Physics Dot Repulsion</h3>
             <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-              Experience dynamic spring physics where dithered dots react in real-time to your mouse movement with customizable repel radius, strength, and force fields.
+              Pointer movement can repel, attract, wave, add noise, vortex, or breathe the dots. Radius and strength are the two controls.
             </p>
           </Card>
 
@@ -65,7 +65,7 @@ export default function DitheritClient() {
             </div>
             <h3 className="font-bold text-zinc-950 dark:text-zinc-50 text-base">Video & GIF Dithering</h3>
             <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-              Upload animated GIFs or WebM/MP4 video clips to render live dithered video playback. Record and download high-resolution WebM loops directly in your browser.
+              A GIF or video is sampled up to 90 frames on a canvas whose long side is 600 pixels. WebM recording uses that canvas.
             </p>
           </Card>
 
@@ -75,7 +75,7 @@ export default function DitheritClient() {
             </div>
             <h3 className="font-bold text-zinc-950 dark:text-zinc-50 text-base">Export React Component</h3>
             <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-              Get clean, zero-dependency TSX code embedding your exact interactive particle animation with interactive canvas physics into your React or Next.js app.
+              The React export is a snippet that imports ditherit-react. The image path is a placeholder, and the package is not included in the snippet.
             </p>
           </Card>
         </section>
@@ -83,19 +83,19 @@ export default function DitheritClient() {
         {/* SEO Structured Content */}
         <SEOSection
           title="ditherit Interactive ASCII & Dot Art Studio"
-          description="A powerful browser-based particle canvas and dithering engine that turns your photos, graphics, and video clips into retro dithered art with interactive spring physics."
+          description="ditherit turns an image, GIF, or video into dithered dots or ASCII and can move those dots with a spring force. Export includes a still, a WebM, or generated code."
           howToUse={[
-            "Upload an image (PNG, JPG, SVG), animated GIF, or video file into the studio.",
-            "Select your dithering algorithm (Floyd-Steinberg, Atkinson, Bayer 8x8, or Sobel ASCII glyphs).",
-            "Fine-tune Dot Size, Spacing, Contrast, and Brightness in real-time.",
-            "Toggle Physics Simulation to make dots react to mouse movement with repel, attract, vortex, or wave forces.",
-            "Export your artwork as a 4K PNG, SVG vector, WebM animation loop, or React component code."
+            "An image, GIF, or video can be opened. Video sampling stops at 90 frames, and the working canvas uses a 600-pixel long side.",
+            "The algorithm list is Floyd-Steinberg, Atkinson, ordered Bayer 8×8, or a hard threshold.",
+            "Dot size, spacing, contrast, and brightness are controls.",
+            "The pointer can repel, attract, wave, add noise, vortex, or breathe the dots.",
+            "PNG export uses the width and height fields. The default is 600×600. SVG, WebM, and a React snippet are separate exports."
           ]}
           benefits={[
-            "100% Client-Side Processing — Your photos and videos never leave your browser or get uploaded to servers.",
-            "Multi-Threaded Web Workers — Heavy image processing and matrix calculations run off the main thread for 60 FPS performance.",
-            "Professional Color Palettes — 1-bit monochrome, Game Boy olive, Cyberpunk neon, Amber CRT, and custom hex dual-tones.",
-            "High-Resolution Vector Export — Output crisp SVG vector paths suitable for print posters and merchandise."
+            "Media is decoded and drawn in the browser. Photos and videos are not uploaded.",
+            "Image dithering runs in a web worker. The page does not measure a frame rate.",
+            "Dot color and background color are hex values. Named palettes such as Game Boy are on the separate dither studio page.",
+            "SVG export uses the same width and height as the PNG. It is not a fixed print size."
           ]}
         />
 
@@ -104,19 +104,19 @@ export default function DitheritClient() {
           faqs={[
             {
               question: "Is ditherit free to use for commercial projects?",
-              answer: "Yes, ditherit Interactive Studio is 100% free and open-source under the MIT license. You can use generated graphics, videos, and exported React component code in personal and commercial projects without royalties or attribution required."
+              answer: "The page does not ask for payment or add a watermark. The site repository is private, so this page does not grant an MIT license."
             },
             {
               question: "Are my uploaded photos and videos sent to any server?",
-              answer: "No. All media decoding, Web Worker dithering algorithms, particle physics calculations, and canvas rendering happen strictly inside your browser's local sandbox memory. Zero data is sent to external servers."
+              answer: "Decoding, dithering, physics, and canvas drawing run in the browser. The media is not uploaded."
             },
             {
               question: "What dithering algorithms are supported?",
-              answer: "ditherit supports Floyd-Steinberg error diffusion, Atkinson dithering (classic Mac OS style), Bayer 4x4 and 8x8 ordered threshold matrices, Halftone clustered dot screens, and Sobel operator edge-detected ASCII character glyphs."
+              answer: "The algorithm list is Floyd-Steinberg, Atkinson, ordered Bayer 8×8, and a hard threshold. Sobel is used for optional glyph edges, not as its own algorithm. There is no halftone mode and no Bayer 4×4 mode."
             },
             {
               question: "How do I embed the interactive dot animation into my React website?",
-              answer: "Click the 'Export React Code' button in the toolbar to download a self-contained, lightweight TypeScript React component (DitherCanvas.tsx) that includes the canvas rendering and mouse physics engine ready to drop into Next.js, Vite, or Create React App."
+              answer: "Export React Code copies a snippet that imports ditherit-react and sets the image path to /path/to/your/asset. The snippet does not include the pixels or the package."
             }
           ]}
         />

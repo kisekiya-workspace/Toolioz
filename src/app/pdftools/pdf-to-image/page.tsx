@@ -6,7 +6,7 @@ import { JSONLD } from '@/components/ui/JSONLD';
 export const metadata: Metadata = {
   title: "PDF to Image Converter | Export PDF to PNG/JPG",
   description:
-    'Convert PDF pages to PNG or JPG images locally in the browser. Choose a resolution scale, preview pages, and download the results without uploading your PDF.',
+    'Converts PDF pages to PNG or JPG at a chosen scale and downloads the images without uploading the file.',
   keywords:
     'PDF to image converter, export pdf to png online, convert pdf to jpg high quality, extract images from pdf, free pdf to image tool',
   alternates: {

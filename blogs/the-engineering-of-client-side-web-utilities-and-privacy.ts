@@ -1,8 +1,8 @@
 export const blog = {
   slug: 'the-engineering-of-client-side-web-utilities-and-privacy',
-  title: 'The Engineering of Client-Side Web Utilities: Zero-Latency Processing, WebAssembly, and Absolute Data Privacy',
+  title: 'Client-side utilities and privacy',
   description:
-    'A 2,500+ word masterclass on modern web software engineering: client-side in-memory execution, physics of latency, Zero Network Transmission (ZNT) privacy, WebAssembly, Floyd-Steinberg & Bayer dithering computer science, and offline PWA architecture.',
+    'Explains in-browser processing, WebAssembly, and what stays on the device when a tool does not upload the file.',
   keywords: [
     'client side web architecture engineering',
     'zero latency web utilities',

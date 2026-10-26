@@ -40,7 +40,7 @@ box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);`;
         <div className="container px-6 py-12 m-auto max-w-6xl">
             <ToolHeader
                 title="Glassmorphism Generator"
-                description="Generate beautiful CSS glassmorphism effects for your UI designs."
+                description="Builds a glassmorphism CSS snippet from blur, transparency, and border settings."
             />
 
             <div className="grid lg:grid-cols-2 gap-12 mb-16">

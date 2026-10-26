@@ -6,15 +6,15 @@ import { Metadata } from 'next';
 import { JSONLD } from '@/components/ui/JSONLD';
 
 export const metadata: Metadata = {
-  title: "WebGL Shader Studio — Animated Backgrounds for Designers | Live GLSL Editor",
-  description: 'Create stunning animated website backgrounds with WebGL shaders. 18 designer-ready presets (aurora gradients, particle effects, wave layers, mesh gradients, dark mode orbs), color picker controls, and one-click export to HTML, React, Three.js, CSS, and Web Components.',
+  title: "WebGL Shader Studio",
+  description: 'Previews animated WebGL backgrounds from presets and exports HTML, React, CSS, or Three.js snippets.',
   keywords: 'WebGL animated background generator, GLSL shader designer tool, website background effects, animated gradient generator, hero section background, Three.js shader export, React WebGL component, CSS gradient fallback, web design shader tool, particle background, mesh gradient animator',
   alternates: {
     canonical: 'https://toolioz.com/devtools/shader-tool',
   },
   openGraph: {
     title: 'WebGL Shader Studio — Animated Backgrounds for Designers | Toolioz',
-    description: 'Create, customize, and export stunning animated WebGL backgrounds for your website. 18 production-ready presets, designer-friendly color pickers, and 6 export formats.',
+    description: 'Previews animated WebGL backgrounds and exports HTML, React, CSS, or Three.js snippets.',
     url: 'https://toolioz.com/devtools/shader-tool',
     siteName: 'Toolioz DevTools',
     type: 'website',
