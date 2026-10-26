@@ -170,7 +170,12 @@ export function buildPageMetadata(options: {
       Boolean(TOOL_ALIASES[options.path])
         ? { index: false, follow: true }
         : options.robots,
-    alternates: { canonical },
+    alternates: {
+      canonical,
+      types: {
+        'text/markdown': `${canonical}.md`,
+      },
+    },
     openGraph: {
       title,
       description: options.description,

@@ -3,6 +3,21 @@
 /_next/static/*
   Cache-Control: public,max-age=31536000,immutable
 
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/llms-full.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/*.md
+  Content-Type: text/markdown; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
 /devtools/*
   Cache-Control: public,max-age=3600,s-maxage=86400
 

@@ -1,57 +1,156 @@
-# Toolioz — Calculators, Developer Utilities & Document Tools
+# Toolioz — Developer Utilities, PDF Tools & Financial Calculators
 
-> Toolioz (https://toolioz.com) is a free utility website offering financial calculators, developer tools, document utilities, marriage biodata makers, and resume builders. Pages labelled local processing keep tool inputs or files in the browser. The site separately uses network services for page assets and analytics, as described in its privacy policy.
+> Toolioz (https://toolioz.com) is a privacy-first web utility suite. All PDF manipulation, cryptographic hashing, data conversion, and financial calculations run 100% client-side in the user's browser using WebAssembly, Web Workers, and HTML5 Canvas. Zero user files, inputs, or personal documents are uploaded to or stored on servers.
 
-## Core Utility Hubs
+## PDF Document Utilities (100% Client-Side, No File Uploads)
 
-- Main Web Portal: https://toolioz.com/
-- Financial Calculators Hub: https://toolioz.com/finance
-- Developer Utilities Hub: https://toolioz.com/devtools
-- PDF Tools Suite: https://toolioz.com/pdftools
-- Marriage Biodata Generator Hub: https://toolioz.com/biodata
-- ATS Resume Builder: https://toolioz.com/resume-builder
-- Technical How-To Guides: https://toolioz.com/how-to
-- Editorial & Review Policy: https://toolioz.com/editorial-policy
-- Privacy Policy: https://toolioz.com/privacy-policy
+Local PDF manipulation using pdf-lib and pdfjs-dist. All processing occurs in the browser memory.
 
-## Key Financial Calculators & Formulas
+- [PDF Merge Tool](https://toolioz.com/pdftools/merge-pdf): Combines PDF files in the chosen order. The files stay in the browser.
+- [PDF to Image Converter](https://toolioz.com/pdftools/pdf-to-image): Renders each PDF page as a PNG or JPEG in the browser.
+- [Image to PDF Converter](https://toolioz.com/pdftools/image-to-pdf): Combines JPG, PNG, and WebP images into one PDF in the browser.
+- [Split PDF & Extract Pages](https://toolioz.com/pdftools/split-pdf): Extracts selected pages or ranges with pdf-lib. The PDF is not uploaded.
+- [Organize PDF](https://toolioz.com/pdftools/organize-pdf): Reorders, rotates, and removes PDF pages, with the file kept in the browser.
+- [Add PDF Page Numbers](https://toolioz.com/pdftools/add-page-numbers-to-pdf): Adds page numbers with pdf-lib. The PDF is not uploaded.
+- [Watermark PDF](https://toolioz.com/pdftools/watermark-pdf): Draws centered Helvetica text on each page. Size, opacity, and angle can change. The color is fixed, and the PDF is not uploaded.
+- [PDF Metadata Editor](https://toolioz.com/pdftools/pdf-metadata-editor): Reads and writes PDF title, author, subject, keywords, creator, and producer with pdf-lib. The file is not uploaded.
+- [PDF to Text](https://toolioz.com/pdftools/pdf-to-text): Extracts selectable text with pdf.js, one block per page. A scanned page returns no text. The PDF is not uploaded.
+- [Bates Numbering PDF](https://toolioz.com/pdftools/bates-numbering-pdf): Stamps a prefix, a zero-padded number, and a suffix in Helvetica on each page. The PDF is not uploaded.
+- [Remove Blank Pages](https://toolioz.com/pdftools/remove-blank-pages): Detects and removes empty or blank pages from a PDF with an adjustable sensitivity slider. Processed 100% in your browser.
+- [Letter ↔ A4](https://toolioz.com/pdftools/letter-to-a4): Resize PDF pages between US Letter and ISO A4 dimensions with proportional scaling. The file is not uploaded.
+- [Split by Bookmarks](https://toolioz.com/pdftools/split-pdf-by-bookmarks): Splits a PDF into separate chapter files using document outline bookmarks. Processing stays in your browser.
+- [PDF to Grayscale](https://toolioz.com/pdftools/pdf-to-grayscale): Converts color PDFs to black & white grayscale while preserving selectable vector text and document quality.
+- [Reverse PDF Pages](https://toolioz.com/pdftools/reverse-pdf-pages): Reverses the sequence of pages in a PDF document in one click. 100% private in-browser processing.
+- [Add Blank Pages](https://toolioz.com/pdftools/add-blank-page-after-page): Interleaves an empty blank page after every page of your PDF for double-sided printing or note taking.
+- [2 Pages Per Sheet](https://toolioz.com/pdftools/2-pages-per-sheet): Combines two PDF pages side-by-side onto a single sheet for compact reading and booklet printing.
+- [Invert PDF Colors](https://toolioz.com/pdftools/invert-pdf-colors): Inverts colors of your PDF for high-contrast dark mode reading without sending files to any server.
+- [Flatten PDF](https://toolioz.com/pdftools/flatten-pdf): Flattens interactive form fields and removes annotations to prevent accidental edits or disclosure.
+- [ATS Resume Generator](https://toolioz.com/resume-builder): Create polished resumes with a live LaTeX editor and text-based PDF export.
 
-- Systematic Investment Plan (SIP) Calculator: https://toolioz.com/finance/sip-calculator
-  - Formula: FV = P × [{(1 + i)^n - 1} / i] × (1 + i)
-- Compound Interest Calculator: https://toolioz.com/finance/compound-interest
-  - Formula: A = P(1 + r/n)^(nt)
-- Mortgage & Loan Prepayment Calculator: https://toolioz.com/finance/loan-prepayment
-  - Estimates tenure reduction versus EMI savings from partial principal prepayments.
-- Income Tax Calculator: https://toolioz.com/finance/income-tax
-  - Compares New Tax Regime (Section 115BAC) vs Old Tax Regime tax liabilities.
-- Lumpsum Investment Calculator: https://toolioz.com/finance/lumpsum-calculator
-- Retirement Corpus Calculator: https://toolioz.com/finance/retirement-corpus
+## Developer, Data & Subtitle Utilities
 
-## Popular Developer & Design Utilities
+Formatters, encoders, converters (JSON, CSV, KML, GPX, XML, TypeScript), and WebVTT caption utilities.
 
-- JSON Formatter & Validator: https://toolioz.com/devtools/json-formatter
-- JSON Web Token (JWT) Decoder: https://toolioz.com/devtools/jwt-decoder
-- X (Twitter) Tap-to-Reveal Hidden Image Generator: https://toolioz.com/devtools/x-hidden-image
-- Split Image in 3 (16:9 triptych): https://toolioz.com/design/split-image-in-3
-- Ditherit & Retro Canvas Studio: https://toolioz.com/devtools/ditherit
-- Drawesome Digital Canvas: https://toolioz.com/devtools/drawesome
-- Timestamp & Epoch Converter: https://toolioz.com/devtools/timestamp-converter
-- Regex Tester & Debugger: https://toolioz.com/devtools/regex-tester
-- BCrypt Hash Generator: https://toolioz.com/devtools/bcrypt-generator
+- [JSON Formatter](https://toolioz.com/devtools/json-formatter): Formats, validates, and minifies JSON, and can emit YAML or TypeScript.
+- [Base64 Converter](https://toolioz.com/devtools/base64-converter): Encode and decode strings to and from Base64 format.
+- [JWT Decoder](https://toolioz.com/devtools/jwt-decoder): Decode, verify and inspect JSON Web Tokens securely.
+- [Cron Generator](https://toolioz.com/devtools/cron-generator): Generate, parse and explain cron expression schedules.
+- [RegExp Tester](https://toolioz.com/devtools/regex-tester): Test and debug Regular Expressions with live highlighting.
+- [URL Encoder](https://toolioz.com/devtools/url-encoder): Encode and decode URLs or URI components instantly.
+- [Bcrypt Generator](https://toolioz.com/devtools/bcrypt-generator): Generate and verify Bcrypt password hashes securely.
+- [Hash Generator](https://toolioz.com/devtools/hash-generator): Generate SHA hashes for text or files using Web Crypto APIs.
+- [cURL Converter](https://toolioz.com/devtools/curl-converter): Convert cURL commands into Fetch, Axios, and Python snippets.
+- [Timestamp Converter](https://toolioz.com/devtools/timestamp-converter): Convert Unix seconds, milliseconds, and date strings instantly.
+- [JSON Diff Checker](https://toolioz.com/devtools/json-diff): Compare two JSON payloads and inspect exact field-level changes.
+- [UUID Generator](https://toolioz.com/devtools/uuid-generator): Generate secure v4 UUIDs in bulk effortlessly.
+- [YAML ↔ JSON](https://toolioz.com/devtools/yaml-json-converter): Converts YAML to JSON with yaml.load, or JSON to YAML with yaml.dump. A parse error is shown.
+- [XML Formatter](https://toolioz.com/devtools/xml-formatter-validator): Formats XML with DOMParser and shows the browser parsererror text when the markup is invalid.
+- [JSON Schema Validator](https://toolioz.com/devtools/json-schema-validator): Checks JSON data with AJV against a JSON Schema and lists each error path and message.
+- [HTTP Status Lookup](https://toolioz.com/devtools/http-status-code-lookup): Search common HTTP response codes by number, name, category, or meaning.
+- [MIME Type Lookup](https://toolioz.com/devtools/mime-type-lookup): Find common MIME media types from a file extension or content type.
+- [UTM Builder](https://toolioz.com/devtools/utm-builder): Adds utm_source, utm_medium, and utm_campaign to an absolute URL with URLSearchParams. Term and content are optional.
+- [Robots.txt Generator](https://toolioz.com/devtools/robots-txt-generator): Writes a robots.txt with a user-agent, Allow and Disallow lines, and an optional sitemap URL.
+- [Hreflang Generator](https://toolioz.com/devtools/hreflang-generator): Writes one alternate link tag per language and URL pair. It does not add the reverse tags.
+- [Schema Markup Generator](https://toolioz.com/devtools/schema-markup-generator): Builds FAQ, HowTo, or Product JSON-LD. A schema.org validator is not run.
+- [HTML Encode / Decode](https://toolioz.com/devtools/html-encoder-decoder): Encodes &, <, >, and quotes. Decoding also accepts numeric character references. The text stays in the page.
+- [Slug Generator](https://toolioz.com/devtools/slug-generator): Turn a title into a lowercase hyphenated URL slug, stripping accents and punctuation.
+- [chmod Calculator](https://toolioz.com/devtools/chmod-calculator): Turns read, write, and execute checkboxes into a 3-digit octal mode and an rwx string. The command has no filename.
+- [CSV ↔ JSON](https://toolioz.com/devtools/csv-json-converter): Converts a headered CSV to JSON objects, or an array of objects to CSV. Cell values stay strings.
+- [CSV to Markdown](https://toolioz.com/devtools/csv-to-markdown-table): Converts CSV or tab-separated data into aligned GitHub-flavored Markdown tables. Kept 100% in your browser.
+- [NDJSON to CSV](https://toolioz.com/devtools/ndjson-to-csv): Converts newline-delimited JSON (NDJSON / JSONL) files into clean tabular CSV with automatic header detection.
+- [XML to CSV](https://toolioz.com/devtools/xml-to-csv): Flattens XML elements and repeating record trees into tabular CSV format for spreadsheets. 100% private in-browser.
+- [JSON to TypeScript](https://toolioz.com/devtools/json-to-typescript): Generates clean TypeScript interfaces and type definitions from JSON data. Processed client-side.
+- [SRT ↔ VTT](https://toolioz.com/devtools/srt-to-vtt): Converts between SubRip (.srt) and WebVTT (.vtt) caption formats instantly in your browser with zero uploads.
+- [Subtitle to Text](https://toolioz.com/devtools/subtitle-to-text): Extracts clean dialogue and plain text transcripts from SRT or VTT subtitle files, stripping timestamps and formatting tags.
+- [Subtitle Time Shift](https://toolioz.com/devtools/subtitle-time-shift): Sync out-of-time subtitles by adding or subtracting milliseconds and adjusting frame rates (23.976, 24, 25, 29.97 fps).
+- [GPX ↔ KML](https://toolioz.com/devtools/gpx-to-kml): Converts GPS tracks and waypoints between GPX and Google Earth KML format with zero server uploads.
+- [GeoJSON to KML](https://toolioz.com/devtools/geojson-to-kml): Converts GeoJSON features (Points, LineStrings, Polygons) to Google Earth KML placemarks client-side.
+- [CSV to KML](https://toolioz.com/devtools/csv-to-kml): Converts tabular spreadsheet coordinates (latitude, longitude, name) into Google Earth KML placemarks.
+- [Snowflake Parser](https://toolioz.com/tools/snowflakes): Shifts a Discord snowflake 22 bits and adds the 2015 Discord epoch. The id is not sent to Discord.
+- [CSS Minifier](https://toolioz.com/tools/css-minifier): Compress CSS to reduce file size.
+- [JS Minifier](https://toolioz.com/tools/js-minifier): Minify and clean JavaScript code.
+- [HTML Minifier](https://toolioz.com/tools/html-minifier): Optimize HTML structure.
+- [Barcode Generator](https://toolioz.com/tools/barcode-generator): Create custom barcodes (EAN, UPC, etc).
+- [SQL Query Generator](https://toolioz.com/tools/sql-query-generator): Visually build SQL queries.
+- [SQL Formatter](https://toolioz.com/tools/sql-formatter): Beautify and debug SQL queries.
+- [Code to Image](https://toolioz.com/tools/code-to-image): Create beautiful code screenshots.
+- [Open Graph Preview](https://toolioz.com/tools/open-graph-preview): Preview pages on social media.
+- [Password Generator](https://toolioz.com/tools/password-generator): Builds a password with Math.random from the selected sets. The default length is 16.
+- [Meta Tag Generator](https://toolioz.com/tools/meta-tag-generator): Creates title, description, and social meta tags for a page.
+- [Diff Checker](https://toolioz.com/tools/diff-checker): Compare two texts and find differences.
+- [GitHub Graph Simulator](https://toolioz.com/tools/github-graph-simulator): Visualize merge, rebase, and git flow.
 
-## Client-Side PDF & Document Tools
+## Financial Engineering & Investment Calculators
 
-- PDF Merger: https://toolioz.com/pdftools/merge-pdf
-- PDF Splitter: https://toolioz.com/pdftools/split-pdf
-- Marriage Biodata PDF Generator: https://toolioz.com/biodata/biodata-generator
-- ATS Resume Generator: https://toolioz.com/pdftools/resume-generator
+Client-side calculators for SIP, compound interest, mortgage prepayment, and financial planning.
 
-## Privacy & Security Architecture
+- [Compound Interest](https://toolioz.com/finance/compound-interest): Future value with daily, monthly, quarterly, or annual compounding.
+- [Mortgage Calc](https://toolioz.com/finance/mortgage-calculator): Monthly mortgage payment, total interest, and payoff for a balance, rate, and term.
+- [ROI Calculator](https://toolioz.com/finance/roi-calculator): Measure the profitability of an investment quickly.
+- [SIP Calculator](https://toolioz.com/finance/sip-calculator): Wealth generation through systematic monthly investments.
+- [Lumpsum Calculator](https://toolioz.com/finance/lumpsum-calculator): Project how a one-time investment can grow with compounding.
+- [Fixed Deposit](https://toolioz.com/finance/fd-calculator): Estimate maturity value for a fixed-rate bank deposit.
+- [Savings Goal](https://toolioz.com/finance/savings-goal): Monthly deposit that grows a balance to a target by a deadline.
+- [Retirement Corpus](https://toolioz.com/finance/retirement-corpus): Corpus that can fund inflation-adjusted spending for a chosen number of years.
+- [Inflation Calc](https://toolioz.com/finance/inflation-calculator): Future price and purchasing-power change after a chosen inflation rate and number of years.
+- [Loan Prepayment](https://toolioz.com/finance/loan-prepayment): Interest saved and months removed when an extra EMI or principal payment is applied.
+- [Car Loan EMI](https://toolioz.com/finance/car-loan): Reducing-balance car-loan EMI, total interest, and total amount payable.
+- [Percentage Calculator](https://toolioz.com/finance/percentage-calculator): Find a percentage of a number or what percent one value is of another, with steps.
+- [Percentage Change](https://toolioz.com/finance/percentage-change-calculator): Calculate percentage increase or decrease from an original value to a new value.
+- [Reverse Percentage](https://toolioz.com/finance/reverse-percentage-calculator): Recover an original amount before a percentage increase or decrease.
+- [Discount After Tax](https://toolioz.com/finance/discount-calculator-after-tax): Break down sale savings, tax on the reduced price, and the final amount.
 
-- Local Tool Processing: Pages identify when calculations, image processing, or PDF manipulation execute in the browser.
-- Separate Network Services: Page assets, analytics, advertising, and selected online features may contact third parties. See the privacy policy for details.
+## Design, Canvas & Creative Utilities
 
-## Machine-Readable Sitemap & Ads
+In-browser graphics tools, retro dithering, 16:9 split triptychs, and drawing canvases.
 
-- Sitemap XML: https://toolioz.com/sitemap.xml
-- Ads Specification: https://toolioz.com/ads.txt
+- [Background Remover](https://toolioz.com/design/background-remover): Remove simple backgrounds locally, refine with brushes, and export a transparent PNG.
+- [Image Compressor](https://toolioz.com/pdftools/image-compressor): Reduce image size with adjustable quality and target-size controls.
+- [Drawesome Vector Studio ✦ (by Benji Taylor)](https://toolioz.com/devtools/drawesome): Freehand vector drawing canvas with 7 realistic pens (pencil, ballpoint, fineliner, marker, highlighter, brush, fountain pen), area eraser, and SVG/PNG export.
+- [ditherit ✦ Interactive ASCII & Dot Art (by Prasanjit Dey)](https://toolioz.com/devtools/ditherit): Convert images, videos, and GIFs into dithered dot art or ASCII with interactive physics repulsion, WebM export, and React/JS code export.
+- [Image & Video Dither Studio](https://toolioz.com/devtools/dither-studio): Apply retro 1-bit, Floyd-Steinberg, Bayer ordered, GameBoy, CGA, and pixel art dithering to images and videos live in browser.
+- [WebGL GLSL Shader Studio](https://toolioz.com/devtools/shader-tool): Interactive real-time GLSL fragment shader editor & playground. Live preview, Shadertoy uniforms, raymarching SDFs, presets, and code export.
+- [Free Shader Background Generator](https://toolioz.com/devtools/background-generator): Design beautiful animated shader-based background images for wallpapers, social headers, and website hero sections.
+- [X Tap-to-Reveal PNG Maker](https://toolioz.com/devtools/x-hidden-image): Tap-to-reveal PNG for X and Twitter. Timeline preview versus opened view, brush masks, PNG8.
+- [Split Image in 3](https://toolioz.com/design/split-image-in-3): Crop a photo to 16:9 and split it into 3 equal vertical parts for X, Instagram, and carousels. Client-side PNG export.
+- [Color Format Suite](https://toolioz.com/devtools/color-converter): Convert seamlessly between HEX, RGB, HSL and CMYK color codes with palette generation.
+- [CSS Grid Builder](https://toolioz.com/devtools/layout-generator): Visually build CSS Grid layouts with rows, columns, gaps, and code export.
+- [EXIF Viewer & Remover](https://toolioz.com/devtools/exif-viewer-remover): Shows photo metadata. The download strips JPEG EXIF, XMP, IPTC, and comments, or PNG metadata, without re-encoding pixels.
+- [Image Dimensions & Ratio](https://toolioz.com/devtools/image-dimensions-aspect-ratio): Reads pixel width and height, simplifies the ratio by the greatest common divisor, and scales one side in proportion.
+- [OCR Image to Text](https://toolioz.com/devtools/ocr-image-to-text): Recognizes English text in JPG, PNG, and WebP images, with recognition kept in the browser.
+- [Contrast Checker](https://toolioz.com/devtools/color-contrast-checker): Measure the contrast ratio of two hex colors against WCAG AA and AAA text thresholds.
+- [Tweet Generator](https://toolioz.com/tools/tweet-generator): Create realistic fake tweet screenshots.
+- [Instagram Bio Generator](https://toolioz.com/tools/instagram-bio-generator): Creates styled text for an Instagram bio.
+- [Image Converter](https://toolioz.com/tools/image-converter): Draws an image on a canvas and saves PNG, JPEG, or WebP. The file is not uploaded.
+- [Image Resizer](https://toolioz.com/tools/image-resizer): Resize images to specific dimensions.
+- [Gradient Generator](https://toolioz.com/tools/gradient-generator): Create beautiful CSS gradients.
+- [Glassmorphism Generator](https://toolioz.com/tools/css-glassmorphism-generator): Generate CSS glassmorphism effects.
+- [Flexbox Playground](https://toolioz.com/tools/flexbox-playground): Interactively learn and test Flexbox.
+- [CSS Button Generator](https://toolioz.com/tools/css-button-generator): Design buttons and copy CSS code.
+- [Color Palette](https://toolioz.com/tools/color-palette): Generate beautiful color palettes from a base color.
+- [Box Shadow Generator](https://toolioz.com/tools/box-shadow-generator): Design CSS box shadows with live preview.
+- [Favicon Generator](https://toolioz.com/tools/favicon-generator): Create favicons from emoji or text.
+
+## Everyday Identity & Document Utilities
+
+Marriage biodata builders, ATS resume generators, unit converters, and text utilities.
+
+- [Unit Converter](https://toolioz.com/devtools/unit-converter): Convert length, mass, temperature, and binary data units.
+- [Lorem Ipsum Generator](https://toolioz.com/devtools/lorem-ipsum): Generate placeholder paragraphs, words, or HTML for design mockups.
+- [Biodata Generator](https://toolioz.com/biodata): Create marriage biodata PDFs with religion-based and modern templates.
+- [BMI Calculator](https://toolioz.com/tools/bmi-calculator): Track body mass index and health metrics.
+- [Scientific Calculator](https://toolioz.com/tools/calculator): Standard and scientific math operations.
+- [Age Calculator](https://toolioz.com/tools/age-calculator): Age in years, months, and days from a date of birth and today's local date.
+- [Stopwatch & Timer](https://toolioz.com/tools/stopwatch): Precision chronograph with laps.
+- [Time Zone Converter](https://toolioz.com/tools/time-zone-converter): Convert dates across time zones.
+- [QR Code Generator](https://toolioz.com/tools/qr-generator): Create customizable QR codes.
+- [Text Tools](https://toolioz.com/tools/text-tools): Case converter, word counter, and text cleaner.
+- [Markdown Editor](https://toolioz.com/tools/markdown-editor): Write and preview Markdown in real-time.
+
+## Site Specifications & Agent Endpoints
+
+Machine-readable manifests and alternate endpoints for AI assistants, LLMs, and research agents.
+
+- [Full LLMs Documentation](https://toolioz.com/llms-full.txt): Comprehensive markdown knowledge base with formulas and workflows
+- [Sitemap XML](https://toolioz.com/sitemap.xml): Canonical URL sitemap index
+- [Privacy Policy](https://toolioz.com/privacy-policy): Privacy guarantees and client-side processing architecture

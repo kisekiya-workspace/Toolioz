@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build --webpack && node scripts/normalize-static-export.mjs",
+    "build": "next build --webpack && node scripts/normalize-static-export.mjs && node scripts/generate-agent-aeo.mjs",
     "dev": "next dev",
     "start": "next start",
     "lint": "eslint",
@@ -13,6 +13,8 @@
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
+    "@dualmark/converters": "^0.11.0",
+    "@dualmark/core": "^0.11.0",
     "@ffmpeg/ffmpeg": "^0.12.15",
     "@ffmpeg/util": "^0.12.2",
     "@opennextjs/cloudflare": "^1.19.1",

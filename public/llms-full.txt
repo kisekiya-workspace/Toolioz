@@ -1,0 +1,1119 @@
+# Toolioz — Comprehensive Machine-Readable Knowledge Base
+
+> Privacy-first client-side web utility platform. All operations execute strictly inside browser memory using Web Workers, HTML5 Canvas 2D, and WebAssembly. No server storage or file transmission occurs during tool execution.
+
+## Architecture & Privacy Model
+- **Zero Server Uploads**: PDF manipulation (splitting, merging, blank page removal, bookmarks, grayscale, booklet generation) is handled entirely by client-side JavaScript (`pdf-lib` and `pdfjs-dist`).
+- **Data Privacy**: Cryptographic hashing (BCrypt, SHA, MD5), data transformation (CSV, JSON, KML, GPX, XML, TypeScript), and JWT decoding never send user inputs to external endpoints.
+- **Formula Accuracy**: Mathematical calculations (SIP, Compound Interest, Loan Prepayment) implement standard financial engineering formulas without server roundtrips.
+
+---
+
+## Complete Catalog of Available Tools & Workflows
+
+### Background Remover
+- **Canonical URL**: https://toolioz.com/design/background-remover
+- **Markdown Endpoint**: https://toolioz.com/design/background-remover.md
+- **Category**: design
+- **Description**: Remove simple backgrounds locally, refine with brushes, and export a transparent PNG.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Unit Converter
+- **Canonical URL**: https://toolioz.com/devtools/unit-converter
+- **Markdown Endpoint**: https://toolioz.com/devtools/unit-converter.md
+- **Category**: utility
+- **Description**: Convert length, mass, temperature, and binary data units.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Lorem Ipsum Generator
+- **Canonical URL**: https://toolioz.com/devtools/lorem-ipsum
+- **Markdown Endpoint**: https://toolioz.com/devtools/lorem-ipsum.md
+- **Category**: utility
+- **Description**: Generate placeholder paragraphs, words, or HTML for design mockups.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Image Compressor
+- **Canonical URL**: https://toolioz.com/pdftools/image-compressor
+- **Markdown Endpoint**: https://toolioz.com/pdftools/image-compressor.md
+- **Category**: design
+- **Description**: Reduce image size with adjustable quality and target-size controls.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Compound Interest
+- **Canonical URL**: https://toolioz.com/finance/compound-interest
+- **Markdown Endpoint**: https://toolioz.com/finance/compound-interest.md
+- **Category**: finance
+- **Description**: Future value with daily, monthly, quarterly, or annual compounding.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Mortgage Calc
+- **Canonical URL**: https://toolioz.com/finance/mortgage-calculator
+- **Markdown Endpoint**: https://toolioz.com/finance/mortgage-calculator.md
+- **Category**: finance
+- **Description**: Monthly mortgage payment, total interest, and payoff for a balance, rate, and term.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### ROI Calculator
+- **Canonical URL**: https://toolioz.com/finance/roi-calculator
+- **Markdown Endpoint**: https://toolioz.com/finance/roi-calculator.md
+- **Category**: finance
+- **Description**: Measure the profitability of an investment quickly.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### SIP Calculator
+- **Canonical URL**: https://toolioz.com/finance/sip-calculator
+- **Markdown Endpoint**: https://toolioz.com/finance/sip-calculator.md
+- **Category**: finance
+- **Description**: Wealth generation through systematic monthly investments.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Lumpsum Calculator
+- **Canonical URL**: https://toolioz.com/finance/lumpsum-calculator
+- **Markdown Endpoint**: https://toolioz.com/finance/lumpsum-calculator.md
+- **Category**: finance
+- **Description**: Project how a one-time investment can grow with compounding.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Fixed Deposit
+- **Canonical URL**: https://toolioz.com/finance/fd-calculator
+- **Markdown Endpoint**: https://toolioz.com/finance/fd-calculator.md
+- **Category**: finance
+- **Description**: Estimate maturity value for a fixed-rate bank deposit.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Savings Goal
+- **Canonical URL**: https://toolioz.com/finance/savings-goal
+- **Markdown Endpoint**: https://toolioz.com/finance/savings-goal.md
+- **Category**: finance
+- **Description**: Monthly deposit that grows a balance to a target by a deadline.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Retirement Corpus
+- **Canonical URL**: https://toolioz.com/finance/retirement-corpus
+- **Markdown Endpoint**: https://toolioz.com/finance/retirement-corpus.md
+- **Category**: finance
+- **Description**: Corpus that can fund inflation-adjusted spending for a chosen number of years.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Inflation Calc
+- **Canonical URL**: https://toolioz.com/finance/inflation-calculator
+- **Markdown Endpoint**: https://toolioz.com/finance/inflation-calculator.md
+- **Category**: finance
+- **Description**: Future price and purchasing-power change after a chosen inflation rate and number of years.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Loan Prepayment
+- **Canonical URL**: https://toolioz.com/finance/loan-prepayment
+- **Markdown Endpoint**: https://toolioz.com/finance/loan-prepayment.md
+- **Category**: finance
+- **Description**: Interest saved and months removed when an extra EMI or principal payment is applied.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Car Loan EMI
+- **Canonical URL**: https://toolioz.com/finance/car-loan
+- **Markdown Endpoint**: https://toolioz.com/finance/car-loan.md
+- **Category**: finance
+- **Description**: Reducing-balance car-loan EMI, total interest, and total amount payable.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Percentage Calculator
+- **Canonical URL**: https://toolioz.com/finance/percentage-calculator
+- **Markdown Endpoint**: https://toolioz.com/finance/percentage-calculator.md
+- **Category**: finance
+- **Description**: Find a percentage of a number or what percent one value is of another, with steps.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Percentage Change
+- **Canonical URL**: https://toolioz.com/finance/percentage-change-calculator
+- **Markdown Endpoint**: https://toolioz.com/finance/percentage-change-calculator.md
+- **Category**: finance
+- **Description**: Calculate percentage increase or decrease from an original value to a new value.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Reverse Percentage
+- **Canonical URL**: https://toolioz.com/finance/reverse-percentage-calculator
+- **Markdown Endpoint**: https://toolioz.com/finance/reverse-percentage-calculator.md
+- **Category**: finance
+- **Description**: Recover an original amount before a percentage increase or decrease.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Discount After Tax
+- **Canonical URL**: https://toolioz.com/finance/discount-calculator-after-tax
+- **Markdown Endpoint**: https://toolioz.com/finance/discount-calculator-after-tax.md
+- **Category**: finance
+- **Description**: Break down sale savings, tax on the reduced price, and the final amount.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### JSON Formatter
+- **Canonical URL**: https://toolioz.com/devtools/json-formatter
+- **Markdown Endpoint**: https://toolioz.com/devtools/json-formatter.md
+- **Category**: devtools
+- **Description**: Formats, validates, and minifies JSON, and can emit YAML or TypeScript.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Base64 Converter
+- **Canonical URL**: https://toolioz.com/devtools/base64-converter
+- **Markdown Endpoint**: https://toolioz.com/devtools/base64-converter.md
+- **Category**: devtools
+- **Description**: Encode and decode strings to and from Base64 format.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### JWT Decoder
+- **Canonical URL**: https://toolioz.com/devtools/jwt-decoder
+- **Markdown Endpoint**: https://toolioz.com/devtools/jwt-decoder.md
+- **Category**: devtools
+- **Description**: Decode, verify and inspect JSON Web Tokens securely.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Cron Generator
+- **Canonical URL**: https://toolioz.com/devtools/cron-generator
+- **Markdown Endpoint**: https://toolioz.com/devtools/cron-generator.md
+- **Category**: devtools
+- **Description**: Generate, parse and explain cron expression schedules.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### RegExp Tester
+- **Canonical URL**: https://toolioz.com/devtools/regex-tester
+- **Markdown Endpoint**: https://toolioz.com/devtools/regex-tester.md
+- **Category**: devtools
+- **Description**: Test and debug Regular Expressions with live highlighting.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### URL Encoder
+- **Canonical URL**: https://toolioz.com/devtools/url-encoder
+- **Markdown Endpoint**: https://toolioz.com/devtools/url-encoder.md
+- **Category**: devtools
+- **Description**: Encode and decode URLs or URI components instantly.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Bcrypt Generator
+- **Canonical URL**: https://toolioz.com/devtools/bcrypt-generator
+- **Markdown Endpoint**: https://toolioz.com/devtools/bcrypt-generator.md
+- **Category**: devtools
+- **Description**: Generate and verify Bcrypt password hashes securely.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Hash Generator
+- **Canonical URL**: https://toolioz.com/devtools/hash-generator
+- **Markdown Endpoint**: https://toolioz.com/devtools/hash-generator.md
+- **Category**: devtools
+- **Description**: Generate SHA hashes for text or files using Web Crypto APIs.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### cURL Converter
+- **Canonical URL**: https://toolioz.com/devtools/curl-converter
+- **Markdown Endpoint**: https://toolioz.com/devtools/curl-converter.md
+- **Category**: devtools
+- **Description**: Convert cURL commands into Fetch, Axios, and Python snippets.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Timestamp Converter
+- **Canonical URL**: https://toolioz.com/devtools/timestamp-converter
+- **Markdown Endpoint**: https://toolioz.com/devtools/timestamp-converter.md
+- **Category**: devtools
+- **Description**: Convert Unix seconds, milliseconds, and date strings instantly.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### JSON Diff Checker
+- **Canonical URL**: https://toolioz.com/devtools/json-diff
+- **Markdown Endpoint**: https://toolioz.com/devtools/json-diff.md
+- **Category**: devtools
+- **Description**: Compare two JSON payloads and inspect exact field-level changes.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### UUID Generator
+- **Canonical URL**: https://toolioz.com/devtools/uuid-generator
+- **Markdown Endpoint**: https://toolioz.com/devtools/uuid-generator.md
+- **Category**: devtools
+- **Description**: Generate secure v4 UUIDs in bulk effortlessly.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Drawesome Vector Studio ✦ (by Benji Taylor)
+- **Canonical URL**: https://toolioz.com/devtools/drawesome
+- **Markdown Endpoint**: https://toolioz.com/devtools/drawesome.md
+- **Category**: design
+- **Description**: Freehand vector drawing canvas with 7 realistic pens (pencil, ballpoint, fineliner, marker, highlighter, brush, fountain pen), area eraser, and SVG/PNG export.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### ditherit ✦ Interactive ASCII & Dot Art (by Prasanjit Dey)
+- **Canonical URL**: https://toolioz.com/devtools/ditherit
+- **Markdown Endpoint**: https://toolioz.com/devtools/ditherit.md
+- **Category**: design
+- **Description**: Convert images, videos, and GIFs into dithered dot art or ASCII with interactive physics repulsion, WebM export, and React/JS code export.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Image & Video Dither Studio
+- **Canonical URL**: https://toolioz.com/devtools/dither-studio
+- **Markdown Endpoint**: https://toolioz.com/devtools/dither-studio.md
+- **Category**: design
+- **Description**: Apply retro 1-bit, Floyd-Steinberg, Bayer ordered, GameBoy, CGA, and pixel art dithering to images and videos live in browser.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### WebGL GLSL Shader Studio
+- **Canonical URL**: https://toolioz.com/devtools/shader-tool
+- **Markdown Endpoint**: https://toolioz.com/devtools/shader-tool.md
+- **Category**: design
+- **Description**: Interactive real-time GLSL fragment shader editor & playground. Live preview, Shadertoy uniforms, raymarching SDFs, presets, and code export.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Free Shader Background Generator
+- **Canonical URL**: https://toolioz.com/devtools/background-generator
+- **Markdown Endpoint**: https://toolioz.com/devtools/background-generator.md
+- **Category**: design
+- **Description**: Design beautiful animated shader-based background images for wallpapers, social headers, and website hero sections.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### X Tap-to-Reveal PNG Maker
+- **Canonical URL**: https://toolioz.com/devtools/x-hidden-image
+- **Markdown Endpoint**: https://toolioz.com/devtools/x-hidden-image.md
+- **Category**: design
+- **Description**: Tap-to-reveal PNG for X and Twitter. Timeline preview versus opened view, brush masks, PNG8.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Split Image in 3
+- **Canonical URL**: https://toolioz.com/design/split-image-in-3
+- **Markdown Endpoint**: https://toolioz.com/design/split-image-in-3.md
+- **Category**: design
+- **Description**: Crop a photo to 16:9 and split it into 3 equal vertical parts for X, Instagram, and carousels. Client-side PNG export.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Color Format Suite
+- **Canonical URL**: https://toolioz.com/devtools/color-converter
+- **Markdown Endpoint**: https://toolioz.com/devtools/color-converter.md
+- **Category**: design
+- **Description**: Convert seamlessly between HEX, RGB, HSL and CMYK color codes with palette generation.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### CSS Grid Builder
+- **Canonical URL**: https://toolioz.com/devtools/layout-generator
+- **Markdown Endpoint**: https://toolioz.com/devtools/layout-generator.md
+- **Category**: design
+- **Description**: Visually build CSS Grid layouts with rows, columns, gaps, and code export.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### PDF Merge Tool
+- **Canonical URL**: https://toolioz.com/pdftools/merge-pdf
+- **Markdown Endpoint**: https://toolioz.com/pdftools/merge-pdf.md
+- **Category**: pdftools
+- **Description**: Combines PDF files in the chosen order. The files stay in the browser.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### PDF to Image Converter
+- **Canonical URL**: https://toolioz.com/pdftools/pdf-to-image
+- **Markdown Endpoint**: https://toolioz.com/pdftools/pdf-to-image.md
+- **Category**: pdftools
+- **Description**: Renders each PDF page as a PNG or JPEG in the browser.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Image to PDF Converter
+- **Canonical URL**: https://toolioz.com/pdftools/image-to-pdf
+- **Markdown Endpoint**: https://toolioz.com/pdftools/image-to-pdf.md
+- **Category**: pdftools
+- **Description**: Combines JPG, PNG, and WebP images into one PDF in the browser.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Split PDF & Extract Pages
+- **Canonical URL**: https://toolioz.com/pdftools/split-pdf
+- **Markdown Endpoint**: https://toolioz.com/pdftools/split-pdf.md
+- **Category**: pdftools
+- **Description**: Extracts selected pages or ranges with pdf-lib. The PDF is not uploaded.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Organize PDF
+- **Canonical URL**: https://toolioz.com/pdftools/organize-pdf
+- **Markdown Endpoint**: https://toolioz.com/pdftools/organize-pdf.md
+- **Category**: pdftools
+- **Description**: Reorders, rotates, and removes PDF pages, with the file kept in the browser.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Add PDF Page Numbers
+- **Canonical URL**: https://toolioz.com/pdftools/add-page-numbers-to-pdf
+- **Markdown Endpoint**: https://toolioz.com/pdftools/add-page-numbers-to-pdf.md
+- **Category**: pdftools
+- **Description**: Adds page numbers with pdf-lib. The PDF is not uploaded.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Watermark PDF
+- **Canonical URL**: https://toolioz.com/pdftools/watermark-pdf
+- **Markdown Endpoint**: https://toolioz.com/pdftools/watermark-pdf.md
+- **Category**: pdftools
+- **Description**: Draws centered Helvetica text on each page. Size, opacity, and angle can change. The color is fixed, and the PDF is not uploaded.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### PDF Metadata Editor
+- **Canonical URL**: https://toolioz.com/pdftools/pdf-metadata-editor
+- **Markdown Endpoint**: https://toolioz.com/pdftools/pdf-metadata-editor.md
+- **Category**: pdftools
+- **Description**: Reads and writes PDF title, author, subject, keywords, creator, and producer with pdf-lib. The file is not uploaded.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### PDF to Text
+- **Canonical URL**: https://toolioz.com/pdftools/pdf-to-text
+- **Markdown Endpoint**: https://toolioz.com/pdftools/pdf-to-text.md
+- **Category**: pdftools
+- **Description**: Extracts selectable text with pdf.js, one block per page. A scanned page returns no text. The PDF is not uploaded.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Bates Numbering PDF
+- **Canonical URL**: https://toolioz.com/pdftools/bates-numbering-pdf
+- **Markdown Endpoint**: https://toolioz.com/pdftools/bates-numbering-pdf.md
+- **Category**: pdftools
+- **Description**: Stamps a prefix, a zero-padded number, and a suffix in Helvetica on each page. The PDF is not uploaded.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Remove Blank Pages
+- **Canonical URL**: https://toolioz.com/pdftools/remove-blank-pages
+- **Markdown Endpoint**: https://toolioz.com/pdftools/remove-blank-pages.md
+- **Category**: pdftools
+- **Description**: Detects and removes empty or blank pages from a PDF with an adjustable sensitivity slider. Processed 100% in your browser.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+**Usage Steps**:
+1. Choose a PDF file.
+2. Set the blank sensitivity slider (default 99.5% white).
+3. Process and download the document with empty pages removed.
+
+**Practical Example**: Automatically strip blank separator sheets from scanned contracts or multi-page invoices.
+
+**Constraints / Limitations**: Very light watermarks or scanned page shadows may require lowering the sensitivity threshold to be detected as blank.
+
+---
+
+### Letter ↔ A4
+- **Canonical URL**: https://toolioz.com/pdftools/letter-to-a4
+- **Markdown Endpoint**: https://toolioz.com/pdftools/letter-to-a4.md
+- **Category**: pdftools
+- **Description**: Resize PDF pages between US Letter and ISO A4 dimensions with proportional scaling. The file is not uploaded.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+**Usage Steps**:
+1. Choose a PDF file.
+2. Select the conversion direction (Letter to A4 or A4 to Letter).
+3. Download the resized PDF with balanced margins.
+
+**Practical Example**: Convert US Letter specifications to standard international A4 format before sharing with overseas colleagues.
+
+**Constraints / Limitations**: Pages are scaled proportionally without distortion. Small margin width adjustments may occur.
+
+---
+
+### Split by Bookmarks
+- **Canonical URL**: https://toolioz.com/pdftools/split-pdf-by-bookmarks
+- **Markdown Endpoint**: https://toolioz.com/pdftools/split-pdf-by-bookmarks.md
+- **Category**: pdftools
+- **Description**: Splits a PDF into separate chapter files using document outline bookmarks. Processing stays in your browser.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### PDF to Grayscale
+- **Canonical URL**: https://toolioz.com/pdftools/pdf-to-grayscale
+- **Markdown Endpoint**: https://toolioz.com/pdftools/pdf-to-grayscale.md
+- **Category**: pdftools
+- **Description**: Converts color PDFs to black & white grayscale while preserving selectable vector text and document quality.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Reverse PDF Pages
+- **Canonical URL**: https://toolioz.com/pdftools/reverse-pdf-pages
+- **Markdown Endpoint**: https://toolioz.com/pdftools/reverse-pdf-pages.md
+- **Category**: pdftools
+- **Description**: Reverses the sequence of pages in a PDF document in one click. 100% private in-browser processing.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Add Blank Pages
+- **Canonical URL**: https://toolioz.com/pdftools/add-blank-page-after-page
+- **Markdown Endpoint**: https://toolioz.com/pdftools/add-blank-page-after-page.md
+- **Category**: pdftools
+- **Description**: Interleaves an empty blank page after every page of your PDF for double-sided printing or note taking.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### 2 Pages Per Sheet
+- **Canonical URL**: https://toolioz.com/pdftools/2-pages-per-sheet
+- **Markdown Endpoint**: https://toolioz.com/pdftools/2-pages-per-sheet.md
+- **Category**: pdftools
+- **Description**: Combines two PDF pages side-by-side onto a single sheet for compact reading and booklet printing.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+**Usage Steps**:
+1. Choose a PDF document.
+2. Click Process to place two pages side-by-side per landscape sheet.
+3. Download the N-up booklet PDF.
+
+**Practical Example**: Print a 30-page slide deck on 15 sheets of paper to cut paper consumption in half.
+
+**Constraints / Limitations**: Pages are scaled down proportionally to fit side-by-side. Very small footnotes may be harder to read.
+
+---
+
+### Invert PDF Colors
+- **Canonical URL**: https://toolioz.com/pdftools/invert-pdf-colors
+- **Markdown Endpoint**: https://toolioz.com/pdftools/invert-pdf-colors.md
+- **Category**: pdftools
+- **Description**: Inverts colors of your PDF for high-contrast dark mode reading without sending files to any server.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Flatten PDF
+- **Canonical URL**: https://toolioz.com/pdftools/flatten-pdf
+- **Markdown Endpoint**: https://toolioz.com/pdftools/flatten-pdf.md
+- **Category**: pdftools
+- **Description**: Flattens interactive form fields and removes annotations to prevent accidental edits or disclosure.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### EXIF Viewer & Remover
+- **Canonical URL**: https://toolioz.com/devtools/exif-viewer-remover
+- **Markdown Endpoint**: https://toolioz.com/devtools/exif-viewer-remover.md
+- **Category**: design
+- **Description**: Shows photo metadata. The download strips JPEG EXIF, XMP, IPTC, and comments, or PNG metadata, without re-encoding pixels.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Image Dimensions & Ratio
+- **Canonical URL**: https://toolioz.com/devtools/image-dimensions-aspect-ratio
+- **Markdown Endpoint**: https://toolioz.com/devtools/image-dimensions-aspect-ratio.md
+- **Category**: design
+- **Description**: Reads pixel width and height, simplifies the ratio by the greatest common divisor, and scales one side in proportion.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### OCR Image to Text
+- **Canonical URL**: https://toolioz.com/devtools/ocr-image-to-text
+- **Markdown Endpoint**: https://toolioz.com/devtools/ocr-image-to-text.md
+- **Category**: design
+- **Description**: Recognizes English text in JPG, PNG, and WebP images, with recognition kept in the browser.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### YAML ↔ JSON
+- **Canonical URL**: https://toolioz.com/devtools/yaml-json-converter
+- **Markdown Endpoint**: https://toolioz.com/devtools/yaml-json-converter.md
+- **Category**: devtools
+- **Description**: Converts YAML to JSON with yaml.load, or JSON to YAML with yaml.dump. A parse error is shown.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### XML Formatter
+- **Canonical URL**: https://toolioz.com/devtools/xml-formatter-validator
+- **Markdown Endpoint**: https://toolioz.com/devtools/xml-formatter-validator.md
+- **Category**: devtools
+- **Description**: Formats XML with DOMParser and shows the browser parsererror text when the markup is invalid.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### JSON Schema Validator
+- **Canonical URL**: https://toolioz.com/devtools/json-schema-validator
+- **Markdown Endpoint**: https://toolioz.com/devtools/json-schema-validator.md
+- **Category**: devtools
+- **Description**: Checks JSON data with AJV against a JSON Schema and lists each error path and message.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### HTTP Status Lookup
+- **Canonical URL**: https://toolioz.com/devtools/http-status-code-lookup
+- **Markdown Endpoint**: https://toolioz.com/devtools/http-status-code-lookup.md
+- **Category**: devtools
+- **Description**: Search common HTTP response codes by number, name, category, or meaning.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### MIME Type Lookup
+- **Canonical URL**: https://toolioz.com/devtools/mime-type-lookup
+- **Markdown Endpoint**: https://toolioz.com/devtools/mime-type-lookup.md
+- **Category**: devtools
+- **Description**: Find common MIME media types from a file extension or content type.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### UTM Builder
+- **Canonical URL**: https://toolioz.com/devtools/utm-builder
+- **Markdown Endpoint**: https://toolioz.com/devtools/utm-builder.md
+- **Category**: devtools
+- **Description**: Adds utm_source, utm_medium, and utm_campaign to an absolute URL with URLSearchParams. Term and content are optional.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Robots.txt Generator
+- **Canonical URL**: https://toolioz.com/devtools/robots-txt-generator
+- **Markdown Endpoint**: https://toolioz.com/devtools/robots-txt-generator.md
+- **Category**: devtools
+- **Description**: Writes a robots.txt with a user-agent, Allow and Disallow lines, and an optional sitemap URL.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Hreflang Generator
+- **Canonical URL**: https://toolioz.com/devtools/hreflang-generator
+- **Markdown Endpoint**: https://toolioz.com/devtools/hreflang-generator.md
+- **Category**: devtools
+- **Description**: Writes one alternate link tag per language and URL pair. It does not add the reverse tags.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Schema Markup Generator
+- **Canonical URL**: https://toolioz.com/devtools/schema-markup-generator
+- **Markdown Endpoint**: https://toolioz.com/devtools/schema-markup-generator.md
+- **Category**: devtools
+- **Description**: Builds FAQ, HowTo, or Product JSON-LD. A schema.org validator is not run.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### HTML Encode / Decode
+- **Canonical URL**: https://toolioz.com/devtools/html-encoder-decoder
+- **Markdown Endpoint**: https://toolioz.com/devtools/html-encoder-decoder.md
+- **Category**: devtools
+- **Description**: Encodes &, <, >, and quotes. Decoding also accepts numeric character references. The text stays in the page.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Slug Generator
+- **Canonical URL**: https://toolioz.com/devtools/slug-generator
+- **Markdown Endpoint**: https://toolioz.com/devtools/slug-generator.md
+- **Category**: devtools
+- **Description**: Turn a title into a lowercase hyphenated URL slug, stripping accents and punctuation.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### chmod Calculator
+- **Canonical URL**: https://toolioz.com/devtools/chmod-calculator
+- **Markdown Endpoint**: https://toolioz.com/devtools/chmod-calculator.md
+- **Category**: devtools
+- **Description**: Turns read, write, and execute checkboxes into a 3-digit octal mode and an rwx string. The command has no filename.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Contrast Checker
+- **Canonical URL**: https://toolioz.com/devtools/color-contrast-checker
+- **Markdown Endpoint**: https://toolioz.com/devtools/color-contrast-checker.md
+- **Category**: design
+- **Description**: Measure the contrast ratio of two hex colors against WCAG AA and AAA text thresholds.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### CSV ↔ JSON
+- **Canonical URL**: https://toolioz.com/devtools/csv-json-converter
+- **Markdown Endpoint**: https://toolioz.com/devtools/csv-json-converter.md
+- **Category**: devtools
+- **Description**: Converts a headered CSV to JSON objects, or an array of objects to CSV. Cell values stay strings.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### CSV to Markdown
+- **Canonical URL**: https://toolioz.com/devtools/csv-to-markdown-table
+- **Markdown Endpoint**: https://toolioz.com/devtools/csv-to-markdown-table.md
+- **Category**: devtools
+- **Description**: Converts CSV or tab-separated data into aligned GitHub-flavored Markdown tables. Kept 100% in your browser.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### NDJSON to CSV
+- **Canonical URL**: https://toolioz.com/devtools/ndjson-to-csv
+- **Markdown Endpoint**: https://toolioz.com/devtools/ndjson-to-csv.md
+- **Category**: devtools
+- **Description**: Converts newline-delimited JSON (NDJSON / JSONL) files into clean tabular CSV with automatic header detection.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### XML to CSV
+- **Canonical URL**: https://toolioz.com/devtools/xml-to-csv
+- **Markdown Endpoint**: https://toolioz.com/devtools/xml-to-csv.md
+- **Category**: devtools
+- **Description**: Flattens XML elements and repeating record trees into tabular CSV format for spreadsheets. 100% private in-browser.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### JSON to TypeScript
+- **Canonical URL**: https://toolioz.com/devtools/json-to-typescript
+- **Markdown Endpoint**: https://toolioz.com/devtools/json-to-typescript.md
+- **Category**: devtools
+- **Description**: Generates clean TypeScript interfaces and type definitions from JSON data. Processed client-side.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### SRT ↔ VTT
+- **Canonical URL**: https://toolioz.com/devtools/srt-to-vtt
+- **Markdown Endpoint**: https://toolioz.com/devtools/srt-to-vtt.md
+- **Category**: devtools
+- **Description**: Converts between SubRip (.srt) and WebVTT (.vtt) caption formats instantly in your browser with zero uploads.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Subtitle to Text
+- **Canonical URL**: https://toolioz.com/devtools/subtitle-to-text
+- **Markdown Endpoint**: https://toolioz.com/devtools/subtitle-to-text.md
+- **Category**: devtools
+- **Description**: Extracts clean dialogue and plain text transcripts from SRT or VTT subtitle files, stripping timestamps and formatting tags.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Subtitle Time Shift
+- **Canonical URL**: https://toolioz.com/devtools/subtitle-time-shift
+- **Markdown Endpoint**: https://toolioz.com/devtools/subtitle-time-shift.md
+- **Category**: devtools
+- **Description**: Sync out-of-time subtitles by adding or subtracting milliseconds and adjusting frame rates (23.976, 24, 25, 29.97 fps).
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### GPX ↔ KML
+- **Canonical URL**: https://toolioz.com/devtools/gpx-to-kml
+- **Markdown Endpoint**: https://toolioz.com/devtools/gpx-to-kml.md
+- **Category**: devtools
+- **Description**: Converts GPS tracks and waypoints between GPX and Google Earth KML format with zero server uploads.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### GeoJSON to KML
+- **Canonical URL**: https://toolioz.com/devtools/geojson-to-kml
+- **Markdown Endpoint**: https://toolioz.com/devtools/geojson-to-kml.md
+- **Category**: devtools
+- **Description**: Converts GeoJSON features (Points, LineStrings, Polygons) to Google Earth KML placemarks client-side.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### CSV to KML
+- **Canonical URL**: https://toolioz.com/devtools/csv-to-kml
+- **Markdown Endpoint**: https://toolioz.com/devtools/csv-to-kml.md
+- **Category**: devtools
+- **Description**: Converts tabular spreadsheet coordinates (latitude, longitude, name) into Google Earth KML placemarks.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Biodata Generator
+- **Canonical URL**: https://toolioz.com/biodata
+- **Markdown Endpoint**: https://toolioz.com/biodata.md
+- **Category**: biodata
+- **Description**: Create marriage biodata PDFs with religion-based and modern templates.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Tweet Generator
+- **Canonical URL**: https://toolioz.com/tools/tweet-generator
+- **Markdown Endpoint**: https://toolioz.com/tools/tweet-generator.md
+- **Category**: design
+- **Description**: Create realistic fake tweet screenshots.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Instagram Bio Generator
+- **Canonical URL**: https://toolioz.com/tools/instagram-bio-generator
+- **Markdown Endpoint**: https://toolioz.com/tools/instagram-bio-generator.md
+- **Category**: design
+- **Description**: Creates styled text for an Instagram bio.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### BMI Calculator
+- **Canonical URL**: https://toolioz.com/tools/bmi-calculator
+- **Markdown Endpoint**: https://toolioz.com/tools/bmi-calculator.md
+- **Category**: utility
+- **Description**: Track body mass index and health metrics.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Image Converter
+- **Canonical URL**: https://toolioz.com/tools/image-converter
+- **Markdown Endpoint**: https://toolioz.com/tools/image-converter.md
+- **Category**: design
+- **Description**: Draws an image on a canvas and saves PNG, JPEG, or WebP. The file is not uploaded.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Image Resizer
+- **Canonical URL**: https://toolioz.com/tools/image-resizer
+- **Markdown Endpoint**: https://toolioz.com/tools/image-resizer.md
+- **Category**: design
+- **Description**: Resize images to specific dimensions.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Scientific Calculator
+- **Canonical URL**: https://toolioz.com/tools/calculator
+- **Markdown Endpoint**: https://toolioz.com/tools/calculator.md
+- **Category**: utility
+- **Description**: Standard and scientific math operations.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Age Calculator
+- **Canonical URL**: https://toolioz.com/tools/age-calculator
+- **Markdown Endpoint**: https://toolioz.com/tools/age-calculator.md
+- **Category**: utility
+- **Description**: Age in years, months, and days from a date of birth and today's local date.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Stopwatch & Timer
+- **Canonical URL**: https://toolioz.com/tools/stopwatch
+- **Markdown Endpoint**: https://toolioz.com/tools/stopwatch.md
+- **Category**: utility
+- **Description**: Precision chronograph with laps.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Time Zone Converter
+- **Canonical URL**: https://toolioz.com/tools/time-zone-converter
+- **Markdown Endpoint**: https://toolioz.com/tools/time-zone-converter.md
+- **Category**: utility
+- **Description**: Convert dates across time zones.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### QR Code Generator
+- **Canonical URL**: https://toolioz.com/tools/qr-generator
+- **Markdown Endpoint**: https://toolioz.com/tools/qr-generator.md
+- **Category**: utility
+- **Description**: Create customizable QR codes.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Snowflake Parser
+- **Canonical URL**: https://toolioz.com/tools/snowflakes
+- **Markdown Endpoint**: https://toolioz.com/tools/snowflakes.md
+- **Category**: devtools
+- **Description**: Shifts a Discord snowflake 22 bits and adds the 2015 Discord epoch. The id is not sent to Discord.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### CSS Minifier
+- **Canonical URL**: https://toolioz.com/tools/css-minifier
+- **Markdown Endpoint**: https://toolioz.com/tools/css-minifier.md
+- **Category**: devtools
+- **Description**: Compress CSS to reduce file size.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### JS Minifier
+- **Canonical URL**: https://toolioz.com/tools/js-minifier
+- **Markdown Endpoint**: https://toolioz.com/tools/js-minifier.md
+- **Category**: devtools
+- **Description**: Minify and clean JavaScript code.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### HTML Minifier
+- **Canonical URL**: https://toolioz.com/tools/html-minifier
+- **Markdown Endpoint**: https://toolioz.com/tools/html-minifier.md
+- **Category**: devtools
+- **Description**: Optimize HTML structure.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Barcode Generator
+- **Canonical URL**: https://toolioz.com/tools/barcode-generator
+- **Markdown Endpoint**: https://toolioz.com/tools/barcode-generator.md
+- **Category**: devtools
+- **Description**: Create custom barcodes (EAN, UPC, etc).
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### SQL Query Generator
+- **Canonical URL**: https://toolioz.com/tools/sql-query-generator
+- **Markdown Endpoint**: https://toolioz.com/tools/sql-query-generator.md
+- **Category**: devtools
+- **Description**: Visually build SQL queries.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### SQL Formatter
+- **Canonical URL**: https://toolioz.com/tools/sql-formatter
+- **Markdown Endpoint**: https://toolioz.com/tools/sql-formatter.md
+- **Category**: devtools
+- **Description**: Beautify and debug SQL queries.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Code to Image
+- **Canonical URL**: https://toolioz.com/tools/code-to-image
+- **Markdown Endpoint**: https://toolioz.com/tools/code-to-image.md
+- **Category**: devtools
+- **Description**: Create beautiful code screenshots.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Open Graph Preview
+- **Canonical URL**: https://toolioz.com/tools/open-graph-preview
+- **Markdown Endpoint**: https://toolioz.com/tools/open-graph-preview.md
+- **Category**: devtools
+- **Description**: Preview pages on social media.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Gradient Generator
+- **Canonical URL**: https://toolioz.com/tools/gradient-generator
+- **Markdown Endpoint**: https://toolioz.com/tools/gradient-generator.md
+- **Category**: design
+- **Description**: Create beautiful CSS gradients.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Glassmorphism Generator
+- **Canonical URL**: https://toolioz.com/tools/css-glassmorphism-generator
+- **Markdown Endpoint**: https://toolioz.com/tools/css-glassmorphism-generator.md
+- **Category**: design
+- **Description**: Generate CSS glassmorphism effects.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Flexbox Playground
+- **Canonical URL**: https://toolioz.com/tools/flexbox-playground
+- **Markdown Endpoint**: https://toolioz.com/tools/flexbox-playground.md
+- **Category**: design
+- **Description**: Interactively learn and test Flexbox.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### CSS Button Generator
+- **Canonical URL**: https://toolioz.com/tools/css-button-generator
+- **Markdown Endpoint**: https://toolioz.com/tools/css-button-generator.md
+- **Category**: design
+- **Description**: Design buttons and copy CSS code.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Text Tools
+- **Canonical URL**: https://toolioz.com/tools/text-tools
+- **Markdown Endpoint**: https://toolioz.com/tools/text-tools.md
+- **Category**: utility
+- **Description**: Case converter, word counter, and text cleaner.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Password Generator
+- **Canonical URL**: https://toolioz.com/tools/password-generator
+- **Markdown Endpoint**: https://toolioz.com/tools/password-generator.md
+- **Category**: devtools
+- **Description**: Builds a password with Math.random from the selected sets. The default length is 16.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Markdown Editor
+- **Canonical URL**: https://toolioz.com/tools/markdown-editor
+- **Markdown Endpoint**: https://toolioz.com/tools/markdown-editor.md
+- **Category**: utility
+- **Description**: Write and preview Markdown in real-time.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Color Palette
+- **Canonical URL**: https://toolioz.com/tools/color-palette
+- **Markdown Endpoint**: https://toolioz.com/tools/color-palette.md
+- **Category**: design
+- **Description**: Generate beautiful color palettes from a base color.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Meta Tag Generator
+- **Canonical URL**: https://toolioz.com/tools/meta-tag-generator
+- **Markdown Endpoint**: https://toolioz.com/tools/meta-tag-generator.md
+- **Category**: devtools
+- **Description**: Creates title, description, and social meta tags for a page.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Box Shadow Generator
+- **Canonical URL**: https://toolioz.com/tools/box-shadow-generator
+- **Markdown Endpoint**: https://toolioz.com/tools/box-shadow-generator.md
+- **Category**: design
+- **Description**: Design CSS box shadows with live preview.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Favicon Generator
+- **Canonical URL**: https://toolioz.com/tools/favicon-generator
+- **Markdown Endpoint**: https://toolioz.com/tools/favicon-generator.md
+- **Category**: design
+- **Description**: Create favicons from emoji or text.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Diff Checker
+- **Canonical URL**: https://toolioz.com/tools/diff-checker
+- **Markdown Endpoint**: https://toolioz.com/tools/diff-checker.md
+- **Category**: devtools
+- **Description**: Compare two texts and find differences.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### GitHub Graph Simulator
+- **Canonical URL**: https://toolioz.com/tools/github-graph-simulator
+- **Markdown Endpoint**: https://toolioz.com/tools/github-graph-simulator.md
+- **Category**: devtools
+- **Description**: Visualize merge, rebase, and git flow.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### ATS Resume Generator
+- **Canonical URL**: https://toolioz.com/resume-builder
+- **Markdown Endpoint**: https://toolioz.com/resume-builder.md
+- **Category**: pdftools
+- **Description**: Create polished resumes with a live LaTeX editor and text-based PDF export.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
