@@ -108,7 +108,8 @@ export function contrastRatio(foreground: string, background: string) {
   };
 }
 
-function splitCsvLine(line: string) {
+export function splitCsvLine(line: string, customDelimiter?: string) {
+  const delimiter = customDelimiter || (line.includes(';') && !line.includes(',') ? ';' : ',');
   const cells: string[] = [];
   let current = '';
   let quoted = false;
@@ -121,7 +122,7 @@ function splitCsvLine(line: string) {
       } else {
         quoted = !quoted;
       }
-    } else if (char === ',' && !quoted) {
+    } else if (char === delimiter && !quoted) {
       cells.push(current);
       current = '';
     } else {
@@ -158,12 +159,19 @@ export function jsonToCsv(input: string) {
   return [headers.join(','), ...parsed.map((row) => headers.map((header) => escape((row as Record<string, unknown>)[header])).join(','))].join('\n');
 }
 
-
 import JsonToTS from 'json-to-ts';
 
 export function jsonToTypeScript(input: string): string {
-  const parsed = JSON.parse(input);
-  const interfaces = JsonToTS(parsed);
+  const trimmed = input.trim();
+  if (!trimmed) throw new Error('Enter JSON data.');
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(trimmed);
+  } catch (cause) {
+    throw new Error(`Invalid JSON: ${cause instanceof Error ? cause.message : 'Syntax error'}`);
+  }
+  const converter = typeof JsonToTS === 'function' ? JsonToTS : (JsonToTS as unknown as { default: typeof JsonToTS }).default || JsonToTS;
+  const interfaces = converter(parsed);
   return interfaces.join('\n\n');
 }
 
@@ -228,76 +236,131 @@ export function csvToMarkdownTable(input: string) {
   ].join('\n');
 }
 
-export function xmlToCsv(input: string) {
-  if (typeof window === 'undefined') return '';
-  const parser = new DOMParser();
-  const xmlDoc = parser.parseFromString(input, 'application/xml');
-  const parserError = xmlDoc.querySelector('parsererror');
-  if (parserError) throw new Error('Invalid XML document: ' + (parserError.textContent?.slice(0, 100) || ''));
+export function xmlToCsv(input: string): string {
+  const trimmed = input.replace(/^\uFEFF/, '').trim();
+  if (!trimmed) throw new Error('Enter XML data.');
 
-  const root = xmlDoc.documentElement;
-  let candidateNodes: Element[] = [];
-  const tagCounts: Record<string, Element[]> = {};
-  for (let i = 0; i < root.children.length; i++) {
-    const el = root.children[i];
-    if (!tagCounts[el.tagName]) tagCounts[el.tagName] = [];
-    tagCounts[el.tagName].push(el);
-  }
+  if (typeof DOMParser !== 'undefined') {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(trimmed, 'application/xml');
+    const parserError = xmlDoc.querySelector('parsererror');
+    if (parserError) throw new Error('Invalid XML document: ' + (parserError.textContent?.slice(0, 100) || ''));
 
-  let maxTag = '';
-  let maxCount = 0;
-  for (const [tag, elements] of Object.entries(tagCounts)) {
-    if (elements.length > maxCount) {
-      maxCount = elements.length;
-      maxTag = tag;
+    const root = xmlDoc.documentElement;
+    let candidateNodes: Element[] = [];
+    const tagCounts: Record<string, Element[]> = {};
+    for (let i = 0; i < root.children.length; i++) {
+      const el = root.children[i];
+      if (!tagCounts[el.tagName]) tagCounts[el.tagName] = [];
+      tagCounts[el.tagName].push(el);
     }
-  }
 
-  if (maxCount > 1) {
-    candidateNodes = tagCounts[maxTag];
-  } else if (root.children.length === 1 && root.children[0].children.length > 1) {
-    const subRoot = root.children[0];
-    const subCounts: Record<string, Element[]> = {};
-    for (let i = 0; i < subRoot.children.length; i++) {
-      const el = subRoot.children[i];
-      if (!subCounts[el.tagName]) subCounts[el.tagName] = [];
-      subCounts[el.tagName].push(el);
-    }
-    for (const [tag, elements] of Object.entries(subCounts)) {
+    let maxTag = '';
+    let maxCount = 0;
+    for (const [tag, elements] of Object.entries(tagCounts)) {
       if (elements.length > maxCount) {
         maxCount = elements.length;
         maxTag = tag;
       }
     }
-    if (maxCount > 1) candidateNodes = subCounts[maxTag];
+
+    if (maxCount > 1) {
+      candidateNodes = tagCounts[maxTag];
+    } else if (root.children.length === 1 && root.children[0].children.length > 0) {
+      const subRoot = root.children[0];
+      const subCounts: Record<string, Element[]> = {};
+      for (let i = 0; i < subRoot.children.length; i++) {
+        const el = subRoot.children[i];
+        if (!subCounts[el.tagName]) subCounts[el.tagName] = [];
+        subCounts[el.tagName].push(el);
+      }
+      for (const [tag, elements] of Object.entries(subCounts)) {
+        if (elements.length > maxCount) {
+          maxCount = elements.length;
+          maxTag = tag;
+        }
+      }
+      if (maxTag && subCounts[maxTag]?.length) candidateNodes = subCounts[maxTag];
+    }
+
+    // Fallback for single-row XML documents or direct child structures
+    if (candidateNodes.length === 0 && root.children.length > 0) {
+      candidateNodes = Array.from(root.children);
+    }
+
+    if (candidateNodes.length === 0) {
+      throw new Error('Could not find record elements in XML.');
+    }
+
+    const headersSet = new Set<string>();
+    const rows: Record<string, string>[] = [];
+    for (const node of candidateNodes) {
+      const row: Record<string, string> = {};
+      for (let a = 0; a < node.attributes.length; a++) {
+        const attr = node.attributes[a];
+        headersSet.add(attr.name);
+        row[attr.name] = attr.value;
+      }
+      for (let c = 0; c < node.children.length; c++) {
+        const child = node.children[c];
+        headersSet.add(child.tagName);
+        row[child.tagName] = child.textContent?.trim() || '';
+      }
+      if (node.children.length === 0 && node.textContent?.trim()) {
+        headersSet.add('value');
+        row['value'] = node.textContent.trim();
+      }
+      rows.push(row);
+    }
+
+    const headers = Array.from(headersSet);
+    const escape = (val: string) => (/[",\n\r]/.test(val) ? `"${val.replace(/"/g, '""')}"` : val);
+    return [
+      headers.join(','),
+      ...rows.map((row) => headers.map((h) => escape(row[h] || '')).join(',')),
+    ].join('\n');
   }
 
-  if (candidateNodes.length === 0) {
-    throw new Error('Could not find recurring record elements in XML.');
+  // Fallback parser for environments without DOMParser (Workers / Node / SSR)
+  let inner = trimmed.replace(/^<\?xml[^>]*\?>/i, '').replace(/<!--[\s\S]*?-->/g, '').trim();
+  const rootWrap = inner.match(/^<([^\s>/]+)[^>]*>([\s\S]*)<\/\1>$/);
+  if (rootWrap) {
+    inner = rootWrap[2].trim();
+  }
+
+  const recordMatches = inner.match(/<([^\s>/]+)[^>]*>[\s\S]*?<\/\1>/g);
+  if (!recordMatches || !recordMatches.length) {
+    throw new Error('Could not find record elements in XML.');
   }
 
   const headersSet = new Set<string>();
   const rows: Record<string, string>[] = [];
-  for (const node of candidateNodes) {
+
+  for (const block of recordMatches) {
     const row: Record<string, string> = {};
-    for (let a = 0; a < node.attributes.length; a++) {
-      const attr = node.attributes[a];
-      headersSet.add(attr.name);
-      row[attr.name] = attr.value;
+    const fieldRegex = /<([^\s>/]+)[^>]*>([^<]*)<\/\1>/g;
+    let fieldMatch;
+    while ((fieldMatch = fieldRegex.exec(block)) !== null) {
+      const fName = fieldMatch[1];
+      const fVal = fieldMatch[2].trim();
+      headersSet.add(fName);
+      row[fName] = fVal;
     }
-    for (let c = 0; c < node.children.length; c++) {
-      const child = node.children[c];
-      headersSet.add(child.tagName);
-      row[child.tagName] = child.textContent?.trim() || '';
-    }
-    if (node.children.length === 0 && node.textContent?.trim()) {
-      headersSet.add('value');
-      row['value'] = node.textContent.trim();
+    // Also parse attributes of the record tag
+    const openTagMatch = block.match(/^<[^\s>]+([^>]*)>/);
+    if (openTagMatch && openTagMatch[1]) {
+      const attrRegex = /([a-zA-Z0-9_-]+)=["']([^"']*)["']/g;
+      let attrMatch;
+      while ((attrMatch = attrRegex.exec(openTagMatch[1])) !== null) {
+        headersSet.add(attrMatch[1]);
+        row[attrMatch[1]] = attrMatch[2];
+      }
     }
     rows.push(row);
   }
 
   const headers = Array.from(headersSet);
+  if (!headers.length) throw new Error('No field tags found within XML records.');
   const escape = (val: string) => (/[",\n\r]/.test(val) ? `"${val.replace(/"/g, '""')}"` : val);
   return [
     headers.join(','),
@@ -322,7 +385,9 @@ export function vttToSrt(input: string): string {
     if (line.includes('-->')) {
       inCue = true;
       result.push(String(cueIndex++));
-      const formattedTimestamp = line
+      // Clean off any WebVTT cue settings (e.g. position:10%,line:90% align:left)
+      const cleanTiming = line.replace(/(\d{2}:\d{2}(?::\d{2})?[,.]\d{3})\s*-->\s*(\d{2}:\d{2}(?::\d{2})?[,.]\d{3}).*$/, '$1 --> $2');
+      const formattedTimestamp = cleanTiming
         .replace(/(\d{2}:\d{2}:\d{2})\.(\d{3})/g, '$1,$2')
         .replace(/(\d{2}:\d{2})\.(\d{3})/g, '00:$1,$2');
       result.push(formattedTimestamp);
@@ -354,8 +419,9 @@ export function subtitleToPlainText(input: string): string {
 }
 
 export function shiftSubtitleTime(input: string, offsetMs: number, targetFps?: number, sourceFps?: number): string {
-  const parseTime = (h: string, m: string, s: string, ms: string) => {
-    return Number(h) * 3600000 + Number(m) * 60000 + Number(s) * 1000 + Number(ms);
+  const parseTime = (h: string | undefined, m: string, s: string, ms: string) => {
+    const hours = h ? Number(h) : 0;
+    return hours * 3600000 + Number(m) * 60000 + Number(s) * 1000 + Number(ms);
   };
   const formatTime = (totalMs: number, sep = ',') => {
     const clamped = Math.max(0, totalMs);
@@ -369,7 +435,7 @@ export function shiftSubtitleTime(input: string, offsetMs: number, targetFps?: n
   const fpsRatio = targetFps && sourceFps && sourceFps > 0 ? targetFps / sourceFps : 1;
 
   return input.replace(
-    /(\d{2}):(\d{2}):(\d{2})([,.])(\d{3})\s*-->\s*(\d{2}):(\d{2}):(\d{2})([,.])(\d{3})/g,
+    /(?:(\d{2}):)?(\d{2}):(\d{2})([,.])(\d{3})\s*-->\s*(?:(\d{2}):)?(\d{2}):(\d{2})([,.])(\d{3})/g,
     (_, h1, m1, s1, sep1, ms1, h2, m2, s2, sep2, ms2) => {
       const t1 = parseTime(h1, m1, s1, ms1) * fpsRatio + offsetMs;
       const t2 = parseTime(h2, m2, s2, ms2) * fpsRatio + offsetMs;
@@ -379,16 +445,16 @@ export function shiftSubtitleTime(input: string, offsetMs: number, targetFps?: n
 }
 
 export function gpxToKml(gpxStr: string): string {
-  const coordRegex = /<trkpt\s+lat=["']([^"']+)["']\s+lon=["']([^"']+)["']/gi;
+  // Support lat and lon in either order
+  const ptRegex = /<(?:trkpt|wpt|rtept)\b([^>]+)>/gi;
   const coords: string[] = [];
   let match;
-  while ((match = coordRegex.exec(gpxStr)) !== null) {
-    coords.push(`${match[2]},${match[1]},0`);
-  }
-  if (!coords.length) {
-    const ptRegex = /<(?:wpt|rtept)\s+lat=["']([^"']+)["']\s+lon=["']([^"']+)["']/gi;
-    while ((match = ptRegex.exec(gpxStr)) !== null) {
-      coords.push(`${match[2]},${match[1]},0`);
+  while ((match = ptRegex.exec(gpxStr)) !== null) {
+    const attrs = match[1];
+    const lat = attrs.match(/\blat=["']([^"']+)["']/i)?.[1];
+    const lon = attrs.match(/\blon=["']([^"']+)["']/i)?.[1];
+    if (lat && lon && !isNaN(Number(lat)) && !isNaN(Number(lon))) {
+      coords.push(`${lon},${lat},0`);
     }
   }
   if (!coords.length) throw new Error('No trackpoints or waypoints found in GPX.');
@@ -410,18 +476,20 @@ ${coords.join('\n')}
 }
 
 export function kmlToGpx(kmlStr: string): string {
-  const coordBlock = kmlStr.match(/<coordinates>([\s\S]*?)<\/coordinates>/i);
-  if (!coordBlock) throw new Error('No <coordinates> block found in KML.');
-  const rawCoords = coordBlock[1].trim().split(/\s+/);
+  const coordMatches = [...kmlStr.matchAll(/<coordinates>([\s\S]*?)<\/coordinates>/gi)];
+  if (!coordMatches.length) throw new Error('No <coordinates> block found in KML.');
   const trackpoints: string[] = [];
-  for (const c of rawCoords) {
-    const parts = c.split(',');
-    if (parts.length >= 2) {
-      const lon = parts[0].trim();
-      const lat = parts[1].trim();
-      const ele = parts[2] ? `<ele>${parts[2].trim()}</ele>` : '';
-      if (lat && lon) {
-        trackpoints.push(`      <trkpt lat="${lat}" lon="${lon}">${ele}</trkpt>`);
+  for (const match of coordMatches) {
+    const rawCoords = match[1].trim().split(/\s+/);
+    for (const c of rawCoords) {
+      const parts = c.split(',');
+      if (parts.length >= 2) {
+        const lon = parts[0].trim();
+        const lat = parts[1].trim();
+        const ele = parts[2] ? `<ele>${parts[2].trim()}</ele>` : '';
+        if (lat && lon && !isNaN(Number(lat)) && !isNaN(Number(lon))) {
+          trackpoints.push(`      <trkpt lat="${lat}" lon="${lon}">${ele}</trkpt>`);
+        }
       }
     }
   }
@@ -442,19 +510,39 @@ export function geoJsonToKml(geoJsonStr: string): string {
   const placemarks: string[] = [];
 
   const parseGeometry = (geom: any, name = 'Feature') => {
+    if (!geom || !geom.type) return '';
     if (geom.type === 'Point') {
       const [lon, lat, ele = 0] = geom.coordinates;
       return `<Placemark><name>${name}</name><Point><coordinates>${lon},${lat},${ele}</coordinates></Point></Placemark>`;
+    }
+    if (geom.type === 'MultiPoint') {
+      return geom.coordinates.map((pt: any, i: number) =>
+        `<Placemark><name>${name} ${i + 1}</name><Point><coordinates>${pt[0]},${pt[1]},${pt[2] || 0}</coordinates></Point></Placemark>`
+      ).join('\n');
     }
     if (geom.type === 'LineString') {
       const coords = geom.coordinates.map((c: any) => `${c[0]},${c[1]},${c[2] || 0}`).join(' ');
       return `<Placemark><name>${name}</name><LineString><coordinates>${coords}</coordinates></LineString></Placemark>`;
     }
+    if (geom.type === 'MultiLineString') {
+      return geom.coordinates.map((line: any, i: number) => {
+        const coords = line.map((c: any) => `${c[0]},${c[1]},${c[2] || 0}`).join(' ');
+        return `<Placemark><name>${name} Line ${i + 1}</name><LineString><coordinates>${coords}</coordinates></LineString></Placemark>`;
+      }).join('\n');
+    }
     if (geom.type === 'Polygon') {
-      const rings = geom.coordinates.map((ring: any) => 
+      const rings = geom.coordinates.map((ring: any) =>
         `<LinearRing><coordinates>${ring.map((c: any) => `${c[0]},${c[1]},${c[2] || 0}`).join(' ')}</coordinates></LinearRing>`
       ).join('');
       return `<Placemark><name>${name}</name><Polygon><outerBoundaryIs>${rings}</outerBoundaryIs></Polygon></Placemark>`;
+    }
+    if (geom.type === 'MultiPolygon') {
+      return geom.coordinates.map((poly: any, i: number) => {
+        const rings = poly.map((ring: any) =>
+          `<LinearRing><coordinates>${ring.map((c: any) => `${c[0]},${c[1]},${c[2] || 0}`).join(' ')}</coordinates></LinearRing>`
+        ).join('');
+        return `<Placemark><name>${name} Polygon ${i + 1}</name><Polygon><outerBoundaryIs>${rings}</outerBoundaryIs></Polygon></Placemark>`;
+      }).join('\n');
     }
     return '';
   };
@@ -482,13 +570,13 @@ ${placemarks.join('\n')}
 export function csvToKml(csvStr: string): string {
   const lines = csvStr.replace(/^\uFEFF/, '').split(/\r?\n/).filter((l) => l.trim().length > 0);
   if (lines.length < 2) throw new Error('CSV must have a header row and at least one data row.');
-  const headers = splitCsvLine(lines[0]).map((h) => h.trim().toLowerCase());
-  const latIdx = headers.findIndex((h) => ['lat', 'latitude', 'y'].includes(h));
-  const lonIdx = headers.findIndex((h) => ['lon', 'lng', 'longitude', 'x'].includes(h));
-  const nameIdx = headers.findIndex((h) => ['name', 'title', 'label', 'city', 'place'].includes(h));
+  const headers = splitCsvLine(lines[0]).map((h) => h.trim().toLowerCase().replace(/^["']|["']$/g, ''));
+  const latIdx = headers.findIndex((h) => ['lat', 'latitude', 'lat_deg', 'y', 'coord_lat'].includes(h));
+  const lonIdx = headers.findIndex((h) => ['lon', 'lng', 'longitude', 'long', 'x', 'coord_lon'].includes(h));
+  const nameIdx = headers.findIndex((h) => ['name', 'title', 'label', 'city', 'place', 'description'].includes(h));
 
   if (latIdx === -1 || lonIdx === -1) {
-    throw new Error('CSV must contain "latitude" (or lat) and "longitude" (or lon/lng) header columns.');
+    throw new Error('CSV must contain latitude (lat, latitude) and longitude (lon, lng, longitude) header columns.');
   }
 
   const placemarks: string[] = [];

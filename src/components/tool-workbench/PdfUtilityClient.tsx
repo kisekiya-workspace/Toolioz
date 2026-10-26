@@ -194,7 +194,9 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
 
       if (mode === 'remove-blank-pages') {
         const pdfjs = await import('pdfjs-dist');
-        pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+        if (typeof window !== 'undefined') {
+          pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+        }
         const pdfData = await file.arrayBuffer();
         const pdfDoc = await pdfjs.getDocument({ data: pdfData.slice(0) }).promise;
         const blankPages: number[] = [];
@@ -205,10 +207,15 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
         for (let i = 1; i <= pdfDoc.numPages; i++) {
           const page = await pdfDoc.getPage(i);
           const viewport = page.getViewport({ scale: 0.5 });
-          canvas.width = viewport.width;
-          canvas.height = viewport.height;
+          canvas.width = Math.max(1, Math.ceil(viewport.width));
+          canvas.height = Math.max(1, Math.ceil(viewport.height));
           if (!ctx) continue;
-          await page.render({ canvasContext: ctx, viewport, canvas }).promise;
+
+          // Crucial: fill with white first because blank pages have transparent background
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          await page.render({ canvasContext: ctx, viewport, canvas } as any).promise;
           const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
           const data = imgData.data;
           let whitePixels = 0;
@@ -217,7 +224,9 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
             const r = data[p];
             const g = data[p + 1];
             const b = data[p + 2];
-            if (r > 245 && g > 245 && b > 245) {
+            const a = data[p + 3];
+            // Count transparent or white/off-white pixels
+            if (a < 15 || (r > 240 && g > 240 && b > 240)) {
               whitePixels++;
             }
           }
@@ -263,8 +272,8 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
         const total = srcDoc.getPageCount();
 
         for (let i = 0; i < total; i++) {
-          const [embedded] = await outDoc.embedPages([srcDoc.getPage(i)]);
-          const { width: origW, height: origH } = srcDoc.getPage(i).getSize();
+          const [copiedPage] = await outDoc.copyPages(srcDoc, [i]);
+          const { width: origW, height: origH } = copiedPage.getSize();
           const isLandscape = origW > origH;
           const finalW = isLandscape ? targetH : targetW;
           const finalH = isLandscape ? targetW : targetH;
@@ -274,8 +283,10 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
           const x = (finalW - scaledW) / 2;
           const y = (finalH - scaledH) / 2;
 
-          const page = outDoc.addPage([finalW, finalH]);
-          page.drawPage(embedded, { x, y, xScale: scale, yScale: scale });
+          copiedPage.scale(scale, scale);
+          copiedPage.setSize(finalW, finalH);
+          copiedPage.translateContent(x, y);
+          outDoc.addPage(copiedPage);
         }
         const bytes = await outDoc.save();
         downloadBlob(bytes, cleanName(file.name, isTargetA4 ? 'resized-a4' : 'resized-letter'), 'application/pdf');
@@ -285,7 +296,9 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
 
       if (mode === 'split-bookmarks') {
         const pdfjs = await import('pdfjs-dist');
-        pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+        if (typeof window !== 'undefined') {
+          pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+        }
         const pdfData = await file.arrayBuffer();
         const pdfDoc = await pdfjs.getDocument({ data: pdfData.slice(0) }).promise;
         const outline = await pdfDoc.getOutline();
@@ -295,16 +308,33 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
           return;
         }
 
+        function flattenOutline(items: any[]): any[] {
+          const flat: any[] = [];
+          for (const it of items) {
+            flat.push(it);
+            if (it.items && Array.isArray(it.items) && it.items.length) {
+              flat.push(...flattenOutline(it.items));
+            }
+          }
+          return flat;
+        }
+
+        const allItems = flattenOutline(outline);
         const sections: { title: string; pageNum: number }[] = [];
-        for (const item of outline) {
+        for (const item of allItems) {
           let dest = item.dest;
           if (typeof dest === 'string') {
             dest = await pdfDoc.getDestination(dest);
           }
           if (Array.isArray(dest)) {
             const pageRef = dest[0];
-            const pageIndex = await pdfDoc.getPageIndex(pageRef);
-            sections.push({ title: (item.title || 'Chapter').replace(/[/\\?%*:|"<>]/g, '_').trim(), pageNum: pageIndex + 1 });
+            try {
+              const pageIndex = await pdfDoc.getPageIndex(pageRef);
+              sections.push({
+                title: (item.title || 'Chapter').replace(/[/\\?%*:|"<>]/g, '_').trim(),
+                pageNum: pageIndex + 1,
+              });
+            } catch {}
           }
         }
 
@@ -314,48 +344,82 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
         }
 
         sections.sort((a, b) => a.pageNum - b.pageNum);
+        const uniqueSections: { title: string; pageNum: number }[] = [];
+        for (const s of sections) {
+          if (!uniqueSections.some((u) => u.pageNum === s.pageNum)) {
+            uniqueSections.push(s);
+          }
+        }
+
         const { PDFDocument } = await import('pdf-lib');
         const srcDoc = await PDFDocument.load(pdfData);
+        const total = srcDoc.getPageCount();
 
-        for (let s = 0; s < sections.length; s++) {
-          const startPage = sections[s].pageNum;
-          const endPage = s + 1 < sections.length ? sections[s + 1].pageNum - 1 : srcDoc.getPageCount();
-          if (startPage > endPage || startPage > srcDoc.getPageCount()) continue;
+        for (let s = 0; s < uniqueSections.length; s++) {
+          const startPage = uniqueSections[s].pageNum;
+          const endPage = s + 1 < uniqueSections.length ? uniqueSections[s + 1].pageNum - 1 : total;
+          if (startPage > endPage || startPage > total) continue;
 
           const chapterDoc = await PDFDocument.create();
-          const pageIndices = [];
+          const pageIndices: number[] = [];
           for (let p = startPage - 1; p < endPage; p++) {
             pageIndices.push(p);
           }
           const copied = await chapterDoc.copyPages(srcDoc, pageIndices);
           copied.forEach((page) => chapterDoc.addPage(page));
           const bytes = await chapterDoc.save();
-          downloadBlob(bytes, `${sections[s].title}.pdf`, 'application/pdf');
+          downloadBlob(bytes, `${uniqueSections[s].title}.pdf`, 'application/pdf');
+          if (s < uniqueSections.length - 1) {
+            await new Promise((resolve) => setTimeout(resolve, 350));
+          }
         }
 
-        setResult(`Extracted ${sections.length} bookmark sections (${sections.map((s) => s.title).slice(0, 3).join(', ')}${sections.length > 3 ? '...' : ''}).`);
+        setResult(`Extracted and downloaded ${uniqueSections.length} chapter files: ${uniqueSections.map((s) => s.title).slice(0, 4).join(', ')}${uniqueSections.length > 4 ? '...' : ''}.`);
         return;
       }
 
       if (mode === 'grayscale') {
-        const { PDFDocument, rgb, BlendMode } = await import('pdf-lib');
+        const { PDFDocument, decodePDFRawStream, PDFArray, PDFRef } = await import('pdf-lib');
         const srcDoc = await PDFDocument.load(await file.arrayBuffer(), { updateMetadata: false });
-        const pages = srcDoc.getPages();
-        for (const page of pages) {
-          const { width, height } = page.getSize();
-          page.drawRectangle({
-            x: 0,
-            y: 0,
-            width,
-            height,
-            color: rgb(0.5, 0.5, 0.5),
-            opacity: 0.99,
-            blendMode: 'Color' as any,
-          });
+        const total = srcDoc.getPageCount();
+
+        for (let i = 0; i < total; i++) {
+          const page = srcDoc.getPage(i);
+          const contentsObj = page.node.Contents();
+          if (!contentsObj) continue;
+          const streamRefs: any[] = contentsObj instanceof PDFArray ? (contentsObj as any).asArray() : [contentsObj];
+          for (const ref of streamRefs) {
+            if (!(ref instanceof PDFRef)) continue;
+            const rawStream = srcDoc.context.lookup(ref) as any;
+            if (!rawStream || !rawStream.contents) continue;
+            try {
+              const decoded = decodePDFRawStream(rawStream).decode();
+              const text = new TextDecoder('latin1').decode(decoded);
+              // Convert RGB non-stroking & stroking: 'r g b rg/RG' -> 'gray g/G'
+              let converted = text.replace(
+                /(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+(rg|RG)/g,
+                (_, r, g, b, op) => {
+                  const gray = 0.299 * Number(r) + 0.587 * Number(g) + 0.114 * Number(b);
+                  return `${gray.toFixed(3)} ${op === 'rg' ? 'g' : 'G'}`;
+                }
+              );
+              // Convert CMYK non-stroking & stroking: 'c m y k k/K' -> 'gray g/G'
+              converted = converted.replace(
+                /(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+(k|K)/g,
+                (_, c, m, y, k, op) => {
+                  const gray = Math.max(0, 1 - Math.min(1, 0.3 * Number(c) + 0.59 * Number(m) + 0.11 * Number(y) + Number(k)));
+                  return `${gray.toFixed(3)} ${op === 'k' ? 'g' : 'G'}`;
+                }
+              );
+              const newStream = srcDoc.context.flateStream(new TextEncoder().encode(converted));
+              srcDoc.context.assign(ref, newStream);
+            } catch {}
+          }
         }
+
         const bytes = await srcDoc.save();
         downloadBlob(bytes, cleanName(file.name, 'grayscale'), 'application/pdf');
-        setResult(`Converted ${pages.length} pages to grayscale. Text remains 100% selectable!`);
+        setResult(`Converted ${total} pages to grayscale. Vector text remains 100% selectable.`);
         return;
       }
 
@@ -402,6 +466,7 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
         for (let i = 0; i < total; i += 2) {
           const sheet = outDoc.addPage([sheetW, sheetH]);
           const p1 = srcDoc.getPage(i);
+          if (!p1.node.Contents()) p1.drawText('', { x: 0, y: 0 });
           const [emb1] = await outDoc.embedPages([p1]);
           const { width: w1, height: h1 } = p1.getSize();
           const scale1 = Math.min((halfW - 20) / w1, (sheetH - 20) / h1);
@@ -414,6 +479,7 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
 
           if (i + 1 < total) {
             const p2 = srcDoc.getPage(i + 1);
+            if (!p2.node.Contents()) p2.drawText('', { x: 0, y: 0 });
             const [emb2] = await outDoc.embedPages([p2]);
             const { width: w2, height: h2 } = p2.getSize();
             const scale2 = Math.min((halfW - 20) / w2, (sheetH - 20) / h2);
@@ -432,24 +498,67 @@ export default function PdfUtilityClient({ tool }: { tool: NewToolDefinition }) 
       }
 
       if (mode === 'invert-colors') {
-        const { PDFDocument, rgb, BlendMode } = await import('pdf-lib');
+        const { PDFDocument, decodePDFRawStream, PDFArray, PDFRef } = await import('pdf-lib');
         const srcDoc = await PDFDocument.load(await file.arrayBuffer(), { updateMetadata: false });
-        const pages = srcDoc.getPages();
-        for (const page of pages) {
+        const total = srcDoc.getPageCount();
+
+        for (let i = 0; i < total; i++) {
+          const page = srcDoc.getPage(i);
           const { width, height } = page.getSize();
-          page.drawRectangle({
-            x: 0,
-            y: 0,
-            width,
-            height,
-            color: rgb(1, 1, 1),
-            opacity: 1,
-            blendMode: BlendMode.Difference,
-          });
+
+          // 1. Invert content stream color operators so text turns white and colored elements invert
+          const contentsObj = page.node.Contents();
+          if (contentsObj) {
+            const streamRefs: any[] = contentsObj instanceof PDFArray ? (contentsObj as any).asArray() : [contentsObj];
+            for (const ref of streamRefs) {
+              if (!(ref instanceof PDFRef)) continue;
+              const rawStream = srcDoc.context.lookup(ref) as any;
+              if (!rawStream || !rawStream.contents) continue;
+              try {
+                const decoded = decodePDFRawStream(rawStream).decode();
+                const text = new TextDecoder('latin1').decode(decoded);
+                // Invert RGB
+                let converted = text.replace(
+                  /(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+(rg|RG)/g,
+                  (_, r, g, b, op) => {
+                    const invR = (1 - Number(r)).toFixed(3);
+                    const invG = (1 - Number(g)).toFixed(3);
+                    const invB = (1 - Number(b)).toFixed(3);
+                    return `${invR} ${invG} ${invB} ${op}`;
+                  }
+                );
+                // Invert Gray
+                converted = converted.replace(
+                  /(\d+(?:\.\d+)?)\s+(g|G)/g,
+                  (_, gray, op) => {
+                    const invGray = (1 - Number(gray)).toFixed(3);
+                    return `${invGray} ${op}`;
+                  }
+                );
+                const newStream = srcDoc.context.flateStream(new TextEncoder().encode(converted));
+                srcDoc.context.assign(ref, newStream);
+              } catch {}
+            }
+          }
+
+          // 2. Prepend a dark background rectangle underneath page contents
+          const darkBg = `q\n0.07 0.07 0.07 rg\n0 0 ${width.toFixed(2)} ${height.toFixed(2)} re\nf\nQ\n`;
+          const bgStream = srcDoc.context.flateStream(new TextEncoder().encode(darkBg));
+          const bgRef = srcDoc.context.register(bgStream);
+          const currentContents = page.node.Contents();
+          if (!currentContents) {
+            page.node.set(srcDoc.context.obj('Contents'), bgRef);
+          } else if (currentContents instanceof PDFArray) {
+            (currentContents as any).insert(0, bgRef);
+          } else {
+            const arr = srcDoc.context.obj([bgRef, currentContents]);
+            page.node.set(srcDoc.context.obj('Contents'), arr);
+          }
         }
+
         const bytes = await srcDoc.save();
         downloadBlob(bytes, cleanName(file.name, 'dark-mode'), 'application/pdf');
-        setResult(`Inverted colors across ${pages.length} pages for dark mode reading.`);
+        setResult(`Inverted colors across ${total} pages with dark background. Text remains 100% vector selectable.`);
         return;
       }
 

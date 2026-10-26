@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { CheckCircle2, Copy, Download, WandSparkles, XCircle } from 'lucide-react';
+import { CheckCircle2, Copy, Download, FileUp, RotateCcw, Sparkles, WandSparkles, XCircle } from 'lucide-react';
 import type { NewToolDefinition } from '@/lib/new-tool-catalog';
 import {
   DEFAULT_CHMOD_BITS,
@@ -37,6 +37,47 @@ import {
   secondaryButtonClass,
 } from './ToolWorkbench';
 
+const SAMPLE_DATA: Record<string, string> = {
+  'html-entities': 'Tom & Jerry <script>alert("hello");</script> & copyright © 2026',
+  'slug': 'Café Menu & Pricing 2026: Fast & Simple!',
+  'csv-json': 'id,name,role,active\n1,Alex,Developer,true\n2,Sam,Designer,false\n3,Jordan,Manager,true',
+  'csv-markdown': 'Product,Category,Price,In Stock\nMechanical Keyboard,Accessories,$89.99,Yes\nUltraWide Monitor,Displays,$349.50,Yes\nWireless Mouse,Accessories,$29.99,No',
+  'ndjson-csv': '{"id":101,"event":"page_view","user":"alex","timestamp":"2026-10-26T10:00:00Z"}\n{"id":102,"event":"click","user":"sam","timestamp":"2026-10-26T10:05:00Z"}\n{"id":103,"event":"purchase","user":"jordan","timestamp":"2026-10-26T10:15:00Z"}',
+  'xml-csv': `<?xml version="1.0" encoding="UTF-8"?>
+<catalog>
+  <book id="bk101">
+    <author>Gambardella, Matthew</author>
+    <title>XML Developer's Guide</title>
+    <genre>Computer</genre>
+    <price>44.95</price>
+  </book>
+  <book id="bk102">
+    <author>Ralls, Kim</author>
+    <title>Midnight Rain</title>
+    <genre>Fantasy</genre>
+    <price>5.95</price>
+  </book>
+</catalog>`,
+  'json-ts': `{\n  "id": 1,\n  "name": "Leanne Graham",\n  "username": "Bret",\n  "email": "Sincere@april.biz",\n  "address": {\n    "street": "Kulas Light",\n    "suite": "Apt. 556",\n    "city": "Gwenborough",\n    "zipcode": "92998-3874"\n  },\n  "phone": "1-770-736-8031",\n  "website": "hildegard.org",\n  "active": true\n}`,
+  'srt-vtt': `1\n00:00:01,000 --> 00:00:04,000\nWelcome to Toolioz client-side utilities.\n\n2\n00:00:04,500 --> 00:00:08,000\nAll processing stays 100% inside your browser.\n\n3\n00:00:08,500 --> 00:00:12,000\nZero server uploads for maximum privacy.`,
+  'subtitle-text': `1\n00:00:01,000 --> 00:00:04,000\nWelcome to Toolioz client-side utilities.\n\n2\n00:00:04,500 --> 00:00:08,000\nAll processing stays 100% inside your browser.\n\n3\n00:00:08,500 --> 00:00:12,000\nZero server uploads for maximum privacy.`,
+  'subtitle-shift': `1\n00:00:01,000 --> 00:00:04,000\nIntro scene with title screen.\n\n2\n00:00:05,000 --> 00:00:09,000\nDialogue starts here.`,
+  'gpx-kml': `<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="Garmin Device">
+  <trk>
+    <name>Mountain Trail Walk</name>
+    <trkseg>
+      <trkpt lon="-122.084" lat="37.422"><ele>15.2</ele></trkpt>
+      <trkpt lon="-122.083" lat="37.423"><ele>16.0</ele></trkpt>
+      <trkpt lon="-122.081" lat="37.425"><ele>18.5</ele></trkpt>
+      <trkpt lon="-122.079" lat="37.427"><ele>21.0</ele></trkpt>
+    </trkseg>
+  </trk>
+</gpx>`,
+  'geojson-kml': `{\n  "type": "FeatureCollection",\n  "features": [\n    {\n      "type": "Feature",\n      "properties": { "name": "Golden Gate Bridge" },\n      "geometry": {\n        "type": "LineString",\n        "coordinates": [\n          [-122.4786, 37.8199],\n          [-122.4783, 37.8280]\n        ]\n      }\n    },\n    {\n      "type": "Feature",\n      "properties": { "name": "Visitor Center" },\n      "geometry": {\n        "type": "Point",\n        "coordinates": [-122.475, 37.808]\n      }\n    }\n  ]\n}`,
+  'csv-kml': `name,latitude,longitude,description\nSan Francisco,37.7749,-122.4194,City by the Bay\nNew York,40.7128,-74.0060,The Big Apple\nLondon,51.5074,-0.1278,Capital of England\nTokyo,35.6762,139.6503,Capital of Japan`,
+};
+
 function copyText(value: string) {
   if (value) navigator.clipboard.writeText(value);
 }
@@ -50,22 +91,31 @@ function ResultBox({
 }) {
   if (!value) return null;
   return (
-    <div className="overflow-hidden rounded-2xl border border-[var(--tool-border)]">
-      <div className="flex flex-wrap items-center justify-between gap-3 bg-[var(--tool-accent)] px-4 py-3 text-white">
-        <strong>Result ready</strong>
+    <div className="overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800">
+      <div className="flex flex-wrap items-center justify-between gap-3 bg-zinc-100 dark:bg-zinc-800 px-4 py-3">
+        <strong className="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-50">
+          Result Ready
+        </strong>
         <div className="flex flex-wrap gap-2">
-          <button className="rounded-lg bg-white/15 px-3 py-2 text-sm font-bold hover:bg-white/25" onClick={() => copyText(value)}>
-            <Copy className="mr-1 inline" size={16} />Copy
+          <button
+            className="rounded-lg bg-white dark:bg-zinc-700 px-3 py-1.5 text-xs font-bold text-zinc-800 dark:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-600 transition cursor-pointer"
+            onClick={() => copyText(value)}
+          >
+            <Copy className="mr-1 inline" size={14} /> Copy
           </button>
           <button
-            className="rounded-lg bg-white px-3 py-2 text-sm font-bold text-[var(--tool-accent-dark)] hover:bg-[var(--tool-soft)]"
+            className="rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-blue-700 transition cursor-pointer"
             onClick={() => downloadBlob(value, filename, 'text/plain;charset=utf-8')}
           >
-            <Download className="mr-1 inline" size={16} />Download
+            <Download className="mr-1 inline" size={14} /> Download
           </button>
         </div>
       </div>
-      <textarea readOnly className={`${areaClass} min-h-40 !rounded-none !border-0 !bg-[var(--tool-soft)]`} value={value} />
+      <textarea
+        readOnly
+        className="min-h-48 w-full resize-y border-0 bg-zinc-50 dark:bg-zinc-950 p-4 font-mono text-xs leading-relaxed text-zinc-900 dark:text-zinc-100 outline-none"
+        value={value}
+      />
     </div>
   );
 }
@@ -80,12 +130,13 @@ function PermissionColumn({
   onChange: (next: PermissionTriplet) => void;
 }) {
   return (
-    <fieldset className="rounded-2xl border border-[var(--tool-border)] bg-[var(--tool-soft)] p-4">
-      <legend className="px-1 text-sm font-bold">{label}</legend>
+    <fieldset className="rounded-xl border border-zinc-200 bg-zinc-50/50 p-4 dark:border-zinc-800 dark:bg-zinc-900/40">
+      <legend className="px-1 text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">{label}</legend>
       {(['r', 'w', 'x'] as const).map((key) => (
-        <label key={key} className="mt-2 flex items-center gap-2 text-sm font-semibold capitalize">
+        <label key={key} className="mt-2 flex items-center gap-2 text-xs font-semibold capitalize text-zinc-800 dark:text-zinc-200 cursor-pointer">
           <input
             type="checkbox"
+            className="accent-blue-600"
             checked={triplet[key]}
             onChange={(event) => onChange({ ...triplet, [key]: event.target.checked })}
           />
@@ -98,15 +149,8 @@ function PermissionColumn({
 
 export default function ExtraWorkbenchClient({ tool }: { tool: NewToolDefinition }) {
   const mode = tool.mode;
-  const [input, setInput] = useState(
-    mode === 'html-entities'
-      ? 'Tom & Jerry <script>'
-      : mode === 'slug'
-        ? 'Café Menu 2026'
-        : mode === 'csv-json'
-          ? 'name,active\nToolioz,true'
-          : '',
-  );
+  const initialInput = SAMPLE_DATA[mode] || '';
+  const [input, setInput] = useState(initialInput);
   const [output, setOutput] = useState('');
   const [error, setError] = useState('');
   const [htmlDirection, setHtmlDirection] = useState<'encode' | 'decode'>('encode');
@@ -152,8 +196,41 @@ export default function ExtraWorkbenchClient({ tool }: { tool: NewToolDefinition
     }
   }
 
+  function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const uploaded = e.target.files?.[0];
+    if (!uploaded) return;
+    setError('');
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const text = event.target?.result;
+      if (typeof text === 'string') {
+        setInput(text);
+      }
+    };
+    reader.onerror = () => setError('Failed to read file.');
+    reader.readAsText(uploaded);
+  }
+
+  function loadSample() {
+    if (SAMPLE_DATA[mode]) {
+      setInput(SAMPLE_DATA[mode]);
+      setOutput('');
+      setError('');
+    }
+  }
+
+  function clearAll() {
+    setInput('');
+    setOutput('');
+    setError('');
+  }
+
   function run() {
     setError('');
+    if (!input.trim()) {
+      setError('Please enter or upload data first.');
+      return;
+    }
     try {
       if (mode === 'html-entities') {
         setOutput(htmlDirection === 'encode' ? encodeHtmlEntities(input) : decodeHtmlEntities(input));
@@ -197,28 +274,28 @@ export default function ExtraWorkbenchClient({ tool }: { tool: NewToolDefinition
             <PermissionColumn label="Group" triplet={bits.group} onChange={(triplet) => setRole('group', triplet)} />
             <PermissionColumn label="Others" triplet={bits.other} onChange={(triplet) => setRole('other', triplet)} />
           </div>
-          <label className="block max-w-xs text-sm font-bold">
+          <label className="block max-w-xs text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
             Octal mode
             <span className="mt-2 flex gap-2">
               <input className={fieldClass} value={octalDraft} onChange={(event) => setOctalDraft(event.target.value)} inputMode="numeric" />
               <button className={secondaryButtonClass} onClick={applyOctal} type="button">Apply</button>
             </span>
           </label>
-          {error && <p role="alert" className="rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm font-semibold text-rose-700">{error}</p>}
+          {error && <p role="alert" className="rounded-xl border border-red-200 bg-red-50 p-3 text-xs font-semibold text-red-700">{error}</p>}
           <div className="grid gap-3 sm:grid-cols-3">
             {[
               ['Octal', chmod.octal],
               ['Symbolic', chmod.symbolic],
               ['Command', chmod.command],
             ].map(([label, value]) => (
-              <div key={label} className="rounded-2xl border border-[var(--tool-border)] bg-[var(--tool-soft)] p-4">
-                <p className="text-xs font-bold uppercase tracking-wider text-[var(--tool-accent-dark)]">{label}</p>
-                <p className="mt-2 font-mono text-xl font-black">{value}</p>
+              <div key={label} className="rounded-xl border border-zinc-200 bg-zinc-50/50 p-4 dark:border-zinc-800 dark:bg-zinc-900/40">
+                <p className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">{label}</p>
+                <p className="mt-2 font-mono text-xl font-bold text-zinc-950 dark:text-zinc-50">{value}</p>
               </div>
             ))}
           </div>
           <button className={primaryButtonClass} type="button" onClick={() => copyText(chmod.command)}>
-            <Copy size={16} />Copy chmod command
+            <Copy size={16} /> Copy chmod command
           </button>
         </div>
       </ToolWorkbench>
@@ -236,34 +313,34 @@ export default function ExtraWorkbenchClient({ tool }: { tool: NewToolDefinition
       <ToolWorkbench tool={tool}>
         <div className="space-y-6">
           <div className="grid gap-4 sm:grid-cols-2">
-            <label className="text-sm font-bold">
+            <label className="text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
               Foreground
               <span className="mt-2 flex gap-2">
-                <input className="h-11 w-14 cursor-pointer rounded-xl border border-[var(--tool-border)]" type="color" value={foreground} onChange={(event) => setForeground(event.target.value)} />
+                <input className="h-10 w-14 cursor-pointer rounded-lg border border-zinc-200 dark:border-zinc-700" type="color" value={foreground} onChange={(event) => setForeground(event.target.value)} />
                 <input className={fieldClass} value={foreground} onChange={(event) => setForeground(event.target.value)} />
               </span>
             </label>
-            <label className="text-sm font-bold">
+            <label className="text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
               Background
               <span className="mt-2 flex gap-2">
-                <input className="h-11 w-14 cursor-pointer rounded-xl border border-[var(--tool-border)]" type="color" value={background} onChange={(event) => setBackground(event.target.value)} />
+                <input className="h-10 w-14 cursor-pointer rounded-lg border border-zinc-200 dark:border-zinc-700" type="color" value={background} onChange={(event) => setBackground(event.target.value)} />
                 <input className={fieldClass} value={background} onChange={(event) => setBackground(event.target.value)} />
               </span>
             </label>
           </div>
-          <div className="rounded-2xl border border-[var(--tool-border)] p-6 text-center" style={{ background, color: foreground }}>
-            <p className="text-3xl font-black">The quick brown fox</p>
-            <p className="mt-2 text-sm">Large text sample at 18.5px / 24px equivalent.</p>
+          <div className="rounded-xl border border-zinc-200 p-6 text-center dark:border-zinc-800" style={{ background, color: foreground }}>
+            <p className="text-2xl font-bold">The quick brown fox jumps over the lazy dog</p>
+            <p className="mt-2 text-xs">Sample text preview at standard reading scale.</p>
           </div>
           {contrast.error ? (
-            <p role="alert" className="rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm font-semibold text-rose-700">{contrast.error}</p>
+            <p role="alert" className="rounded-xl border border-red-200 bg-red-50 p-3 text-xs font-semibold text-red-700">{contrast.error}</p>
           ) : (
             <>
-              <p className="text-4xl font-black tabular-nums">{contrast.ratio.toFixed(2)}:1</p>
+              <p className="text-3xl font-black tabular-nums text-zinc-950 dark:text-zinc-50">{contrast.ratio.toFixed(2)}:1</p>
               <div className="grid gap-2 sm:grid-cols-2">
                 {checks.map(([label, pass]) => (
-                  <p key={label} className={`flex items-center gap-2 rounded-xl border px-3 py-2 text-sm font-semibold ${pass ? 'border-emerald-200 bg-emerald-50 text-emerald-800' : 'border-rose-200 bg-rose-50 text-rose-700'}`}>
-                    {pass ? <CheckCircle2 size={16} /> : <XCircle size={16} />}
+                  <p key={label} className={`flex items-center gap-2 rounded-xl border px-3 py-2 text-xs font-semibold ${pass ? 'border-emerald-200 bg-emerald-50 text-emerald-800 dark:border-emerald-900/60 dark:bg-emerald-950/40 dark:text-emerald-300' : 'border-red-200 bg-red-50 text-red-700 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-300'}`}>
+                    {pass ? <CheckCircle2 size={15} /> : <XCircle size={15} />}
                     {label}
                   </p>
                 ))}
@@ -274,6 +351,14 @@ export default function ExtraWorkbenchClient({ tool }: { tool: NewToolDefinition
       </ToolWorkbench>
     );
   }
+
+  const fileAccept =
+    mode.includes('csv') ? '.csv,.tsv,.txt' :
+    mode.includes('srt') || mode.includes('vtt') || mode.includes('subtitle') ? '.srt,.vtt,.txt' :
+    mode.includes('gpx') ? '.gpx,.kml,.xml,.txt' :
+    mode.includes('geojson') ? '.geojson,.json,.txt' :
+    mode.includes('xml') ? '.xml,.txt' :
+    mode.includes('json') ? '.json,.ndjson,.jsonl,.txt' : '.txt';
 
   return (
     <ToolWorkbench tool={tool}>
@@ -304,7 +389,7 @@ export default function ExtraWorkbenchClient({ tool }: { tool: NewToolDefinition
         )}
         {mode === 'subtitle-shift' && (
           <label className="block text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-            Timing Offset (Milliseconds) — positive delays, negative advances
+            Timing Offset (Milliseconds) — positive delays (+1000ms), negative advances (-500ms)
             <input
               type="number"
               step="100"
@@ -314,14 +399,52 @@ export default function ExtraWorkbenchClient({ tool }: { tool: NewToolDefinition
             />
           </label>
         )}
-        <label className="block text-sm font-bold">
-          Input
-          <textarea className={`${areaClass} mt-2`} value={input} onChange={(event) => setInput(event.target.value)} />
-        </label>
-        {error && <p role="alert" className="rounded-xl border border-rose-200 bg-rose-50 p-3 text-sm font-semibold text-rose-700">{error}</p>}
+
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <label className="text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+            Input Data
+          </label>
+          <div className="flex flex-wrap items-center gap-2">
+            <label className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-2.5 py-1 text-xs font-semibold text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 transition">
+              <FileUp size={13} /> Upload File
+              <input type="file" accept={fileAccept} className="hidden" onChange={handleFileUpload} />
+            </label>
+            {SAMPLE_DATA[mode] && (
+              <button
+                type="button"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-2.5 py-1 text-xs font-semibold text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 transition cursor-pointer"
+                onClick={loadSample}
+              >
+                <Sparkles size={13} /> Load Sample
+              </button>
+            )}
+            <button
+              type="button"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-2.5 py-1 text-xs font-semibold text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 transition cursor-pointer"
+              onClick={clearAll}
+            >
+              <RotateCcw size={13} /> Clear
+            </button>
+          </div>
+        </div>
+
+        <textarea
+          className={`${areaClass} min-h-48 font-mono text-xs`}
+          placeholder="Paste or upload your content here..."
+          value={input}
+          onChange={(event) => setInput(event.target.value)}
+        />
+
+        {error && (
+          <p role="alert" className="rounded-xl border border-red-200 bg-red-50 p-3 text-xs font-semibold text-red-700 dark:border-red-900/60 dark:bg-red-950/30 dark:text-red-300">
+            {error}
+          </p>
+        )}
+
         <button className={primaryButtonClass} type="button" onClick={run}>
-          <WandSparkles size={18} />Generate result
+          <WandSparkles size={16} /> Generate result
         </button>
+
         <ResultBox
           value={output}
           filename={
