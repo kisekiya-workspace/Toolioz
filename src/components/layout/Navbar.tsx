@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
@@ -105,9 +106,102 @@ export const Navbar = () => {
 
   if (hideChrome) return null;
 
+  const mobileMenu =
+    isOpen ? (
+      <div
+        className="fixed inset-x-0 top-16 bottom-0 z-[100] overflow-y-auto overscroll-contain bg-[#fafafa] p-4 lg:hidden dark:bg-[#0a0a0a]"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site navigation"
+      >
+        <div className="mx-auto flex max-w-lg flex-col gap-6 pb-10">
+          <Link
+            href="/resume-builder"
+            onClick={() => setIsOpen(false)}
+            className="flex h-12 items-center justify-center gap-2 rounded-[6px] bg-[#171717] text-sm text-white dark:bg-white dark:text-[#171717]"
+          >
+            <Briefcase size={16} />
+            ATS Resume Builder
+          </Link>
+
+          <div>
+            <p className="mb-3 text-xs font-medium uppercase tracking-wider text-[#8f8f8f]">
+              Tool Categories
+            </p>
+            <div className="grid grid-cols-1 gap-2">
+              {TOOL_CATEGORIES.map((category) => (
+                <Link
+                  key={category.id}
+                  href={category.id === 'utility' ? '/tools' : category.id === 'makers' ? '/makers' : `/${category.id}`}
+                  className="flex items-center gap-3 rounded-[8px] bg-white p-3 shadow-[var(--ds-shadow-border)] dark:bg-[#111]"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <div
+                    className="flex size-8 items-center justify-center rounded-[6px]"
+                    style={{ backgroundColor: `${category.color}15`, color: category.color }}
+                  >
+                    <category.icon size={18} />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <span className="block text-sm font-medium text-[#171717] dark:text-[#ededed]">
+                      {category.title}
+                    </span>
+                    <span className="block truncate text-xs text-[#8f8f8f]">{category.desc}</span>
+                  </div>
+                  <ChevronRight size={14} className="shrink-0 text-[#8f8f8f]" />
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {currentCategoryId && categoryTools.length > 0 && (
+            <div>
+              <p className="mb-3 text-xs font-medium uppercase tracking-wider text-[#8f8f8f]">
+                In {currentCategory?.title}
+              </p>
+              <div className="grid grid-cols-1 gap-1">
+                {categoryTools.slice(0, 8).map((tool) => (
+                  <Link
+                    key={tool.id}
+                    href={tool.href}
+                    className="flex items-center justify-between rounded-[6px] p-2 text-sm text-[#4d4d4d] hover:bg-[#f2f2f2] hover:text-[#171717] dark:text-[#a1a1a1] dark:hover:bg-[#171717] dark:hover:text-[#ededed]"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <span className="truncate">{tool.title}</span>
+                    <ChevronRight size={12} className="shrink-0" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div>
+            <p className="mb-3 text-xs font-medium uppercase tracking-wider text-[#8f8f8f]">
+              More
+            </p>
+            <div className="grid grid-cols-1 gap-2">
+              {MORE_NAV.map(({ name, href, icon: Icon }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="flex items-center gap-3 rounded-[8px] bg-white p-3 text-sm text-[#171717] shadow-[var(--ds-shadow-border)] dark:bg-[#111] dark:text-[#ededed]"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Icon size={16} className="shrink-0 text-[#4d4d4d] dark:text-[#a1a1a1]" />
+                  <span className="flex-1">{name}</span>
+                  <ChevronRight size={14} className="text-[#8f8f8f]" />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    ) : null;
+
   return (
+    <>
     <header
-      className="sticky top-0 z-50 w-full bg-[#fafafa]/90 shadow-[var(--header-border-bottom)] backdrop-blur-md dark:bg-[#0a0a0a]/90"
+      className="sticky top-0 z-[110] w-full bg-[#fafafa]/90 shadow-[var(--header-border-bottom)] backdrop-blur-md dark:bg-[#0a0a0a]/90"
     >
       <div className="mx-auto flex h-16 w-full max-w-[1200px] items-center gap-4 px-4 sm:px-6">
         <Link href="/" className="flex min-w-0 shrink-0 items-center gap-2">
@@ -269,92 +363,8 @@ export const Navbar = () => {
           </button>
         </div>
       </div>
-
-      {isOpen && (
-        <div className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto bg-[#fafafa] p-4 lg:hidden dark:bg-[#0a0a0a]">
-          <div className="mx-auto flex max-w-lg flex-col gap-6 pb-10">
-            <Link
-              href="/resume-builder"
-              onClick={() => setIsOpen(false)}
-              className="flex h-12 items-center justify-center gap-2 rounded-[6px] bg-[#171717] text-sm text-white dark:bg-white dark:text-[#171717]"
-            >
-              <Briefcase size={16} />
-              ATS Resume Builder
-            </Link>
-
-            <div>
-              <p className="mb-3 text-xs font-medium uppercase tracking-wider text-[#8f8f8f]">
-                Tool Categories
-              </p>
-              <div className="grid grid-cols-1 gap-2">
-                {TOOL_CATEGORIES.map((category) => (
-                  <Link
-                    key={category.id}
-                    href={category.id === 'utility' ? '/tools' : category.id === 'makers' ? '/makers' : `/${category.id}`}
-                    className="flex items-center gap-3 rounded-[8px] bg-white p-3 shadow-[var(--ds-shadow-border)] dark:bg-[#111]"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <div
-                      className="flex size-8 items-center justify-center rounded-[6px]"
-                      style={{ backgroundColor: `${category.color}15`, color: category.color }}
-                    >
-                      <category.icon size={18} />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <span className="block text-sm font-medium text-[#171717] dark:text-[#ededed]">
-                        {category.title}
-                      </span>
-                      <span className="block truncate text-xs text-[#8f8f8f]">{category.desc}</span>
-                    </div>
-                    <ChevronRight size={14} className="shrink-0 text-[#8f8f8f]" />
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {currentCategoryId && categoryTools.length > 0 && (
-              <div>
-                <p className="mb-3 text-xs font-medium uppercase tracking-wider text-[#8f8f8f]">
-                  In {currentCategory?.title}
-                </p>
-                <div className="grid grid-cols-1 gap-1">
-                  {categoryTools.slice(0, 8).map((tool) => (
-                    <Link
-                      key={tool.id}
-                      href={tool.href}
-                      className="flex items-center justify-between rounded-[6px] p-2 text-sm text-[#4d4d4d] hover:bg-[#f2f2f2] hover:text-[#171717] dark:text-[#a1a1a1] dark:hover:bg-[#171717] dark:hover:text-[#ededed]"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <span className="truncate">{tool.title}</span>
-                      <ChevronRight size={12} className="shrink-0" />
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            <div>
-              <p className="mb-3 text-xs font-medium uppercase tracking-wider text-[#8f8f8f]">
-                More
-              </p>
-              <div className="grid grid-cols-1 gap-2">
-                {MORE_NAV.map(({ name, href, icon: Icon }) => (
-                  <Link
-                    key={href}
-                    href={href}
-                    className="flex items-center gap-3 rounded-[8px] bg-white p-3 text-sm text-[#171717] shadow-[var(--ds-shadow-border)] dark:bg-[#111] dark:text-[#ededed]"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <Icon size={16} className="shrink-0 text-[#4d4d4d] dark:text-[#a1a1a1]" />
-                    <span className="flex-1">{name}</span>
-                    <ChevronRight size={14} className="text-[#8f8f8f]" />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </header>
+    {mobileMenu && typeof document !== 'undefined' ? createPortal(mobileMenu, document.body) : null}
+    </>
   );
 };

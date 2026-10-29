@@ -132,6 +132,16 @@ export default function RootLayout({
         {adsensePublisherId ? (
           <meta name="google-adsense-account" content={adsensePublisherId} />
         ) : null}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="alternate" type="application/rss+xml" title="Toolioz" href="https://toolioz.com/feed.xml" />
+        <script
+          type="speculationrules"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              prefetch: [{ where: { href_matches: '/*' }, eagerness: 'conservative' }],
+            }),
+          }}
+        />
       </head>
       <body className="min-h-screen bg-background font-sans text-foreground selection:bg-[#0072F5] selection:text-white">
         <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-3 focus:text-zinc-900 focus:shadow-lg">Skip to tool content</a>

@@ -26,3 +26,114 @@
 
 /finance/*
   Cache-Control: public,max-age=3600,s-maxage=86400
+
+# Trust and discovery headers. These do not replace the cache rules above.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Link: <https://toolioz.com/sitemap.xml>; rel="sitemap", <https://toolioz.com/feed.xml>; rel="alternate"; type="application/rss+xml"
+
+# Same edge cache as finance, devtools, and pdftools, for sections that had none.
+/design/*
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/gaming/*
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/blog/*
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/how-to/*
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/makers/*
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/craft/*
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/kitchen/*
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/maker/*
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/home/*
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/music/*
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/electronics/*
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/converters/*
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/minecraft/*
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/pokemon/*
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/dnd/*
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/tools/*
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/biodata
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/biodata/*
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/resume-builder
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/about
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/contact
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/privacy-policy
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/terms
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+/feed.xml
+  Content-Type: application/rss+xml; charset=utf-8
+  Cache-Control: public,max-age=3600,s-maxage=86400
+
+# Public images are not content-hashed. A week is enough; hashed bundles stay immutable below.
+/*.svg
+  Cache-Control: public,max-age=604800
+
+/*.png
+  Cache-Control: public,max-age=604800
+
+/*.webp
+  Cache-Control: public,max-age=604800
+
+/*.jpg
+  Cache-Control: public,max-age=604800
+
+/*.jpeg
+  Cache-Control: public,max-age=604800
+
+/*.ico
+  Cache-Control: public,max-age=604800
+
+/*.woff2
+  Cache-Control: public,max-age=31536000,immutable
+
+# Must stay last so extension rules do not shorten the hashed Next.js cache.
+/_next/static/*
+  Cache-Control: public,max-age=31536000,immutable

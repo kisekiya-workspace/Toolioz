@@ -45,3 +45,9 @@
 /how-to-compress-pdf-under-2mb /how-to/compress-pdf-under-2mb 301
 /how-to-create-marriage-biodata-pdf /how-to/create-marriage-biodata-pdf 301
 /how-to-reduce-home-loan-interest /how-to/reduce-home-loan-interest 301
+
+# One host, no trailing slash, no /index.html duplicate.
+https://www.toolioz.com/* https://toolioz.com/:splat 301
+/index.html / 301
+/index.html/ / 301
+/*/ /:splat 301
