@@ -14,7 +14,7 @@ export default function AboutClient() {
             About <span className="text-primary">Toolioz</span>
           </h1>
           <p className={styles.subtitle}>
-            An independent publisher of documented calculators and browser utilities, not a bank, CA firm, or ad network.
+            Browser calculators and file utilities. Unofficial tools, used at the visitor&apos;s own risk.
           </p>
         </div>
       </header>
@@ -23,50 +23,39 @@ export default function AboutClient() {
         <div className="mx-auto max-w-6xl px-6">
           <Card className={styles.card}>
             <p>
-              <strong>Toolioz</strong> is run by the Toolioz editorial and engineering team. The public site exists so a
-              person can finish one concrete job. Project an SIP, estimate tax for a labelled year, format JSON, merge a PDF, or print a biodata, without creating an account. Correspondence goes to{' '}
-              <a href="mailto:support@toolioz.com">support@toolioz.com</a>. There is no walk-in office and no phone support
-              queue.
+              <strong>Toolioz</strong> publishes free browser tools: finance estimates, developer utilities, PDF helpers,
+              gaming calculators, and similar one-job pages. There is no account. Correspondence goes to{' '}
+              <a href="mailto:support@toolioz.com">support@toolioz.com</a>. There is no walk-in office and no phone
+              support queue.
             </p>
 
             <h2>Who this site is for</h2>
             <p>
-              The finance pages are written for people who already know they want a number and need the equation stated in
-              the open. That includes salaried planners in India comparing a SIP amount, a home-loan EMI, or a GST-inclusive invoice.
-              The developer and PDF pages are written for people who already have a file or a payload and need to transform
-              it in the browser. The site is not a newsroom or a trading terminal. It is not a replacement for a SEBI-registered
-              adviser or a chartered accountant.
+              The pages are for people who already know they want a number or a file transform and want to try a
+              browser tool. The site is not a bank, a CA firm, a newsroom, a trading terminal, or an official source
+              for tax, game, or product rules. It is not a replacement for a SEBI-registered adviser, a chartered
+              accountant, or a publisher&apos;s documentation.
             </p>
 
-            <h2>How a calculator is allowed onto the public directory</h2>
+            <h2>Accuracy and reliability</h2>
             <p>
-              Google publisher rules require that ads sit next to original publisher content, not next to empty widgets,
-              doorway pages, or unreviewed auto-generated text. Toolioz lists only tools that perform a distinct
-              task, show the formula or parser behaviour in prose, include at least one numeric example that can be
-              repeated by hand, and state what the page does not do. Keyword variants of the same percentage arithmetic,
-              such as sports win rate, body-fat estimates, and school grades, are not part of the finance catalog.
-            </p>
-            <p>
-              Before a page is indexed, the implemented function is checked against the on-page formula for ordinary values,
-              zeros, and invalid input. Time-sensitive tax and rebate figures are dated. If a statute changes and we have not
-              yet patched the code, the Income Tax Department or GST Council document is the authority, not this website.
+              Tools can be wrong, incomplete, or not updated. Formulas, tax slabs, game constants, and file behaviour
+              change, and Toolioz has no duty to keep every page current. Results are unofficial estimates. Use them
+              at your own risk and verify anything that matters against an official source. The{' '}
+              <Link href="/terms">terms of service</Link> state that the site is provided as-is, without warranties,
+              and without liability for reliance on any output.
             </p>
 
-            <h2>Advertising and independence</h2>
+            <h2>Advertising and privacy</h2>
             <p>
-              If Google AdSense is enabled after a successful review, ads must not outrank the calculator and the article on
-              the same URL. Ad code is not placed on withheld, duplicate, or unfinished tool URLs. Advertising does not change
-              a formula output. Analytics still load on most pages; that is described in the{' '}
-              <Link href="/privacy-policy">privacy policy</Link>. Pages labelled local processing keep tool inputs and uploads
-              in the browser. That is not a claim that the site sends zero network bytes.
+              If Google AdSense is enabled, advertising does not change a formula output. Analytics still load on most
+              pages; that is described in the <Link href="/privacy-policy">privacy policy</Link>. Pages labelled local
+              processing keep tool inputs and uploads in the browser. That is not a claim that the site sends zero
+              network bytes.
             </p>
 
-            <h2>Corrections</h2>
             <p>
-              Send the URL, the inputs, the number you got, the number you expected, and a primary source. Material errors are
-              corrected in both the function and the prose. The{' '}
-              <Link href="/editorial-policy">editorial policy</Link> is the process document; the{' '}
-              <Link href="/contact">contact page</Link> is the inbox. Last reviewed: 10 September 2026.
+              Questions go to the <Link href="/contact">contact page</Link>. Last updated: October 2026.
             </p>
           </Card>
         </div>

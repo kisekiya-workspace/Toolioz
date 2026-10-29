@@ -58,8 +58,8 @@ export default async function StandaloneBlogPostPage({ params }: BlogPageProps) 
     dateModified: post.updatedIso,
     author: {
       '@type': 'Organization',
-      name: 'Toolioz Editorial Team',
-      url: 'https://toolioz.com/editorial-policy',
+      name: 'Toolioz',
+      url: 'https://toolioz.com/about',
     },
     publisher: {
       '@type': 'Organization',
@@ -107,8 +107,8 @@ export default async function StandaloneBlogPostPage({ params }: BlogPageProps) 
               <ArrowLeft size={13} /> Back to Articles
             </Link>
             <div className="flex items-center gap-3 text-xs font-mono text-zinc-400">
-              <Link href="/editorial-policy" className="hover:text-blue-600 dark:hover:text-blue-400">
-                Toolioz Editorial Team
+              <Link href="/about" className="hover:text-blue-600 dark:hover:text-blue-400">
+                Toolioz
               </Link>
               <span>•</span>
               <span className="flex items-center gap-1">

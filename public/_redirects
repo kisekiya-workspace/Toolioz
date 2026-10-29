@@ -35,6 +35,9 @@
 /tools/json-to-csv /devtools/csv-json-converter 301
 /tools/word-counter /tools/text-tools 301
 
+# Retired editorial policy — no review warranty; terms cover use-at-own-risk
+/editorial-policy /terms 301
+
 # Broken how-to shortcuts from older internal links
 /how-to-calculate-sip-returns /how-to/calculate-sip-returns 301
 /how-to-format-json-and-fix-errors /how-to/format-json-and-fix-errors 301

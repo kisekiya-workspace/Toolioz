@@ -31,21 +31,22 @@ export function HomePublisherExplainer() {
           guidance before a filing or investment decision.
         </p>
         <h3 className="mt-8 text-lg font-semibold text-[#171717] dark:text-[#ededed]">
-          How a page is reviewed
+          Accuracy
         </h3>
-        <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-          <li>The on-page formula is compared with the function in code for ordinary values, zeros, and invalid input.</li>
-          <li>Assumptions such as compounding frequency, payment timing, currency, and tax year are written next to the result.</li>
-          <li>Tax, loan, and investment outputs are labelled as planning estimates, not advice.</li>
-          <li>
-            File tools that are marked local processing keep the document in the browser. The website still loads
-            ordinary page assets and analytics, which are described in the{' '}
-            <Link href="/privacy-policy" className="text-[#0072F5] underline-offset-2 hover:underline">
-              privacy policy
-            </Link>
-            .
-          </li>
-        </ul>
+        <p className="mt-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+          Tools can be wrong, incomplete, or not updated. Tax, loan, and investment outputs are unofficial estimates,
+          not advice. Use every result at your own risk and check official sources before acting. Limits of liability
+          are in the{' '}
+          <Link href="/terms" className="text-[#0072F5] underline-offset-2 hover:underline">
+            terms of service
+          </Link>
+          . File tools marked local processing keep the document in the browser; ordinary page assets and analytics are
+          described in the{' '}
+          <Link href="/privacy-policy" className="text-[#0072F5] underline-offset-2 hover:underline">
+            privacy policy
+          </Link>
+          .
+        </p>
         <h3 className="mt-8 text-lg font-semibold text-[#171717] dark:text-[#ededed]">
           Where to start
         </h3>
@@ -70,7 +71,7 @@ export function HomePublisherExplainer() {
           <Link href="/how-to" className="text-[#0072F5] underline-offset-2 hover:underline">
             how-to library
           </Link>
-          . Correction requests go to{' '}
+          . Questions go to{' '}
           <Link href="/contact" className="text-[#0072F5] underline-offset-2 hover:underline">
             contact
           </Link>{' '}
@@ -78,11 +79,7 @@ export function HomePublisherExplainer() {
           <a href="mailto:support@toolioz.com" className="text-[#0072F5] underline-offset-2 hover:underline">
             support@toolioz.com
           </a>
-          . The{' '}
-          <Link href="/editorial-policy" className="text-[#0072F5] underline-offset-2 hover:underline">
-            editorial policy
-          </Link>{' '}
-          explains selection, sources, and updates.
+          .
         </p>
       </div>
     </section>
@@ -130,8 +127,8 @@ export function FinancePublisherExplainer() {
           >
             AMFI
           </a>{' '}
-          for mutual-fund industry data, and lender rate sheets for EMI examples. When a rule changes,
-          the calculator copy is dated and should be read against the official source. Report a mismatch
+          for mutual-fund industry data, and lender rate sheets for EMI examples. Calculators can be
+          wrong or not updated after a rule change; the official source is the authority. Questions go
           through the{' '}
           <Link href="/contact" className="text-blue-600 underline-offset-2 hover:underline dark:text-blue-400">
             contact page

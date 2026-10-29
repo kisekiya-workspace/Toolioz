@@ -5,6 +5,7 @@ import React from 'react';
 import { Footer } from '@/components/layout/Footer';
 import { Card } from '@/components/ui/Card';
 import { secondaryPageStyles as styles } from '@/app/SecondaryPage.styles';
+import Link from 'next/link';
 
 export default function PrivacyClient() {
   return (
@@ -65,14 +66,22 @@ export default function PrivacyClient() {
               keep your browser updated and avoid using sensitive documents on a device you do not trust.
             </p>
 
-            <h2>7. Questions and Updates</h2>
+            <h2>7. Accuracy of Tools</h2>
+            <p>
+              This policy describes data handling, not the correctness of calculators or other utilities. Tools can be
+              wrong, incomplete, or out of date. Toolioz does not warrant results and has no duty to keep pages current.
+              Use of every tool is at your own risk. Limits of liability are in the{' '}
+              <Link href="/terms">terms of service</Link>.
+            </p>
+
+            <h2>8. Questions and Updates</h2>
             <p>
               Privacy questions can be sent to <a href="mailto:support@toolioz.com">support@toolioz.com</a>. We update this policy when
               the site&apos;s data flows or service providers materially change. The date below identifies the latest review.
             </p>
 
             <p className={styles.lastUpdated}>
-              Last reviewed: 31 August 2026
+              Last reviewed: October 2026
             </p>
           </Card>
         </div>

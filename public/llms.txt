@@ -64,6 +64,9 @@ Formatters, encoders, converters (JSON, CSV, KML, GPX, XML, TypeScript), and Web
 - [GPX ↔ KML](https://toolioz.com/devtools/gpx-to-kml): Converts GPS tracks and waypoints between GPX and Google Earth KML format with zero server uploads.
 - [GeoJSON to KML](https://toolioz.com/devtools/geojson-to-kml): Converts GeoJSON features (Points, LineStrings, Polygons) to Google Earth KML placemarks client-side.
 - [CSV to KML](https://toolioz.com/devtools/csv-to-kml): Converts tabular spreadsheet coordinates (latitude, longitude, name) into Google Earth KML placemarks.
+- [CSS Clamp Generator](https://toolioz.com/devtools/css-clamp-generator): Builds clamp() fluid type and spacing, with a modular type-scale tab.
+- [PX to REM Converter](https://toolioz.com/devtools/px-to-rem-converter): Converts pixels to rem and em at a chosen root font size, with a common-size table.
+- [Tailwind Color Generator](https://toolioz.com/devtools/tailwind-color-generator): Builds 50–950 OKLCH shades and Tailwind v4 @theme tokens from a seed hex.
 - [Snowflake Parser](https://toolioz.com/tools/snowflakes): Shifts a Discord snowflake 22 bits and adds the 2015 Discord epoch. The id is not sent to Discord.
 - [CSS Minifier](https://toolioz.com/tools/css-minifier): Compress CSS to reduce file size.
 - [JS Minifier](https://toolioz.com/tools/js-minifier): Minify and clean JavaScript code.
@@ -117,6 +120,12 @@ In-browser graphics tools, retro dithering, 16:9 split triptychs, and drawing ca
 - [Image Dimensions & Ratio](https://toolioz.com/devtools/image-dimensions-aspect-ratio): Reads pixel width and height, simplifies the ratio by the greatest common divisor, and scales one side in proportion.
 - [OCR Image to Text](https://toolioz.com/devtools/ocr-image-to-text): Recognizes English text in JPG, PNG, and WebP images, with recognition kept in the browser.
 - [Contrast Checker](https://toolioz.com/devtools/color-contrast-checker): Measure the contrast ratio of two hex colors against WCAG AA and AAA text thresholds.
+- [Color Blindness Simulator](https://toolioz.com/design/color-blindness-simulator): Simulates protanopia, deuteranopia, and tritanopia on a palette or an uploaded image.
+- [PNG to ICO Converter](https://toolioz.com/design/png-to-ico): Packs a PNG into a multi-size .ico with 16, 32, 48, and 256 px layers.
+- [SVG to PNG Converter](https://toolioz.com/design/svg-to-png): Rasters an SVG to a transparent PNG at a chosen width in the browser.
+- [Photo Print Size Calculator](https://toolioz.com/design/photo-print-size-calculator): Converts pixel dimensions to inches and centimetres at a chosen DPI.
+- [Drawing Grid Maker](https://toolioz.com/design/drawing-grid-maker): Overlays a measured grid on a photo for transfer drawing, with print output.
+- [Pixel Art from Image](https://toolioz.com/design/pixel-art-from-image): Downsamples a photo to a pixel grid for bead, Minecraft, or cross-stitch planning.
 - [Tweet Generator](https://toolioz.com/tools/tweet-generator): Create realistic fake tweet screenshots.
 - [Instagram Bio Generator](https://toolioz.com/tools/instagram-bio-generator): Creates styled text for an Instagram bio.
 - [Image Converter](https://toolioz.com/tools/image-converter): Draws an image on a canvas and saves PNG, JPEG, or WebP. The file is not uploaded.
@@ -128,6 +137,51 @@ In-browser graphics tools, retro dithering, 16:9 split triptychs, and drawing ca
 - [Color Palette](https://toolioz.com/tools/color-palette): Generate beautiful color palettes from a base color.
 - [Box Shadow Generator](https://toolioz.com/tools/box-shadow-generator): Design CSS box shadows with live preview.
 - [Favicon Generator](https://toolioz.com/tools/favicon-generator): Create favicons from emoji or text.
+
+## Gaming, Minecraft, Pokemon & D&D Calculators
+
+Evergreen game math: Minecraft circles and nether portals, FPS sensitivity/eDPI, Pokemon type weaknesses, and D&D 5e dice and encounter XP.
+
+- [Minecraft Circle Generator](https://toolioz.com/minecraft/circle-generator): Maps Minecraft circles and spheres from a diameter. Pixel math does not change with patches.
+- [Nether Portal Calculator](https://toolioz.com/minecraft/nether-portal-calculator): Converts Overworld and Nether portal coordinates with the 8:1 Java Edition scale.
+- [Shulker Box Calculator](https://toolioz.com/minecraft/shulker-box-calculator): Counts items in Minecraft shulker boxes at stack sizes of 64, 16, or 1.
+- [Mouse Sensitivity Converter](https://toolioz.com/gaming/mouse-sensitivity-converter): Converts FPS hipfire sensitivity with eDPI and cm/360 using each game's yaw constant.
+- [Pokemon Type Weakness](https://toolioz.com/pokemon/type-weakness-calculator): Dual-type Pokemon weaknesses from the Generation 6 type chart used since 2013.
+- [D&D Dice Roller](https://toolioz.com/dnd/dice-roller): Rolls 5e dice notation including advantage, 4d6kh3, and damage plus modifiers.
+- [5e Encounter Calculator](https://toolioz.com/dnd/5e-encounter-calculator): Rates D&D 5e encounters with the 2014 Dungeon Master's Guide XP table.
+
+## Makers, Craft, Kitchen, Music & Home Calculators
+
+Client-side knitting, yarn, 3D filament, baking, coffee, BPM, aquarium, lumber, and electronics calculators.
+
+- [Knitting Gauge Calculator](https://toolioz.com/craft/knitting-gauge-calculator): Converts a knitting gauge swatch into cast-on stitches and a pattern adjustment factor.
+- [Crochet Gauge Calculator](https://toolioz.com/craft/crochet-gauge-calculator): Converts a crochet gauge swatch into stitch counts and a pattern adjustment factor.
+- [Yarn Calculator](https://toolioz.com/craft/yarn-calculator): Estimates yarn grams, yards, and 100 g skeins for a blanket, scarf, or hat.
+- [Needle Size Converter](https://toolioz.com/craft/needle-size-converter): Converts knitting needle and crochet hook sizes across millimetres, US, UK, and Japan.
+- [Cross Stitch Fabric Calculator](https://toolioz.com/craft/cross-stitch-fabric-calculator): Cuts Aida or evenweave fabric size from stitch counts, fabric count, and over 1 or 2.
+- [Quilt Size Calculator](https://toolioz.com/craft/quilt-size-calculator): Adds quilt blocks, sashing, borders, and a bed drop to a finished size in inches and centimetres.
+- [Filament Weight to Length](https://toolioz.com/maker/filament-weight-calculator): Converts 3D-printer filament grams to metres using published material density and diameter.
+- [3D Print Cost Calculator](https://toolioz.com/maker/3d-print-cost-calculator): Prices a print from filament mass, printer watts, electricity rate, and optional slicer comments.
+- [Epoxy Resin Calculator](https://toolioz.com/maker/epoxy-resin-calculator): Fills a slab, cylinder, oval, or river table and splits the volume into an A:B mix.
+- [Candle Wax Calculator](https://toolioz.com/maker/candle-wax-calculator): Estimates soy or paraffin wax and fragrance load from container volume in ounces.
+- [Baking Pan Size Converter](https://toolioz.com/kitchen/baking-pan-size-converter): Scales batter between round, square, rectangular, loaf, and bundt pans by volume.
+- [Cups to Grams Converter](https://toolioz.com/kitchen/cups-to-grams): Converts cups and grams for flour, butter, sugar, rice, and other baking ingredients.
+- [Sourdough Hydration Calculator](https://toolioz.com/kitchen/sourdough-hydration-calculator): Turns baker’s percentages into flour, water, starter, and salt weights.
+- [Coffee Ratio Calculator](https://toolioz.com/kitchen/coffee-ratio-calculator): Sets pour-over, French press, cold brew, and espresso ratios in grams.
+- [Cake Serving Calculator](https://toolioz.com/kitchen/cake-serving-calculator): Counts party and wedding slices from round or rectangular tiers.
+- [BPM to MS Calculator](https://toolioz.com/music/bpm-to-ms-calculator): Converts tempo to delay and reverb times, with tap tempo and note divisions.
+- [Chord Transposer](https://toolioz.com/music/chord-transposer): Transposes pasted chord sheets by semitones and shows a capo-friendly chart.
+- [Frequency to Note Converter](https://toolioz.com/music/frequency-to-note-converter): Maps hertz to piano notes, cents, and MIDI at A4 = 440 or 432.
+- [Video File Size Calculator](https://toolioz.com/music/video-file-size-calculator): Estimates recording size from bitrate and duration, or bitrate from a target size.
+- [Aquarium Volume Calculator](https://toolioz.com/home/aquarium-volume-calculator): Finds litres and gallons for rectangular, bowfront, cylinder, hexagon, and corner tanks.
+- [Board Feet Calculator](https://toolioz.com/home/board-feet-calculator): Counts lumber board feet and log scale with Doyle, Scribner, and International ¼″.
+- [Wallpaper Calculator](https://toolioz.com/home/wallpaper-calculator): Estimates rolls with pattern repeat, straight match, or half-drop.
+- [Miter Angle Calculator](https://toolioz.com/home/miter-angle-calculator): Finds polygon, picture-frame, and compound crown-molding miter and bevel angles.
+- [Resistor Color Code Calculator](https://toolioz.com/electronics/resistor-color-code-calculator): Reads 4, 5, and 6 band resistors and converts a value back to colors.
+- [LED Resistor Calculator](https://toolioz.com/electronics/led-resistor-calculator): Sizes a series resistor for LEDs and solves a two-resistor voltage divider.
+- [Roman Numeral Date Converter](https://toolioz.com/converters/roman-numeral-date): Converts dates to Roman numerals with a tattoo-style preview and PNG export.
+- [Morse Code Translator](https://toolioz.com/converters/morse-code-translator): Encodes and decodes Morse, then plays the pattern as audio in the browser.
+- [Barbell Plate Calculator](https://toolioz.com/converters/barbell-plate-calculator): Splits a target weight across plates on a kg or lb bar and draws the loaded bar.
 
 ## Everyday Identity & Document Utilities
 

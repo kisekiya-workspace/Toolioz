@@ -446,4 +446,215 @@ export const publisherArticlesTools: PublisherArticle[] = [
       { label: 'How to create a marriage biodata PDF', href: '/how-to/create-marriage-biodata-pdf' },
     ],
   },
+  {
+    path: '/minecraft/circle-generator',
+    title: 'How this Minecraft circle generator decides which blocks to place',
+    lead:
+      'The map is a pixel disk on a block grid. A block is included when the distance from the circle origin to that block’s center is at most half the entered diameter. Hollow rings subtract an inner disk of radius diameter/2 minus thickness. The same test in three axes builds a sphere. Nothing here reads Minecraft version data.',
+    reviewed: '29 October 2026',
+    sections: [
+      {
+        heading: 'Diameter, not radius',
+        paragraphs: [
+          'Builders usually talk in width. Diameter 16 is a 16-block-wide ring. WorldEdit //sphere and //hsphere take a radius, which is half that diameter. An odd diameter sits on one center block, drawn gold. An even diameter sits between four blocks, which is why some circles look slightly flattened on one axis at small sizes.',
+          'Filled mode keeps every block whose center is inside the radius. Thickness is ignored then. A thickness of 1 on a hollow circle is the usual wall. Thickness 2 is a walkable ring for a pixel-art track.',
+        ],
+      },
+      {
+        heading: 'Spheres as stacked circles',
+        paragraphs: [
+          'Each Y layer of a sphere is itself a circle whose radius shrinks toward the poles. The layer control shows that slice so a dome can be built floor by floor in survival. Block count is the full 3D set, not the visible layer. Java and Bedrock share the same integer block grid, so the map matches both editions.',
+        ],
+      },
+    ],
+    examples: [
+      {
+        title: 'Diameter 1 and 3',
+        body: 'Diameter 1 is a single block. Diameter 3 filled is a 3×3 square because every block center is within 1.5 of the origin. Hollow thickness 1 at diameter 3 is the eight-block ring around the center.',
+      },
+      {
+        title: 'WorldEdit radius',
+        body: 'A diameter-20 sphere on this page corresponds to //sphere <block> 10 at the same center. The generator does not run WorldEdit; it only prints the matching radius.',
+      },
+    ],
+    limitations: [
+      'Ellipses, ovals, and rotated circles are not generated.',
+      'Sphere diameter is capped at 64 blocks so the layer map stays usable in the browser.',
+      'Setblock command dumps are not emitted; copy coordinates or ASCII instead.',
+    ],
+    sources: [
+      { label: 'WorldEdit generation commands', href: 'https://worldedit.enginehub.org/en/latest/usage/generation/' },
+      { label: 'Minecraft Wiki, coordinates', href: 'https://minecraft.wiki/w/Coordinates' },
+    ],
+  },
+  {
+    path: '/minecraft/nether-portal-calculator',
+    title: 'Nether portal linking is an 8:1 scale plus a search radius',
+    lead:
+      'Java Edition divides Overworld X and Z by eight, or multiplies Nether X and Z by eight, and copies Y. Integer division truncates toward zero, including for negative coordinates. After the conversion, the game reuses a portal if one already sits inside 16 blocks in the Nether or 128 blocks in the Overworld.',
+    reviewed: '29 October 2026',
+    sections: [
+      {
+        heading: 'Why a nearby extra portal steals the link',
+        paragraphs: [
+          'The converted point is a search center, not a unique address. If another portal is already inside the destination radius, that portal is used. Fast-travel highways fail when a second base portal sits too close in the Nether. Delete or move the extra frame, or place the intended pair at the exact converted coordinates and light the destination first.',
+          'Y is not scaled. A portal at Overworld Y 80 still prefers Nether Y 80, which is often solid netherrack. Carve a room at that Y or accept that the game may create the return portal at a nearby air pocket and then fail to line up on the way back.',
+        ],
+      },
+    ],
+    examples: [
+      {
+        title: 'Overworld 800, 64, −1200',
+        body: 'trunc(800/8) = 100 and trunc(−1200/8) = −150. The matching Nether point is 100, 64, −150. Flooring −150.0 is the same here; the difference appears on coordinates that do not divide evenly, such as −17 → −2, not −3.',
+      },
+    ],
+    limitations: [
+      'Bedrock search and portal-spawn rules differ slightly; radii listed are Java Edition.',
+      'Chunk loading, portal cooldown, and entity width are not modeled.',
+    ],
+    sources: [
+      { label: 'Minecraft Wiki, Nether portal', href: 'https://minecraft.wiki/w/Nether_portal' },
+    ],
+  },
+  {
+    path: '/minecraft/shulker-box-calculator',
+    title: 'Shulker box capacity is 27 slots times stack size',
+    lead:
+      'A shulker box is a 27-slot chest that keeps its contents when broken. Vanilla Minecraft does not allow a shulker box inside another shulker box. Storage planning is slots × stack size × number of boxes. Stack 64, 16, and 1 cover almost every survival item.',
+    reviewed: '29 October 2026',
+    sections: [
+      {
+        heading: 'Chests of boxes',
+        paragraphs: [
+          'A double chest holds 54 shulker boxes. At 64-stack items that is 93,312 items. An ender chest holds 27 boxes (46,656 items). A player inventory of 36 slots plus an offhand box is 63,936 items at stack 64. Bundles and datapack stack components can differ and are not counted here.',
+        ],
+      },
+    ],
+    examples: [
+      {
+        title: '1,000 ender pearls',
+        body: 'Pearls stack to 16, so one box holds 432. 1,000 pearls need three boxes (1,296 capacity) with 296 empty pearl slots left over.',
+      },
+    ],
+    limitations: [
+      'Shulker nesting is not vanilla and is not modeled.',
+      'Bundle occupancy and component-modified stacks are omitted.',
+    ],
+    sources: [
+      { label: 'Minecraft Wiki, Shulker Box', href: 'https://minecraft.wiki/w/Shulker_Box' },
+    ],
+  },
+  {
+    path: '/gaming/mouse-sensitivity-converter',
+    title: 'Hipfire conversion is a yaw ratio, not a copied sensitivity number',
+    lead:
+      'Each FPS stores a yaw constant: degrees turned per mouse count at sensitivity 1. Matching turn speed is source sensitivity × (source yaw / destination yaw) × (source DPI / destination DPI). eDPI is sensitivity × DPI and is only comparable inside one yaw. cm/360 is the figure that should match across games.',
+    reviewed: '29 October 2026',
+    sections: [
+      {
+        heading: 'Why CS2 to Valorant sens is about 0.314',
+        paragraphs: [
+          'CS2 and CS:GO use Source m_yaw 0.022. Valorant uses 0.07. 0.022 / 0.07 ≈ 0.314286. CS2 1.5 at 800 DPI is Valorant 0.47143 at 800 DPI, eDPI 1,200, about 34.6 cm per 360°. Pair pages lock one ratio so a search such as CS2 to Valorant sens lands on a worked example instead of a generic two-dropdown tool.',
+          'Apex hipfire uses the same 0.022 yaw as CS2, so Apex 1.0 matches CS2 1.0. Apex ADS optics are extra sliders. Overwatch 2 and modern Call of Duty hipfire use 0.0066. Fortnite uses 0.005555…. Rainbow Six Siege uses 0.00572958. Those constants are engine yaw, not a patch note.',
+        ],
+      },
+    ],
+    examples: [
+      {
+        title: 'Same cm/360, different numbers',
+        body: 'Valorant 0.5 at 800 DPI is CS2 1.59091 at 800 DPI. Both are about 32.7 cm/360. The larger CS2 number is the smaller yaw, not a faster swipe.',
+      },
+    ],
+    limitations: [
+      'ADS, zoom, relative aim, and scoped ratios are not converted.',
+      'FOV and aspect-ratio differences can still make two matched cm/360 settings feel slightly unlike.',
+    ],
+    sources: [
+      { label: 'Valve Developer Community, CS:GO cvars (m_yaw)', href: 'https://developer.valvesoftware.com/wiki/List_of_CS:GO_Cvars' },
+    ],
+  },
+  {
+    path: '/pokemon/type-weakness-calculator',
+    title: 'Dual-type weakness multiplies two independent type matchups',
+    lead:
+      'Each attacking type is looked up against both defending types on the Generation 6 chart, then multiplied. 2 × 2 is a 4× weakness. 2 × ½ cancels to 1×. A 0 on either type is an immunity. Fairy was added in X and Y in 2013. The 18×18 attacking matrix has been stable since then.',
+    reviewed: '29 October 2026',
+    sections: [
+      {
+        heading: 'What this page does not apply',
+        paragraphs: [
+          'Abilities such as Levitate, Flash Fire, or Thick Fat change a matchup after the type chart. Terastallization replaces the defensive typing for a turn. Those effects are not multiplied in. The tool answers “what does the type chart say about this pairing,” which is the usual weakness-search intent, and still prints the full Pokemon type chart for chart queries.',
+        ],
+      },
+    ],
+    examples: [
+      {
+        title: 'Fire / Flying',
+        body: 'Rock is 2× versus Fire and 2× versus Flying, so Rock is 4×. Electric is 2× versus Flying and 1× versus Fire, so Electric is 2×. Ground is 0 versus Flying, so Ground is immune even though it is 2× versus Fire.',
+      },
+    ],
+    limitations: [
+      'Abilities, items, weather, and Terastallization are omitted.',
+      'Inverse battles and type-changing moves are omitted.',
+    ],
+    sources: [
+      { label: 'Bulbapedia, Type', href: 'https://bulbapedia.bulbagarden.net/wiki/Type' },
+    ],
+  },
+  {
+    path: '/dnd/dice-roller',
+    title: '5e dice notation is keep, drop, and a modifier after the faces',
+    lead:
+      '1d20+5 rolls one twenty-sided die and adds five. Advantage is 2d20kh1. Disadvantage is 2d20kl1. Ability scores are 4d6kh3. Faces are drawn with crypto.getRandomValues. The grammar does not depend on a monster-manual revision.',
+    reviewed: '29 October 2026',
+    sections: [
+      {
+        heading: 'Encounter XP is a different page',
+        paragraphs: [
+          'Difficulty budgets live on the 5e encounter calculator and use the 2014 Dungeon Master’s Guide table. Mixing XP into a dice roller would hide both jobs. Roll damage and checks here; rate the fight there.',
+        ],
+      },
+    ],
+    examples: [
+      {
+        title: 'Fireball 8d6+0',
+        body: 'Eight six-sided dice, no keep suffix, no modifier. The total is the sum of all eight faces. A save for half is a later division the roller does not apply.',
+      },
+    ],
+    limitations: [
+      'Rerolls such as Great Weapon Fighting are not a keep suffix; roll and replace manually.',
+      'Exploding dice and FATE dice are not parsed.',
+    ],
+    sources: [
+      { label: 'D&D Beyond, rolling a d20', href: 'https://www.dndbeyond.com/sources/dnd/basic-rules-2014/the-game' },
+    ],
+  },
+  {
+    path: '/dnd/5e-encounter-calculator',
+    title: '2014 encounter ratings compare adjusted XP with a party budget',
+    lead:
+      'Each character level has Easy, Medium, Hard, and Deadly XP in the 2014 Dungeon Master’s Guide. Monster XP is summed from challenge rating, then multiplied by a count factor. A party of one or two steps that factor up; six or more steps it down. Award raw XP, not adjusted XP, after the fight.',
+    reviewed: '29 October 2026',
+    sections: [
+      {
+        heading: 'Why 2014, not 2024',
+        paragraphs: [
+          'The 2024 rules use a different encounter-building method. This page keeps the 2014 table because those numbers are frozen and still match most published 5e adventures. Mixing both methods on one form would make the band unreadable. Enter challenge rating and count; named stat blocks are unnecessary.',
+        ],
+      },
+    ],
+    examples: [
+      {
+        title: 'Four 5th-level characters versus two CR 2 and one CR 5',
+        body: 'Party Deadly budget is 4 × 1,100 = 4,400. Raw XP is 2 × 450 + 1,800 = 2,700. Three monsters use ×2, so adjusted XP is 5,400, which is beyond the Deadly line for that table.',
+      },
+    ],
+    limitations: [
+      'Terrain, legendary actions, and action economy beyond the count multiplier are not scored.',
+      'The 2024 encounter method is not implemented.',
+    ],
+    sources: [
+      { label: 'D&D Beyond, Systems Reference Document', href: 'https://www.dndbeyond.com/resources/1781-systems-reference-document-srd' },
+    ],
+  },
 ];

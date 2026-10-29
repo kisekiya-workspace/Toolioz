@@ -62,6 +62,16 @@ const categoryBuckets = {
     title: 'Everyday Identity & Document Utilities',
     description: 'Marriage biodata builders, ATS resume generators, unit converters, and text utilities.',
     links: []
+  },
+  gaming: {
+    title: 'Gaming, Minecraft, Pokemon & D&D Calculators',
+    description: 'Evergreen game math: Minecraft circles and nether portals, FPS sensitivity/eDPI, Pokemon type weaknesses, and D&D 5e dice and encounter XP.',
+    links: []
+  },
+  makers: {
+    title: 'Makers, Craft, Kitchen, Music & Home Calculators',
+    description: 'Client-side knitting, yarn, 3D filament, baking, coffee, BPM, aquarium, lumber, and electronics calculators.',
+    links: []
   }
 };
 
@@ -82,6 +92,8 @@ const llmsTxtContent = renderLlmsTxt({
     categoryBuckets.devtools,
     categoryBuckets.finance,
     categoryBuckets.design,
+    categoryBuckets.gaming,
+    categoryBuckets.makers,
     categoryBuckets.utility,
     {
       title: 'Site Specifications & Agent Endpoints',

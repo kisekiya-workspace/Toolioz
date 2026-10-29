@@ -34,6 +34,8 @@ const HUB_HREF: Record<string, string> = {
   pdftools: '/pdftools',
   biodata: '/biodata',
   utility: '/tools',
+  gaming: '/gaming',
+  makers: '/makers',
 };
 
 const QUICK_TAGS = [
@@ -42,6 +44,8 @@ const QUICK_TAGS = [
   { id: 'devtools', label: 'Developer' },
   { id: 'design', label: 'Design' },
   { id: 'pdftools', label: 'PDF' },
+  { id: 'gaming', label: 'Gaming' },
+  { id: 'makers', label: 'Makers' },
   { id: 'biodata', label: 'Biodata' },
   { id: 'utility', label: 'Everyday' },
 ];
@@ -50,7 +54,6 @@ const BLOG_HUBS = [
   { title: 'Step-by-step guides', href: '/how-to', desc: 'Worked SIP, JSON, PDF, and biodata walkthroughs' },
   { title: 'Amortization notes', href: '/blog/debt-amortization-mathematics-and-mortgage-acceleration-blueprints', desc: 'How EMI and prepayment change remaining interest' },
   { title: 'ATS Resume Builder', href: '/resume-builder', desc: 'Build a resume PDF in the browser and export locally' },
-  { title: 'Editorial policy', href: '/editorial-policy', desc: 'What Toolioz indexes, tests, and will not publish' },
 ];
 
 const FAQS = [

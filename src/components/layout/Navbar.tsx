@@ -24,8 +24,13 @@ const PRIMARY_NAV = [
   { name: 'DevTools', href: '/devtools' },
   { name: 'Design', href: '/design' },
   { name: 'PDF', href: '/pdftools' },
+  { name: 'Gaming', href: '/gaming' },
+  { name: 'Makers', href: '/makers' },
   { name: 'Biodata', href: '/biodata' },
 ];
+
+const GAMING_PREFIXES = ['/gaming', '/minecraft', '/pokemon', '/dnd'];
+const MAKERS_PREFIXES = ['/makers', '/craft', '/kitchen', '/maker', '/home', '/music', '/electronics', '/converters'];
 
 const MORE_NAV = [
   { name: 'Guides', href: '/blog', icon: BookOpen },
@@ -50,9 +55,19 @@ export const Navbar = () => {
   const pathname = usePathname();
   const hideChrome = pathname === '/biodata' || pathname.startsWith('/biodata/');
 
-  const currentCategoryId = TOOL_CATEGORIES.find(
-    (category) => pathname === `/${category.id}` || pathname.startsWith(`/${category.id}/`),
-  )?.id;
+  const isGamingPath = GAMING_PREFIXES.some(
+    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
+  );
+  const isMakersPath = MAKERS_PREFIXES.some(
+    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
+  );
+  const currentCategoryId = isGamingPath
+    ? 'gaming'
+    : isMakersPath
+      ? 'makers'
+      : TOOL_CATEGORIES.find(
+          (category) => pathname === `/${category.id}` || pathname.startsWith(`/${category.id}/`),
+        )?.id;
   const currentCategory = TOOL_CATEGORIES.find((category) => category.id === currentCategoryId);
   const categoryTools = TOOLS.filter((tool) => tool.category === currentCategoryId);
   const moreActive = MORE_NAV.some(
@@ -150,7 +165,7 @@ export const Navbar = () => {
                   {TOOL_CATEGORIES.map((category) => (
                     <Link
                       key={category.id}
-                      href={category.id === 'utility' ? '/tools' : `/${category.id}`}
+                      href={category.id === 'utility' ? '/tools' : category.id === 'makers' ? '/makers' : `/${category.id}`}
                       className={[
                         'flex items-start gap-3 rounded-[8px] p-3 hover:bg-[#fafafa] dark:hover:bg-[#171717]',
                         currentCategoryId === category.id ? 'bg-[#f2f2f2] dark:bg-[#171717]' : '',
@@ -181,7 +196,12 @@ export const Navbar = () => {
           </div>
 
           {PRIMARY_NAV.map((item) => {
-            const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+            const isActive =
+              item.href === '/gaming'
+                ? isGamingPath
+                : item.href === '/makers'
+                  ? isMakersPath
+                  : pathname === item.href || pathname.startsWith(`${item.href}/`);
             return (
               <Link key={item.href} href={item.href} className={navItemClass(isActive)}>
                 {item.name}
@@ -270,7 +290,7 @@ export const Navbar = () => {
                 {TOOL_CATEGORIES.map((category) => (
                   <Link
                     key={category.id}
-                    href={category.id === 'utility' ? '/tools' : `/${category.id}`}
+                    href={category.id === 'utility' ? '/tools' : category.id === 'makers' ? '/makers' : `/${category.id}`}
                     className="flex items-center gap-3 rounded-[8px] bg-white p-3 shadow-[var(--ds-shadow-border)] dark:bg-[#111]"
                     onClick={() => setIsOpen(false)}
                   >

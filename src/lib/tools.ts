@@ -38,14 +38,24 @@ import {
   Scale,
   Activity,
   Sigma,
+  Circle,
+  Boxes,
+  MousePointer2,
+  Swords,
+  Dices,
+  Gamepad2,
+  Hexagon,
+  Flame,
+  Hammer,
   type LucideIcon
 } from 'lucide-react';
 import { NEW_DEV_TOOLS, NEW_PDF_TOOLS } from '@/lib/new-tool-catalog';
 import { ADSENSE_INDEX_TOOL_IDS, ADSENSE_NOINDEX_HOWTO_SLUGS } from '@/lib/adsense-catalog';
 import { TOOLS as LEGACY_TOOLS } from '@/data/sociials-tools';
 import { canonicalToolPath, CHANGING_RULES_NOINDEX_PATHS, PAUSED_TOOL_PATHS, TOOL_ALIASES, WITHHELD_TOOL_PATHS } from '@/lib/tool-routes';
+import { MAKERS_TOOLS } from '@/lib/makers-catalog';
 
-export type Category = 'finance' | 'devtools' | 'design' | 'pdftools' | 'biodata' | 'utility';
+export type Category = 'finance' | 'devtools' | 'design' | 'pdftools' | 'biodata' | 'utility' | 'gaming' | 'makers';
 
 export interface Tool {
   id: string;
@@ -567,6 +577,82 @@ export const TOOLS: Tool[] = [
     category: (tool.group === 'image' ? 'design' : 'devtools') as Category,
     isTrending: ['ocr', 'yaml-json', 'utm', 'schema'].includes(tool.mode),
   })),
+  // ═══ GAMING TOOLS ═══
+  {
+    id: 'minecraft-circle-generator',
+    title: 'Minecraft Circle Generator',
+    desc: 'Maps Minecraft circles and spheres from a diameter. Pixel math does not change with patches.',
+    icon: Circle,
+    href: '/minecraft/circle-generator',
+    color: '#5c8f3a',
+    category: 'gaming',
+    isTrending: true,
+  },
+  {
+    id: 'minecraft-nether-portal',
+    title: 'Nether Portal Calculator',
+    desc: 'Converts Overworld and Nether portal coordinates with the 8:1 Java Edition scale.',
+    icon: Flame,
+    href: '/minecraft/nether-portal-calculator',
+    color: '#b91c1c',
+    category: 'gaming',
+  },
+  {
+    id: 'minecraft-shulker-box',
+    title: 'Shulker Box Calculator',
+    desc: 'Counts items in Minecraft shulker boxes at stack sizes of 64, 16, or 1.',
+    icon: Boxes,
+    href: '/minecraft/shulker-box-calculator',
+    color: '#7c3aed',
+    category: 'gaming',
+  },
+  {
+    id: 'mouse-sensitivity-converter',
+    title: 'Mouse Sensitivity Converter',
+    desc: 'Converts FPS hipfire sensitivity with eDPI and cm/360 using each game\'s yaw constant.',
+    icon: MousePointer2,
+    href: '/gaming/mouse-sensitivity-converter',
+    color: '#d97706',
+    category: 'gaming',
+    isTrending: true,
+  },
+  {
+    id: 'pokemon-type-weakness',
+    title: 'Pokemon Type Weakness',
+    desc: 'Dual-type Pokemon weaknesses from the Generation 6 type chart used since 2013.',
+    icon: Hexagon,
+    href: '/pokemon/type-weakness-calculator',
+    color: '#e11d48',
+    category: 'gaming',
+  },
+  {
+    id: 'dnd-dice-roller',
+    title: 'D&D Dice Roller',
+    desc: 'Rolls 5e dice notation including advantage, 4d6kh3, and damage plus modifiers.',
+    icon: Dices,
+    href: '/dnd/dice-roller',
+    color: '#991b1b',
+    category: 'gaming',
+  },
+  {
+    id: 'dnd-5e-encounter',
+    title: '5e Encounter Calculator',
+    desc: 'Rates D&D 5e encounters with the 2014 Dungeon Master\'s Guide XP table.',
+    icon: Swords,
+    href: '/dnd/5e-encounter-calculator',
+    color: '#9a3412',
+    category: 'gaming',
+  },
+  ...MAKERS_TOOLS.map((tool) => ({
+    id: tool.id,
+    title: tool.title,
+    desc: tool.desc,
+    icon: tool.icon,
+    href: tool.href,
+    color: tool.color,
+    category: tool.category as Category,
+    isTrending: tool.isTrending,
+  })),
   // ═══ BIODATA TOOLS ═══
   {
     id: 'biodata-generator',
@@ -621,7 +707,7 @@ function normalizePath(pathname: string): string {
 
 function isToolPagePath(path: string): boolean {
   if (path === '/biodata' || path === '/resume-builder') return true;
-  return /^\/(finance|devtools|design|pdftools|biodata)\/.+/.test(path) && !path.includes('/blog/');
+  return /^\/(finance|devtools|design|pdftools|biodata|minecraft|gaming|pokemon|dnd|craft|kitchen|maker|home|music|electronics|converters)\/.+/.test(path) && !path.includes('/blog/');
 }
 
 /** Compatibility helper for ad components; catalog restoration does not enable ads. */
@@ -689,5 +775,19 @@ export const CATEGORIES = [
     desc: 'Marriage biodata builders with cultural, traditional, and modern layouts.',
     color: '#db2777',
     icon: UserRound
+  },
+  {
+    id: 'gaming',
+    title: 'Gaming Tools',
+    desc: 'Minecraft, FPS sensitivity, Pokemon types, and D&D 5e calculators with frozen math.',
+    color: '#16a34a',
+    icon: Gamepad2
+  },
+  {
+    id: 'makers',
+    title: 'Makers Tools',
+    desc: 'Craft, kitchen, 3D printing, music, home, and electronics calculators that run in the browser.',
+    color: '#be185d',
+    icon: Hammer
   }
 ];

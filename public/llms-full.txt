@@ -794,6 +794,402 @@
 
 ---
 
+### Minecraft Circle Generator
+- **Canonical URL**: https://toolioz.com/minecraft/circle-generator
+- **Markdown Endpoint**: https://toolioz.com/minecraft/circle-generator.md
+- **Category**: gaming
+- **Description**: Maps Minecraft circles and spheres from a diameter. Pixel math does not change with patches.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Nether Portal Calculator
+- **Canonical URL**: https://toolioz.com/minecraft/nether-portal-calculator
+- **Markdown Endpoint**: https://toolioz.com/minecraft/nether-portal-calculator.md
+- **Category**: gaming
+- **Description**: Converts Overworld and Nether portal coordinates with the 8:1 Java Edition scale.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Shulker Box Calculator
+- **Canonical URL**: https://toolioz.com/minecraft/shulker-box-calculator
+- **Markdown Endpoint**: https://toolioz.com/minecraft/shulker-box-calculator.md
+- **Category**: gaming
+- **Description**: Counts items in Minecraft shulker boxes at stack sizes of 64, 16, or 1.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Mouse Sensitivity Converter
+- **Canonical URL**: https://toolioz.com/gaming/mouse-sensitivity-converter
+- **Markdown Endpoint**: https://toolioz.com/gaming/mouse-sensitivity-converter.md
+- **Category**: gaming
+- **Description**: Converts FPS hipfire sensitivity with eDPI and cm/360 using each game's yaw constant.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Pokemon Type Weakness
+- **Canonical URL**: https://toolioz.com/pokemon/type-weakness-calculator
+- **Markdown Endpoint**: https://toolioz.com/pokemon/type-weakness-calculator.md
+- **Category**: gaming
+- **Description**: Dual-type Pokemon weaknesses from the Generation 6 type chart used since 2013.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### D&D Dice Roller
+- **Canonical URL**: https://toolioz.com/dnd/dice-roller
+- **Markdown Endpoint**: https://toolioz.com/dnd/dice-roller.md
+- **Category**: gaming
+- **Description**: Rolls 5e dice notation including advantage, 4d6kh3, and damage plus modifiers.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### 5e Encounter Calculator
+- **Canonical URL**: https://toolioz.com/dnd/5e-encounter-calculator
+- **Markdown Endpoint**: https://toolioz.com/dnd/5e-encounter-calculator.md
+- **Category**: gaming
+- **Description**: Rates D&D 5e encounters with the 2014 Dungeon Master's Guide XP table.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Knitting Gauge Calculator
+- **Canonical URL**: https://toolioz.com/craft/knitting-gauge-calculator
+- **Markdown Endpoint**: https://toolioz.com/craft/knitting-gauge-calculator.md
+- **Category**: makers
+- **Description**: Converts a knitting gauge swatch into cast-on stitches and a pattern adjustment factor.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Crochet Gauge Calculator
+- **Canonical URL**: https://toolioz.com/craft/crochet-gauge-calculator
+- **Markdown Endpoint**: https://toolioz.com/craft/crochet-gauge-calculator.md
+- **Category**: makers
+- **Description**: Converts a crochet gauge swatch into stitch counts and a pattern adjustment factor.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Yarn Calculator
+- **Canonical URL**: https://toolioz.com/craft/yarn-calculator
+- **Markdown Endpoint**: https://toolioz.com/craft/yarn-calculator.md
+- **Category**: makers
+- **Description**: Estimates yarn grams, yards, and 100 g skeins for a blanket, scarf, or hat.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Needle Size Converter
+- **Canonical URL**: https://toolioz.com/craft/needle-size-converter
+- **Markdown Endpoint**: https://toolioz.com/craft/needle-size-converter.md
+- **Category**: makers
+- **Description**: Converts knitting needle and crochet hook sizes across millimetres, US, UK, and Japan.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Cross Stitch Fabric Calculator
+- **Canonical URL**: https://toolioz.com/craft/cross-stitch-fabric-calculator
+- **Markdown Endpoint**: https://toolioz.com/craft/cross-stitch-fabric-calculator.md
+- **Category**: makers
+- **Description**: Cuts Aida or evenweave fabric size from stitch counts, fabric count, and over 1 or 2.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Quilt Size Calculator
+- **Canonical URL**: https://toolioz.com/craft/quilt-size-calculator
+- **Markdown Endpoint**: https://toolioz.com/craft/quilt-size-calculator.md
+- **Category**: makers
+- **Description**: Adds quilt blocks, sashing, borders, and a bed drop to a finished size in inches and centimetres.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Filament Weight to Length
+- **Canonical URL**: https://toolioz.com/maker/filament-weight-calculator
+- **Markdown Endpoint**: https://toolioz.com/maker/filament-weight-calculator.md
+- **Category**: makers
+- **Description**: Converts 3D-printer filament grams to metres using published material density and diameter.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### 3D Print Cost Calculator
+- **Canonical URL**: https://toolioz.com/maker/3d-print-cost-calculator
+- **Markdown Endpoint**: https://toolioz.com/maker/3d-print-cost-calculator.md
+- **Category**: makers
+- **Description**: Prices a print from filament mass, printer watts, electricity rate, and optional slicer comments.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Epoxy Resin Calculator
+- **Canonical URL**: https://toolioz.com/maker/epoxy-resin-calculator
+- **Markdown Endpoint**: https://toolioz.com/maker/epoxy-resin-calculator.md
+- **Category**: makers
+- **Description**: Fills a slab, cylinder, oval, or river table and splits the volume into an A:B mix.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Candle Wax Calculator
+- **Canonical URL**: https://toolioz.com/maker/candle-wax-calculator
+- **Markdown Endpoint**: https://toolioz.com/maker/candle-wax-calculator.md
+- **Category**: makers
+- **Description**: Estimates soy or paraffin wax and fragrance load from container volume in ounces.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Baking Pan Size Converter
+- **Canonical URL**: https://toolioz.com/kitchen/baking-pan-size-converter
+- **Markdown Endpoint**: https://toolioz.com/kitchen/baking-pan-size-converter.md
+- **Category**: makers
+- **Description**: Scales batter between round, square, rectangular, loaf, and bundt pans by volume.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Cups to Grams Converter
+- **Canonical URL**: https://toolioz.com/kitchen/cups-to-grams
+- **Markdown Endpoint**: https://toolioz.com/kitchen/cups-to-grams.md
+- **Category**: makers
+- **Description**: Converts cups and grams for flour, butter, sugar, rice, and other baking ingredients.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Sourdough Hydration Calculator
+- **Canonical URL**: https://toolioz.com/kitchen/sourdough-hydration-calculator
+- **Markdown Endpoint**: https://toolioz.com/kitchen/sourdough-hydration-calculator.md
+- **Category**: makers
+- **Description**: Turns baker’s percentages into flour, water, starter, and salt weights.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Coffee Ratio Calculator
+- **Canonical URL**: https://toolioz.com/kitchen/coffee-ratio-calculator
+- **Markdown Endpoint**: https://toolioz.com/kitchen/coffee-ratio-calculator.md
+- **Category**: makers
+- **Description**: Sets pour-over, French press, cold brew, and espresso ratios in grams.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Cake Serving Calculator
+- **Canonical URL**: https://toolioz.com/kitchen/cake-serving-calculator
+- **Markdown Endpoint**: https://toolioz.com/kitchen/cake-serving-calculator.md
+- **Category**: makers
+- **Description**: Counts party and wedding slices from round or rectangular tiers.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### BPM to MS Calculator
+- **Canonical URL**: https://toolioz.com/music/bpm-to-ms-calculator
+- **Markdown Endpoint**: https://toolioz.com/music/bpm-to-ms-calculator.md
+- **Category**: makers
+- **Description**: Converts tempo to delay and reverb times, with tap tempo and note divisions.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Chord Transposer
+- **Canonical URL**: https://toolioz.com/music/chord-transposer
+- **Markdown Endpoint**: https://toolioz.com/music/chord-transposer.md
+- **Category**: makers
+- **Description**: Transposes pasted chord sheets by semitones and shows a capo-friendly chart.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Frequency to Note Converter
+- **Canonical URL**: https://toolioz.com/music/frequency-to-note-converter
+- **Markdown Endpoint**: https://toolioz.com/music/frequency-to-note-converter.md
+- **Category**: makers
+- **Description**: Maps hertz to piano notes, cents, and MIDI at A4 = 440 or 432.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Video File Size Calculator
+- **Canonical URL**: https://toolioz.com/music/video-file-size-calculator
+- **Markdown Endpoint**: https://toolioz.com/music/video-file-size-calculator.md
+- **Category**: makers
+- **Description**: Estimates recording size from bitrate and duration, or bitrate from a target size.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### CSS Clamp Generator
+- **Canonical URL**: https://toolioz.com/devtools/css-clamp-generator
+- **Markdown Endpoint**: https://toolioz.com/devtools/css-clamp-generator.md
+- **Category**: devtools
+- **Description**: Builds clamp() fluid type and spacing, with a modular type-scale tab.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### PX to REM Converter
+- **Canonical URL**: https://toolioz.com/devtools/px-to-rem-converter
+- **Markdown Endpoint**: https://toolioz.com/devtools/px-to-rem-converter.md
+- **Category**: devtools
+- **Description**: Converts pixels to rem and em at a chosen root font size, with a common-size table.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Tailwind Color Generator
+- **Canonical URL**: https://toolioz.com/devtools/tailwind-color-generator
+- **Markdown Endpoint**: https://toolioz.com/devtools/tailwind-color-generator.md
+- **Category**: devtools
+- **Description**: Builds 50–950 OKLCH shades and Tailwind v4 @theme tokens from a seed hex.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Color Blindness Simulator
+- **Canonical URL**: https://toolioz.com/design/color-blindness-simulator
+- **Markdown Endpoint**: https://toolioz.com/design/color-blindness-simulator.md
+- **Category**: design
+- **Description**: Simulates protanopia, deuteranopia, and tritanopia on a palette or an uploaded image.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### PNG to ICO Converter
+- **Canonical URL**: https://toolioz.com/design/png-to-ico
+- **Markdown Endpoint**: https://toolioz.com/design/png-to-ico.md
+- **Category**: design
+- **Description**: Packs a PNG into a multi-size .ico with 16, 32, 48, and 256 px layers.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### SVG to PNG Converter
+- **Canonical URL**: https://toolioz.com/design/svg-to-png
+- **Markdown Endpoint**: https://toolioz.com/design/svg-to-png.md
+- **Category**: design
+- **Description**: Rasters an SVG to a transparent PNG at a chosen width in the browser.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Photo Print Size Calculator
+- **Canonical URL**: https://toolioz.com/design/photo-print-size-calculator
+- **Markdown Endpoint**: https://toolioz.com/design/photo-print-size-calculator.md
+- **Category**: design
+- **Description**: Converts pixel dimensions to inches and centimetres at a chosen DPI.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Drawing Grid Maker
+- **Canonical URL**: https://toolioz.com/design/drawing-grid-maker
+- **Markdown Endpoint**: https://toolioz.com/design/drawing-grid-maker.md
+- **Category**: design
+- **Description**: Overlays a measured grid on a photo for transfer drawing, with print output.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Pixel Art from Image
+- **Canonical URL**: https://toolioz.com/design/pixel-art-from-image
+- **Markdown Endpoint**: https://toolioz.com/design/pixel-art-from-image.md
+- **Category**: design
+- **Description**: Downsamples a photo to a pixel grid for bead, Minecraft, or cross-stitch planning.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Aquarium Volume Calculator
+- **Canonical URL**: https://toolioz.com/home/aquarium-volume-calculator
+- **Markdown Endpoint**: https://toolioz.com/home/aquarium-volume-calculator.md
+- **Category**: makers
+- **Description**: Finds litres and gallons for rectangular, bowfront, cylinder, hexagon, and corner tanks.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Board Feet Calculator
+- **Canonical URL**: https://toolioz.com/home/board-feet-calculator
+- **Markdown Endpoint**: https://toolioz.com/home/board-feet-calculator.md
+- **Category**: makers
+- **Description**: Counts lumber board feet and log scale with Doyle, Scribner, and International ¼″.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Wallpaper Calculator
+- **Canonical URL**: https://toolioz.com/home/wallpaper-calculator
+- **Markdown Endpoint**: https://toolioz.com/home/wallpaper-calculator.md
+- **Category**: makers
+- **Description**: Estimates rolls with pattern repeat, straight match, or half-drop.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Miter Angle Calculator
+- **Canonical URL**: https://toolioz.com/home/miter-angle-calculator
+- **Markdown Endpoint**: https://toolioz.com/home/miter-angle-calculator.md
+- **Category**: makers
+- **Description**: Finds polygon, picture-frame, and compound crown-molding miter and bevel angles.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Resistor Color Code Calculator
+- **Canonical URL**: https://toolioz.com/electronics/resistor-color-code-calculator
+- **Markdown Endpoint**: https://toolioz.com/electronics/resistor-color-code-calculator.md
+- **Category**: makers
+- **Description**: Reads 4, 5, and 6 band resistors and converts a value back to colors.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### LED Resistor Calculator
+- **Canonical URL**: https://toolioz.com/electronics/led-resistor-calculator
+- **Markdown Endpoint**: https://toolioz.com/electronics/led-resistor-calculator.md
+- **Category**: makers
+- **Description**: Sizes a series resistor for LEDs and solves a two-resistor voltage divider.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Roman Numeral Date Converter
+- **Canonical URL**: https://toolioz.com/converters/roman-numeral-date
+- **Markdown Endpoint**: https://toolioz.com/converters/roman-numeral-date.md
+- **Category**: makers
+- **Description**: Converts dates to Roman numerals with a tattoo-style preview and PNG export.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Morse Code Translator
+- **Canonical URL**: https://toolioz.com/converters/morse-code-translator
+- **Markdown Endpoint**: https://toolioz.com/converters/morse-code-translator.md
+- **Category**: makers
+- **Description**: Encodes and decodes Morse, then plays the pattern as audio in the browser.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
+### Barbell Plate Calculator
+- **Canonical URL**: https://toolioz.com/converters/barbell-plate-calculator
+- **Markdown Endpoint**: https://toolioz.com/converters/barbell-plate-calculator.md
+- **Category**: makers
+- **Description**: Splits a target weight across plates on a kg or lb bar and draws the loaded bar.
+- **Processing Mode**: 100% Client-Side In-Browser
+
+---
+
 ### Biodata Generator
 - **Canonical URL**: https://toolioz.com/biodata
 - **Markdown Endpoint**: https://toolioz.com/biodata.md

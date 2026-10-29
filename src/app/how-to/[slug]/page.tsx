@@ -79,8 +79,8 @@ export default async function HowToDetailPage({ params }: HowToPageProps) {
     dateModified: post.updatedIso,
     author: {
       '@type': 'Organization',
-      name: 'Toolioz Editorial Team',
-      url: 'https://toolioz.com/editorial-policy',
+      name: 'Toolioz',
+      url: 'https://toolioz.com/about',
     },
     publisher: {
       '@type': 'Organization',
@@ -140,8 +140,8 @@ export default async function HowToDetailPage({ params }: HowToPageProps) {
               <ArrowLeft size={13} /> Back to Guides
             </Link>
             <div className="flex items-center gap-3 text-xs font-mono text-zinc-400">
-              <Link href="/editorial-policy" className="hover:text-emerald-600 dark:hover:text-emerald-400">
-                Toolioz Editorial Team
+              <Link href="/about" className="hover:text-emerald-600 dark:hover:text-emerald-400">
+                Toolioz
               </Link>
               <span>•</span>
               <span className="flex items-center gap-1">

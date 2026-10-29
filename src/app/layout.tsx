@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://toolioz.com',
   },
-  authors: [{ name: 'Toolioz Editorial Team', url: '/editorial-policy' }],
+  authors: [{ name: 'Toolioz', url: '/about' }],
   icons: {
     icon: [
       { url: '/tooliozLogo.svg', type: 'image/svg+xml' },

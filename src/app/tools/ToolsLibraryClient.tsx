@@ -25,6 +25,8 @@ const categoryNames = {
   pdftools: 'PDF',
   biodata: 'Biodata',
   utility: 'Everyday',
+  gaming: 'Gaming',
+  makers: 'Makers',
 } as const;
 
 const TOOLS: LibraryTool[] = [

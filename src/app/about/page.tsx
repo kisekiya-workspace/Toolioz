@@ -3,15 +3,15 @@ import AboutClient from './AboutClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "About Us | Our Vision for Precision Tools",
-  description: "Describes Toolioz, a browser-based suite of finance calculators, developer utilities, PDF tools, and biodata makers.",
-  keywords: 'About Toolioz, mission statement, privacy-first tools, high precision calculators, developer utility vision',
+  title: "About Us",
+  description: "Describes Toolioz, a browser suite of unofficial calculators and file tools provided as-is and used at the visitor's own risk.",
+  keywords: 'About Toolioz, unofficial calculators, browser tools, Toolioz disclaimer',
   alternates: {
     canonical: 'https://toolioz.com/about',
   },
   openGraph: {
-    title: 'Our Mission & Vision | Toolioz',
-    description: 'Built for precision. Learn why we created the Toolioz utility suite.',
+    title: 'About Toolioz',
+    description: 'Describes Toolioz, a browser suite of unofficial calculators and file tools provided as-is and used at the visitor\'s own risk.',
     url: 'https://toolioz.com/about',
     type: 'website',
   }

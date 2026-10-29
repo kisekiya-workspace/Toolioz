@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Explains which Toolioz inputs stay in the browser and how analytics, ads, CDNs, and support mail are handled.",
+  description: "Explains which Toolioz inputs stay in the browser, how analytics and ads work, and that tools are used at the visitor's own risk.",
   keywords: 'Toolioz privacy policy, browser processing, Google Analytics, advertising privacy',
   alternates: {
     canonical: 'https://toolioz.com/privacy-policy',

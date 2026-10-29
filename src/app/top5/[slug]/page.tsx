@@ -58,8 +58,8 @@ export default async function Top5BlogPostPage({ params }: Top5PageProps) {
     dateModified: post.updatedIso,
     author: {
       '@type': 'Organization',
-      name: 'Toolioz Editorial Team',
-      url: `${SITE_URL}/editorial-policy`,
+      name: 'Toolioz',
+      url: `${SITE_URL}/about`,
     },
     publisher: {
       '@type': 'Organization',
@@ -111,8 +111,8 @@ export default async function Top5BlogPostPage({ params }: Top5PageProps) {
               <ArrowLeft size={13} /> Back to Top 5 Reviews
             </Link>
             <div className="flex items-center gap-3 text-xs font-mono text-zinc-400">
-              <Link href="/editorial-policy" className="hover:text-indigo-600 dark:hover:text-indigo-400">
-                Toolioz Editorial Team
+              <Link href="/about" className="hover:text-indigo-600 dark:hover:text-indigo-400">
+                Toolioz
               </Link>
               <span>•</span>
               <span className="flex items-center gap-1">

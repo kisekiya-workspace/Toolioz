@@ -1,9 +1,10 @@
 import { publisherArticles as financeArticles, type PublisherArticle } from '@/lib/publisher-articles-finance';
 import { publisherArticlesTools } from '@/lib/publisher-articles-tools';
+import { publisherArticlesMakers } from '@/lib/publisher-articles-makers';
 
 export type { PublisherArticle };
 
-const allArticles: PublisherArticle[] = [...financeArticles, ...publisherArticlesTools];
+const allArticles: PublisherArticle[] = [...financeArticles, ...publisherArticlesTools, ...publisherArticlesMakers];
 
 const aliases: Record<string, string> = {
   '/resume-builder': '/pdftools/resume-generator',

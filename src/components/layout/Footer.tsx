@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowUpRight, ShieldCheck, Mail, Sparkles, Terminal, FileText, Calculator } from 'lucide-react';
+import { ArrowUpRight, ShieldCheck, Mail, Sparkles, Terminal, FileText, Calculator, Gamepad2, Hammer } from 'lucide-react';
 import { ToolPublisherArticle } from '@/components/content/ToolPublisherArticle';
 
 export function Footer() {
@@ -45,7 +45,7 @@ export function Footer() {
         </div>
 
         {/* 5-Column Navigation Grid */}
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-5 mb-12">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 mb-12">
           
           {/* Column 1: Financial Engines */}
           <div className="flex flex-col gap-2.5">
@@ -146,20 +146,70 @@ export function Footer() {
             </Link>
           </div>
 
+          <div className="flex flex-col gap-2.5">
+            <h4 className="flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider text-[#171717] dark:text-[#ededed]">
+              <Gamepad2 size={13} className="text-emerald-600 dark:text-emerald-400" />
+              Gaming
+            </h4>
+            <Link href="/gaming" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              Gaming Hub
+            </Link>
+            <Link href="/minecraft/circle-generator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              Minecraft Circle Generator
+            </Link>
+            <Link href="/gaming/mouse-sensitivity-converter" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              Sensitivity Converter
+            </Link>
+            <Link href="/gaming/cs2-to-valorant-sens" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              CS2 to Valorant Sens
+            </Link>
+            <Link href="/pokemon/type-weakness-calculator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              Pokemon Type Weakness
+            </Link>
+            <Link href="/dnd/dice-roller" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              D&D Dice Roller
+            </Link>
+            <Link href="/dnd/5e-encounter-calculator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              5e Encounter Calculator
+            </Link>
+            <h4 className="mt-4 flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider text-[#171717] dark:text-[#ededed]">
+              <Hammer size={13} className="text-pink-600 dark:text-pink-400" />
+              Makers
+            </h4>
+            <Link href="/makers" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              Makers Hub
+            </Link>
+            <Link href="/craft/knitting-gauge-calculator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              Knitting Gauge
+            </Link>
+            <Link href="/music/bpm-to-ms-calculator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              BPM to MS
+            </Link>
+            <Link href="/maker/filament-weight-calculator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              Filament Length
+            </Link>
+            <Link href="/home/aquarium-volume-calculator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              Aquarium Volume
+            </Link>
+            <Link href="/devtools/css-clamp-generator" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              CSS Clamp
+            </Link>
+            <Link href="/converters/roman-numeral-date" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
+              Roman Numeral Date
+            </Link>
+          </div>
+
           {/* Column 4: Guides & Comparisons */}
           <div className="flex flex-col gap-2.5">
             <h4 className="flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-wider text-[#171717] dark:text-[#ededed]">
               <Sparkles size={13} className="text-purple-600 dark:text-purple-400" />
-              Editorial Guides
+              Guides
             </h4>
             <Link href="/blog" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               Guides
             </Link>
             <Link href="/how-to" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               Step-by-Step How-To
-            </Link>
-            <Link href="/editorial-policy" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
-              Editorial policy
             </Link>
             <Link href="/how-to/calculate-sip-returns" className="text-xs text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors truncate">
               Calculate SIP Returns
@@ -179,9 +229,6 @@ export function Footer() {
             </h4>
             <Link href="/about" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               About Toolioz
-            </Link>
-            <Link href="/editorial-policy" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
-              Editorial &amp; Review Policy
             </Link>
             <Link href="/privacy-policy" className="text-xs text-[#8f8f8f] hover:text-[#171717] dark:text-[#8f8f8f] dark:hover:text-[#ededed]">
               Privacy Policy

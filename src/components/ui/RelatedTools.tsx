@@ -2,24 +2,31 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { PUBLISHER_READY_TOOLS as TOOLS } from '@/lib/tools';
+import { PUBLISHER_READY_TOOLS as TOOLS, type Tool } from '@/lib/tools';
 import { ChevronRight } from 'lucide-react';
 
 interface RelatedToolsProps {
   currentToolId: string;
   categoryId: string;
   limit?: number;
+  ids?: string[];
 }
 
 export const RelatedTools: React.FC<RelatedToolsProps> = ({
   currentToolId,
   categoryId,
   limit = 3,
+  ids,
 }) => {
-  const related = TOOLS
-    .filter((tool) => tool.category === categoryId && tool.id !== currentToolId)
-    .sort((a, b) => a.title.localeCompare(b.title))
-    .slice(0, limit);
+  const related: Tool[] = (
+    ids
+      ? ids
+          .map((id) => TOOLS.find((tool) => tool.id === id))
+          .filter((tool): tool is Tool => tool != null && tool.id !== currentToolId)
+      : TOOLS
+          .filter((tool) => tool.category === categoryId && tool.id !== currentToolId)
+          .sort((a, b) => a.title.localeCompare(b.title))
+  ).slice(0, limit);
 
   if (related.length === 0) return null;
 

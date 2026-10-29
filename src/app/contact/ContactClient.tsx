@@ -68,8 +68,9 @@ export default function ContactClient() {
             <li>Open attachments that look like executable software. Send screenshots or a description instead of .exe files.</li>
           </ul>
           <p>
-            Editorial standards are on the <Link href="/editorial-policy" className="text-blue-600 hover:underline">editorial policy</Link>{' '}
-            page. How data is handled is on the <Link href="/privacy-policy" className="text-blue-600 hover:underline">privacy policy</Link>.
+            Tools can be wrong or out of date. Use results at your own risk; the{' '}
+            <Link href="/terms" className="text-blue-600 hover:underline">terms of service</Link> apply. How data is
+            handled is on the <Link href="/privacy-policy" className="text-blue-600 hover:underline">privacy policy</Link>.
           </p>
         </div>
       </section>

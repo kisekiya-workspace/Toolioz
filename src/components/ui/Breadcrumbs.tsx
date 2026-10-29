@@ -30,10 +30,27 @@ export const Breadcrumbs = () => {
   pathSegments.forEach((segment) => {
     currentLink += `/${segment}`;
     
-    // Check if segment is a category
+    const hubNames: Record<string, string> = {
+      minecraft: 'Minecraft',
+      gaming: 'Gaming tools',
+      pokemon: 'Pokemon',
+      dnd: 'D&D',
+      makers: 'Makers tools',
+      craft: 'Craft calculators',
+      kitchen: 'Kitchen calculators',
+      maker: 'Making calculators',
+      home: 'Home calculators',
+      music: 'Music calculators',
+      electronics: 'Electronics calculators',
+      converters: 'Converters',
+    };
     const category = CATEGORIES.find(c => c.id === segment);
     if (category) {
       items.push({ name: category.title, href: currentLink });
+      return;
+    }
+    if (hubNames[segment]) {
+      items.push({ name: hubNames[segment], href: currentLink });
       return;
     }
 
